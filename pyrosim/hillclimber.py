@@ -2,33 +2,43 @@
 from pyrosim import PYROSIM
 import matplotlib.pyplot as plt
 import numpy as np
-from robot import ROBOT
-import random
-from individual import INDIVIDUAL
+from individualTemplate import INDIVIDUAL
 from copy import deepcopy
 import pickle
+from database import *
 
-parent = INDIVIDUAL(0)
-parent.Start_Evaluate(False)
+mydatabase = DATABASE()
+genomeSahpe = [5, 8]
+
+parent = INDIVIDUAL(0, genomeSahpe)
+parent.Evaluate(False, False)
 parent.Compute_Fitness()
 
-for i in range(0, 100):
-    child = deepcopy( parent )
+i=0
+current_color = ""
+
+while True:
+
+    tmp = mydatabase.Fetch_New_Color()
+    if tmp != "": current_color = tmp
+    
+    child = deepcopy(parent)
+
     child.Mutate()
-    child.Start_Evaluate(True)
+    child.Set_Color(current_color)
+    child.Evaluate(False, False)
     child.Compute_Fitness()
 
-    print '[g:', i+1, ']', '[pw:', parent.genome ,']','[p:' , parent.fitness , ']', '[c:', child.fitness, ']'
+    print '[g:', i, ']', '[p:', parent.fitness , ']', '[c:', child.fitness, ']'
 
     if ( child.fitness > parent.fitness ):
-        child.Start_Evaluate(True)
-        child.Compute_Fitness()
-
+        # child.Evaluate(False, True)
+        # child.Compute_Fitness()
         parent = child
 
-        f = open('robot.p','w')
-        pickle.dump(parent , f )
-        f.close()
+    i += 1
+
+    
 
 
 

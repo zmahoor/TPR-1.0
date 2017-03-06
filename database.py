@@ -32,27 +32,23 @@ class DATABASE:
             self.connection.commit()
 
         except:
-            print("please paint me with blue|red|green|white|black|purple|cyan!")
+            print("no color found...please paint me :(")
             self.connection.rollback()
 
         return color
 
     def Insert_Chat(self, username, current_time, msg):
         #INSERT INTO chats VALUES (ID, time, user, txt);
-        print "u: ", username,
-        print "time:", current_time,
-        print "msg: ", msg
-
         sql = "INSERT INTO chats(timeA, username, txt) VALUES('%s', '%s', '%s');"%(current_time, username, msg)
         try:
-            cursor.execute(sql)
-            connection.commit()
-            print("successfull insert")
+            self.cursor.execute(sql)
+            self.connection.commit()
+            # print("successfull insert")
         except:
             print("unable to insert data")
-            connection.rollback()
+            self.connection.rollback()
                 
-        # connection.close()          
+        # self.connection.close()          
 
     def Fetch_A_Command(self, id):
 
