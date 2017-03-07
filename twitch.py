@@ -59,7 +59,7 @@ class Twitch:
                 # print(line)
 
                 if self.login_status(line):
-                    print("... and they didn't accept our details");
+                    print("Login authentication failed");
                     sys.exit();
 
                 loading = self.loading_complete(line) 
@@ -72,7 +72,7 @@ class Twitch:
         else: return True
     
     def login_status(self, line):
-        if ("Login unsuccessful" in line): return True
+        if ("Login authentication failed" in line): return True
         else: return False
 
     def send_message(self, message):
