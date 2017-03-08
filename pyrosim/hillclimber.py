@@ -5,7 +5,11 @@ import numpy as np
 from individualTemplate import INDIVIDUAL
 from copy import deepcopy
 import pickle
-from database import *
+import sys
+
+sys.path.append('../bots')
+
+from database import DATABASE
 
 mydatabase = DATABASE()
 genomeSahpe = [5, 8]
@@ -21,7 +25,7 @@ while True:
 
     tmp = mydatabase.Fetch_New_Color()
     if tmp != "": current_color = tmp
-    
+
     child = deepcopy(parent)
 
     child.Mutate()

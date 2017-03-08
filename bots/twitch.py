@@ -56,7 +56,7 @@ class Twitch:
             readbuffer = temp.pop()
             
             for line in temp:
-                # print(line)
+                print(line)
 
                 if self.login_status(line):
                     print("Login authentication failed");

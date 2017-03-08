@@ -1,13 +1,14 @@
 import pymysql.cursors
 import pymysql
 from time import gmtime, strftime
+from settings import *
 
 class DATABASE:
 
     def __init__(self):
 
-        self.connection = pymysql.connect(host='96.126.111.207', user='root',
-            password='TwitchPlaysRobotics', db='TwitchPlays')
+        self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
+            password=MYSQL_PASS, db=MYSQL_DB)
 
         self.cursor = self.connection.cursor()
         self.cursor.execute("SELECT VERSION()")
@@ -32,7 +33,7 @@ class DATABASE:
             self.connection.commit()
 
         except:
-            print("no color found...please paint me :(")
+            print("please paint me with blue|red|green|white|black|purple|cyan|yellow")
             self.connection.rollback()
 
         return color
