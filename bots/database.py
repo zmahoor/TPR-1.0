@@ -108,7 +108,7 @@ class DATABASE:
             color = result[3]
 
             print(result)
-            sql = "UPDATE chats SET processed=1 WHERE id='%d';"%(chatid)
+            sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
             self.cursor.execute(sql)
             self.connection.commit()
 
