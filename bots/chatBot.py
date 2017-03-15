@@ -37,7 +37,7 @@ while running:
             #Try block, some characters are not understood by python and can cause exceptions
             try:
                 #Get info from message.
-                msg = str(message['message'].lower());
+                msg = str(message['message'].lower().replace("'", ''));
                 username = str(message['username'].lower());
                 t.send_message("Thank you for your message!")
 

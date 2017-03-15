@@ -22,18 +22,23 @@ if (False):
     if (message[0] == '?'):
         message_type = 3
         #send message to helpbot to chat to user
-        elif (message[0] == '!'):
-               
-            #Either command (1)
-            #then move to commands table
-            message_type = 1
-            #Or reinforcement (2)
-            #then move to reinforcements table
-            message_type = 2
-        else:
-            #if does not start with ? or !, it is raw chat
-            message_type = 0
-            #keep in chats table???
+    #show the score
+    elif(message[0] == '_')
+        message_type = 3
+    #set the username after @ as the parent of this user
+    elif(message[0] == '@')
+        message_type = 3
+    elif(message[0] == '!'):               
+        #Either command (1)
+        #then move to commands table
+        message_type = 1
+        #Or reinforcement (2)
+        #then move to reinforcements table
+        message_type = 2
+    else:
+        #if does not start with ? or !, it is raw chat
+        message_type = 0
+        #keep in chats table???
 
     #user = pull user field from new row
     if (user not in users):
