@@ -15,17 +15,97 @@ class DATABASE:
         data = self.cursor.fetchone()
 
         print ("Database version : %s " % data)
+    
+    def Add_User(self, username, time):
 
-    def Fetch_New_Color(self):
+        sql = "INSERT INTO users(userName, timeAdded, numChats) VALUES('%s', '%s', 1)\
+            ON DUPLICATE KEY UPDATE numChats = numChats + 1;"%(username, time)
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+            print("unable to update table users")
 
-        color = ""
+    def Add_User_Parent(self, user, parent):
+
+        sql = "UPDATE users set parentName='%s' WHERE userName='%s';"%(parent, user)
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            print("could not update the parent")
+            self.connection.rollback()
+
+    def Add_Reinforcement(self, color, reward):
+        # if the startTime is beyond n minutes then discard this reward
+        if reward == 'y':
+            sql = " UPDATE display set numYes=numYes+1 WHERE color='%s'\
+             ORDER BY startTime DESC LIMIT 1;"%(color)
+        elif reward == 'n':
+            sql = " UPDATE display set numNo=numNo+1 WHERE color='%s'\
+             ORDER BY startTime DESC LIMIT 1;"%(color)
+        else: return
 
         try:
-            sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeA ASC LIMIT 1;"
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            print("could not insert the reinforcement")
+            self.connection.rollback()
+
+    def Add_Command(self, command, color, time):
+
+        # print(command, color, time)
+        sql = "INSERT INTO command_log(cmdTxt, color, timeArrival) VALUES('%s', '%s', '%s');"%(command, color, time)
+
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+            print("unable to log this command")
+
+        sql = "INSERT INTO unique_commands(cmdTxt, timeAdded, numIssued) VALUES('%s', '%s', 1)\
+            ON DUPLICATE KEY UPDATE numIssued = numIssued + 1;"%(command, time)
+
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+            print("unable to add this new command")
+
+    def Fetch_New_Chat(self):
+        result = None
+        try:
+            #find the oldest piece of unprocessed chat
+            sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
+            chatID = result[0]
+
+            print(result)
+
+            #modify the row as processed
+            sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
+            self.cursor.execute(sql)
+            self.connection.commit()
+
+        except:
+            # print("no new chat message is found")
+            self.connection.rollback()
+
+        return result
+
+    def Fetch_New_Color(self):
+        color = ""
+        try:
+            sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
+            self.cursor.execute(sql)
+            result = self.cursor.fetchone()
+            chatID = result[0]
             color = result[3]
-            chatid = result[0]
 
             print(result)
             sql = "UPDATE chats SET processed=1 WHERE id='%d';"%(chatid)
@@ -40,7 +120,8 @@ class DATABASE:
 
     def Insert_Chat(self, username, current_time, msg):
         #INSERT INTO chats VALUES (ID, time, user, txt);
-        sql = "INSERT INTO chats(timeA, username, txt) VALUES('%s', '%s', '%s');"%(current_time, username, msg)
+        sql = "INSERT INTO chats(timeArrival, username, txt) VALUES('%s', '%s', '%s');"\
+        %(current_time, username, msg)
         try:
             self.cursor.execute(sql)
             self.connection.commit()
@@ -83,7 +164,6 @@ class DATABASE:
         currentTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
         sql = "INSERT INTO commands VALUES('%d', '%s', '%d', '%s', '%d');" %(rowID, txt, num, currentTime, id)
-
 
         try:
             self.cursor.execute(sql)
