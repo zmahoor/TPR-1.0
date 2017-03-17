@@ -12,8 +12,7 @@ def validPrefix():
 def isRewardSignal(string):
     global validColors
 
-    validRS = [ p+"y" for p in validPrefix() ] +\
-            [ p+"n" for p in validPrefix() ]
+    validRS = [p+"y" for p in validPrefix()]+[p+"n" for p in validPrefix()]
 
     return string in validRS
 
@@ -43,12 +42,6 @@ def getParentInfo(data):
     return data[1:]
 
 mydatabase = database.DATABASE();
-
-message_type = 0
-
-validColors = ['red', 'green', 'blue']
-maxCommandLength = 50
-minCommandLength = 2
 
 while(True):
 

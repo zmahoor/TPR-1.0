@@ -6,7 +6,6 @@ from bugRobot import ROBOT
 import math
 import pickle
 import constants as c
-# from database import *
 
 class INDIVIDUAL:
 
@@ -24,8 +23,6 @@ class INDIVIDUAL:
 
         self.sim = None
 
-        # self.mydatabase = DATABASE()
-
 
     def __getstate__(self):
 
@@ -35,6 +32,9 @@ class INDIVIDUAL:
 
         self.id, self.genomeSahpe, self.genome, self.color, self.fitness = state
 
+    def Set_ID(self, id):
+        self.id = id
+        
     def Set_Color(self, color):
 
         if color == 'red':
@@ -78,9 +78,6 @@ class INDIVIDUAL:
         self.fitness = np.sum(self.genome)
         # self.fitness = np.random.random() * 2 - 1
         del self.sim
-        # connect to the database and find likebility of each individual
-
-        # self.fitness = self.mydatabase.Find_Fitness(self.id)
 
     def Mutate(self):
 
@@ -98,16 +95,13 @@ class INDIVIDUAL:
         if self.genome[ind1][ind2] < -1.0:
             self.genome[ind1][ind2] = -1
 
-    # def Kill_From_Database(self):
-    #     self.mydatabase.Change_Robot_Status(self.id)
-
     def Print(self):
 
         print '[', self.id, self.fitness, ']',
 
     def Store(self):
-
-        f = open( 'robot' + str(id) + '.txt', 'wb' )
+        path = '../brains/r_' + str(self.id) + '.txt'
+        f = open( path, 'wb' )
         pickle.dump(  self , f )
         f.close()
 
