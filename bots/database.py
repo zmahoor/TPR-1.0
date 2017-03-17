@@ -178,7 +178,7 @@ class DATABASE:
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             chatID = result['chatID']
-            color = result['color']
+            color = result['txt']
 
             print(result)
             sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
