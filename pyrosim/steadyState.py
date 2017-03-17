@@ -8,6 +8,7 @@ import sys
 import pickle
 import os 
 from termcolor import colored
+import constants as c
 
 sys.path.append('../bots')
 
@@ -48,6 +49,7 @@ def announcement(cmdCurrent, currentColor, nextColor):
     print
     print colored("Type !"+ nextColor[0] +\
         "command to issue a command to the next robot.", nextColor)
+    print colored(" Next robot in: " + str(c.evaluationTime*0.05)+" seconds", nextColor)
     print('-'*70)
 
 def display(newInd, robotType):
