@@ -13,5 +13,7 @@ MYSQL_PASS = 'TwitchPlaysRobotics'
 
 #simulator info
 validColors = ['red', 'green', 'blue', 'purple', 'yellow']
+filteredUsers = ["moderator1", "experimenter0", "janetsbe", "etc, etc, etc"]; 
+
 maxCommandLength = 50
 minCommandLength = 2

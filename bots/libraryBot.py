@@ -47,11 +47,13 @@ while(True):
 
     newRow = mydatabase.Fetch_New_Chat()
 
+    # print("newRow: ", newRow)
+
     if newRow == None: continue
    
-    timeArrival = newRow[1]
-    user = newRow[2]
-    message = newRow[3]
+    timeArrival = newRow['timeArrival']
+    user = newRow['username']
+    message = newRow['txt']
 
     # check the user table and if the user is new then insert it
     mydatabase.Add_User(user, timeArrival)
@@ -67,19 +69,24 @@ while(True):
     elif(message[0] == '@'):
         print(message, " set parent")
         parent = getParentInfo(message)
+        
         mydatabase.Add_User_Parent(user, parent)
 
     #Or reinforcement then move to reinforcements table
     elif isRewardSignal(message):
         print(message, "reward signal")
         color, reward = parseReward(message)
-        mydatabase.Add_Reinforcement(color, reward)
+
+        mydatabase.Add_To_RewardLog(user, reward, color, timeArrival)
+        mydatabase.Add_Reward_To_Display(color, reward)
 
     #Either command then move to commands table
     elif isCommand(message):
         print(message, "command")
         color, command = parseCommand(message)
-        mydatabase.Add_Command(command, color, timeArrival)
+
+        mydatabase.Add_To_CommandLog(user, command, color, timeArrival)
+        mydatabase.Add_Command(command, timeArrival)
 
     else:
         #if does not start with ? or !, it is raw chat

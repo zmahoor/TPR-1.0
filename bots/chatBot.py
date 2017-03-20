@@ -17,11 +17,7 @@ host = HOST
 
 t.connect(username, key, channel, host, port);
  
-filteredUsers = ["moderator1", "experimenter0", "janetsbe", "etc, etc, etc"]; 
-
 running = True;
-validColors = ['red', 'green', 'blue', 'white' ,'black', 'purple', 'cyan', 'yellow']
-
 #The main loop
 while running:
 
@@ -43,8 +39,6 @@ while running:
 
                 print(username + ": " + msg);
                 currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
-
-                # rawChatMessages.append((username, currentTime, msg));
 
                 if(username not in filteredUsers):
                     mydatabase.Insert_Chat(username, currentTime, msg)

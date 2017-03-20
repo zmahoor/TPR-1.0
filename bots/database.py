@@ -1,6 +1,6 @@
 import pymysql.cursors
 import pymysql
-from time import gmtime, strftime
+from time import *
 from settings import *
 
 class DATABASE:
@@ -49,7 +49,7 @@ class DATABASE:
             print("could not update the parent")
             self.connection.rollback()
 
-    def Add_Reinforcement(self, color, reward):
+    def Add_Reward_To_Display(self, color, reward):
         # if the startTime is beyond 3 minutes, discard this reward
         currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
@@ -81,10 +81,10 @@ class DATABASE:
             print("could not upadate the fittness")
             self.connection.rollback()
 
-    def Add_Command(self, command, color, time):
+    def Add_To_CommandLog(self, username, command, color, time):
         # print(command, color, time)
-        sql = "INSERT INTO command_log(cmdTxt, color, timeArrival) VALUES\
-        ('%s', '%s', '%s');"%(command, color, time)
+        sql = "INSERT INTO command_log(userName, cmdTxt, color, timeArrival) VALUES\
+        ('%s', '%s', '%s', '%s');"%(username, command, color, time)
 
         try:
             self.cursor.execute(sql)
@@ -93,6 +93,7 @@ class DATABASE:
             self.connection.rollback()
             print("unable to log this command")
 
+    def Add_Command(self, command, time):
         sql = "INSERT INTO unique_commands(cmdTxt, timeAdded, numIssued) VALUES('%s', '%s', 1)\
             ON DUPLICATE KEY UPDATE numIssued = numIssued + 1;"%(command, time)
 
@@ -102,6 +103,17 @@ class DATABASE:
         except:
             self.connection.rollback()
             print("unable to add this new command")
+
+    def Add_To_RewardLog(self, username, reward, color, time):
+        sql = "INSERT INTO reward_log(userName, reward, color, timeArrival) VALUES\
+        ('%s', '%s', '%s', '%s');"%(username, reward, color, time)
+
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+            print("unable to log this reward")
 
     def Add_Robot(self, robotType):
         robotID = 0
