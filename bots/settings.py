@@ -12,7 +12,8 @@ MYSQL_USER = 'root'
 MYSQL_PASS = 'TwitchPlaysRobotics'
 
 #simulator info
-validColors = ['red', 'green', 'blue', 'purple', 'yellow']
+#colors that python package termcolor support
+validColors = ['red', 'green', 'blue', 'white', 'yellow', 'magenta']
 filteredUsers = ["moderator1", "experimenter0", "janetsbe", "etc, etc, etc"]; 
 
 maxCommandLength = 50

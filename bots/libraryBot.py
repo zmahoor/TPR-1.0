@@ -23,10 +23,11 @@ def isCommand(data):
 
     if "http" in data: return False
  
-    if (len(data) > maxCommandLength+2 ): return False
-    if (len(data) < minCommandLength+2): return False
+    if (len(data) > maxCommandLength+1 ): return False
+    if (len(data) < minCommandLength+1): return False
 
-    if(data.startswith(tuple(validPrefix()))): return True
+    # if(data.startswith(tuple(validPrefix()))): return True
+    if(data[0] == "!"): return True
 
     return False
 
@@ -34,9 +35,9 @@ def isCommand(data):
 def parseReward(data):
     return data[1], data[2]
 
-#data = !rgo ==> color = data[1] and command = data[2:]
+#data = !go ==> command = data[1:]
 def parseCommand(data):
-    return data[1], data[2:]
+    return data[1:]
 
 def getParentInfo(data):
     return data[1:]
@@ -62,30 +63,40 @@ while(True):
     if (message[0] == '?'):
         print(message, " help requested")
     #show the score table
-    elif(message[0] == '_'):
+    elif (message == '_score'):
         print(message, " score table")
     
     #set the username after @ as the parent of this user
-    elif(message[0] == '@'):
-        print(message, " set parent")
+    elif (message[0] == '#'):
+
+        # print(message, " set parent")
+
         parent = getParentInfo(message)
-        
+
         mydatabase.Add_User_Parent(user, parent)
 
     #Or reinforcement then move to reinforcements table
     elif isRewardSignal(message):
-        print(message, "reward signal")
+
+        # print(message, "reward signal")
+
         color, reward = parseReward(message)
 
-        mydatabase.Add_To_RewardLog(user, reward, color, timeArrival)
-        mydatabase.Add_Reward_To_Display(color, reward)
+        mydatabase.Add_To_RewardLog(user, color, reward, timeArrival)
+
+        mydatabase.Add_Reward_To_Display(color, reward, timeArrival)
+
+        mydatabase.Update_Total_Fitness(color, reward, timeArrival)
 
     #Either command then move to commands table
     elif isCommand(message):
-        print(message, "command")
-        color, command = parseCommand(message)
 
-        mydatabase.Add_To_CommandLog(user, command, color, timeArrival)
+        # print(message, "command")
+
+        command = parseCommand(message)
+
+        mydatabase.Add_To_CommandLog(user, command, timeArrival)
+
         mydatabase.Add_Command(command, timeArrival)
 
     else:

@@ -18,8 +18,8 @@ class DATABASE:
     
     def Insert_Chat(self, username, current_time, msg):
         #INSERT INTO chats VALUES (ID, time, user, txt);
-        sql = "INSERT INTO chats(timeArrival, username, txt) VALUES('%s', '%s', '%s');"\
-        %(current_time, username, msg)
+        sql = """INSERT INTO chats(timeArrival, username, txt) VALUES
+        ('%s', '%s', '%s');"""%(current_time, username, msg)
         try:
             self.cursor.execute(sql)
             self.connection.commit()
@@ -30,18 +30,19 @@ class DATABASE:
                 
     def Add_User(self, username, time):
 
-        sql = "INSERT INTO users(userName, timeAdded, numChats) VALUES('%s', '%s', 1)\
-            ON DUPLICATE KEY UPDATE numChats = numChats + 1;"%(username, time)
+        sql = """INSERT IGNORE INTO users(userName, timeAdded) VALUES('%s', '%s');"""%(username, time)
+        print(sql)
         try:
             self.cursor.execute(sql)
             self.connection.commit()
         except:
             self.connection.rollback()
-            print("unable to update table users")
+            print("unable to insert new user")
 
     def Add_User_Parent(self, user, parent):
-
         sql = "UPDATE users set parentName='%s' WHERE userName='%s';"%(parent, user)
+        print
+        print(sql)
         try:
             self.cursor.execute(sql)
             self.connection.commit()
@@ -49,44 +50,85 @@ class DATABASE:
             print("could not update the parent")
             self.connection.rollback()
 
-    def Add_Reward_To_Display(self, color, reward):
+    def Add_Reward_To_Display(self, color, reward, arrivalTime):
         # if the startTime is beyond 3 minutes, discard this reward
-        currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
-
+        
         if reward == 'y':
-            sql = " UPDATE display set numYes=numYes+1 WHERE color='%s' \
-            and timediff(currentTime, startTime) < '00:03:00'\
-             ORDER BY startTime DESC LIMIT 1;"%(color)
+            sql = """ UPDATE display set numYes=numYes+1 WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+
         elif reward == 'n':
-            sql = " UPDATE display set numNo=numNo+1 WHERE color='%s'\
-            timediff(currentTime, startTime) < '00:03:00'\
-             ORDER BY startTime DESC LIMIT 1;"%(color)
+            sql = """ UPDATE display set numNo=numNo+1 WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+
         else: return
 
         try:
+            print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
         except:
             print("could not insert the reinforcement")
             self.connection.rollback()
 
-    def Update_Total_Fitness(self, robotID):
-        sql = "UPDATE robots set totalFitness=(SELECT SUM(numYes) FROM display\
-        WHERE robotID='%d') WHERE robotID='%d';"%(robotID, robotID)
+    def Add_To_RewardLog(self, username, color, reward, time):
+        sql = """INSERT INTO reward_log(userName, reward, color, timeArrival) VALUES
+        ('%s', '%s', '%s', '%s');"""%(username, reward, color, time)
 
         try:
+            print
+            print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
         except:
-            print("could not upadate the fittness")
             self.connection.rollback()
+            print("unable to log this reward")
 
-    def Add_To_CommandLog(self, username, command, color, time):
-        # print(command, color, time)
-        sql = "INSERT INTO command_log(userName, cmdTxt, color, timeArrival) VALUES\
-        ('%s', '%s', '%s', '%s');"%(username, command, color, time)
+    def Update_Total_Fitness(self, color, reward, arrivalTime):
+        if reward == 'y':
+            sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE 
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        elif reward == 'n':
+            sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        else: return
 
         try:
+            print
+            print(sql)
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            print("could not update the robot's fittness")
+            self.connection.rollback()
+
+
+    # def Update_Total_Fitness(self, robotID):
+    #     sql = """UPDATE robots set totalFitness=(SELECT SUM(numYes) FROM display
+    #     WHERE robotID='%d') WHERE robotID='%d';"""%(robotID, robotID)
+
+    #     try:
+    #         self.cursor.execute(sql)
+    #         self.connection.commit()
+    #     except:
+    #         print("could not upadate the fittness")
+    #         self.connection.rollback()
+
+    def Add_To_CommandLog(self, username, command, time):
+        sql = """INSERT INTO command_log(userName, cmdTxt, timeArrival) VALUES
+        ('%s', '%s', '%s');"""%(username, command, time)
+
+        try:
+            print
+            print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
         except:
@@ -94,8 +136,8 @@ class DATABASE:
             print("unable to log this command")
 
     def Add_Command(self, command, time):
-        sql = "INSERT INTO unique_commands(cmdTxt, timeAdded, numIssued) VALUES('%s', '%s', 1)\
-            ON DUPLICATE KEY UPDATE numIssued = numIssued + 1;"%(command, time)
+        sql = """INSERT INTO unique_commands(cmdTxt, timeAdded, numIssued) VALUES('%s', '%s', 1)
+            ON DUPLICATE KEY UPDATE numIssued = numIssued + 1;"""%(command, time)
 
         try:
             self.cursor.execute(sql)
@@ -103,17 +145,6 @@ class DATABASE:
         except:
             self.connection.rollback()
             print("unable to add this new command")
-
-    def Add_To_RewardLog(self, username, reward, color, time):
-        sql = "INSERT INTO reward_log(userName, reward, color, timeArrival) VALUES\
-        ('%s', '%s', '%s', '%s');"%(username, reward, color, time)
-
-        try:
-            self.cursor.execute(sql)
-            self.connection.commit()
-        except:
-            self.connection.rollback()
-            print("unable to log this reward")
 
     def Add_Robot(self, robotType):
         robotID = 0
@@ -129,9 +160,9 @@ class DATABASE:
 
         return robotID
 
-    def Add_Display(self, robotID, cmdTxt, color, startTime):
-        sql = "INSERT INTO display(robotID, cmdTxt, color, startTime) VALUES\
-        ('%d','%s','%s', '%s');"%(robotID, cmdTxt, color, startTime)
+    def Add_Command_To_Display(self, robotID, cmdTxt, color, startTime):
+        sql = """INSERT INTO display(robotID, cmdTxt, color, startTime) VALUES
+        ('%d','%s','%s', '%s');"""%(robotID, cmdTxt, color, startTime)
 
         try:
             self.cursor.execute(sql)
@@ -141,6 +172,7 @@ class DATABASE:
             print("unable to insert the robot into the display")
 
     def Kill_Robot(self, robotID):
+        #update the robot with dead flag as 1--kill it--
         sql = "UPDATE robots set dead=1 WHERE robotID='%d';"%(robotID)
         try:
             self.cursor.execute(sql)
@@ -150,36 +182,38 @@ class DATABASE:
             print("unable to kill the robot")
 
     def Fetch_Alive_Robots(self, robotType):
+        #find all the robots with the dead flag as zero --alive--
+        sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
         result = None
         try:
-            sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
             self.cursor.execute(sql)
             result = self.cursor.fetchall()
         except:
             print("unable to retrieve alive robots")
-            self.connection.rollback()
 
         return result
 
     def Fetch_New_Chat(self):
+        #find the oldest piece of unprocessed chat
+        sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         result = None
+        chatID = 0
         try:
-            #find the oldest piece of unprocessed chat
-            sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             chatID = result['chatID']
-
+        except:
+            pass
             # print(result)
 
-            #modify the row as processed
-            sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
+        #update the processed flag as 1 for that piece of chat
+        sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
+        try:
             self.cursor.execute(sql)
             self.connection.commit()
-
         except:
-            # print("no new chat message is found")
             self.connection.rollback()
+            # print("no new chat message is found")
 
         return result
 
@@ -199,40 +233,34 @@ class DATABASE:
 
         except:
             print("please paint me with blue|red|green|white|black|purple|cyan|yellow")
-            self.connection.rollback()
 
         return color
 
 
-    def Fetch_Command(self, currentColor):
-        command = (0, "stay still")
-        sql = "SELECT count(cmdLogID), cmdTxt FROM command_log WHERE color ='%s'\
-         and processed =0 GROUP BY cmdTxt ORDER BY COUNT(cmdLogID) DESC LIMIT 1;" %(currentColor)
+    def Fetch_Popular_Command(self):
+        #find the most popular command where processed=0
+        sql = """SELECT count(cmdLogID) as cmdCount, cmdTxt FROM command_log WHERE 
+        processed =0 GROUP BY cmdTxt ORDER BY COUNT(cmdLogID) DESC LIMIT 1;"""
 
+        result = None
         try:            
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
-            if result != None: return command
+            print result
         except:
-            print("unable to fetch a command")
-            self.connection.rollback()
+            pass
 
-        return(command)
-
-    def Insert_A_Command(self):
-        # sql = "INSERT INTO users VALUES('%d', '%s', '%d', '%d')" %(1001, 'lingling', 11, 11)
-
-        rowID = 1005
-        txt = 'dance'
-        num = 1
-        robotID = 2
-        currentTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-
-        sql = "INSERT INTO commands VALUES('%d', '%s', '%d', '%s', '%d');" %(rowID, txt, num, currentTime, id)
-
+        #change those commands as processed=1
+        sql = """ UPDATE command_log SET processed=1 WHERE processed =0;"""
         try:
             self.cursor.execute(sql)
             self.connection.commit()
+
         except:
-            print("unable to insert data")
             self.connection.rollback()
+            print("unable to fetch a command")
+
+        if result == None: 
+            return({'cmdCount':0, 'cmdTxt':"stay still"})
+        
+        return result
