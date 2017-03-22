@@ -34,7 +34,7 @@ class INDIVIDUAL:
 
     def Set_ID(self, id):
         self.id = id
-        
+
     def Set_Color(self, color):
 
         if color == 'red':
@@ -49,7 +49,7 @@ class INDIVIDUAL:
         elif color == 'yellow':
             self.color = [1 ,1, 0]
 
-        elif color == 'purple':
+        elif color == 'purple' or color =='magenta':
             self.color = [1, 0, 1]
 
         elif color == 'white':

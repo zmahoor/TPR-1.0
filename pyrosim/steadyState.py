@@ -23,7 +23,8 @@ colorIndex = 0
 currentColor = validColors[colorIndex % len(validColors)]
 numAliveIndividuals = 5
 mydatabase = DATABASE()
-
+changeCommand = False
+popularCommand = {'cmdCount':0, 'cmdTxt':"stay still"}
 robotType = "4leg"
 
 def loadRobotFromFile(robotID):
@@ -36,8 +37,7 @@ def loadRobotFromFile(robotID):
     else:
         return INDIVIDUAL(0, GENOME_SHAPE)
 
-def announcement(cmdCurrent, currentColor, nextColor):
-
+def announcement(cmdCurrent, currentColor):
     print('-'*70)
     print colored("Type !"+ currentColor[0] +\
         "y if the current robot is following the command ["+\
@@ -47,40 +47,58 @@ def announcement(cmdCurrent, currentColor, nextColor):
         "n if the current robot is NOT following the command ["+\
          cmdCurrent+"].", currentColor)
     print
-    print colored("Type !"+ nextColor[0] +\
-        "command to issue a command to the next robot.", nextColor)
-    print colored(" Next robot in: " + str(c.evaluationTime*0.05)+" seconds", nextColor)
+    print colored("Type !command to change the command.", 'cyan')
+    print
+    # print colored("Next robot is in: " + str(c.evaluationTime*0.05)+" seconds", nextColor)
     print('-'*70)
 
-def display(newInd, robotType):
+def updateDatabase(robotType):
     global colorIndex
     global currentColor
-
-    #store the robot's info in the database 
-    currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
+    global popularCommand
     
-    robotID = mydatabase.Add_Robot(robotType)
-    print("New individual with mutation: ", robotID)
-    (cmdNum, cmdCurrent) = mydatabase.Fetch_Command(currentColor)
+    #get the current time
+    currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
+    #get the color that is used for displaying the current robot
     currentColor = validColors[colorIndex % len(validColors)]
+
+    #add a new robot to the robots table and return the id
+    robotID = mydatabase.Add_Robot(robotType)
+
+    print("New individual after mutation: ", robotID)
+
+    #add a new entry in the display talble for this robot and the command
+    mydatabase.Add_Command_To_Display(robotID, popularCommand['cmdTxt'], currentColor[0],
+     currentTime)
+
+    #print an announcment for this robot and a robot comes next
+    announcement(popularCommand['cmdTxt'], currentColor)
+
+    #move the color index by one
     colorIndex += 1
-    nextColor = validColors[colorIndex % len(validColors)]
 
-    mydatabase.Add_Display(robotID, cmdCurrent, currentColor[0], currentTime)
+    return robotID
 
-    announcement(cmdCurrent, currentColor, nextColor)
+def display(newInd, robotID):
+    global currentColor
 
-    # display an individual and store the controller into a file
+    #set the id based off the 
     newInd.Set_ID(robotID)
+
+    #set the color of this robot
     newInd.Set_Color(currentColor)
+
+    #evaluate this individual
     newInd.Evaluate(False, False)
+
+    #compute the fitness for this robot
     newInd.Compute_Fitness()
+
+    #store the controller of this robot into a file
     newInd.Store()
 
     del newInd
-
-    mydatabase.Update_Total_Fitness(robotID)
 
 def compete(pop):
     pop_len = len(pop)
@@ -112,31 +130,53 @@ def main(argv):
     generation = 1
 
     global robotType
+    global changeCommand
+    global popularCommand
+
 
     while True:
-        print("Generation: ", generation)
+        print("G: ", generation)
 
+        #return all the alive individuals
         aliveIndividuals = mydatabase.Fetch_Alive_Robots(robotType)
-        print("Number of alive individuals: ", len(aliveIndividuals))
+
+        print "(Alive individuals: ",
+        for ind in aliveIndividuals: print str(ind['robotID']) + ":" + str(ind['totalFitness']),
+        print ")"
+
+            #find the most popular command for this new robot
+        if(generation % 6 == 0):
+            popularCommand = mydatabase.Fetch_Popular_Command()
+            # changeCommand = False
+
         if len(aliveIndividuals) < numAliveIndividuals:
 
             newInd = INDIVIDUAL(0, GENOME_SHAPE)
 
-            display(newInd, robotType)
+            robotID = updateDatabase(robotType)
+
+            robotID = updateDatabase(robotType)
+
+            display(newInd, robotID)
 
         else:
 
             (winner, loser) = compete(aliveIndividuals)
-            print("winner, loser: ", aliveIndividuals[winner]['robotID'], aliveIndividuals[loser]['robotID'])
+
+            print("winner: ", aliveIndividuals[winner]['robotID'], 
+                "loser: ", aliveIndividuals[loser]['robotID'])
+
             newInd = replace(aliveIndividuals[loser], aliveIndividuals[winner])
 
-            display(newInd, robotType)
+            robotID = updateDatabase(robotType)
+
+            display(newInd, robotID)
 
         generation += 1
 
         print
 
-        if generation == 2: break
+        if generation == 100: break
 
 if __name__ == "__main__":
    main(sys.argv[1:])
