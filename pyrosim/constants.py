@@ -1,6 +1,6 @@
-evaluationTime = 800
-# L = 0.1
-L = 0.3
+evaluationTime = 600
+L = 0.1
+# L = 0.3
 R = L/5
 
 popSize = 10
