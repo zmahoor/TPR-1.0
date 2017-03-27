@@ -12,7 +12,8 @@ def validPrefix():
 def isRewardSignal(string):
     global validColors
 
-    validRS = [p+"y" for p in validPrefix()]+[p+"n" for p in validPrefix()]
+    validRS = [p+"y" for p in validPrefix()]+[p+"n" for p in validPrefix()]+\
+    [p+"l" for p in validPrefix()]+[p+"d" for p in validPrefix()]
 
     return string in validRS
 
@@ -61,10 +62,10 @@ while(True):
 
     #message begins with '?' send message to helpbot to chat to user
     if (message[0] == '?'):
+
+        mydatabase.Add_To_Help(user, message, timeArrival)
+
         print(message, " help requested")
-    #show the score table
-    elif (message == '_score'):
-        print(message, " score table")
     
     #set the username after @ as the parent of this user
     elif (message[0] == '#'):
@@ -87,6 +88,8 @@ while(True):
         mydatabase.Add_Reward_To_Display(color, reward, timeArrival)
 
         mydatabase.Update_Total_Fitness(color, reward, timeArrival)
+
+        mydatabase.Update_Total_Likeability(color, reward, timeArrival)
 
     #Either command then move to commands table
     elif isCommand(message):

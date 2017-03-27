@@ -27,9 +27,18 @@ class DATABASE:
         except:
             print("unable to insert data")
             self.connection.rollback()
-                
-    def Add_User(self, username, time):
+    
+    def Add_To_Help(self, user, txt, time):
+        sql = """INSERT IGNORE INTO helps(txt, userName, timeArrival) VALUES('%s', '%s');"""%(user, txt, time)
+        print(sql)
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+            print("unable to insert help request")
 
+    def Add_User(self, username, time):
         sql = """INSERT IGNORE INTO users(userName, timeAdded) VALUES('%s', '%s');"""%(username, time)
         print(sql)
         try:
@@ -60,6 +69,16 @@ class DATABASE:
 
         elif reward == 'n':
             sql = """ UPDATE display set numNo=numNo+1 WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+
+        elif reward == 'l':
+            sql = """ UPDATE display set numLike=numLike+1 WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+
+        elif reward == 'd':
+            sql = """ UPDATE display set numDislike=numDislike+1 WHERE color='%s'
             and timediff('%s', startTime) < '00:03:00'
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
@@ -110,14 +129,37 @@ class DATABASE:
             print("could not update the robot's fittness")
             self.connection.rollback()
 
+    def Update_Total_Likeability(self, color, reward, arrivalTime):
+        if reward == 'l':
+            sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE 
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
-    # def Update_Total_Fitness(self, robotID):
-    #     sql = """UPDATE robots set totalFitness=(SELECT SUM(numYes) FROM display
-    #     WHERE robotID='%d') WHERE robotID='%d';"""%(robotID, robotID)
+        elif reward == 'd':
+            sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and timediff('%s', startTime) < '00:03:00'
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        else: return
+
+        try:
+            print
+            print(sql)
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            print("could not update the robot's fittness")
+            self.connection.rollback()
+
+    # def Fetch_Total_Fitness(self, robotID):
+    #     sql = """SELECT SUM(numYes) FROM display
+    #     WHERE robotID='%d';"""%(robotID)
 
     #     try:
     #         self.cursor.execute(sql)
-    #         self.connection.commit()
+    #         self.connection.fetchone()
     #     except:
     #         print("could not upadate the fittness")
     #         self.connection.rollback()
@@ -171,6 +213,15 @@ class DATABASE:
             self.connection.rollback()
             print("unable to insert the robot into the display")
 
+    def Update_Robot_Evaluation(self, robotID):
+        sql = "UPDATE robots SET numEvals=numEvals+1 WHERE robotID='%d';"%(robotID)
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+            # print("no new chat message is found")
+
     def Kill_Robot(self, robotID):
         #update the robot with dead flag as 1--kill it--
         sql = "UPDATE robots set dead=1 WHERE robotID='%d';"%(robotID)
@@ -180,6 +231,28 @@ class DATABASE:
         except:
             self.connection.rollback()
             print("unable to kill the robot")
+
+    def Fetch_User_Score(self, user):
+        sql = "SELECT * FROM users WHERE userName='%s';"%(user)
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchone()
+        except:
+            print("unable to retrieve user's score")
+
+        return result
+
+    def Fetch_Top_Users(self, topn):
+        sql = """SELECT userName, score FROM users ORDER BY scores DESC LIMIT %s;"""%(topn)
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetcall()
+        except:
+            print("unable to retrieve score table")
+
+        return result
 
     def Fetch_Alive_Robots(self, robotType):
         #find all the robots with the dead flag as zero --alive--
@@ -246,7 +319,7 @@ class DATABASE:
         try:            
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
-            print result
+            # print result
         except:
             pass
 

@@ -71,7 +71,12 @@ class INDIVIDUAL:
 
         self.sim.Start() 
 
+        # self.sim.Wait_To_Finish()
+
+    def Wait_For_Me(self):
+
         self.sim.Wait_To_Finish()
+        del self.sim
 
     def Compute_Fitness(self):
 
@@ -99,11 +104,12 @@ class INDIVIDUAL:
 
         print '[', self.id, self.fitness, ']',
 
-    def Store(self):
-        path = '../brains/r_' + str(self.id) + '.txt'
-        f = open( path, 'wb' )
-        pickle.dump(  self , f )
-        f.close()
+    def store_Robot_To_File(self):
+        brainPath = '../brains/r_' + str(self.id) + '.txt'
+
+        with open(brainPath,'wb') as f:
+            pickle.dump(  self , f )
+            f.close()
 
 
 

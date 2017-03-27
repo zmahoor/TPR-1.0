@@ -65,7 +65,7 @@ class Twitch:
                 loading = self.loading_complete(line) 
 
         print('Joined %s channel..' %(self.channel))
-        self.send_message("Successfully joined chat...")
+        self.send_message("Joined chat...")
 
     def loading_complete(self, line):
         if("End of /NAMES list" in line): return False
@@ -86,15 +86,19 @@ class Twitch:
 
         print("Sent: %s" %(messageTemp))
 
-    def is_ping_message(self, line):
-        if line == "PING :tmi.twitch.tv\r":
+    def is_ping_message(self, data):
+        if "PING :tmi.twitch.tv\r" in data:
             self.send_message("PONG :tmi.twitch.tv".encode("utf-8"))
-            return true
-        else: return False
+            return True
+        else: 
+            return False
 
     def recieve_messages(self, amount=512):
         # data = None
         data = self.sock.recv(amount);
+
+        if self.is_ping_message(data):
+            return None
         # try:
         #     data = self.sock.recv(amount);
         # except: 
