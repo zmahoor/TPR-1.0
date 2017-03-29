@@ -222,6 +222,16 @@ class DATABASE:
             self.connection.rollback()
             # print("no new chat message is found")
 
+    def Update_Scores(self, user):
+        sql= """UPDATE users SET score=(SELECT count(*) FROM chats WHERE
+         userName = '%s') WHERE userName = '%s' ;"""%(user, user)
+
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+        except:
+            self.connection.rollback()
+
     def Kill_Robot(self, robotID):
         #update the robot with dead flag as 1--kill it--
         sql = "UPDATE robots set dead=1 WHERE robotID='%d';"%(robotID)
@@ -244,11 +254,11 @@ class DATABASE:
         return result
 
     def Fetch_Top_Users(self, topn):
-        sql = """SELECT userName, score FROM users ORDER BY scores DESC LIMIT %s;"""%(topn)
+        sql = """SELECT userName, score FROM users ORDER BY score DESC LIMIT %d;"""%(topn)
         result = None
         try:
             self.cursor.execute(sql)
-            result = self.cursor.fetcall()
+            result = self.cursor.fetchall()
         except:
             print("unable to retrieve score table")
 
@@ -309,6 +319,18 @@ class DATABASE:
 
         return color
 
+    def Fetch_All_Commands(self, topn):
+        sql = """SELECT cmdTxt, numIssued from unique_commands ORDER BY numIssued DESC LIMIT %d;"""%(topn)
+
+        result = None
+        try:            
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+            # print result
+        except:
+            print("unable fetching all the unique commands")
+
+        return result
 
     def Fetch_Popular_Command(self):
         #find the most popular command where processed=0
