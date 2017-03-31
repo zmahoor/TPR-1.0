@@ -5,7 +5,6 @@ from time import *
 import sys 
 import os 
 from termcolor import colored
-import constants as c
 import matplotlib.pyplot as plt
 
 sys.path.append('../bots')
@@ -38,7 +37,7 @@ def main():
 
     i=0
 
-    while i < 2:
+    while True:
 
         cmdVals = []
         cmdTxt = []
