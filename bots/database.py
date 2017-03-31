@@ -64,22 +64,22 @@ class DATABASE:
         
         if reward == 'y':
             sql = """ UPDATE display set numYes=numYes+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         elif reward == 'n':
             sql = """ UPDATE display set numNo=numNo+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         elif reward == 'l':
             sql = """ UPDATE display set numLike=numLike+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         elif reward == 'd':
             sql = """ UPDATE display set numDislike=numDislike+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         else: return
@@ -109,13 +109,13 @@ class DATABASE:
         if reward == 'y':
             sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE 
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         elif reward == 'n':
             sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         else: return
@@ -133,13 +133,13 @@ class DATABASE:
         if reward == 'l':
             sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE 
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         elif reward == 'd':
             sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:03:00'
+            and timediff('%s', startTime) < '00:02:00'
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         else: return

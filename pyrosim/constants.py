@@ -1,4 +1,4 @@
-evaluationTime = 600
+evaluationTime = 1800
 L = 0.1
 # L = 0.3
 R = L/5

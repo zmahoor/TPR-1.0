@@ -24,7 +24,7 @@ currentColor = validColors[colorIndex % len(validColors)]
 numAliveIndividuals = 5
 mydatabase = DATABASE()
 changeCommand = False
-popularCommand = {'cmdCount':0, 'cmdTxt':"stay still"}
+popularCommand = {'cmdCount':0, 'cmdTxt':"roll"}
 robotType = "4leg"
 
 def load_Robot_From_File(robotID):
@@ -59,22 +59,6 @@ def print_Message(cmdCurrent, currentColor):
     # print colored("Next robot is in: " + str(c.evaluationTime*0.05)+" seconds", nextColor)
     print('-'*70)
 
-def update_Database(robotType):
-    global popularCommand
-    
-    #get the current time
-    currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
-
-    #add a new robot to the robots table and return the id
-    robotID = mydatabase.Add_Robot(robotType)
-
-    #add a new entry in the display table for this robot and the command
-    mydatabase.Add_Command_To_Display(robotID, popularCommand['cmdTxt'], 
-        currentColor[0], currentTime)
-
-    mydatabase.Update_Robot_Evaluation(aliveIndividuals[index]['robotID'])
-
-    return robotID
 
 def select_Random_Individual(pop):
 
@@ -96,8 +80,8 @@ def compete_While_Waiting_For(pop, ignoreIndex):
         while ind2 == ind1 or ind2 == ignoreIndex: 
             ind2 =  np.random.randint(pop_len)
 
-    print pop[ind1]
-    print pop[ind2]
+    # print pop[ind1]
+    # print pop[ind2]
 
     return compete_Based_On_Dominance(pop[ind1], pop[ind2])
 
@@ -149,11 +133,6 @@ def main(argv):
         #return all the alive individuals
         aliveIndividuals = mydatabase.Fetch_Alive_Robots(robotType)
 
-        # print "(Alive individuals: ",
-        # for ind in aliveIndividuals: 
-        #     print str(ind['robotID']) + ":" + str(ind['totalFitness']),
-        # print ")"
-
         #find the most popular command
         if(generation % 6 == 0):
             popularCommand = mydatabase.Fetch_Popular_Command()
@@ -163,12 +142,24 @@ def main(argv):
 
             newIndividual = INDIVIDUAL(0, GENOME_SHAPE)
 
-            robotID = update_Database(robotType)
+            #get the current time
+            currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
+
+            #add a new robot to the robots table and return the id
+            robotID = mydatabase.Add_Robot(robotType)
+
+            #add a new entry in the display table for this robot and the command
+            mydatabase.Add_Command_To_Display(robotID, popularCommand['cmdTxt'], 
+                currentColor[0], currentTime)
+
+            mydatabase.Update_Robot_Evaluation(robotID)
 
             newIndividual.Set_Color(currentColor)
 
+            print("Evaluating: ", robotID)
+
             #print a message for users on screen
-            print_Reward_Message(popularCommand['cmdTxt'], currentColor)
+            print_Message(popularCommand['cmdTxt'], currentColor)
 
             newIndividual.Evaluate(False, False)
 
@@ -226,7 +217,7 @@ def main(argv):
 
         print
 
-        if generation == 6: break
+        # if generation == 6: break
 
 if __name__ == "__main__":
    main(sys.argv[1:])
