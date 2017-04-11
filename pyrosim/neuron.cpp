@@ -17,7 +17,7 @@ NEURON::NEURON(int myID, int neuronType, double tau) {
 
 	if ( type == BIAS_NEURON )
 
-		value = 1.0;
+		value = tau;
 }
 
 NEURON::NEURON(int myID, int neuronType, int svIndex, double tau) {

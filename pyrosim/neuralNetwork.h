@@ -21,7 +21,7 @@ public:
 
 	~NEURAL_NETWORK(void);
 
-	void   Add_Bias_Neuron(int ID);
+	void   Add_Bias_Neuron(int ID, double bias);
 
 	void   Add_Hidden_Neuron(int ID, double tau);
 

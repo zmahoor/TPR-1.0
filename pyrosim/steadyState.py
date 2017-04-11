@@ -80,8 +80,8 @@ def compete_While_Waiting_For(pop, ignoreIndex):
         while ind2 == ind1 or ind2 == ignoreIndex: 
             ind2 =  np.random.randint(pop_len)
 
-    # print pop[ind1]
-    # print pop[ind2]
+    print pop[ind1]
+    print pop[ind2]
 
     return compete_Based_On_Dominance(pop[ind1], pop[ind2])
 
@@ -99,6 +99,8 @@ def compete_Based_On_Dominance(individual1, individual2):
     mydatabase.Kill_Robot(loser['robotID'])
 
     newInd = load_Robot_From_File(winner['robotID'])
+
+    print("winner: ", winner['robotID'])
 
     newInd.Mutate()
 
@@ -201,6 +203,8 @@ def main(argv):
             if newIndividual != None:
                 robotID = mydatabase.Add_Robot(robotType)
 
+                print("child: ", robotID)
+                
                 newIndividual.Set_ID(robotID)
 
                 #store this individual to a file
