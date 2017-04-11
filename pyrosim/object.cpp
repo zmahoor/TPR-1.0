@@ -126,8 +126,10 @@ void OBJECT::Draw(void) {
 	if ( myShape == BOX )
 
 		DrawBox();
-	else
+	else if(myShape == CYLINDER)
 		DrawCylinder();
+    else if(myShape == SPHERE)
+        DrawSphere();
 }
 
 void OBJECT::Draw_Ray_Sensor(double x, double y, double z, int t) {
@@ -196,6 +198,8 @@ void OBJECT::Read_From_Python(dWorldID world, dSpaceID space, int shape) {
 
 	std::cin >> z;
 
+    std::cin>> mass;
+
 	if ( myShape == BOX ) {
 
 		std::cin >> length;
@@ -210,9 +214,9 @@ void OBJECT::Read_From_Python(dWorldID world, dSpaceID space, int shape) {
 
                 std::cin >> b;
 
-		CreateBox(world,space, x,y,z, length,width,height);
+		CreateBox(world,space, x,y,z, mass, length,width,height);
 	}
-	else {
+	else if( myShape == CYLINDER) {
 
 		std::cin >> r1;
 
@@ -230,8 +234,27 @@ void OBJECT::Read_From_Python(dWorldID world, dSpaceID space, int shape) {
 
                 std::cin >> b;
 
-                CreateCylinder(world,space, x,y,z, r1,r2,r3, length,radius);
+                CreateCylinder(world,space, x,y,z, mass, r1,r2,r3, length,radius);
 	}
+
+    else if( myShape == SPHERE)
+    {
+        std::cin >> r1;
+
+        std::cin >> r2;
+
+        std::cin >> r3;
+
+        std::cin >> radius; 
+
+         std::cin >> r;
+
+        std::cin >> g;
+
+        std::cin >> b;
+
+        CreateSphere(world,space, x,y,z, mass, r1,r2,r3,radius);
+    }
 }
 
 void OBJECT::Set_Ray_Sensor(double distance, OBJECT *objectThatWasHit, int t) {
@@ -303,14 +326,15 @@ int OBJECT::Contains_A_Light_Source(void) {
 
 void OBJECT::CreateBox(dWorldID world, dSpaceID space,
                                 double x, double y, double z,
+                                double mass,
                                 double length, double width, double height) {
 
         dMass m;
 
         body = dBodyCreate (world);
         dBodySetPosition (body,x,y,z);
-        dMassSetBox (&m,1,length,width,height);
-        dMassAdjust (&m,1);
+        dMassSetBox (&m, mass,length,width,height);
+        dMassAdjust (&m, mass);
         dBodySetMass (body,&m);
         geom = dCreateBox(space,length,width,height);
         dGeomSetBody (geom,body);
@@ -320,6 +344,7 @@ void OBJECT::CreateBox(dWorldID world, dSpaceID space,
 
 void OBJECT::CreateCylinder(dWorldID world, dSpaceID space,
                                                 double x, double y, double z,
+                                                double mass,
                                                 double r1, double r2, double r3,
                                                 double length, double radius) {
 
@@ -333,14 +358,38 @@ void OBJECT::CreateCylinder(dWorldID world, dSpaceID space,
     	dBodySetRotation(body,R);
 
         // dMassSetSphere (&m,1,radius);
-	dMassSetCapsule(&m,1,1,radius,length);
-        dMassAdjust (&m,1);
+	    dMassSetCapsule(&m,mass,1,radius,length);
+        dMassAdjust (&m, mass);
         dBodySetMass (body,&m);
         // geom = dCreateCylinder(space,radius,length);
         geom = dCreateCapsule(space,radius,length);
         dGeomSetBody (geom,body);
 
 	dGeomSetData(geom,this);
+}
+
+void OBJECT::CreateSphere(dWorldID world, dSpaceID space,
+                                                double x, double y, double z,
+                                                double mass,
+                                                double r1, double r2, double r3,
+                                                double radius) {
+
+        dMass m;
+
+        body = dBodyCreate (world);
+        dBodySetPosition (body,x,y,z);
+
+        dMatrix3 R;
+        dRFromZAxis(R,r1,r2,r3);
+        dBodySetRotation(body,R);
+
+        dMassSetSphere (&m,mass,radius);
+        dMassAdjust (&m, mass);
+        dBodySetMass (body,&m);
+        geom = dCreateSphere(space,radius);
+        dGeomSetBody (geom,body);
+
+        dGeomSetData(geom,this);
 }
 
 double OBJECT::Distance_To(OBJECT *otherObject) {
@@ -372,6 +421,11 @@ void OBJECT::DrawCylinder(void) {
 	// dsSetTexture (DS_WOOD);
 
 	dsDrawCapsule(dBodyGetPosition(body),dBodyGetRotation(body),length,radius);
+}
+
+void OBJECT::DrawSphere(void){
+
+    dsDrawSphere(dBodyGetPosition(body),dBodyGetRotation(body), radius);
 }
 
 OBJECT* OBJECT::Find_Closest_Light_Source(int numObjects, OBJECT **objects) {

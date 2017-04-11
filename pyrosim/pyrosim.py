@@ -34,21 +34,23 @@ class PYROSIM:
 
 		self.Send('EvaluationTime '+str(evalTime)+'\n')
 
-	def Get_Sensor_Data(self,sensorID=0,s=0):
+	def Get_Sensor_Data(self, sensorID=0, s=0):
 
 		return self.dataFromPython[sensorID,s,:]
 
-	def Send_Bias_Neuron(self, neuronID = 0 ):
+	def Send_Bias_Neuron(self, neuronID = 0, biasValue=1.0 ):
 
 		outputString = 'BiasNeuron'
 
 		outputString = outputString + ' ' + str(neuronID)
 
+		outputString = outputString + ' ' + str(biasValue)
+
 		outputString = outputString + '\n'
 
 		self.Send(outputString)
 
-	def Send_Box(self, objectID=0, x=0, y=0, z=0, length=0.1, width=0.1, height=0.1, r=1, g=1, b=1):
+	def Send_Box(self, objectID=0, x=0, y=0, z=0, mass=1.0, length=0.1, width=0.1, height=0.1, r=1, g=1, b=1):
 
 		outputString = 'Box'
 
@@ -57,6 +59,8 @@ class PYROSIM:
 		outputString = outputString + ' ' + str(x)
 		outputString = outputString + ' ' + str(y)
 		outputString = outputString + ' ' + str(z)
+
+		outputString = outputString + ' ' + str(mass)
 
 		outputString = outputString + ' ' + str(length)
 		outputString = outputString + ' ' + str(width)
@@ -70,7 +74,7 @@ class PYROSIM:
 
 		self.Send(outputString)
 
-	def Send_Cylinder(self, objectID=0, x=0, y=0, z=0, r1=0, r2=0, r3=1, length=1.0, radius=0.1, r=1, g=1, b=1):
+	def Send_Cylinder(self, objectID=0, x=0, y=0, z=0, mass=1.0, r1=0, r2=0, r3=1, length=1.0, radius=0.1, r=1, g=1, b=1):
 
 		outputString = 'Cylinder'
 
@@ -79,6 +83,8 @@ class PYROSIM:
 		outputString = outputString + ' ' + str(x)
 		outputString = outputString + ' ' + str(y)
 		outputString = outputString + ' ' + str(z)
+
+		outputString = outputString + ' ' + str(mass)
 
 		outputString = outputString + ' ' + str(r1)
 		outputString = outputString + ' ' + str(r2)
@@ -94,6 +100,33 @@ class PYROSIM:
 		outputString = outputString + '\n'
 
 		self.Send(outputString)
+
+	def Send_Sphere(self, objectID=0, x=0, y=0, z=0, mass=1.0, r1=0, r2=0, r3=1, radius=0.1, r=1, g=1, b=1):
+
+		outputString = 'Sphere'
+
+		outputString = outputString + ' ' + str(objectID)
+
+		outputString = outputString + ' ' + str(x)
+		outputString = outputString + ' ' + str(y)
+		outputString = outputString + ' ' + str(z)
+
+		outputString = outputString + ' ' + str(mass)
+
+		outputString = outputString + ' ' + str(r1)
+		outputString = outputString + ' ' + str(r2)
+		outputString = outputString + ' ' + str(r3)
+
+		outputString = outputString + ' ' + str(radius)
+
+		outputString = outputString + ' ' + str(r)
+		outputString = outputString + ' ' + str(g)
+		outputString = outputString + ' ' + str(b)
+
+		outputString = outputString + '\n'
+
+		self.Send(outputString)
+
 
 	def Send_Hidden_Neuron(self, neuronID = 0 , tau = 1.0 ):
 

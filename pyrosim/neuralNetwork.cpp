@@ -30,9 +30,9 @@ NEURAL_NETWORK::~NEURAL_NETWORK(void) {
 
 }
 
-void NEURAL_NETWORK::Add_Bias_Neuron(int ID) {
+void NEURAL_NETWORK::Add_Bias_Neuron(int ID, double bias) {
 
-        neurons[numNeurons] = new NEURON(ID,BIAS_NEURON,1.0);
+        neurons[numNeurons] = new NEURON(ID,BIAS_NEURON, bias);
 
         numNeurons++;
 

@@ -1,7 +1,7 @@
 evaluationTime = 1800
 L = 0.1
-# L = 0.3
 R = L/5
+PI = 3.14159
 
 popSize = 10
 numGens = 10

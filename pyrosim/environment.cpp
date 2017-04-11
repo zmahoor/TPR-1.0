@@ -6,6 +6,7 @@
 
 extern int BOX;
 extern int CYLINDER;
+extern int SPHERE;
 
 extern int MAX_OBJECTS;
 extern int MAX_JOINTS;
@@ -60,6 +61,10 @@ void ENVIRONMENT::Read_From_Python(dWorldID world,dSpaceID space, int *evaluatio
 		else if ( strcmp(incomingString,"Cylinder") == 0 )
 
 			Create_Object(world,space,numberOfBodies,CYLINDER);
+
+                else if ( strcmp(incomingString,"Sphere") == 0 )
+
+                        Create_Object(world,space,numberOfBodies,SPHERE);
 
 		else if ( strcmp(incomingString,"Joint") == 0 )
 
@@ -167,14 +172,17 @@ void ENVIRONMENT::Add_Sensor_Neuron(int ID, int sensorID, int sensorValueIndex, 
 void ENVIRONMENT::Create_Bias_Neuron(void) {
 
         int ID;
-
+        double bias; 
+        
         std::cin >> ID;
+
+        std::cin >> bias;
 
         if ( neuralNetwork == NULL )
 
                 Create_Neural_Network();
 
-        neuralNetwork->Add_Bias_Neuron(ID);
+        neuralNetwork->Add_Bias_Neuron(ID, bias);
 }
 
 void ENVIRONMENT::Create_Hidden_Neuron(void) {
