@@ -24,10 +24,10 @@ class POPULATION:
             self.p[i].Print()
         print
 
-    def Evaluate(self, pb):
+    def Evaluate(self, pp, pb):
 
         for i in self.p:
-            self.p[i].Start_Evaluate(pb)
+            self.p[i].Start_Evaluate(pp, pb)
 
         for i in self.p:
             self.p[i].Compute_Fitness()
@@ -53,13 +53,13 @@ class POPULATION:
             if (self.p[i].fitness >= self.p[best].fitness ):
                 best = i
 
-        if (self.p[best].fitness > self.bestOfAll):
-            self.bestOfAll = self.p[best].fitness
-            self.p[best].Store()
+        # if (self.p[best].fitness > self.bestOfAll):
+        #     self.bestOfAll = self.p[best].fitness
+        
+        self.p[best].Store()
 
-        self.p[best].Start_Evaluate(False)
+        self.p[best].Start_Evaluate(True, False)
         self.p[best].Compute_Fitness()
-
 
         # print "bestOfAll: ", self.bestOfAll
        

@@ -1,37 +1,160 @@
-
-from pyrosim import PYROSIM
-import matplotlib.pyplot as plt
+import constants as c
 import numpy as np
+import random
+import math
+from synapse import SYNAPSE
 
-sim = PYROSIM(playPaused=False , evalTime=200)
+class SYNAPSES: 
 
-sim.Send_Cylinder( objectID=0, x=0, y=0 , z=0.6, length=1.0, radius=0.1 )
-sim.Send_Cylinder( objectID=1, x=0 , y=0.5 , z=1.1 , r1=0 , r2=1, r3=0, length=1.0 , radius=0.1, r=1, g=0, b=0)
-sim.Send_Joint( jointID = 0 , firstObjectID = 0 , secondObjectID = 1, n1 = -1 , n2 = 0 , n3 = 0, x=0, y=0, z= 1.1, lo=-3.14159/2 , hi=3.14159/2)
+    def __init__(self,numSensorNeurons,numMotorNeurons):
 
-sim.Send_Touch_Sensor( sensorID = 0 , objectID = 0 )
-sim.Send_Touch_Sensor( sensorID = 1 , objectID = 1 )
-sim.Send_Proprioceptive_Sensor(sensorID=2, jointID=0)
-sim.Send_Ray_Sensor(sensorID = 3 , objectID = 1 , x = 0 , y = 1.1 , z = 1.1 , r1 = 0 , r2 = 1, r3 = 0)
+        self.numSensorNeurons = numSensorNeurons
 
-sim.Send_Sensor_Neuron(neuronID=0, sensorID=0 )
-sim.Send_Sensor_Neuron(neuronID=1, sensorID=1 )
-sim.Send_Motor_Neuron(neuronID=2 , jointID=0 )
+        self.numMotorNeurons = numMotorNeurons
 
-sim.Send_Synapse(sourceNeuronID = 1 , targetNeuronID = 2 , weight = -1.0 )
-sim.Send_Synapse(sourceNeuronID = 0 , targetNeuronID = 2 , weight = -1.0 )
+        self.Create_SH()
 
-sim.Start()
+        self.Create_HH()
 
-sim.Wait_To_Finish()
-sensorData = sim.Get_Sensor_Data(sensorID = 2)
+        self.Create_HM()
 
-max_ =  np.max(np.ceil(sensorData))
+    def Mutate(self):
 
-f = plt.figure()
-pn = f.add_subplot(111)
-pn.set_ylim(-2, max_+1)
+        mutType = random.randint(0,2)
 
-plt.plot(sensorData)
-plt.show()
+        if ( mutType == 0 ):
+
+            self.Mutate_SH()
+
+        elif ( mutType == 1 ):
+
+            self.Mutate_HH()
+        else:
+            self.Mutate_HM()
+
+    def Print(self):
+
+        self.Print_SH()
+
+        self.Print_HH()
+
+        self.Print_HM()
+    
+    def Send_To_Simulator(self,simulator):
+
+        self.Send_SH(simulator)
+
+        self.Send_HH(simulator)
+
+        self.Send_HM(simulator)
+
+# -------------------- Private functions ---------------------
+
+    def Create_SH(self):
+
+        self.sh = {}
+
+        for s in range(0,self.numSensorNeurons):
+
+            for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+                sourceNeuron = s
+
+                targetNeuron = self.numSensorNeurons + h
+
+                self.sh[s,h] = SYNAPSE(sourceNeuron,targetNeuron)
+
+    def Create_HH(self):
+
+        self.hh = {}
+
+        for h1 in range(0,c.NUM_HIDDEN_NEURONS):
+
+            for h2 in range(0,c.NUM_HIDDEN_NEURONS):
+
+                sourceNeuron = self.numSensorNeurons + h1
+
+                targetNeuron = self.numSensorNeurons + h2
+
+                self.hh[h1,h2] = SYNAPSE(sourceNeuron,targetNeuron)
+
+    def Create_HM(self):
+
+        self.hm = {}
+
+        for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+            for m in range(0,self.numMotorNeurons):
+
+                sourceNeuron = self.numSensorNeurons + h
+
+                targetNeuron = self.numSensorNeurons + c.NUM_HIDDEN_NEURONS + m 
+
+                self.hm[h,m] = SYNAPSE(sourceNeuron,targetNeuron)
+
+    def Mutate_SH(self):
+
+        s = random.randint(0, self.numSensorNeurons - 1 )
+
+        h = random.randint(0, c.NUM_HIDDEN_NEURONS - 1 )
+
+        self.sh[s,h].Mutate()
+
+    def Mutate_HH(self):
+
+        h1 = random.randint(0, c.NUM_HIDDEN_NEURONS - 1 )
+
+        h2 = random.randint(0, c.NUM_HIDDEN_NEURONS - 1 )
+
+        self.hh[h1,h2].Mutate()
+
+    def Mutate_HM(self):
+
+        h = random.randint(0, c.NUM_HIDDEN_NEURONS - 1 )
+
+        m = random.randint(0, self.numMotorNeurons - 1 )
+
+        self.hm[h,m].Mutate()
+
+    def Print_SH(self):
+
+        for s,h in self.sh:
+
+            self.sh[s,h].Print()
+
+    def Print_HH(self):
+
+        for h1,h2 in self.hh:
+
+            self.hh[h1,h2].Print()
+
+    def Print_HM(self):
+
+        for h,m in self.hm:
+
+            self.hm[h,m].Print()
+
+    def Send_SH(self,simulator):
+
+        for s in range(0,self.numSensorNeurons):
+
+            for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+                self.sh[s,h].Send_To_Simulator(simulator)
+
+    def Send_HH(self,simulator):
+
+        for h1 in range(0,c.NUM_HIDDEN_NEURONS):
+
+            for h2 in range(0,c.NUM_HIDDEN_NEURONS):
+
+                self.hh[h1,h2].Send_To_Simulator(simulator)
+
+    def Send_HM(self,simulator):
+
+        for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+            for m in range(0,self.numMotorNeurons):
+
+                self.hm[h,m].Send_To_Simulator(simulator)
 
