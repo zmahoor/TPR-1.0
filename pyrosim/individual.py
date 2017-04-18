@@ -4,6 +4,7 @@ import random
 from robot import ROBOT
 import math
 import pickle
+import constants as c
 
 class INDIVIDUAL:
 
@@ -19,40 +20,45 @@ class INDIVIDUAL:
 
         self.sim = None
 
+        self.robot = ROBOT()
+
     def __getstate__(self):
 
-        return(self.id, self.genome, self.color, self.fitness)
+        return(self.id, self.genome, self.color, self.fitness, self.robot)
 
     def __setstate__(self, state):
 
-        self.id, self.genome, self.color, self.fitness = state
+        self.id, self.genome, self.color, self.fitness, self.robot = state
 
-    def Start_Evaluate(self, pb):
+    def Start_Evaluate(self, pp, pb):
 
-        self.sim = PYROSIM(playPaused=False , playBlind=pb, evalTime=500)
-
-        robot = ROBOT(self.sim, self.genome, self.color)
-
+        self.sim = PYROSIM(playPaused=pp , playBlind=pb, evalTime=c.evaluationTime)
+        # robot = ROBOT(self.sim, self.genome, self.color)
+        self.robot.Send_To_Simulator(self.sim, self.color)
         self.sim.Start()
 
     def Compute_Fitness(self):
 
         self.sim.Wait_To_Finish()
 
-        x = self.sim.Get_Sensor_Data(sensorID=4 , s=0 )
-        y = self.sim.Get_Sensor_Data(sensorID=4 , s=1 )
-        z = self.sim.Get_Sensor_Data(sensorID=4 , s=2 )
+        # x = self.sim.Get_Sensor_Data(sensorID=4 , s=0 )
+        # y = self.sim.Get_Sensor_Data(sensorID=4 , s=1 )
+        # z = self.sim.Get_Sensor_Data(sensorID=4 , s=2 )
 
-        self.fitness = y[-1]
+        # self.fitness = y[-1]
 
-        if self.fitness > 40.0:
-            self.fitness = 40.0
+        # if self.fitness > 40.0:
+        #     self.fitness = 40.0
+
+        self.fitness = self.robot.Evaluate(self.sim, 'movement')
 
     def Mutate(self):
 
-        geneToMutate = np.random.randint(4)
-        self.genome[geneToMutate] = random.gauss( self.genome[geneToMutate] ,
-             math.fabs(self.genome[geneToMutate]) )
+        self.robot.Mutate()
+
+        # geneToMutate = np.random.randint(4)
+        # self.genome[geneToMutate] = random.gauss( self.genome[geneToMutate] ,
+        #      math.fabs(self.genome[geneToMutate]) )
 
         self.color = [ random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1)]
 
@@ -62,8 +68,8 @@ class INDIVIDUAL:
 
     def Store(self):
 
-        f = open( 'robot.txt', 'wb' )
-        pickle.dump(  self , f )
+        f = open( 'robot_'+str(self.id)+'.txt', 'wb' )
+        pickle.dump(self, f)
         f.close()
 
 

@@ -5,27 +5,33 @@ import constants as c
 
 class ROBOT:
 
-    def __init__(self, sim, wts, color):
+    def __init__(self, sim, wts, color, command=0.0):
 
-        self.num_sensor_neurons, self.num_motor_neurons = np.shape(wts)
+        self.num_input_neurons, self.num_motor_neurons = np.shape(wts)
 
         self.color = color
 
-        self.last_jointID = 0
+        self.command = command
 
-        self.last_objectID = 0
+        self.num_joints = 0
 
-        self.last_sensorID = 0
+        self.num_objects = 0
 
-        self.last_synapseID = 0
+        self.num_sensors = 0
+
+        self.num_neurons = 0
+
+        self.num_synapses = 0
 
         self.head_ID = 0
+
+        self.sensors = []
 
         self.Send_Objects(sim, color)
 
         self.Send_Joints(sim)
 
-        self.Make_Eyes(sim, [0, -3*c.L, 2*c.R], 0.015, [1,0,0], [0,-1,0], 0.015)
+        self.Make_Eyes(sim, [0,-3*c.L,2*c.R], 0.015, [1,0,0], [0,-1,0], 0.015)
 
         self.Send_Sensors(sim)
 
@@ -36,114 +42,130 @@ class ROBOT:
     def Send_Objects(self, sim, color):
 
         # Green Box
-        sim.Send_Box(objectID = self.last_objectID , x=0, y=0, z=c.R, length=c.L,
+        sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.R, length=c.L,
          width=2*c.L, height=2*c.R, r=0, g=1, b=0)
 
-        self.last_objectID += 1
+        self.num_objects += 1
 
         # Purple Box
-        sim.Send_Box(objectID = self.last_objectID , x=0, y=2*c.L, z=c.R,length=c.L,
+        sim.Send_Box(objectID = self.num_objects , x=0, y=2*c.L, z=c.R,length=c.L,
          width=2*c.L, height=2*c.R, r=1, g=0, b=1)
 
-        self.last_objectID += 1
+        self.num_objects += 1
 
         # Red Box
-        sim.Send_Box(objectID = self.last_objectID , x=0, y=-2*c.L, z=c.R,length=c.L,
+        sim.Send_Box(objectID = self.num_objects , x=0, y=-2*c.L, z=c.R,length=c.L,
          width=2*c.L, height=2*c.R, r=1, g=0, b=0)
 
-        self.head_ID = self.last_objectID
+        self.head_ID = self.num_objects
+        self.num_objects += 1
 
         #######################EYES#############################################
-        # self.last_objectID += 1
-
-        # sim.Send_Sphere(objectID = self.last_objectID, x=-0.02, y=-3*c.L-0.02, 
+        # sim.Send_Sphere(objectID = self.num_objects, x=-0.02, y=-3*c.L-0.02, 
         #     z=c.R+0.02, radius=0.02, r=1, g=1, b=1)
 
-        # self.last_objectID += 1
+        # self.num_objects += 1
 
-        # sim.Send_Sphere(objectID = self.last_objectID, x=0.02,  y=-3*c.L-0.02, 
+        # sim.Send_Sphere(objectID = self.num_objects, x=0.02,  y=-3*c.L-0.02, 
         #     z=c.R+0.02, radius=0.02, r=1, g=1, b=1)
 
-        # self.last_objectID += 1
+        # self.num_objects += 1
 
-        # sim.Send_Sphere(objectID = self.last_objectID, x=-0.02, y=-3*c.L-0.03, 
+        # sim.Send_Sphere(objectID = self.num_objects, x=-0.02, y=-3*c.L-0.03, 
         #     z=c.R+0.03, radius=0.01, r=0, g=0, b=0)
 
-        # self.last_objectID += 1
+        # self.num_objects += 1
 
-        # sim.Send_Sphere(objectID = self.last_objectID, x=0.02,  y=-3*c.L-0.03, 
+        # sim.Send_Sphere(objectID = self.num_objects, x=0.02,  y=-3*c.L-0.03, 
         #     z=c.R+0.03, radius=0.01, r=0, g=0, b=0)
 
     def Send_Joints(self, sim):
 
-        sim.Send_Joint( jointID = self.last_jointID, firstObjectID = 0, secondObjectID = 2,
+        sim.Send_Joint( jointID = self.num_joints, firstObjectID = 0, secondObjectID = 2,
          n1 =1, n2 =0, n3 =0, x=0, y=-c.L, z=c.R, lo=-c.PI/4 , hi=c.PI/4)
 
-        self.last_jointID += 1
+        self.num_joints += 1
 
-        sim.Send_Joint( jointID = self.last_jointID, firstObjectID = 0, secondObjectID = 1,
+        sim.Send_Joint( jointID = self.num_joints, firstObjectID = 0, secondObjectID = 1,
          n1 =1, n2 =0, n3 =0, x=0, y=c.L, z=c.R, lo=-c.PI/4 , hi=c.PI/4)
 
-        print self.last_jointID
+        self.num_joints += 1
+
+        print self.num_joints
 
         # #######################EYES#############################################
-        # self.last_jointID += 1
+        # self.num_joints += 1
 
-        # sim.Send_Joint(jointID = self.last_jointID , firstObjectID = 1 , secondObjectID = 3,
+        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 1 , secondObjectID = 3,
         #  n1 =1 , n2 =0 , n3 =0, x=-0.02, y=-3*c.L, z=c.R+0.02, lo=0 , hi=0)
 
-        #self.last_jointID += 1
+        #self.num_joints += 1
 
-        # sim.Send_Joint(jointID = self.last_jointID , firstObjectID = 1 , secondObjectID = 4,
+        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 1 , secondObjectID = 4,
         #  n1 =1 , n2 =0 , n3 =0, x=0.02, y=-3*c.L, z=c.R+0.02, lo=0 , hi=0)
 
-        # self.last_jointID += 1
+        # self.num_joints += 1
 
-        # sim.Send_Joint(jointID = self.last_jointID , firstObjectID = 3 , secondObjectID = 5,
+        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 3 , secondObjectID = 5,
         #  n1 =1 , n2 =0 , n3 =0, x=-0.02, y=-3*c.L-0.03, z=c.R+0.03, lo=0 , hi=0)
 
-        # self.last_jointID += 1
+        # self.num_joints += 1
 
-        # sim.Send_Joint(jointID = self.last_jointID , firstObjectID = 4 , secondObjectID = 6,
+        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 4 , secondObjectID = 6,
         #  n1 =1 , n2 =0 , n3 =0, x=0.02, y=-3*c.L-0.03, z=c.R+0.03, lo=0 , hi=0)
 
 
     def Send_Sensors(self, sim):
 
-        sim.Send_Touch_Sensor(sensorID = self.last_sensorID, objectID = 0)
-        self.last_sensorID += 1
+        sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 0)
+        self.sensors.append({'type':'TOUCH', 'min':0 , 'max':1, 'val':[]})
+        self.num_sensors += 1
 
-        sim.Send_Touch_Sensor(sensorID = self.last_sensorID, objectID = 1)
-        self.last_sensorID += 1
+        sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 1)
+        self.sensors.append({'type':'TOUCH','min':0 , 'max':1, 'val':[]})
+        self.num_sensors += 1
         
-        sim.Send_Touch_Sensor(sensorID = self.last_sensorID, objectID = 2)
-        self.last_sensorID += 1
+        sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 2)
+        self.sensors.append({'type':'TOUCH','min':0 , 'max':1, 'val':[]})
+        self.num_sensors += 1
 
-        sim.Send_Proprioceptive_Sensor(sensorID = self.last_sensorID, jointID = 0)
-        self.last_sensorID += 1
+        sim.Send_Proprioceptive_Sensor(sensorID = self.num_sensors, jointID = 0)
+        self.sensors.append({'type':'PROPRICEPTIVE','min':-c.PI/4 , 'max':-c.PI/4, 'val':[]})
+        self.num_sensors += 1
 
-        sim.Send_Proprioceptive_Sensor(sensorID = self.last_sensorID, jointID = 1)
-        self.last_sensorID += 1
+        sim.Send_Proprioceptive_Sensor(sensorID = self.num_sensors, jointID = 1)
+        self.sensors.append({'type':'PROPRICEPTIVE','min':-c.PI/4 , 'max':-c.PI/4, 'val':[]})
+        self.num_sensors += 1
 
-        sim.Send_Position_Sensor(sensorID = self.last_sensorID, objectID = 1)
+        sim.Send_Position_Sensor(sensorID = self.num_sensors, objectID = 1)
+        self.sensors.append({'type':'POSITION','min':-20 , 'max':20, 'val':[]})
+
+        print self.sensors
 
     def Send_Neurons(self, sim):
 
-        for sn in range(0, self.num_sensor_neurons):
+        for sn in range(0, self.num_input_neurons-1):
             sim.Send_Sensor_Neuron(neuronID=sn, sensorID=sn)
-            # self.last_neuronID += 1
+            self.num_neurons += 1
+
+        sim.Send_Bias_Neuron(neuronID = self.num_neurons, biasValue=self.command)
+
+        self.num_neurons += 1
 
         for mn in range(0, self.num_motor_neurons):
-            sim.Send_Motor_Neuron(neuronID=mn+self.num_sensor_neurons,
-             jointID=mn, tau=0.3)
+            sim.Send_Motor_Neuron(neuronID=mn+self.num_input_neurons, jointID=mn, tau=0.3)
+            self.num_neurons += 1
+
+        print self.num_neurons
 
     def Send_Synapses(self, sim, wts):
 
-        for sn in range(0, self.num_sensor_neurons):
+        for sn in range(0, self.num_input_neurons):
             for mn in range(0, self.num_motor_neurons):
                 
                 sim.Send_Synapse(sourceNeuronID = sn , targetNeuronID 
-                    =mn+self.num_sensor_neurons, weight= wts[sn][mn])
+                    =mn+self.num_input_neurons, weight= wts[sn][mn])
+                self.num_synapses += 1
 
     def L2_Norm(self, mylist):
         n =0.0
@@ -172,71 +194,68 @@ class ROBOT:
 
         rightPupil=[axis2[i]* eye_radius/1.5 + axis1[i]* distance + midpoint[i] for i in range(0, len(axis1))]
 
-        self.last_objectID += 1
-
-        sim.Send_Sphere(objectID = self.last_objectID, 
+        sim.Send_Sphere(objectID = self.num_objects, 
             x= lefEye[0], y= lefEye[1], z= lefEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
 
-        print self.last_objectID
+        print self.num_objects
 
-        self.last_objectID += 1
+        self.num_objects += 1
 
-        sim.Send_Sphere(objectID = self.last_objectID, 
+        sim.Send_Sphere(objectID = self.num_objects, 
             x= rightEye[0], y= rightEye[1], z= rightEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
 
-        print self.last_objectID
+        print self.num_objects
 
-        self.last_objectID += 1
+        self.num_objects += 1
 
-        sim.Send_Sphere(objectID = self.last_objectID, 
+        sim.Send_Sphere(objectID = self.num_objects, 
             x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
             mass=0.1, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        print self.last_objectID
+        print self.num_objects
 
-        self.last_objectID += 1
+        self.num_objects += 1
 
-        sim.Send_Sphere(objectID = self.last_objectID, 
+        sim.Send_Sphere(objectID = self.num_objects, 
             x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
             mass=0.1, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        print self.last_objectID
+        print self.num_objects
 
         ###########################JOINTS#######################################
-        self.last_jointID += 1
 
-        sim.Send_Joint(jointID = self.last_jointID, firstObjectID = self.head_ID,
-        secondObjectID = self.last_objectID-3,
+        sim.Send_Joint(jointID = self.num_joints, firstObjectID = self.head_ID,
+        secondObjectID = self.num_objects-3,
         n1 =1, n2 =0, n3 =0, 
         x= lefEye[0], y= lefEye[1], z= lefEye[2],
         lo=0, hi=0)
 
-        print self.last_jointID, self.last_objectID-4, self.last_objectID-3
+        print self.num_joints, self.num_objects-4, self.num_objects-3
 
-        self.last_jointID += 1
+        self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.last_jointID, firstObjectID = self.head_ID,
-        secondObjectID = self.last_objectID-2,
+        sim.Send_Joint(jointID = self.num_joints, firstObjectID = self.head_ID,
+        secondObjectID = self.num_objects-2,
         n1 =1, n2 =0, n3 =0, 
         x= rightEye[0], y= rightEye[1], z= rightEye[2], 
         lo=0, hi=0)
         
-        print self.last_jointID, self.last_objectID-4, self.last_objectID-2
+        print self.num_joints, self.num_objects-4, self.num_objects-2
 
-        self.last_jointID += 1
+        self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.last_jointID, firstObjectID = self.last_objectID-3, 
-        secondObjectID = self.last_objectID-1,
+        sim.Send_Joint(jointID = self.num_joints, firstObjectID = self.num_objects-3, 
+        secondObjectID = self.num_objects-1,
         n1 =1, n2 =0, n3 =0, 
         x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
         lo=0 , hi=0)
 
-        self.last_jointID += 1
+        self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.last_jointID, firstObjectID = self.last_objectID-2 , 
-        secondObjectID = self.last_objectID,
+        sim.Send_Joint(jointID = self.num_joints, firstObjectID = self.num_objects-2 , 
+        secondObjectID = self.num_objects,
         n1 =1, n2 =0, n3 =0, 
         x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
         lo=0 , hi=0)

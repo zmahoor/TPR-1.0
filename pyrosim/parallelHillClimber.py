@@ -1,21 +1,24 @@
 
 from pyrosim import PYROSIM
 import numpy as np
-from nrobot import ROBOT
+from robot import ROBOT
 import random
 from individual import INDIVIDUAL
 from copy import deepcopy
 import pickle
 from population import POPULATION
 
-parents = POPULATION(5)
-parents.Evaluate(True)
+parents = POPULATION(20)
+parents.Evaluate(False, True)
 
-for g in range(1, 500):
+for g in range(1, 50):
 
     children = deepcopy(parents)
+
+    # children.Print()
+
     children.Mutate()
-    children.Evaluate(True)
+    children.Evaluate(False, True)
 
     parents.ReplaceWith(children)
     print g,

@@ -1,31 +1,60 @@
-
-from pyrosim import PYROSIM
+import constants as c
+import copy
+import math
+import os
+import random
+import pickle
 import numpy as np
+
+# from pyrosim import SIMULATOR 
+from pyrosim import PYROSIM
+from body import BODY
+from brain import BRAIN
 
 class ROBOT:
 
-    def __init__(self, sim, wts, color):
+    def __init__(self):
 
-        # print color
-        
-        sim.Send_Cylinder( objectID=0, x=0, y=0 , z=0.6, length=1.0, radius=0.1 )
-        sim.Send_Cylinder( objectID=1, x=0 , y=0.5 , z=1.1 , r1=0 , r2=1, r3=0, length=1.0 , radius=0.1, r=color[0], g=color[1], b=color[1])
+        self.body = BODY()
 
-        sim.Send_Joint( jointID = 0 , firstObjectID = 0 , secondObjectID = 1, n1 = -1 , n2 = 0 , n3 = 0, x=0, y=0, z= 1.1, lo=-3.14159/2 , hi=3.14159/2)
+        self.brain = BRAIN( self.body.numSensors, self.body.numJoints )
 
-        sim.Send_Touch_Sensor( sensorID = 0 , objectID = 0 )
-        sim.Send_Touch_Sensor( sensorID = 1 , objectID = 1 )
-        sim.Send_Proprioceptive_Sensor(sensorID = 2, jointID = 0)
-        sim.Send_Ray_Sensor(sensorID = 3 , objectID = 1 , x = 0 , y = 1.1 , z = 1.1 , r1 = 0 , r2 = 1, r3 = 0)
-        sim.Send_Position_Sensor(sensorID = 4, objectID = 1)
+        # print self.body.numSensors, self.body.numJoints
 
-        for sn in range(0, 4):
-            sim.Send_Sensor_Neuron(neuronID=sn, sensorID=sn)
+    def Evaluate(self,simulator,whatToMaximize):
 
-        sim.Send_Motor_Neuron(neuronID=4, jointID=0 )
+        self.body.Get_Sensor_Data_From_Simulator(simulator)
 
-        for sn in range(0, 4):
-            sim.Send_Synapse(sourceNeuronID = sn , targetNeuronID = 4, weight= wts[sn])
+        return self.body.Compute_Fitness(whatToMaximize)
 
+    def Mutate(self):
 
+        mutType = random.randint(0,1)
 
+        if ( mutType == 0 ):
+
+            self.body.Mutate()
+        else:
+            self.brain.Mutate()
+
+        self.body.Reset()
+
+    def Num_Body_Parts(self):
+
+        return self.body.numObjects
+
+    def Print(self):
+
+        self.body.Print()
+
+        self.brain.Print()
+
+    def Send_To_Simulator(self,simulator,color):
+
+        midpoint = [self.body.root.x, self.body.root.y-c.headRadius, self.body.root.z]
+
+        self.body.Send_To_Simulator(simulator,color)
+
+        self.body.Make_Eyes(simulator, midpoint, 0.015, [1,0,0], [0,-1,0], 0.015)
+
+        self.brain.Send_To_Simulator(simulator)

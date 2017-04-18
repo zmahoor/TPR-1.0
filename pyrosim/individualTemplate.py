@@ -9,7 +9,7 @@ import constants as c
 
 class INDIVIDUAL:
 
-    def __init__(self, i, genomeSahpe, color=[0.5, 0.5, 0.5]):
+    def __init__(self, i, genomeSahpe, color=[0.5, 0.5, 0.5], command=0.0):
 
         self.id = i
 
@@ -22,7 +22,6 @@ class INDIVIDUAL:
         self.fitness = 0
 
         self.sim = None
-
 
     def __getstate__(self):
 
@@ -67,7 +66,7 @@ class INDIVIDUAL:
 
         self.sim = PYROSIM(playPaused=pp, playBlind=pb, evalTime=c.evaluationTime)
 
-        robot = ROBOT(self.sim, self.genome, self.color)
+        robot = ROBOT(self.sim, self.genome, self.color, self.command)
 
         self.sim.Start() 
 
@@ -83,6 +82,30 @@ class INDIVIDUAL:
         self.fitness = np.sum(self.genome)
         # self.fitness = np.random.random() * 2 - 1
         del self.sim
+
+    def Get_Sensors(self):
+        sensors = []
+
+        for i in range(0, self.last_sensorID):
+
+            if(type == 'POSITION'):
+                temp = self.sim.Get_Sensor_Data(sensorID=sn, s=0)
+                temp.append(self.sim.Get_Sensor_Data(sensorID=sn, s=1))
+                temp.append(self.sim.Get_Sensor_Data(sensorID=sn, s=2))
+
+            else if(type == 'PROPRICEPTIVR')
+                temp = self.sim.Get_Sensor_Data(sensorID=sn, s=0)
+
+            else if(type == 'TOUCH')
+                temp = self.sim.Get_Sensor_Data(sensorID=sn, s=0)
+
+
+            sensors.append(temp)
+
+
+        return sensors
+
+
 
     def Mutate(self):
 
