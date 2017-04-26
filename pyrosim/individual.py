@@ -37,7 +37,7 @@ class INDIVIDUAL:
         self.robot.Send_To_Simulator(self.sim, self.color)
         self.sim.Start()
 
-    def Compute_Fitness(self):
+    def Compute_Fitness(self, whatToMaximize):
 
         self.sim.Wait_To_Finish()
 
@@ -50,7 +50,7 @@ class INDIVIDUAL:
         # if self.fitness > 40.0:
         #     self.fitness = 40.0
 
-        self.fitness = self.robot.Evaluate(self.sim, 'movement')
+        self.fitness = self.robot.Evaluate(self.sim, whatToMaximize)
 
     def Mutate(self):
 

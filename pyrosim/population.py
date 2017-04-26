@@ -7,11 +7,13 @@ from copy import deepcopy
 
 class POPULATION:
 
-    def __init__(self, ps):
+    def __init__(self, ps, wtm):
 
         self.p = {}
 
         self.popSize = ps
+
+        self.whatToMaximize = wtm
 
         for i in range(0, self.popSize):
             self.p[i] = INDIVIDUAL(i) 
@@ -30,7 +32,7 @@ class POPULATION:
             self.p[i].Start_Evaluate(pp, pb)
 
         for i in self.p:
-            self.p[i].Compute_Fitness()
+            self.p[i].Compute_Fitness(self.whatToMaximize)
 
         # self.Print()
 
@@ -59,7 +61,7 @@ class POPULATION:
         self.p[best].Store()
 
         self.p[best].Start_Evaluate(True, False)
-        self.p[best].Compute_Fitness()
+        self.p[best].Compute_Fitness(self.whatToMaximize)
 
         # print "bestOfAll: ", self.bestOfAll
        

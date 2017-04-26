@@ -1,27 +1,27 @@
-import twitch;
+import twitch
 from settings import *
-import database;
+import database
 from time import *
 
-t = twitch.Twitch();
-mydatabase = database.DATABASE();
+t = twitch.Twitch()
+mydatabase = database.DATABASE()
 
 
 #Enter your twitch username and oauth-key below, and the app connects to twitch with the details.
 #Your oauth-key can be generated at 
-username = IDENT; #Your twitch username. ALL LOWER CASE
-key = PASS; #Key acquired from twitch.tv account page
+username = IDENT #Your twitch username. ALL LOWER CASE
+key = PASS #Key acquired from twitch.tv account page
 channel = CHANNEL
 port = PORT
 host = HOST
 
-t.connect(username, key, channel, host, port);
+t.connect(username, key, channel, host, port)
  
-running = True;
+running = True
 #The main loop
 while running:
 
-    newMessages = t.recieve_messages(amount = 1024);
+    newMessages = t.recieve_messages(amount = 1024)
     print("mess: ", newMessages)
 
     if newMessages:
@@ -31,20 +31,15 @@ while running:
             #Try block, some characters are not understood by python and can cause exceptions
             try:
                 #Get info from message.
-                msg = str(message['message'].lower().replace("'", ''));
-                username = str(message['username'].lower());
+                msg = str(message['message'].lower().replace("'", ''))
+                username = str(message['username'].lower())
                 # t.send_message("Thank you for your message!")
 
-                print(username + ": " + msg);
+                print(username + ": " + msg)
                 currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
                 if(username not in filteredUsers):
                     mydatabase.Insert_Chat(username, currentTime, msg)
-
-                    if (msg == '_myinfo'):
-                        result = mydatabase.Fetch_User_Score(username)
-                        t.send_message("@"+ username + ", score:"+
-                            str(result['score'])+" parent: "+ str(result['parentName']))
 
             except:
                 print("msg error")
