@@ -7,11 +7,16 @@ from individual import INDIVIDUAL
 from copy import deepcopy
 import pickle
 from population import POPULATION
+import constants as c
+from environment import ENVIRONMENT
 
-parents = POPULATION(20)
+
+wtm = 'movement_height'
+
+parents = POPULATION(c.popSize, wtm)
 parents.Evaluate(False, True)
 
-for g in range(1, 50):
+for g in range(1, c.numGens):
 
     children = deepcopy(parents)
 

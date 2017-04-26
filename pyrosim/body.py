@@ -35,6 +35,18 @@ class BODY:
 
             return self.Sum_Joint_Diff()
 
+        if(whatToMaximize == c.maximizeMovementAndHeight):
+
+            return self.Sum_Joint_Diff()*self.Head_Z_Position()
+
+        if(whatToMaximize == c.maximizeHeight):
+
+            return self.Head_Z_Position()
+
+        if(whatToMaximize == c.maximizeDistance):
+
+            return self.Head_X_Position()
+
         else:
             print 'unknown fitness function ' + whatToMaximize
 
@@ -95,6 +107,23 @@ class BODY:
         print "sumLight: ", sumOfLight
 
         return sumOfLight
+
+    def Head_Z_Position(self):
+
+        # headZLocation = self.root.object.positionSensor.values
+
+        # count = 0.0
+
+        # for l in headZLocation:
+
+        #     if l >= 3* c.headRadius and l <= (c.maxDepth * c.length + c.headRadius):
+
+        #         count += 1.0
+
+        # return count/len(headZLocation)
+
+        return self.root.object.Get_Position_Sensor_Value()
+
 
     def Sum_Joint_Diff(self):
 
@@ -174,7 +203,7 @@ class BODY:
 
         # the lowest part is the head
         if lowestDepth[0] == 0:
-            self.root.Move( 0 , 0, lowestPoint[0] + c.headRadius )
+            self.root.Move( 0 , 0, -lowestPoint[0] + c.headRadius )
         else:
             self.root.Move( 0 , 0, -lowestPoint[0] + c.radius )
 

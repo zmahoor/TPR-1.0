@@ -2,6 +2,7 @@ import constants as c
 import math
 from touchSensor import TOUCH_SENSOR
 from lightSensor import LIGHT_SENSOR
+from positionSensor import POSITION_SENSOR
 
 class OBJECT: 
 
@@ -17,10 +18,19 @@ class OBJECT:
 
         self.touchSensor = None
 
+        self.positionSensor = None
+
         self.current = currentNode
         
 
     def Add_Sensors(self,sensorsCreated):
+
+        if self.ID == 0: 
+
+            self.positionSensor = POSITION_SENSOR(sensorID = sensorsCreated[0] , objectIndex = self.ID)
+
+            sensorsCreated[0] = sensorsCreated[0] + 1
+
 
         self.touchSensor = TOUCH_SENSOR( sensorID = sensorsCreated[0] , objectIndex = self.ID)
 
@@ -39,15 +49,27 @@ class OBJECT:
         else:
             return 0
 
+    def Get_Position_Sensor_Value(self):
+
+        if (self.positionSensor):
+
+            return self.positionSensor.Get_Z_Mean_Value()
+        else:
+            return 0
+
     def Get_Sensor_Data_From_Simulator(self,simulator):
 
-        # if ( self.lightSensor ):
+        if ( self.lightSensor ):
 
-        #     self.lightSensor.Get_Data_From_Simulator(simulator)
+            self.lightSensor.Get_Data_From_Simulator(simulator)
 
         if ( self.touchSensor ):
 
             self.touchSensor.Get_Data_From_Simulator(simulator)
+
+        if(self.positionSensor):
+
+            self.positionSensor.Get_Data_From_Simulator(simulator)
 
     def Print(self):
 
@@ -95,10 +117,14 @@ class OBJECT:
 
             simulator.Send_Cylinder(objectID=self.ID, x=x, y=y, z=z, r1=r1, r2=r2, r3=r3, length=length, radius=c.radius, r=color[0], g=color[1], b=color[2])
 
-        # if ( self.lightSensor ):
+        if ( self.lightSensor ):
 
-        #     self.lightSensor.Send_To_Simulator(simulator) 
+            self.lightSensor.Send_To_Simulator(simulator) 
 
         if ( self.touchSensor ):
 
             self.touchSensor.Send_To_Simulator(simulator)
+
+        if ( self.positionSensor ):
+
+            self.positionSensor.Send_To_Simulator(simulator)

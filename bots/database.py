@@ -7,14 +7,16 @@ class DATABASE:
 
     def __init__(self):
 
-        self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
-            password=MYSQL_PASS, db=MYSQL_DB)
+        try:
+            self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
+                password=MYSQL_PASS, db=MYSQL_DB)
 
-        self.cursor = self.connection.cursor(pymysql.cursors.DictCursor)
-        self.cursor.execute("SELECT VERSION()")
-        data = self.cursor.fetchone()
-
-        print ("Database version : %s " % data)
+            self.cursor = self.connection.cursor(pymysql.cursors.DictCursor)
+            self.cursor.execute("SELECT VERSION()")
+            data = self.cursor.fetchone()
+            print ("Database version : %s " % data)
+        except:
+            print "Unable to connect to database..."
     
     def Insert_Chat(self, username, current_time, msg):
         #INSERT INTO chats VALUES (ID, time, user, txt);
@@ -29,7 +31,7 @@ class DATABASE:
             self.connection.rollback()
     
     def Add_To_Help(self, user, txt, time):
-        sql = """INSERT IGNORE INTO helps(txt, userName, timeArrival) VALUES('%s', '%s');"""%(user, txt, time)
+        sql = """INSERT IGNORE INTO helps(txt, userName, timeArrival) VALUES('%s','%s','%s');"""%(txt, user, time)
         print(sql)
         try:
             self.cursor.execute(sql)
@@ -300,6 +302,24 @@ class DATABASE:
 
         return result
 
+    def Fetch_Oldest_Help(self):
+        result=None
+        try:
+            sql = "SELECT * FROM helps WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
+            self.cursor.execute(sql)
+            result = self.cursor.fetchone()
+            helpID = result['helpID']
+
+            print(result)
+            sql = "UPDATE helps SET processed=1 WHERE helpID='%d';"%(helpID)
+            self.cursor.execute(sql)
+            self.connection.commit()
+
+        except:
+            pass
+
+        return result
+        
     def Fetch_New_Color(self):
         color = ""
         try:
