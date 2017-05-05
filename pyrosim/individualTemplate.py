@@ -83,30 +83,6 @@ class INDIVIDUAL:
         # self.fitness = np.random.random() * 2 - 1
         del self.sim
 
-    def Get_Sensors(self):
-        sensors = []
-
-        for i in range(0, self.last_sensorID):
-
-            if(type == 'POSITION'):
-                temp = self.sim.Get_Sensor_Data(sensorID=sn, s=0)
-                temp.append(self.sim.Get_Sensor_Data(sensorID=sn, s=1))
-                temp.append(self.sim.Get_Sensor_Data(sensorID=sn, s=2))
-
-            else if(type == 'PROPRICEPTIVR')
-                temp = self.sim.Get_Sensor_Data(sensorID=sn, s=0)
-
-            else if(type == 'TOUCH')
-                temp = self.sim.Get_Sensor_Data(sensorID=sn, s=0)
-
-
-            sensors.append(temp)
-
-
-        return sensors
-
-
-
     def Mutate(self):
 
         geneToMutate = np.random.randint(self.genomeSahpe[0] * self.genomeSahpe[1])

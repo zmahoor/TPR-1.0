@@ -11,7 +11,7 @@ import constants as c
 from environment import ENVIRONMENT
 
 
-wtm = 'movement_height'
+wtm = 'distance'
 
 parents = POPULATION(c.popSize, wtm)
 parents.Evaluate(False, True)

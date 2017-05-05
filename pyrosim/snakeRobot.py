@@ -60,24 +60,6 @@ class ROBOT:
         self.head_ID = self.num_objects
         self.num_objects += 1
 
-        #######################EYES#############################################
-        # sim.Send_Sphere(objectID = self.num_objects, x=-0.02, y=-3*c.L-0.02, 
-        #     z=c.R+0.02, radius=0.02, r=1, g=1, b=1)
-
-        # self.num_objects += 1
-
-        # sim.Send_Sphere(objectID = self.num_objects, x=0.02,  y=-3*c.L-0.02, 
-        #     z=c.R+0.02, radius=0.02, r=1, g=1, b=1)
-
-        # self.num_objects += 1
-
-        # sim.Send_Sphere(objectID = self.num_objects, x=-0.02, y=-3*c.L-0.03, 
-        #     z=c.R+0.03, radius=0.01, r=0, g=0, b=0)
-
-        # self.num_objects += 1
-
-        # sim.Send_Sphere(objectID = self.num_objects, x=0.02,  y=-3*c.L-0.03, 
-        #     z=c.R+0.03, radius=0.01, r=0, g=0, b=0)
 
     def Send_Joints(self, sim):
 
@@ -93,52 +75,25 @@ class ROBOT:
 
         print self.num_joints
 
-        # #######################EYES#############################################
-        # self.num_joints += 1
-
-        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 1 , secondObjectID = 3,
-        #  n1 =1 , n2 =0 , n3 =0, x=-0.02, y=-3*c.L, z=c.R+0.02, lo=0 , hi=0)
-
-        #self.num_joints += 1
-
-        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 1 , secondObjectID = 4,
-        #  n1 =1 , n2 =0 , n3 =0, x=0.02, y=-3*c.L, z=c.R+0.02, lo=0 , hi=0)
-
-        # self.num_joints += 1
-
-        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 3 , secondObjectID = 5,
-        #  n1 =1 , n2 =0 , n3 =0, x=-0.02, y=-3*c.L-0.03, z=c.R+0.03, lo=0 , hi=0)
-
-        # self.num_joints += 1
-
-        # sim.Send_Joint(jointID = self.num_joints , firstObjectID = 4 , secondObjectID = 6,
-        #  n1 =1 , n2 =0 , n3 =0, x=0.02, y=-3*c.L-0.03, z=c.R+0.03, lo=0 , hi=0)
-
 
     def Send_Sensors(self, sim):
 
         sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 0)
-        self.sensors.append({'type':'TOUCH', 'min':0 , 'max':1, 'val':[]})
         self.num_sensors += 1
 
         sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 1)
-        self.sensors.append({'type':'TOUCH','min':0 , 'max':1, 'val':[]})
         self.num_sensors += 1
         
         sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 2)
-        self.sensors.append({'type':'TOUCH','min':0 , 'max':1, 'val':[]})
         self.num_sensors += 1
 
         sim.Send_Proprioceptive_Sensor(sensorID = self.num_sensors, jointID = 0)
-        self.sensors.append({'type':'PROPRICEPTIVE','min':-c.PI/4 , 'max':-c.PI/4, 'val':[]})
         self.num_sensors += 1
 
         sim.Send_Proprioceptive_Sensor(sensorID = self.num_sensors, jointID = 1)
-        self.sensors.append({'type':'PROPRICEPTIVE','min':-c.PI/4 , 'max':-c.PI/4, 'val':[]})
         self.num_sensors += 1
 
         sim.Send_Position_Sensor(sensorID = self.num_sensors, objectID = 1)
-        self.sensors.append({'type':'POSITION','min':-20 , 'max':20, 'val':[]})
 
         print self.sensors
 
