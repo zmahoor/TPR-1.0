@@ -33,7 +33,7 @@ class BODY:
 
         if(whatToMaximize == c.maximizeMovement):
 
-            return self.Sum_Joint_Diff()
+            return -self.Sum_Joint_Diff()
 
         if(whatToMaximize == c.maximizeMovementAndHeight):
 
@@ -84,6 +84,10 @@ class BODY:
 
         self.Move_Up()
 
+    def Store_Sensors(self, raw_sensors):
+
+        self.root.Store_Sensors(raw_sensors)
+
     def Send_To_Simulator(self,simulator,color):
 
         self.root.Send_Objects_To_Simulator(simulator, color)
@@ -110,7 +114,7 @@ class BODY:
 
     def Head_Z_Position(self):
 
-        # headZLocation = self.root.object.positionSensor.values
+        # headZLocation = self.root.object.positionSensor.values[2]
 
         # count = 0.0
 
@@ -122,8 +126,11 @@ class BODY:
 
         # return count/len(headZLocation)
 
-        return self.root.object.Get_Position_Sensor_Value()
+        return self.root.object.positionSensor.Get_Mean_Z_Value()
 
+    def Head_X_Position(self):
+
+        return self.root.object.positionSensor.Get_Last_X_Value()
 
     def Sum_Joint_Diff(self):
 
@@ -199,8 +206,6 @@ class BODY:
 
         self.root.Find_Lowest_Point(lowestPoint, lowestDepth)
 
-        # print "low: ", lowestPoint, lowestDepth
-
         # the lowest part is the head
         if lowestDepth[0] == 0:
             self.root.Move( 0 , 0, -lowestPoint[0] + c.headRadius )
@@ -274,15 +279,23 @@ class BODY:
             x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
             mass=0.05, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        # print object_ID
+        # sim.Send_Ray_Sensor(sensorID= self.numSensors, objectID=object_ID, 
+        #     x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], r1=0,r2=-1,r3=0)
 
         object_ID += 1
+
+        # self.numSensors += 1
 
         sim.Send_Sphere(objectID = object_ID, 
             x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
             mass=0.05, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        # print object_ID
+        # sim.Send_Ray_Sensor(sensorID= self.numSensors, objectID=object_ID, 
+        #     x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], r1=0,r2=-1,r3=0)
+ 
+        # self.numSensors += 1
+
+        # print self.numSensors
 
         ###########################JOINTS#######################################
 

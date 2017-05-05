@@ -22,7 +22,6 @@ class OBJECT:
 
         self.current = currentNode
         
-
     def Add_Sensors(self,sensorsCreated):
 
         if self.ID == 0: 
@@ -41,6 +40,27 @@ class OBJECT:
         # sensorsCreated[0] = sensorsCreated[0] + 1
 
 
+    def Store_Sensors(self, raw_sensors):
+
+        if self.positionSensor:
+
+            raw_sensors['meta_data'].append("P"+str(self.ID)+"_X")
+            raw_sensors['meta_data'].append("P"+str(self.ID)+"_Y")
+            raw_sensors['meta_data'].append("P"+str(self.ID)+"_Z")
+
+            raw_sensors['data'].extend(self.positionSensor.values)
+
+        if self.lightSensor:
+
+            raw_sensors['meta_data'].append("L"+str(self.ID))
+            raw_sensors['data'].append(self.lightSensor.values)
+
+        if self.touchSensor:
+
+            raw_sensors['meta_data'].append("T"+str(self.ID))
+            raw_sensors['data'].append(self.touchSensor.values)
+
+
     def Get_Light_Sensor_Value(self):
 
         if ( self.lightSensor ):
@@ -53,7 +73,7 @@ class OBJECT:
 
         if (self.positionSensor):
 
-            return self.positionSensor.Get_Z_Mean_Value()
+            return self.positionSensor.Get_Mean_Z_Value()
         else:
             return 0
 
@@ -82,15 +102,6 @@ class OBJECT:
     def Send_To_Simulator(self,simulator,color):
 
         if self.parent == None: 
-
-            # temp = [self.current.x > self.current.x, self.current.y > self.child.y,
-            #     self.current.z > self.child.z]
-
-            # dir = [1 if temp[i]==True else -1 for i in range(0, len(temp)) ]
-
-            # x = self.current.x + dir[0]*head_radius/2
-            # y = self.current.y + dir[1]*head_radius/2
-            # z = self.current.z + dir[2]*head_radius/2
 
             x = self.current.x
             y = self.current.y 

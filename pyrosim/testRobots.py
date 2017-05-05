@@ -35,5 +35,6 @@ robot.Send_To_Simulator(sim, color)
 sim.Start()
 sim.Wait_To_Finish()
 fitness = robot.Evaluate(sim, 'movement')
+robot.Store_Sensors(1)
 
-print fitness
+# print fitness

@@ -199,6 +199,20 @@ class NODE:
 
             self.children[c].Get_Sensor_Data_From_Simulator(simulator)
 
+    def Store_Sensors(self, raw_sensors):
+
+        if ( self.object ):
+
+            self.object.Store_Sensors(raw_sensors)
+
+        if ( self.joint):
+
+            self.joint.Store_Sensors(raw_sensors)
+
+        for c in range(0,self.numChildren):
+
+            self.children[c].Store_Sensors(raw_sensors)
+
     def Make_Parent_Of(self,other):
 
         other.Recalculate_Depth(self.myDepth+1)

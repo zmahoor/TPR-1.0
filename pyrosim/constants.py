@@ -4,10 +4,13 @@ R = L/5
 PI = 3.14159
 
 headRadius = 2 * R
+
 eyeRadius = 0.015
 
 popSize = 20
+
 numGens = 100
+
 numEnvs = 2
 
 # ------------- Things to maximize -----------------
@@ -42,7 +45,7 @@ maximizeMovementAndHeight = 'movement_height'
 
 evaluationTime = 600
 
-maxDepth = 3
+maxDepth = 1
 
 maxChildren = 2
 
@@ -50,7 +53,7 @@ length = 0.5 / 4.0
 
 radius = 0.05 / 4.0
 
-numGenerations = 1000000
+numGenerations = 300
 
 # ------------------ Robot parameters --------------
 

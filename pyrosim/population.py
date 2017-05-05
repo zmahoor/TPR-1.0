@@ -61,6 +61,7 @@ class POPULATION:
         self.p[best].Store()
 
         self.p[best].Start_Evaluate(True, False)
+        
         self.p[best].Compute_Fitness(self.whatToMaximize)
 
         # print "bestOfAll: ", self.bestOfAll

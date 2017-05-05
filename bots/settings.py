@@ -6,7 +6,8 @@ IDENT = "tpr_bot2"
 CHANNEL = "mungozero"
 
 #mysql info
-MYSQL_HOST = '45.79.171.136'
+# MYSQL_HOST = '45.79.171.136'
+MYSQL_HOST = '132.198.138.134'
 MYSQL_DB = 'TwitchPlays'
 MYSQL_USER = 'root'
 MYSQL_PASS = 'twitchplaysrobotics2138'

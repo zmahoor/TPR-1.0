@@ -27,6 +27,12 @@ class ROBOT:
 
         return self.body.Compute_Fitness(whatToMaximize)
 
+    def Get_Raw_Sensors(self):
+
+        self.raw_sensors={'meta_data':[], 'data':[]}
+
+        self.body.Store_Sensors(self.raw_sensors)
+
     def Mutate(self):
 
         mutType = random.randint(0,1)

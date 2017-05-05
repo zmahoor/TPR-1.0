@@ -1,7 +1,6 @@
 #!/bin/bash
 #-------------------------To be set by user-------------------------------------
 MAINDIR="/backup_tpr"
-
 USERNAME="root"
 DBNAME="TwitchPlays"
 PASS="twitchplaysrobotics2138"
