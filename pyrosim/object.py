@@ -44,22 +44,17 @@ class OBJECT:
 
         if self.positionSensor:
 
-            raw_sensors['meta_data'].append("P"+str(self.ID)+"_X")
-            raw_sensors['meta_data'].append("P"+str(self.ID)+"_Y")
-            raw_sensors['meta_data'].append("P"+str(self.ID)+"_Z")
-
-            raw_sensors['data'].extend(self.positionSensor.values)
+            raw_sensors["P"+str(self.ID)+"_X"] = self.positionSensor.values[0]
+            raw_sensors["P"+str(self.ID)+"_Y"] = self.positionSensor.values[1]
+            raw_sensors["P"+str(self.ID)+"_Z"] = self.positionSensor.values[2]
 
         if self.lightSensor:
 
-            raw_sensors['meta_data'].append("L"+str(self.ID))
-            raw_sensors['data'].append(self.lightSensor.values)
+            raw_sensors["L"+str(self.ID)] = self.lightSensor.values
 
         if self.touchSensor:
 
-            raw_sensors['meta_data'].append("T"+str(self.ID))
-            raw_sensors['data'].append(self.touchSensor.values)
-
+            raw_sensors["T"+str(self.ID)] = self.touchSensor.values
 
     def Get_Light_Sensor_Value(self):
 

@@ -5,10 +5,11 @@ from robot import ROBOT
 import math
 import pickle
 import constants as c
+import os
 
 class INDIVIDUAL:
 
-    def __init__(self, i):
+    def __init__(self, i, robotType):
 
         self.id = i
 
@@ -18,15 +19,33 @@ class INDIVIDUAL:
 
         self.sim = None
 
-        self.robot = ROBOT()
+        self.robotType = robotType
+
+        self.robot = ROBOT(robotType)
 
     def __getstate__(self):
 
-        return(self.id, self.color, self.fitness, self.robot)
+        return(self.id, self.color, self.fitness, self.robotType, self.robot)
 
     def __setstate__(self, state):
 
-        self.id, self.color, self.fitness, self.robot = state
+        self.id, self.color, self.fitness, self.robotType, self.robot = state
+
+    def Get_Head_Trajectory(self):
+
+        self.sim.Wait_To_Finish()
+
+        self.head_trajectory = np.array(self.robot.Get_Head_Trajectory(self.sim))
+
+        # add the first order dervitave to the head trajectory
+        self.head_trajectory = np.vstack([self.head_trajectory, 
+            np.append(np.diff(self.head_trajectory[0]), [0])])
+
+        self.head_trajectory = np.vstack([self.head_trajectory, 
+            np.append(np.diff(self.head_trajectory[1]), [0])])
+
+        self.head_trajectory = np.vstack([self.head_trajectory,
+         np.append(np.diff(self.head_trajectory[2]), [0])])
 
     def Start_Evaluate(self, pp, pb):
 
@@ -36,11 +55,11 @@ class INDIVIDUAL:
 
         self.sim.Start()
 
-    def Compute_Fitness(self, whatToMaximize):
+    def Compute_Fitness(self, fitness_all, whatToMaximize):
 
         self.sim.Wait_To_Finish()
 
-        self.fitness = self.robot.Evaluate(self.sim, whatToMaximize)
+        # self.fitness = self.robot.Evaluate(self.sim, whatToMaximize)
 
         del self.sim
 
@@ -56,7 +75,12 @@ class INDIVIDUAL:
 
     def Store(self):
 
-        f = open( 'robot_'+str(self.id)+'.txt', 'wb' )
+        path = "../" + self.robotType
+
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        f = open( path +'/robot_'+str(self.id)+'.dat', 'wb' )
         pickle.dump(self, f)
         f.close()
 

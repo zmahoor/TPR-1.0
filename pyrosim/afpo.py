@@ -173,6 +173,8 @@ class AFPO:
 
     def Save_Best(self):
 
+        # print self.genomes[0].ID
+        
         self.genomes[0].Save(self.whatToMaximize)
 
     def Save_Random_Genome_From_Pareto_Front(self):
