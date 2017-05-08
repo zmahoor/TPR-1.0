@@ -37,15 +37,19 @@ class BODY:
 
         if(whatToMaximize == c.maximizeMovementAndHeight):
 
-            return self.Sum_Joint_Diff()*self.Head_Z_Position()
+            return -(self.Sum_Joint_Diff() * self.Head_Z_Position())
+
+        if(whatToMaximize == c.maximizeDistanceAndHeight):
+
+            return -(self.Head_X_Position() * self.Head_Z_Position())
 
         if(whatToMaximize == c.maximizeHeight):
 
-            return self.Head_Z_Position()
+            return -self.Head_Z_Position()
 
         if(whatToMaximize == c.maximizeDistance):
 
-            return self.Head_X_Position()
+            return -self.Head_X_Position()
 
         else:
             print 'unknown fitness function ' + whatToMaximize

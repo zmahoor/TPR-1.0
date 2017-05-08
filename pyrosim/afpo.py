@@ -117,7 +117,7 @@ class AFPO:
 
             print g,constants.numGenerations
 
-            if g%100 == 0: 
+            if (g+1)%500 == 0: 
 
                 self.time_to_save = True 
             else: 
