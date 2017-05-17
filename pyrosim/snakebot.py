@@ -1,15 +1,13 @@
-
 from pyrosim import PYROSIM
 import numpy as np
+import copy
 import constants as c
+import math
+import random
 
 class ROBOT:
 
-    def __init__(self, sim, wts, color, command=0.0):
-
-        self.num_input_neurons, self.num_motor_neurons = np.shape(wts)
-
-        self.color = color
+    def __init__(self, command=0.0):
 
         self.command = command
 
@@ -19,28 +17,57 @@ class ROBOT:
 
         self.num_sensors = 0
 
-        self.num_neurons = 0
-
-        self.num_synapses = 0
-
         self.head_ID = 0
 
-        self.sensors = []
+        self.num_in_neurons = 0
+
+        self.num_motor_neurons = 0
+
+        self.genome = np.random.rand(6, 2) * 2 - 1
+
+    def Evaluate(self,sim,whatToMaximize):
+
+        self.Get_Raw_Sensors(sim)
+
+        if whatToMaximize == c.maximizeDistance:
+
+            return self.raw_sensors['P'+str(head_ID)+'_X'][-1] 
+
+    def Mutate(self):
+
+        self.genomeSahpe = self.genome.shape
+
+        geneToMutate = np.random.randint(self.genomeSahpe[0] * self.genomeSahpe[1])
+
+        ind1 = geneToMutate / self.genomeSahpe[1]
+        ind2 = geneToMutate % self.genomeSahpe[1]
+
+        self.genome[ind1][ind2] = random.gauss( self.genome[ind1][ind2] ,
+             math.fabs(self.genome[ind1][ind2]) )
+
+        if self.genome[ind1][ind2] > 1.0:
+            self.genome[ind1][ind2] = 1
+
+        if self.genome[ind1][ind2] < -1.0:
+            self.genome[ind1][ind2] = -1
+
+    def Send_To_Simulator(self, sim, color, biasValue):
 
         self.Send_Objects(sim, color)
 
         self.Send_Joints(sim)
 
-        self.Make_Eyes(sim, [0,-3*c.L,2*c.R], 0.015, [1,0,0], [0,-1,0], 0.015)
+        self.Send_Eyes(sim, [0,-3*c.L,2*c.R], 0.015, [1,0,0], [0,-1,0], 0.015)
 
         self.Send_Sensors(sim)
 
-        self.Send_Neurons(sim)
+        self.Send_Neurons(sim, biasValue)
 
-        self.Send_Synapses(sim, wts)
+        self.Send_Synapses(sim)
 
     def Send_Objects(self, sim, color):
 
+        self.num_objects = 0
         # Green Box
         sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.R, length=c.L,
          width=2*c.L, height=2*c.R, r=0, g=1, b=0)
@@ -63,20 +90,19 @@ class ROBOT:
 
     def Send_Joints(self, sim):
 
-        sim.Send_Joint( jointID = self.num_joints, firstObjectID = 0, secondObjectID = 2,
-         n1 =1, n2 =0, n3 =0, x=0, y=-c.L, z=c.R, lo=-c.PI/4 , hi=c.PI/4)
+        self.num_joints = 0
 
+        sim.Send_Joint( jointID = self.num_joints, firstObjectID = 0, secondObjectID = 2,
+         n1 =1, n2 =0, n3 =0, x=0, y=-c.L, z=c.R, lo=-c.PI/2 , hi=c.PI/2)
         self.num_joints += 1
 
         sim.Send_Joint( jointID = self.num_joints, firstObjectID = 0, secondObjectID = 1,
-         n1 =1, n2 =0, n3 =0, x=0, y=c.L, z=c.R, lo=-c.PI/4 , hi=c.PI/4)
-
+         n1 =1, n2 =0, n3 =0, x=0, y=c.L, z=c.R, lo=-c.PI/2 , hi=c.PI/2)
         self.num_joints += 1
 
-        print self.num_joints
-
-
     def Send_Sensors(self, sim):
+
+        self.num_sensors = 0
 
         sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 0)
         self.num_sensors += 1
@@ -94,33 +120,82 @@ class ROBOT:
         self.num_sensors += 1
 
         sim.Send_Position_Sensor(sensorID = self.num_sensors, objectID = 1)
+        self.num_sensors += 1
 
-        print self.sensors
 
-    def Send_Neurons(self, sim):
+    def Get_Raw_Sensors(self, sim):
 
-        for sn in range(0, self.num_input_neurons-1):
-            sim.Send_Sensor_Neuron(neuronID=sn, sensorID=sn)
-            self.num_neurons += 1
+        self.raw_sensors = {}
 
-        sim.Send_Bias_Neuron(neuronID = self.num_neurons, biasValue=self.command)
+        self.raw_sensors['T0'] = copy.deepcopy(sim.Get_Sensor_Data(0, 0))
 
-        self.num_neurons += 1
+        self.raw_sensors['T1'] = copy.deepcopy(sim.Get_Sensor_Data(1, 0))
+
+        self.raw_sensors['T2'] = copy.deepcopy(sim.Get_Sensor_Data(2, 0))
+
+        self.raw_sensors['P0'] = copy.deepcopy(sim.Get_Sensor_Data(3, 0))
+
+        self.raw_sensors['P1'] = copy.deepcopy(sim.Get_Sensor_Data(4, 0))
+
+        self.raw_sensors['P'+str(head_ID)+'_X'] = copy.deepcopy(sim.Get_Sensor_Data(5, 0))
+
+        self.raw_sensors['P'+str(head_ID)+'_Y'] = copy.deepcopy(sim.Get_Sensor_Data(5, 1))
+
+        self.raw_sensors['P'+str(head_ID)+'_Z'] = copy.deepcopy(sim.Get_Sensor_Data(5, 2))
+
+    def Get_Head_Trajectory(self, sim):
+
+        self.values = []
+
+        for ind in range(0, 3):
+
+            self.values.append(copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, ind)))
+
+        return self.values
+
+    def Send_Neurons(self, sim, bValue):
+
+        self.num_in_neurons = 0
+
+        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=0)
+        self.num_in_neurons += 1
+        
+        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=1)
+        self.num_in_neurons += 1
+
+        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=2)
+        self.num_in_neurons += 1
+
+        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=3)
+        self.num_in_neurons += 1
+
+        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=4)
+        self.num_in_neurons += 1
+
+        # sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=5, sensorValueIndex = 0)
+        # self.num_in_neurons += 1
+
+        # sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=5, sensorValueIndex = 1)
+        # self.num_in_neurons += 1
+
+        # sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=5, sensorValueIndex = 2)
+        # self.num_in_neurons += 1
+
+        sim.Send_Bias_Neuron(neuronID=self.num_in_neurons, biasValue=bValue)
+        self.num_in_neurons += 1
+
+        self.num_motor_neurons = self.num_joints - 4
 
         for mn in range(0, self.num_motor_neurons):
-            sim.Send_Motor_Neuron(neuronID=mn+self.num_input_neurons, jointID=mn, tau=0.3)
-            self.num_neurons += 1
+            sim.Send_Motor_Neuron(neuronID=mn+self.num_in_neurons, jointID=mn, tau=0.5)
 
-        print self.num_neurons
+    def Send_Synapses(self, sim):
 
-    def Send_Synapses(self, sim, wts):
-
-        for sn in range(0, self.num_input_neurons):
+        for sn in range(0, self.num_in_neurons):
             for mn in range(0, self.num_motor_neurons):
                 
                 sim.Send_Synapse(sourceNeuronID = sn , targetNeuronID 
-                    =mn+self.num_input_neurons, weight= wts[sn][mn])
-                self.num_synapses += 1
+                    =mn+self.num_in_neurons, weight= self.genome[sn][mn])
 
     def L2_Norm(self, mylist):
         n =0.0
@@ -129,7 +204,7 @@ class ROBOT:
 
         return(n**0.5)
 
-    def Make_Eyes(self, sim, midpoint, distance, axis1=[1,0,0], axis2=[0,0,-1], 
+    def Send_Eyes(self, sim, midpoint, distance, axis1=[1,0,0], axis2=[0,0,-1], 
         eye_radius=0.02):
         
         if distance < eye_radius/2.0:
@@ -139,7 +214,7 @@ class ROBOT:
 
         axis2 = [axis2[i] / self.L2_Norm(axis2) for i in range(len(axis2))]
 
-        print axis1, axis2
+        # print axis1, axis2
 
         lefEye    =[axis1[i]* -distance + midpoint[i] for i in range(len(axis1))]
 
@@ -153,7 +228,7 @@ class ROBOT:
             x= lefEye[0], y= lefEye[1], z= lefEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
 
-        print self.num_objects
+        # print self.num_objects
 
         self.num_objects += 1
 
@@ -161,7 +236,7 @@ class ROBOT:
             x= rightEye[0], y= rightEye[1], z= rightEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
 
-        print self.num_objects
+        # print self.num_objects
 
         self.num_objects += 1
 
@@ -169,7 +244,7 @@ class ROBOT:
             x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
             mass=0.1, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        print self.num_objects
+        # print self.num_objects
 
         self.num_objects += 1
 
@@ -177,7 +252,7 @@ class ROBOT:
             x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
             mass=0.1, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        print self.num_objects
+        # print self.num_objects
 
         ###########################JOINTS#######################################
 
@@ -187,7 +262,7 @@ class ROBOT:
         x= lefEye[0], y= lefEye[1], z= lefEye[2],
         lo=0, hi=0)
 
-        print self.num_joints, self.num_objects-4, self.num_objects-3
+        # print self.num_joints, self.num_objects-4, self.num_objects-3
 
         self.num_joints += 1
 
@@ -197,7 +272,7 @@ class ROBOT:
         x= rightEye[0], y= rightEye[1], z= rightEye[2], 
         lo=0, hi=0)
         
-        print self.num_joints, self.num_objects-4, self.num_objects-2
+        # print self.num_joints, self.num_objects-4, self.num_objects-2
 
         self.num_joints += 1
 
@@ -215,4 +290,5 @@ class ROBOT:
         x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
         lo=0 , hi=0)
 
+        self.num_joints += 1
 

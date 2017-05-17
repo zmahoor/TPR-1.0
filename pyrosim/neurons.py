@@ -4,91 +4,116 @@ import random
 
 class NEURONS: 
 
-        def __init__(self,numSensorNeurons,numMotorNeurons):
+    def __init__(self,numSensorNeurons,numMotorNeurons, biasValues):
 
-		self.numSensorNeurons = numSensorNeurons
+        self.numSensorNeurons = numSensorNeurons
 
-		self.numMotorNeurons = numMotorNeurons
+        self.numMotorNeurons = numMotorNeurons
 
-		self.Create_Sensor_Neurons()
+        self.numBiasNeurons = len(biasValues)
 
-		self.Create_Hidden_Neurons()
+        # self.biasValues = biasValues
 
-		self.Create_Motor_Neurons()
+        self.Create_Bias_Neurons()
 
-	def Mutate(self):
+        self.Create_Sensor_Neurons()
 
-		mutType = random.randint(0,2)
+        self.Create_Hidden_Neurons()
 
-		if ( mutType == 0 ):
+        self.Create_Motor_Neurons()
 
-			self.Mutate_Sensor_Neurons()
+    def Mutate(self):
 
-		elif ( mutType == 1 ):
+        mutType = random.randint(1,2)
 
-			self.Mutate_Hidden_Neurons()
-		else:
-			self.Mutate_Motor_Neurons()
+        # if ( mutType == 0 ):
 
-	def Print(self):
+        #   self.Mutate_Sensor_Neurons()
 
-                for s in self.sensorNeurons:
+        if ( mutType == 1 ):
 
-                        self.sensorNeurons[s].Print()
+            self.Mutate_Hidden_Neurons()
+        else:
+            self.Mutate_Motor_Neurons()
 
-		for h in self.hiddenNeurons:
+    def Print(self):
 
-			self.hiddenNeurons[h].Print()
+        for b in self.biasNeurons:
 
-		for m in self.motorNeurons:
+            self.biasNeurons[b].Print()
 
-			self.motorNeurons[m].Print()
+        for s in self.sensorNeurons:
 
-	def Send_To_Simulator(self,simulator):
+            self.sensorNeurons[s].Print()
 
-                for s in range(0,self.numSensorNeurons):
+        for h in self.hiddenNeurons:
 
-			self.sensorNeurons[s].Send_Sensor_Neuron_To_Simulator(simulator,s)
+            self.hiddenNeurons[h].Print()
 
-                for h in range(0,c.NUM_HIDDEN_NEURONS):
+        for m in self.motorNeurons:
 
-			self.hiddenNeurons[h].Send_Hidden_Neuron_To_Simulator(simulator)
+            self.motorNeurons[m].Print()
 
-                for m in range(0,self.numMotorNeurons):
+    def Send_To_Simulator(self,simulator, biasValues):
 
-			self.motorNeurons[m].Send_Motor_Neuron_To_Simulator(simulator,m)
+        for b in range(0, self.numBiasNeurons):
+            
+            self.biasNeurons[b].Send_Bias_Neuron_To_Simulator(simulator, biasValues[b])
+
+        for s in range(0,self.numSensorNeurons):
+
+            self.sensorNeurons[s].Send_Sensor_Neuron_To_Simulator(simulator,s)
+
+        for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+            self.hiddenNeurons[h].Send_Hidden_Neuron_To_Simulator(simulator)
+
+        for m in range(0,self.numMotorNeurons):
+
+            self.motorNeurons[m].Send_Motor_Neuron_To_Simulator(simulator,m)
+
 
 # -------------------- Private functions ---------------------
 
-	def Create_Sensor_Neurons(self):
+    def Create_Bias_Neurons(self):
 
-		self.sensorNeurons = {}
+        self.biasNeurons = {}
 
-                for s in range(0,self.numSensorNeurons):
+        for b in range(0, self.numBiasNeurons):
 
-                        self.sensorNeurons[s] = NEURON(c.SENSOR_NEURON,s)
+            self.biasNeurons[b] = NEURON(c.BIAS_NEURON, b)
 
-	def Create_Hidden_Neurons(self):
+    def Create_Sensor_Neurons(self):
 
-		self.hiddenNeurons = {}
+        self.sensorNeurons = {}
 
-                for h in range(0,c.NUM_HIDDEN_NEURONS):
+        for s in range(0,self.numSensorNeurons):
 
-                        self.hiddenNeurons[h] = NEURON(c.HIDDEN_NEURON,self.numSensorNeurons + h)
+            self.sensorNeurons[s] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons + s)
 
-	def Create_Motor_Neurons(self):
+    def Create_Hidden_Neurons(self):
 
-                self.motorNeurons = {}
+        self.hiddenNeurons = {}
 
-                for m in range(0,self.numMotorNeurons):
+        for h in range(0,c.NUM_HIDDEN_NEURONS):
 
-                        self.motorNeurons[m] = NEURON(c.MOTOR_NEURON,self.numSensorNeurons + c.NUM_HIDDEN_NEURONS + m)
+            self.hiddenNeurons[h] = NEURON(c.HIDDEN_NEURON, 
+                self.numBiasNeurons+self.numSensorNeurons + h)
 
-	def Mutate_Sensor_Neurons(self):
+    def Create_Motor_Neurons(self):
 
-		s = random.randint(0,self.numSensorNeurons-1)
+        self.motorNeurons = {}
 
-		self.sensorNeurons[s].Mutate()
+        for m in range(0,self.numMotorNeurons):
+
+            self.motorNeurons[m] = NEURON(c.MOTOR_NEURON, 
+                self.numBiasNeurons+ self.numSensorNeurons + c.NUM_HIDDEN_NEURONS + m)
+
+    # def Mutate_Sensor_Neurons(self):
+
+    #   s = random.randint(0,self.numSensorNeurons-1)
+
+    #   self.sensorNeurons[s].Mutate()
 
         def Mutate_Hidden_Neurons(self):
 
