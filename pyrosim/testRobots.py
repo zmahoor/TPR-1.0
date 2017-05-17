@@ -1,32 +1,29 @@
 import numpy as np
 from pyrosim import PYROSIM
 import random
-# from snakeRobot import ROBOT
-# from bugRobot import ROBOT
-# from quadraped import ROBOT
 
-from robot import ROBOT
+from snakebot import ROBOT as SB
+from quadruped import ROBOT as QB
+from treebot import ROBOT as TB
+from starfishbot import ROBOT as SFB
 
 from environment import ENVIRONMENT
 
 import constants as c
 
-# genomeSahpe = [7, 2]
-# genomeSahpe = [6,8]
-# color = [0, 1, 0]
-
 color = np.random.random(3)
 
+biasValues = [1.0, -1.0]
 # genome = np.random.random(genomeSahpe) * 2 - 1
-
 # genome = np.full(genomeSahpe, 1.0)
 
 sim = PYROSIM(playPaused= True, playBlind=False, evalTime=200)
 
-# robot = ROBOT(sim, genome, color, command = 0.0)
-
-robot = ROBOT()
-robot.Send_To_Simulator(sim, color)
+# robot = TB(1, biasValues)
+# robot = SB(1.0)
+robot = SFB(1.0)
+robot.Send_To_Simulator(sim, color, 1.0)
+# robot.Send_To_Simulator(sim, color, biasValues)
 
 # environment = ENVIRONMENT()
 # print "parts: ", robot.Num_Body_Parts()
@@ -34,7 +31,7 @@ robot.Send_To_Simulator(sim, color)
 
 sim.Start()
 sim.Wait_To_Finish()
-fitness = robot.Evaluate(sim, 'movement')
-robot.Store_Sensors(1)
-
+# fitness = robot.Evaluate(sim, 'movement')
+# robot.Store_Sensors(1)
+del sim
 # print fitness

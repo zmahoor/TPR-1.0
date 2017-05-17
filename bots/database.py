@@ -1,6 +1,7 @@
 import pymysql.cursors
 import pymysql
 from time import *
+import datetime
 from settings import *
 
 class DATABASE:
@@ -266,6 +267,59 @@ class DATABASE:
 
         return result
 
+    #return a list of all commands along with their scores and ranks
+    # that were typed (interval) seconds before the current time
+    def Fetch_Recent_Typed_Command(self, interval=10):
+
+        current_time = datetime.datetime.now()
+        prev_time = current_time - datetime.timedelta(seconds=interval)
+
+        current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = """SELECT uc.cmdTxt, uc.totalLearnability, cl.timeArrival, 
+        FIND_IN_SET( uc.totalLearnability, (SELECT GROUP_CONCAT( uc.totalLearnability 
+        ORDER BY uc.totalLearnability DESC )
+        FROM unique_commands as uc )) AS rank
+        FROM command_log as cl
+        JOIN unique_commands as uc on cl.cmdTxt = uc.cmdTxt
+        WHERE cl.timeArrival
+        BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+        except:
+            print("unable to retrieve most recent typed command")
+
+        return result
+
+
+    def Fetch_Recent_Active_Users(self, interval=10):
+
+        current_time = datetime.datetime.now()
+        prev_time = current_time - datetime.timedelta(seconds=interval)
+
+        current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = """SELECT c.username, u.score, c.timeArrival, 
+        FIND_IN_SET( u.score, (SELECT GROUP_CONCAT( u.score ORDER BY u.score DESC ) FROM users as u )) AS rank
+        FROM chats as c 
+        JOIN users as u on u.username = c.username
+        WHERE c.timeArrival
+        BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+        except:
+            print("unable to retrieve most recent active users")
+
+        return result
+
     def Fetch_Alive_Robots(self, robotType):
         #find all the robots with the dead flag as zero --alive--
         sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
@@ -349,6 +403,19 @@ class DATABASE:
             # print result
         except:
             print("unable fetching all the unique commands")
+
+        return result
+
+    def Fetch_Top_Commands(self, topn):
+        sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
+        ORDER BY score DESC LIMIT %d;"""%(topn)
+
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+        except:
+            print("unable to retrieve command table")
 
         return result
 

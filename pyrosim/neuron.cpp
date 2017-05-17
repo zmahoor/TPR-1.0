@@ -86,7 +86,7 @@ void NEURON::Reset(void) {
 
         if ( type == BIAS_NEURON )
 
-                value = 1.0;
+                value = tau;
 	else
 		value = 0.0;
 }

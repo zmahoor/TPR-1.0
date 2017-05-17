@@ -53,7 +53,7 @@ help_type = {'general' : gen, 'project' : proj,
              'reinf' : reinf, 'sim' : sim}
 
 while True:
-    time.sleep(5)
+    time.sleep(2)
     #QUERY DATABASE FOR RECORDS IN 'HELP' W/ FLAG 0
     #GRAB OLDEST
     records = db.Fetch_Oldest_Help()
