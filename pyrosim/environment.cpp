@@ -86,6 +86,10 @@ void ENVIRONMENT::Read_From_Python(dWorldID world,dSpaceID space, int *evaluatio
 
 			Create_Proprioceptive_Sensor(*evaluationTime);
 
+                else if ( strcmp(incomingString,"SyntheticSensor") == 0 )
+
+                        Create_Synthetic_Sensor(*evaluationTime);
+
                 else if ( strcmp(incomingString,"LightSensor") == 0 )
 
                         Create_Light_Sensor(*evaluationTime);
@@ -323,6 +327,18 @@ void ENVIRONMENT::Create_Proprioceptive_Sensor(int evalPeriod) {
         std::cin >> jointIndex;
 
         joints[jointIndex]->Create_Proprioceptive_Sensor(ID,evalPeriod);
+}
+void ENVIRONMENT::Create_Synthetic_Sensor(int evalPeriod) {
+
+        int jointIndex;
+
+        int ID;
+
+        std::cin >> ID;
+
+        std::cin >> jointIndex;
+
+        joints[jointIndex]->Create_Synthetic_Sensor(ID,evalPeriod);
 }
 
 void ENVIRONMENT::Connect_Motor_Neuron_to_Joint( int jointID, NEURON *motorNeuron ) {

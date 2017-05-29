@@ -54,6 +54,7 @@ class POPULATION:
 
                 self.novelty[i][self.popSize+j] = dist
 
+            
     def Print(self):
 
         for i in self.p:
@@ -61,10 +62,10 @@ class POPULATION:
             self.p[i].Print()
         print
 
-    def Evaluate(self, pp, pb, knn=5):
+    def Evaluate(self, pp, pb, brange=10, knn=5):
 
         for i in self.p:
-            self.p[i].Start_Evaluate(pp, pb, 1.0)
+            self.p[i].Start_Evaluate(pp, pb, [1.0])
 
         for i in self.p:
             self.p[i].Get_Head_Trajectory()
@@ -116,9 +117,9 @@ class POPULATION:
     def Store_All(self):
 
         for i in self.p:
-            self.p[i].Store()
+            self.p[i].Store_To_Diversity_Pool()
 
     def Store_Archive(self):
         
         for i in POPULATION.archive:
-            POPULATION.archive[i].Store()
+            POPULATION.archive[i].Store_To_Diversity_Pool()

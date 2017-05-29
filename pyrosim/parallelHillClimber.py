@@ -8,20 +8,22 @@ import pickle
 from individual import INDIVIDUAL
 from robot import ROBOT
 from environment import ENVIRONMENT
-from population import POPULATION
+from population2 import POPULATION
 import constants as c
 
-robotType = 'starfishbot'
+robotType = '4'
 
 archive_thresh = 2.0
 
 knn = 3
 
+brange = 10
+
 parents = POPULATION(c.popSize, robotType)
 
-parents.Evaluate(False, True, knn)
+parents.Evaluate(False, True)
 
-parents.Update_Archive(archive_thresh)
+# parents.Update_Archive(archive_thresh)
 
 for g in range(1, c.numGenerations):
 
@@ -29,18 +31,16 @@ for g in range(1, c.numGenerations):
 
     children.Mutate()
 
-    children.Evaluate(False, True, knn)
+    children.Evaluate(False, True, brange, knn)
 
     # print g, 
     # children.Print()
 
-    # parents.Update_Archive(1.0)
-
     parents.ReplaceWith(children)
 
-    parents.Evaluate(False, True, knn)
+    # parents.Evaluate(False, True, knn)
 
-    parents.Update_Archive(archive_thresh)
+    # parents.Update_Archive(archive_thresh)
 
     print g,
     parents.Print()
@@ -48,4 +48,5 @@ for g in range(1, c.numGenerations):
 
     # parents.Print_Archive()
 
-parents.Store_Archive()
+parents.Store_All_Above_Average()
+# parents.Store_Archive()

@@ -13,10 +13,6 @@ class INDIVIDUAL:
 
         self.id = i
 
-        # self.genomeShape = genomeShape
-
-        # self.genome = np.random.random(self.genomeSahpe) * 2 - 1
-
         self.color = color
         
         self.fitness = 0
@@ -94,13 +90,6 @@ class INDIVIDUAL:
     def Print(self):
 
         print '[', self.id, self.fitness, ']',
-
-    def store_Robot_To_File(self):
-        brainPath = '../brains/r_' + str(self.id) + '.txt'
-
-        with open(brainPath,'wb') as f:
-            pickle.dump(  self , f )
-            f.close()
 
 
 

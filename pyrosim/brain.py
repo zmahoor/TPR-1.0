@@ -11,7 +11,7 @@ class BRAIN:
 
         self.neurons = NEURONS(numSensors,numJoints, biasValues)
 
-        # self.synapses = SYNAPSES(numSensors,numJoints, biasValues)
+        self.synapses = SYNAPSES(numSensors,numJoints, biasValues)
 
     def Mutate(self):
 
@@ -27,7 +27,7 @@ class BRAIN:
 
         self.neurons.Send_To_Simulator(simulator, biasValues)
 
-        # self.synapses.Send_To_Simulator(simulator)
+        self.synapses.Send_To_Simulator(simulator)
 
 # ----------------- Private methods -----------------------
 

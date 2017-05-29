@@ -1,7 +1,5 @@
-
 from pyrosim import PYROSIM
 import numpy as np
-from numpy import linalg as LA
 import constants as c
 import copy
 import random
@@ -9,7 +7,7 @@ import math
 
 class ROBOT:
 
-    def __init__(self, command):
+    def __init__(self, command=0.0):
 
         self.command = command
 
@@ -25,7 +23,7 @@ class ROBOT:
 
         self.num_motor_neurons = 0
 
-        self.genome = np.random.rand(16, 8) * 2 - 1
+        self.genome = np.random.rand(12, 4) * 2 - 1
 
     def Send_To_Simulator(self, sim, color, biasValue):
 
@@ -33,9 +31,7 @@ class ROBOT:
 
         self.Send_Joints(sim)
 
-        self.Send_Eyes(sim, [0, 0, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
-
-        # self.Make_Eyes(sim, [c.L/2, -c.L/2,4*c.R+c.L], 0.007, [1.4,1.4,0], [1.4,-1.4,0], 0.015)
+        self.Send_Eyes(sim, [0, -c.L, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
 
         self.Send_Sensors(sim)
 
@@ -76,7 +72,7 @@ class ROBOT:
         for s in range(0, 4):
             self.raw_sensors['T'+str(s)] = copy.deepcopy(sim.Get_Sensor_Data(s, 0))
 
-        for s in range(0, 8):
+        for s in range(0, 4):
             self.raw_sensors['P'+str(s)] = copy.deepcopy(sim.Get_Sensor_Data(s+4, 0))
 
         self.raw_sensors['P'+str(self.head_ID)+'_X'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 0))
@@ -97,116 +93,67 @@ class ROBOT:
 
     def Send_Objects(self, sim, color):
 
-        self.num_objects = 0
-
+        self.num_objects =0
         # box 
-        sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.L + c.R, length=c.L, width=c.L,
+        sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.L + c.R, length=c.L, width=2*c.L,
          height=2*c.R, r=color[0], g=color[1], b=color[2])
 
         self.head_ID = 0
-        
         self.num_objects += 1
 
-        # # red
-        sim.Send_Cylinder(objectID = self.num_objects, x=0, y=c.L, z=c.L + c.R, r1=0 , r2=1, r3=0,
+        sim.Send_Cylinder(objectID = self.num_objects, x=-c.L/2-c.R, y=c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=2,
          length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         
         self.num_objects += 1
 
-        # green
-        sim.Send_Cylinder(objectID=self.num_objects, x=c.L, y=0, z=c.L + c.R, r1=1 , r2=0, r3=0,
+        sim.Send_Cylinder(objectID=self.num_objects, x=-c.L/2-c.R, y=-c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=2,
          length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
 
         self.num_objects += 1
 
-        # # blue
-        sim.Send_Cylinder(objectID=self.num_objects, x=0, y=-c.L, z=c.L + c.R, r1=0 , r2=-1, r3=0,
+        sim.Send_Cylinder(objectID=self.num_objects, x=c.L/2+c.R, y=c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=-2,
          length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         
         self.num_objects += 1
 
-        # #purple
-        sim.Send_Cylinder(objectID=self.num_objects, x=-c.L, y=0, z=c.L + c.R, r1=-1 , r2=0, r3=0,
+        sim.Send_Cylinder(objectID=self.num_objects, x=c.L/2+c.R, y=-c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=-2,
          length=c.L, radius=c.R,  r=color[0], g=color[1], b=color[2])
 
         self.num_objects += 1
 
-        ## vertical segments
-        #red
-        sim.Send_Cylinder(objectID=self.num_objects, x=0, y=c.L/2 + c.L, z=(c.L/2 + c.R), r1=0,
-         r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
-
-        self.num_objects += 1
-
-        # green
-        sim.Send_Cylinder(objectID=self.num_objects, x=(c.L+c.L/2), y=0, z=(c.L/2 + c.R), r1=0,
-         r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
-
-        self.num_objects += 1
-
-        #blue
-        sim.Send_Cylinder(objectID=self.num_objects, x=0, y=-(c.L/2 + c.L), z=(c.L/2 + c.R), r1=0,
-         r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
-        
-        self.num_objects += 1
-
-        # purple
-        sim.Send_Cylinder(objectID=self.num_objects, x=-(c.L+c.L/2), y=0, z=(c.L/2 + c.R), r1=0,
-         r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
-
     def Send_Joints(self, sim):
+
         self.num_joints = 0
-        # red
         sim.Send_Joint(jointID = self.num_joints, firstObjectID = 0, secondObjectID = 1,
-         n1 =-1 , n2 =0 , n3 =0, x=0, y=c.L/2, z=c.L+c.R)
+         n1 =-1, n2 =0 , n3 =0, x=-c.L/2, y=c.L/2, z=c.L+c.R)
 
         self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.num_joints , firstObjectID = 1 , secondObjectID = 5,
-         n1 =-1 , n2 =0 , n3 =0, x=0, y=c.L+c.L/2, z=c.L+c.R)
-
-        self.num_joints += 1
-
-        # green
         sim.Send_Joint(jointID = self.num_joints, firstObjectID = 0 , secondObjectID = 2,
-         n1 =0 , n2 =1 , n3 =0, x=c.L/2, y=0, z=c.L+c.R)
+         n1 =-1 , n2 =0 , n3 =0, x=-c.L/2, y=-c.L/2, z=c.L+c.R)
 
         self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.num_joints, firstObjectID = 2 , secondObjectID = 6,
-         n1 =0 , n2 =1 , n3 =0, x=(c.L+c.L/2), y=0, z=c.L+c.R)
-
-        self.num_joints += 1
-        
-        # # blue
         sim.Send_Joint(jointID = self.num_joints, firstObjectID = 0 , secondObjectID = 3,
-         n1 =1 , n2 =0 , n3 =0, x=0, y=-c.L/2, z=c.L+c.R)
+         n1 =1 , n2 =0 , n3 =0, x=c.L/2, y=c.L/2, z=c.L + c.R)
 
         self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.num_joints, firstObjectID = 3 , secondObjectID = 7,
-         n1 =1 , n2 =0 , n3 =0, x=0, y=-(c.L+c.L/2), z= c.L+c.R)
-
-        self.num_joints += 1
-        
-        # # purple
         sim.Send_Joint(jointID = self.num_joints, firstObjectID = 0 , secondObjectID = 4,
-         n1 =0 , n2 =-1 , n3 =0, x=-c.L/2, y=0, z=c.L+c.R)
+         n1 =1 , n2 =0 , n3 =0, x=c.L/2, y=-c.L/2, z=c.L + c.R)
 
         self.num_joints += 1
 
-        sim.Send_Joint(jointID = self.num_joints, firstObjectID = 4 , secondObjectID = 8,
-         n1 =0 , n2 =-1 , n3 =0, x=-(c.L+c.L/2), y=0, z=c.L+c.R)
 
     def Send_Sensors(self, sim):
 
         self.num_sensors = 0
 
         for s in range(0, 4):
-            sim.Send_Touch_Sensor(sensorID = s, objectID = s+5)
+            sim.Send_Touch_Sensor(sensorID = s, objectID = s+1)
             self.num_sensors += 1
 
-        for s in range(0, 8):
+        for s in range(0, 4):
             sim.Send_Proprioceptive_Sensor(sensorID = s+4, jointID =s)
             self.num_sensors += 1
         
@@ -268,8 +215,6 @@ class ROBOT:
 
         rightPupil=[axis2[i]* eye_radius/1.5 + axis1[i]* distance + midpoint[i] for i in range(0, len(axis1))]
 
-        self.num_objects += 1
-
         sim.Send_Sphere(objectID = self.num_objects, 
             x= lefEye[0], y= lefEye[1], z= lefEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
@@ -301,7 +246,6 @@ class ROBOT:
         # print self.num_objects
 
         ###########################JOINTS#######################################
-        self.num_joints += 1
 
         sim.Send_Joint(jointID = self.num_joints, firstObjectID = self.head_ID,
         secondObjectID = self.num_objects-3,
@@ -336,7 +280,9 @@ class ROBOT:
         n1 =1, n2 =0, n3 =0, 
         x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
         lo=0 , hi=0)
+
         self.num_joints += 1
 
 
    
+

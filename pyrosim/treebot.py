@@ -32,9 +32,11 @@ class ROBOT:
 
         return self.body.Get_Head_Trajectory(simulator)
 
-    def Get_Raw_Sensors(self):
+    def Get_Raw_Sensors(self, simulator):
 
         self.raw_sensors={}
+
+        self.body.Get_Sensor_Data_From_Simulator(simulator)
 
         self.body.Store_Sensors(self.raw_sensors)
 
