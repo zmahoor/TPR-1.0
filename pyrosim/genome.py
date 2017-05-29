@@ -10,11 +10,13 @@ import os
 
 class GENOME:
 
-    def __init__(self,ID):
+    def __init__(self,ID, maxDepth):
+
+        self.robotType = maxDepth
 
         self.ID = ID
 
-        self.robot = ROBOT()
+        self.robot = ROBOT(maxDepth)
 
         self.age = 0
 
@@ -22,11 +24,11 @@ class GENOME:
 
     def __getstate__(self):
 
-        return(self.ID, self.fitness, self.age, self.robot)
+        return(self.ID, self.fitness, self.age, self.robotType, self.robot)
 
     def __setstate__(self, state):
 
-        self.ID, self.fitness, self.age, self.robot = state
+        self.ID, self.fitness, self.age, self.robotType, self.robot = state
 
     def Age(self):
 
@@ -106,11 +108,15 @@ class GENOME:
 
     def Save(self, whatToMaximize):
 
-        if not os.path.exists("../"+ whatToMaximize):
-            
-            os.makedirs("../"+ whatToMaximize)
+        path = "../"+ str(self.robotType) + "/"+ whatToMaximize
 
-        f = open('../'+whatToMaximize+'/robot_'+str(self.ID)+'.txt','wb')
+        if not os.path.exists(path):
+            
+            os.makedirs(path)
+
+        f = open(path+'/best.txt','wb')
+
+        # f = open(path+'/robot_'+str(self.ID)+'.txt','wb')
 
         pickle.dump(self,f)
 

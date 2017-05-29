@@ -9,7 +9,7 @@ import random
 
 class BODY:
 
-    def __init__(self):
+    def __init__(self, maxDepth):
 
         self.numObjects = 0
 
@@ -17,7 +17,7 @@ class BODY:
 
         self.numSensors = 0
 
-        self.root = NODE(None,0,c.maxDepth,1,0.0,0.0,0,0,0)
+        self.root = NODE(None,0,maxDepth,1,0.0,0.0,0,0,0)
 
         self.head_ID = 0
 
@@ -51,6 +51,10 @@ class BODY:
 
             return -self.Head_X_Position()
 
+        if(whatToMaximize == c.maximizeTouch):
+
+            return self.Sum_Touch()
+
         else:
             print 'unknown fitness function ' + whatToMaximize
 
@@ -59,6 +63,12 @@ class BODY:
     def Get_Sensor_Data_From_Simulator(self,simulator):
 
         self.root.Get_Sensor_Data_From_Simulator(simulator)
+
+    def Get_Head_Trajectory(self, simulator):
+        
+        if self.root.object.positionSensor:
+
+            return self.root.object.positionSensor.values
 
     def Mutate(self):
 
@@ -73,6 +83,7 @@ class BODY:
         self.root.Print()
 
     def Reset(self):
+
 
         self.Create_Mirror_Image()
 
@@ -115,6 +126,22 @@ class BODY:
         print "sumLight: ", sumOfLight
 
         return sumOfLight
+
+    def Sum_Touch(self):
+
+        return self.root.Sum_Touch()
+
+        if ( self.touchSensor ):
+
+            sumOfTouch = self.touchSensor.Get_Mean_Value()
+
+        for c in range(0,self.numChildren):
+
+            sumOfTouch = sumOfTouch + self.children[c].Sum_Touch()
+
+        print "sumTouch: ", sumOfTouch
+
+        return sumOfTouch
 
     def Head_Z_Position(self):
 

@@ -9,8 +9,6 @@ eyeRadius = 0.015
 
 popSize = 20
 
-numGens = 100
-
 numEnvs = 2
 
 # ------------- Things to maximize -----------------
@@ -41,11 +39,15 @@ maximizePushing = 'pushing'
 
 maximizeMovementAndHeight = 'movement_height'
 
+maximizeDistanceAndHeight = 'distance_height'
+
+maximizeTouch = 'touch'
+
 # ------------- Other parameters -------------------
 
 evaluationTime = 600
 
-maxDepth = 1
+maxDepth = 4
 
 maxChildren = 2
 
@@ -53,7 +55,7 @@ length = 0.5 / 4.0
 
 radius = 0.05 / 4.0
 
-numGenerations = 300
+numGenerations = 10000
 
 # ------------------ Robot parameters --------------
 

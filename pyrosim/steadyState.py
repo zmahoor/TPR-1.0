@@ -21,21 +21,22 @@ GENOME_SHAPE = [5, 8]
 
 colorIndex = 0
 currentColor = validColors[colorIndex % len(validColors)]
-numAliveIndividuals = 5
+numAliveIndividuals = 20
 mydatabase = DATABASE()
 changeCommand = False
 popularCommand = {'cmdCount':0, 'cmdTxt':"roll"}
 robotType = "4leg"
 
 def load_Robot_From_File(robotID):
-    brainPath = '../brains/r_' + str(robotID) + '.txt'
+    brainPath = '../controllers/r_' + str(robotID) + '.txt'
 
     if os.path.isfile(brainPath):
         with open(brainPath,'r') as f:
             ind = pickle.load(f)
             return ind
     else:
-        return INDIVIDUAL(0, GENOME_SHAPE)
+        return INDIVIDUAL(robotID, GENOME_SHAPE)
+
 
 def print_Message(cmdCurrent, currentColor):
     print('-'*70)
@@ -80,8 +81,8 @@ def compete_While_Waiting_For(pop, ignoreIndex):
         while ind2 == ind1 or ind2 == ignoreIndex: 
             ind2 =  np.random.randint(pop_len)
 
-    print pop[ind1]
-    print pop[ind2]
+    #print pop[ind1]
+    #print pop[ind2]
 
     return compete_Based_On_Dominance(pop[ind1], pop[ind2])
 
@@ -158,7 +159,7 @@ def main(argv):
 
             newIndividual.Set_Color(currentColor)
 
-            print("Evaluating: ", robotID)
+            #print("Evaluating: ", robotID)
 
             #print a message for users on screen
             print_Message(popularCommand['cmdTxt'], currentColor)
@@ -189,7 +190,7 @@ def main(argv):
             #set the color of this robot
             randomIndividual.Set_Color(currentColor)
 
-            print("Evaluating: ", aliveIndividuals[index]['robotID'])
+            #print("Evaluating: ", aliveIndividuals[index]['robotID'])
 
             #evaluate this individual and show on the screen
             randomIndividual.Evaluate(False, False)
@@ -203,7 +204,7 @@ def main(argv):
             if newIndividual != None:
                 robotID = mydatabase.Add_Robot(robotType)
 
-                print("child: ", robotID)
+                #print("child: ", robotID)
                 
                 newIndividual.Set_ID(robotID)
 

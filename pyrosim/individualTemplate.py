@@ -21,15 +21,17 @@ class INDIVIDUAL:
         
         self.fitness = 0
 
+        self.command = command
+
         self.sim = None
 
     def __getstate__(self):
 
-        return(self.id, self.genomeSahpe, self.genome, self.color, self.fitness)
+        return(self.id, self.genomeSahpe, self.genome, self.command, self.color, self.fitness)
 
     def __setstate__(self, state):
 
-        self.id, self.genomeSahpe, self.genome, self.color, self.fitness = state
+        self.id, self.genomeSahpe, self.genome, self.command, self.color, self.fitness = state
 
     def Set_ID(self, id):
         self.id = id
@@ -104,7 +106,7 @@ class INDIVIDUAL:
         print '[', self.id, self.fitness, ']',
 
     def store_Robot_To_File(self):
-        brainPath = '../brains/r_' + str(self.id) + '.txt'
+        brainPath = '../controllers/r_' + str(self.id) + '.txt'
 
         with open(brainPath,'wb') as f:
             pickle.dump(  self , f )

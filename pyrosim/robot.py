@@ -13,9 +13,9 @@ from brain import BRAIN
 
 class ROBOT:
 
-    def __init__(self):
+    def __init__(self, maxDepth):
 
-        self.body = BODY()
+        self.body = BODY(int(maxDepth))
 
         self.brain = BRAIN( self.body.numSensors, self.body.numJoints )
 
@@ -27,9 +27,15 @@ class ROBOT:
 
         return self.body.Compute_Fitness(whatToMaximize)
 
+    def Get_Head_Trajectory(self, simulator):
+
+        self.body.Get_Sensor_Data_From_Simulator(simulator)
+
+        return self.body.Get_Head_Trajectory(simulator)
+
     def Get_Raw_Sensors(self):
 
-        self.raw_sensors={'meta_data':[], 'data':[]}
+        self.raw_sensors={}
 
         self.body.Store_Sensors(self.raw_sensors)
 

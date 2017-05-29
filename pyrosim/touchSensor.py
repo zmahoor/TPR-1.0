@@ -14,7 +14,7 @@ class TOUCH_SENSOR:
 
         self.values = copy.deepcopy(simulator.Get_Sensor_Data(self.sensorID,0))
 
-    def Get_Value(self):
+    def Get_Mean_Value(self):
 
         return np.mean(self.values)
 

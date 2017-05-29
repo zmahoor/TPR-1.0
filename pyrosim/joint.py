@@ -32,9 +32,7 @@ class JOINT:
 
         if self.propSensor:
 
-            raw_sensors['meta_data'].append("J"+str(self.ID))
-
-            raw_sensors['data'].append(self.propSensor.values)
+            raw_sensors["J"+str(self.ID)] = self.propSensor.values
 
     def Get_Proprioceptive_Sensor_Value(self):
 

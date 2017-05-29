@@ -9,11 +9,13 @@ import time
 
 class AFPO:
 
-    def __init__(self,whatToMaximize):
+    def __init__(self,whatToMaximize, maxDepth):
 
         # random.seed(0)
 
         # np.random.seed(0)
+
+        self.robotType = maxDepth
 
         self.timeSinceLastInjection = time.time()
 
@@ -25,7 +27,7 @@ class AFPO:
 
         for g in range(0,constants.popSize):
 
-            self.genomes[g] = GENOME(self.nextAvailableID)
+            self.genomes[g] = GENOME(self.nextAvailableID, self.robotType)
 
             self.nextAvailableID = self.nextAvailableID + 1
 
@@ -39,11 +41,13 @@ class AFPO:
 
             self.Sort_NonDominated_By_Fitness()
 
-            if self.time_to_save:
+            # if self.time_to_save:
 
-                self.Save_Best()
+            #     self.Save_Best()
 
-                # self.Save_Random_Genome_From_Pareto_Front()
+            #     # self.Save_Random_Genome_From_Pareto_Front()
+
+            self.Save_Best()
 
             # self.Display_Best()
 
@@ -117,11 +121,11 @@ class AFPO:
 
             print g,constants.numGenerations
 
-            if (g+1)%500 == 0: 
+            # if (g+1)%300 == 0: 
 
-                self.time_to_save = True 
-            else: 
-                self.time_to_save = False
+            #     self.time_to_save = True 
+            # else: 
+            #     self.time_to_save = False
 
             self.Advance_One_Generation(environment)
 
@@ -151,7 +155,7 @@ class AFPO:
 
     def Inject_New_Genome(self):
 
-        self.genomes[constants.popSize-1] = GENOME(self.nextAvailableID)
+        self.genomes[constants.popSize-1] = GENOME(self.nextAvailableID, self.robotType)
 
         self.nextAvailableID = self.nextAvailableID + 1
 
@@ -173,6 +177,8 @@ class AFPO:
 
     def Save_Best(self):
 
+        # print self.genomes[0].ID
+        
         self.genomes[0].Save(self.whatToMaximize)
 
     def Save_Random_Genome_From_Pareto_Front(self):

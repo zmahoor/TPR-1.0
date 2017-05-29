@@ -1,4 +1,4 @@
-
+# parallel hill climber plus novelty search to create diverse behaviours
 from pyrosim import PYROSIM
 import numpy as np
 from robot import ROBOT
@@ -10,13 +10,14 @@ from population import POPULATION
 import constants as c
 from environment import ENVIRONMENT
 
-
 wtm = 'distance'
 
-parents = POPULATION(c.popSize, wtm)
+robotType = '1'
+
+parents = POPULATION(c.popSize, wtm, robotType)
 parents.Evaluate(False, True)
 
-for g in range(1, c.numGens):
+for g in range(1, c.numGenerations):
 
     children = deepcopy(parents)
 
@@ -29,5 +30,6 @@ for g in range(1, c.numGens):
     print g,
     parents.Print()
 
-parents.FindFittest()
+parents.Store_All()
+# parents.FindFittest()
 
