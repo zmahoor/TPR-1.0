@@ -5,7 +5,7 @@ import constants as c
 
 class ROBOT:
 
-    def __init__(self, sim, wts, color):
+    def __init__(self, sim, wts, color, command=0):
 
         self.num_sensor_neurons, self.num_motor_neurons = np.shape(wts)
 
@@ -24,8 +24,6 @@ class ROBOT:
         self.Send_Joints(sim)
 
         self.Make_Eyes(sim, [0, 0, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
-
-        # self.Make_Eyes(sim, [c.L/2, -c.L/2,4*c.R+c.L], 0.007, [1.4,1.4,0], [1.4,-1.4,0], 0.015)
 
         self.Send_Sensors(sim)
 
@@ -150,7 +148,7 @@ class ROBOT:
 
         axis2 = [axis2[i] / self.L2_Norm(axis2) for i in range(len(axis2))]
 
-        print axis1, axis2
+        #print axis1, axis2
 
         lefEye    =[axis1[i]* -distance + midpoint[i] for i in range(len(axis1))]
 
@@ -166,7 +164,7 @@ class ROBOT:
             x= lefEye[0], y= lefEye[1], z= lefEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
 
-        print self.last_objectID
+        #print self.last_objectID
 
         self.last_objectID += 1
 
@@ -174,7 +172,7 @@ class ROBOT:
             x= rightEye[0], y= rightEye[1], z= rightEye[2], 
             mass=0.1, radius = eye_radius, r=1, g=1, b=1)
 
-        print self.last_objectID
+        #print self.last_objectID
 
         self.last_objectID += 1
 
@@ -182,7 +180,7 @@ class ROBOT:
             x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
             mass=0.1, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        print self.last_objectID
+        #print self.last_objectID
 
         self.last_objectID += 1
 
@@ -190,7 +188,7 @@ class ROBOT:
             x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
             mass=0.1, radius = eye_radius/1.5, r=0, g=0, b=0)
 
-        print self.last_objectID
+        #print self.last_objectID
 
         ###########################JOINTS#######################################
         self.last_jointID += 1
@@ -201,7 +199,7 @@ class ROBOT:
         x= lefEye[0], y= lefEye[1], z= lefEye[2],
         lo=0, hi=0)
 
-        print self.last_jointID, self.last_objectID-4, self.last_objectID-3
+        #print self.last_jointID, self.last_objectID-4, self.last_objectID-3
 
         self.last_jointID += 1
 
@@ -211,7 +209,7 @@ class ROBOT:
         x= rightEye[0], y= rightEye[1], z= rightEye[2], 
         lo=0, hi=0)
         
-        print self.last_jointID, self.last_objectID-4, self.last_objectID-2
+        #print self.last_jointID, self.last_objectID-4, self.last_objectID-2
 
         self.last_jointID += 1
 

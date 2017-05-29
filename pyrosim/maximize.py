@@ -10,7 +10,9 @@ whatToMaximize = sys.argv[1]
 
 environment = None
 
-afpo = AFPO(whatToMaximize)
+maxDepth = 4
+
+afpo = AFPO(whatToMaximize, maxDepth)
 
 afpo.Evolve(environment)
 

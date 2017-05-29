@@ -339,6 +339,20 @@ class NODE:
 
         return size
 
+    def Sum_Touch(self):
+
+        sumOfTouch = 0
+
+        if ( self.object ):
+
+            sumOfTouch = self.object.Get_Touch_Sensor_Value()
+
+        for c in self.children:
+
+            sumOfTouch = sumOfTouch + self.children[c].Sum_Touch()
+
+        return sumOfTouch
+
     def Sum_Light(self):
 
         sumOfLight = 0
