@@ -1,65 +1,158 @@
 from pyrosim import PYROSIM
 import numpy as np
 import random
-from individualTemplate import INDIVIDUAL
+from individual import INDIVIDUAL
 from copy import deepcopy
-from time import *
+import datetime
 import sys 
 import pickle
 import os 
-from termcolor import colored
+import glob
 import constants as c
+from pygameWrapper import PYGAMEWRAPPER
+from timer import TIMER
 
 sys.path.append('../bots')
 
 from database import DATABASE
 from settings import *
 
-# INDIVIDUAL_DURATION = 30
-GENOME_SHAPE = [5, 8]
-# GENOME_SHAPE =[4, 1]
-
 colorIndex = 0
-currentColor = validColors[colorIndex % len(validColors)]
+morphologyIndex = 0
 numAliveIndividuals = 20
+
+MORPHOLOGY_DURATION =  1 * 60
+INDIVIDUAL_DURATION = 30
+
+currentColor = validColors[colorIndex % len(validColors)]
+robotType = validRobots[morphologyIndex % len(validRobots)]
+
 mydatabase = DATABASE()
-changeCommand = False
-popularCommand = {'cmdCount':0, 'cmdTxt':"roll"}
-robotType = "4leg"
 
-def load_Robot_From_File(robotID):
-    brainPath = '../controllers/r_' + str(robotID) + '.txt'
+window = PYGAMEWRAPPER(width=950,height=280)
 
-    if os.path.isfile(brainPath):
-        with open(brainPath,'r') as f:
-            ind = pickle.load(f)
-            return ind
-    else:
-        return INDIVIDUAL(robotID, GENOME_SHAPE)
+currentCommand = {'cmdCount':0, 'cmdTxt':"roll"}
+
+def store_Sensors_To_File(individual, currentTime):
+
+    sensorValues = individual.Get_Raw_Sensors()
+
+    id = individual.id
+
+    path = "../sensors/"+ str(currentTime.year) + "/" + str(currentTime.month)+\
+        "/" + str(currentTime.day)
+
+    # print path
+
+    if not os.path.exists(path):
+
+        os.makedirs(path)
+
+    currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
+
+    path += '/robot_' + str(individual.id) + "_" + currentTime + ".dat"
+
+    with open( path , 'wb' ) as f:
+
+        pickle.dump(sensorValues, f)
 
 
-def print_Message(cmdCurrent, currentColor):
-    print('-'*70)
-    print
-    print colored("Type !"+ currentColor[0] +\
-        "y if the current robot is obeying the command ["+\
-         cmdCurrent+"].", currentColor)
-    print
-    print colored("Type !"+ currentColor[0] +\
-        "n if the current robot is NOT obeying the command ["+\
-         cmdCurrent+"].", currentColor)
-    print
-    print colored("Type !"+ currentColor[0] +\
-        "l if You LIKE the current robot.", currentColor)
-    print
-    print colored("Type !"+ currentColor[0] +\
-        "d if You DISLIKE the current robot.", currentColor)
-    print
-    print colored("Type !command to change the current command.", 'cyan')
-    print
-    # print colored("Next robot is in: " + str(c.evaluationTime*0.05)+" seconds", nextColor)
-    print('-'*70)
+def store_Controller_To_File(individual):
 
+    id = individual.id
+
+    path = "../controllers/"+ robotType
+
+    if not os.path.exists(path):
+
+        os.makedirs(path)
+
+    path += '/robot_' + str(individual.id) + ".dat"
+
+    with open( path , 'wb' ) as f:
+
+        pickle.dump(individual, f)
+
+
+def load_Controller_From_File(robotID):
+
+    brainPath = "../controllers/"+ robotType +"/robot_"+ str(robotID) +".dat" 
+
+    print brainPath
+
+    if not os.path.isfile(brainPath): return None
+
+    individual = None
+
+    with open(brainPath,'r') as f:
+
+        individual = pickle.load(f)
+
+    return individual
+
+
+def load_From_Diversity_Pool(robotType):
+
+    path = "../diversity_pool/"+ robotType + "/*.dat" 
+
+    brainPaths = list()
+
+    for f in glob.iglob(path): brainPaths.append(f)
+
+    print path, robotType, len(brainPaths)
+
+    randomIndex = np.random.randint(low=0, high=len(brainPaths))
+
+    if not os.path.isfile(brainPaths[randomIndex]): return None
+
+    individual = None
+
+    with open(brainPaths[randomIndex],'r') as f:
+
+        individual = pickle.load(f)
+
+    return individual
+
+def draw_Reinforcment_Window():
+
+    global currentCommand
+    global currentColor
+
+    window.Wipe()
+
+    cmdTxt = currentCommand['cmdTxt']
+
+    myy = 10
+    window.Draw_Text("Type", x= 10, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "y", x= 80, y=myy, color=currentColor)
+    window.Draw_Text(" if the current robot is obeying the command", x= 130, y=myy)
+    window.Draw_Text("["+ cmdTxt +"].", x= 800, y=myy, color='brown')
+
+    
+    myy += 40
+    window.Draw_Text("Type", x= 10, y= myy)
+    window.Draw_Text("!"+ currentColor[0] + "n", x= 80, y=myy, color=currentColor)
+    window.Draw_Text(" if the current robot is NOT obeying the command", x= 130, y=myy)
+    window.Draw_Text("["+ cmdTxt +"].", x= 800, y=myy, color='brown')
+
+    myy += 40
+    
+    window.Draw_Text("Type", x= 10, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "l", x= 80, y=myy, color=currentColor)
+    window.Draw_Text(" if you LIKE the current robot." , x= 130, y=myy)
+    
+    myy += 40
+
+    window.Draw_Text("Type", x= 10, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "d", x= 80, y=myy, color=currentColor)
+    window.Draw_Text(" if you DISLIKE the current robot." , x= 130, y=myy)
+
+    myy += 60
+
+    window.Draw_Text("Need help: type", x= 700, y=myy) 
+    window.Draw_Text("?", x= 920, y=myy, color='brown')
+
+    window.Refresh()
 
 def select_Random_Individual(pop):
 
@@ -71,18 +164,19 @@ def compete_While_Waiting_For(pop, ignoreIndex):
 
     pop_len = len(pop)
 
+    if (pop_len <= 2) : return None
+
     ind1 =  np.random.randint(pop_len)
     ind2 =  np.random.randint(pop_len)
 
     while ind1 == ignoreIndex:
         ind1 =  np.random.randint(pop_len)
 
-    if pop_len > 1:
-        while ind2 == ind1 or ind2 == ignoreIndex: 
-            ind2 =  np.random.randint(pop_len)
+    while ind2 == ind1 or ind2 == ignoreIndex: 
+        ind2 =  np.random.randint(pop_len)
 
-    #print pop[ind1]
-    #print pop[ind2]
+    print pop[ind1]
+    print pop[ind2]
 
     return compete_Based_On_Dominance(pop[ind1], pop[ind2])
 
@@ -99,11 +193,16 @@ def compete_Based_On_Dominance(individual1, individual2):
 
     mydatabase.Kill_Robot(loser['robotID'])
 
-    newInd = load_Robot_From_File(winner['robotID'])
+    newInd = load_Controller_From_File(winner['robotID'])
 
     print("winner: ", winner['robotID'])
 
-    newInd.Mutate()
+    if newInd == None:  
+
+        mydatabase.Kill_Robot(winner['robotID'])
+
+    else:
+        newInd.Mutate()
 
     return newInd
 
@@ -118,111 +217,108 @@ def dominance(individual1, individual2):
     else:
         return False
 
-def main(argv):
-
-    generation = 0
+def morphology_Cycle(morphology_timer):
 
     global robotType
-    global popularCommand
+    global currentCommand
     global currentColor
     global colorIndex
+    global morphologyIndex
 
-    while True:
-        # print("G: ", generation)
+    while not morphology_timer.Time_Elapsed():
 
-        #get the color that is used for displaying the current robot
         currentColor = validColors[colorIndex % len(validColors)]
 
-        #return all the alive individuals
         aliveIndividuals = mydatabase.Fetch_Alive_Robots(robotType)
 
-        #find the most popular command
-        if(generation % 6 == 0):
-            popularCommand = mydatabase.Fetch_Popular_Command()
-            # print(popularCommand)
+        temp = mydatabase.Fetch_Popular_Command()
+
+        if temp != None: currentCommand = temp
+
+        # print currentColor, len(aliveIndividuals), numAliveIndividuals
 
         if len(aliveIndividuals) < numAliveIndividuals:
 
-            newIndividual = INDIVIDUAL(0, GENOME_SHAPE)
+            if np.random.uniform(0, 1) >= 0:
 
-            #get the current time
-            currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
+                newIndividual = INDIVIDUAL(0, robotType)
 
-            #add a new robot to the robots table and return the id
+            else:
+
+                newIndividual = load_From_Diversity_Pool(robotType)
+
             robotID = mydatabase.Add_Robot(robotType)
 
-            #add a new entry in the display table for this robot and the command
-            mydatabase.Add_Command_To_Display(robotID, popularCommand['cmdTxt'], 
-                currentColor[0], currentTime)
+            print "newIndividual", robotID
 
-            mydatabase.Update_Robot_Evaluation(robotID)
+            newIndividual.Set_ID(robotID)
 
-            newIndividual.Set_Color(currentColor)
-
-            #print("Evaluating: ", robotID)
-
-            #print a message for users on screen
-            print_Message(popularCommand['cmdTxt'], currentColor)
-
-            newIndividual.Evaluate(False, False)
-
-            newIndividual.Wait_For_Me()
-
-            newIndividual.store_Robot_To_File()
+            store_Controller_To_File(newIndividual)
 
         else:
 
-            #select a ranodm one from the list of living robots
             index = select_Random_Individual(aliveIndividuals)
 
-            #load that random individual from a stored file
-            randomIndividual = load_Robot_From_File(aliveIndividuals[index]['robotID'])
+            randomIndividual = load_Controller_From_File(aliveIndividuals[index]['robotID'])
 
-            #print a message for users on screen
-            print_Message(popularCommand['cmdTxt'], currentColor)
+            print "randomIndividual", aliveIndividuals[index]['robotID']
 
-            currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
+            if randomIndividual == None:
 
-            #add this random individual to the display table
+                mydatabase.Kill_Robot(aliveIndividuals[index]['robotID'])
+
+                continue
+
+            draw_Reinforcment_Window()
+
+            currentTime = datetime.datetime.now()
+
             mydatabase.Add_Command_To_Display(aliveIndividuals[index]['robotID'],
-                popularCommand['cmdTxt'], currentColor[0], currentTime)
+                currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-            #set the color of this robot
             randomIndividual.Set_Color(currentColor)
 
-            #print("Evaluating: ", aliveIndividuals[index]['robotID'])
+            randomIndividual.Start_Evaluate(False, False, [1.0])
 
-            #evaluate this individual and show on the screen
-            randomIndividual.Evaluate(False, False)
-
-            mydatabase.Update_Robot_Evaluation(aliveIndividuals[index]['robotID'])
-
-            #compete a pair
             newIndividual = compete_While_Waiting_For(aliveIndividuals, index)
 
-            #add this new individual to the robot table
             if newIndividual != None:
+
                 robotID = mydatabase.Add_Robot(robotType)
 
-                #print("child: ", robotID)
+                print("child: ", robotID)
                 
                 newIndividual.Set_ID(robotID)
 
-                #store this individual to a file
-                newIndividual.store_Robot_To_File()
+                newIndividual.store_Controller_To_File()
 
-            #finish simulating the random individual
             randomIndividual.Wait_For_Me()
 
-            #store that random individual in case
-            randomIndividual.store_Robot_To_File()
+            store_Sensors_To_File(randomIndividual, currentTime)
 
-        generation += 1
         colorIndex += 1
 
+def main(argv):
+
+    global robotType
+    global morphologyIndex
+
+    generation = 1
+
+    while True:
+        print("G: ", generation)
+
+        morphology_timer = TIMER(MORPHOLOGY_DURATION)
+
+        robotType = validRobots[morphologyIndex % len(validRobots)]
+
+        morphology_Cycle(morphology_timer)
+
+        morphologyIndex += 1
+
+        generation += 1
         print
 
-        # if generation == 6: break
 
 if __name__ == "__main__":
    main(sys.argv[1:])

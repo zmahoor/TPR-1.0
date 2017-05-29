@@ -26,6 +26,9 @@ JOINT::JOINT(void) {
 
 	positionControl = true;
 
+        syntheticSensor = NULL;
+
+
         joint = NULL;
 
         proprioceptiveSensor = NULL;
@@ -77,6 +80,16 @@ int JOINT::Connect_Sensor_To_Sensor_Neuron(int sensorID , NEURON *sensorNeuron) 
                         return true;
                 }
 
+        if ( syntheticSensor )
+
+                if ( syntheticSensor->Get_ID() == sensorID ) {
+
+                        syntheticSensor->Connect_To_Sensor_Neuron(sensorNeuron);
+
+                        return true;
+                }
+
+
         return false;
 }
 
@@ -104,6 +117,11 @@ void JOINT::Create_In_Simulator(dWorldID world, OBJECT *firstObject, OBJECT *sec
 void JOINT::Create_Proprioceptive_Sensor(int myID, int evalPeriod) {
 
         proprioceptiveSensor = new PROPRIOCEPTIVE_SENSOR(myID,evalPeriod);
+}
+
+void JOINT::Create_Synthetic_Sensor(int myID, int evalPeriod) {
+
+        syntheticSensor = new SYNTHETIC_SENSOR(myID,evalPeriod);
 }
 
 int JOINT::Get_First_Object_Index(void) {
@@ -165,6 +183,11 @@ void JOINT::Update_Sensor_Neurons(int t) {
         if ( proprioceptiveSensor )
 
                 proprioceptiveSensor->Update_Sensor_Neurons(t);
+
+        if ( syntheticSensor )
+
+                syntheticSensor->Update_Sensor_Neurons(t);
+
 }
 
 void JOINT::Write_To_Python(int evalPeriod) {

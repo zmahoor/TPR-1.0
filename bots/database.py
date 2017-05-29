@@ -1,7 +1,9 @@
 import pymysql.cursors
 import pymysql
 from time import *
+import datetime
 from settings import *
+import sys
 
 class DATABASE:
 
@@ -16,7 +18,8 @@ class DATABASE:
             data = self.cursor.fetchone()
             print ("Database version : %s " % data)
         except:
-            print "Unable to connect to database..."
+            print "Unable to connect to database...check your internet connection or the settings"
+            sys.exit()
     
     def Insert_Chat(self, username, current_time, msg):
         #INSERT INTO chats VALUES (ID, time, user, txt);
@@ -31,7 +34,9 @@ class DATABASE:
             self.connection.rollback()
     
     def Add_To_Help(self, user, txt, time):
-        sql = """INSERT IGNORE INTO helps(txt, userName, timeArrival) VALUES('%s','%s','%s');"""%(txt, user, time)
+        sql = """INSERT IGNORE INTO helps(txt, userName, timeArrival) 
+        VALUES('%s','%s','%s');"""%(txt, user, time)
+
         print(sql)
         try:
             self.cursor.execute(sql)
@@ -66,22 +71,22 @@ class DATABASE:
         
         if reward == 'y':
             sql = """ UPDATE display set numYes=numYes+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         elif reward == 'n':
             sql = """ UPDATE display set numNo=numNo+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         elif reward == 'l':
             sql = """ UPDATE display set numLike=numLike+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         elif reward == 'd':
             sql = """ UPDATE display set numDislike=numDislike+1 WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         else: return
@@ -99,7 +104,6 @@ class DATABASE:
         ('%s', '%s', '%s', '%s');"""%(username, reward, color, time)
 
         try:
-            print
             print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
@@ -111,19 +115,18 @@ class DATABASE:
         if reward == 'y':
             sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE 
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         elif reward == 'n':
             sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         else: return
 
         try:
-            print
             print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
@@ -135,19 +138,18 @@ class DATABASE:
         if reward == 'l':
             sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE 
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         elif reward == 'd':
             sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
             robotID = (SELECT robotID FROM display WHERE color='%s'
-            and timediff('%s', startTime) < '00:02:00'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         else: return
 
         try:
-            print
             print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
@@ -171,7 +173,6 @@ class DATABASE:
         ('%s', '%s', '%s');"""%(username, command, time)
 
         try:
-            print
             print(sql)
             self.cursor.execute(sql)
             self.connection.commit()
@@ -205,6 +206,9 @@ class DATABASE:
         return robotID
 
     def Add_Command_To_Display(self, robotID, cmdTxt, color, startTime):
+
+        startTime = startTime.strftime("%Y-%m-%d %H:%M:%S")
+
         sql = """INSERT INTO display(robotID, cmdTxt, color, startTime) VALUES
         ('%d','%s','%s', '%s');"""%(robotID, cmdTxt, color, startTime)
 
@@ -215,7 +219,6 @@ class DATABASE:
             self.connection.rollback()
             print("unable to insert the robot into the display")
 
-    def Update_Robot_Evaluation(self, robotID):
         sql = "UPDATE robots SET numEvals=numEvals+1 WHERE robotID='%d';"%(robotID)
         try:
             self.cursor.execute(sql)
@@ -224,15 +227,112 @@ class DATABASE:
             self.connection.rollback()
             # print("no new chat message is found")
 
-    def Update_Scores(self, user):
-        sql= """UPDATE users SET score=(SELECT count(*) FROM chats WHERE
-         userName = '%s') WHERE userName = '%s' ;"""%(user, user)
+    def Update_Users_Score(self):
+
+        sql= """SELECT * from users;"""
+
+        results = None
 
         try:
             self.cursor.execute(sql)
-            self.connection.commit()
+            results = self.cursor.fetchall()
         except:
-            self.connection.rollback()
+            print "unable to fetch user names"
+
+        if results == None: return
+
+        for row in results:
+
+            user = row['userName']
+
+            print user
+
+            sql= """UPDATE users SET score=(SELECT count(*) FROM reward_log WHERE
+             userName = '%s') + (SELECT count(*) FROM command_log WHERE
+             userName = '%s') WHERE userName = '%s' ;"""%(user, user, user)
+
+            try:
+                self.cursor.execute(sql)
+                self.connection.commit()
+            except:
+                self.connection.rollback()
+
+    def Update_Commands_Score(self):
+
+        sql = """ SELECT cmdTxt, min(startTime) as firstTime, max(startTime) as lastTime
+            from display group by cmdTxt;"""
+
+        results = None
+        try:
+            self.cursor.execute(sql)
+            results = self.cursor.fetchall()
+        except:
+            pass
+
+        print len(results)
+
+        if results == None: return
+
+        for row in results:
+
+            # print row
+
+            command = row['cmdTxt']
+
+            start_time = row['firstTime']
+
+            last_time  = row['lastTime']
+
+            first_sum = 0
+
+            second_sum = 0
+
+            mid_time = start_time + (last_time - start_time)/2
+
+            # print mid_time
+
+            sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as firstSum FROM 
+                    display WHERE startTime <= '%s' and cmdTxt='%s';"""%(mid_time, command)
+
+            results = None
+            try:
+                self.cursor.execute(sql)
+                results = self.cursor.fetchall()
+            except:
+                pass
+
+            # print results
+
+            if results[0]['cmdTxt'] != None: 
+                first_sum = results[0]['firstSum']
+
+            sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as secondSum FROM
+             display WHERE startTime > '%s' and cmdTxt='%s';"""%(mid_time, command)
+
+            results = None
+            try:
+                self.cursor.execute(sql)
+                results = self.cursor.fetchall()
+            except:
+                pass
+
+            # print results
+
+            if results[0]['cmdTxt'] != None: 
+                second_sum = results[0]['secondSum']
+
+            # print command ,first_sum-second_sum
+
+            sql = """UPDATE unique_commands SET totalLearnability ='%f' WHERE 
+                cmdTxt ='%s';"""%(first_sum - second_sum, command)
+
+            try:
+                self.cursor.execute(sql)
+                self.connection.commit()
+            except:
+                print "failed to update likeability"
+
+            print
 
     def Kill_Robot(self, robotID):
         #update the robot with dead flag as 1--kill it--
@@ -263,6 +363,63 @@ class DATABASE:
             result = self.cursor.fetchall()
         except:
             print("unable to retrieve score table")
+
+        return result
+
+    #return a list of all commands along with their scores and ranks
+    # that were typed (interval) seconds before the current time
+    def Fetch_Recent_Typed_Command(self, interval=10):
+
+        current_time = datetime.datetime.now()
+        prev_time = current_time - datetime.timedelta(seconds=interval)
+
+        current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = """SELECT uc.cmdTxt, uc.totalLearnability, cl.timeArrival, 
+        FIND_IN_SET( uc.totalLearnability, (SELECT GROUP_CONCAT( uc.totalLearnability 
+        ORDER BY uc.totalLearnability DESC )
+        FROM unique_commands as uc )) AS rank
+        FROM command_log as cl
+        JOIN unique_commands as uc on cl.cmdTxt = uc.cmdTxt
+        WHERE cl.timeArrival
+        BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+            self.connection.commit()
+        except:
+            print("unable to retrieve most recent typed command")
+
+        return result
+
+
+    def Fetch_Recent_Active_Users(self, interval=10):
+
+        current_time = datetime.datetime.now()
+        prev_time = current_time - datetime.timedelta(seconds=interval)
+
+        current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        print current_time, prev_time
+
+        sql = """SELECT c.username, u.score, c.timeArrival, 
+        FIND_IN_SET( u.score, (SELECT GROUP_CONCAT( u.score ORDER BY u.score DESC ) FROM users as u )) AS rank
+        FROM chats as c 
+        JOIN users as u on u.username = c.username
+        WHERE c.timeArrival
+        BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+            self.connection.commit()
+        except:
+            print("unable to retrieve most recent active users")
 
         return result
 
@@ -352,6 +509,40 @@ class DATABASE:
 
         return result
 
+    def Fetch_For_Command_Window(self, interval=10):
+
+        current_time = datetime.datetime.now()
+        prev_time = current_time - datetime.timedelta(seconds=interval)
+
+        current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
+        WHERE timeArrival BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+
+        result = None
+        try:            
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+            self.connection.commit()
+        except:
+            print("unable fetching the most recent type command")
+
+        return result
+
+    def Fetch_Top_Commands(self, topn):
+        sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
+        ORDER BY score DESC LIMIT %d;"""%(topn)
+
+        result = None
+        try:
+            self.cursor.execute(sql)
+            result = self.cursor.fetchall()
+        except:
+            print("unable to retrieve command table")
+
+        return result
+
     def Fetch_Popular_Command(self):
         #find the most popular command where processed=0
         sql = """SELECT count(cmdLogID) as cmdCount, cmdTxt FROM command_log WHERE 
@@ -375,7 +566,9 @@ class DATABASE:
             self.connection.rollback()
             print("unable to fetch a command")
 
-        if result == None: 
-            return({'cmdCount':0, 'cmdTxt':"stay still"})
+        # if result == None: 
+        #     return({'cmdCount':0, 'cmdTxt':"stay still"})
         
         return result
+
+

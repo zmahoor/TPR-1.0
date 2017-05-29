@@ -243,7 +243,7 @@ int main (int argc, char **argv)
 
 		Run_Blind();
 	else
-  		dsSimulationLoop (argc,argv,352*3,288*2,&fn);
+  		dsSimulationLoop (argc,argv,960,1080,&fn);
 
   return 0;
 }

@@ -10,8 +10,8 @@ endif
 
 all: simulator
 
-simulator: simulator.o environment.o object.o joint.o positionSensor.o proprioceptiveSensor.o touchSensor.o raySensor.o lightSensor.o vestibularSensor.o neuralNetwork.o neuron.o synapse.o
-	/bin/bash ode-0.12/libtool --tag=CXX   --mode=link g++  -g -O2   -o simulator simulator.o environment.o object.o joint.o positionSensor.o proprioceptiveSensor.o touchSensor.o raySensor.o lightSensor.o vestibularSensor.o neuralNetwork.o neuron.o synapse.o ode-0.12/drawstuff/src/libdrawstuff.la ode-0.12/ode/src/libode.la -framework OpenGL -framework GLUT -lm -lpthread ${openglopts}
+simulator: simulator.o environment.o object.o joint.o positionSensor.o proprioceptiveSensor.o syntheticSensor.o touchSensor.o raySensor.o lightSensor.o vestibularSensor.o neuralNetwork.o neuron.o synapse.o
+	/bin/bash ode-0.12/libtool --tag=CXX   --mode=link g++  -g -O2   -o simulator simulator.o environment.o object.o joint.o positionSensor.o proprioceptiveSensor.o syntheticSensor.o touchSensor.o raySensor.o lightSensor.o vestibularSensor.o neuralNetwork.o neuron.o synapse.o ode-0.12/drawstuff/src/libdrawstuff.la ode-0.12/ode/src/libode.la -framework OpenGL -framework GLUT -lm -lpthread ${openglopts}
 
 synapse.o: synapse.cpp
 	g++ -DHAVE_CONFIG_H -I. -Iode-0.12/ode/src  -Iode-0.12/include -DDRAWSTUFF_TEXTURE_PATH="\"ode-0.12/drawstuff/textures\"" -DdTRIMESH_ENABLED -DdDOUBLE  -g -O2 -MT synapse.o -MD -MP -c -o synapse.o synapse.cpp
@@ -36,6 +36,9 @@ touchSensor.o: touchSensor.cpp
 
 proprioceptiveSensor.o: proprioceptiveSensor.cpp
 	g++ -DHAVE_CONFIG_H -I. -Iode-0.12/ode/src  -Iode-0.12/include -DDRAWSTUFF_TEXTURE_PATH="\"ode-0.12/drawstuff/textures\"" -DdTRIMESH_ENABLED -DdDOUBLE  -g -O2 -MT proprioceptiveSensor.o -MD -MP -c -o proprioceptiveSensor.o proprioceptiveSensor.cpp
+
+syntheticSensor.o: syntheticSensor.cpp
+	g++ -DHAVE_CONFIG_H -I. -Iode-0.12/ode/src  -Iode-0.12/include -DDRAWSTUFF_TEXTURE_PATH="\"ode-0.12/drawstuff/textures\"" -DdTRIMESH_ENABLED -DdDOUBLE  -g -O2 -MT syntheticSensor.o -MD -MP -c -o syntheticSensor.o syntheticSensor.cpp
 
 positionSensor.o: positionSensor.cpp
 	g++ -DHAVE_CONFIG_H -I. -Iode-0.12/ode/src  -Iode-0.12/include -DDRAWSTUFF_TEXTURE_PATH="\"ode-0.12/drawstuff/textures\"" -DdTRIMESH_ENABLED -DdDOUBLE  -g -O2 -MT positionSensor.o -MD -MP -c -o positionSensor.o positionSensor.cpp

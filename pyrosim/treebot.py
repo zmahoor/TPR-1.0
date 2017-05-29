@@ -6,18 +6,17 @@ import random
 import pickle
 import numpy as np
 
-# from pyrosim import SIMULATOR 
 from pyrosim import PYROSIM
 from body import BODY
 from brain import BRAIN
 
 class ROBOT:
 
-    def __init__(self, maxDepth):
+    def __init__(self, maxDepth, biasValues):
 
         self.body = BODY(int(maxDepth))
 
-        self.brain = BRAIN( self.body.numSensors, self.body.numJoints )
+        self.brain = BRAIN( self.body.numSensors, self.body.numJoints, biasValues)
 
         # print self.body.numSensors, self.body.numJoints
 
@@ -33,9 +32,11 @@ class ROBOT:
 
         return self.body.Get_Head_Trajectory(simulator)
 
-    def Get_Raw_Sensors(self):
+    def Get_Raw_Sensors(self, simulator):
 
         self.raw_sensors={}
+
+        self.body.Get_Sensor_Data_From_Simulator(simulator)
 
         self.body.Store_Sensors(self.raw_sensors)
 
@@ -61,7 +62,7 @@ class ROBOT:
 
         self.brain.Print()
 
-    def Send_To_Simulator(self,simulator,color):
+    def Send_To_Simulator(self,simulator,color, biasValues):
 
         midpoint = [self.body.root.x, self.body.root.y-c.headRadius, self.body.root.z]
 
@@ -69,4 +70,4 @@ class ROBOT:
 
         self.body.Make_Eyes(simulator, midpoint, 0.015, [1,0,0], [0,-1,0], 0.015)
 
-        self.brain.Send_To_Simulator(simulator)
+        self.brain.Send_To_Simulator(simulator, biasValues)
