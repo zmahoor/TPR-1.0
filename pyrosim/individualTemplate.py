@@ -9,19 +9,19 @@ import constants as c
 
 class INDIVIDUAL:
 
-    def __init__(self, i, genomeSahpe, color=[0.5, 0.5, 0.5], command=0.0):
+    def __init__(self, i, robotType, color=[0.5, 0.5, 0.5], command=0.0):
 
         self.id = i
-
-        self.genomeSahpe = genomeSahpe
-
-        self.genome = np.random.random(self.genomeSahpe) * 2 - 1
 
         self.color = color
         
         self.fitness = 0
 
+<<<<<<< HEAD
         self.command = command
+=======
+        self.robotType = robotType
+>>>>>>> d4ab1aae9e75b1f7d309162fa8a0487f8b1850c4
 
         self.sim = None
 
@@ -34,6 +34,7 @@ class INDIVIDUAL:
         self.id, self.genomeSahpe, self.genome, self.command, self.color, self.fitness = state
 
     def Set_ID(self, id):
+
         self.id = id
 
     def Set_Color(self, color):
@@ -77,6 +78,7 @@ class INDIVIDUAL:
     def Wait_For_Me(self):
 
         self.sim.Wait_To_Finish()
+        
         del self.sim
 
     def Compute_Fitness(self):
@@ -87,24 +89,13 @@ class INDIVIDUAL:
 
     def Mutate(self):
 
-        geneToMutate = np.random.randint(self.genomeSahpe[0] * self.genomeSahpe[1])
-
-        ind1 = geneToMutate / self.genomeSahpe[1]
-        ind2 = geneToMutate % self.genomeSahpe[1]
-
-        self.genome[ind1][ind2] = random.gauss( self.genome[ind1][ind2] ,
-             math.fabs(self.genome[ind1][ind2]) )
-
-        if self.genome[ind1][ind2] > 1.0:
-            self.genome[ind1][ind2] = 1
-
-        if self.genome[ind1][ind2] < -1.0:
-            self.genome[ind1][ind2] = -1
+        self.robot.Mutate()
 
     def Print(self):
 
         print '[', self.id, self.fitness, ']',
 
+<<<<<<< HEAD
     def store_Robot_To_File(self):
         brainPath = '../controllers/r_' + str(self.id) + '.txt'
 
@@ -112,6 +103,8 @@ class INDIVIDUAL:
             pickle.dump(  self , f )
             f.close()
 
+=======
+>>>>>>> d4ab1aae9e75b1f7d309162fa8a0487f8b1850c4
 
 
 

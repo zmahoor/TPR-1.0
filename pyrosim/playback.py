@@ -6,19 +6,20 @@ from copy import deepcopy
 import pickle
 import sys
 
-wtm = 'distance'
+wtm = 'height'
 
-f = open(sys.argv[1]+'.txt','r')
+f = open(sys.argv[1],'r')
 best = pickle.load(f)
 f.close()
 
 print 'fitness: ', best.fitness
 
-best.Send_To_Simulator(False,True,600,None,color=np.array([1,1,1]))
-best.Get_From_Simulator(wtm)
+# best.Send_To_Simulator(False,True,600,None,color=np.array([1,1,1]))
+# best.Get_From_Simulator(wtm)
+# print best.robot.command
+# best.robot.command = 0
 
-print 'fitness: ', best.fitness
-
-# best.Start_Evaluate(True, False)
-# best.Compute_Fitness(wtm)
+best.Start_Evaluate(True, False, [0.5])
+best.Compute_Fitness(wtm)
+# print best.robot.command
 

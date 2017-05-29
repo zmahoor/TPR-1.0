@@ -6,11 +6,15 @@ from synapse import SYNAPSE
 
 class SYNAPSES: 
 
-    def __init__(self,numSensorNeurons,numMotorNeurons):
+    def __init__(self,numSensorNeurons,numMotorNeurons, biasValues):
 
         self.numSensorNeurons = numSensorNeurons
 
         self.numMotorNeurons = numMotorNeurons
+
+        self.numBiasNeurons = len(biasValues)
+
+        self.Create_BH()
 
         self.Create_SH()
 
@@ -20,7 +24,7 @@ class SYNAPSES:
 
     def Mutate(self):
 
-        mutType = random.randint(0,2)
+        mutType = random.randint(0,3)
 
         if ( mutType == 0 ):
 
@@ -29,18 +33,27 @@ class SYNAPSES:
         elif ( mutType == 1 ):
 
             self.Mutate_HH()
-        else:
+
+        elif(mutType == 2):
+
             self.Mutate_HM()
 
+        else:
+            self.Mutate_BH()
+
     def Print(self):
+
+        self.Print_BH()
 
         self.Print_SH()
 
         self.Print_HH()
 
         self.Print_HM()
-    
+
     def Send_To_Simulator(self,simulator):
+
+        self.Send_BH(simulator)
 
         self.Send_SH(simulator)
 
@@ -48,7 +61,23 @@ class SYNAPSES:
 
         self.Send_HM(simulator)
 
+
 # -------------------- Private functions ---------------------
+    
+    def Create_BH(self):
+
+        self.bh = {}
+
+        for b in range(0,self.numBiasNeurons):
+
+            for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+                sourceNeuron = b
+
+                targetNeuron = self.numSensorNeurons + h
+
+                self.bh[b,h] = SYNAPSE(sourceNeuron,targetNeuron)
+
 
     def Create_SH(self):
 
@@ -116,6 +145,21 @@ class SYNAPSES:
 
         self.hm[h,m].Mutate()
 
+
+    def Mutate_BH(self):
+
+        b = random.randint(0, self.numBiasNeurons - 1 )
+
+        h = random.randint(0, c.NUM_HIDDEN_NEURONS - 1 )
+
+        self.sh[b,h].Mutate()
+
+    def Print_BH(self):
+
+        for b,h in self.bh:
+
+            self.bh[b,h].Print()
+
     def Print_SH(self):
 
         for s,h in self.sh:
@@ -157,4 +201,13 @@ class SYNAPSES:
             for m in range(0,self.numMotorNeurons):
 
                 self.hm[h,m].Send_To_Simulator(simulator)
+
+    def Send_BH(self, simulator):
+
+        for b in range(0,self.numBiasNeurons):
+
+            for h in range(0,c.NUM_HIDDEN_NEURONS):
+
+                self.bh[b,h].Send_To_Simulator(simulator)
+
 

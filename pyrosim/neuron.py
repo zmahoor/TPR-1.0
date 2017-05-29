@@ -13,6 +13,10 @@ class NEURON:
         self.tau = random.random() * 2  * c.TAU_MAX - c.TAU_MAX
 
     def Mutate(self):
+        
+        if(self.type == c.SENSOR_NEURON or self.type == c.BIAS_NEURON):
+
+            return
 
         self.tau = random.gauss( self.tau , math.fabs(self.tau) )
 
@@ -28,6 +32,10 @@ class NEURON:
 
         print self.ID , self.tau
 
+    def Send_Bias_Neuron_To_Simulator(self, simulator, value):
+
+        simulator.Send_Bias_Neuron(neuronID = self.ID, biasValue=value)
+
     def Send_Sensor_Neuron_To_Simulator(self,simulator,sensorID):
 
         simulator.Send_Sensor_Neuron(neuronID=self.ID, sensorID=sensorID, sensorValueIndex=0, tau=self.tau )
@@ -39,4 +47,5 @@ class NEURON:
     def Send_Motor_Neuron_To_Simulator(self,simulator,jointID):
 
         simulator.Send_Motor_Neuron(neuronID = self.ID, jointID = jointID , tau = self.tau )
+
 

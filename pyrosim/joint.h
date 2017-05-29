@@ -3,6 +3,7 @@
 
 #include "object.h"
 #include "proprioceptiveSensor.h"
+#include "syntheticSensor.h"
 #include "neuron.h"
 
 class JOINT {
@@ -26,6 +27,8 @@ private:
 	dJointID joint;
 
         PROPRIOCEPTIVE_SENSOR *proprioceptiveSensor;
+	
+	SYNTHETIC_SENSOR *syntheticSensor;
 
 	NEURON *motorNeuron;
 
@@ -43,6 +46,9 @@ public:
 	void Create_In_Simulator(dWorldID world, OBJECT *firstObject, OBJECT *secondObject);
 
         void Create_Proprioceptive_Sensor(int myID, int evalPeriod);
+
+        void Create_Synthetic_Sensor(int myID, int evalPeriod);
+
 
 	int  Get_First_Object_Index(void);
 

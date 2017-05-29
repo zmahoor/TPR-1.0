@@ -1,80 +1,107 @@
 #population of individuals for novelty search
-
 from pyrosim import PYROSIM
 import numpy as np
 from individual import INDIVIDUAL
 from sys import float_info
 import pickle
 from copy import deepcopy
-from scipy.spatial import distance
+from numpy import linalg as LA
 
 class POPULATION:
 
-    def __init__(self, ps, wtm, robotType):
+    archive = {}
+
+    asize = 0
+
+    def __init__(self, ps, robotType):
 
         self.p = {}
 
         self.popSize = ps
 
-        # self.whatToMaximize = wtm
-
         for i in range(0, self.popSize):
             self.p[i] = INDIVIDUAL(i, robotType) 
 
-        self.bestOfAll = -float_info.max
+    def Compute_Novelty_Matrix(self):
 
+        self.novelty = np.zeros((self.popSize,self.popSize + POPULATION.asize))
 
-    # compare all the individuals against each other and 
-    def fitness_all(self):
-
-        self.relFitness = np.zeros((self.popSize,self.popSize))
-
+        # distance to all the other individuals
         for i in range(0, self.popSize):
 
-            self.relFitness[i][i] = float('inf')
+            self.novelty[i][i] = float('inf')
 
             for j in range(i+1, self.popSize):
 
                 vec1 = self.p[i].head_trajectory
+
                 vec2 = self.p[j].head_trajectory
 
-                rows, cols= vec1.shape
+                dist = LA.norm(vec1-vec2)
 
-                for k in range(0, rows):
-                    self.relFitness[i][j] += distance.euclidean(vec1[k][:], vec2[k][:])
+                self.novelty[i][j] = self.novelty[j][i] = dist
 
-                self.relFitness[i][j] = self.relFitness[i][j] / float(rows)
+        # distance to all the individuals in archive
+        for i in range(0, self.popSize):
 
-                self.relFitness[j][i] = self.relFitness[i][j]
+            for j in range(0, POPULATION.asize):
 
+                vec1 = self.p[i].head_trajectory
 
+                vec2 = POPULATION.archive[j].head_trajectory
+
+                dist = LA.norm(vec1-vec2)
+
+                self.novelty[i][self.popSize+j] = dist
+
+            
     def Print(self):
 
         for i in self.p:
+
             self.p[i].Print()
         print
 
-    def Evaluate(self, pp, pb):
+    def Evaluate(self, pp, pb, brange=10, knn=5):
 
         for i in self.p:
-            self.p[i].Start_Evaluate(pp, pb)
+            self.p[i].Start_Evaluate(pp, pb, [1.0])
 
         for i in self.p:
             self.p[i].Get_Head_Trajectory()
         
-        # for i in self.p:
-        #     self.p[i].Compute_Fitness(self.whatToMaximize)
-        
-        self.fitness_all()
-
-        # print self.relFitness
+        self.Compute_Novelty_Matrix()
 
         for i in self.p:
-            self.p[i].fitness = min(self.relFitness[i])
+            #find the k nearest neighbors
+            idx = np.argpartition(self.novelty[i], knn)
+            self.p[i].fitness = np.average(self.novelty[i][idx[:knn]])
 
-            # print self.p[i].fitness
+    def Print_Archive(self):
 
-        # self.Print()
+        print "archive size: ", POPULATION.asize
+
+    def Unique(self, i):
+
+        for a in range(0, POPULATION.asize):
+
+            if ( POPULATION.archive[a].head_trajectory == self.p[i].head_trajectory).all():
+
+                return False
+
+        return True
+
+    def Update_Archive(self, threshold):
+
+        for i in self.p:
+
+            if self.p[i].fitness > threshold and self.Unique(i):
+
+                POPULATION.archive[POPULATION.asize] = deepcopy(self.p[i])
+
+                POPULATION.archive[POPULATION.asize].id = POPULATION.asize
+
+                POPULATION.asize = POPULATION.asize + 1
 
     def Mutate(self):
 
@@ -90,21 +117,9 @@ class POPULATION:
     def Store_All(self):
 
         for i in self.p:
-            self.p[i].Store()
+            self.p[i].Store_To_Diversity_Pool()
 
-    def FindFittest(self):
-
-        best = 0
-
-        for i in self.p:
-            if (self.p[i].fitness >= self.p[best].fitness ):
-                best = i
+    def Store_Archive(self):
         
-        self.p[best].Store()
-
-        self.p[best].Start_Evaluate(True, False)
-        
-        self.p[best].Compute_Fitness(self.whatToMaximize)
-
-        # print "bestOfAll: ", self.bestOfAll
-       
+        for i in POPULATION.archive:
+            POPULATION.archive[i].Store_To_Diversity_Pool()
