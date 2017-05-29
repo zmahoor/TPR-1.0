@@ -84,6 +84,24 @@ class PYROSIM:
 
         self.Send(outputString)
 
+    def Send_Synthetic_Sensor(self, ID, values, jointIndex = 0):
+
+        outputString = 'SyntheticSensor'
+
+        outputString = outputString + ' ' + str(ID)
+
+        outputString = outputString + ' ' + str(jointIndex)
+
+        for v in values:
+
+            outputString = outputString + ' ' + str(v)
+
+        outputString = outputString + '\n'
+
+        self.Send(outputString)
+
+        self.numSensors = self.numSensors + 1
+
     def Send_Cylinder(self, objectID=0, x=0, y=0, z=0, mass=1.0, r1=0, r2=0, r3=1, length=1.0, radius=0.1, r=1, g=1, b=1):
 
         outputString = 'Cylinder'

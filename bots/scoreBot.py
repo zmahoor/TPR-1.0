@@ -6,56 +6,57 @@ from termcolor import colored
 
 mydatabase = database.DATABASE();
 
+
 def main():
 
-    while True:
+    mydatabase.Update_Users_Score()
 
-        topn = 10
-        users = mydatabase.Fetch_Top_Users(topn)
+    mydatabase.Update_Commands_Score()
 
-        commands = mydatabase.Fetch_All_Commands(topn)
+    # while True:
 
-        if users == None: continue
+    #     topn = 10
+    #     users = mydatabase.Fetch_Top_Users(topn)
 
-        print colored(" ----------Leaderboard-----------", "green", attrs=['bold'])
+    #     commands = mydatabase.Fetch_Top_Commands(topn)
 
-        info = ("Rank" , "Useranme", "Score")
-        txt = '{0:<10} {1:<15} {2:>5}'.format(*info)
+    #     if users == None: continue
 
-        print colored("|"+ txt + " |", "green", attrs=['bold'])
-        print colored("|---------------------------------|", "green", attrs=['bold'])
+    #     print colored(" ----------Leaderboard-----------", "green", attrs=['bold'])
 
-        i = 1
-        for user in users:
-            user = (str(i), user['userName'], user['score'])
-            txt = '{0:<10} {1:<15} {2:>06.2f}'.format(*user)
-            print colored("|"+ txt + "|", 'green')
-            i += 1
-        print colored(" ---------------------------------", "green", attrs=['bold'])
+    #     info = ("Rank" , "Useranme", "Score")
+    #     txt = '{0:<10} {1:<15} {2:>5}'.format(*info)
 
-        print
+    #     print colored("|"+ txt + " |", "green", attrs=['bold'])
+    #     print colored("|---------------------------------|", "green", attrs=['bold'])
 
+    #     i = 1
+    #     for user in users:
+    #         user = (str(i), user['userName'], user['score'])
+    #         txt = '{0:<10} {1:<15} {2:>06.2f}'.format(*user)
+    #         print colored("|"+ txt + "|", 'green')
+    #         i += 1
+    #     print colored(" ---------------------------------", "green", attrs=['bold'])
 
-        print colored(" ----------Top Commands-----------", "blue", attrs=['bold'])
-
-        info = ("Rank" , "Command", "Number")
-        txt = '{0:<10} {1:<15} {2:>5}'.format(*info)
-
-        print colored("|"+ txt + "|", "blue", attrs=['bold'])
-        print colored("|---------------------------------|", "blue", attrs=['bold'])
-
-        i = 1
-        for cmd in commands:
-            cmd = (str(i), cmd['cmdTxt'], cmd['numIssued'])
-            txt = '{0:<10} {1:<15} {2:>6d}'.format(*cmd)
-            print colored("|"+ txt + "|", 'blue')
-            i += 1
-        print colored(" ---------------------------------", "blue", attrs=['bold'])
+    #     print
 
 
-        for user in users:
-            mydatabase.Update_Scores(user['userName'])
+    #     print colored(" ----------Top Commands-----------", "blue", attrs=['bold'])
+
+    #     info = ("Rank" , "Command", "Number")
+    #     txt = '{0:<10} {1:<15} {2:>5}'.format(*info)
+
+    #     print colored("|"+ txt + "|", "blue", attrs=['bold'])
+    #     print colored("|---------------------------------|", "blue", attrs=['bold'])
+
+    #     i = 1
+    #     for cmd in commands:
+    #         cmd = (str(i), cmd['cmdTxt'], cmd['totalLearnability'])
+    #         txt = '{0:<10} {1:<15} {2:>6d}'.format(*cmd)
+    #         print colored("|"+ txt + "|", 'blue')
+    #         i += 1
+    #     print colored(" ---------------------------------", "blue", attrs=['bold'])
     
-        sleep(30.0)
+    #     sleep(30.0)
 
 main()

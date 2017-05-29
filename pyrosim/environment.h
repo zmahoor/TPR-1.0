@@ -68,6 +68,8 @@ private:
 
 	void Create_Proprioceptive_Sensor(int evalPeriod);
 
+	void Create_Synthetic_Sensor(int evalPeriod);
+
 	void Create_Sensor_Neuron(void);
 
 	void Create_Synapse(void);

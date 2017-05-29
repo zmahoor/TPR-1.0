@@ -115,15 +115,15 @@ class NEURONS:
 
     #   self.sensorNeurons[s].Mutate()
 
-        def Mutate_Hidden_Neurons(self):
+    def Mutate_Hidden_Neurons(self):
 
-                h = random.randint(0,c.NUM_HIDDEN_NEURONS-1)
+        h = random.randint(0,c.NUM_HIDDEN_NEURONS-1)
 
-                self.hiddenNeurons[h].Mutate()
+        self.hiddenNeurons[h].Mutate()
 
-        def Mutate_Motor_Neurons(self):
+    def Mutate_Motor_Neurons(self):
 
-                m = random.randint(0,self.numMotorNeurons-1)
+        m = random.randint(0,self.numMotorNeurons-1)
 
-                self.motorNeurons[m].Mutate()
+        self.motorNeurons[m].Mutate()
 
