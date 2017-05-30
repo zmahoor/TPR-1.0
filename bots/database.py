@@ -426,7 +426,7 @@ class DATABASE:
     def Fetch_Alive_Robots(self, robotType):
         #find all the robots with the dead flag as zero --alive--
         sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
-        result = None
+        result = list()
         try:
             self.cursor.execute(sql)
             result = self.cursor.fetchall()
