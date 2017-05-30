@@ -20,9 +20,10 @@ class POPULATION:
         self.popSize = ps
 
         for i in range(0, self.popSize):
+
             self.p[i] = INDIVIDUAL(i, robotType) 
 
-    def Compute_Novelty_Matrix(self):
+    def Compute_External_Novelty(self):
 
         self.novelty = np.zeros((self.popSize,self.popSize + POPULATION.asize))
 
@@ -62,7 +63,7 @@ class POPULATION:
             self.p[i].Print()
         print
 
-    def Evaluate(self, pp, pb, brange=10, knn=5):
+    def Evaluate_External_Novelty(self, pp, pb, brange=10, knn=5):
 
         for i in self.p:
             self.p[i].Start_Evaluate(pp, pb, [1.0])
@@ -70,12 +71,47 @@ class POPULATION:
         for i in self.p:
             self.p[i].Get_Head_Trajectory()
         
-        self.Compute_Novelty_Matrix()
+        self.Compute_External_Novelty()
 
         for i in self.p:
             #find the k nearest neighbors
             idx = np.argpartition(self.novelty[i], knn)
             self.p[i].fitness = np.average(self.novelty[i][idx[:knn]])
+
+    def Evaluate_Internal_Novelty(self, pp, pb, brange=3, knn=5):
+
+        temp={}
+
+        for i in self.p: temp[i]=[]
+
+        for b in np.linspace(0, 1, brange):
+
+            for i in self.p:
+
+                self.p[i].Start_Evaluate(pp, pb, [b])
+
+            for i in self.p:
+
+                self.p[i].Get_Head_Trajectory()
+            
+            for i in self.p:
+
+                temp[i].append(self.p[i].head_trajectory)
+
+        for i in self.p:
+
+            novelty = np.zeros((brange, brange))
+
+            for j in range(0, brange):
+
+                novelty[j][j] = float('inf')
+
+                for k in range(j+1, brange):
+
+                    novelty[k][j] = novelty[j][k] = LA.norm(temp[i][j] - temp[i][k])
+
+            self.p[i].fitness = np.min(novelty)
+
 
     def Print_Archive(self):
 
@@ -123,3 +159,18 @@ class POPULATION:
         
         for i in POPULATION.archive:
             POPULATION.archive[i].Store_To_Diversity_Pool()
+
+    def Store_All_Above_Average(self):
+
+        avg = 0.0
+        for i in self.p:
+            avg += self.p[i].fitness
+
+        avg /= float(self.popSize)
+
+        print "average fitness: ", avg
+
+        for i in self.p:
+            if self.p[i].fitness >= avg:
+                self.p[i].Store_To_Diversity_Pool()
+

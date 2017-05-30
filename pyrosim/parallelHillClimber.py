@@ -8,10 +8,10 @@ import pickle
 from individual import INDIVIDUAL
 from robot import ROBOT
 from environment import ENVIRONMENT
-from population2 import POPULATION
+from population import POPULATION
 import constants as c
 
-robotType = '4'
+robotType = '1'
 
 archive_thresh = 2.0
 
@@ -21,7 +21,7 @@ brange = 10
 
 parents = POPULATION(c.popSize, robotType)
 
-parents.Evaluate(False, True)
+parents.Evaluate_Internal_Novelty(False, True)
 
 # parents.Update_Archive(archive_thresh)
 
@@ -31,7 +31,7 @@ for g in range(1, c.numGenerations):
 
     children.Mutate()
 
-    children.Evaluate(False, True, brange, knn)
+    children.Evaluate_Internal_Novelty(False, True, brange, knn)
 
     # print g, 
     # children.Print()

@@ -20,8 +20,8 @@ from settings import *
 colorIndex = 0
 morphologyIndex = 0
 
-SUB_POPULATION_SIZE = 20
-MORPHOLOGY_DURATION = 5 * 60
+SUB_POPULATION_SIZE = 5
+MORPHOLOGY_DURATION = 1 * 60
 INDIVIDUAL_DURATION = 30
 REWARD_WINDOW_W = 950
 REWARD_WINDOW_H = 280
@@ -33,7 +33,7 @@ mydatabase = DATABASE()
 
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H)
 
-currentCommand = {'cmdCount':0, 'cmdTxt':"roll"}
+currentCommand = {'cmdCount':0, 'cmdTxt':"walk backward very very fast"}
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -78,6 +78,8 @@ def Load_From_Diversity_Pool(robotType):
 
     brainPaths = list(glob.iglob(path))
 
+    if len(brainPaths) == 0: return None
+
     randomIndex = np.random.randint(low=0, high=len(brainPaths))
     if not os.path.isfile(brainPaths[randomIndex]): 
         return None
@@ -90,7 +92,7 @@ def Read_File(filePath):
         f = open(filePath,'r')
         individual = pickle.load(f)
         f.close
-        
+
         print "Successful loading ", filePath
         return individual
     except:
@@ -108,29 +110,33 @@ def Draw_Reinforcment_Window():
 
     myy = 10
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "y", x= 80, y=myy, color=currentColor)
-    window.Draw_Text(" if the current robot is obeying the command", x= 130, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 800, y=myy, color='brown')
+    window.Draw_Text("!"+ currentColor[0] + "y", x= 70, y=myy, color=currentColor)
+    window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
+        " robot is obeying the command", x= 110, y=myy)
+    window.Draw_Text("["+ cmdTxt +"].", x= 580, y=myy, color='brown')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y= myy)
-    window.Draw_Text("!"+ currentColor[0] + "n", x= 80, y=myy, color=currentColor)
-    window.Draw_Text(" if the current robot is NOT obeying the command", x= 130, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 800, y=myy, color='brown')
+    window.Draw_Text("!"+ currentColor[0] + "n", x= 70, y=myy, color=currentColor)
+    window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
+     " robot is [N]ot obeying the command", x= 110, y=myy)
+    window.Draw_Text("["+ cmdTxt +"].", x= 635, y=myy, color='brown')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "l", x= 80, y=myy, color=currentColor)
-    window.Draw_Text(" if you LIKE the current robot." , x= 130, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "l", x= 70, y=myy, color=currentColor)
+    window.Draw_Text(" if you [L]ike the ["+ currentColor[0].upper() + "]"+\
+        currentColor[1:]+ " robot." , x= 110, y=myy)
     
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "d", x= 80, y=myy, color=currentColor)
-    window.Draw_Text(" if you DISLIKE the current robot." , x= 130, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "d", x= 70, y=myy, color=currentColor)
+    window.Draw_Text(" if you [D]islike the ["+ currentColor[0].upper() + "]"+\
+     currentColor[1:]+ " robot." , x= 110, y=myy)
 
     myy += 60
-    window.Draw_Text("Need help: type", x= 700, y=myy) 
-    window.Draw_Text("?", x= 920, y=myy, color='brown')
+    window.Draw_Text("Need help? Type", x= 700, y=myy) 
+    window.Draw_Text("?", x= 880, y=myy, color='brown')
 
     window.Refresh()
 
