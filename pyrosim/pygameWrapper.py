@@ -10,7 +10,7 @@ class PYGAMEWRAPPER:
 
         self.screen = pygame.display.set_mode(size)
 
-        self.myfont = pygame.font.Font("Anonymous_Pro.ttf",26)
+        self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf",26)
 
     def Get_Color(self, color='black'):
 

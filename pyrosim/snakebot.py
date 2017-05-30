@@ -197,22 +197,15 @@ class ROBOT:
                 sim.Send_Synapse(sourceNeuronID = sn , targetNeuronID 
                     =mn+self.num_in_neurons, weight= self.genome[sn][mn])
 
-    def L2_Norm(self, mylist):
-        n =0.0
-        for i in range(len(mylist)):
-            n += mylist[i]**2 
-
-        return(n**0.5)
-
     def Send_Eyes(self, sim, midpoint, distance, axis1=[1,0,0], axis2=[0,0,-1], 
         eye_radius=0.02):
         
         if distance < eye_radius/2.0:
             distance = eye_radius/2.0
 
-        axis1 = [axis1[i] / self.L2_Norm(axis1) for i in range(len(axis1))]
+        axis1 = [axis1[i] / np.linalg.norm(axis1) for i in range(len(axis1))]
 
-        axis2 = [axis2[i] / self.L2_Norm(axis2) for i in range(len(axis2))]
+        axis2 = [axis2[i] / np.linalg.norm(axis1)(axis2) for i in range(len(axis2))]
 
         # print axis1, axis2
 
