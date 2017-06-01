@@ -26,18 +26,23 @@ class OBJECT:
 
         if self.ID == 0: 
 
-            self.positionSensor = POSITION_SENSOR(sensorID = sensorsCreated[0] , objectIndex = self.ID)
+            sensorInd = len(sensorsCreated)
 
-            sensorsCreated[0] = sensorsCreated[0] + 1
+            self.positionSensor = POSITION_SENSOR(sensorID = sensorInd , objectIndex = self.ID)
 
+            sensorsCreated[sensorInd] = c.POS_SENSOR
 
-        self.touchSensor = TOUCH_SENSOR( sensorID = sensorsCreated[0] , objectIndex = self.ID)
+        sensorInd = len(sensorsCreated)
 
-        sensorsCreated[0] = sensorsCreated[0] + 1
+        self.touchSensor = TOUCH_SENSOR( sensorID = sensorInd , objectIndex = self.ID)
 
-        # self.lightSensor = LIGHT_SENSOR( sensorID = sensorsCreated[0] , objectIndex = self.ID)
+        sensorsCreated[sensorInd] = c.TOC_SENSOR
 
-        # sensorsCreated[0] = sensorsCreated[0] + 1
+        # sensorInd = len(sensorsCreated)
+
+        # self.lightSensor = LIGHT_SENSOR( sensorID = sensorInd , objectIndex = self.ID)
+
+        # sensorsCreated[sensorID] = c.LIT_SENSOR
 
 
     def Store_Sensors(self, raw_sensors):

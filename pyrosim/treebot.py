@@ -18,7 +18,7 @@ class ROBOT:
 
         self.brain = BRAIN( self.body.numSensors, self.body.numJoints, biasValues)
 
-        # print self.body.numSensors, self.body.numJoints
+        print self.body.numSensors, self.body.numJoints, self.body.sensorsCreated
 
     def Evaluate(self,simulator,whatToMaximize):
 
@@ -64,10 +64,6 @@ class ROBOT:
 
     def Send_To_Simulator(self,simulator,color, biasValues):
 
-        midpoint = [self.body.root.x, self.body.root.y-c.headRadius, self.body.root.z]
-
         self.body.Send_To_Simulator(simulator,color)
-
-        self.body.Make_Eyes(simulator, midpoint, 0.015, [1,0,0], [0,-1,0], 0.015)
 
         self.brain.Send_To_Simulator(simulator, biasValues)

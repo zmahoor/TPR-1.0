@@ -24,9 +24,11 @@ class JOINT:
 
     def Add_Sensors(self,sensorsCreated):
 
-        self.propSensor = PROPRIOCEPTIVE_SENSOR( sensorID = sensorsCreated[0] , jointIndex = self.ID)
+        sensorInd = len(sensorsCreated)
 
-        sensorsCreated[0] = sensorsCreated[0] + 1
+        self.propSensor = PROPRIOCEPTIVE_SENSOR( sensorID = sensorInd , jointIndex = self.ID)
+
+        sensorsCreated[sensorInd] = c.TOC_SENSOR
 
     def Store_Sensors(self, raw_sensors):
 

@@ -15,7 +15,7 @@ MYSQL_PASS = 'twitchplaysrobotics2138'
 #simulator info
 #colors that python package termcolor support
 validColors = ['red', 'green', 'blue', 'orange', 'cyan', 'purple']
-filteredUsers = ["tpr_bot2", "tpr_bot1","tpr_bot3", "tpr_bot"]
+filteredUsers = ["tpr_bot2", "tpr_bot1", "tpr_bot3", "tpr_bot"]
 validRobots = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot', 'spherebot', 'snakebot', 'crabbot']
 
 maxCommandLength = 50

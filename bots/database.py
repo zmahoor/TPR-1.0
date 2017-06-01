@@ -96,7 +96,7 @@ class DATABASE:
             self.cursor.execute(sql)
             self.connection.commit()
         except:
-            print("could not insert the reinforcement")
+            print("could not insert the reward")
             self.connection.rollback()
 
     def Add_To_RewardLog(self, username, color, reward, time):
@@ -570,5 +570,29 @@ class DATABASE:
         #     return({'cmdCount':0, 'cmdTxt':"stay still"})
         
         return result
+
+
+    def Set_Current_Command(self, currentCommand, prevCommand):
+
+        sql= """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';"""%(currentCommand)
+
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+
+        except:
+            self.connection.rollback()
+            print("unable to set the current command")
+
+        sql= """UPDATE unique_commands set active=0 WHERE cmdTxt='%s';"""%(prevCommand)
+
+        try:
+            self.cursor.execute(sql)
+            self.connection.commit()
+
+        except:
+            self.connection.rollback()
+            print("unable to unset the previous command")
+
 
 
