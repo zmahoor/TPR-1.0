@@ -8,7 +8,7 @@ headRadius = 2 * R
 
 eyeRadius = 0.015
 
-popSize = 30
+popSize = 5
 
 numEnvs = 2
 
@@ -46,7 +46,7 @@ maximizeTouch = 'touch'
 
 # ------------- Other parameters -------------------
 
-evaluationTime = 1800
+evaluationTime = 600
 
 # maxDepth = 2
 
@@ -56,7 +56,7 @@ length = 0.5 / 4.0
 
 radius = 0.05 / 4.0
 
-numGenerations = 30
+numGenerations = 10
 
 # ------------------ Robot parameters --------------
 
@@ -73,6 +73,12 @@ HIDDEN_NEURON = 1
 MOTOR_NEURON = 2
 
 BIAS_NEURON = 3
+
+POS_SENSOR = 4
+PRO_SENSOR = 5
+RAY_SENSOR = 6
+TOC_SENSOR = 7
+LIT_SENSOR = 8
 
 NUM_HIDDEN_NEURONS = 3
 

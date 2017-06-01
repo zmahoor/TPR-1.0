@@ -1,6 +1,7 @@
 from node import NODE
 from object import OBJECT
 from joint import JOINT
+from eyes import EYES
 import constants as c
 import copy
 import numpy as np
@@ -37,11 +38,7 @@ class BODY:
 
         if(whatToMaximize == c.maximizeMovementAndHeight):
 
-            return -(self.Sum_Joint_Diff() * self.Head_Z_Position())
-
-        if(whatToMaximize == c.maximizeDistanceAndHeight):
-
-            return -(self.Head_X_Position() * self.Head_Z_Position())
+            return -(self.Sum_Joint_Diff()*self.Head_Z_Position())
 
         if(whatToMaximize == c.maximizeHeight):
 
@@ -50,10 +47,6 @@ class BODY:
         if(whatToMaximize == c.maximizeDistance):
 
             return -self.Head_X_Position()
-
-        if(whatToMaximize == c.maximizeTouch):
-
-            return self.Sum_Touch()
 
         else:
             print 'unknown fitness function ' + whatToMaximize
@@ -84,7 +77,6 @@ class BODY:
 
     def Reset(self):
 
-
         self.Create_Mirror_Image()
 
         self.Assign_IDs()
@@ -99,15 +91,43 @@ class BODY:
 
         self.Move_Up()
 
+        self.Add_Eyes()
+
+    def Add_Eyes(self):
+
+        jointsCreated  = {}
+        objectsCreated = {}
+
+        jointsCreated[0] = self.numJoints
+        objectsCreated[0]= self.numObjects
+
+        midpoint = [self.root.x, self.root.y-c.headRadius, self.root.z]
+
+        self.eyes = EYES(self.head_ID, midpoint, 0.015, [1,0,0], [0,-1,0], 0.015)
+
+        self.eyes.Create_Eyes(jointsCreated, objectsCreated)
+
+        self.eyes.Add_Sensors(self.sensorsCreated)
+
+        # print jointsCreated, objectsCreated, sensorsCreated
+
+        self.numSensors = len(self.sensorsCreated)
+
+        self.numJoints  = jointsCreated[0]
+        self.numObjects = objectsCreated[0]
+
     def Store_Sensors(self, raw_sensors):
 
         self.root.Store_Sensors(raw_sensors)
+        self.eyes.Store_Sensors(raw_sensors)
 
     def Send_To_Simulator(self,simulator,color):
 
         self.root.Send_Objects_To_Simulator(simulator, color)
 
         self.root.Send_Joints_To_Simulator(simulator)
+
+        self.eyes.Send_Eyes_To_Simulator(simulator)
 
     def Sum_Light(self):
 
@@ -126,22 +146,6 @@ class BODY:
         print "sumLight: ", sumOfLight
 
         return sumOfLight
-
-    def Sum_Touch(self):
-
-        return self.root.Sum_Touch()
-
-        if ( self.touchSensor ):
-
-            sumOfTouch = self.touchSensor.Get_Mean_Value()
-
-        for c in range(0,self.numChildren):
-
-            sumOfTouch = sumOfTouch + self.children[c].Sum_Touch()
-
-        print "sumTouch: ", sumOfTouch
-
-        return sumOfTouch
 
     def Head_Z_Position(self):
 
@@ -205,13 +209,11 @@ class BODY:
 
     def Add_Sensors(self):
 
-        sensorsCreated = {}
+        self.sensorsCreated = {}
 
-        sensorsCreated[0] = 0
+        self.root.Add_Sensors(self.sensorsCreated)
 
-        self.root.Add_Sensors(sensorsCreated)
-
-        self.numSensors = sensorsCreated[0]
+        self.numSensors = len(self.sensorsCreated)
 
     def Assign_IDs(self):
 
@@ -258,116 +260,3 @@ class BODY:
         self.root.children[0].joint.r = self.root.children[1]
 
         self.root.children[1].joint.r = self.root.children[0]
-
-    def L2_Norm(self, mylist):
-        n =0.0
-        for i in range(len(mylist)):
-            n += mylist[i]**2 
-
-        return(n**0.5)
-
-    def Make_Eyes(self, sim, midpoint, distance, axis1=[1,0,0], axis2=[0,0,-1], 
-        eye_radius=0.02):
-
-        joint_ID = self.numJoints
-
-        object_ID = self.numObjects
-        
-        if distance < eye_radius/2.0:
-            distance = eye_radius/2.0
-
-        axis1 = [axis1[i] / self.L2_Norm(axis1) for i in range(len(axis1))]
-
-        axis2 = [axis2[i] / self.L2_Norm(axis2) for i in range(len(axis2))]
-
-        # print axis1, axis2
-
-        lefEye    =[axis1[i]* -distance + midpoint[i] for i in range(len(axis1))]
-
-        rightEye  =[axis1[i]* distance + midpoint[i] for i in range(len(axis1))]
-
-        leftPupil =[axis2[i]* eye_radius/1.5 + axis1[i]* -distance + midpoint[i] for i in range(0, len(axis1))]
-
-        rightPupil=[axis2[i]* eye_radius/1.5 + axis1[i]* distance + midpoint[i] for i in range(0, len(axis1))]
-
-        sim.Send_Sphere(objectID = object_ID, 
-            x= lefEye[0], y= lefEye[1], z= lefEye[2], 
-            mass=0.05, radius = eye_radius, r=1, g=1, b=1)
-
-        # print object_ID
-
-        object_ID += 1
-
-        sim.Send_Sphere(objectID = object_ID, 
-            x= rightEye[0], y= rightEye[1], z= rightEye[2], 
-            mass=0.05, radius = eye_radius, r=1, g=1, b=1)
-
-        # print object_ID
-
-        object_ID += 1
-
-        sim.Send_Sphere(objectID = object_ID, 
-            x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
-            mass=0.05, radius = eye_radius/1.5, r=0, g=0, b=0)
-
-        # sim.Send_Ray_Sensor(sensorID= self.numSensors, objectID=object_ID, 
-        #     x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], r1=0,r2=-1,r3=0)
-
-        object_ID += 1
-
-        # self.numSensors += 1
-
-        sim.Send_Sphere(objectID = object_ID, 
-            x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
-            mass=0.05, radius = eye_radius/1.5, r=0, g=0, b=0)
-
-        # sim.Send_Ray_Sensor(sensorID= self.numSensors, objectID=object_ID, 
-        #     x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], r1=0,r2=-1,r3=0)
- 
-        # self.numSensors += 1
-
-        # print self.numSensors
-
-        ###########################JOINTS#######################################
-
-        sim.Send_Joint(jointID = joint_ID, firstObjectID = self.head_ID,
-        secondObjectID = object_ID-3,
-        n1 =1, n2 =0, n3 =0, 
-        x= lefEye[0], y= lefEye[1], z= lefEye[2],
-        lo=0, hi=0)
-
-        # print joint_ID, object_ID-4, object_ID-3
-
-        joint_ID += 1
-
-        sim.Send_Joint(jointID = joint_ID, firstObjectID = self.head_ID,
-        secondObjectID = object_ID-2,
-        n1 =1, n2 =0, n3 =0, 
-        x= rightEye[0], y= rightEye[1], z= rightEye[2], 
-        lo=0, hi=0)
-        
-        # print joint_ID, object_ID-4, object_ID-2
-
-        joint_ID += 1
-
-        sim.Send_Joint(jointID = joint_ID, firstObjectID = object_ID-3, 
-        secondObjectID = object_ID-1,
-        n1 =1, n2 =0, n3 =0, 
-        x= leftPupil[0], y= leftPupil[1], z= leftPupil[2], 
-        lo=0 , hi=0)
-
-        # print joint_ID, object_ID-3, object_ID-1
-
-        joint_ID += 1
-
-        sim.Send_Joint(jointID = joint_ID, firstObjectID = object_ID-2 , 
-        secondObjectID = object_ID,
-        n1 =1, n2 =0, n3 =0, 
-        x= rightPupil[0], y= rightPupil[1], z= rightPupil[2], 
-        lo=0 , hi=0)
-
-        # print joint_ID, object_ID-2, object_ID
-
-
-
-
