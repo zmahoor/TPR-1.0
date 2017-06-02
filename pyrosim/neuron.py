@@ -4,11 +4,15 @@ import math
 
 class NEURON:
 
-    def __init__(self,type,ID):
+    def __init__(self,type,ID,sensorID=0,valueIndex=0):
 
         self.type = type
 
         self.ID = ID
+
+        self.sensorID = sensorID
+
+        self.valueIndex = valueIndex
 
         self.tau = random.random() * 2  * c.TAU_MAX - c.TAU_MAX
 
@@ -36,9 +40,10 @@ class NEURON:
 
         simulator.Send_Bias_Neuron(neuronID = self.ID, biasValue=value)
 
-    def Send_Sensor_Neuron_To_Simulator(self,simulator,sensorID):
+    def Send_Sensor_Neuron_To_Simulator(self,simulator):
 
-        simulator.Send_Sensor_Neuron(neuronID=self.ID, sensorID=sensorID, sensorValueIndex=0, tau=self.tau )
+        simulator.Send_Sensor_Neuron(neuronID=self.ID, sensorID=self.sensorID, 
+            sensorValueIndex=self.valueIndex, tau=self.tau )
 
     def Send_Hidden_Neuron_To_Simulator(self,simulator):
 

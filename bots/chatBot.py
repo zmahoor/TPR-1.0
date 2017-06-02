@@ -22,7 +22,7 @@ running = True
 while running:
 
     newMessages = t.recieve_messages(amount = 1024)
-    print("mess: ", newMessages)
+    # print("mess: ", newMessages)
 
     if newMessages:
 
@@ -39,7 +39,7 @@ while running:
                 currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
                 if(username not in filteredUsers):
-                    mydatabase.Insert_Chat(username, currentTime, msg)
+                    mydatabase.Add_To_Chat_Table(username, currentTime, msg)
 
             except:
                 print("msg error")

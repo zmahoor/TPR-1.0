@@ -370,7 +370,6 @@ class PYROSIM:
 
                         return
 
-
         while ( dataFromSimulator[index] != 'Done' ):
 
             ID = int( dataFromSimulator[index] )

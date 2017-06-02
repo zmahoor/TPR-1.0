@@ -191,7 +191,7 @@ def Dominance(individual1, individual2):
 
 def Add_New_Robot(newIndividual):
 
-    robotID = mydatabase.Add_Robot(robotType)
+    robotID = mydatabase.Add_To_Robot_Table(robotType)
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual)
 
@@ -235,13 +235,15 @@ def Morphology_Cycle(morphologyTimer):
 
         currentTime = datetime.datetime.now()
 
-        popularCommand = mydatabase.Fetch_Popular_Command()
+        popularCommand = mydatabase.Find_Most_Popular_Command()
         currentCommand = popularCommand if popularCommand != None else currentCommand
 
-        mydatabase.Add_Command_To_Display(aliveIndividuals[index]['robotID'],
+        mydatabase.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
             currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-        print "Displaying controller ", randomIndividual.id, " of type ", robotType
+        print "Displaying controller ", randomIndividual.id, " of type ", robotType, " with color",
+        currentColor
+        
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, [1.0])
 
