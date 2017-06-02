@@ -11,7 +11,7 @@ from environment import ENVIRONMENT
 from population import POPULATION
 import constants as c
 
-robotType = '4'
+robotType      = 'spherebot'
 
 archive_thresh = 2.0
 
@@ -21,7 +21,9 @@ brange = 10
 
 parents = POPULATION(c.popSize, robotType)
 
-parents.Evaluate_Internal_Novelty(False, True)
+parents.Evaluate_Internal_Novelty(False, True, brange, knn)
+
+# parents.Evaluate_External_Novelty(False, True, brange, knn)
 
 # parents.Update_Archive(archive_thresh)
 
@@ -33,12 +35,14 @@ for g in range(1, c.numGenerations):
 
     children.Evaluate_Internal_Novelty(False, True, brange, knn)
 
+    # children.Evaluate_External_Novelty(False, True, brange, knn)
+
     # print g, 
     # children.Print()
 
     parents.ReplaceWith(children)
 
-    # parents.Evaluate(False, True, knn)
+    # parents.Evaluate_External_Novelty(False, True, brange, knn)
 
     # parents.Update_Archive(archive_thresh)
 

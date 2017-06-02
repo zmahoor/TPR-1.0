@@ -5,6 +5,7 @@ import constants as c
 import math
 import random
 from eyes import EYES 
+from brain import BRAIN
 
 class ROBOT:
 
@@ -12,19 +13,28 @@ class ROBOT:
 
         self.command_vector = commandVector
 
-        self.num_joints = 0
+        self.Initialize_Body()
 
-        self.num_objects = 0
+        self.brain = BRAIN(self.num_sensors, self.num_motor_neurons,
+            self.sensorsCreated, self.command_vector)
 
-        self.num_sensors = 0
+    def Initialize_Body(self):
 
-        self.head_ID = 0
-
+        self.num_joints     = 0
+        self.num_objects    = 0
+        self.head_ID        = 0
+        self.num_sensors    = 0
         self.num_in_neurons = 0
+        self.num_motor_neurons = 2
+        self.sensorsCreated = {}
 
-        self.num_motor_neurons = 0
+        self.Add_Sensors()
 
-        self.genome = np.random.rand(11, 2) * 2 - 1
+        print self.num_sensors, self.num_motor_neurons, self.sensorsCreated, self.command_vector
+    
+    def Mutate(self):
+
+        self.brain.Mutate()
 
     def Evaluate(self,sim,whatToMaximize):
 
@@ -34,25 +44,7 @@ class ROBOT:
 
             return self.raw_sensors['P'+str(self.head_ID)+'_X'][-1] 
 
-    def Mutate(self):
-
-        self.genomeSahpe = self.genome.shape
-
-        geneToMutate = np.random.randint(self.genomeSahpe[0] * self.genomeSahpe[1])
-
-        ind1 = geneToMutate / self.genomeSahpe[1]
-        ind2 = geneToMutate % self.genomeSahpe[1]
-
-        self.genome[ind1][ind2] = random.gauss( self.genome[ind1][ind2] ,
-             math.fabs(self.genome[ind1][ind2]) )
-
-        if self.genome[ind1][ind2] > 1.0:
-            self.genome[ind1][ind2] = 1
-
-        if self.genome[ind1][ind2] < -1.0:
-            self.genome[ind1][ind2] = -1
-
-    def Send_To_Simulator(self, sim, color, biasValue):
+    def Send_To_Simulator(self, sim, color, biasValues):
 
         jointsCreated  = {}
         objectsCreated = {}
@@ -75,9 +67,7 @@ class ROBOT:
 
         self.Send_Sensors(sim)
 
-        self.Send_Neurons(sim, biasValue[0])
-
-        self.Send_Synapses(sim)
+        self.brain.Send_To_Simulator(sim,biasValues)
 
     def Send_Objects(self, sim, color):
 
@@ -85,13 +75,11 @@ class ROBOT:
         # Green Box
         sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.R, length=c.L,
          width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
-
         self.num_objects += 1
 
         # Purple Box
         sim.Send_Box(objectID = self.num_objects , x=0, y=2*c.L, z=c.R,length=c.L,
          width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
-
         self.num_objects += 1
 
         # Red Box
@@ -113,121 +101,67 @@ class ROBOT:
          n1 =1, n2 =0, n3 =0, x=0, y=c.L, z=c.R, lo=-c.PI/2 , hi=c.PI/2)
         self.num_joints += 1
 
-    def Send_Sensors(self, sim):
+    def Add_Sensors(self):
 
+        self.sensorsCreated = {}
         self.num_sensors = 0
 
-        sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 0)
+        for s in range(0, 3):
+            self.sensorsCreated[self.num_sensors]=c.TOC_SENSOR
+            self.num_sensors += 1
+
+        for s in range(0, 2):
+            self.sensorsCreated[self.num_sensors]=c.PRO_SENSOR
+            self.num_sensors += 1
+
+        self.sensorsCreated[self.num_sensors]=c.RAY_SENSOR
         self.num_sensors += 1
 
-        sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 1)
-        self.num_sensors += 1
-        
-        sim.Send_Touch_Sensor(sensorID = self.num_sensors, objectID = 2)
+        self.sensorsCreated[self.num_sensors]=c.RAY_SENSOR
         self.num_sensors += 1
 
-        sim.Send_Proprioceptive_Sensor(sensorID = self.num_sensors, jointID = 0)
+        self.sensorsCreated[self.num_sensors]=c.POS_SENSOR
         self.num_sensors += 1
 
-        sim.Send_Proprioceptive_Sensor(sensorID = self.num_sensors, jointID = 1)
-        self.num_sensors += 1
+    def Send_Sensors(self, sim):
 
-        sim.Send_Ray_Sensor(sensorID=self.num_sensors, objectID=self.num_objects-1
+        sim.Send_Touch_Sensor(sensorID = 0, objectID = 0)
+        sim.Send_Touch_Sensor(sensorID = 1, objectID = 1)
+        sim.Send_Touch_Sensor(sensorID = 2, objectID = 2)
+
+        sim.Send_Proprioceptive_Sensor(sensorID = 3, jointID = 0)
+        sim.Send_Proprioceptive_Sensor(sensorID = 4, jointID = 1)
+
+        sim.Send_Ray_Sensor(sensorID=5, objectID=self.num_objects-2
             , x=self.eyes.leftPupil[0], y=self.eyes.leftPupil[1], 
             z=self.eyes.leftPupil[2], r1=0, r2=-1, r3=0)
-        self.num_sensors += 1
 
-        sim.Send_Ray_Sensor(sensorID=self.num_sensors, objectID=self.num_objects-2
+        sim.Send_Ray_Sensor(sensorID=6, objectID=self.num_objects-1
             , x=self.eyes.rightPupil[0], y=self.eyes.rightPupil[1],
              z=self.eyes.rightPupil[2], r1=0, r2=-1, r3=0)
 
-        sim.Send_Position_Sensor(sensorID = self.num_sensors, objectID = 1)
-        self.num_sensors += 1
-
+        sim.Send_Position_Sensor(sensorID =7, objectID = self.head_ID)
 
     def Get_Raw_Sensors(self, sim):
 
         self.raw_sensors = {}
 
         self.raw_sensors['T0'] = copy.deepcopy(sim.Get_Sensor_Data(0, 0))
-
         self.raw_sensors['T1'] = copy.deepcopy(sim.Get_Sensor_Data(1, 0))
-
         self.raw_sensors['T2'] = copy.deepcopy(sim.Get_Sensor_Data(2, 0))
 
         self.raw_sensors['P0'] = copy.deepcopy(sim.Get_Sensor_Data(3, 0))
-
         self.raw_sensors['P1'] = copy.deepcopy(sim.Get_Sensor_Data(4, 0))
 
         self.raw_sensors['R0'] = copy.deepcopy(sim.Get_Sensor_Data(5, 0))
 
-        self.raw_sensors['R1'] = copy.deepcopy(sim.Get_Sensor_Data(6, 0))
-
         self.raw_sensors['P'+str(self.head_ID)+'_X'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 0))
-
         self.raw_sensors['P'+str(self.head_ID)+'_Y'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 1))
-
         self.raw_sensors['P'+str(self.head_ID)+'_Z'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 2))
 
     def Get_Head_Trajectory(self, sim):
 
         self.values = []
-
         for ind in range(0, 3):
-
             self.values.append(copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, ind)))
-
         return self.values
-
-    def Send_Neurons(self, sim, bValue):
-
-        self.num_in_neurons = 0
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=0)
-        self.num_in_neurons += 1
-        
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=1)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=2)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=3)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=4)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=5)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=6)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=self.num_sensors-1,
-         sensorValueIndex = 0)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=self.num_sensors-1,
-         sensorValueIndex = 1)
-        self.num_in_neurons += 1
-
-        sim.Send_Sensor_Neuron(neuronID=self.num_in_neurons, sensorID=self.num_sensors-1,
-         sensorValueIndex = 2)
-        self.num_in_neurons += 1
-
-        sim.Send_Bias_Neuron(neuronID=self.num_in_neurons, biasValue=bValue)
-        self.num_in_neurons += 1
-
-        self.num_motor_neurons = self.num_joints - 4
-
-        for mn in range(0, self.num_motor_neurons):
-            sim.Send_Motor_Neuron(neuronID=mn+self.num_in_neurons, jointID=mn, tau=0.5)
-
-    def Send_Synapses(self, sim):
-
-        for sn in range(0, self.num_in_neurons):
-            for mn in range(0, self.num_motor_neurons):
-                
-                sim.Send_Synapse(sourceNeuronID = sn , targetNeuronID 
-                    =mn+self.num_in_neurons, weight= self.genome[sn][mn])

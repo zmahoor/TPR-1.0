@@ -56,7 +56,7 @@ length = 0.5 / 4.0
 
 radius = 0.05 / 4.0
 
-numGenerations = 10
+numGenerations = 50
 
 # ------------------ Robot parameters --------------
 
@@ -80,6 +80,6 @@ RAY_SENSOR = 6
 TOC_SENSOR = 7
 LIT_SENSOR = 8
 
-NUM_HIDDEN_NEURONS = 3
+NUM_HIDDEN_NEURONS = 5
 
 TAU_MAX = 1.0

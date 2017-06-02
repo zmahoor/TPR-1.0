@@ -4,7 +4,7 @@ import random
 
 class NEURONS: 
 
-    def __init__(self,numSensorNeurons,numMotorNeurons, biasValues):
+    def __init__(self,numSensorNeurons,numMotorNeurons, sensorsList, biasValues):
 
         self.numSensorNeurons = numSensorNeurons
 
@@ -12,7 +12,7 @@ class NEURONS:
 
         self.numBiasNeurons = len(biasValues)
 
-        # self.biasValues = biasValues
+        self.sensorsList = sensorsList
 
         self.Create_Bias_Neurons()
 
@@ -62,7 +62,7 @@ class NEURONS:
 
         for s in range(0,self.numSensorNeurons):
 
-            self.sensorNeurons[s].Send_Sensor_Neuron_To_Simulator(simulator,s)
+            self.sensorNeurons[s].Send_Sensor_Neuron_To_Simulator(simulator)
 
         for h in range(0,c.NUM_HIDDEN_NEURONS):
 
@@ -85,11 +85,36 @@ class NEURONS:
 
     def Create_Sensor_Neurons(self):
 
+        rayAdded = False
+
         self.sensorNeurons = {}
 
+        ind=0
         for s in range(0,self.numSensorNeurons):
 
-            self.sensorNeurons[s] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons + s)
+            if(self.sensorsList[s] == c.POS_SENSOR):
+
+                self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s,0)
+                ind += 1
+                self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s,1)
+                ind += 1
+                self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s,2)
+
+            elif(self.sensorsList[s] == c.PRO_SENSOR or self.sensorsList[s] == c.TOC_SENSOR 
+                or self.sensorsList[s] == c.LIT_SENSOR):
+                self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s)
+                ind += 1
+
+            # elif(self.sensorsList[s] == c.RAY_SENSOR and not rayAdded):
+            #     rayAdded = True
+            #     self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s)
+            #     ind += 1
+
+        self.numSensorNeurons = len(self.sensorNeurons)
+
+        # for s in self.sensorNeurons:
+
+        #     print self.sensorNeurons[s].ID, self.sensorNeurons[s].sensorID, self.sensorNeurons[s].valueIndex
 
     def Create_Hidden_Neurons(self):
 
@@ -109,6 +134,7 @@ class NEURONS:
             self.motorNeurons[m] = NEURON(c.MOTOR_NEURON, 
                 self.numBiasNeurons+ self.numSensorNeurons + c.NUM_HIDDEN_NEURONS + m)
 
+        # print len(self.motorNeurons)
     # def Mutate_Sensor_Neurons(self):
 
     #   s = random.randint(0,self.numSensorNeurons-1)

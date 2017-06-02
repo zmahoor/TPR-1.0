@@ -16,21 +16,17 @@ import constants as c
 
 color = np.random.random(3)
 
-biasValues = [1.0, -1.0]
-# genome = np.random.random(genomeSahpe) * 2 - 1
-# genome = np.full(genomeSahpe, 1.0)
-
 sim = PYROSIM(playPaused= True, playBlind=False, evalTime=200)
 
-robot = CB([1.0])
+# robot = CB([1.0])
 # robot = QB([1.0])
 # robot = SHB([1.0])
-# robot = TB(1, biasValues)
-# robot = SPB(1.0)
-# robot = SFB(1.0)
+# robot = TB(2, [1.0])
+robot = SPB([1.0])
+# robot = SFB([1.0])
 # robot = SNB([1.0])
 # robot.Send_To_Simulator(sim, color, 1.0)
-robot.Send_To_Simulator(sim, color, biasValues)
+robot.Send_To_Simulator(sim, color, [1.0])
 
 # environment = ENVIRONMENT()
 # print "parts: ", robot.Num_Body_Parts()

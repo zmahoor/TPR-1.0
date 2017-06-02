@@ -36,27 +36,27 @@ class INDIVIDUAL:
 
         elif robotType == 'snakebot':
 
-            self.robot = SNB(1.0)
+            self.robot = SNB([1.0])
 
         elif robotType == 'quadruped':
 
-            self.robot = QB(1.0)
+            self.robot = QB([1.0])
 
         elif robotType == 'shinbot':
 
-            self.robot = SHB(1.0)
+            self.robot = SHB([1.0])
 
         elif robotType == 'starfishbot':
 
-            self.robot = SFB(1.0)
+            self.robot = SFB([1.0])
 
         elif robotType == 'spherebot':
 
-            self.robot = SPB(1.0)
+            self.robot = SPB([1.0])
 
         elif robotType == 'crabbot':
 
-            self.robot = CB(1.0)
+            self.robot = CB([1.0])
 
         else: 
             print "robot not known"

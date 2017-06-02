@@ -47,7 +47,7 @@ mydatabase = database.DATABASE();
 
 while(True):
 
-    newRow = mydatabase.Fetch_New_Chat()
+    newRow = mydatabase.Fetch_An_Unprocessed_Chat()
 
     # print("newRow: ", newRow)
 
@@ -58,34 +58,34 @@ while(True):
     message = newRow['txt']
 
     # check the user table and if the user is new then insert it
-    mydatabase.Add_User(user, timeArrival)
+    mydatabase.Add_To_User_Table(user, timeArrival)
 
     #message begins with '?' send message to helpbot to chat to user
     if (message[0] == '?'):
 
-        mydatabase.Add_To_Help(user, message, timeArrival)
+        mydatabase.Add_To_Help_Table(user, message, timeArrival)
 
-        print(message, " help requested")
+        print(message, " help requested.")
     
     #set the username after @ as the parent of this user
     elif (message[0] == '#'):
 
-        # print(message, " set parent")
+        print(message, " set parent.")
 
         parent = getParentInfo(message)
 
-        mydatabase.Add_User_Parent(user, parent)
+        mydatabase.Update_User_Parent(user, parent)
 
     #Or reinforcement then move to reinforcements table
     elif isRewardSignal(message):
 
-        # print(message, "reward signal")
+        print(message, " reward entered.")
 
         color, reward = parseReward(message)
 
-        mydatabase.Add_To_RewardLog(user, color, reward, timeArrival)
+        mydatabase.Add_To_RewardLog_Table(user, color, reward, timeArrival)
 
-        mydatabase.Add_Reward_To_Display(color, reward, timeArrival)
+        mydatabase.Add_Reward_To_Display_Table(color, reward, timeArrival)
 
         mydatabase.Update_Total_Fitness(color, reward, timeArrival)
 
@@ -94,13 +94,17 @@ while(True):
     #Either command then move to commands table
     elif isCommand(message):
 
-        # print(message, "command")
+        print(message, " command entered")
 
         command = parseCommand(message)
 
-        mydatabase.Add_To_CommandLog(user, command, timeArrival)
+        mydatabase.Add_To_CommandLog_Table(user, command, timeArrival)
 
-        mydatabase.Add_Command(command, timeArrival)
+        randIndex = mydatabase.Get_New_WordIndex()
+
+        # print command, timeArrival, randIndex
+
+        mydatabase.Add_To_Unique_Commands_Table(command, timeArrival, randIndex)
 
     else:
         #if does not start with ? or !, it is raw chat

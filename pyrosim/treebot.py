@@ -16,9 +16,11 @@ class ROBOT:
 
         self.body = BODY(int(maxDepth))
 
-        self.brain = BRAIN( self.body.numSensors, self.body.numJoints, biasValues)
+        self.brain = BRAIN( self.body.numSensors, 
+            self.body.numJoints-4 if self.body.eyes else self.body.numJoints,
+         self.body.sensorsCreated, biasValues)
 
-        print self.body.numSensors, self.body.numJoints, self.body.sensorsCreated
+        # print self.body.numSensors, self.body.numJoints, self.body.sensorsCreated
 
     def Evaluate(self,simulator,whatToMaximize):
 
@@ -62,8 +64,8 @@ class ROBOT:
 
         self.brain.Print()
 
-    def Send_To_Simulator(self,simulator,color, biasValues):
+    def Send_To_Simulator(self,simulator,color,biasValues):
 
         self.body.Send_To_Simulator(simulator,color)
 
-        self.brain.Send_To_Simulator(simulator, biasValues)
+        self.brain.Send_To_Simulator(simulator,biasValues)
