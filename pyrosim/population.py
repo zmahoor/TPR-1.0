@@ -6,6 +6,7 @@ from sys import float_info
 import pickle
 from copy import deepcopy
 from numpy import linalg as LA
+import constants as c
 
 class POPULATION:
 
@@ -66,7 +67,7 @@ class POPULATION:
     def Evaluate_External_Novelty(self, pp, pb, brange=10, knn=5):
 
         for i in self.p:
-            self.p[i].Start_Evaluate(pp, pb, [1.0])
+            self.p[i].Start_Evaluate(pp, pb, (c.NUM_BIAS_NEURONS+c.NUM_COMMAND_NEURONS)*[1.0])
 
         for i in self.p:
             self.p[i].Get_Head_Trajectory()
@@ -88,7 +89,7 @@ class POPULATION:
 
             for i in self.p:
 
-                self.p[i].Start_Evaluate(pp, pb, [b])
+                self.p[i].Start_Evaluate(pp, pb, c.NUM_BIAS_NEURONS*[1.0]+[b] if c.NUM_BIAS_NEURONS>0 else [b])
 
             for i in self.p:
 

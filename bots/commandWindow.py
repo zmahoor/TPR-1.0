@@ -5,17 +5,24 @@ from pygameWrapper import PYGAMEWRAPPER
 from timer import TIMER
 from settings import *
 import database
+import datetime
 
 COMMAND_DURATION = 1 * 60
 COMMAND_WINDOW_W = 950
 COMMAND_WINDOW_H = 280
-DEFAULT_COMMAND = "move"
 
 window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H)
 
 currentCommand = DEFAULT_COMMAND
-prevCommand = ""
+
 mydatabase = database.DATABASE()
+
+currentTime = datetime.datetime.now()
+currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
+
+mydatabase.Add_To_Unique_Commands_Table(currentCommand, currentTime, 1.0)
+
+mydatabase.Set_Current_Command(currentCommand)
 
 def DRAW_COMMNAND_WINDOW(timeRemaining):
     global currentCommand
@@ -23,8 +30,8 @@ def DRAW_COMMNAND_WINDOW(timeRemaining):
     window.Wipe()
 
     myy=10
-    window.Draw_Text("Type !newcommand to change the command ",x= 10, y=myy) 
-    window.Draw_Text(currentCommand, x= 500, y=myy, color='brown')
+    window.Draw_Text("Type !newcommand to change the current command. ",x= 10, y=myy) 
+    # window.Draw_Text(currentCommand, x= 500, y=myy, color='brown')
 
     myy += 40
     window.Draw_Text(str(timeRemaining) + " seconds until the next command.", x= 10, y=myy)
@@ -35,7 +42,6 @@ def DRAW_COMMNAND_WINDOW(timeRemaining):
 def main():
 
     global currentCommand
-    global prevCommand
 
     commandTimer = TIMER(COMMAND_DURATION)
 
@@ -47,16 +53,17 @@ def main():
 
             DRAW_COMMNAND_WINDOW(commandTimer.Time_Remaining())
 
-        temp = mydatabase.Fetch_Popular_Command()
+        temp = mydatabase.Find_Most_Popular_Command()
 
         print "popular command: ", temp
+
         if temp!= None: 
-
-            prevCommand    = currentCommand
             currentCommand = temp['cmdTxt']
+            mydatabase.Set_Current_Command(currentCommand)
 
-            if currentCommand != prevCommand:
-                mydatabase.Set_Current_Command(currentCommand)
+        else:
+            currentCommand = DEFAULT_COMMAND
+            mydatabase.Set_Current_Command(currentCommand)
 
 main()
 

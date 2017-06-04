@@ -11,9 +11,9 @@ from environment import ENVIRONMENT
 from population import POPULATION
 import constants as c
 
-robotType      = 'spherebot'
+robotType      = 'quadruped'
 
-archive_thresh = 2.0
+archive_thresh = 4.0
 
 knn = 3
 
@@ -21,11 +21,11 @@ brange = 10
 
 parents = POPULATION(c.popSize, robotType)
 
-parents.Evaluate_Internal_Novelty(False, True, brange, knn)
+# parents.Evaluate_Internal_Novelty(False, True, brange, knn)
 
-# parents.Evaluate_External_Novelty(False, True, brange, knn)
+parents.Evaluate_External_Novelty(False, True, brange, knn)
 
-# parents.Update_Archive(archive_thresh)
+parents.Update_Archive(archive_thresh)
 
 for g in range(1, c.numGenerations):
 
@@ -33,18 +33,18 @@ for g in range(1, c.numGenerations):
 
     children.Mutate()
 
-    children.Evaluate_Internal_Novelty(False, True, brange, knn)
+    # children.Evaluate_Internal_Novelty(False, True, brange, knn)
 
-    # children.Evaluate_External_Novelty(False, True, brange, knn)
+    children.Evaluate_External_Novelty(False, True, brange, knn)
 
     # print g, 
     # children.Print()
 
     parents.ReplaceWith(children)
 
-    # parents.Evaluate_External_Novelty(False, True, brange, knn)
+    parents.Evaluate_External_Novelty(False, True, brange, knn)
 
-    # parents.Update_Archive(archive_thresh)
+    parents.Update_Archive(archive_thresh)
 
     print g,
     parents.Print()
@@ -52,5 +52,5 @@ for g in range(1, c.numGenerations):
 
     # parents.Print_Archive()
 
-parents.Store_All_Above_Average()
-# parents.Store_Archive()
+# parents.Store_All_Above_Average()
+parents.Store_Archive()

@@ -117,11 +117,10 @@ class DATABASE:
         err_msg = "Failed to log this command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Add_To_Unique_Commands_Table(self, command, time, randIndex):
+    def Add_To_Unique_Commands_Table(self, command, time, wordToVec):
 
-        sql = """INSERT INTO unique_commands(cmdTxt, timeAdded, numIssued, 
-            randomIndex) VALUES('%s', '%s', 1, '%f')
-            ON DUPLICATE KEY UPDATE numIssued = numIssued + 1;"""%(command, time, randIndex)
+        sql = """INSERT IGNORE INTO unique_commands(cmdTxt, timeAdded, 
+            wordToVec) VALUES('%s', '%s', '%f');"""%(command, time, wordToVec)
 
         err_msg = "Failed to add this new command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
@@ -270,9 +269,9 @@ class DATABASE:
         err_msg = "Failed to kill the robot..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Get_New_WordIndex(self):
+    def Get_New_Word_Vector(self):
 
-        sql="""SELECT randomIndex FROM unique_commands;"""
+        sql="""SELECT wordToVec FROM unique_commands;"""
         err_msg = "unable to fetch user names"
         results = self.Execute_Select_Sql_Command(sql, err_msg)
 
@@ -438,6 +437,8 @@ class DATABASE:
         prevCommand = ""
         if result!= None:
             prevCommand = result['cmdTxt']
+
+        if prevCommand == currentCommand : return 
 
         sql= """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';"""%(currentCommand)
         err_msg = "Failed to set the current command..."

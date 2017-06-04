@@ -12,13 +12,13 @@ from brain import BRAIN
 
 class ROBOT:
 
-    def __init__(self, maxDepth, biasValues):
+    def __init__(self, maxDepth):
 
         self.body = BODY(int(maxDepth))
 
         self.brain = BRAIN( self.body.numSensors, 
             self.body.numJoints-4 if self.body.eyes else self.body.numJoints,
-         self.body.sensorsCreated, biasValues)
+         self.body.sensorsCreated)
 
         # print self.body.numSensors, self.body.numJoints, self.body.sensorsCreated
 

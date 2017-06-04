@@ -9,14 +9,12 @@ from brain import BRAIN
 
 class ROBOT:
 
-    def __init__(self, commandVector=[0.0]):
-
-        self.command_vector = commandVector
+    def __init__(self):
 
         self.Initialize_Body()
 
         self.brain = BRAIN(self.num_sensors, self.num_motor_neurons,
-            self.sensorsCreated, self.command_vector)
+            self.sensorsCreated)
 
     def Initialize_Body(self):
 
@@ -30,7 +28,7 @@ class ROBOT:
 
         self.Add_Sensors()
 
-        print self.num_sensors, self.num_motor_neurons, self.sensorsCreated, self.command_vector
+        print self.num_sensors, self.num_motor_neurons, self.sensorsCreated
     
     def Mutate(self):
 
@@ -66,6 +64,8 @@ class ROBOT:
         self.eyes.Send_Eyes_To_Simulator(sim)
 
         self.Send_Sensors(sim)
+
+        # print biasValues
 
         self.brain.Send_To_Simulator(sim,biasValues)
 

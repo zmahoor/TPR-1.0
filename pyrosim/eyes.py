@@ -77,15 +77,21 @@ class EYES:
 
         sensorsCreated[sensorInd] = c.RAY_SENSOR
 
+    def Get_Sensor_Data_From_Simulator(self, simulator):
+
+        if self.left_raySensor:
+
+            self.left_raySensor.Get_Data_From_Simulator(simulator)
+
     def Store_Sensors(self, raw_sensors):
 
         if self.left_raySensor:
 
-            raw_sensors["R"+str(self.ID)] = self.left_raySensor.values[0]
+            raw_sensors["R"+str(self.leftPupil_ID)] = self.left_raySensor.values[0]
 
         if self.right_raySensor:
 
-            raw_sensors["R"+str(self.ID)] = self.left_raySensor.values[0]
+            raw_sensors["R"+str(self.rightPupil_ID)] = self.left_raySensor.values[0]
 
     def Send_Eyes_To_Simulator(self, sim):
 
