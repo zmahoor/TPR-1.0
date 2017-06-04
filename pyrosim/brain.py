@@ -7,11 +7,11 @@ from synapses import SYNAPSES
 
 class BRAIN:
 
-    def __init__(self,numSensors,numJoints, sensorsList, biasValues):
+    def __init__(self,numSensors,numJoints, sensorsList):
 
-        self.neurons = NEURONS(numSensors,numJoints,sensorsList, biasValues)
+        self.neurons = NEURONS(numSensors,numJoints,sensorsList)
 
-        self.synapses = SYNAPSES(numSensors,numJoints, biasValues)
+        self.synapses = SYNAPSES(numSensors,numJoints)
 
     def Mutate(self):
 
@@ -23,9 +23,9 @@ class BRAIN:
         else:
             self.synapses.Mutate()
 
-    def Send_To_Simulator(self,simulator,biasValues):
+    def Send_To_Simulator(self,simulator, biasValues):
 
-        self.neurons.Send_To_Simulator(simulator,biasValues)
+        self.neurons.Send_To_Simulator(simulator, biasValues)
 
         self.synapses.Send_To_Simulator(simulator)
 

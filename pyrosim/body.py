@@ -56,6 +56,7 @@ class BODY:
     def Get_Sensor_Data_From_Simulator(self,simulator):
 
         self.root.Get_Sensor_Data_From_Simulator(simulator)
+        self.eyes.Get_Sensor_Data_From_Simulator(simulator)
 
     def Get_Head_Trajectory(self, simulator):
         

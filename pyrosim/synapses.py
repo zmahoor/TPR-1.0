@@ -6,13 +6,13 @@ from synapse import SYNAPSE
 
 class SYNAPSES: 
 
-    def __init__(self,numSensorNeurons,numMotorNeurons, biasValues):
+    def __init__(self,numSensorNeurons,numMotorNeurons):
 
         self.numSensorNeurons = numSensorNeurons
 
         self.numMotorNeurons = numMotorNeurons
 
-        self.numBiasNeurons = len(biasValues)
+        self.numBiasNeurons = c.NUM_BIAS_NEURONS + c.NUM_COMMAND_NEURONS
 
         self.Create_BH()
 
@@ -144,7 +144,6 @@ class SYNAPSES:
         m = random.randint(0, self.numMotorNeurons - 1 )
 
         self.hm[h,m].Mutate()
-
 
     def Mutate_BH(self):
 

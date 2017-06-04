@@ -8,7 +8,7 @@ headRadius = 2 * R
 
 eyeRadius = 0.015
 
-popSize = 5
+popSize = 30
 
 numEnvs = 2
 
@@ -56,7 +56,7 @@ length = 0.5 / 4.0
 
 radius = 0.05 / 4.0
 
-numGenerations = 50
+numGenerations = 300
 
 # ------------------ Robot parameters --------------
 
@@ -81,5 +81,9 @@ TOC_SENSOR = 7
 LIT_SENSOR = 8
 
 NUM_HIDDEN_NEURONS = 5
+
+NUM_COMMAND_NEURONS = 1
+
+NUM_BIAS_NEURONS = 1
 
 TAU_MAX = 1.0

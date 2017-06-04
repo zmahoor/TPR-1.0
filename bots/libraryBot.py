@@ -43,7 +43,7 @@ def parseCommand(data):
 def getParentInfo(data):
     return data[1:]
 
-mydatabase = database.DATABASE();
+mydatabase = database.DATABASE()
 
 while(True):
 
@@ -100,7 +100,7 @@ while(True):
 
         mydatabase.Add_To_CommandLog_Table(user, command, timeArrival)
 
-        randIndex = mydatabase.Get_New_WordIndex()
+        randIndex = mydatabase.Get_New_Word_Vector()
 
         # print command, timeArrival, randIndex
 

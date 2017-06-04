@@ -10,7 +10,7 @@ whatToMaximize = sys.argv[1]
 
 environment = None
 
-maxDepth = 4
+maxDepth = 3
 
 afpo = AFPO(whatToMaximize, maxDepth)
 

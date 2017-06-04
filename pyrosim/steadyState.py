@@ -33,7 +33,7 @@ mydatabase = DATABASE()
 
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H)
 
-currentCommand = {'cmdCount':0, 'cmdTxt':"walk backward very very fast"}
+currentCommand = {}
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -179,8 +179,17 @@ def Compete_Based_On_Dominance(individual1, individual2):
     if newInd == None:  
         mydatabase.Kill_Robot(winner['robotID'])
     else:
-        newInd.Mutate()
+        Create_Mutation(newInd)
+
     return newInd
+
+def Create_Mutation(individual):
+
+    individual.Mutate()
+
+    individual.Start_Evaluate(False, True, c.NUM_BIAS_NEURONS*[1.0]+[currentCommand['wordToVec']])
+
+    return individual
 
 def Dominance(individual1, individual2):
 
@@ -231,21 +240,25 @@ def Morphology_Cycle(morphologyTimer):
 
         currentColor = validColors[colorIndex % len(validColors)]
 
-        Draw_Reinforcment_Window()
 
         currentTime = datetime.datetime.now()
 
-        popularCommand = mydatabase.Find_Most_Popular_Command()
-        currentCommand = popularCommand if popularCommand != None else currentCommand
+        # popularCommand = mydatabase.Find_Most_Popular_Command()
+        # currentCommand = popularCommand if popularCommand != None else currentCommand
+
+        currentCommand = mydatabase.Get_Current_Command()
+
+        Draw_Reinforcment_Window()
+
+        wordVector = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['randomIndex']]
 
         mydatabase.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
             currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-        print "Displaying controller ", randomIndividual.id, " of type ", robotType, " with color",
-        currentColor
+        print "Displaying controller ", randomIndividual.id, " of type ", robotType, " with color", currentColor, " current command ", currentCommand['cmdTxt']
         
         randomIndividual.Set_Color(currentColor)
-        randomIndividual.Start_Evaluate(False, False, [1.0])
+        randomIndividual.Start_Evaluate(False, False, wordVector)
 
         newIndividual = Compete_While_Waiting_For(aliveIndividuals, index)
         if newIndividual != None:

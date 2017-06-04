@@ -20,3 +20,4 @@ validRobots = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot', 'sphe
 
 maxCommandLength = 50
 minCommandLength = 2
+DEFAULT_COMMAND = "move"

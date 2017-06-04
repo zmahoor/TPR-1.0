@@ -3,7 +3,7 @@ import random
 import math
 import constants as c
 from subprocess import Popen, PIPE
-from robot import ROBOT 
+from treebot import ROBOT 
 from pyrosim import PYROSIM
 import pickle
 import os
@@ -16,7 +16,7 @@ class GENOME:
 
         self.ID = ID
 
-        self.robot = ROBOT(maxDepth)
+        self.robot = ROBOT(maxDepth, [1.0])
 
         self.age = 0
 
@@ -74,7 +74,7 @@ class GENOME:
 
         self.fitness = self.robot.Evaluate(self.simulator,whatToMaximize)
 
-        self.robot.Get_Raw_Sensors()
+        self.robot.Get_Raw_Sensors( self.simulator)
 
         del self.simulator
 
@@ -128,7 +128,7 @@ class GENOME:
 
         self.simulator = PYROSIM(playBlind,playPaused,evaluationTime)
 
-        self.robot.Send_To_Simulator(self.simulator,color)
+        self.robot.Send_To_Simulator(self.simulator,color, [1.0])
 
         # environment.Send_To_Simulator(self.simulator,self.robot.Num_Body_Parts())
 

@@ -19,7 +19,7 @@ print 'fitness: ', best.fitness
 # print best.robot.command
 # best.robot.command = 0
 
-best.Start_Evaluate(True, False, [0])
+best.Start_Evaluate(True, False, [1.0, 0.0])
 best.Compute_Fitness(wtm)
 # print best.robot.command
 

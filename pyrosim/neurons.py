@@ -1,16 +1,17 @@
 import constants as c
 from neuron import NEURON
 import random
+import constants as c
 
 class NEURONS: 
 
-    def __init__(self,numSensorNeurons,numMotorNeurons, sensorsList, biasValues):
+    def __init__(self,numSensorNeurons,numMotorNeurons, sensorsList):
 
         self.numSensorNeurons = numSensorNeurons
 
         self.numMotorNeurons = numMotorNeurons
 
-        self.numBiasNeurons = len(biasValues)
+        self.numBiasNeurons = c.NUM_BIAS_NEURONS + c.NUM_COMMAND_NEURONS
 
         self.sensorsList = sensorsList
 
@@ -111,10 +112,6 @@ class NEURONS:
             #     ind += 1
 
         self.numSensorNeurons = len(self.sensorNeurons)
-
-        # for s in self.sensorNeurons:
-
-        #     print self.sensorNeurons[s].ID, self.sensorNeurons[s].sensorID, self.sensorNeurons[s].valueIndex
 
     def Create_Hidden_Neurons(self):
 
