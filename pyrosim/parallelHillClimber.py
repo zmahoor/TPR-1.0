@@ -11,7 +11,7 @@ from environment import ENVIRONMENT
 from population import POPULATION
 import constants as c
 
-robotType      = 'quadruped'
+robotType      = 'snakebot'
 
 archive_thresh = 4.0
 

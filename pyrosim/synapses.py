@@ -74,7 +74,7 @@ class SYNAPSES:
 
                 sourceNeuron = b
 
-                targetNeuron = self.numSensorNeurons + h
+                targetNeuron = self.numBiasNeurons + self.numSensorNeurons + h
 
                 self.bh[b,h] = SYNAPSE(sourceNeuron,targetNeuron)
 
@@ -87,9 +87,9 @@ class SYNAPSES:
 
             for h in range(0,c.NUM_HIDDEN_NEURONS):
 
-                sourceNeuron = s
+                sourceNeuron = s+self.numBiasNeurons
 
-                targetNeuron = self.numSensorNeurons + h
+                targetNeuron = self.numBiasNeurons + self.numSensorNeurons + h
 
                 self.sh[s,h] = SYNAPSE(sourceNeuron,targetNeuron)
 
@@ -101,9 +101,9 @@ class SYNAPSES:
 
             for h2 in range(0,c.NUM_HIDDEN_NEURONS):
 
-                sourceNeuron = self.numSensorNeurons + h1
+                sourceNeuron = self.numSensorNeurons + self.numBiasNeurons + h1
 
-                targetNeuron = self.numSensorNeurons + h2
+                targetNeuron = self.numSensorNeurons + self.numBiasNeurons + h2
 
                 self.hh[h1,h2] = SYNAPSE(sourceNeuron,targetNeuron)
 
@@ -115,9 +115,9 @@ class SYNAPSES:
 
             for m in range(0,self.numMotorNeurons):
 
-                sourceNeuron = self.numSensorNeurons + h
+                sourceNeuron = self.numSensorNeurons + self.numBiasNeurons + h
 
-                targetNeuron = self.numSensorNeurons + c.NUM_HIDDEN_NEURONS + m 
+                targetNeuron = self.numSensorNeurons + self.numBiasNeurons + c.NUM_HIDDEN_NEURONS + m 
 
                 self.hm[h,m] = SYNAPSE(sourceNeuron,targetNeuron)
 

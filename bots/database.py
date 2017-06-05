@@ -120,7 +120,8 @@ class DATABASE:
     def Add_To_Unique_Commands_Table(self, command, time, wordToVec):
 
         sql = """INSERT IGNORE INTO unique_commands(cmdTxt, timeAdded, 
-            wordToVec) VALUES('%s', '%s', '%f');"""%(command, time, wordToVec)
+            wordToVec, totalLearnability, active) VALUES
+            ('%s', '%s', '%f', 0, 0);"""%(command, time, wordToVec)
 
         err_msg = "Failed to add this new command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
@@ -307,7 +308,7 @@ class DATABASE:
         current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
         prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
 
-        sql = """SELECT uc.cmdTxt, uc.totalLearnability, cl.timeArrival, 
+        sql = """SELECT uc.cmdTxt as cmd, uc.totalLearnability as score, cl.timeArrival, 
         FIND_IN_SET( uc.totalLearnability, (SELECT GROUP_CONCAT( uc.totalLearnability 
         ORDER BY uc.totalLearnability DESC )
         FROM unique_commands as uc )) AS rank
@@ -329,7 +330,7 @@ class DATABASE:
 
         print current_time, prev_time
 
-        sql = """SELECT c.username, u.score, c.timeArrival, 
+        sql = """SELECT c.username as userName, u.score, c.timeArrival, 
         FIND_IN_SET( u.score, 
         (SELECT GROUP_CONCAT( u.score ORDER BY u.score DESC ) FROM users as u )) AS rank
         FROM chats as c 

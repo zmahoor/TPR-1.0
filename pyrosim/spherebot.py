@@ -22,7 +22,7 @@ class ROBOT:
         self.num_objects    = 0
         self.head_ID        = 0
         self.num_sensors    = 0
-        self.num_motor_neurons = 2
+        self.num_motor_neurons = 1
         self.sensorsCreated = {}
 
         self.Add_Sensors()
