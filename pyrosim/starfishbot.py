@@ -117,6 +117,7 @@ class ROBOT:
         # purple
         sim.Send_Cylinder(objectID=self.num_objects, x=-(c.L+c.L/2), y=0, z=(c.L/2 + c.R), r1=0,
          r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
+        self.num_objects += 1
 
     def Send_Joints(self, sim):
         self.num_joints = 0
@@ -155,6 +156,7 @@ class ROBOT:
 
         sim.Send_Joint(jointID = self.num_joints, firstObjectID = 4 , secondObjectID = 8,
          n1 =0 , n2 =-1 , n3 =0, x=-(c.L+c.L/2), y=0, z=c.L+c.R)
+        self.num_joints += 1
 
     def Get_Raw_Sensors(self, sim):
 

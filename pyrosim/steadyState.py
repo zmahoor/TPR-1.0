@@ -9,13 +9,13 @@ import pickle
 import os 
 import glob
 import constants as c
-from pygameWrapper import PYGAMEWRAPPER
 from timer import TIMER
 
 sys.path.append('../bots')
 
 from database import DATABASE
 from settings import *
+from pygameWrapper import PYGAMEWRAPPER
 
 colorIndex = 0
 morphologyIndex = 0
@@ -31,7 +31,7 @@ robotType = validRobots[morphologyIndex % len(validRobots)]
 
 mydatabase = DATABASE()
 
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H)
+window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
 
 currentCommand = {}
 
@@ -110,33 +110,33 @@ def Draw_Reinforcment_Window():
 
     myy = 10
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "y", x= 70, y=myy, color=currentColor)
+    window.Draw_Text("!"+ currentColor[0] + "y", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
         " robot is obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 580, y=myy, color='brown')
+    window.Draw_Text("["+ cmdTxt +"].", x= 580, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y= myy)
-    window.Draw_Text("!"+ currentColor[0] + "n", x= 70, y=myy, color=currentColor)
+    window.Draw_Text("!"+ currentColor[0] + "n", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
      " robot is [N]ot obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 635, y=myy, color='brown')
+    window.Draw_Text("["+ cmdTxt +"].", x= 635, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "l", x= 70, y=myy, color=currentColor)
+    window.Draw_Text("!"+ currentColor[0] + "l", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if you [L]ike the ["+ currentColor[0].upper() + "]"+\
         currentColor[1:]+ " robot." , x= 110, y=myy)
     
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "d", x= 70, y=myy, color=currentColor)
+    window.Draw_Text("!"+ currentColor[0] + "d", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if you [D]islike the ["+ currentColor[0].upper() + "]"+\
      currentColor[1:]+ " robot." , x= 110, y=myy)
 
     myy += 60
     window.Draw_Text("Need help? Type", x= 700, y=myy) 
-    window.Draw_Text("?", x= 880, y=myy, color='brown')
+    window.Draw_Text("?", x= 880, y=myy, color='BROWN')
 
     window.Refresh()
 
@@ -179,15 +179,33 @@ def Compete_Based_On_Dominance(individual1, individual2):
     if newInd == None:  
         mydatabase.Kill_Robot(winner['robotID'])
     else:
-        Create_Mutation(newInd)
+        newInd.Mutate()
 
     return newInd
 
+# def Individual_Has_Moved(head_trajectory):
+
+#     x_locs = head_trajectory[0]
+#     np.diff(x_locs)
+
+#     y_loc  = head_trajectory[1]
+#     np.diff(y_locs)
+
+#     z_loc  = head_trajectory[2]
+#     np.diff(z_locs)
+
 def Create_Mutation(individual):
 
-    individual.Mutate()
+    while True: 
 
-    individual.Start_Evaluate(False, True, c.NUM_BIAS_NEURONS*[1.0]+[currentCommand['wordToVec']])
+        individual.Mutate()
+
+        individual.Start_Evaluate(False, True, c.NUM_BIAS_NEURONS*[1.0]+[currentCommand['wordToVec']])
+        individual.Wait_For_Me()
+
+        head_trajectory = individual.Get_Head_Trajectory()
+
+        if Individual_Has_Moved(head_trajectory): break
 
     return individual
 
@@ -250,12 +268,13 @@ def Morphology_Cycle(morphologyTimer):
 
         Draw_Reinforcment_Window()
 
-        wordVector = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['randomIndex']]
+        wordVector = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
 
         mydatabase.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
             currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-        print "Displaying controller ", randomIndividual.id, " of type ", robotType, " with color", currentColor, " current command ", currentCommand['cmdTxt']
+        print "Displaying controller ", randomIndividual.id, " of type ", robotType,\
+         " with color", currentColor, " current command ", currentCommand['cmdTxt']
         
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)

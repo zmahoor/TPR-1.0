@@ -4,7 +4,7 @@ class PYGAMEWRAPPER:
 
         
                 
-        def __init__(self,width=800,height=240):
+        def __init__(self,width=800,height=240, fontSize=17):
 
                 #initialize pygame modules
 		pygame.init()
@@ -18,7 +18,7 @@ class PYGAMEWRAPPER:
 		self.screen = pygame.display.set_mode(size)
 
                 #define font to be used
-		self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf",17)
+		self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf", fontSize)
 
 	def Draw_Text(self, textString , x = 10 , y = 10, color = 'BLACK' ):
 

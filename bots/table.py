@@ -16,7 +16,7 @@ class TABLE:
         self.window = window
 
     def Update(self, new, bottom):
-
+        
         #get size of newList that populates table (if not empty or None)
         try:
             size = len(new)
@@ -33,27 +33,26 @@ class TABLE:
         screen = self.screen
 
         #draw lines that define the table
-        pygame.draw.line(screen, BLACK, (.12*self.w,0), (.12*self.w,self.h*12.0/13.0), 1)
-
-        pygame.draw.line(screen, BLACK, (.625*self.w,0), (.625*self.w,self.h*12.0/13.0), 1)
-
-        pygame.draw.line(screen, BLACK, (.8*self.w, 0), (.8*self.w, self.h*12.0/13.0), 1)
-
-        pygame.draw.line(screen, BLACK, (.9*self.w, 0), (.9*self.w, self.h*12.0/13.0), 1)
+        
         
         pygame.draw.line(screen, BLACK, (0, self.h/12.0), (self.w, self.h/12.0), 3)
         
         for i in range (2, 12):
-            
-            pygame.draw.line(screen, BLACK, (0, i*self.h/13.0), (self.w, i*self.h/13.0), 1)
 
             #add ranks for 1-10
+            if i%2 == 0:
+                col = 'LIGHTBLUE'
+            else:
+                col = 'TAN'
+            window.Draw_Rect(0, (i-.9)*self.h/13.0, self.w, (i+.1)*self.h/13.0, color = col)
             window.Draw_Text(str(i-1), x = 5, y = ((i-.5)*self.h/13.0))
         
         pygame.draw.line(screen, BLACK, (0, (11*self.h/13.0)), (self.w, (11*self.h/13.0)), 2)
 
         pygame.draw.line(screen, BLACK, (0, (12*self.h/13.0)), (self.w, (12*self.h/13.0)), 2)
 
+
+        
         for i in range(0,size):
 
             #name is the command name or username, depending on input
@@ -83,4 +82,3 @@ class TABLE:
         #draw the name and score to the screen in the bottom row 
         window.Draw_Text(bt, x = self.w*.13, y = 11.5*self.h/13.0)  
         window.Draw_Text(str(int(bottom[1])), x = self.w*.635, y = 11.5*self.h/13.0) 
-        
