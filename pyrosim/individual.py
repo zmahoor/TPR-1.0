@@ -125,7 +125,7 @@ class INDIVIDUAL:
         # self.head_trajectory = np.vstack([self.head_trajectory,
         #  np.append(np.diff(self.head_trajectory[2]), [0])])
 
-        del self.sim
+        # del self.sim
 
     def Start_Evaluate(self, pp, pb, command):
 

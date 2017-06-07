@@ -18,10 +18,10 @@ color = np.random.random(3)
 
 sim = PYROSIM(playPaused= True, playBlind=False, evalTime=200)
 
-# robot = CB()
+robot = CB()
 # robot = QB()
 # robot = SHB()
-robot = TB(2)
+# robot = TB(2)
 # robot = SPB()
 # robot = SFB()
 # robot = SNB()

@@ -100,7 +100,8 @@ class NEURONS:
                 self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s,1)
                 ind += 1
                 self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s,2)
-
+                ind += 1
+                
             elif(self.sensorsList[s] == c.PRO_SENSOR or self.sensorsList[s] == c.TOC_SENSOR 
                 or self.sensorsList[s] == c.LIT_SENSOR):
                 self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s)
