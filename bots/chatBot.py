@@ -17,9 +17,8 @@ host = HOST
 
 t.connect(username, key, channel, host, port)
  
-running = True
 #The main loop
-while running:
+while True:
 
     newMessages = t.recieve_messages(amount = 1024)
     # print("mess: ", newMessages)

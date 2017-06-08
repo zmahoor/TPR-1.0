@@ -77,6 +77,8 @@ class Twitch:
 
     def send_message(self, message):
         messageTemp = "PRIVMSG #" + self.channel + " :" + message.rstrip()
+        print messageTemp
+        
         try:
             sent = self.sock.send(messageTemp + "\r\n")
         except:
