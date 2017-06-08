@@ -374,24 +374,18 @@ class DATABASE:
 
         return result
         
-    # def Fetch_New_Color(self):
-    #     color = ""
-    #     try:
-    #         sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
-    #         self.cursor.execute(sql)
-    #         result = self.cursor.fetchone()
-    #         chatID = result['chatID']
-    #         color = result['txt']
+    def First_Time_Contributer(self, username):
 
-    #         print(result)
-    #         sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
-    #         self.cursor.execute(sql)
-    #         self.connection.commit()
+        sql ="""SELECT userName FROM reward_log where userName='%s' union 
+        SELECT userName FROM command_log where userName='%s';"""%(username, username)
 
-    #     except:
-    #         print("please paint me with blue|red|green|white|black|purple|cyan|yellow")
+        err_msg = "Failed to fetch information about this user..."
+        result = self.Execute_Select_Sql_Command(sql, err_msg)
 
-    #     return color
+        if result == (): 
+            return True
+        
+        return False
 
     def Fetch_For_Command_Window(self, interval=10):
 

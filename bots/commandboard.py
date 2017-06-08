@@ -62,7 +62,7 @@ while 1:
     window.Draw_Text('#YES', x = .815*w, y = .5*h/12.0)
     window.Draw_Text('#NO', x = .915*w, y = .5*h/12.0)
 
-    window.Draw_Text('For more information, type "?cmds"'.upper(), x = .12*w, y = 12.3/13.0 * h)
+    window.Draw_Text('Need help? type "?commands"'.upper(), x = .12*w, y = 12.3/13.0 * h)
     
     time.sleep(.2)
     c = c + 1
