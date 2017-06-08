@@ -23,9 +23,10 @@ gen = 'This is Twitch Plays Robotics, a...\n\
        "?project" for more info on the project\n\
        "?robot" for more info on the robots\n\
        "?command" for more info on the commands\n\
-       "?reinf" for more info on reinforcements\n\
+       "?reinforce" for more info on reinforcements\n\
        "?sim" for more info on the simulation\n\
-       "?myscore" for information on your score.'
+       "?myscore" for information on your score\n\
+       "?scores" for information on the scoring system.'
 
 #Project help message
 proj = 'Twitch Plays Robotics is a ...'
@@ -39,7 +40,7 @@ cmd = 'Commands are typed in the chat, and the one asked for the most\
         Ever try asking a dog to learn a new trick? Think of it like that!'
 
 #Reinforcements help message
-reinf = 'Reinforcements help the robot learn. Saying "yes" to the robot\
+reinforce = 'Reinforcements help the robot learn. Saying "yes" to the robot\
         is rewarding it, e.g. giving a dog a treat.  Saying "no" ... '
 
 #Simulation help message
@@ -47,10 +48,16 @@ sim = 'The simulation is created in a physics engine called Open Dynamics \
         Engine (ODE.) The robots inside of it are made through a python wrapper\
         called PyRoSim (Python Robotics Simulator.)'
 
+scores = 'To collect points, give reinforcement to robots or vote for commands.'
+
+first_time = 'Congratulations! You just earned your first point.'
+
 #Organize messages by type
-help_type = {'general' : gen, 'project' : proj,
-             'robot' : bot, 'command' : cmd,
-             'reinf' : reinf, 'sim' : sim}
+help_type = {'general'   : gen, 'project'   : proj,
+             'robot'     : bot, 'command'   : cmd,
+             'reinforce' : reinforce, 'sim' : sim,
+             'scores'    : scores,
+             'first_time_contribution': first_time}
 
 while True:
     time.sleep(2)
@@ -63,6 +70,7 @@ while True:
         msg = records['txt']
         username = records['userName']
         print msg, username
+
         msg_to_send = msg[1:].rstrip()
 
         if (msg == '?myscore'):

@@ -81,7 +81,7 @@ class Twitch:
             sent = self.sock.send(messageTemp + "\r\n")
         except:
             print("Lost connection to Twitch, attempting to reconnect...")
-            self.twitch_connect(self.user, self.oauth, self.channel, self.host, self.port)
+            self.connect(self.user, self.oauth, self.channel, self.host, self.port)
             return None
 
         print("Sent: %s" %(messageTemp))

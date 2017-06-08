@@ -1,5 +1,5 @@
 from settings import *
-import database;
+import database
 from time import *
 import re
 
@@ -61,6 +61,19 @@ while(True):
     mydatabase.Add_To_User_Table(user, timeArrival)
 
     #message begins with '?' send message to helpbot to chat to user
+
+    # print user, message, timeArrival
+
+    # if this message is the user's first contribution--reward or command--, 
+    # mark that in the help table. helpBot will later send a message to this user.
+    if isRewardSignal(message) or isCommand(message):
+
+        if mydatabase.First_Time_Contributer(user):
+
+            print(message, 'first time contribution')
+
+            mydatabase.Add_To_Help_Table(user, "?first_time_contribution", timeArrival)
+
     if (message[0] == '?'):
 
         mydatabase.Add_To_Help_Table(user, message, timeArrival)
@@ -94,7 +107,7 @@ while(True):
     #Either command then move to commands table
     elif isCommand(message):
 
-        print(message, " command entered")
+        print(message, " command entered.")
 
         command = parseCommand(message)
 
