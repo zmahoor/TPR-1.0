@@ -72,7 +72,7 @@ while(True):
 
             print(message, 'first time contribution')
 
-            mydatabase.Add_To_Help_Table(user, "?first_time_contribution", timeArrival)
+            mydatabase.Add_To_Help_Table(user, "first_time_contribution", timeArrival)
 
     if (message[0] == '?'):
 

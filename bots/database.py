@@ -366,7 +366,7 @@ class DATABASE:
         sql = "SELECT * FROM helps WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         err_msg = "Failed to fetch the oldest unprocessed help request..."
         result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
-
+        
         if result != None:
             helpID = result['helpID']
             sql = "UPDATE helps SET processed=1 WHERE helpID='%d';"%(helpID)
