@@ -353,9 +353,13 @@ class DATABASE:
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
     #find all the robots with the dead flag as zero --alive--
-    def Fetch_Alive_Robots(self, robotType):
+    def Fetch_Alive_Robots(self, robotType="all"):
 
-        sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
+        if robotType== "all":
+            sql = "SELECT * FROM robots WHERE dead=0;"
+        else:
+            sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
+            
         err_msg = "Failed to retrieve alive robots..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
