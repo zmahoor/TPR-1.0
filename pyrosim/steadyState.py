@@ -45,7 +45,7 @@ def Store_Sensors_To_File(individual, currentTime):
         os.makedirs(path)
 
     # create file
-    currentTime = currentTime.strftime("%Y-%m-%d %H-%M-%S")
+    currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
     path += '/robot_' + str(individual.id) + "_" + currentTime + ".dat"
     sensorValues = individual.Get_Raw_Sensors()
     with open( path , 'wb' ) as f:
@@ -274,7 +274,7 @@ def Morphology_Cycle(morphologyTimer):
             currentCommand['cmdTxt'], currentColor[0], currentTime)
 
         print "Displaying controller ", randomIndividual.id, " of type ", robotType,\
-         " with color", currentColor, " current command ", currentCommand['cmdTxt']
+         " with color: ", currentColor, " current command: ", currentCommand['cmdTxt']
         
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)

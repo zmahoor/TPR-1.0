@@ -43,11 +43,11 @@ def parseCommand(data):
 def getParentInfo(data):
     return data[1:]
 
-mydatabase = database.DATABASE()
+db = database.DATABASE()
 
 while(True):
 
-    newRow = mydatabase.Fetch_An_Unprocessed_Chat()
+    newRow = db.Fetch_An_Unprocessed_Chat()
 
     # print("newRow: ", newRow)
 
@@ -58,7 +58,7 @@ while(True):
     message = newRow['txt']
 
     # check the user table and if the user is new then insert it
-    mydatabase.Add_To_User_Table(user, timeArrival)
+    db.Add_To_User_Table(user, timeArrival)
 
     #message begins with '?' send message to helpbot to chat to user
 
@@ -68,15 +68,15 @@ while(True):
     # mark that in the help table. helpBot will later send a message to this user.
     if isRewardSignal(message) or isCommand(message):
 
-        if mydatabase.First_Time_Contributer(user):
+        if db.First_Time_Contributer(user):
 
             print(message, 'first time contribution')
 
-            mydatabase.Add_To_Help_Table(user, "first_time_contribution", timeArrival)
+            db.Add_To_Help_Table(user, "first_time_contribution", timeArrival)
 
     if (message[0] == '?'):
 
-        mydatabase.Add_To_Help_Table(user, message, timeArrival)
+        db.Add_To_Help_Table(user, message, timeArrival)
 
         print(message, " help requested.")
     
@@ -87,7 +87,7 @@ while(True):
 
         parent = getParentInfo(message)
 
-        mydatabase.Update_User_Parent(user, parent)
+        db.Update_User_Parent(user, parent)
 
     #Or reinforcement then move to reinforcements table
     elif isRewardSignal(message):
@@ -96,13 +96,13 @@ while(True):
 
         color, reward = parseReward(message)
 
-        mydatabase.Add_To_RewardLog_Table(user, color, reward, timeArrival)
+        db.Add_To_RewardLog_Table(user, color, reward, timeArrival)
 
-        mydatabase.Add_Reward_To_Display_Table(color, reward, timeArrival)
+        db.Add_Reward_To_Display_Table(color, reward, timeArrival)
 
-        mydatabase.Update_Total_Fitness(color, reward, timeArrival)
+        db.Update_Total_Fitness(color, reward, timeArrival)
 
-        mydatabase.Update_Total_Likeability(color, reward, timeArrival)
+        db.Update_Total_Likeability(color, reward, timeArrival)
 
     #Either command then move to commands table
     elif isCommand(message):
@@ -111,13 +111,13 @@ while(True):
 
         command = parseCommand(message)
 
-        mydatabase.Add_To_CommandLog_Table(user, command, timeArrival)
+        db.Add_To_CommandLog_Table(user, command, timeArrival)
 
-        randIndex = mydatabase.Get_New_Word_Vector()
+        randIndex = db.Get_New_Word_Vector()
 
         # print command, timeArrival, randIndex
 
-        mydatabase.Add_To_Unique_Commands_Table(command, timeArrival, randIndex)
+        db.Add_To_Unique_Commands_Table(command, timeArrival, randIndex)
 
     else:
         #if does not start with ? or !, it is raw chat

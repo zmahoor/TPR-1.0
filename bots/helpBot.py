@@ -1,4 +1,5 @@
 ###USE TPR_BOT3 FOR SENDING MESSAGES
+# This bot picks an unprocessed help message from database and sends a response.
 
 import string
 import pymysql
@@ -7,16 +8,20 @@ from twitch import Twitch
 import time
 from settings import *
 
-t = Twitch()
+t  = Twitch()
 db = DATABASE()
 
 username = IDENT #Your twitch username. ALL LOWER CASE
-key = PASS #Key acquired from twitch.tv account page
-channel = CHANNEL
-port = PORT
-host = HOST
+key      = PASS #Key acquired from twitch.tv account page
+channel  = CHANNEL
+port     = PORT
+host     = HOST
 
 t.connect(username, key, channel, host, port)
+
+# to send a pong message to twitch server every 5 minutes otherwise the connection
+# is closed. This is a good option when a bot is not actively listening to a channel.
+t.pong()
 
 #General help message
 gen = """This is Twitch Plays Robotics, a..\
@@ -66,9 +71,9 @@ SLEEP_RATE = 20/30
 while True:
 
     # to send a pong message to twitch server otherwise the connection is closed.
+    # receive_message(..) in twitch class is a blocking function and not suitable 
+    # for help bot.
     # msg_from_twitch = t.recieve_messages(amount = 1024)
-
-    # print "msg from twitch:", msg_from_twitch
 
     # get the oldest unprocessed request for help with flag=0.
     records = db.Fetch_Oldest_Help()
@@ -86,17 +91,19 @@ while True:
             result = db.Fetch_User_Score(username)
             sent = t.send_message("@"+ username + ", score:"+
                 str(result['score'])+" invited by: "+ str(result['parentName']))
+            print('sent score info', sent)
 
         elif (msg == 'first_time_contribution'):
-            t.send_message('@' + username + ' ' + first_time)
+            sent = t.send_message('@' + username + ' ' + first_time)
+            print('first time contribution: ', sent)
 
         elif msg_to_send in help_type:
-            print('sent filtered')
-            t.send_message('@' + username + ' ' + help_type.get(msg_to_send))
+            sent = t.send_message('@' + username + ' ' + help_type.get(msg_to_send))
+            print('sent filtered', sent)
 
         else:
-            print('sent general')
-            t.send_message('@' + username + ' ' + help_type.get('general'))
+            sent = t.send_message('@' + username + ' ' + help_type.get('general'))
+            print('sent general', sent)
 
         time.sleep(SLEEP_RATE)
 
