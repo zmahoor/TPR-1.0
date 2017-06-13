@@ -1,19 +1,17 @@
-import twitch
 from settings import *
-import database
 from time import *
+from database import DATABASE
+from twitch import Twitch
 
-t = twitch.Twitch()
-mydatabase = database.DATABASE()
+t  = Twitch()
+db = DATABASE()
 
 
-#Enter your twitch username and oauth-key below, and the app connects to twitch with the details.
-#Your oauth-key can be generated at 
 username = IDENT #Your twitch username. ALL LOWER CASE
-key = PASS #Key acquired from twitch.tv account page
-channel = CHANNEL
-port = PORT
-host = HOST
+key      = PASS #Key acquired from twitch.tv account page
+channel  = CHANNEL
+port     = PORT
+host     = HOST
 
 t.connect(username, key, channel, host, port)
  
@@ -38,7 +36,7 @@ while True:
                 currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
                 if(username not in filteredUsers):
-                    mydatabase.Add_To_Chat_Table(username, currentTime, msg)
+                    db.Add_To_Chat_Table(username, currentTime, msg)
 
             except:
                 print("msg error")

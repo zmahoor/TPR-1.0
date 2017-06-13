@@ -6,15 +6,16 @@ import socket
 import sys
 import re
 import string
+import threading
 
 class Twitch:
 
     def __init(self, sock=None):
-        self.user = ""
-        self.oauth = ""
+        self.user    = ""
+        self.oauth   = ""
         self.channel = ""
-        self.port = ""
-        self.host = ""
+        self.port    = ""
+        self.host    = ""
         self.channel = ""
 
         self.sock = None
@@ -26,6 +27,7 @@ class Twitch:
         print("Connecting to twitch.tv")
 
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # to have a non-blocking soucket add this line. not tested yet.
         # self.sock.settimeout(0.6)
         self.host = host
         self.port = port
@@ -77,20 +79,29 @@ class Twitch:
 
     def send_message(self, message):
         messageTemp = "PRIVMSG #" + self.channel + " :" + message.rstrip()
-        print messageTemp
+        # print messageTemp
         
         try:
             sent = self.sock.send(messageTemp + "\r\n")
+            print("Sent: %s" %(messageTemp))
         except:
             print("Lost connection to Twitch, attempting to reconnect...")
             self.connect(self.user, self.oauth, self.channel, self.host, self.port)
-            return None
+            sent = None
 
-        print("Sent: %s" %(messageTemp))
+        return sent
 
+    # to send a pong message every 5 mintues.
+    def pong(self):
+        self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
+        print("PONG SENT!")
+        threading.Timer(300, self.pong).start()
+
+    # if the incoming message is ping, then send a pong.
     def is_ping_message(self, data):
         if "PING :tmi.twitch.tv\r" in data:
-            self.send_message("PONG :tmi.twitch.tv".encode("utf-8"))
+            print('recieved ping...', ' sending pong...')
+            self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
             return True
         else: 
             return False

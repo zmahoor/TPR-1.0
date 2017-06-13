@@ -286,6 +286,17 @@ class DATABASE:
             newIndex = np.random.random()
         return newIndex
 
+    def Fetch_From_Disply_Table(self, startTime):
+
+        sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
+         d.numYes, d.numNo, d.numLike, d.numDislike
+         from display as d JOIN robots as r ON d.robotID=r.robotID 
+         JOIN unique_commands as u on d.cmdTxt=u.cmdTxt
+         WHERE d.startTime='%s';"""%(startTime)
+
+        err_msg = "Failed to retrieve record of a dispaly..."
+        return self.Execute_SelectOne_Sql_Command(sql, err_msg)
+
     def Fetch_User_Score(self, user):
 
         sql = "SELECT * FROM users WHERE userName='%s';"%(user)
@@ -366,7 +377,7 @@ class DATABASE:
         sql = "SELECT * FROM helps WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         err_msg = "Failed to fetch the oldest unprocessed help request..."
         result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
-        
+
         if result != None:
             helpID = result['helpID']
             sql = "UPDATE helps SET processed=1 WHERE helpID='%d';"%(helpID)
