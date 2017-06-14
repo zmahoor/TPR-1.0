@@ -19,7 +19,7 @@ from pygameWrapper import PYGAMEWRAPPER
 
 
 SUB_POPULATION_SIZE      = 5
-MORPHOLOGY_MUTATION_RATE = 0.3
+MORPHOLOGY_MUTATION_RATE = 0.2
 INDIVIDUAL_DURATION      = 30
 REWARD_WINDOW_W          = 950
 REWARD_WINDOW_H          = 280
@@ -46,8 +46,7 @@ def Store_Sensors_To_File(individual, currentTime):
     currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
     path += '/robot_' + str(individual.id) + "_" + currentTime + ".dat"
     sensorValues = individual.Get_Raw_Sensors()
-    with open( path , 'wb' ) as f:
-        pickle.dump(sensorValues, f)
+    Write_File(path, sensorValues)
 
 def Store_Controller_To_File(individual, robotType):
 
@@ -58,8 +57,7 @@ def Store_Controller_To_File(individual, robotType):
 
     # get filename and extension
     path += '/robot_' + str(individual.id) + ".dat"
-    with open( path , 'wb' ) as f:
-        pickle.dump(individual, f)
+    Write_File(path, individual)
 
 def Load_Controller_From_File(robotID, robotType):
 
@@ -96,6 +94,17 @@ def Read_File(filePath):
     except:
         print "Failed loading ", filePath 
         return None
+
+def Write_File(filePath, data):
+
+    try:
+        f = open(filePath,'wb')
+        pickle.dump(data, f)
+        f.close
+
+        print "Successful writing ", filePath
+    except:
+        print "Failed writing ", filePath 
 
 def Draw_Reinforcment_Window():
 
@@ -169,11 +178,13 @@ def Compete_Based_On_Dominance(individual1, individual2):
         winner, loser = individual2, individual1
     elif not Dominance(individual1, individual2):
         return None
+
     print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
+    print "Killing the loser...", loser['robotID']
 
     db.Kill_Robot(loser['robotID'])
 
-    winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['robotType'])
+    winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
     if winnerIndividual == None:  
         db.Kill_Robot(winner['robotID'])
     
@@ -185,10 +196,14 @@ def Create_Mutation(individual):
 
     mr = np.random.random()
 
+    print 'Creating a mutation...', mr
+
     if  individual == None or mr < MORPHOLOGY_MUTATION_RATE:
 
         randomType    = validRobots[np.random.randint(0, len(validRobots))]
         newIndividual = Load_From_Diversity_Pool(randomType)
+
+        print 'Mutate the loser\'s morphology to ', randomType
 
         if newIndividual == None:
             newIndividual = INDIVIDUAL(0, randomType)
@@ -196,7 +211,12 @@ def Create_Mutation(individual):
         return newIndividual
 
     if  mr > MORPHOLOGY_MUTATION_RATE:
-        return individual.Mutate()
+
+        newIndividual = deepcopy(individual)
+        newIndividual.Mutate()
+        print 'Mutate the brain of robot: ', newIndividual.id
+
+        return newIndividual
 
 def Dominance(individual1, individual2):
 
@@ -208,12 +228,14 @@ def Dominance(individual1, individual2):
 def Add_New_Robot(newIndividual):
 
     robotID = db.Add_To_Robot_Table(newIndividual.robotType)
+
+    print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual, newIndividual.robotType)
 
 def Initialize_Sub_Population(numToBeFilled, robotType):
 
-    print "Empty slots in sub population of ", robotType, " is: ", numToBeFilled
+    print 'Empty slots in sub population of ', robotType, " is: ", numToBeFilled
     while numToBeFilled > 0 :
 
         newIndividual = Load_From_Diversity_Pool(robotType)
@@ -222,20 +244,33 @@ def Initialize_Sub_Population(numToBeFilled, robotType):
         Add_New_Robot(newIndividual)
 
         numToBeFilled -= 1
+        
+    print '\n'
 
 def Initialize_Global_Population():
 
+    print "\n\n"
+    print "Initializing the global population..."
+
     aliveIndividuals = db.Fetch_Alive_Robots("all")
 
-    for type in validRobots:
+    print "Num of alive individuals: ", len(aliveIndividuals)
+
+    print '\n'
+
+    for rtype in validRobots:
 
         count = 0
         for robot in aliveIndividuals: 
-            if robot['type'] == type:
+            if robot['type'] == rtype:
                 count += 1 
 
+        print 'Create: ', SUB_POPULATION_SIZE-count, ' new individuals from type; ', rtype
+
         if count< SUB_POPULATION_SIZE: 
-            Initialize_Sub_Population(SUB_POPULATION_SIZE-count, type)
+            Initialize_Sub_Population(SUB_POPULATION_SIZE-count, rtype)
+
+    print '\n'
 
 def Steady_State():
 
@@ -244,6 +279,8 @@ def Steady_State():
     global colorIndex
 
     aliveIndividuals = db.Fetch_Alive_Robots("all")
+
+    print "Num of alive individuals: ", len(aliveIndividuals)
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
 
     index            = Select_Random_Individual(len(aliveIndividuals))
@@ -290,7 +327,7 @@ def main(argv):
         Initialize_Global_Population()
 
     while True:
-        print("G: ", generation)
+        print "Generation: ", generation
 
         Steady_State()
 
