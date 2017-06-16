@@ -5,6 +5,7 @@ import pygame
 from database import DATABASE
 import copy
 from settings import *
+from timer import TIMER
 
 db = DATABASE()
 
@@ -13,6 +14,9 @@ window = PYGAMEWRAPPER(width = 960, height = 250)
 y = [100, 150, 200]
 
 reset = 1
+
+partialCmdTimer = TIMER(10)
+cmdTimer        = TIMER(3*60)
 
 # [ (c1, v1, [users]), (c2, v2, [users]), ... (cn, vn, [users]) ]
 
@@ -57,8 +61,6 @@ def Get_Commands():
                                 
         return a
         
-ctr = 0
-
 li = Get_Commands()
 
 xc = 1000
@@ -90,30 +92,21 @@ while 1:
         
         time.sleep(.01)
 
-        ctr = ctr + 1
-
-        if ctr == 1000:
-
-                reset = reset + 1
-                
+        if partialCmdTimer.Time_Elapsed():
                 li = Get_Commands()
-                
                 xc = 1000
-                
-                ctr = 0
+                reset += 1 
+                partialCmdTimer.Reset()
 
-        if reset == 3:
-                
-                reset = 0
+        if cmdTimer.Time_Elapsed():
+                newActive = DEFAULT_COMMAND
                 if li != []:
                         newActive = li[0][0]
-                        print li
                         print "newActive: ", newActive
-                
-                        db.Set_Current_Command(newActive)
-                else:
-                        db.Set_Current_Command(DEFAULT_COMMAND)
-                          
+                db.Set_Current_Command(newActive)
+                reset = 0
+                cmdTimer.Reset()
+
 	window.Refresh()
 
 
