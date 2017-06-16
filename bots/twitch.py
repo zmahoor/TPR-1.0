@@ -93,8 +93,13 @@ class Twitch:
 
     # to send a pong message every 5 mintues.
     def pong(self):
-        self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
-        print("PONG SENT!")
+        try:
+            self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
+            print("PONG SENT!")
+        except:
+            print('Unable to send pong message..')
+            self.connect(self.user, self.oauth, self.channel, self.host, self.port)
+
         threading.Timer(300, self.pong).start()
 
     # if the incoming message is ping, then send a pong.
