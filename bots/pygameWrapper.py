@@ -81,7 +81,7 @@ class PYGAMEWRAPPER:
                           'LIGHTGRAY'   : (150, 150, 150),
                           'DARKGRAY'    : ( 75,  75,  75),
                           'PINK'        : (255,  10, 190),
-                          'LIGHTBLUE'   : (  0, 192, 255),
+                          'LIGHTBLUE'   : (173, 216, 230),
                           'LIGHTGREEN'  : (100, 255,   0),
                           'DARKGREEN'   : ( 11, 128,  11),
                           'VIOLET'      : ( 70,   0, 130),
@@ -90,7 +90,8 @@ class PYGAMEWRAPPER:
                           'PURPLE'      : (255, 0  , 255),
                           'CYAN'        : (0, 255  , 255),
                           'BROWN'       : (102, 51 ,   0),
-                          'YELLOW'      : (255, 255,   0)}
+                          'YELLOW'      : (255, 255,   0),
+                          'TAN'         : (241, 232, 220)}
 
                 #get color
                 if color in colors:
