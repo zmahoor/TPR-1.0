@@ -17,7 +17,6 @@ from database import DATABASE
 from settings import *
 from pygameWrapper import PYGAMEWRAPPER
 
-
 SUB_POPULATION_SIZE      = 5
 MORPHOLOGY_MUTATION_RATE = 0.2
 INDIVIDUAL_DURATION      = 30
