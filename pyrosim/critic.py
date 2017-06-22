@@ -18,7 +18,12 @@ from settings import *
 SENSOR_DROP_RATE  = 6
 mydatabase = DATABASE()
 
-def Read_From_Database(displayTime):
+def Read_From_Database(path):
+
+    # load the crowd inputs from database.
+    start       = path.rfind('_')
+    end         = path.rfind('.')
+    displayTime = path[start+1:end]
 
     record= mydatabase.Fetch_From_Disply_Table(displayTime)
 
@@ -26,15 +31,18 @@ def Read_From_Database(displayTime):
 
     # ignore this evaluation and remove this sensor file if it has not received
     # any inputs from the crowd.
-    # if record['numYes'] == 0 and record['numNo'] == 0 and \
-    #     record['numLike'] ==0 and record['numDislike'] == 0:
+    if record['numYes'] == 0 and record['numNo'] == 0 and \
+        record['numLike'] ==0 and record['numDislike'] == 0:
 
-    #     # Remove_Sensor_File(path)
-    #     return None
+        print 'zero feedback...removing it.'
+        Remove_Sensor_File(path)
+        return None
 
     # ignore this evaluation if it has not received any yes or no from the crowd.
-    # if record['numYes'] == 0 and record['numNo'] == 0:
-    #     return None
+    if record['numYes'] == 0 and record['numNo'] == 0:
+
+        print 'neither positive nor negative feedback useful for critic.'
+        return None
 
     # calculate obedience and add it to the dictionary.
     try:
@@ -79,18 +87,15 @@ def Load_Sensors_From_File():
         # load the sensors.
         sensors = Read_File(path)
 
-        # load the crowd inputs from database.
-        start   = path.rfind('_')
-        end     = path.rfind('.')
-        displayTime = path[start+1:end]
-        record =  Read_From_Database(displayTime)
+        record =  Read_From_Database(path)
 
         if record == None:
+            print 'skipping ....not received any feedback'
             continue
 
         sample = Extract_Features(dict(sensors.items() + record.items()))
 
-        # dataForCritic.append( dict(sensors.items() + record.items()))
+        dataForCritic.append(sample)
 
     return dataForCritic
 
@@ -99,13 +104,13 @@ def Propriceptive_Feature_Extraction(values):
     values = np.array(values).T
 
     temp = np.diff(values, axis=0)
-    print "joint features: ", temp.shape
+    # print "joint features: ", temp.shape
 
     temp = np.average(temp, axis=1)
-    print "joint features: ", temp[-1],temp.shape
+    # print "joint features: ", temp[-1],temp.shape
 
     temp = np.hstack((temp, np.array(temp[-1])))
-    print "joint features: ", temp.shape
+    # print "joint features: ", temp.shape
 
     return temp[1::SENSOR_DROP_RATE]
 
@@ -120,9 +125,10 @@ def Position_Feature_Extraction(values):
 def Touch_Feature_Extraction(values):
 
     values = np.array(values).T
-    print 'touch features:', values.shape
+    # print 'touch features:', values.shape
+
     temp   = np.average(values, axis=1)
-    print 'touch features:', temp.shape
+    # print 'touch features:', temp.shape
 
     return temp[1::SENSOR_DROP_RATE]
 
@@ -143,32 +149,32 @@ def Extract_Features(sample):
 
         # position_x sensor
         if key.startswith('P') and key.endswith('_X') :
-            print key, sample[key].shape
+            # print key, sample[key].shape
             posX = Position_Feature_Extraction(sample[key])
         
         # position_y sensor
         elif key.startswith('P') and key.endswith('_Y'):
-            print key, sample[key].shape
+            # print key, sample[key].shape
             posY = Position_Feature_Extraction(sample[key])
 
         # position_z sensor
         elif key.startswith('P') and key.endswith('_Z'):
-            print key, sample[key].shape
+            # print key, sample[key].shape
             posZ = Position_Feature_Extraction(sample[key])
 
         # touch sensor
         elif key.startswith('T'):
-            print key, sample[key].shape
+            # print key, sample[key].shape
             touch.append(sample[key])
 
         # ray sensor 
         elif key.startswith('R0'):
-            print key, sample[key].shape
+            # print key, sample[key].shape
             ray = Ray_Feature_Extraction(sample[key])
 
         # propriceptive sensor
         elif key.startswith('P'):
-            print key, sample[key].shape
+            # print key, sample[key].shape
             prop.append(sample[key])
 
     if len(prop) != 0:
@@ -189,18 +195,18 @@ def Extract_Features(sample):
 
     return (timeSeriedFeatures, nonTimedSeriedFeatures, output)
 
-def Prepare_Training_Features(dataForCritic):
+# def Prepare_Training_Features(dataForCritic):
 
-    sensor_data = []
-    word_data   = []
-    output      = []
+#     sensor_data = []
+#     word_data   = []
+#     output      = []
 
-    for sample in dataForCritic:
+#     for sample in dataForCritic:
 
-        tfeatures, ntfeatures, output = Extract_Features(sample)
-        sensor_data.append(tfeatures)
-        word_data.append(ntfeatures)
-        outputs.append(output)
+#         tfeatures, ntfeatures, output = Extract_Features(sample)
+#         sensor_data.append(tfeatures)
+#         word_data.append(ntfeatures)
+#         outputs.append(output)
 
 def Read_File(filePath):
 
@@ -218,5 +224,5 @@ def Read_File(filePath):
 dataForCritic = Load_Sensors_From_File()
 print "samples for critic: ", len(dataForCritic)
 
-trainingData  = Prepare_Training_Features(dataForCritic)
+# trainingData  = Prepare_Training_Features(dataForCritic)
 
