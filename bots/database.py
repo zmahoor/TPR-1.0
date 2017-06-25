@@ -4,7 +4,6 @@ from time import *
 import datetime
 from settings import *
 import sys
-import numpy as np
 
 class DATABASE:
 
@@ -286,13 +285,19 @@ class DATABASE:
             newIndex = np.random.random()
         return newIndex
 
-    def Fetch_From_Disply_Table(self, startTime):
+    def Fetch_From_Disply_Table(self, startTime='all'):
 
+        if startTime == 'all':
+            sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
+            d.numYes, d.numNo, d.numLike, d.numDislike, d.startTime
+            from display as d JOIN robots as r ON d.robotID=r.robotID 
+            JOIN unique_commands as u on d.cmdTxt=u.cmdTxt;"""%
+        else:
         sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
-         d.numYes, d.numNo, d.numLike, d.numDislike
-         from display as d JOIN robots as r ON d.robotID=r.robotID 
-         JOIN unique_commands as u on d.cmdTxt=u.cmdTxt
-         WHERE d.startTime='%s';"""%(startTime)
+            d.numYes, d.numNo, d.numLike, d.numDislike, startTime
+            from display as d JOIN robots as r ON d.robotID=r.robotID 
+            JOIN unique_commands as u on d.cmdTxt=u.cmdTxt
+            WHERE d.startTime='%s';"""%(startTime)
 
         err_msg = "Failed to retrieve record of a dispaly..."
         return self.Execute_SelectOne_Sql_Command(sql, err_msg)
@@ -359,7 +364,7 @@ class DATABASE:
             sql = "SELECT * FROM robots WHERE dead=0;"
         else:
             sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
-            
+
         err_msg = "Failed to retrieve alive robots..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
