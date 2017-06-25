@@ -291,16 +291,16 @@ class DATABASE:
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, d.startTime
             from display as d JOIN robots as r ON d.robotID=r.robotID 
-            JOIN unique_commands as u on d.cmdTxt=u.cmdTxt;"""%
+            JOIN unique_commands as u on d.cmdTxt=u.cmdTxt;"""
         else:
-        sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
+            sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, startTime
             from display as d JOIN robots as r ON d.robotID=r.robotID 
             JOIN unique_commands as u on d.cmdTxt=u.cmdTxt
             WHERE d.startTime='%s';"""%(startTime)
 
         err_msg = "Failed to retrieve record of a dispaly..."
-        return self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        return self.Execute_Select_Sql_Command(sql, err_msg)
 
     def Fetch_User_Score(self, user):
 

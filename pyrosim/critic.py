@@ -21,8 +21,10 @@ sys.path.append('../bots')
 from database import DATABASE
 from settings import *
 
-SENSOR_DROP_RATE  = 6
-# mydatabase = DATABASE()
+SENSOR_DROP_RATE  = 12
+data_generation   = True
+
+mydatabase = DATABASE()
 
 class CRITIC:
 
@@ -35,7 +37,7 @@ class CRITIC:
 
         layers = self.params['layers']
 
-        sensor_input = Input(shape=(30, 6), name='sensor_input')
+        sensor_input = Input(shape=(150, 6), name='sensor_input')
 
         lstm1    = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
@@ -88,7 +90,7 @@ class CRITIC:
             start_time = time.time()
             try:
                 self.model.fit_generator(Generate_Data(), steps_per_epoch=10000, epochs=10)
-            except Exception as e::
+            except Exception as e:
                 print str(e)
 
         self.model.save('critic_model.h5')  # creates a HDF5 file 'my_model.h5'
@@ -129,12 +131,15 @@ class CRITIC:
         except Exception as e:
             print str(e)
 
-def Delete_Sensor_File(startTime):
+def Delete_Sensor_File(record):
 
-    startTime = datetime.strptime(startTime, "%Y-%m-%d %H:%M:%S")
+    robotID   = record['robotID']
+    startTime = record['startTime']
+    
+    path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
+        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
 
-    path = "../sensors/"+ str(currentTime.year) + "/" + str(currentTime.month)+\
-        "/" + str(currentTime.day)
+    print path
 
     if not os.path.isfile(path): return
 
@@ -154,43 +159,63 @@ def Delete_Useless_Sensor_Files():
 
             print 'zero feedback...removing it.'
 
-            startTime = record['startTime']
-            Delete_Sensor_File(startTime)
+            Delete_Sensor_File(record)
 
 def Generate_Data():
-    while 1:
+    
     records = mydatabase.Fetch_From_Disply_Table('all')
 
-    if records == (): 
+    print('Number of possible samples: ', len(records))
+
+    if records == () or records == None: 
         print 'No data was found for critic.' 
         exit()
 
-    for record in records:
-        if record['numYes'] == 0 and record['numNo'] == 0:
-            continue
+    i = 0
+    while 1:    
 
-        record['obedience'] = float(record['numYes'] - record['numNo']) \
-                            / float(record['numYes'] + record['numNo'])
+        for record in records:
 
-        # remove unnecessary keys.
-        map(record.pop, ['numLike','numDislike', 'numNo', 'numYes'])
+            if record['numYes'] == 0 and record['numNo'] == 0:
+                print 'No feedback for this individual.'
+                continue
 
-        startTime = record['startTime']
-        sensors   = Load_Sensors_From_File(startTime)
+            sensors = Load_Sensors_From_File(record)
 
-        output = record['obedience']
-        tfeatures, ntfeatures = Extract_Features( dict(sensors.items() + record.items() ))
+            if sensors == None: 
+                # print('Not able to load the sensor file.') 
+                continue
 
-        yield ({'sensor_input': tfeatures, 'word_input': ntfeatures}, {'output': output})
+            features = Extract_Features( sensors )
+            if features == None: continue
 
-def Load_Sensors_From_File(startTime):
+            tfeatures  = features[0]
+            if tfeatures.shape != (150, 6): continue
+            
+            obedience  = float(record['numYes'] - record['numNo']) \
+                                / float(record['numYes'] + record['numNo'])
+
+            if 'wordToVec' in record.keys(): 
+                ntfeatures = np.array([ record['wordToVec'] ])
+            else: ntfeatures = np.array([0.0])
+
+            i = i + 1
+
+            print i, record['robotID'], tfeatures.shape, ntfeatures.shape
+            yield ({'sensor_input': tfeatures, 'word_input': ntfeatures}, {'output': obedience})
+
+def Load_Sensors_From_File(record):
+
+    robotID   = record['robotID']
+    startTime = record['startTime']
     
-    startTime = datetime.strptime(startTime, "%Y-%m-%d %H:%M:%S")
-
     path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
-        "/" + str(startTime.day)
+        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
 
-    if not os.path.isfile(path): return None
+    # print path
+
+    if not os.path.isfile(path): 
+        return None
 
     sensors = Read_File(path)
 
@@ -212,15 +237,9 @@ def Read_File(filePath):
 def Propriceptive_Feature_Extraction(values):
 
     values = np.array(values).T
-
     temp   = np.diff(values, axis=0)
-    # print "joint features: ", temp.shape
-
     temp   = np.average(temp, axis=1)
-    # print "joint features: ", temp[-1],temp.shape
-
     temp   = np.hstack((temp, np.array(temp[-1])))
-    # print "joint features: ", temp.shape
 
     return temp[1::SENSOR_DROP_RATE]
 
@@ -235,10 +254,7 @@ def Position_Feature_Extraction(values):
 def Touch_Feature_Extraction(values):
 
     values = np.array(values).T
-    # print 'touch features:', values.shape
-
     temp   = np.average(values, axis=1)
-    # print 'touch features:', temp.shape
 
     return temp[1::SENSOR_DROP_RATE]
 
@@ -251,9 +267,11 @@ def Extract_Features(sample):
     posY  = None
     posZ  = None
 
-    print sample.keys()
+    features = None
+    # print sample.keys()
     
-    if 'R0' not in sample.keys(): return None
+    if 'R0' not in sample.keys(): 
+        return None
 
     for key in sample.keys():
 
@@ -295,17 +313,15 @@ def Extract_Features(sample):
         touch = Touch_Feature_Extraction(touch)
     else: return None
 
-    timeSeriedFeatures     = np.array([posX[:], posY, posZ, ray, touch, prop]).T
+    features = np.array([posX[:], posY, posZ, ray, touch, prop]).T
 
-    print 'sensors: ', np.array(timeSeriedFeatures).shape
+    # print 'sensors: ', timeSeriedFeatures.shape
 
-    nonTimedSeriedFeatures = sample['wordToVec']
-
-    return (timeSeriedFeatures, nonTimedSeriedFeatures)
+    return (features, True)
 
 def make_sudo_data(num_samples=10000):
     num_dim     = 6
-    time_steps  = 30
+    time_steps  = 150
     words       = [0.5, 0.7]
 
     wordToVec  = [ words[np.random.randint(len(words))] for i in range(num_samples) ]
@@ -315,9 +331,8 @@ def make_sudo_data(num_samples=10000):
     return np.array(wordToVec), sensors, obedience
 
 def main():
-    # Delete_Useless_Sensor_Files()
-
-    # Genereate_Data(records)
+    # num_dim     = 6
+    # time_steps  = 150
 
     params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
     'validation_split':0.05}
@@ -329,7 +344,7 @@ def main():
     c.setup_model()
     c.train_model(training_data)
 
-    predicted = c.predict(testing_data)
+    # predicted = c.predict(testing_data)
 
 
 main()
