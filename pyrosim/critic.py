@@ -1,14 +1,20 @@
-
-from pyrosim import PYROSIM
+from keras.models import Sequential, Model
+from keras.layers.core import Dense, Activation, Dropout
+from keras.layers import Input, Embedding, LSTM, Dense, Activation, concatenate
+import keras 
+from keras.models import load_model, save_model
 import numpy as np
-import random
-from individual import INDIVIDUAL
-from copy import deepcopy
+import time
+import matplotlib.pyplot as plt
+import h5py
 import sys 
 import pickle
 import os 
 import constants as c
-from timer import TIMER
+from datetime import datetime
+import argparse
+
+np.random.seed(1234)
 
 sys.path.append('../bots')
 
@@ -16,100 +22,204 @@ from database import DATABASE
 from settings import *
 
 SENSOR_DROP_RATE  = 6
-mydatabase = DATABASE()
+# mydatabase = DATABASE()
 
-def Read_From_Database(path):
+class CRITIC:
 
-    # load the crowd inputs from database.
-    start       = path.rfind('_')
-    end         = path.rfind('.')
-    displayTime = path[start+1:end]
+    def __init__(self, params):
 
-    record= mydatabase.Fetch_From_Disply_Table(displayTime)
+        self.model = None
+        self.params = params
 
-    if record == None: return None
+    def setup_model(self):
 
-    # ignore this evaluation and remove this sensor file if it has not received
-    # any inputs from the crowd.
-    if record['numYes'] == 0 and record['numNo'] == 0 and \
-        record['numLike'] ==0 and record['numDislike'] == 0:
+        layers = self.params['layers']
 
-        print 'zero feedback...removing it.'
-        Remove_Sensor_File(path)
-        return None
+        sensor_input = Input(shape=(30, 6), name='sensor_input')
 
-    # ignore this evaluation if it has not received any yes or no from the crowd.
-    if record['numYes'] == 0 and record['numNo'] == 0:
+        lstm1    = LSTM(12, return_sequences=True)(sensor_input)
+        dropout1 = Dropout(0.2)(lstm1)
 
-        print 'neither positive nor negative feedback useful for critic.'
-        return None
+        lstm2    = LSTM(12, return_sequences=True)(dropout1)
+        dropout2 = Dropout(0.2)(lstm2)
 
-    # calculate obedience and add it to the dictionary.
-    try:
-        obedience = float(record['numYes']-record['numNo'])/float(record['numYes']+record['numNo'])
-    except:
-        obedience = 0
+        lstm3    = LSTM(12, return_sequences=False)(dropout2)
+        dropout3 = Dropout(0.2)(lstm3)
+        
+        word_input = Input(shape=(1,), name='word_input')
+        x = keras.layers.concatenate([dropout3, word_input])
 
-    record['obedience'] = obedience
+        x = Dense(12, activation='relu')(x)
+        x = Dense(12, activation='relu')(x)
+        x = Dense(12, activation='relu')(x)
 
-    # remove unnecessary keys.
-    map(record.pop, ['numLike','numDislike', 'numNo', 'numYes'])
+        output = Dense(1, activation='linear', name='output')(x)
 
-    return record
+        self.model = Model(inputs=[sensor_input, word_input], outputs=[output])
 
-def Remove_Sensor_File(fileToBeRemoved):
+        start = time.time()
+
+        self.model.compile(optimizer='rmsprop', loss={'output': 'mse'},
+            loss_weights={'output': 1.})
+        
+        print "Compilation Time : ", time.time() - start
+
+    def train_model(self, data):
+
+        wordToVec, sensors, obedience = data
+        print wordToVec.shape, sensors.shape, obedience.shape
+                
+        if not data_generation:
+
+            print('Not using data generation...')
+
+            start_time = time.time()
+            try:
+                self.model.fit({'sensor_input': sensors, 'word_input': wordToVec},
+                    {'output': obedience},
+                    epochs=self.params['epochs'], batch_size=self.params['batch_size'],
+                    validation_split=self.params['validation_split'])
+
+            except KeyboardInterrupt:
+                print 'Training duration (s) : ', time.time() - start_time
+        else:
+
+            print('Using data generation...')
+            start_time = time.time()
+            try:
+                self.model.fit_generator(Generate_Data(), steps_per_epoch=10000, epochs=10)
+            except Exception as e::
+                print str(e)
+
+        self.model.save('critic_model.h5')  # creates a HDF5 file 'my_model.h5'
+
+        print 'Training duration (s) : ', time.time() - start_time
+
+    def predict(self, data):
+        
+        wordToVec, sensors, obedience = data
+        print wordToVec.shape, sensors.shape, obedience.shape
+
+        predicted = self.model.predict({'sensor_input': sensors, 'word_input': wordToVec})
+        predicted = np.reshape(predicted, (predicted.size,))
+
+        print predicted.shape
+        
+        # self.plot_results(obedience, predicted)
+
+        return predicted
+
+    def plot_results(self, y_test, predicted):
+
+        assert y_test.shape == predicted.shape
+
+        x = 200
+        try:
+
+            fig, ax = plt.subplots()
+            line1,  = ax.plot(y_test, '-', linewidth=2,
+                 label='True obedience')
+
+            line2,  = ax.plot(predicted, '-', linewidth=2,
+                 label='Predicted obedience')
+
+            ax.legend(loc='upper right')
+            plt.show()
+
+        except Exception as e:
+            print str(e)
+
+def Delete_Sensor_File(startTime):
+
+    startTime = datetime.strptime(startTime, "%Y-%m-%d %H:%M:%S")
+
+    path = "../sensors/"+ str(currentTime.year) + "/" + str(currentTime.month)+\
+        "/" + str(currentTime.day)
+
+    if not os.path.isfile(path): return
 
     try:
         os.remove(fileToBeRemoved)
     except:
         print "unable to remove this file.."
 
-def Load_Sensors_From_File():
+def Delete_Useless_Sensor_Files():
 
-    # get directory
-    path = "../sensors/"
+    records = mydatabase.Fetch_From_Disply_Table('all')
 
-    dataForCritic = []
+    for record in records:
 
-    # recursively find all the sensor files.
-    sensorFiles = [os.path.join(dirpath, f)
-    for dirpath, dirnames, files in os.walk(path)
-    for f in files if f.endswith('.dat')]
+        if record['numYes'] == 0 and record['numNo'] == 0 and \
+            record['numLike'] ==0 and record['numDislike'] == 0:
 
-    print "num of sensor files: ", len(sensorFiles)
-    if len(sensorFiles) == 0: return None
+            print 'zero feedback...removing it.'
 
-    for path in sensorFiles:
+            startTime = record['startTime']
+            Delete_Sensor_File(startTime)
 
-        if not os.path.isfile(path): 
+def Generate_Data():
+    while 1:
+    records = mydatabase.Fetch_From_Disply_Table('all')
+
+    if records == (): 
+        print 'No data was found for critic.' 
+        exit()
+
+    for record in records:
+        if record['numYes'] == 0 and record['numNo'] == 0:
             continue
 
-        # load the sensors.
-        sensors = Read_File(path)
+        record['obedience'] = float(record['numYes'] - record['numNo']) \
+                            / float(record['numYes'] + record['numNo'])
 
-        record =  Read_From_Database(path)
+        # remove unnecessary keys.
+        map(record.pop, ['numLike','numDislike', 'numNo', 'numYes'])
 
-        if record == None:
-            print 'skipping ....not received any feedback'
-            continue
+        startTime = record['startTime']
+        sensors   = Load_Sensors_From_File(startTime)
 
-        sample = Extract_Features(dict(sensors.items() + record.items()))
+        output = record['obedience']
+        tfeatures, ntfeatures = Extract_Features( dict(sensors.items() + record.items() ))
 
-        dataForCritic.append(sample)
+        yield ({'sensor_input': tfeatures, 'word_input': ntfeatures}, {'output': output})
 
-    return dataForCritic
+def Load_Sensors_From_File(startTime):
+    
+    startTime = datetime.strptime(startTime, "%Y-%m-%d %H:%M:%S")
+
+    path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
+        "/" + str(startTime.day)
+
+    if not os.path.isfile(path): return None
+
+    sensors = Read_File(path)
+
+    return sensors
+
+def Read_File(filePath):
+
+    sensors = None
+
+    try:
+        with open(filePath, 'r') as f:
+            sensors = pickle.load(f)
+        print "Successful loading ", filePath
+    except:
+        print "Failed loading ", filePath 
+    
+    return sensors
 
 def Propriceptive_Feature_Extraction(values):
 
     values = np.array(values).T
 
-    temp = np.diff(values, axis=0)
+    temp   = np.diff(values, axis=0)
     # print "joint features: ", temp.shape
 
-    temp = np.average(temp, axis=1)
+    temp   = np.average(temp, axis=1)
     # print "joint features: ", temp[-1],temp.shape
 
-    temp = np.hstack((temp, np.array(temp[-1])))
+    temp   = np.hstack((temp, np.array(temp[-1])))
     # print "joint features: ", temp.shape
 
     return temp[1::SENSOR_DROP_RATE]
@@ -191,38 +301,36 @@ def Extract_Features(sample):
 
     nonTimedSeriedFeatures = sample['wordToVec']
 
-    output                 = sample['obedience']
+    return (timeSeriedFeatures, nonTimedSeriedFeatures)
 
-    return (timeSeriedFeatures, nonTimedSeriedFeatures, output)
+def make_sudo_data(num_samples=10000):
+    num_dim     = 6
+    time_steps  = 30
+    words       = [0.5, 0.7]
 
-# def Prepare_Training_Features(dataForCritic):
+    wordToVec  = [ words[np.random.randint(len(words))] for i in range(num_samples) ]
+    sensors    = 2*np.random.rand(num_samples, time_steps, num_dim) - 1
+    obedience  = np.random.rand(num_samples)
 
-#     sensor_data = []
-#     word_data   = []
-#     output      = []
+    return np.array(wordToVec), sensors, obedience
 
-#     for sample in dataForCritic:
+def main():
+    # Delete_Useless_Sensor_Files()
 
-#         tfeatures, ntfeatures, output = Extract_Features(sample)
-#         sensor_data.append(tfeatures)
-#         word_data.append(ntfeatures)
-#         outputs.append(output)
+    # Genereate_Data(records)
 
-def Read_File(filePath):
+    params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
+    'validation_split':0.05}
 
-    sensors = None
+    training_data = make_sudo_data(1000)
+    testing_data  = make_sudo_data(200)
 
-    try:
-        with open(filePath, 'r') as f:
-            sensors = pickle.load(f)
-        print "Successful loading ", filePath
-    except:
-        print "Failed loading ", filePath 
-    
-    return sensors
+    c = CRITIC(params)
+    c.setup_model()
+    c.train_model(training_data)
 
-dataForCritic = Load_Sensors_From_File()
-print "samples for critic: ", len(dataForCritic)
+    predicted = c.predict(testing_data)
 
-# trainingData  = Prepare_Training_Features(dataForCritic)
+
+main()
 
