@@ -21,9 +21,7 @@ from database import DATABASE
 from settings import *
 
 SENSOR_DROP_RATE  = 12
-data_generation   = True
-
-mydatabase = DATABASE()
+data_generation   = False
 
 class CRITIC:
 
@@ -36,7 +34,7 @@ class CRITIC:
 
         layers = self.params['layers']
 
-        sensor_input = Input(shape=(50, 6), name='sensor_input')
+        sensor_input = Input(shape=(150, 6), name='sensor_input')
 
         lstm1    = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
@@ -65,13 +63,13 @@ class CRITIC:
         
         print "Compilation Time : ", time.time() - start
 
-    def train_model(self):
+    def train_model(self, mydatabase):
 
         if not data_generation:
 
             print('Not using data generation...')
 
-            data = Load_Training_Data()
+            data = Load_Training_Data(mydatabase)
             sensors, wordToVec, obedience = data
 
             print wordToVec.shape, sensors.shape, obedience.shape
@@ -90,7 +88,7 @@ class CRITIC:
             print('Using data generation...')
             start_time = time.time()
             try:
-                self.model.fit_generator(Generate_Data(10), steps_per_epoch=10, epochs=5)
+                self.model.fit_generator(Generate_Data(10, mydatabase), steps_per_epoch=10, epochs=5)
             except Exception as e:
                 print str(e)
 
@@ -100,16 +98,11 @@ class CRITIC:
 
     def predict(self, data):
         
-        wordToVec, sensors, obedience = data
-        print wordToVec.shape, sensors.shape, obedience.shape
-
-        predicted = self.model.predict({'sensor_input': sensors, 'word_input': wordToVec})
+        predicted = self.model.predict(data)
         predicted = np.reshape(predicted, (predicted.size,))
 
-        print predicted.shape
+        print "predicted: ", predicted.shape
         
-        # self.plot_results(obedience, predicted)
-
         return predicted
 
     def plot_results(self, y_test, predicted):
@@ -163,24 +156,7 @@ def Delete_Useless_Sensor_Files():
 
             Delete_Sensor_File(record)
 
-# def Generate_Data2():
-
-#     num_dim     = 6
-#     time_steps  = 150
-#     words       = [0.5, 0.7]
-#     batch_size  = 1000
-
-#     while True:
-
-#         wordToVec  = np.array([ words[np.random.randint(len(words))] for i in range(batch_size) ])
-#         sensors    = 2*np.random.rand(batch_size, time_steps, num_dim) - 1
-#         obedience  = np.random.rand(batch_size)
-
-#         print wordToVec.shape, sensors.shape, obedience.shape
-
-#         yield ({'sensor_input': sensors, 'word_input': wordToVec}, {'output': obedience})
-
-def Generate_Data(batch_size):
+def Generate_Data(batch_size, mydatabase):
     
     records = mydatabase.Fetch_From_Disply_Table('all_yes_or_no')
 
@@ -238,7 +214,7 @@ def Generate_Data(batch_size):
                 output       = []
                 numSamples   = 0
 
-def Load_Training_Data():
+def Load_Training_Data(mydatabase):
     
     records = mydatabase.Fetch_From_Disply_Table('all_yes_or_no')
 
@@ -346,6 +322,7 @@ def Extract_Features(sample):
     # print sample.keys()
     
     if 'R0' not in sample.keys(): 
+        print 'R0 is missing in sensors.'
         return None
 
     for key in sample.keys():
@@ -394,31 +371,31 @@ def Extract_Features(sample):
 
     return (features, True)
 
-# def make_sudo_data(num_samples=10000):
-#     num_dim     = 6
-#     time_steps  = 150
-#     words       = [0.5, 0.7]
+def main(argv):
 
-#     wordToVec  = [ words[np.random.randint(len(words))] for i in range(num_samples) ]
-#     sensors    = 2*np.random.rand(num_samples, time_steps, num_dim) - 1
-#     obedience  = np.random.rand(num_samples)
+    mydatabase = DATABASE()
 
-#     return np.array(wordToVec), sensors, obedience
-
-def main():
-
-    params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
+    params = {'epochs':10, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
     'validation_split':0.05}
-
-    # training_data = make_sudo_data(1000)
-    # testing_data  = make_sudo_data(200)
 
     c = CRITIC(params)
     c.setup_model()
-    c.train_model()
+    c.train_model(mydatabase)
+
+    # c = load_model('critic_model.h5')
+
+    # sensors   = 2*np.random.rand(2,150,6)-1
+    # wordToVec =  np.array([0.5, 0.5])
+
+    # print sensors.shape, wordToVec.shape
+
+    # testing_data = {'sensor_input': sensors, 'word_input': wordToVec}
 
     # predicted = c.predict(testing_data)
 
+    # print "predicted: ", predicted[0], predicted[1]
 
-main()
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
 

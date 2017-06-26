@@ -10,6 +10,9 @@ import os
 import glob
 import constants as c
 from timer import TIMER
+from keras.models import load_model
+
+import critic as ct
 
 sys.path.append('../bots')
 
@@ -19,11 +22,13 @@ from pygameWrapper import PYGAMEWRAPPER
 
 SUB_POPULATION_SIZE      = 5
 MORPHOLOGY_MUTATION_RATE = 0.2
-INDIVIDUAL_DURATION      = 30
 REWARD_WINDOW_W          = 950
 REWARD_WINDOW_H          = 280
+INJECTION_PERIOD         = 60 * 5
 
-colorIndex      = 0
+Injection_Timer  = TIMER(INJECTION_PERIOD)
+
+colorIndex   = 0
 currentColor = validColors[colorIndex % len(validColors)]
 
 db = DATABASE()
@@ -31,6 +36,7 @@ db = DATABASE()
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
 
 currentCommand = {}
+wordVector =     []
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -168,7 +174,92 @@ def Compete_While_Waiting_For(pop, ignoreIndex):
     print pop[ind1]
     print pop[ind2]
 
-    return Compete_Based_On_Dominance(pop[ind1], pop[ind2])
+    # return Compete_Based_On_Obedience(pop[ind1], pop[ind2])
+
+    # neither have shown to the crowd.
+    if pop[ind1]['numEvals'] == 0 and pop[ind2]['numEvals'] == 0:
+        return Compete_Based_On_Obedience(pop[ind1], pop[ind2])
+
+    # both have shown to the crowd.
+    elif pop[ind1]['numEvals'] != 0 and pop[ind2]['numEvals'] != 0:
+        return Compete_Based_On_Dominance(pop[ind1], pop[ind2])
+
+    # only one has shown to the crowd.
+    else:
+        return None
+
+def Compete_Based_On_Obedience(record1, record2):
+
+    global currentCommand
+
+    try:
+        critic = load_model('critic_model.h5')
+        print 'Successfully loaded the critic model.'
+        
+    except KeyboardInterrupt:
+        print 'Unable loading the critic model.'
+        return None
+
+    individual1 = Load_Controller_From_File(record1['robotID'], record1['type'])
+    individual2 = Load_Controller_From_File(record2['robotID'], record2['type'])
+
+    if individual1 == None or individual2 == None: return None
+
+    # run in blind mode and collect sensors.
+    individual1.Start_Evaluate(False, True, wordVector)
+    individual2.Start_Evaluate(False, True, wordVector)
+
+    individual1.Wait_For_Me()
+    individual2.Wait_For_Me()
+
+    sensorValues1 = individual1.Get_Raw_Sensors()
+    sensorValues2 = individual2.Get_Raw_Sensors()
+
+    del individual2
+    del individual1
+
+    print sensorValues1.keys(), sensorValues2.keys()
+
+    features1 = ct.Extract_Features( sensorValues1 )
+    features2 = ct.Extract_Features( sensorValues2 )
+
+    if features1 == None or features2 == None: 
+        print 'Features are not calculated properly' 
+        return None
+
+    print features1[0].shape, features2[0].shape
+    assert features1[0].shape == features1[0].shape
+
+    sensor_input = np.stack((features1[0], features2[0]))
+    word_input   = np.array(2*[currentCommand['wordToVec']])
+
+    print 'samples to be send to critic: ', sensor_input.shape, word_input.shape
+    sample       = {'sensor_input': sensor_input, 'word_input': word_input}
+
+    pred_obedience = critic.predict(sample)
+
+    print 'pred_obedience: ', pred_obedience[0], pred_obedience[1]
+
+    if pred_obedience[0] > pred_obedience[1]: 
+        winner, loser = record1, record2
+
+    elif pred_obedience[1] > pred_obedience[0]: 
+        winner, loser = record2, record1
+
+    else: return None
+
+    print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
+    print "Killing the loser...", loser['robotID']
+
+    db.Kill_Robot(loser['robotID'])
+
+    winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
+    if winnerIndividual == None:  
+        db.Kill_Robot(winner['robotID'])
+    
+    mutatedOne = Create_Mutation(winnerIndividual)
+
+    return mutatedOne
 
 def Compete_Based_On_Dominance(individual1, individual2):
 
@@ -193,24 +284,21 @@ def Compete_Based_On_Dominance(individual1, individual2):
 
 def Create_Mutation(individual):
 
-    mr = np.random.random()
+    if Injection_Timer.Time_Elapsed() or individual == None:
 
-    print 'Creating a mutation...', mr
+        Injection_Timer.Reset()
 
-    if  individual == None or mr < MORPHOLOGY_MUTATION_RATE:
+        print 'Time to inject a new individual...'
 
         randomType    = validRobots[np.random.randint(0, len(validRobots))]
         newIndividual = Load_From_Diversity_Pool(randomType)
-
-        print 'Mutate the loser\'s morphology to ', randomType
 
         if newIndividual == None:
             newIndividual = INDIVIDUAL(0, randomType)
 
         return newIndividual
 
-    if  mr > MORPHOLOGY_MUTATION_RATE:
-
+    else:
         newIndividual = deepcopy(individual)
         newIndividual.Mutate()
         print 'Mutate the brain of robot: ', newIndividual.id
@@ -244,7 +332,7 @@ def Initialize_Sub_Population(numToBeFilled, robotType):
 
         numToBeFilled -= 1
         
-        print '\n'
+    print '\n'
 
 def Initialize_Global_Population():
 
@@ -276,33 +364,39 @@ def Steady_State():
     global currentCommand
     global currentColor
     global colorIndex
+    global wordVector
 
     aliveIndividuals = db.Fetch_Alive_Robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
 
-    index            = Select_Random_Individual(len(aliveIndividuals))
-    randomIndividual = Load_Controller_From_File(aliveIndividuals[index]['robotID'], 
-        aliveIndividuals[index]['type'])
-
+    index     = Select_Random_Individual(len(aliveIndividuals))
+    robotID   = aliveIndividuals[index]['robotID']
+    robotType = aliveIndividuals[index]['type']
+    randomIndividual = Load_Controller_From_File(robotID, robotType)
+        
     if randomIndividual == None:
-        db.Kill_Robot(aliveIndividuals[index]['robotID'])
+        print "Could not load robot ", robotID, " with type: ", robotType
+        db.Kill_Robot(robotID)
         return
 
     currentColor   = validColors[colorIndex % len(validColors)]
     currentTime    = datetime.datetime.now()
     currentCommand = db.Get_Current_Command()
+
+    if currentCommand == None or currentCommand == ():
+        currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
+
     wordVector     = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
 
     Draw_Reinforcment_Window()
 
-    db.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
-        currentCommand['cmdTxt'], currentColor[0], currentTime)
+    db.Add_Command_To_Display_Table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-    print "Displaying controller ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
-     ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'], "and current time: ",\
-     currentTime
+    print "Displaying robot ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
+     ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\
+     " and current time: ", currentTime
     
     randomIndividual.Set_Color(currentColor)
     randomIndividual.Start_Evaluate(False, False, wordVector)
@@ -321,7 +415,7 @@ def Steady_State():
 def main(argv):
 
     generation  = 1
-    initialize  = True
+    initialize  = False
 
     if initialize:
         Initialize_Global_Population()
