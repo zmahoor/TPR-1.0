@@ -285,19 +285,20 @@ class DATABASE:
             newIndex = np.random.random()
         return newIndex
 
-    def Fetch_From_Disply_Table(self, startTime='all'):
+    def Fetch_From_Disply_Table(self, condition='all'):
 
-        if startTime == 'all':
+        if  condition== 'all':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, d.startTime
             from display as d JOIN robots as r ON d.robotID=r.robotID 
             JOIN unique_commands as u on d.cmdTxt=u.cmdTxt;"""
-        else:
+
+        elif condition == 'all_yes_or_no':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, startTime
             from display as d JOIN robots as r ON d.robotID=r.robotID 
             JOIN unique_commands as u on d.cmdTxt=u.cmdTxt
-            WHERE d.startTime='%s';"""%(startTime)
+            WHERE d.numNo <> 0 or d.numYes <> 0;"""
 
         err_msg = "Failed to retrieve record of a dispaly..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
@@ -310,7 +311,11 @@ class DATABASE:
 
     def Fetch_Top_Users(self, topn):
 
-        sql = """SELECT userName, score FROM users ORDER BY score DESC LIMIT %d;"""%(topn)
+        if topn == 'all':
+            sql = """SELECT userName, score FROM users ORDER BY score DESC;"""
+        else:
+            sql = """SELECT userName, score FROM users ORDER BY score DESC LIMIT %d;"""%(topn)
+
         err_msg = "Failed to retrieve scores of top users..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
@@ -423,8 +428,13 @@ class DATABASE:
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
     def Fetch_Topn_Unique_Commands(self, topn):
-        sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
-        ORDER BY score DESC LIMIT %d;"""%(topn)
+
+        if topn == 'all':
+            sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
+            ORDER BY score;"""
+        else:
+            sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
+            ORDER BY score DESC LIMIT %d;"""%(topn)
 
         err_msg = "Failed to retrieve the topn unique commands..."
         return self.Execute_Select_Sql_Command(sql, err_msg)

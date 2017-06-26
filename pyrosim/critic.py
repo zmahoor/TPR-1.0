@@ -15,7 +15,6 @@ from datetime import datetime
 import argparse
 
 np.random.seed(1234)
-
 sys.path.append('../bots')
 
 from database import DATABASE
@@ -37,7 +36,7 @@ class CRITIC:
 
         layers = self.params['layers']
 
-        sensor_input = Input(shape=(150, 6), name='sensor_input')
+        sensor_input = Input(shape=(50, 6), name='sensor_input')
 
         lstm1    = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
@@ -66,14 +65,16 @@ class CRITIC:
         
         print "Compilation Time : ", time.time() - start
 
-    def train_model(self, data):
+    def train_model(self):
 
-        wordToVec, sensors, obedience = data
-        print wordToVec.shape, sensors.shape, obedience.shape
-                
         if not data_generation:
 
             print('Not using data generation...')
+
+            data = Load_Training_Data()
+            sensors, wordToVec, obedience = data
+
+            print wordToVec.shape, sensors.shape, obedience.shape
 
             start_time = time.time()
             try:
@@ -89,7 +90,7 @@ class CRITIC:
             print('Using data generation...')
             start_time = time.time()
             try:
-                self.model.fit_generator(Generate_Data(), steps_per_epoch=10000, epochs=10)
+                self.model.fit_generator(Generate_Data(10), steps_per_epoch=10, epochs=5)
             except Exception as e:
                 print str(e)
 
@@ -137,7 +138,8 @@ def Delete_Sensor_File(record):
     startTime = record['startTime']
     
     path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
-        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
+        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' +\
+         startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
 
     print path
 
@@ -161,9 +163,26 @@ def Delete_Useless_Sensor_Files():
 
             Delete_Sensor_File(record)
 
-def Generate_Data():
+# def Generate_Data2():
+
+#     num_dim     = 6
+#     time_steps  = 150
+#     words       = [0.5, 0.7]
+#     batch_size  = 1000
+
+#     while True:
+
+#         wordToVec  = np.array([ words[np.random.randint(len(words))] for i in range(batch_size) ])
+#         sensors    = 2*np.random.rand(batch_size, time_steps, num_dim) - 1
+#         obedience  = np.random.rand(batch_size)
+
+#         print wordToVec.shape, sensors.shape, obedience.shape
+
+#         yield ({'sensor_input': sensors, 'word_input': wordToVec}, {'output': obedience})
+
+def Generate_Data(batch_size):
     
-    records = mydatabase.Fetch_From_Disply_Table('all')
+    records = mydatabase.Fetch_From_Disply_Table('all_yes_or_no')
 
     print('Number of possible samples: ', len(records))
 
@@ -171,38 +190,93 @@ def Generate_Data():
         print 'No data was found for critic.' 
         exit()
 
-    i = 0
-    while 1:    
+    sensor_input = []
+    word_input   = []
+    output       = []
+    numSamples   = 0
+
+    while True:
 
         for record in records:
 
-            if record['numYes'] == 0 and record['numNo'] == 0:
-                print 'No feedback for this individual.'
-                continue
-
             sensors = Load_Sensors_From_File(record)
-
             if sensors == None: 
                 # print('Not able to load the sensor file.') 
                 continue
 
             features = Extract_Features( sensors )
-            if features == None: continue
+            if features == None: 
+                continue
 
             tfeatures  = features[0]
-            if tfeatures.shape != (150, 6): continue
+            if tfeatures.shape != (c.evaluationTime/SENSOR_DROP_RATE, 6): 
+                continue
             
-            obedience  = float(record['numYes'] - record['numNo']) \
+            obedience = float(record['numYes'] - record['numNo']) \
                                 / float(record['numYes'] + record['numNo'])
 
             if 'wordToVec' in record.keys(): 
-                ntfeatures = np.array([ record['wordToVec'] ])
-            else: ntfeatures = np.array([0.0])
+                ntfeatures = record['wordToVec']
+            else: ntfeatures = 0.0
 
-            i = i + 1
+            sensor_input.append(tfeatures)
+            word_input.append(ntfeatures)
+            output.append(obedience)
 
-            print i, record['robotID'], tfeatures.shape, ntfeatures.shape
-            yield ({'sensor_input': tfeatures, 'word_input': ntfeatures}, {'output': obedience})
+            numSamples = numSamples + 1
+            
+            if numSamples == batch_size:
+                
+                print numSamples, len(sensor_input), len(word_input), len(output)
+
+                yield ({'sensor_input': np.array(sensor_input),\
+                       'word_input': np.array(word_input)},\
+                       {'output': np.array(output)})
+
+                sensor_input = []
+                word_input   = []
+                output       = []
+                numSamples   = 0
+
+def Load_Training_Data():
+    
+    records = mydatabase.Fetch_From_Disply_Table('all_yes_or_no')
+
+    print('Number of possible samples: ', len(records))
+
+    if records == () or records == None: 
+        print 'No data was found for critic.' 
+        exit()
+
+    sensor_input = []
+    word_input   = []
+    output       = []
+
+    for record in records:
+
+        sensors = Load_Sensors_From_File(record)
+        if sensors == None: 
+            # print('Not able to load the sensor file.') 
+            continue
+
+        features = Extract_Features( sensors )
+        if features == None: continue
+
+        tfeatures  = features[0]
+        if tfeatures.shape != (c.evaluationTime/SENSOR_DROP_RATE, 6): continue
+        
+        obedience  = float(record['numYes'] - record['numNo']) \
+                            / float(record['numYes'] + record['numNo'])
+
+        if 'wordToVec' in record.keys(): 
+            ntfeatures = record['wordToVec']
+        else: ntfeatures = 0.0
+
+        sensor_input.append(tfeatures)
+        word_input.append(ntfeatures)
+        output.append(obedience)
+
+    return (np.array(sensor_input), np.array(word_input), np.array(output))
 
 def Load_Sensors_From_File(record):
 
@@ -210,7 +284,8 @@ def Load_Sensors_From_File(record):
     startTime = record['startTime']
     
     path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
-        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
+        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' +\
+         startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
 
     # print path
 
@@ -319,30 +394,28 @@ def Extract_Features(sample):
 
     return (features, True)
 
-def make_sudo_data(num_samples=10000):
-    num_dim     = 6
-    time_steps  = 150
-    words       = [0.5, 0.7]
+# def make_sudo_data(num_samples=10000):
+#     num_dim     = 6
+#     time_steps  = 150
+#     words       = [0.5, 0.7]
 
-    wordToVec  = [ words[np.random.randint(len(words))] for i in range(num_samples) ]
-    sensors    = 2*np.random.rand(num_samples, time_steps, num_dim) - 1
-    obedience  = np.random.rand(num_samples)
+#     wordToVec  = [ words[np.random.randint(len(words))] for i in range(num_samples) ]
+#     sensors    = 2*np.random.rand(num_samples, time_steps, num_dim) - 1
+#     obedience  = np.random.rand(num_samples)
 
-    return np.array(wordToVec), sensors, obedience
+#     return np.array(wordToVec), sensors, obedience
 
 def main():
-    # num_dim     = 6
-    # time_steps  = 150
 
     params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
     'validation_split':0.05}
 
-    training_data = make_sudo_data(1000)
-    testing_data  = make_sudo_data(200)
+    # training_data = make_sudo_data(1000)
+    # testing_data  = make_sudo_data(200)
 
     c = CRITIC(params)
     c.setup_model()
-    c.train_model(training_data)
+    c.train_model()
 
     # predicted = c.predict(testing_data)
 
