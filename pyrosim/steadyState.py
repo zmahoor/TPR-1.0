@@ -183,32 +183,6 @@ def Compete_Based_On_Dominance(individual1, individual2):
 
     return newInd
 
-# def Individual_Has_Moved(head_trajectory):
-
-#     x_locs = head_trajectory[0]
-#     np.diff(x_locs)
-
-#     y_loc  = head_trajectory[1]
-#     np.diff(y_locs)
-
-#     z_loc  = head_trajectory[2]
-#     np.diff(z_locs)
-
-def Create_Mutation(individual):
-
-    while True: 
-
-        individual.Mutate()
-
-        individual.Start_Evaluate(False, True, c.NUM_BIAS_NEURONS*[1.0]+[currentCommand['wordToVec']])
-        individual.Wait_For_Me()
-
-        head_trajectory = individual.Get_Head_Trajectory()
-
-        if Individual_Has_Moved(head_trajectory): break
-
-    return individual
-
 def Dominance(individual1, individual2):
 
     notShownMore    = individual1['numEvals'] <= individual2['numEvals']
@@ -274,7 +248,8 @@ def Morphology_Cycle(morphologyTimer):
             currentCommand['cmdTxt'], currentColor[0], currentTime)
 
         print "Displaying controller ", randomIndividual.id, " of type ", robotType,\
-         " with color: ", currentColor, " current command: ", currentCommand['cmdTxt']
+         " with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\
+         " and current time: ", currentTime
         
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)

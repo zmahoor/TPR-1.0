@@ -87,11 +87,11 @@ class EYES:
 
         if self.left_raySensor:
 
-            raw_sensors["R"+str(self.leftPupil_ID)] = self.left_raySensor.values[0]
+            raw_sensors['R0'] = self.left_raySensor.values
 
         if self.right_raySensor:
 
-            raw_sensors["R"+str(self.rightPupil_ID)] = self.left_raySensor.values[0]
+            raw_sensors['R1'] = self.left_raySensor.values
 
     def Send_Eyes_To_Simulator(self, sim):
 

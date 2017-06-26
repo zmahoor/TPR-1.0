@@ -34,7 +34,7 @@ class JOINT:
 
         if self.propSensor:
 
-            raw_sensors["J"+str(self.ID)] = self.propSensor.values
+            raw_sensors["P"+str(self.ID)] = self.propSensor.values
 
     def Get_Proprioceptive_Sensor_Value(self):
 

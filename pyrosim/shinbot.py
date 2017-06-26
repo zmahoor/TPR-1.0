@@ -75,7 +75,7 @@ class ROBOT:
         for s in range(0, 4):
             self.raw_sensors['P'+str(s)] = copy.deepcopy(sim.Get_Sensor_Data(s+4, 0))
 
-        self.raw_sensors['R1'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-3, 0))
+        self.raw_sensors['R0'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-3, 0))
 
         self.raw_sensors['P'+str(self.head_ID)+'_X'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 0))
         self.raw_sensors['P'+str(self.head_ID)+'_Y'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 1))

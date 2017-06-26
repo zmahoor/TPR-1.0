@@ -21,11 +21,11 @@ SUB_POPULATION_SIZE      = 5
 MORPHOLOGY_MUTATION_RATE = 0.2
 REWARD_WINDOW_W          = 950
 REWARD_WINDOW_H          = 280
-INJECTION_PERIOD         = 60
+INJECTION_PERIOD         = 60 * 5
 
-Injection_Timer  = time(INJECTION_PERIOD)
+Injection_Timer = TIMER(INJECTION_PERIOD)
 
-colorIndex       = 0
+colorIndex   = 0
 currentColor = validColors[colorIndex % len(validColors)]
 
 db = DATABASE()
@@ -33,7 +33,7 @@ db = DATABASE()
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
 
 currentCommand = {}
-wordVector =     []
+wordVector     = []
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -173,48 +173,6 @@ def Compete_While_Waiting_For(pop, ignoreIndex):
 
     return Compete_Based_On_Dominance(pop[ind1], pop[ind2])
 
-def Compete_Based_On_Obedience(individual1, individual2):
-
-    global currentCommand
-    global wordVector
-
-    # run in blind mode and collect sensors.
-    individual1.Start_Evaluate(True, False, wordVector)
-    individual2.Start_Evaluate(True, False, wordVector)
-
-    individual1.Wait_For_Me()
-    individual2.Wait_For_Me()
-
-    sensorValues1 = individual1.Get_Raw_Sensors()
-    sensorValues2 = individual2.Get_Raw_Sensors()
-
-    sample1 = Extract_Features( dict(sensorValues1 + currentCommand) )
-    sample2 = Extract_Features( dict(sensorValues2 + currentCommand) )
-
-    pred_ob1 = model.predict(sample1)
-    pred_ob2 = model.predict(sample2)
-
-    if pred_ob1 > pred_ob2: 
-        winner, loser = individual1, individual2
-
-    elif pred_ob2 > pred_ob1: 
-        winner, loser = individual2, individual1
-
-    else: return None
-
-    print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
-    print "Killing the loser...", loser['robotID']
-
-    db.Kill_Robot(loser['robotID'])
-
-    winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
-    if winnerIndividual == None:  
-        db.Kill_Robot(winner['robotID'])
-    
-    mutatedOne = Create_Mutation(winnerIndividual)
-
-    return mutatedOne
-
 def Compete_Based_On_Dominance(individual1, individual2):
 
     winner, loser = individual1, individual2
@@ -326,12 +284,14 @@ def Steady_State():
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
 
     index            = Select_Random_Individual(len(aliveIndividuals))
-    randomIndividual = Load_Controller_From_File(aliveIndividuals[index]['robotID'], 
-        aliveIndividuals[index]['type'])
-
+    robotID   = aliveIndividuals[index]['robotID']
+    robotType = aliveIndividuals[index]['type']
+    randomIndividual = Load_Controller_From_File(robotID, robotType)
+        
     if randomIndividual == None:
-        db.Kill_Robot(aliveIndividuals[index]['robotID'])
-        return
+        print "Could not load robot ", robotID, " with type: ", robotType
+        db.Kill_Robot(robotID)
+
 
     currentColor   = validColors[colorIndex % len(validColors)]
     currentTime    = datetime.datetime.now()
@@ -347,9 +307,9 @@ def Steady_State():
     db.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
         currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-    print "Displaying controller ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
+    print "Displaying robot ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
      ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\
-     "current time: ", currentTime
+     " and current time: ", currentTime
     
     randomIndividual.Set_Color(currentColor)
     randomIndividual.Start_Evaluate(False, False, wordVector)
@@ -368,7 +328,7 @@ def Steady_State():
 def main(argv):
 
     generation  = 1
-    initialize  = True
+    initialize  = False
 
     if initialize:
         Initialize_Global_Population()
