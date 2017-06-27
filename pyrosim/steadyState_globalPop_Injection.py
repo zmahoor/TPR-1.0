@@ -21,9 +21,9 @@ SUB_POPULATION_SIZE      = 5
 MORPHOLOGY_MUTATION_RATE = 0.2
 REWARD_WINDOW_W          = 950
 REWARD_WINDOW_H          = 280
-INJECTION_PERIOD         = 60 * 5
+INJECTION_PERIOD         = 60 * 60
 
-Injection_Timer = TIMER(INJECTION_PERIOD)
+injectionTimer = TIMER(INJECTION_PERIOD)
 
 colorIndex   = 0
 currentColor = validColors[colorIndex % len(validColors)]
@@ -196,9 +196,9 @@ def Compete_Based_On_Dominance(individual1, individual2):
 
 def Create_Mutation(individual):
 
-    if Injection_Timer.Time_Elapsed() or individual == None:
+    if injectionTimer.Time_Elapsed() or individual == None:
 
-        Injection_Timer.Reset()
+        injectionTimer.Reset()
 
         print 'Time to inject a new individual...'
 
@@ -254,7 +254,6 @@ def Initialize_Global_Population():
     aliveIndividuals = db.Fetch_Alive_Robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
-
     print '\n'
 
     for rtype in validRobots:
@@ -268,7 +267,6 @@ def Initialize_Global_Population():
 
         if count< SUB_POPULATION_SIZE: 
             Initialize_Sub_Population(SUB_POPULATION_SIZE-count, rtype)
-
     print '\n'
 
 def Steady_State():
@@ -291,7 +289,6 @@ def Steady_State():
     if randomIndividual == None:
         print "Could not load robot ", robotID, " with type: ", robotType
         db.Kill_Robot(robotID)
-
 
     currentColor   = validColors[colorIndex % len(validColors)]
     currentTime    = datetime.datetime.now()

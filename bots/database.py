@@ -4,6 +4,7 @@ from time import *
 import datetime
 from settings import *
 import sys
+import numpy as np
 
 class DATABASE:
 
