@@ -24,6 +24,7 @@ REWARD_WINDOW_H          = 280
 INJECTION_PERIOD         = 60 * 60
 
 injectionTimer = TIMER(INJECTION_PERIOD)
+injectionFlag  = False
 
 colorIndex   = 0
 currentColor = validColors[colorIndex % len(validColors)]
@@ -196,10 +197,9 @@ def Compete_Based_On_Dominance(individual1, individual2):
 
 def Create_Mutation(individual):
 
-    if injectionTimer.Time_Elapsed() or individual == None:
+    if  injectionFlag == True or individual == None:
 
-        injectionTimer.Reset()
-
+        injectionFlag = False
         print 'Time to inject a new individual...'
 
         randomType    = validRobots[np.random.randint(0, len(validRobots))]
@@ -334,6 +334,12 @@ def main(argv):
         print "Generation: ", generation
 
         Steady_State()
+
+        if injectionTimer.Time_Elapsed():
+            injectionTimer.Reset_Timer()
+
+            if injectionFlag == False:
+                injectionFlag = True
 
         generation += 1
         print
