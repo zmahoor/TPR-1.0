@@ -17,16 +17,19 @@ from database import DATABASE
 from settings import *
 from pygameWrapper import PYGAMEWRAPPER
 
-SUB_POPULATION_SIZE      = 5
-MORPHOLOGY_MUTATION_RATE = 0.2
-INDIVIDUAL_DURATION      = 30
-REWARD_WINDOW_W          = 950
-REWARD_WINDOW_H          = 280
+colorIndex = 0
+morphologyIndex = 0
 
-colorIndex      = 0
+SUB_POPULATION_SIZE = 5
+MORPHOLOGY_DURATION = 1 * 60
+INDIVIDUAL_DURATION = 30
+REWARD_WINDOW_W     = 950
+REWARD_WINDOW_H     = 280
+
 currentColor = validColors[colorIndex % len(validColors)]
+robotType = validRobots[morphologyIndex % len(validRobots)]
 
-db = DATABASE()
+mydatabase = DATABASE()
 
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
 
@@ -45,9 +48,10 @@ def Store_Sensors_To_File(individual, currentTime):
     currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
     path += '/robot_' + str(individual.id) + "_" + currentTime + ".dat"
     sensorValues = individual.Get_Raw_Sensors()
-    Write_File(path, sensorValues)
+    with open( path , 'wb' ) as f:
+        pickle.dump(sensorValues, f)
 
-def Store_Controller_To_File(individual, robotType):
+def Store_Controller_To_File(individual):
 
     # get directory
     path = "../controllers/"+ robotType
@@ -56,9 +60,10 @@ def Store_Controller_To_File(individual, robotType):
 
     # get filename and extension
     path += '/robot_' + str(individual.id) + ".dat"
-    Write_File(path, individual)
+    with open( path , 'wb' ) as f:
+        pickle.dump(individual, f)
 
-def Load_Controller_From_File(robotID, robotType):
+def Load_Controller_From_File(robotID):
 
     brainPath = "../controllers/"+ robotType +"/robot_"+ str(robotID) +".dat" 
 
@@ -93,17 +98,6 @@ def Read_File(filePath):
     except:
         print "Failed loading ", filePath 
         return None
-
-def Write_File(filePath, data):
-
-    try:
-        f = open(filePath,'wb')
-        pickle.dump(data, f)
-        f.close
-
-        print "Successful writing ", filePath
-    except:
-        print "Failed writing ", filePath 
 
 def Draw_Reinforcment_Window():
 
@@ -177,45 +171,17 @@ def Compete_Based_On_Dominance(individual1, individual2):
         winner, loser = individual2, individual1
     elif not Dominance(individual1, individual2):
         return None
-
     print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
-    print "Killing the loser...", loser['robotID']
 
-    db.Kill_Robot(loser['robotID'])
+    mydatabase.Kill_Robot(loser['robotID'])
 
-    winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
-    if winnerIndividual == None:  
-        db.Kill_Robot(winner['robotID'])
-    
-    mutatedOne = Create_Mutation(winnerIndividual)
+    newInd = Load_Controller_From_File(winner['robotID'])
+    if newInd == None:  
+        mydatabase.Kill_Robot(winner['robotID'])
+    else:
+        newInd.Mutate()
 
-    return mutatedOne
-
-def Create_Mutation(individual):
-
-    mr = np.random.random()
-
-    print 'Creating a mutation...', mr
-
-    if  individual == None or mr < MORPHOLOGY_MUTATION_RATE:
-
-        randomType    = validRobots[np.random.randint(0, len(validRobots))]
-        newIndividual = Load_From_Diversity_Pool(randomType)
-
-        print 'Mutate the loser\'s morphology to ', randomType
-
-        if newIndividual == None:
-            newIndividual = INDIVIDUAL(0, randomType)
-
-        return newIndividual
-
-    if  mr > MORPHOLOGY_MUTATION_RATE:
-
-        newIndividual = deepcopy(individual)
-        newIndividual.Mutate()
-        print 'Mutate the brain of robot: ', newIndividual.id
-
-        return newIndividual
+    return newInd
 
 def Dominance(individual1, individual2):
 
@@ -226,15 +192,13 @@ def Dominance(individual1, individual2):
 
 def Add_New_Robot(newIndividual):
 
-    robotID = db.Add_To_Robot_Table(newIndividual.robotType)
-
-    print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID
+    robotID = mydatabase.Add_To_Robot_Table(robotType)
     newIndividual.Set_ID(robotID)
-    Store_Controller_To_File(newIndividual, newIndividual.robotType)
+    Store_Controller_To_File(newIndividual)
 
-def Initialize_Sub_Population(numToBeFilled, robotType):
+def Initialize_Sub_Population(numToBeFilled):
 
-    print 'Empty slots in sub population of ', robotType, " is: ", numToBeFilled
+    print "Empty slots in sub population of ", robotType, " is: ", numToBeFilled
     while numToBeFilled > 0 :
 
         newIndividual = Load_From_Diversity_Pool(robotType)
@@ -243,93 +207,78 @@ def Initialize_Sub_Population(numToBeFilled, robotType):
         Add_New_Robot(newIndividual)
 
         numToBeFilled -= 1
-        
-        print '\n'
 
-def Initialize_Global_Population():
+def Morphology_Cycle(morphologyTimer):
 
-    print "\n\n"
-    print "Initializing the global population..."
-
-    aliveIndividuals = db.Fetch_Alive_Robots("all")
-
-    print "Num of alive individuals: ", len(aliveIndividuals)
-
-    print '\n'
-
-    for rtype in validRobots:
-
-        count = 0
-        for robot in aliveIndividuals: 
-            if robot['type'] == rtype:
-                count += 1 
-
-        print 'Create: ', SUB_POPULATION_SIZE-count, ' new individuals from type; ', rtype
-
-        if count< SUB_POPULATION_SIZE: 
-            Initialize_Sub_Population(SUB_POPULATION_SIZE-count, rtype)
-
-    print '\n'
-
-def Steady_State():
-
+    global robotType
     global currentCommand
     global currentColor
     global colorIndex
+    global morphologyIndex
 
-    aliveIndividuals = db.Fetch_Alive_Robots("all")
+    while not morphologyTimer.Time_Elapsed():
 
-    print "Num of alive individuals: ", len(aliveIndividuals)
-    assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
+        aliveIndividuals = mydatabase.Fetch_Alive_Robots(robotType)
 
-    index            = Select_Random_Individual(len(aliveIndividuals))
-    randomIndividual = Load_Controller_From_File(aliveIndividuals[index]['robotID'], 
-        aliveIndividuals[index]['type'])
+        Initialize_Sub_Population(SUB_POPULATION_SIZE - len(aliveIndividuals))
 
-    if randomIndividual == None:
-        db.Kill_Robot(aliveIndividuals[index]['robotID'])
-        return
+        index    = Select_Random_Individual(len(aliveIndividuals))
+        robotID   = aliveIndividuals[index]['robotID']
+        randomIndividual = Load_Controller_From_File(robotID)
 
-    currentColor   = validColors[colorIndex % len(validColors)]
-    currentTime    = datetime.datetime.now()
-    currentCommand = db.Get_Current_Command()
-    wordVector     = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
+        if randomIndividual == None:
+            mydatabase.Kill_Robot(aliveIndividuals[index]['robotID'])
+            continue
 
-    Draw_Reinforcment_Window()
+        currentColor   = validColors[colorIndex % len(validColors)]
+        currentTime    = datetime.datetime.now()
+        currentCommand = mydatabase.Get_Current_Command()
+        
+        if currentCommand == None or currentCommand == ():
+            currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
 
-    db.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
-        currentCommand['cmdTxt'], currentColor[0], currentTime)
+        wordVector = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
 
-    print "Displaying controller ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
-     ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'], "and current time: ",\
-     currentTime
-    
-    randomIndividual.Set_Color(currentColor)
-    randomIndividual.Start_Evaluate(False, False, wordVector)
+        Draw_Reinforcment_Window()
 
-    newIndividual = Compete_While_Waiting_For(aliveIndividuals, index)
-    if newIndividual != None:
-        Add_New_Robot(newIndividual)
+        mydatabase.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
+            currentCommand['cmdTxt'], currentColor[0], currentTime)
 
-    randomIndividual.Wait_For_Me()
+        print "Displaying controller ", randomIndividual.id, " of type ", robotType,\
+         " with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\
+         " and current time: ", currentTime
+        
+        randomIndividual.Set_Color(currentColor)
+        randomIndividual.Start_Evaluate(False, False, wordVector)
 
-    Store_Sensors_To_File(randomIndividual, currentTime)
+        newIndividual = Compete_While_Waiting_For(aliveIndividuals, index)
+        if newIndividual != None:
+            Add_New_Robot(newIndividual)
 
-    colorIndex += 1
-    print
+        randomIndividual.Wait_For_Me()
+
+        Store_Sensors_To_File(randomIndividual, currentTime)
+
+        colorIndex += 1
+        print
 
 def main(argv):
 
-    generation  = 1
-    initialize  = True
+    global robotType
+    global morphologyIndex
 
-    if initialize:
-        Initialize_Global_Population()
+    generation = 1
 
     while True:
-        print "Generation: ", generation
+        print("G: ", generation)
 
-        Steady_State()
+        morphologyTimer = TIMER(MORPHOLOGY_DURATION)
+
+        robotType = validRobots[morphologyIndex % len(validRobots)]
+
+        Morphology_Cycle(morphologyTimer)
+
+        morphologyIndex += 1
 
         generation += 1
         print
