@@ -197,6 +197,8 @@ def Compete_Based_On_Dominance(individual1, individual2):
 
 def Create_Mutation(individual):
 
+    global injectionFlag
+
     if  injectionFlag == True or individual == None:
 
         injectionFlag = False
@@ -324,6 +326,9 @@ def Steady_State():
 
 def main(argv):
 
+    global injectionFlag
+    global injectionTimer
+
     generation  = 1
     initialize  = False
 
@@ -331,12 +336,12 @@ def main(argv):
         Initialize_Global_Population()
 
     while True:
-        print "Generation: ", generation
+        print "Generation: ", generation, " injection flag: ", injectionFlag
 
         Steady_State()
 
         if injectionTimer.Time_Elapsed():
-            injectionTimer.Reset_Timer()
+            injectionTimer.Reset()
 
             if injectionFlag == False:
                 injectionFlag = True

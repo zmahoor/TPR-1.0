@@ -7,18 +7,24 @@ from settings import *
 import math
 import copy
 
+#---Variables to keep track of time---#
 startTime = time.time()
 call = True
-#create database object
-db = DATABASE()
-
-#create window
-window = PYGAMEWRAPPER(width = 960, height = 250, fontSize = 20)
-
-#y-coordinates of top 3 commands
-y = [100, 150, 200]
-
 reset = 0
+curr = 0
+#-------------------------------------#
+
+#-------Constants-------#
+WIDTH 		= 960
+HEIGHT 		= 250
+FONT_SIZE	= 20
+COLORS 		= ['RED', 'BLUE', 'DARKGREEN']
+DB 		= DATABASE()
+Y_COOR 		= [100, 150, 200]
+WINDOW 		= PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
+TIME_OF_CYCLE 	= 10  #in seconds
+NUM_CYCLES 	= 6
+#-----------------------#
 
 #List format
 # [ (c_1, v_1, [users]), (c_2, v_2, [users]), ... (c_n, v_n, [users]) ]
@@ -26,102 +32,101 @@ reset = 0
 
 #Checks li for an instance of c
 #If exists, return the index where it's located
-def Return_Index(l, c):
-
+def Return_Index(list_to_check, command_to_check):
+	l = list_to_check
+	c = command_to_check
+	
         if l == [] or l == None:
                 
                 return None	#return None if list is empty
         
         index = None		#return None if c is not found
 
-        for j in range(0,len(l)):
+        for i in range(0,len(l)):
 
-                if l[j][0] == c:
+                if l[i][0] == c:
 
                         exists = True
 
-                        i = j
-
                         return i
         
-
-
-curr = 0
 def Add_Time_Since_Start(call, cr):
 
         timeSinceStart = time.time() - startTime
 	
-        s = int(timeSinceStart)
+        timeSinceStart = int(timeSinceStart)
 
-	if s != cr:
-		cr = s
+	if timeSinceStart != cr:
+		cr = timeSinceStart
 		call = True
-
+	
+	s = NUM_CYCLES*TIME_OF_CYCLE - timeSinceStart
+	
         m, s = divmod(s, 60)
 
+	if s < 10:
+		s = '0' + str(s)
+	else:
+		s = str(s)
+
         timer = ''
+	
+        timer = timer + str(m) + ':' + s
 
-        timer = timer + str(30 - s) + 's '
+	WINDOW.Draw_Text("Time to next:   " + timer, x = 800, y = 200) 
 
-	window.Draw_Text("Time to next:   " + timer, x = 800, y = 200) 
-
-	return s, call, cr
+	return timeSinceStart, call, cr
 
 # 1---get commands in current cycle
 # 2---get total number of votes for each command
 # 3---keep track of which user voted for which command
 def Get_Commands():
 
-        a = []
+        cmds_to_return = []
         
-        newCmds = db.Fetch_For_Command_Window(interval = (reset-1) * 10)
+        full_cmd_list = DB.Fetch_For_Command_Window(interval = (reset-1) * TIME_OF_CYCLE)
 	print reset - 1
 	#print 'COMMANDS'     
 
-        for i in newCmds:
+        for i in full_cmd_list:
 
                 usn = i['userName'].upper()
                 
                 cmn = i['cmdTxt'].upper()
 
-                index = Return_Index(a, cmn)
+                index = Return_Index(cmds_to_return, cmn)
                 
                 if index != None:	 #if command is already in the list
                         
-                        temp = a[index][2]
+                        temp = cmds_to_return[index][2]
 
                         if usn not in temp:
 
                                 temp.append(usn)	#add user to user list
 
-                        print "temp: ", temp
+                        command = cmds_to_return[index][0]
 
-                        c = a[index][0]
+                        votes = cmds_to_return[index][1]
 
-                        v = a[index][1]
+                        tup = (command, votes + 1, copy.deepcopy(temp))	#increment votes by 1
 
-                        tup = (c, v + 1, copy.deepcopy(temp))	#increment votes by 1
+                        del cmds_to_return[index]
 
-                        del a[index]
-
-                        a.append(tup)
+                        cmds_to_return.append(tup)
 
                 else:			#if empty, create new element
 
-                        a.append( (cmn.upper(), 1, [usn]) )
+                        cmds_to_return.append( (cmn.upper(), 1, [usn]) )
                         
-        a.sort(key = lambda a : a[1])	#sort the list by vote order
+        cmds_to_return.sort(key = lambda cmds_to_return : cmds_to_return[1])	#sort the list by vote order
         
-        a = a[::-1]
+        return cmds_to_return[::-1]
 
-        return a
-        
-ctr = 0
 
-#li = Get_Commands()
 li = []
-xc = 1000
-
+li = Get_Commands()
+start_x_names = 1000
+names = ['','','']
 
 while 1:
 
@@ -129,32 +134,32 @@ while 1:
                 
                 if event.type == pygame.QUIT:
                         
-                        window.Quit()
+			WINDOW.Quit()
                         
-        window.Wipe()
+        WINDOW.Wipe()
 
-        window.Draw_Text('These are the top commands for the next robot to be given.'.upper(), x = 10, y = 10)
-        window.Draw_Text('Please vote by typing in "!commandName"'.upper(), x = 10, y = 35)
+        WINDOW.Draw_Text('These are the top commands for the next robot to be given.'.upper(), x = 10, y = 10)
+        WINDOW.Draw_Text('Please vote by typing in "!commandName"'.upper(), x = 10, y = 35)
         
-	c, call, curr = Add_Time_Since_Start(call, curr)
+	timePassed, call, curr = Add_Time_Since_Start(call, curr)
 	
         size = len(li)
+
         if size > 3:
                 size = 3
-        cols = ['RED', 'BLUE', 'DARKGREEN']
-        for i in range (0, size):
-                window.Draw_Text(li[i][2][0].upper(), x = xc, y = y[i], color = 'DARKGRAY')
-                window.Draw_Rect(180, y[i], 3*li[i][1] + 15, 20, color = cols[i])
-                window.Draw_Text(str(li[i][1]), x = 183, y = y[i]-1, color = 'WHITE')
-                window.Draw_Text(li[i][0], x = 25, y = y[i]) 
         
-        xc = xc - 0.8
+        for i in range (0, size):
+                
+                WINDOW.Draw_Text(names[i].upper(), x = start_x_names, y = Y_COOR[i], color = 'DARKGRAY')
+                WINDOW.Draw_Rect(180, Y_COOR[i], 3*li[i][1] + 15, 20, color = COLORS[i])
+                WINDOW.Draw_Text(str(li[i][1]), x = 183, y = Y_COOR[i]-3, color = 'WHITE')
+                WINDOW.Draw_Text(li[i][0], x = 25, y = Y_COOR[i]) 
+        
+        start_x_names = start_x_names - 0.8
         
         time.sleep(.01)
 
-        ctr = ctr + 1
-
-        if c%10 == 0:
+        if timePassed % TIME_OF_CYCLE == 0:
 		if call:
 			reset = reset + 1
 			li = Get_Commands()
@@ -162,9 +167,15 @@ while 1:
                 	print 'COMMANDS'
 			call = False
 		
-                xc = 1000
+                start_x_names = 1000
+                names = []
+                for i in range (0, len(li)):
+                        r = random.randint(0, len(li[i][2])-1)
+                        names.append(li[i][2][r])
+                        
 
-        if c == 30:
+             
+        if timePassed == NUM_CYCLES * TIME_OF_CYCLE:
                 reset = 0
 		startTime = time.time()
 
@@ -173,11 +184,11 @@ while 1:
                         print li
                         print "newActive: ", newActive
                 
-                        db.Set_Current_Command(newActive)
+                        DB.Set_Current_Command(newActive)
                 else:
-                        db.Set_Current_Command(DEFAULT_COMMAND)
+                        DB.Set_Current_Command(DEFAULT_COMMAND)
                           
-	window.Refresh()
+	WINDOW.Refresh()
 
 
         

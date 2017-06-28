@@ -7,11 +7,11 @@ from settings import *
 import database
 import datetime
 
-COMMAND_DURATION = 1 * 60
+COMMAND_DURATION = 3 * 60
 COMMAND_WINDOW_W = 950
 COMMAND_WINDOW_H = 280
 
-window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H)
+window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H, fontSize=25)
 
 currentCommand = DEFAULT_COMMAND
 
