@@ -19,8 +19,9 @@ from pygameWrapper import PYGAMEWRAPPER
 
 SUB_POPULATION_SIZE      = 5
 MORPHOLOGY_MUTATION_RATE = 0.2
-REWARD_WINDOW_W          = 950
+REWARD_WINDOW_W          = 940
 REWARD_WINDOW_H          = 280
+REWARD_WINDOW_FONT_SIZE  = 24
 INJECTION_PERIOD         = 60 * 60
 
 injectionTimer = TIMER(INJECTION_PERIOD)
@@ -31,7 +32,8 @@ currentColor = validColors[colorIndex % len(validColors)]
 
 db = DATABASE()
 
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
+window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H,\
+ fontSize= REWARD_WINDOW_FONT_SIZE)
 
 currentCommand = {}
 wordVector     = []

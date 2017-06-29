@@ -4,22 +4,24 @@ import time
 import random
 from database import DATABASE
 import pygame
+from timer import TIMER
 
-db = DATABASE()
-window = PYGAMEWRAPPER(width = 480, height = 500)
+DB = DATABASE()
+WINDOW = PYGAMEWRAPPER(width = 480, height = 500, fontSize = 17)
 c = 0
 
-w = window.size[0]
-h = window.size[1]
-
-screen = window.screen
+WIDTH  = WINDOW.size[0]
+HEIGHT = WINDOW.size[1]
+SCREEN = WINDOW.screen
+UPDATE_PERIOD = 10
     
-table = TABLE(window, width = w, height = h)
+table = TABLE(WINDOW, width = WIDTH, height = HEIGHT)
+updateTimer = TIMER(UPDATE_PERIOD)
     
 def get_NewCmd():
     #gets recent commands and picks one at random
     newCmd = ('   ', 0, 99999)
-    test = db.Fetch_Recent_Typed_Command(interval = 10)
+    test = DB.Fetch_Recent_Typed_Command(interval = 10)
     print 'test', test
     if test != ():
         size = len(test)
@@ -27,7 +29,7 @@ def get_NewCmd():
             r = 0
         else:
             r = random.randint(0,size-1)
-        newCmd = (test[r].get('cmd'),test[r].get('score'),test[r].get('rank'))
+        newCmd = (test[r].get('cmd'), test[r].get('score'), test[r].get('rank'))
     return newCmd
 
 def Parse_Scores(li):
@@ -43,7 +45,7 @@ def Parse_Scores(li):
         scorelist.append((n,s))
     return scorelist
 
-newList = Parse_Scores(db.Fetch_Topn_Unique_Commands(10))
+newList = Parse_Scores(DB.Fetch_Topn_Unique_Commands(10))
 newCmd = get_NewCmd()
 print 'user', newCmd
 
@@ -51,25 +53,23 @@ while 1:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            window.Quit()
+            WINDOW.Quit()
                         
-    window.Wipe()
+    WINDOW.Wipe()
     
     table.Update(newList, newCmd)
-    window.Draw_Text('COMMAND', x = (w/2.0) - 100, y = .5*h/12.0)
-    window.Draw_Text('RANK', x = 7, y = .5*h/12.0)
-    window.Draw_Text('SCORE', x = .65*w, y = .5*h/12.0)
-    window.Draw_Text('#YES', x = .815*w, y = .5*h/12.0)
-    window.Draw_Text('#NO', x = .915*w, y = .5*h/12.0)
+    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = .5*HEIGHT/12.0)
+    WINDOW.Draw_Text('RANK', x = 4, y = .5*HEIGHT/12.0)
+    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = .5*HEIGHT/12.0)
 
-    window.Draw_Text('Need help? type "?commands"'.upper(), x = .12*w, y = 12.3/13.0 * h)
+    WINDOW.Draw_Text('For more information, type "?cmds"'.upper(), x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
     
-    time.sleep(.2)
-    c = c + 1
-    if c > 51:
-        newList = Parse_Scores(db.Fetch_Topn_Unique_Commands(10))
-        newCmd = get_NewCmd()
-        print 'user', newCmd
-        c = 0    
-    window.Refresh()
+    if updateTimer.Time_Elapsed():
 
+        newList = Parse_Scores(DB.Fetch_Topn_Unique_Commands(10))
+        newCmd  = get_NewCmd()
+        
+        updateTimer.Reset()
+        print 'user', newCmd
+
+    WINDOW.Refresh()
