@@ -17,7 +17,7 @@ curr = 0
 #-------Constants-------#
 WIDTH 		= 920
 HEIGHT 		= 250
-FONT_SIZE	= 20
+FONT_SIZE	= 23
 COLORS 		= ['RED', 'BLUE', 'DARKGREEN']
 DB 		= DATABASE()
 Y_COOR 		= [75, 125, 175]
@@ -73,7 +73,8 @@ def Add_Time_Since_Start(call, cr):
 	
         timer = timer + str(m) + ':' + s
 
-	WINDOW.Draw_Text("Time to next:   " + timer, x = 740, y = 200) 
+	WINDOW.Draw_Text("Command with the most votes will be sent to the robot in   " + timer, x = 10, y = 200) 
+        WINDOW.Draw_Text("Need help?  Type  ?votes ", x =700, y = 200) 
 
 	return timeSinceStart, call, cr
 
@@ -90,9 +91,9 @@ def Get_Commands():
 
         for i in full_cmd_list:
 
-                usn = i['userName'].upper()
+                usn = i['userName']
                 
-                cmn = i['cmdTxt'].upper()
+                cmn = i['cmdTxt']
 
                 index = Return_Index(cmds_to_return, cmn)
                 
@@ -116,7 +117,7 @@ def Get_Commands():
 
                 else:			#if empty, create new element
 
-                        cmds_to_return.append( (cmn.upper(), 1, [usn]) )
+                        cmds_to_return.append( (cmn, 1, [usn]) )
                         
         cmds_to_return.sort(key = lambda cmds_to_return : cmds_to_return[1])	#sort the list by vote order
         
@@ -138,8 +139,8 @@ while 1:
                         
         WINDOW.Wipe()
 
-        WINDOW.Draw_Text('These are the top commands for the next robot to be given.'.upper(), x = 10, y = 10)
-        WINDOW.Draw_Text('Please vote by typing in "!commandName"'.upper(), x = 10, y = 35)
+        WINDOW.Draw_Text('Type !command to vote for the next command (for example type !move).', x = 10, y = 10)
+        WINDOW.Draw_Text('Top commands for the next robots are:', x = 10, y = 40)
         
 	timePassed, call, curr = Add_Time_Since_Start(call, curr)
 	
@@ -161,7 +162,7 @@ while 1:
 
         for i in range (0, size):
                 
-                WINDOW.Draw_Text(names[i].upper(), x = start_x_names, y = Y_COOR[i], color = 'DARKGRAY')
+                WINDOW.Draw_Text(names[i], x = start_x_names, y = Y_COOR[i], color = 'DARKGRAY')
                 WINDOW.Draw_Rect(X_VAL, Y_COOR[i], 3*li[i][1] + 15, 20, color = COLORS[i])
                 WINDOW.Draw_Text(str(li[i][1]), x = X_VAL + 3, y = Y_COOR[i]-3, color = 'WHITE')
                 WINDOW.Draw_Text(li[i][0], x = 25, y = Y_COOR[i]) 

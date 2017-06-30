@@ -78,12 +78,6 @@ class TABLE:
 
         pygame.draw.line(screen, BLACK, (0, (12*self.HEIGHT/(self.USERS+3))), (self.WIDTH, (12*self.HEIGHT/(self.USERS+3))), 2)
 
-
-        
-        
-
-            
-
         #get name of recent for bottom row
         bt = bottom[0]
 

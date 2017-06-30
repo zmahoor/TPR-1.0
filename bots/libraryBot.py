@@ -81,13 +81,13 @@ while(True):
         print(message, " help requested.")
     
     #set the username after @ as the parent of this user
-    elif (message[0] == '#'):
+    # elif (message[0] == '#'):
 
-        print(message, " set parent.")
+    #     print(message, " set parent.")
 
-        parent = getParentInfo(message)
+    #     parent = getParentInfo(message)
 
-        db.Update_User_Parent(user, parent)
+    #     db.Update_User_Parent(user, parent)
 
     #Or reinforcement then move to reinforcements table
     elif isRewardSignal(message):

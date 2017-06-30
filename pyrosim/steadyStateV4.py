@@ -11,6 +11,7 @@ import glob
 import constants as c
 from timer import TIMER
 from keras.models import load_model
+import pygame
 
 import critic as ct
 
@@ -20,21 +21,24 @@ from database import DATABASE
 from settings import *
 from pygameWrapper import PYGAMEWRAPPER
 
-SUB_POPULATION_SIZE      = 5
-MORPHOLOGY_MUTATION_RATE = 0.2
-REWARD_WINDOW_W          = 950
-REWARD_WINDOW_H          = 280
-INJECTION_PERIOD         = 60 * 5
+SUB_POPULATION_SIZE = 5
+REWARD_WINDOW_W     = 910
+REWARD_WINDOW_H     = 280
+FONT_SIZE           = 23
+INJECTION_PERIOD    = 60 * 60
 
 colorIndex     = 0
 currentColor   = validColors[colorIndex % len(validColors)]
 currentCommand = {}
 wordVector     = []
+
 injectionTimer = TIMER(INJECTION_PERIOD)
+injectionFlag  = False
+removeInjected = False
+initializePopulation = False
 
 db = DATABASE()
-
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
+window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -83,7 +87,12 @@ def Load_From_Diversity_Pool(robotType):
     if not os.path.isfile(brainPaths[randomIndex]): 
         return None
 
-    return Read_File(brainPaths[randomIndex])
+    ind = Read_File(brainPaths[randomIndex])
+
+    if removeInjected:
+        Remove_File(brainPaths[randomIndex])
+
+    return ind
 
 def Read_File(filePath):
 
@@ -109,6 +118,15 @@ def Write_File(filePath, data):
     except:
         print "Failed writing ", filePath 
 
+def Remove_File(filePath):
+
+    try:
+        os.remove(brainPaths[randomIndex])
+        print "Successfully removed the injected robot from the diversity pool.."
+
+    except:
+        print "Was not able to remove the injected robot from the diversity pool.."
+
 def Draw_Reinforcment_Window():
 
     global currentCommand
@@ -119,18 +137,23 @@ def Draw_Reinforcment_Window():
     cmdTxt = currentCommand['cmdTxt']
 
     myy = 10
+
+    window.Draw_Text("New here? Type", x= 10, y=myy)
+    window.Draw_Text("?", x= 14*12, y=myy, color='BROWN')
+
+    myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
     window.Draw_Text("!"+ currentColor[0] + "y", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
         " robot is obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 580, y=myy, color='BROWN')
+    window.Draw_Text("["+ cmdTxt +"].", x= 550, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y= myy)
     window.Draw_Text("!"+ currentColor[0] + "n", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
      " robot is [N]ot obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 635, y=myy, color='BROWN')
+    window.Draw_Text("["+ cmdTxt +"].", x= 625, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
@@ -145,8 +168,11 @@ def Draw_Reinforcment_Window():
      currentColor[1:]+ " robot." , x= 110, y=myy)
 
     myy += 60
-    window.Draw_Text("Need help? Type", x= 700, y=myy) 
-    window.Draw_Text("?", x= 880, y=myy, color='BROWN')
+
+    # window.Draw_Text("A new robot will be born in " + str(injectionTimer.Time_Remaining())\
+    #  + " s.", x=10, y=myy) 
+    window.Draw_Text("Need help? Type", x= 650, y=myy) 
+    window.Draw_Text("?rewards", x= 810, y=myy, color='BROWN')
 
     window.Refresh()
 
@@ -280,19 +306,8 @@ def Compete_Based_On_Dominance(individual1, individual2):
 
 def Create_Mutation(individual):
 
-    if injectionTimer.Time_Elapsed() or individual == None:
-
-        injectionTimer.Reset()
-
-        print 'Time to inject a new individual...'
-
-        randomType    = validRobots[np.random.randint(0, len(validRobots))]
-        newIndividual = Load_From_Diversity_Pool(randomType)
-
-        if newIndividual == None:
-            newIndividual = INDIVIDUAL(0, randomType)
-
-        return newIndividual
+    if individual == None:
+        return None
 
     else:
         newIndividual = deepcopy(individual)
@@ -315,6 +330,8 @@ def Add_New_Robot(newIndividual):
     print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual, newIndividual.robotType)
+
+    return robotID
 
 def Initialize_Sub_Population(numToBeFilled, robotType):
 
@@ -359,13 +376,47 @@ def Steady_State():
     global currentColor
     global colorIndex
     global wordVector
+    global injectionFlag
 
     aliveIndividuals = db.Fetch_Alive_Robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
 
-    index     = Select_Random_Individual(len(aliveIndividuals))
+    index = Select_Random_Individual(len(aliveIndividuals))
+
+    if injectionFlag:
+
+        print 'Time to inject a new individual..'
+
+        zeroEvalsFlag = False
+        for i in range(len(aliveIndividuals)): 
+            if aliveIndividuals[i]['numEvals'] == 0: 
+                zeroEvalsFlag = True
+                break
+
+        if zeroEvalsFlag:
+            
+            print 'There is a spot for the newbie...'
+            injectionFlag    = False
+            randomType       = validRobots[np.random.randint(0, len(validRobots))]
+            randomIndividual = Load_From_Diversity_Pool(randomType)
+
+            if randomIndividual == None:
+                randomIndividual = INDIVIDUAL(0, randomType)
+
+            robotID = Add_New_Robot(randomIndividual)
+            db.Kill_Robot(aliveIndividuals[i]['robotID'])
+
+            aliveIndividuals = db.Fetch_Alive_Robots("all")
+
+            for i in range(len(aliveIndividuals)): 
+
+                if aliveIndividuals[i]['robotID'] == robotID: 
+                    index = i
+        else:
+            print 'There is NO spots for the newbie...'
+
     robotID   = aliveIndividuals[index]['robotID']
     robotType = aliveIndividuals[index]['type']
     randomIndividual = Load_Controller_From_File(robotID, robotType)
@@ -406,18 +457,36 @@ def Steady_State():
     colorIndex += 1
     print
 
+def Inject_New_Individual():
+    pass
+
 def main(argv):
 
-    generation  = 1
-    initialize  = False
+    global injectionFlag
+    global injectionTimer
+    global initializePopulation
 
-    if initialize:
+    generation  = 1
+
+    if initializePopulation:
         Initialize_Global_Population()
 
     while True:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                window.Quit()
+
         print "Generation: ", generation
 
         Steady_State()
+
+        if injectionTimer.Time_Elapsed():
+
+            print 'Injection timer elapsed'
+
+            injectionTimer.Reset()
+            injectionFlag = True
 
         generation += 1
         print
