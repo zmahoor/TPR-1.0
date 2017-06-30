@@ -12,13 +12,13 @@ HEIGHT    = 430
 FONT_SIZE = 17
 WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
 UPDATE_PERIOD = 10
-updateTimer = TIMER(UPDATE_PERIOD)
 
 #get screen
 SCREEN = WINDOW.screen
     
 #create new table object
 table = TABLE(WINDOW, width = WIDTH, height = HEIGHT)
+updateTimer = TIMER(UPDATE_PERIOD)
 
 #This function takes users who are recently active and
 #picks a random one to be displayed at the bottom of the table
@@ -71,8 +71,8 @@ while 1:
     WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = 20+.5*HEIGHT/12.0)
     WINDOW.Draw_Text('RANK', x = 4, y = 20+.5*HEIGHT/12.0)    
     WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = 20+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('USER HIGHSCORES', x = .35*WIDTH, y = 1)
-    WINDOW.Draw_Text('For more information, type "?scores"'.upper(), x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
+    WINDOW.Draw_Text('TOP USERS TEACHING THE ROBOTS', x = 0.25*WIDTH, y = 1)
+    WINDOW.Draw_Text('Need help? Type ?scores', x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
 
     if updateTimer.Time_Elapsed():
 

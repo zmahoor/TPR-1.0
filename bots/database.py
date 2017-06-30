@@ -413,33 +413,33 @@ class DATABASE:
         
         return False
 
-    def Fetch_For_Command_Window( self ):
-
-        sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
-        WHERE animationFlag=0;"""
-
-        err_msg = "unable fetching the most recent type command
-        result = self.Execute_Select_Sql_Command(sql, err_msg)
-
-        sql = """ UPDATE command_log SET animationFlag=1 WHERE animationFlag=0;"""
-        self.Execute_Update_Sql_Command(sql)
-
-        return result
-
-    # def Fetch_For_Command_Window(self, interval=10):
-
-    #     current_time = datetime.datetime.now()
-    #     prev_time = current_time - datetime.timedelta(seconds=interval)
-
-    #     current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    #     prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+    # def Fetch_For_Command_Window( self ):
 
     #     sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
-    #     WHERE timeArrival BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+    #     WHERE animationFlag=0;"""
 
     #     err_msg = "unable fetching the most recent type command"
+    #     result = self.Execute_Select_Sql_Command(sql, err_msg)
 
-    #     return self.Execute_Select_Sql_Command(sql, err_msg)
+    #     sql = """ UPDATE command_log SET animationFlag=1 WHERE animationFlag=0;"""
+    #     self.Execute_Update_Sql_Command(sql)
+
+    #     return result
+
+    def Fetch_For_Command_Window(self, interval=10):
+
+        current_time = datetime.datetime.now()
+        prev_time = current_time - datetime.timedelta(seconds=interval)
+
+        current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+        prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
+        WHERE timeArrival BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+
+        err_msg = "unable fetching the most recent type command"
+
+        return self.Execute_Select_Sql_Command(sql, err_msg)
 
     def Fetch_Topn_Unique_Commands(self, topn):
 

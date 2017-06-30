@@ -26,10 +26,10 @@ t.pong()
 #General help message
 gen = """This is Twitch Plays Robotics, a..\
         "?project" for more info on the project\
-       "?robot" for more info on the robots\
-       "?command" for more info on the commands\
-       "?reinforce" for more info on reinforcements\
-       "?sim" for more info on the simulation\
+       "?robots" for more info on the robots\
+       "?commands" for more info on the commands\
+       "?votes" for more info on reinforcements\
+       "?rewards" for more info on the simulation\
        "?myscore" to see your own score\
        "?scores" for information on the scoring system."""
 
@@ -45,7 +45,7 @@ cmd = """Commands are typed in the chat, and the one asked for the most over\
         Ever try asking a dog to learn a new trick? Think of it like that!"""
 
 #Reinforcements help message
-reinforce = """Reinforcements help the robot learn. Saying "yes" to the robot\
+rewards = """Reinforcements help the robot learn. Saying "yes" to the robot\
         is rewarding it, e.g. giving a dog a treat.  Saying "no" ... """
 
 #Simulation help message
@@ -56,13 +56,15 @@ sim = """The simulation is created in a physics engine called Open Dynamics\
 scores = """To collect points, give reinforcement to robots or vote for commands.\
          To see your points type in ?myscore"""
 
+votes = """You can vote for a command by typing !command. Don't forget the exclamation mark!"""
+
 first_time = 'Congratulations! You just earned your first point.'
 
 #Organize messages by type
 help_type = {'general'   : gen, 'project'   : proj,
-             'robot'     : bot, 'command'   : cmd,
-             'reinforce' : reinforce, 'simulator' : sim,
-             'scores'    : scores}
+             'robots'     : bot, 'commands'   : cmd,
+             'rewards' : rewards, 'simulator' : sim,
+             'scores'    : scores, 'votes': votes}
 
 # sleep to avoid getting blocked from twitch. There is a limit on the number of messages 
 # a bot can send to channel. 
@@ -89,8 +91,7 @@ while True:
 
         if (msg == '?myscore'):
             result = db.Fetch_User_Score(username)
-            sent = t.send_message("@"+ username + ", score:"+
-                str(result['score'])+" invited by: "+ str(result['parentName']))
+            sent = t.send_message("@"+ username + ", your score:"+ str(result['score']))
             print('sent score info', sent)
 
         elif (msg == 'first_time_contribution'):

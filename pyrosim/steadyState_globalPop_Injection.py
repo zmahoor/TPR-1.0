@@ -10,6 +10,7 @@ import os
 import glob
 import constants as c
 from timer import TIMER
+import pygame
 
 sys.path.append('../bots')
 
@@ -116,6 +117,10 @@ def Draw_Reinforcment_Window():
     global currentCommand
     global currentColor
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            window.Quit()
+            
     window.Wipe()
 
     cmdTxt = currentCommand['cmdTxt']
