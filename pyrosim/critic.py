@@ -20,8 +20,9 @@ sys.path.append('../bots')
 from database import DATABASE
 from settings import *
 
-SENSOR_DROP_RATE  = 12
-data_generation   = False
+SENSOR_DROP_RATE = 12
+data_generation  = False
+synthetic_data   = True
 
 class CRITIC:
 
@@ -69,9 +70,13 @@ class CRITIC:
 
             print('Not using data generation...')
 
-            data = Load_Training_Data(mydatabase)
-            sensors, wordToVec, obedience = data
+            if synthetic_data:
+                print('Generate synthetic data.')
+                data = Generate_Synthetic_Data( 10000 )
+            else:
+                data = Load_Training_Data( mydatabase )
 
+            sensors, wordToVec, obedience = data
             print wordToVec.shape, sensors.shape, obedience.shape
 
             start_time = time.time()
@@ -371,8 +376,19 @@ def Extract_Features(sample):
 
     return (features, True)
 
-def main(argv):
+def Generate_Synthetic_Data( num_samples ):
 
+    num_features   = 6
+    num_time_steps = 150
+
+    sensors    = 2*np.random.rand( num_samples, num_time_steps, num_features)-1
+    word_input = np.random.rand(num_samples, 1)
+    obedience  = 2*np.random.rand(num_samples, 1)-1
+    
+    return (sensors, word_input, obedience)
+
+def main(argv):
+    
     mydatabase = DATABASE()
 
     params = {'epochs':10, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
@@ -382,19 +398,8 @@ def main(argv):
     c.setup_model()
     c.train_model(mydatabase)
 
-    # c = load_model('critic_model.h5')
-
-    # sensors   = 2*np.random.rand(2,150,6)-1
-    # wordToVec =  np.array([0.5, 0.5])
-
-    # print sensors.shape, wordToVec.shape
-
-    # testing_data = {'sensor_input': sensors, 'word_input': wordToVec}
-
-    # predicted = c.predict(testing_data)
-
-    # print "predicted: ", predicted[0], predicted[1]
-
+    testing_data = Generate_Synthetic_Data(1000)
+    print c.predict( testing_data )
 
 if __name__ == "__main__":
     main(sys.argv[1:])
