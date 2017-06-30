@@ -39,9 +39,9 @@ class TABLE:
         #draw lines that define the table
         
         
-        pygame.draw.line(screen, BLACK, (0, self.HEIGHT/12.0), (self.WIDTH, self.HEIGHT/12.0), 3)
+        pygame.draw.line(screen, BLACK, (0, 40+0.5*self.HEIGHT/12.0), (self.WIDTH, 40+0.5*self.HEIGHT/12.0), 3)
         
-        top_rect = self.HEIGHT/12.0
+        top_rect = 40+0.5*self.HEIGHT/12.0
         height_rect = ((11.0/12.0) * self.HEIGHT) / (self.USERS+2)
         
         for i in range (0, self.USERS):

@@ -19,7 +19,7 @@ from pygameWrapper import PYGAMEWRAPPER
 
 SUB_POPULATION_SIZE      = 5
 MORPHOLOGY_MUTATION_RATE = 0.2
-REWARD_WINDOW_W          = 940
+REWARD_WINDOW_W          = 910
 REWARD_WINDOW_H          = 280
 REWARD_WINDOW_FONT_SIZE  = 24
 INJECTION_PERIOD         = 60 * 60
@@ -121,18 +121,23 @@ def Draw_Reinforcment_Window():
     cmdTxt = currentCommand['cmdTxt']
 
     myy = 10
+
+    window.Draw_Text("New here? Type", x= 10, y=myy)
+    window.Draw_Text("?", x= 14*12, y=myy, color='BROWN')
+
+    myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
     window.Draw_Text("!"+ currentColor[0] + "y", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
         " robot is obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 580, y=myy, color='BROWN')
+    window.Draw_Text("["+ cmdTxt +"].", x= 550, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y= myy)
     window.Draw_Text("!"+ currentColor[0] + "n", x= 70, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
      " robot is [N]ot obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 635, y=myy, color='BROWN')
+    window.Draw_Text("["+ cmdTxt +"].", x= 625, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
@@ -147,8 +152,8 @@ def Draw_Reinforcment_Window():
      currentColor[1:]+ " robot." , x= 110, y=myy)
 
     myy += 60
-    window.Draw_Text("Need help? Type", x= 700, y=myy) 
-    window.Draw_Text("?", x= 880, y=myy, color='BROWN')
+    window.Draw_Text("Need help? Type", x= 650, y=myy) 
+    window.Draw_Text("?rewards", x= 810, y=myy, color='BROWN')
 
     window.Refresh()
 

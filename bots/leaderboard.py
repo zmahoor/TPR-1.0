@@ -7,8 +7,8 @@ import pygame
 from timer import TIMER
 
 DB = DATABASE()
-WIDTH     = 480
-HEIGHT    = 500
+WIDTH     = 440
+HEIGHT    = 430
 FONT_SIZE = 17
 WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
 UPDATE_PERIOD = 10
@@ -68,10 +68,10 @@ while 1:
     
     table.Update(newList, newUser)
     
-    WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = .5*HEIGHT/12.0)
-    WINDOW.Draw_Text('RANK', x = 4, y = .5*HEIGHT/12.0)    
-    WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = .5*HEIGHT/12.0)
-
+    WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = 20+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('RANK', x = 4, y = 20+.5*HEIGHT/12.0)    
+    WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = 20+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('USER HIGHSCORES', x = .35*WIDTH, y = 1)
     WINDOW.Draw_Text('For more information, type "?scores"'.upper(), x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
 
     if updateTimer.Time_Elapsed():

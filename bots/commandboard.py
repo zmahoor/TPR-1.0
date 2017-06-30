@@ -7,7 +7,7 @@ import pygame
 from timer import TIMER
 
 DB = DATABASE()
-WINDOW = PYGAMEWRAPPER(width = 480, height = 500, fontSize = 17)
+WINDOW = PYGAMEWRAPPER(width = 440, height = 430, fontSize = 17)
 c = 0
 
 WIDTH  = WINDOW.size[0]
@@ -58,10 +58,10 @@ while 1:
     WINDOW.Wipe()
     
     table.Update(newList, newCmd)
-    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = .5*HEIGHT/12.0)
-    WINDOW.Draw_Text('RANK', x = 4, y = .5*HEIGHT/12.0)
-    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = .5*HEIGHT/12.0)
-
+    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = 20+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('RANK', x = 4, y = 20+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('PROGRESS', x = 0.7*WIDTH, y = 20+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('PROGRESS OF COMMANDS', x = .30*WIDTH, y = 1)
     WINDOW.Draw_Text('For more information, type "?cmds"'.upper(), x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
     
     if updateTimer.Time_Elapsed():

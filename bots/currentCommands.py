@@ -15,15 +15,15 @@ curr = 0
 #-------------------------------------#
 
 #-------Constants-------#
-WIDTH 		= 960
+WIDTH 		= 920
 HEIGHT 		= 250
 FONT_SIZE	= 20
 COLORS 		= ['RED', 'BLUE', 'DARKGREEN']
 DB 		= DATABASE()
-Y_COOR 		= [100, 150, 200]
+Y_COOR 		= [75, 125, 175]
 WINDOW 		= PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
 TIME_OF_CYCLE 	= 10  #in seconds
-NUM_CYCLES 	= 6
+NUM_CYCLES 	= 18
 #-----------------------#
 
 #List format
@@ -73,7 +73,7 @@ def Add_Time_Since_Start(call, cr):
 	
         timer = timer + str(m) + ':' + s
 
-	WINDOW.Draw_Text("Time to next:   " + timer, x = 800, y = 200) 
+	WINDOW.Draw_Text("Time to next:   " + timer, x = 740, y = 200) 
 
 	return timeSinceStart, call, cr
 
@@ -147,12 +147,23 @@ while 1:
 
         if size > 3:
                 size = 3
-        
+
+        MAX = 460
+        X_VAL = 10
+        for j in range (0,size):
+                len_of_characters = len(li[j][0]) * 14
+                if len_of_characters > X_VAL:
+                        X_VAL = len_of_characters
+
+        X_VAL = X_VAL + 25
+        if X_VAL > MAX:
+                X_VAL = MAX
+
         for i in range (0, size):
                 
                 WINDOW.Draw_Text(names[i].upper(), x = start_x_names, y = Y_COOR[i], color = 'DARKGRAY')
-                WINDOW.Draw_Rect(180, Y_COOR[i], 3*li[i][1] + 15, 20, color = COLORS[i])
-                WINDOW.Draw_Text(str(li[i][1]), x = 183, y = Y_COOR[i]-3, color = 'WHITE')
+                WINDOW.Draw_Rect(X_VAL, Y_COOR[i], 3*li[i][1] + 15, 20, color = COLORS[i])
+                WINDOW.Draw_Text(str(li[i][1]), x = X_VAL + 3, y = Y_COOR[i]-3, color = 'WHITE')
                 WINDOW.Draw_Text(li[i][0], x = 25, y = Y_COOR[i]) 
         
         start_x_names = start_x_names - 0.8
@@ -172,9 +183,7 @@ while 1:
                 for i in range (0, len(li)):
                         r = random.randint(0, len(li[i][2])-1)
                         names.append(li[i][2][r])
-                        
 
-             
         if timePassed == NUM_CYCLES * TIME_OF_CYCLE:
                 reset = 0
 		startTime = time.time()
