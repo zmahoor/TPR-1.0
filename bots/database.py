@@ -10,26 +10,43 @@ class DATABASE:
 
     def __init__(self):
 
+        self.connect()
+    
+    def connect(self):
         try:
             self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
-                password=MYSQL_PASS, db=MYSQL_DB)
+                password=MYSQL_PASS, db=MYSQL_DB, connect_timeout=60)
 
             self.cursor = self.connection.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("SELECT VERSION()")
             data = self.cursor.fetchone()
             print ("Database version : %s " % data)
-        except:
+
+        except Exception as e:
             print "Unable to connect to database...check your internet connection or the settings"
+            print str(e)
             sys.exit()
-    
+
+    def close(self):
+        try:
+            self.connection.close()
+            print 'closed the connection...'
+        except:
+            print 'unabled to closed the connection...'
+
     def Execute_Update_Sql_Command(self, sql_command, err_msg=""):
 
         try:
             self.cursor.execute(sql_command)
             self.connection.commit()
-        except:
-            print(err_msg)
-            self.connection.rollback()
+
+        except (pymysql.OperationalError, pymysql.InternalError), e:
+            self.connect()
+            print str(e)
+
+        except pymysql.ProgrammingError, e:
+            print str(e)
+            print (err_msg)
 
     def Execute_Select_Sql_Command(self, sql_command, err_msg=""):
 
@@ -38,8 +55,15 @@ class DATABASE:
             self.cursor.execute(sql_command)
             results = self.cursor.fetchall()
             self.connection.commit()
-        except:
-            print(err_msg)
+
+        except (pymysql.OperationalError, pymysql.InternalError), e:
+            self.connect()
+            print str(e)
+
+        except pymysql.ProgrammingError, e:
+            print str(e)
+            print (err_msg)
+
         return results
 
     def Execute_SelectOne_Sql_Command(self, sql_command, err_msg=""):
@@ -49,10 +73,17 @@ class DATABASE:
             self.cursor.execute(sql_command)
             results = self.cursor.fetchone()
             self.connection.commit()
-        except:
-            print(err_msg)
-        return results
 
+        except (pymysql.OperationalError, pymysql.InternalError), e:
+            print(err_msg)
+            print str(e)
+            self.connect()
+
+        except pymysql.ProgrammingError, e:
+            print(err_msg)
+            print str(e)
+
+        return results
 
     def Add_To_Chat_Table(self, username, current_time, msg):
         sql = """INSERT INTO chats(timeArrival, username, txt) VALUES

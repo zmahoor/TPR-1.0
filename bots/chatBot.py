@@ -6,7 +6,6 @@ from twitch import Twitch
 t  = Twitch()
 db = DATABASE()
 
-
 username = IDENT #Your twitch username. ALL LOWER CASE
 key      = PASS #Key acquired from twitch.tv account page
 channel  = CHANNEL
@@ -38,8 +37,9 @@ while True:
                 if(username not in filteredUsers):
                     db.Add_To_Chat_Table(username, currentTime, msg)
 
-            except:
-                print("msg error")
+            except Exception as e:
+                print str(e)
+                print("something went wrong. Unable inserting this message.")
                 #end if not in filtered users
         #end for each message in new messages
     #end if new messages
