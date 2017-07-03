@@ -76,7 +76,11 @@ class CRITIC:
             else:
                 data = Load_Training_Data( mydatabase )
 
+
+
             sensors, wordToVec, obedience = data
+            # sensors = self.normalize_data( sensors )
+
             print wordToVec.shape, sensors.shape, obedience.shape
 
             start_time = time.time()
@@ -100,6 +104,13 @@ class CRITIC:
         self.model.save('critic_model.h5')  # creates a HDF5 file 'my_model.h5'
 
         print 'Training duration (s) : ', time.time() - start_time
+
+    def normalize_data(self, data):
+
+        self._mean = np.mean(np.mean(data, axis=1, dtype=np.float64), axis=0, dtype=np.float64)
+        self._std  = np.std(np.std(data, axis=1, dtype=np.float64), axis=0, dtype=np.float64)
+
+        return (data - self._mean) / self._std
 
     def predict(self, data):
         
@@ -294,6 +305,7 @@ def Propriceptive_Feature_Extraction(values):
 
     values = np.array(values).T
     temp   = np.diff(values, axis=0)
+    temp   = np.absolute(values)
     temp   = np.average(temp, axis=1)
     temp   = np.hstack((temp, np.array(temp[-1])))
 
@@ -389,9 +401,11 @@ def Generate_Synthetic_Data( num_samples ):
 
 def main(argv):
     
-    mydatabase = DATABASE()
+    if synthetic_data == False:
+        mydatabase = DATABASE()
+    else :mydatabase = None
 
-    params = {'epochs':10, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
+    params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
     'validation_split':0.05}
 
     c = CRITIC(params)
@@ -399,7 +413,15 @@ def main(argv):
     c.train_model(mydatabase)
 
     testing_data = Generate_Synthetic_Data(1000)
-    print c.predict( testing_data )
+
+    # print c.predict( {'sensor_input': testing_data[0],\
+    #     'word_input': testing_data[1]})
+
+    score = c.model.evaluate({'sensor_input': testing_data[0],\
+        'word_input': testing_data[1]}, {'output': testing_data[2]},\
+         batch_size=32, verbose=1, sample_weight=None)
+
+    print("%s: %.2f%%" % (c.model.metrics_names[1], score[1]*100))
 
 if __name__ == "__main__":
     main(sys.argv[1:])
