@@ -115,18 +115,6 @@ class INDIVIDUAL:
 
         self.head_trajectory = np.array(self.robot.Get_Head_Trajectory(self.sim))
 
-        # add the first order dervitave to the head trajectory
-        # self.head_trajectory = np.vstack([self.head_trajectory, 
-        #     np.append(np.diff(self.head_trajectory[0]), [0])])
-
-        # self.head_trajectory = np.vstack([self.head_trajectory, 
-        #     np.append(np.diff(self.head_trajectory[1]), [0])])
-
-        # self.head_trajectory = np.vstack([self.head_trajectory,
-        #  np.append(np.diff(self.head_trajectory[2]), [0])])
-
-        # del self.sim
-
     def Start_Evaluate(self, pp, pb, command):
 
         self.sim = PYROSIM(playPaused=pp , playBlind=pb, evalTime=c.evaluationTime)

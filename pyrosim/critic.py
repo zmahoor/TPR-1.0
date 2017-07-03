@@ -74,12 +74,19 @@ class CRITIC:
                 print('Generate synthetic data.')
                 data = Generate_Synthetic_Data( 10000 )
             else:
-                data = Load_Training_Data( mydatabase )
-
-
+                data = Load_Training_Data( mydatabase )    
 
             sensors, wordToVec, obedience = data
-            # sensors = self.normalize_data( sensors )
+
+            print "range: "
+            print np.min(np.min(sensors, axis=1), axis=0)
+            print np.max(np.max(sensors, axis=1), axis=0)
+
+            sensors = self.normalize_data( sensors )
+
+            print "range: "
+            print np.min(np.min(sensors, axis=1), axis=0)
+            print np.max(np.max(sensors, axis=1), axis=0)
 
             print wordToVec.shape, sensors.shape, obedience.shape
 
@@ -107,10 +114,10 @@ class CRITIC:
 
     def normalize_data(self, data):
 
-        self._mean = np.mean(np.mean(data, axis=1, dtype=np.float64), axis=0, dtype=np.float64)
-        self._std  = np.std(np.std(data, axis=1, dtype=np.float64), axis=0, dtype=np.float64)
+        self._min = np.min(np.min(data, axis=1), axis=0)
+        self._max  = np.max(np.max(data, axis=1), axis=0)
 
-        return (data - self._mean) / self._std
+        return (data - self._min) / (self._max - self._min)
 
     def predict(self, data):
         
@@ -403,7 +410,7 @@ def main(argv):
     
     if synthetic_data == False:
         mydatabase = DATABASE()
-    else :mydatabase = None
+    else: mydatabase = None
 
     params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
     'validation_split':0.05}
@@ -412,16 +419,22 @@ def main(argv):
     c.setup_model()
     c.train_model(mydatabase)
 
-    testing_data = Generate_Synthetic_Data(1000)
+    if synthetic_data:
+        testing_data = Generate_Synthetic_Data(100)
 
-    # print c.predict( {'sensor_input': testing_data[0],\
-    #     'word_input': testing_data[1]})
+        sensors = (testing_data[0] - c._min) / (c._max - c._min)
 
-    score = c.model.evaluate({'sensor_input': testing_data[0],\
-        'word_input': testing_data[1]}, {'output': testing_data[2]},\
-         batch_size=32, verbose=1, sample_weight=None)
+        print "range: "
+        print np.min(np.min(sensors, axis=1), axis=0)
+        print np.max(np.max(sensors, axis=1), axis=0)
 
-    print("%s: %.2f%%" % (c.model.metrics_names[1], score[1]*100))
+        print c.predict( {'sensor_input': sensors, 'word_input': testing_data[1]})
+
+        score = c.model.evaluate({'sensor_input': sensors,\
+            'word_input': testing_data[1]}, {'output': testing_data[2]},\
+            batch_size=32, verbose=1, sample_weight=None)
+
+        print c.model.metrics_names, score
 
 if __name__ == "__main__":
     main(sys.argv[1:])
