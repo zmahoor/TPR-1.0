@@ -74,15 +74,14 @@ class CRITIC:
                 print('Generate synthetic data.')
                 data = Generate_Synthetic_Data( 10000 )
             else:
-                data = Load_Training_Data( mydatabase )    
-
-            sensors, wordToVec, obedience = data
-
-            print "range: "
-            print np.min(np.min(sensors, axis=1), axis=0)
-            print np.max(np.max(sensors, axis=1), axis=0)
+                data = Load_Training_Data( mydatabase )
 
             sensors = self.normalize_data( sensors )
+
+            self._min = np.min(np.min(sensors, axis=1), axis=0)
+            self._max = np.max(np.max(sensors, axis=1), axis=0)
+
+            sensors, wordToVec, obedience = data
 
             print "range: "
             print np.min(np.min(sensors, axis=1), axis=0)
@@ -91,6 +90,7 @@ class CRITIC:
             print wordToVec.shape, sensors.shape, obedience.shape
 
             start_time = time.time()
+
             try:
                 self.model.fit({'sensor_input': sensors, 'word_input': wordToVec},
                     {'output': obedience},
@@ -113,9 +113,6 @@ class CRITIC:
         print 'Training duration (s) : ', time.time() - start_time
 
     def normalize_data(self, data):
-
-        self._min = np.min(np.min(data, axis=1), axis=0)
-        self._max  = np.max(np.max(data, axis=1), axis=0)
 
         return (data - self._min) / (self._max - self._min)
 
@@ -410,16 +407,19 @@ def main(argv):
     
     if synthetic_data == False:
         mydatabase = DATABASE()
-    else: mydatabase = None
 
-    params = {'epochs':1, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
-    'validation_split':0.05}
+    else: 
+        mydatabase = None
+
+    params = {'epochs':1000, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
+        'validation_split':0.05}
 
     c = CRITIC(params)
     c.setup_model()
     c.train_model(mydatabase)
 
     if synthetic_data:
+
         testing_data = Generate_Synthetic_Data(100)
 
         sensors = (testing_data[0] - c._min) / (c._max - c._min)

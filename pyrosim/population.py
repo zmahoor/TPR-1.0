@@ -52,20 +52,39 @@ class POPULATION:
             self.p[i].Print()
         print
 
+    def Sensors_Have_Changed( index ):
+
+        sensorDict = self.p[index].Get_Raw_Sensors()
+
+        for sensorType in sensorDict.keys():
+
+            sensorValues = sensorDict[sensorType]
+
+            if np.absolute(sensorValues[0,-1]-sensorValues[0,-2]) == 0:
+                return False
+
+        return True
+
     def Evaluate_External_Novelty(self, pp, pb, knn=5):
 
         for i in self.p:
+            print i
             self.p[i].Start_Evaluate(pp, pb, (c.NUM_BIAS_NEURONS+c.NUM_COMMAND_NEURONS)*[1.0])
 
         for i in self.p:
             self.p[i].Get_Head_Trajectory()
-        
+
         self.Compute_External_Novelty()
 
         for i in self.p:
-            #find the k nearest neighbors
-            idx = np.argpartition(self.novelty[i], knn)
-            self.p[i].fitness = np.average(self.novelty[i][idx[:knn]])
+
+            if not Sensors_Have_Changed( i ):
+                self.p[i].fitness = 0
+
+            else:
+                #find the k nearest neighbors
+                idx = np.argpartition(self.novelty[i], knn)
+                self.p[i].fitness = np.average(self.novelty[i][idx[:knn]])
 
     def Evaluate_Internal_Novelty(self, pp, pb, brange=3):
 
