@@ -5,6 +5,7 @@ import math
 import pickle
 import constants as c
 import os
+import datetime
 
 from snakebot import ROBOT as SNB
 from quadruped import ROBOT as QB
@@ -113,6 +114,8 @@ class INDIVIDUAL:
 
         self.sim.Wait_To_Finish()
 
+        self.robot.Get_Raw_Sensors(self.sim)
+
         self.head_trajectory = np.array(self.robot.Get_Head_Trajectory(self.sim))
 
     def Start_Evaluate(self, pp, pb, command):
@@ -160,7 +163,11 @@ class INDIVIDUAL:
         if not os.path.exists(path):
             os.makedirs(path)
 
-        f = open( path +'/robot_'+str(self.id)+'.dat', 'wb' )
+        currentTime = datetime.datetime.now()
+        currentTime = currentTime.strftime("%Y-%m-%d %H-%M-%S")
+        path += '/robot_'+str(self.id)+'_'+currentTime+'.dat'
+
+        f = open(path, 'wb')
         pickle.dump(self, f)
         f.close()
 
