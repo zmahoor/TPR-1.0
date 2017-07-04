@@ -12,6 +12,7 @@ import constants as c
 from timer import TIMER
 from keras.models import load_model
 import pygame
+import argparse
 
 import critic as ct
 
@@ -32,13 +33,11 @@ currentColor   = validColors[colorIndex % len(validColors)]
 currentCommand = {}
 wordVector     = []
 
-injectionTimer = TIMER(INJECTION_PERIOD)
+window = None
+db     = None
+injectionTimer = None
 injectionFlag  = False
 removeInjected = False
-initializePopulation = False
-
-db = DATABASE()
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -77,6 +76,8 @@ def Load_Controller_From_File(robotID, robotType):
 
 def Load_From_Diversity_Pool(robotType):
 
+    global removeInjected
+
     path = "../diversity_pool/"+ robotType + "/*.dat" 
 
     brainPaths = list(glob.iglob(path))
@@ -103,6 +104,10 @@ def Read_File(filePath):
 
         print "Successful loading ", filePath
         return individual
+
+    except KeyboardInterrupt:
+        sys.exit()
+
     except:
         print "Failed loading ", filePath 
         return None
@@ -113,8 +118,11 @@ def Write_File(filePath, data):
         f = open(filePath,'wb')
         pickle.dump(data, f)
         f.close
-
         print "Successful writing ", filePath
+
+    except KeyboardInterrupt:
+        sys.exit()
+
     except:
         print "Failed writing ", filePath 
 
@@ -123,6 +131,9 @@ def Remove_File(filePath):
     try:
         os.remove(brainPaths[randomIndex])
         print "Successfully removed the injected robot from the diversity pool.."
+    
+    except KeyboardInterrupt:
+        sys.exit()
 
     except:
         print "Was not able to remove the injected robot from the diversity pool.."
@@ -131,6 +142,7 @@ def Draw_Reinforcment_Window():
 
     global currentCommand
     global currentColor
+    global window
 
     window.Wipe()
 
@@ -143,29 +155,29 @@ def Draw_Reinforcment_Window():
 
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "y", x= 70, y=myy, color=currentColor.upper())
+    window.Draw_Text("!"+ currentColor[0] + "y", x= 60, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
-        " robot is obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 550, y=myy, color='BROWN')
+     " robot is obeying the command", x= 90, y=myy)
+    window.Draw_Text("["+ cmdTxt +"].", x=500, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y= myy)
-    window.Draw_Text("!"+ currentColor[0] + "n", x= 70, y=myy, color=currentColor.upper())
+    window.Draw_Text("!"+ currentColor[0] + "n", x= 60, y=myy, color=currentColor.upper())
     window.Draw_Text(" if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
-     " robot is [N]ot obeying the command", x= 110, y=myy)
-    window.Draw_Text("["+ cmdTxt +"].", x= 625, y=myy, color='BROWN')
+     " robot is [N]ot obeying the command", x= 90, y=myy)
+    window.Draw_Text("["+ cmdTxt +"].", x= 540, y=myy, color='BROWN')
 
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "l", x= 70, y=myy, color=currentColor.upper())
+    window.Draw_Text("!"+ currentColor[0] + "l", x= 60, y=myy, color=currentColor.upper())
     window.Draw_Text(" if you [L]ike the ["+ currentColor[0].upper() + "]"+\
-        currentColor[1:]+ " robot." , x= 110, y=myy)
+        currentColor[1:]+ " robot." , x= 90, y=myy)
     
     myy += 40
     window.Draw_Text("Type", x= 10, y=myy)
-    window.Draw_Text("!"+ currentColor[0] + "d", x= 70, y=myy, color=currentColor.upper())
+    window.Draw_Text("!"+ currentColor[0] + "d", x= 60, y=myy, color=currentColor.upper())
     window.Draw_Text(" if you [D]islike the ["+ currentColor[0].upper() + "]"+\
-     currentColor[1:]+ " robot." , x= 110, y=myy)
+     currentColor[1:]+ " robot." , x= 90, y=myy)
 
     myy += 60
 
@@ -258,7 +270,15 @@ def Compete_Based_On_Obedience(record1, record2):
     print 'samples to be send to critic: ', sensor_input.shape, word_input.shape
     sample       = {'sensor_input': sensor_input, 'word_input': word_input}
 
-    pred_obedience = critic.predict(sample)
+    try:
+        pred_obedience = critic.predict(sample)
+
+    except KeyboardInterrupt:
+        sys.exit()
+
+    except:
+        print 'Unable predicting obedience...'
+        return None
 
     print 'pred_obedience: ', pred_obedience[0], pred_obedience[1]
 
@@ -377,11 +397,12 @@ def Steady_State():
     global colorIndex
     global wordVector
     global injectionFlag
+    global db
 
     aliveIndividuals = db.Fetch_Alive_Robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
-    assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
+    assert len(aliveIndividuals) > 2, 'Not enough individuals in the population. Run with --initPopulation flag.'
 
     index = Select_Random_Individual(len(aliveIndividuals))
 
@@ -457,19 +478,25 @@ def Steady_State():
     colorIndex += 1
     print
 
-def Inject_New_Individual():
-    pass
-
-def main(argv):
+def main(args):
 
     global injectionFlag
     global injectionTimer
-    global initializePopulation
+    global db
+    global window
+    global removeInjected
 
-    generation  = 1
+    db = DATABASE()
 
-    if initializePopulation:
+    initPopulation = args.initPopulation
+    removeInjected = args.removeInjected
+
+    if initPopulation:
         Initialize_Global_Population()
+
+    window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
+    injectionTimer = TIMER(INJECTION_PERIOD)
+    generation  = 1
 
     while True:
 
@@ -492,5 +519,18 @@ def main(argv):
         print
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+
+    parser = argparse.ArgumentParser(description='Steady state Version 4.')
+    
+    parser.add_argument('--initPopulation', action='store_true',\
+     help='initialize the population.')
+
+    parser.add_argument('--removeInjected', action='store_true',\
+     help='remove an injected individual from the diversity pool.')
+
+    args = parser.parse_args()
+
+    main(args)
+
+
 

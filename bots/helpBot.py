@@ -80,33 +80,32 @@ while True:
     # get the oldest unprocessed request for help with flag=0.
     records = db.Fetch_Oldest_Help()
 
-    if records == None:
-        continue
+    if records == None: continue
+    
+    msg = records['txt']
+    username = records['userName']
+    print msg, username
+
+    msg_to_send = msg[1:].rstrip()
+
+    if (msg == '?myscore'):
+        result = db.Fetch_User_Score(username)
+        sent = t.send_message("@"+ username + ", your score:"+ str(result['score']))
+        print('sent score info', sent)
+
+    elif (msg == 'first_time_contribution'):
+        sent = t.send_message('@' + username + ' ' + first_time)
+        print('first time contribution: ', sent)
+
+    elif msg_to_send in help_type:
+        sent = t.send_message('@' + username + ' ' + help_type.get(msg_to_send))
+        print('sent filtered', sent)
+
     else:
-        msg = records['txt']
-        username = records['userName']
-        print msg, username
+        sent = t.send_message('@' + username + ' ' + help_type.get('general'))
+        print('sent general', sent)
 
-        msg_to_send = msg[1:].rstrip()
-
-        if (msg == '?myscore'):
-            result = db.Fetch_User_Score(username)
-            sent = t.send_message("@"+ username + ", your score:"+ str(result['score']))
-            print('sent score info', sent)
-
-        elif (msg == 'first_time_contribution'):
-            sent = t.send_message('@' + username + ' ' + first_time)
-            print('first time contribution: ', sent)
-
-        elif msg_to_send in help_type:
-            sent = t.send_message('@' + username + ' ' + help_type.get(msg_to_send))
-            print('sent filtered', sent)
-
-        else:
-            sent = t.send_message('@' + username + ' ' + help_type.get('general'))
-            print('sent general', sent)
-
-        time.sleep(SLEEP_RATE)
+    time.sleep(SLEEP_RATE)
 
 
     

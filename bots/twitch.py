@@ -96,11 +96,17 @@ class Twitch:
         try:
             self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
             print("PONG SENT!")
+
+        except KeyboardInterrupt:
+            sys.exit()
+
         except:
             print('Unable to send pong message..')
             self.connect(self.user, self.oauth, self.channel, self.host, self.port)
 
-        threading.Timer(300, self.pong).start()
+        t = threading.Timer(300, self.pong)
+        t.daemon = True
+        t.start()
 
     # if the incoming message is ping, then send a pong.
     def is_ping_message(self, data):
