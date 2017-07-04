@@ -7,7 +7,6 @@ import pickle
 import argparse
 
 from individual import INDIVIDUAL
-from robot import ROBOT
 from population import POPULATION
 
 def main(args):
