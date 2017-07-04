@@ -40,6 +40,10 @@ class DATABASE:
             self.cursor.execute(sql_command)
             self.connection.commit()
 
+        except KeyboardInterrupt:
+            self.connection.rollback()
+            sys.exit()
+
         except (pymysql.OperationalError, pymysql.InternalError), e:
             self.connect()
             print str(e)
@@ -55,6 +59,10 @@ class DATABASE:
             self.cursor.execute(sql_command)
             results = self.cursor.fetchall()
             self.connection.commit()
+
+        except KeyboardInterrupt:
+            self.close()
+            sys.exit()
 
         except (pymysql.OperationalError, pymysql.InternalError), e:
             self.connect()
@@ -73,6 +81,10 @@ class DATABASE:
             self.cursor.execute(sql_command)
             results = self.cursor.fetchone()
             self.connection.commit()
+
+        except KeyboardInterrupt:
+            self.close()
+            sys.exit()
 
         except (pymysql.OperationalError, pymysql.InternalError), e:
             print(err_msg)

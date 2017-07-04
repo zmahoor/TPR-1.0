@@ -125,25 +125,25 @@ class CRITIC:
         
         return predicted
 
-    def plot_results(self, y_test, predicted):
+    # def plot_results(self, y_test, predicted):
 
-        assert y_test.shape == predicted.shape
+    #     assert y_test.shape == predicted.shape
 
-        x = 200
-        try:
+    #     x = 200
+    #     try:
 
-            fig, ax = plt.subplots()
-            line1,  = ax.plot(y_test, '-', linewidth=2,
-                 label='True obedience')
+    #         fig, ax = plt.subplots()
+    #         line1,  = ax.plot(y_test, '-', linewidth=2,
+    #              label='True obedience')
 
-            line2,  = ax.plot(predicted, '-', linewidth=2,
-                 label='Predicted obedience')
+    #         line2,  = ax.plot(predicted, '-', linewidth=2,
+    #              label='Predicted obedience')
 
-            ax.legend(loc='upper right')
-            plt.show()
+    #         ax.legend(loc='upper right')
+    #         plt.show()
 
-        except Exception as e:
-            print str(e)
+    #     except Exception as e:
+    #         print str(e)
 
 def Delete_Sensor_File(record):
 
