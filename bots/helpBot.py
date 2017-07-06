@@ -24,20 +24,19 @@ t.connect(username, key, channel, host, port)
 t.pong()
 
 #General help message
-gen = """This is Twitch Plays Robotics, a..\
-        "?project" for more info on the project\
-       "?robots" for more info on the robots\
-       "?commands" for more info on the commands\
-       "?votes" for more info on reinforcements\
-       "?rewards" for more info on the simulation\
-       "?myscore" to see your own score\
-       "?scores" for information on the scoring system."""
+gen = """Type "?project" for more info on this project\
+       , type "?robots" for more info on the robots\
+       , type "?commands" for more info on the commands\
+       , type "?votes" for more info on reinforcements\
+       , type "?rewards" for more info on the simulation\
+       , type "?myscore" to see your own score\
+       , type "?scores" for information on the scoring system."""
 
 #Project help message
-proj = 'Twitch Plays Robotics is a ...'
+proj = 'Twitch Plays Robotics is a comunity-driven project to teach robots language.'
 
 #Robot help message
-bot = 'These robots are created every 30 seconds, and...'
+bot = """These robots are displayed every 30 seconds and learn from your feedback."""
 
 #Commands help message
 cmd = """Commands are typed in the chat, and the one asked for the most over\
@@ -46,7 +45,7 @@ cmd = """Commands are typed in the chat, and the one asked for the most over\
 
 #Reinforcements help message
 rewards = """Reinforcements help the robot learn. Saying "yes" to the robot\
-        is rewarding it, e.g. giving a dog a treat.  Saying "no" ... """
+        is rewarding it, e.g. giving a dog a treat."""
 
 #Simulation help message
 sim = """The simulation is created in a physics engine called Open Dynamics\
@@ -54,17 +53,17 @@ sim = """The simulation is created in a physics engine called Open Dynamics\
         called PyRoSim (Python Robotics Simulator.)"""
 
 scores = """To collect points, give reinforcement to robots or vote for commands.\
-         To see your points type in ?myscore"""
+         To see your points type ?myscore."""
 
 votes = """You can vote for a command by typing !command. Don't forget the exclamation mark!"""
 
 first_time = 'Congratulations! You just earned your first point.'
 
 #Organize messages by type
-help_type = {'general'   : gen, 'project'   : proj,
-             'robots'     : bot, 'commands'   : cmd,
-             'rewards' : rewards, 'simulator' : sim,
-             'scores'    : scores, 'votes': votes}
+help_type = {'general'   : gen, 'project'       : proj,
+             'robots'    : bot, 'commands'      : cmd,
+             'rewards'   : rewards, 'simulator' : sim,
+             'scores'    : scores, 'votes'      : votes}
 
 # sleep to avoid getting blocked from twitch. There is a limit on the number of messages 
 # a bot can send to channel. 

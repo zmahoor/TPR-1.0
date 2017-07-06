@@ -15,7 +15,7 @@ curr = 0
 #-------------------------------------#
 
 #-------Constants-------#
-WIDTH 		= 920
+WIDTH 		= 900
 HEIGHT 		= 275
 FONT_SIZE	= 23
 COLORS 		= ['RED', 'BLUE', 'DARKGREEN']
@@ -74,7 +74,7 @@ def Add_Time_Since_Start(call, cr):
         timer = timer + str(m) + ':' + s
 
 	WINDOW.Draw_Text("Command with the most votes will be sent to the robot in   " + timer, x = 10, y = HEIGHT-50) 
-        WINDOW.Draw_Text("Need help?  Type  ?votes ", x =700, y = HEIGHT-50) 
+        WINDOW.Draw_Text("Need help? Type ?votes ", x =675, y = HEIGHT-50) 
 
 	return timeSinceStart, call, cr
 
