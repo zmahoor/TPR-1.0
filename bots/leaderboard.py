@@ -8,8 +8,8 @@ from timer import TIMER
 
 DB = DATABASE()
 WIDTH     = 440
-HEIGHT    = 430
-FONT_SIZE = 17
+HEIGHT    = 360
+FONT_SIZE = 20
 WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
 UPDATE_PERIOD = 10
 
@@ -68,11 +68,11 @@ while 1:
     
     table.Update(newList, newUser)
     
-    WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = 20+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('RANK', x = 4, y = 20+.5*HEIGHT/12.0)    
-    WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = 20+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('TOP USERS TEACHING THE ROBOTS', x = 0.25*WIDTH, y = 1)
-    WINDOW.Draw_Text('Need help? Type ?scores', x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
+    WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0)    
+    WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = 15+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('TOP USERS TEACHING THE ROBOTS', x = 0.15*WIDTH, y = 1)
+    WINDOW.Draw_Text('Need help? Type ?scores', x = .12*WIDTH, y = HEIGHT - 25)
 
     if updateTimer.Time_Elapsed():
 
@@ -82,6 +82,4 @@ while 1:
 
         print 'user', newUser
 
-        WINDOW.Refresh()
-
-
+    WINDOW.Refresh()
