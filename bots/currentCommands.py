@@ -16,11 +16,11 @@ curr = 0
 
 #-------Constants-------#
 WIDTH 		= 920
-HEIGHT 		= 250
+HEIGHT 		= 275
 FONT_SIZE	= 23
 COLORS 		= ['RED', 'BLUE', 'DARKGREEN']
 DB 		= DATABASE()
-Y_COOR 		= [75, 125, 175]
+Y_COOR 		= [65, 115, 165]
 WINDOW 		= PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
 TIME_OF_CYCLE 	= 10  #in seconds
 NUM_CYCLES 	= 18
@@ -73,8 +73,8 @@ def Add_Time_Since_Start(call, cr):
 	
         timer = timer + str(m) + ':' + s
 
-	WINDOW.Draw_Text("Command with the most votes will be sent to the robot in   " + timer, x = 10, y = 200) 
-        WINDOW.Draw_Text("Need help?  Type  ?votes ", x =700, y = 200) 
+	WINDOW.Draw_Text("Command with the most votes will be sent to the robot in   " + timer, x = 10, y = HEIGHT-50) 
+        WINDOW.Draw_Text("Need help?  Type  ?votes ", x =700, y = HEIGHT-50) 
 
 	return timeSinceStart, call, cr
 
@@ -85,8 +85,8 @@ def Get_Commands():
 
         cmds_to_return = []
         
-        full_cmd_list = DB.Fetch_For_Command_Window(interval = (reset-1) * TIME_OF_CYCLE)
-	print reset - 1
+        full_cmd_list = DB.Fetch_For_Command_Window(interval = reset * TIME_OF_CYCLE)
+	print reset
 	#print 'COMMANDS'     
 
         for i in full_cmd_list:
@@ -139,8 +139,8 @@ while 1:
                         
         WINDOW.Wipe()
 
-        WINDOW.Draw_Text('Type !command to vote for the next command (for example type !move).', x = 10, y = 10)
-        WINDOW.Draw_Text('Top commands for the next robots are:', x = 10, y = 40)
+        WINDOW.Draw_Text('Type !command to vote for the next command (for example type !move).', x = 10, y = 2)
+        WINDOW.Draw_Text('Top commands for the next robots are:', x = 10, y = 28)
         
 	timePassed, call, curr = Add_Time_Since_Start(call, curr)
 	
@@ -163,8 +163,8 @@ while 1:
         for i in range (0, size):
                 
                 WINDOW.Draw_Text(names[i], x = start_x_names, y = Y_COOR[i], color = 'DARKGRAY')
-                WINDOW.Draw_Rect(X_VAL, Y_COOR[i], 3*li[i][1] + 15, 20, color = COLORS[i])
-                WINDOW.Draw_Text(str(li[i][1]), x = X_VAL + 3, y = Y_COOR[i]-3, color = 'WHITE')
+                WINDOW.Draw_Rect(X_VAL, Y_COOR[i]+5, 3*li[i][1] + 15, 20, color = COLORS[i])
+                WINDOW.Draw_Text(str(li[i][1]), x = X_VAL + 3, y = Y_COOR[i]-1, color = 'WHITE')
                 WINDOW.Draw_Text(li[i][0], x = 25, y = Y_COOR[i]) 
         
         start_x_names = start_x_names - 0.8
@@ -173,9 +173,9 @@ while 1:
 
         if timePassed % TIME_OF_CYCLE == 0:
 		if call:
-			reset = reset + 1
-			li = Get_Commands()
 			
+			li = Get_Commands()
+			reset = reset + 1
                 	print 'COMMANDS'
 			call = False
 		
@@ -199,9 +199,3 @@ while 1:
                         DB.Set_Current_Command(DEFAULT_COMMAND)
                           
 	WINDOW.Refresh()
-
-
-        
-
-
-        

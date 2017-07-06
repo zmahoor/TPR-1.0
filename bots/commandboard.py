@@ -7,9 +7,10 @@ import pygame
 from timer import TIMER
 
 DB = DATABASE()
-WINDOW = PYGAMEWRAPPER(width = 440, height = 430, fontSize = 17)
-WIDTH  = WINDOW.size[0]
-HEIGHT = WINDOW.size[1]
+FONT_SIZE = 20
+WIDTH = 440
+HEIGHT = 360
+WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
 SCREEN = WINDOW.screen
 UPDATE_PERIOD = 10
     
@@ -56,11 +57,11 @@ while 1:
     WINDOW.Wipe()
     
     table.Update(newList, newCmd)
-    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = 20+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('RANK', x = 4, y = 20+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = 20+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('TOP COMMANDS LEARNED BY THE ROBOTS', x = 0.25*WIDTH, y = 1)
-    WINDOW.Draw_Text('Need help? Type ?commands', x = .12*WIDTH, y = 12.3/13.0 * HEIGHT)
+    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = 15+.5*HEIGHT/12.0)
+    WINDOW.Draw_Text('TOP COMMANDS LEARNED BY THE ROBOTS', x = 0.10*WIDTH, y = 1)
+    WINDOW.Draw_Text('Need help? Type ?commands', x = .12*WIDTH, y = HEIGHT - 25)
     
     if updateTimer.Time_Elapsed():
 
