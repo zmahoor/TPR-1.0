@@ -302,7 +302,7 @@ class DATABASE:
             # print command ,first_sum-second_sum
 
             sql = """UPDATE unique_commands SET totalLearnability ='%f' WHERE 
-                cmdTxt ='%s';"""%(first_sum - second_sum, command)
+                cmdTxt ='%s';"""%(second_sum - first_sum, command)
 
             err_msg = "Failed to update command's learnability"
             self.Execute_Update_Sql_Command(sql, err_msg)
