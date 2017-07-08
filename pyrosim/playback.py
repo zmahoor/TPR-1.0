@@ -5,21 +5,15 @@ from individual import INDIVIDUAL
 from copy import deepcopy
 import pickle
 import sys
-
-wtm = 'height'
+import constants as c
 
 f = open(sys.argv[1],'r')
-best = pickle.load(f)
+individual = pickle.load(f)
 f.close()
 
-print 'fitness: ', best.fitness
+command = 1.0
+wordVector = c.NUM_BIAS_NEURONS*[1.0] + [command]
+individual.Start_Evaluate(False, False, wordVector)
 
-# best.Send_To_Simulator(False,True,600,None,color=np.array([1,1,1]))
-# best.Get_From_Simulator(wtm)
-# print best.robot.command
-# best.robot.command = 0
-
-best.Start_Evaluate(True, False, [1.0, 0.0])
-best.Compute_Fitness(wtm)
-# print best.robot.command
+print 'fitness: ', individual.fitness
 

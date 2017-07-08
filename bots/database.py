@@ -272,12 +272,12 @@ class DATABASE:
 
         for row in records:
             # print row
-            command = row['cmdTxt']
+            command    = row['cmdTxt']
             start_time = row['firstTime']
             last_time  = row['lastTime']
-            first_sum = 0
+            first_sum  = 0
             second_sum = 0
-            mid_time = start_time + (last_time - start_time)/2
+            mid_time   = start_time + (last_time - start_time)/2
             # print mid_time
 
             sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as firstSum FROM 

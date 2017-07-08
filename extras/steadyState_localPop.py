@@ -31,7 +31,7 @@ robotType = validRobots[morphologyIndex % len(validRobots)]
 
 mydatabase = DATABASE()
 
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=26)
+window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=23)
 
 currentCommand = {}
 

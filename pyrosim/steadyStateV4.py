@@ -1,23 +1,23 @@
 from pyrosim import PYROSIM
 import numpy as np
-import random
-from individual import INDIVIDUAL
 from copy import deepcopy
 import datetime
 import sys 
 import pickle
 import os 
 import glob
-import constants as c
-from timer import TIMER
 from keras.models import load_model
 import pygame
 import argparse
 
-import critic as ct
+from individual import INDIVIDUAL
+from timer import TIMER
+import constants as c
 
 sys.path.append('../bots')
+sys.path.append('../critic')
 
+import critic as ct
 from database import DATABASE
 from settings import *
 from pygameWrapper import PYGAMEWRAPPER
@@ -36,7 +36,6 @@ wordVector     = []
 window = None
 db     = None
 injectionTimer = None
-injectionFlag  = False
 removeInjected = False
 
 def Store_Sensors_To_File(individual, currentTime):
@@ -129,7 +128,7 @@ def Write_File(filePath, data):
 def Remove_File(filePath):
 
     try:
-        os.remove(brainPaths[randomIndex])
+        os.remove(filePath)
         print "Successfully removed the injected robot from the diversity pool.."
     
     except KeyboardInterrupt:
@@ -191,8 +190,13 @@ def Draw_Reinforcment_Window():
 
     myy += 60
 
-    # window.Draw_Text("A new robot will be born in " + str(injectionTimer.Time_Remaining())\
-    #  + " s.", x=10, y=myy) 
+    minute, second = divmod(injectionTimer.Time_Remaining(), 60)
+    hour, minute   = divmod(minute, 60)
+    rtime = "%d:%02d:%2d"%(hour, minute, second)
+
+    window.Draw_Rect(10, myy, 320, 30 , color = 'TAN')
+    window.Draw_Text("A new robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
+
     window.Draw_Text("Need help? Type", x= 640, y=myy) 
     window.Draw_Text("?rewards", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
 
@@ -201,7 +205,7 @@ def Draw_Reinforcment_Window():
 def Select_Random_Individual(popSize):
     return np.random.randint(popSize)
 
-def Compete_While_Waiting_For(pop, ignoreIndex):
+def Compete_While_Waiting_For(pop, ignoreID):
 
     pop_len = len(pop)
     if (pop_len <= 2) : 
@@ -209,12 +213,12 @@ def Compete_While_Waiting_For(pop, ignoreIndex):
 
     while True:
         ind1 = Select_Random_Individual(len(pop))
-        if ind1 != ignoreIndex:
+        if pop[ind1]['robotID'] != ignoreID:
             break
 
     while True:
         ind2 = Select_Random_Individual(len(pop))
-        if ind2 != ind1 and ind2 != ignoreIndex:
+        if ind2 != ind1 and pop[ind2]['robotID'] != ignoreID:
             break
     print "Competing controllers: ", pop[ind1]['robotID'], " and " , pop[ind2]['robotID']
     print pop[ind1]
@@ -237,11 +241,25 @@ def Compete_Based_On_Obedience(record1, record2):
     global currentCommand
 
     try:
-        critic = load_model('critic_model.h5')
+        critic = load_model('../critic/model.h5')
         print 'Successfully loaded the critic model.'
 
     except KeyboardInterrupt:
+        sys.exit()
+    except:
         print 'Unable loading the critic model.'
+        return None
+
+    try:
+        with open('../critic/data_stats.dat') as f:
+            data_stats = pickle.load(f)
+            _min = data_stats['_min']
+            _max = data_stats['_max']
+
+    except KeyboardInterrupt:
+        sys.exit()
+    except:
+        print 'Unable loading the normalization data.'
         return None
 
     individual1 = Load_Controller_From_File(record1['robotID'], record1['type'])
@@ -264,6 +282,8 @@ def Compete_Based_On_Obedience(record1, record2):
 
     print sensorValues1.keys(), sensorValues2.keys()
 
+    print _min, _max
+
     features1 = ct.Extract_Features( sensorValues1 )
     features2 = ct.Extract_Features( sensorValues2 )
 
@@ -274,7 +294,11 @@ def Compete_Based_On_Obedience(record1, record2):
     print features1[0].shape, features2[0].shape
     assert features1[0].shape == features1[0].shape
 
-    sensor_input = np.stack((features1[0], features2[0]))
+    # normalize the sensor data for both individuals.
+    normalizedSensors1 = (features1[0] - _min) / (_max - _min)
+    normalizedSensors2 = (features2[0] - _min) / (_max - _min)
+
+    sensor_input = np.stack(( normalizedSensors1, normalizedSensors2))
     word_input   = np.array(2*[currentCommand['wordToVec']])
 
     print 'samples to be send to critic: ', sensor_input.shape, word_input.shape
@@ -402,11 +426,11 @@ def Initialize_Global_Population():
 
 def Steady_State():
 
+    global injectionTimer
     global currentCommand
     global currentColor
     global colorIndex
     global wordVector
-    global injectionFlag
     global db
 
     aliveIndividuals = db.Fetch_Alive_Robots("all")
@@ -414,42 +438,35 @@ def Steady_State():
     print "Num of alive individuals: ", len(aliveIndividuals)
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population. Run with --initPopulation flag.'
 
-    index = Select_Random_Individual(len(aliveIndividuals))
-
-    if injectionFlag:
+    if injectionTimer.Time_Elapsed():
 
         print 'Time to inject a new individual..'
+        injectionTimer.Reset()
 
-        zeroEvalsFlag = False
-        for i in range(len(aliveIndividuals)): 
-            if aliveIndividuals[i]['numEvals'] == 0: 
-                zeroEvalsFlag = True
-                break
+        min_Evaluated_Robot = min(aliveIndividuals, key=lambda x:x['numEvals'])
+        print "To be killed to make space fot the incoming robot :(", min_Evaluated_Robot
 
-        if zeroEvalsFlag:
-            
-            print 'There is a spot for the newbie...'
-            injectionFlag    = False
-            randomType       = validRobots[np.random.randint(0, len(validRobots))]
-            randomIndividual = Load_From_Diversity_Pool(randomType)
+        injectionType = validRobots[np.random.randint(0, len(validRobots))]
+        toBe_Injected = Load_From_Diversity_Pool(injectionType)
 
-            if randomIndividual == None:
-                randomIndividual = INDIVIDUAL(0, randomType)
+        if toBe_Injected == None:
+            toBe_Injected = INDIVIDUAL(0, randomType)
 
-            robotID = Add_New_Robot(randomIndividual)
-            db.Kill_Robot(aliveIndividuals[i]['robotID'])
+        robotID = Add_New_Robot(toBe_Injected)
+        db.Kill_Robot(min_Evaluated_Robot['robotID'])
 
-            aliveIndividuals = db.Fetch_Alive_Robots("all")
+        aliveIndividuals = db.Fetch_Alive_Robots("all")
 
-            for i in range(len(aliveIndividuals)): 
+        toBe_Displayed = next((item for item in aliveIndividuals if item['robotID'] == robotID), None)
 
-                if aliveIndividuals[i]['robotID'] == robotID: 
-                    index = i
-        else:
-            print 'There is NO spots for the newbie...'
+        if toBe_Displayed == None: return
 
-    robotID   = aliveIndividuals[index]['robotID']
-    robotType = aliveIndividuals[index]['type']
+    else:
+        toBe_Displayed_Index = Select_Random_Individual(len(aliveIndividuals))
+        toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
+
+    robotID   = toBe_Displayed['robotID']
+    robotType = toBe_Displayed['type']
     randomIndividual = Load_Controller_From_File(robotID, robotType)
         
     if randomIndividual == None:
@@ -477,7 +494,7 @@ def Steady_State():
     randomIndividual.Set_Color(currentColor)
     randomIndividual.Start_Evaluate(False, False, wordVector)
 
-    newIndividual = Compete_While_Waiting_For(aliveIndividuals, index)
+    newIndividual = Compete_While_Waiting_For(aliveIndividuals, robotID)
     if newIndividual != None:
         Add_New_Robot(newIndividual)
 
@@ -490,7 +507,6 @@ def Steady_State():
 
 def main(args):
 
-    global injectionFlag
     global injectionTimer
     global db
     global window
@@ -510,20 +526,13 @@ def main(args):
 
     while True:
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                window.Quit()
-
         print "Generation: ", generation
 
         Steady_State()
 
-        if injectionTimer.Time_Elapsed():
-
-            print 'Injection timer elapsed'
-
-            injectionTimer.Reset()
-            injectionFlag = True
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                window.Quit()
 
         generation += 1
         print
