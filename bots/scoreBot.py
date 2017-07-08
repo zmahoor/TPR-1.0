@@ -9,7 +9,7 @@ def main():
 
     while True:
 
-        sleep(10)
+        sleep(10.0)
 
         mydatabase.Update_Users_Score()
 

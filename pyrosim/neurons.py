@@ -107,10 +107,10 @@ class NEURONS:
                 self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s)
                 ind += 1
 
-            # elif(self.sensorsList[s] == c.RAY_SENSOR and not rayAdded):
-            #     rayAdded = True
-            #     self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s)
-            #     ind += 1
+            elif(self.sensorsList[s] == c.RAY_SENSOR and not rayAdded):
+                rayAdded = True
+                self.sensorNeurons[ind] = NEURON(c.SENSOR_NEURON,self.numBiasNeurons+ind,s)
+                ind += 1
 
         self.numSensorNeurons = len(self.sensorNeurons)
 

@@ -3,4 +3,7 @@
 *.pyc
 pyrosim/simulator
 pyrosim/ode-0.12/*
-brains/*
+controllers/*
+sensors/*
+db/*
+diversity_pool/*

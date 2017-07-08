@@ -3,6 +3,8 @@ from keras.layers.core import Dense, Activation, Dropout
 from keras.layers import Input, Embedding, LSTM, Dense, Activation, concatenate
 import keras 
 from keras.models import load_model, save_model
+from keras.callbacks import ModelCheckpoint
+
 import numpy as np
 import time
 import matplotlib.pyplot as plt
@@ -10,19 +12,24 @@ import h5py
 import sys 
 import pickle
 import os 
-import constants as c
 from datetime import datetime
 import argparse
 
 np.random.seed(1234)
-sys.path.append('../bots')
 
+sys.path.append('../bots')
+sys.path.append('../pyrosim')
+
+import constants as c
 from database import DATABASE
 from settings import *
 
-SENSOR_DROP_RATE = 12
+SENSOR_DROP_RATE = 18
+num_features     = 6
+sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
+
 data_generation  = False
-synthetic_data   = True
+synthetic_data   = False
 
 class CRITIC:
 
@@ -33,24 +40,17 @@ class CRITIC:
 
     def setup_model(self):
 
-        layers = self.params['layers']
-
-        sensor_input = Input(shape=(150, 6), name='sensor_input')
+        sensor_input = Input(shape=(sequence_len, num_features), name='sensor_input')
 
         lstm1    = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
 
-        lstm2    = LSTM(12, return_sequences=True)(dropout1)
+        lstm2    = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
-
-        lstm3    = LSTM(12, return_sequences=False)(dropout2)
-        dropout3 = Dropout(0.2)(lstm3)
         
         word_input = Input(shape=(1,), name='word_input')
-        x = keras.layers.concatenate([dropout3, word_input])
+        x = keras.layers.concatenate([dropout2, word_input])
 
-        x = Dense(12, activation='relu')(x)
-        x = Dense(12, activation='relu')(x)
         x = Dense(12, activation='relu')(x)
 
         output = Dense(1, activation='linear', name='output')(x)
@@ -61,6 +61,8 @@ class CRITIC:
 
         self.model.compile(optimizer='rmsprop', loss={'output': 'mse'},
             loss_weights={'output': 1.})
+
+        self.checkpointer = ModelCheckpoint(filepath='temp_model.hdf5', verbose=1, save_best_only=True,)
         
         print "Compilation Time : ", time.time() - start
 
@@ -72,16 +74,20 @@ class CRITIC:
 
             if synthetic_data:
                 print('Generate synthetic data.')
-                data = Generate_Synthetic_Data( 10000 )
+                data = Generate_Synthetic_Data( self.params['training_size'] )
             else:
                 data = Load_Training_Data( mydatabase )
 
-            sensors = self.normalize_data( sensors )
-
-            self._min = np.min(np.min(sensors, axis=1), axis=0)
-            self._max = np.max(np.max(sensors, axis=1), axis=0)
-
             sensors, wordToVec, obedience = data
+
+            _min = np.min(np.min(sensors, axis=1), axis=0)
+            _max = np.max(np.max(sensors, axis=1), axis=0)
+
+            data_stats = {}
+            data_stats['_min'] = _min
+            data_stats['_max'] = _max
+
+            sensors = (sensors - _min) / (_max - _min)
 
             print "range: "
             print np.min(np.min(sensors, axis=1), axis=0)
@@ -95,7 +101,7 @@ class CRITIC:
                 self.model.fit({'sensor_input': sensors, 'word_input': wordToVec},
                     {'output': obedience},
                     epochs=self.params['epochs'], batch_size=self.params['batch_size'],
-                    validation_split=self.params['validation_split'])
+                    validation_split=self.params['validation_split'], callbacks=[self.checkpointer])
 
             except KeyboardInterrupt:
                 print 'Training duration (s) : ', time.time() - start_time
@@ -104,17 +110,18 @@ class CRITIC:
             print('Using data generation...')
             start_time = time.time()
             try:
-                self.model.fit_generator(Generate_Data(10, mydatabase), steps_per_epoch=10, epochs=5)
+                self.model.fit_generator(Generate_Data(10, mydatabase), steps_per_epoch=10, epochs=5,\
+                 callbacks=[self.self.checkpointer])
             except Exception as e:
                 print str(e)
 
-        self.model.save('critic_model.h5')  # creates a HDF5 file 'my_model.h5'
+        with open('data_stats.dat', 'wb') as f:
+            print 'Writing training data\'s stats...'
+            pickle.dump(data_stats, f)
+
+        self.model.save('model.h5')  # creates a HDF5 file 'my_model.h5'
 
         print 'Training duration (s) : ', time.time() - start_time
-
-    def normalize_data(self, data):
-
-        return (data - self._min) / (self._max - self._min)
 
     def predict(self, data):
         
@@ -124,26 +131,6 @@ class CRITIC:
         print "predicted: ", predicted.shape
         
         return predicted
-
-    # def plot_results(self, y_test, predicted):
-
-    #     assert y_test.shape == predicted.shape
-
-    #     x = 200
-    #     try:
-
-    #         fig, ax = plt.subplots()
-    #         line1,  = ax.plot(y_test, '-', linewidth=2,
-    #              label='True obedience')
-
-    #         line2,  = ax.plot(predicted, '-', linewidth=2,
-    #              label='Predicted obedience')
-
-    #         ax.legend(loc='upper right')
-    #         plt.show()
-
-    #     except Exception as e:
-    #         print str(e)
 
 def Delete_Sensor_File(record):
 
@@ -205,7 +192,7 @@ def Generate_Data(batch_size, mydatabase):
                 continue
 
             tfeatures  = features[0]
-            if tfeatures.shape != (c.evaluationTime/SENSOR_DROP_RATE, 6): 
+            if tfeatures.shape != (c.evaluationTime/SENSOR_DROP_RATE, num_features): 
                 continue
             
             obedience = float(record['numYes'] - record['numNo']) \
@@ -259,7 +246,7 @@ def Load_Training_Data(mydatabase):
         if features == None: continue
 
         tfeatures  = features[0]
-        if tfeatures.shape != (c.evaluationTime/SENSOR_DROP_RATE, 6): continue
+        if tfeatures.shape != (sequence_len, num_features): continue
         
         obedience  = float(record['numYes'] - record['numNo']) \
                             / float(record['numYes'] + record['numNo'])
@@ -348,34 +335,23 @@ def Extract_Features(sample):
 
     for key in sample.keys():
 
-        # position_x sensor
         if key.startswith('P') and key.endswith('_X') :
-            # print key, sample[key].shape
             posX = Position_Feature_Extraction(sample[key])
         
-        # position_y sensor
         elif key.startswith('P') and key.endswith('_Y'):
-            # print key, sample[key].shape
             posY = Position_Feature_Extraction(sample[key])
 
-        # position_z sensor
         elif key.startswith('P') and key.endswith('_Z'):
-            # print key, sample[key].shape
             posZ = Position_Feature_Extraction(sample[key])
 
-        # touch sensor
         elif key.startswith('T'):
-            # print key, sample[key].shape
             touch.append(sample[key])
 
-        # ray sensor 
         elif key.startswith('R0'):
-            # print key, sample[key].shape
             ray = Ray_Feature_Extraction(sample[key])
 
         # propriceptive sensor
         elif key.startswith('P'):
-            # print key, sample[key].shape
             prop.append(sample[key])
 
     if len(prop) != 0:
@@ -386,7 +362,7 @@ def Extract_Features(sample):
         touch = Touch_Feature_Extraction(touch)
     else: return None
 
-    features = np.array([posX[:], posY, posZ, ray, touch, prop]).T
+    features = np.array([posX, posY, posZ, ray, touch, prop]).T
 
     # print 'sensors: ', timeSeriedFeatures.shape
 
@@ -394,25 +370,28 @@ def Extract_Features(sample):
 
 def Generate_Synthetic_Data( num_samples ):
 
-    num_features   = 6
-    num_time_steps = 150
-
-    sensors    = 2*np.random.rand( num_samples, num_time_steps, num_features)-1
+    sensors    = np.random.rand( num_samples, sequence_len, num_features)
     word_input = np.random.rand(num_samples, 1)
     obedience  = 2*np.random.rand(num_samples, 1)-1
     
     return (sensors, word_input, obedience)
 
-def main(argv):
+def main(args):
     
+    synthetic_data = args.synthetic_data
+    synthetic_size = args.synthetic_size
+    batch_size     = args.batch_size
+    val_split      = args.val_split
+    epoch          = args.epoch
+
     if synthetic_data == False:
         mydatabase = DATABASE()
 
     else: 
         mydatabase = None
 
-    params = {'epochs':1000, 'batch_size': 512, 'layers':[1, 32, 64, 1],\
-        'validation_split':0.05}
+    params = {'epochs':epoch, 'batch_size': batch_size,'validation_split':val_split,\
+        'training_size':synthetic_size}
 
     c = CRITIC(params)
     c.setup_model()
@@ -422,13 +401,11 @@ def main(argv):
 
         testing_data = Generate_Synthetic_Data(100)
 
-        sensors = (testing_data[0] - c._min) / (c._max - c._min)
-
         print "range: "
         print np.min(np.min(sensors, axis=1), axis=0)
         print np.max(np.max(sensors, axis=1), axis=0)
 
-        print c.predict( {'sensor_input': sensors, 'word_input': testing_data[1]})
+        print c.predict( {'sensor_input': testing_data[0], 'word_input': testing_data[1]})
 
         score = c.model.evaluate({'sensor_input': sensors,\
             'word_input': testing_data[1]}, {'output': testing_data[2]},\
@@ -437,5 +414,28 @@ def main(argv):
         print c.model.metrics_names, score
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+
+    parser = argparse.ArgumentParser(description='Critic Model.')
+    
+    parser.add_argument('--synthetic_data', action='store_true',\
+     help='create synthetic trainig data.')
+
+    parser.add_argument('--generate', action='store_true',\
+     help='generate data and bring them to the memory per batch.')
+
+    parser.add_argument('--batch_size', '-b', type = int, default=512, help=\
+        'batchSize, default=512.')
+
+    parser.add_argument('--epoch', '-e', type = int, default=1000, help=\
+        'Number of learning epochs, default=1000.')
+
+    parser.add_argument('--val_split', '-v', type = float, default=0.05, help=\
+        'Validatio split, default=0.05.')
+
+    parser.add_argument('--synthetic_size', '-s', type = int, default=10000, help=\
+        'Num of synthetic training set, default=10000.')
+
+    args = parser.parse_args()
+
+    main(args)
 
