@@ -62,7 +62,7 @@ class CRITIC:
         self.model.compile(optimizer='rmsprop', loss={'output': 'mse'},
             loss_weights={'output': 1.})
 
-        self.checkpointer = ModelCheckpoint(filepath='temp_model.hdf5', verbose=1, save_best_only=True,)
+        self.checkpointer = ModelCheckpoint(filepath='temp_model.h5', verbose=1, save_best_only=True,)
         
         print "Compilation Time : ", time.time() - start
 
@@ -377,6 +377,8 @@ def Generate_Synthetic_Data( num_samples ):
     return (sensors, word_input, obedience)
 
 def main(args):
+        
+    global synthetic_data
     
     synthetic_data = args.synthetic_data
     synthetic_size = args.synthetic_size
@@ -402,12 +404,12 @@ def main(args):
         testing_data = Generate_Synthetic_Data(100)
 
         print "range: "
-        print np.min(np.min(sensors, axis=1), axis=0)
-        print np.max(np.max(sensors, axis=1), axis=0)
+        print np.min(np.min(testing_data[0], axis=1), axis=0)
+        print np.max(np.max(testing_data[0], axis=1), axis=0)
 
         print c.predict( {'sensor_input': testing_data[0], 'word_input': testing_data[1]})
 
-        score = c.model.evaluate({'sensor_input': sensors,\
+        score = c.model.evaluate({'sensor_input': testing_data[0],\
             'word_input': testing_data[1]}, {'output': testing_data[2]},\
             batch_size=32, verbose=1, sample_weight=None)
 
