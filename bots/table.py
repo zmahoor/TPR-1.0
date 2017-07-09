@@ -44,7 +44,7 @@ class TABLE:
         top_rect = 40+0.5*self.HEIGHT/12.0
         height_rect = ((11.0/12.0) * self.HEIGHT) / (self.USERS+2)
         
-        for i in range (0, self.USERS):
+        for i in range (0, min(self.USERS, size)):
 
             #add ranks for 1-10
             if i%2 == 0:

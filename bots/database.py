@@ -160,11 +160,11 @@ class DATABASE:
         err_msg = "Failed to log this command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Add_To_Unique_Commands_Table(self, command, time, wordToVec):
+    def Add_To_Unique_Commands_Table(self, command, time, wordToVec, active=0):
 
         sql = """INSERT IGNORE INTO unique_commands(cmdTxt, timeAdded, 
             wordToVec, totalLearnability, active) VALUES
-            ('%s', '%s', '%f', 0, 0);"""%(command, time, wordToVec)
+            ('%s', '%s', '%f', 0, '%d');"""%(command, time, wordToVec, active)
 
         err_msg = "Failed to add this new command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
@@ -456,18 +456,18 @@ class DATABASE:
         
         return False
 
-    # def Fetch_For_Command_Window( self ):
+    def Tobe_Animated_In_Command_Window( self ):
 
-    #     sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
-    #     WHERE animationFlag=0;"""
+        sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
+        WHERE animationFlag=0;"""
 
-    #     err_msg = "unable fetching the most recent type command"
-    #     result = self.Execute_Select_Sql_Command(sql, err_msg)
+        err_msg = "unable fetching the most recent type command"
+        result = self.Execute_Select_Sql_Command(sql, err_msg)
 
-    #     sql = """ UPDATE command_log SET animationFlag=1 WHERE animationFlag=0;"""
-    #     self.Execute_Update_Sql_Command(sql)
+        sql = """ UPDATE command_log SET animationFlag=1 WHERE animationFlag=0;"""
+        self.Execute_Update_Sql_Command(sql)
 
-    #     return result
+        return result
 
     def Fetch_For_Command_Window(self, interval=10):
 
@@ -496,7 +496,7 @@ class DATABASE:
         err_msg = "Failed to retrieve the topn unique commands..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
-    def Find_Most_Popular_Command(self):
+    def Find_Most_Voted_Command(self):
         #find the most popular command where processed=0
         sql = """SELECT count(cmdLogID) as cmdCount, cmdTxt FROM command_log WHERE 
         processed =0 GROUP BY cmdTxt ORDER BY COUNT(cmdLogID) DESC LIMIT 1;"""

@@ -26,6 +26,10 @@ TIME_OF_CYCLE 	= 10  #in seconds
 NUM_CYCLES 	= 18
 #-----------------------#
 
+# add the default command to the unique_commands table and let it to be active command.
+currentTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+DB.Add_To_Unique_Commands_Table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
+
 #List format
 # [ (c_1, v_1, [users]), (c_2, v_2, [users]), ... (c_n, v_n, [users]) ]
 
