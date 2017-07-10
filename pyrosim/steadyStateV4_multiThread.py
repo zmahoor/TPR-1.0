@@ -466,7 +466,7 @@ def Steady_State(run_event):
             toBe_Injected = Load_From_Diversity_Pool(injectionType)
 
             if toBe_Injected == None:
-                toBe_Injected = INDIVIDUAL(0, randomType)
+                toBe_Injected = INDIVIDUAL(0, injectionType)
 
             robotID = Add_New_Robot(toBe_Injected)
             db.Kill_Robot(min_Evaluated_Robot['robotID'])
