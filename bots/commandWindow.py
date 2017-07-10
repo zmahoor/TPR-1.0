@@ -34,7 +34,6 @@ def Draw_Command_Window(timeRemaining):
 
     global currentCommand
     global animated_list
-    global start_x_names
 
     window.Wipe()
 
@@ -91,9 +90,6 @@ def Draw_Command_Window(timeRemaining):
 def process( tobe_animated ):
 
     global animated_list
-
-    # for item in animated_list:
-    #     item['users'][:] = []
 
     for item in tobe_animated:
         cmdTxt   = item['cmdTxt']
