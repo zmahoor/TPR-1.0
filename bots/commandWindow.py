@@ -11,6 +11,7 @@ import pygame
 from copy import deepcopy
 
 COMMAND_DURATION = 3 * 60
+DB_FETCH_DURATION = 10
 COMMAND_WINDOW_W = 900
 COMMAND_WINDOW_H = 275
 Y_COOR = [65, 115, 165]
@@ -29,6 +30,7 @@ currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
 
 mydatabase.Add_To_Unique_Commands_Table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
 mydatabase.Find_Most_Voted_Command()
+mydatabase.Tobe_Animated_In_Command_Window()
 
 def Draw_Command_Window(timeRemaining):
 
@@ -44,7 +46,7 @@ def Draw_Command_Window(timeRemaining):
     if timeRemaining < 0: timeRemaining = 0
     minute, second = divmod(timeRemaining, 60)
     hour, minute   = divmod(minute, 60)
-    timeRemaining = "%d:%02d:%2d"%(hour, minute, second)
+    timeRemaining  = "%02d:%02d"%(minute, second)
 
     MAX = 460
 
@@ -61,7 +63,7 @@ def Draw_Command_Window(timeRemaining):
 
         cmdTxt = animated_list[i]['cmdTxt']
         votes  = animated_list[i]['votes']
-        users   = animated_list[i]['users']
+        users  = animated_list[i]['users']
 
         # print NAME_X
 
@@ -76,12 +78,12 @@ def Draw_Command_Window(timeRemaining):
                 NAME_X[i] = 800
                 animated_list[i]['users'].pop(0)
 
-        window.Draw_Rect(X_VAL, Y_COOR[i]+5, 3*votes + 15, 20, color = COLORS[i])
-        window.Draw_Text(str(votes), x = X_VAL + 3, y = Y_COOR[i]-1, color = 'WHITE')
+        window.Draw_Rect(X_VAL, Y_COOR[i]+8, 3*votes + 15, 20, color = COLORS[i])
+        window.Draw_Text(str(votes), x = X_VAL + 2, y = Y_COOR[i]-1, color = 'WHITE')
         window.Draw_Text(cmdTxt, x = 25, y = Y_COOR[i]) 
 
 
-    window.Draw_Text("Command with the most votes will be sent to the robot in   " + timeRemaining, x = 10, y = 220) 
+    window.Draw_Text("Command with the most votes will be sent to the robot in " + timeRemaining, x = 10, y = 220) 
     window.Draw_Text("Need help? Type ?votes ", x = 675, y = 220) 
 
 
@@ -108,51 +110,46 @@ def process( tobe_animated ):
     animated_list = sorted(animated_list, key=lambda k:k['votes'], reverse=True)
 
     print animated_list
+    print
 
 def main():
 
     global currentCommand
+    global animated_list
 
     commandTimer = TIMER(COMMAND_DURATION)
-    smallTimer   = TIMER(10)
+    smallTimer   = TIMER(DB_FETCH_DURATION)
 
     while True:
 
-        commandTimer.Reset()
-        smallTimer.Reset()
-
         for event in pygame.event.get():
-                
             if event.type == pygame.QUIT:
-                        
                 window.Quit()
 
-        while not commandTimer.Time_Elapsed():
+        if commandTimer.Time_Elapsed():
 
-            # sleep(2)
+            animated_list[:] = []
+            temp = mydatabase.Find_Most_Voted_Command()
+
+            print "Most voted command: ", temp
+
+            if temp!= None:  currentCommand = temp['cmdTxt']
+            else: currentCommand = DEFAULT_COMMAND
+
+            mydatabase.Set_Current_Command(currentCommand)
+            commandTimer.Reset()
+
+        elif not commandTimer.Time_Elapsed():
+
             if smallTimer.Time_Elapsed():
 
-                smallTimer.Reset()
                 tobe_animated = mydatabase.Tobe_Animated_In_Command_Window()
-
                 if tobe_animated != None:
                     process( tobe_animated)
 
+                smallTimer.Reset()
+
             Draw_Command_Window(commandTimer.Time_Remaining())
-
-        animated_list[:] = []
-
-        temp = mydatabase.Find_Most_Voted_Command()
-
-        print "popular command: ", temp
-
-        if temp!= None: 
-            currentCommand = temp['cmdTxt']
-            mydatabase.Set_Current_Command(currentCommand)
-
-        else:
-            currentCommand = DEFAULT_COMMAND
-            mydatabase.Set_Current_Command(currentCommand)
 
 main()
 
