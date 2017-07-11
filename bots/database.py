@@ -321,12 +321,12 @@ class DATABASE:
 
         newIndex = 0
         if results != None:
-            newIndex = np.random.random()
+            newIndex = 2*np.random.random()-1
 
             while newIndex in results:
-                newIndex = np.random.rand()
+                newIndex = 2*np.random.rand()-1
         else:
-            newIndex = np.random.random()
+            newIndex = 2*np.random.random()-1
         return newIndex
 
     def Fetch_From_Disply_Table(self, condition='all'):

@@ -81,7 +81,7 @@ class POPULATION:
         for i in self.p:
             self.p[i].Mutate()
 
-    def ReplaceWith(self, other):
+    def Replace_With(self, other):
 
         for i in self.p:
             if (self.p[i].fitness < other.p[i].fitness):

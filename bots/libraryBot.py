@@ -6,7 +6,7 @@ import re
 # !r !g !b
 def validPrefix():
     global validColors
-    return [ "!"+color[0] for color in validColors]
+    return [ "!"+color[0] for color in validColors] + ["!"+specialColor[0]]
 
 # !rn 
 def isRewardSignal(string):

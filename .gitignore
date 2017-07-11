@@ -2,7 +2,6 @@
 *.d
 *.pyc
 pyrosim/simulator
-pyrosim/ode-0.12/*
 controllers/*
 sensors/*
 db/*
