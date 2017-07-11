@@ -36,10 +36,12 @@ def main(args):
 
         if storeTimer.Time_Elapsed():
 
-            best = self.Find_Best()
+            best = parents.Find_Best()
             
-            if best.fitness > 0:
-                self.p[best].Store_To_Diversity_Pool()
+            if parents.p[best].fitness > 0:
+                print 'Best is: ', best
+                parents.p[best].Store_To_Diversity_Pool()
+                print 'Killing the best and replaching it with a random individual.'
                 parents.Kill_And_Replace( best )
 
             storeTimer.Reset()
@@ -47,8 +49,6 @@ def main(args):
         print g,
         parents.Print()
         print
-
-    # parents.Store_All_Above_Average()
 
 if __name__ == "__main__":
 
