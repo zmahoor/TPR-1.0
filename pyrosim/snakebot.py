@@ -72,15 +72,6 @@ class ROBOT:
     def Send_Objects(self, sim, color):
 
         self.num_objects = 0
-        # Green Box
-        sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.R, length=c.L,
-         width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
-        self.num_objects += 1
-
-        # Purple Box
-        sim.Send_Box(objectID = self.num_objects , x=0, y=2*c.L, z=c.R,length=c.L,
-         width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
-        self.num_objects += 1
 
         # Red Box
         sim.Send_Box(objectID = self.num_objects , x=0, y=-2*c.L, z=c.R,length=c.L,
@@ -88,6 +79,18 @@ class ROBOT:
 
         self.head_ID = self.num_objects
         self.num_objects += 1
+
+        # Purple Box
+        sim.Send_Box(objectID = self.num_objects , x=0, y=2*c.L, z=c.R,length=c.L,
+         width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
+
+        self.num_objects += 1
+
+        # Green Box
+        sim.Send_Box(objectID = self.num_objects , x=0, y=0, z=c.R, length=c.L,
+         width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
+        self.num_objects += 1
+
 
     def Send_Joints(self, sim):
 
@@ -97,7 +100,7 @@ class ROBOT:
          n1 =1, n2 =0, n3 =0, x=0, y=-c.L, z=c.R, lo=-c.PI/2 , hi=c.PI/2)
         self.num_joints += 1
 
-        sim.Send_Joint( jointID = self.num_joints, firstObjectID = 0, secondObjectID = 1,
+        sim.Send_Joint( jointID = self.num_joints, firstObjectID = 2, secondObjectID = 1,
          n1 =1, n2 =0, n3 =0, x=0, y=c.L, z=c.R, lo=-c.PI/2 , hi=c.PI/2)
         self.num_joints += 1
 

@@ -78,7 +78,7 @@ class PYGAMEWRAPPER:
                   'GREEN'       : (  0, 255,   0),
                   'BLUE'        : (  0,   0, 255),
                   'GRAY'        : (123, 123, 123),
-                  'LIGHTGRAY'   : (150, 150, 150),
+                  'SILVER'      : (190, 190, 190),
                   'DARKGRAY'    : ( 75,  75,  75),
                   'PINK'        : (255,  10, 190),
                   'LIGHTBLUE'   : (173, 216, 230),
