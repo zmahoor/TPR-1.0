@@ -6,75 +6,111 @@ from copy import deepcopy
 import pickle
 import argparse
 from timer import TIMER
+import os 
+import sys 
 
 from individual import INDIVIDUAL
 from population_Vn import POPULATION
 
-storeTimer = TIMER(5 * 60)
+sys.path.append('../bots')
 
-def main(args):
+from settings import *
 
-    robotType = args.robot
-    arch_thr  = args.arc_thr
-    knn       = args.knn
-    brange    = args.brange
-    popSize   = args.popsize
-    numGen    = args.numgen
-    internal_novelty = args.internal_novelty
+def Load_Population_From_File( robotType ):
 
-    parents = POPULATION(popSize, robotType)
+    path = '../secondary_population/population_of_' + str(robotType) + '.dat'
+    population = None
+    try:
+        with open(path, 'rb') as f:
+            population = pickle.load(f)
+
+        print ('Successful loading the population of: ', robotType)
+
+    except:
+        print ('Failed loading the population of: ', robotType)
+    
+    return population
+
+def Store_Population_To_File( population, robotType ):
+    
+    path = '../secondary_population'
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    path += '/population_of_' + str(robotType) + '.dat'
+
+    try:
+        with open(path, 'wb') as f:
+            pickle.dump(population, f)
+
+        print ('Successful writing population of: ', robotType)
+
+    except:
+        print ('Failed writing the population of: ', robotType)
+
+def Fill_Diversity_Pool(robotType, tPeriod, popSize):
+    
+    endTimer = TIMER( tPeriod * 60)
+
+    parents = Load_Population_From_File(robotType)
+
+    if parents == None:
+        parents = POPULATION(popSize, robotType)
 
     parents.Evaluate_Internal_Novelty(False, True)
 
-    for g in range(1, numGen):
+    g = 1
+    while not endTimer.Time_Elapsed():
 
         children = deepcopy(parents)
         children.Mutate()
 
         children.Evaluate_Internal_Novelty(False, True)
-        parents.ReplaceWith(children)
-
-        if storeTimer.Time_Elapsed():
-
-            best = parents.Find_Best()
-            
-            if parents.p[best].fitness > 0:
-                print 'Best is: ', best
-                parents.p[best].Store_To_Diversity_Pool()
-                print 'Killing the best and replaching it with a random individual.'
-                parents.Kill_And_Replace( best )
-
-            storeTimer.Reset()
+        parents.Replace_With(children)
 
         print g,
         parents.Print()
-        print
+        g += 1
+        print 
+
+    best = parents.Find_Best()
+    
+    if parents.p[best].fitness > 0:
+
+        print 'Killing the best: '+ str(best) +' and replaching it with a random individual.'
+
+        parents.p[best].Store_To_Diversity_Pool()
+        parents.Kill_And_Replace( best )
+
+    Store_Population_To_File( parents, robotType)
+
+    del parents
+    del children
+
+    return
+
+def main(args):
+
+    popSize     = args.pop_size
+    tPeriod     = args.evolution_period
+    robotType   = args.robot
+
+    Fill_Diversity_Pool(robotType, tPeriod, popSize)
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='Diversity pool using either intenal or external diversity.')
+    parser = argparse.ArgumentParser(description='Diversity pool using intenal novelty.')
     
-    parser.add_argument('--robot', '-r', type=str, default='1',\
+    parser.add_argument('--robot', '-r', type=str, default='4',\
      help='Morphology types: {1,2,3,4,spherebot\
         ,crabbot, quadruped, shinbot, snakebot}, default=1')
 
-    parser.add_argument('--popsize', '-p', type=int, default=30, help=\
+    parser.add_argument('--pop_size', '-p', type=int, default=20, help=\
         'Size of populaiton, default=30.')
     
-    parser.add_argument('--numgen', '-n', type=int, default=100, help=\
-        'Number of generations, default=100.')
-
-    parser.add_argument('--arc_thr', '-t', type=float, default=4.0,
-        help='An individual with a fitness larger than this value is inserted into the archive, default=4.0.')
-
-    parser.add_argument('--knn', '-k', type=int, default=3,
-        help='K nearest neighbor for calculating fitness in external novelty, default=3.')
-
-    parser.add_argument('--brange', '-b', type=int, default=10,
-        help='Divide [0, 1] in brange values for word to vector, default=10.')
-
-    parser.add_argument('--internal_novelty', action='store_true',
-        help='A boolean flag, default=False')
+    parser.add_argument('--evolution_period', '-t', type=int, default=60, help=\
+        'Experiment time in minutes, default=60.')
 
     args = parser.parse_args()
 
