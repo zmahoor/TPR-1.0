@@ -14,6 +14,7 @@ class POPULATION:
 
         self.p = {}
         self.popSize = ps
+        self.robotType = robotType
 
         for i in range(0, self.popSize):
             self.p[i] = INDIVIDUAL(i, robotType) 
@@ -41,7 +42,7 @@ class POPULATION:
         for i in self.p: 
             tempSensors[i]=[]
 
-        for b in [0, +1]:
+        for b in [-1, +1]:
 
             for i in self.p:
                 self.p[i].Start_Evaluate(pp, pb, c.NUM_BIAS_NEURONS*[1.0]+[b]\
@@ -105,9 +106,9 @@ class POPULATION:
         return best_index
 
     def Kill_And_Replace(self, index):
-
+        
         del self.p[index]
-        self.p[index] = INDIVIDUAL(i, robotType)
+        self.p[index] = INDIVIDUAL(index, self.robotType)
 
     def Store_All_Above_Average(self):
 
