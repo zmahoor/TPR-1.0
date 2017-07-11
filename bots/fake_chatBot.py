@@ -20,13 +20,18 @@ def rewardSignals():
     return validRS
 
 REWARDS = rewardSignals()
-CMDS    = ['!jump', '!walk', '!run away', '!break free', '!stay still', '!move', '!help']
+CMDS    = ['!walk very fast then jump', '!walk back then forward', '!crawl', '!jump',\
+ '!walk', '!run away', '!break free', '!stay still', '!move', '!help',\
+ '!walk forward', 'walk fast forward']
+
 HELPS   = ['?' , '?rewards', '?commands', '?myscore', '?scores', '?robots', '?votes', '?project']
 EXTRA   = ['helloO %$##', 'WHat is this?', 'DROP TABLE', 'SQL DELETE Rows']
 
 DATA    = REWARDS + CMDS + HELPS + EXTRA
 
-USERS = ['zmahoor', 'jfelag', 'doctorjoshuvm', 'tpr_bot1', 'acaeelle', 'dwood', 'bfust', 'jsmith']
+USERS = ['zmahoor', 'jfelag', 'doctorjoshuvm', 'tpr_bot1', 'ccappelle',\
+    'abernatskiy', 'dwood', 'cfusting', 'jsmith', 'samk', 'marcin', 'roman.popov',\
+    'krystalleger', 'sijmen']
 
 #The main loop
 while True:
@@ -35,7 +40,7 @@ while True:
     uindex = np.random.randint(len(USERS))
     
     message = {'message': DATA[dindex], 'username': USERS[uindex]}   
-    sleep(0.5)
+    sleep(1.0)
 
     try:
         #Get info from message.
