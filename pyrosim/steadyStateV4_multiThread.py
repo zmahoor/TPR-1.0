@@ -28,7 +28,7 @@ SUB_POPULATION_SIZE = 5
 REWARD_WINDOW_W     = 900
 REWARD_WINDOW_H     = 280
 FONT_SIZE           = 23
-INJECTION_PERIOD    = 60 * 5
+INJECTION_PERIOD    = 5 * 60
 
 colorIndex     = 0
 currentColor   = validColors[colorIndex % len(validColors)]
@@ -203,10 +203,10 @@ def Draw_Reinforcment_Window(run_event):
         if rtime < 0: rtime = 0
         minute, second = divmod(rtime, 60)
         hour, minute   = divmod(minute, 60)
-        rtime = "%d:%02d:%2d"%(hour, minute, second)
+        rtime = "%d:%02d:%02d"%(hour, minute, second)
 
         window.Draw_Rect(10, myy, 320, 30 , color = 'TAN')
-        window.Draw_Text("A new robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
+        window.Draw_Text("A silver robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
 
         window.Draw_Text("Need help? Type", x= 640, y=myy) 
         window.Draw_Text("?rewards", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
@@ -477,9 +477,12 @@ def Steady_State(run_event):
 
             if toBe_Displayed == None: return
 
+            currentColor = specialColor
+
         else:
             toBe_Displayed_Index = Select_Random_Individual(len(aliveIndividuals))
             toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
+            currentColor   = validColors[colorIndex % len(validColors)]
 
         robotID   = toBe_Displayed['robotID']
         robotType = toBe_Displayed['type']
@@ -490,9 +493,7 @@ def Steady_State(run_event):
             db.Kill_Robot(robotID)
             return
 
-        currentColor   = validColors[colorIndex % len(validColors)]
         currentTime    = datetime.datetime.now()
-
         tempCurrentCommand = db.Get_Current_Command()
 
         if tempCurrentCommand != None:

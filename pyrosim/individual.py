@@ -104,6 +104,9 @@ class INDIVIDUAL:
         elif color == 'orange':
             self.color = [1, 153.0/255.0, 0 ]
 
+        elif color == 'silver':
+            self.color = [0.75, 0.75, 0.75]
+
         # else: self.color = [0.5, 0.5, 0.5]
 
     def Get_Raw_Sensors(self):

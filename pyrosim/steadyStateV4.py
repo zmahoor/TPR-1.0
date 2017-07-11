@@ -192,10 +192,10 @@ def Draw_Reinforcment_Window():
 
     minute, second = divmod(injectionTimer.Time_Remaining(), 60)
     hour, minute   = divmod(minute, 60)
-    rtime = "%d:%02d:%2d"%(hour, minute, second)
+    rtime = "%d:%02d:%02d"%(hour, minute, second)
 
     window.Draw_Rect(10, myy, 320, 30 , color = 'TAN')
-    window.Draw_Text("A new robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
+    window.Draw_Text("A silver robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
 
     window.Draw_Text("Need help? Type", x= 640, y=myy) 
     window.Draw_Text("?rewards", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
