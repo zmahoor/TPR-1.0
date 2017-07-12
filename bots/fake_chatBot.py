@@ -22,7 +22,7 @@ def rewardSignals():
 REWARDS = rewardSignals()
 CMDS    = ['!walk very fast then jump', '!walk back then forward', '!crawl', '!jump',\
  '!walk', '!run away', '!break free', '!stay still', '!move', '!help',\
- '!walk forward', 'walk fast forward']
+ '!walk forward', 'walk fast forward' , '!dance dance', '!dance', '!move forward', '!walkkk']
 
 HELPS   = ['?' , '?rewards', '?commands', '?myscore', '?scores', '?robots', '?votes', '?project']
 EXTRA   = ['helloO %$##', 'WHat is this?', 'DROP TABLE', 'SQL DELETE Rows']

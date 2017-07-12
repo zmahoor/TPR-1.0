@@ -461,9 +461,13 @@ def Steady_State():
 
         if toBe_Displayed == None: return
 
+        currentColor = specialColor
+
     else:
+        
         toBe_Displayed_Index = Select_Random_Individual(len(aliveIndividuals))
         toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
+        currentColor   = validColors[colorIndex % len(validColors)]
 
     robotID   = toBe_Displayed['robotID']
     robotType = toBe_Displayed['type']
@@ -474,7 +478,6 @@ def Steady_State():
         db.Kill_Robot(robotID)
         return
 
-    currentColor   = validColors[colorIndex % len(validColors)]
     currentTime    = datetime.datetime.now()
     currentCommand = db.Get_Current_Command()
 
