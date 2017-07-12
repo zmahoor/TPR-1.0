@@ -39,6 +39,7 @@ db     = None
 injectionTimer = None
 removeInjected = False
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
+toBe_Displayed = None
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -144,6 +145,30 @@ def Draw_Reinforcment_Window(run_event):
     global currentCommand
     global currentColor
     global injectionTimer
+    global db
+
+    robotID   = toBe_Displayed['robotID']
+    robotType = toBe_Displayed['type']
+
+    robotInfo = db.Fetch_Robot_Information(robotID, robotType, cmdTxt)
+
+    print ('current robot info: ', robotInfo)
+
+    numOfKind = robotInfo['numOfKind'] if robotInfo['numOfKind'] != None else 0
+    numYes    = robotInfo['numYes'] if robotInfo['numYes'] != None else 0
+    numNo     = robotInfo['numNo'] if robotInfo['numNo'] != None else 0
+    numLike   = robotInfo['numLike'] if robotInfo['numLike'] != None else 0
+    numLike   = robotInfo['numDislike'] if robotInfo['numDislike'] != None else 0
+
+    lifePeriod = robotInfo['first'] - robotInfo['last']
+
+    txt1 = "This robot is one of "+ str(numOfKind)+ " out of "+ robotType
+    txt2 = ("Has been alive overal for " + lifePeriod + " and colleted " str(numYes) + " Yes "\
+         + str(numNo) + " No " + str(numLike) + " likes and " + str(numDislike) + "for the current command."
+
+    print txt1
+    print txt2
+
 
     WSPACE = 5
 
@@ -187,15 +212,16 @@ def Draw_Reinforcment_Window(run_event):
         window.Draw_Text("!"+ currentColor[0] + "l ", x=window.text_x+window.text_width+WSPACE,\
          y=myy, color=currentColor.upper())
         window.Draw_Text("if you [L]ike the ["+ currentColor[0].upper() + "]"+\
-            currentColor[1:]+ " robot." , x=window.text_x+window.text_width+WSPACE, y=myy)
-        
-        myy += 40
-        window.Draw_Text("Type", x= 10, y=myy)
+            currentColor[1:]+ " robot or " , x=window.text_x+window.text_width+WSPACE, y=myy)
+
         window.Draw_Text("!"+ currentColor[0] + "d", x=window.text_x+window.text_width+WSPACE,\
          y=myy, color=currentColor.upper())
+        window.Draw_Text("if you [D]islike the it." , x=window.text_x+window.text_width+WSPACE, y=myy)
 
-        window.Draw_Text("if you [D]islike the ["+ currentColor[0].upper() + "]"+\
-         currentColor[1:]+ " robot." , x=window.text_x+window.text_width+WSPACE, y=myy)
+        myy += 40
+
+        # window.Draw_Text(, x=window.text_x+window.text_width+WSPACE, y=myy)
+        # window.Draw_Text, x=window.text_x+window.text_width+WSPACE, y=myy)
 
         myy += 60
 
@@ -206,7 +232,7 @@ def Draw_Reinforcment_Window(run_event):
         rtime = "%d:%02d:%02d"%(hour, minute, second)
 
         window.Draw_Rect(10, myy, 320, 30 , color = 'TAN')
-        window.Draw_Text("A silver robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
+        window.Draw_Text("A new comer in silver color robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
 
         window.Draw_Text("Need help? Type", x= 640, y=myy) 
         window.Draw_Text("?rewards", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
@@ -442,6 +468,7 @@ def Steady_State(run_event):
     global currentColor
     global colorIndex
     global wordVector
+    global toBe_Displayed
 
     generation  = 1
 
