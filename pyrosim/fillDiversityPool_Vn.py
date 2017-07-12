@@ -49,7 +49,7 @@ def Store_Population_To_File( population, robotType ):
     except:
         print ('Failed writing the population of: ', robotType)
 
-def Fill_Diversity_Pool(robotType, tPeriod, popSize):
+def Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest):
     
     endTimer = TIMER( tPeriod * 60)
 
@@ -74,14 +74,16 @@ def Fill_Diversity_Pool(robotType, tPeriod, popSize):
         g += 1
         print 
 
-    best = parents.Find_Best()
-    
-    if parents.p[best].fitness > 0:
+    # store top n robots into the diversity pool and kill them from this population.
+    for i in range (0, numBest):
+        best = parents.Find_Best()
+        
+        if parents.p[best].fitness > 0:
 
-        print 'Killing the best: '+ str(best) +' and replaching it with a random individual.'
+            print 'Killing the best: '+ str(best) +' and replaching it with a random individual.'
 
-        parents.p[best].Store_To_Diversity_Pool()
-        parents.Kill_And_Replace( best )
+            parents.p[best].Store_To_Diversity_Pool()
+            parents.Kill_And_Replace( best )
 
     Store_Population_To_File( parents, robotType)
 
@@ -92,11 +94,12 @@ def Fill_Diversity_Pool(robotType, tPeriod, popSize):
 
 def main(args):
 
-    popSize     = args.pop_size
-    tPeriod     = args.evolution_period
-    robotType   = args.robot
+    numBest = args.num_top_best
+    popSize = args.pop_size
+    tPeriod = args.evolution_period
+    robotType = args.robot
 
-    Fill_Diversity_Pool(robotType, tPeriod, popSize)
+    Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest)
 
 if __name__ == "__main__":
 
@@ -111,6 +114,9 @@ if __name__ == "__main__":
     
     parser.add_argument('--evolution_period', '-t', type=int, default=60, help=\
         'Experiment time in minutes, default=60.')
+
+    parser.add_argument('--num_top_best', '-b', type=int, default=60, help=\
+        'Top n robots will be stored., default=5.')
 
     args = parser.parse_args()
 
