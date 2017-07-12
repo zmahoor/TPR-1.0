@@ -329,6 +329,26 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
+    def Fetch_Robot_Information(self, robotID, robotType, cmdTxt):
+
+        result = {}
+
+        sql=""" select sum(numYes) as numYes, sum(numNo) as numNo, sum(numDislike) as numDislike,
+         sum(numLike) as numLike from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
+        result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result.update( result1 )
+
+        sql="""select count(*) as numOfKind from robots where type='%s';"""%(robotType)
+        result2 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result.update( result2 )
+
+
+        sql="""select min(startTime) as first, max(startTime) as last from display where robotID='%d' """%(robotID)
+        result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result.update( result3 )
+
+        return result
+
     def Fetch_From_Disply_Table(self, condition='all'):
 
         if  condition== 'all':
