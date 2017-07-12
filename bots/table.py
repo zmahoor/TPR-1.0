@@ -67,6 +67,9 @@ class TABLE:
 
             #draw name and score to the table
             if score != None and name != None:
+
+                if len(name) > 23 : name = name[0:23]
+
                 window.Draw_Text(name, x = self.WIDTH*.15, y = top_rect + (.4*height_rect))
                 window.Draw_Text(str(int(score)), x = self.WIDTH*.7, y = top_rect + (.4*height_rect))
             
@@ -79,6 +82,8 @@ class TABLE:
         pygame.draw.line(screen, BLACK, (0, (12*self.HEIGHT/(self.USERS+3))), (self.WIDTH, (12*self.HEIGHT/(self.USERS+3))), 2)
 
         #get name of recent for bottom row
+        print ('bottom' , bottom)
+
         bt = bottom[0]
 
         #capitalize the name if exists
@@ -86,6 +91,14 @@ class TABLE:
             
             bt = bt.upper()
 
-        #draw the name and score to the screen in the bottom row 
-        window.Draw_Text(bt, x = self.WIDTH*.13, y = 11.5*self.HEIGHT/13.0)  
-        window.Draw_Text(str(int(bottom[1])), x = self.WIDTH*.635, y = 11.5*self.HEIGHT/13.0) 
+            if len(bt) > 23: bt = bt[0:23]
+
+            #draw the name and score to the screen in the bottom row 
+            window.Draw_Text(bt, x = self.WIDTH*.13, y = top_rect + (.4*height_rect))  
+
+            if bt != '   ':
+                window.Draw_Text(str(int(bottom[1])), x = self.WIDTH*.7, y = top_rect + (.4*height_rect))
+
+            else: 
+                window.Draw_Text('   ', x = self.WIDTH*.7, y = top_rect + (.4*height_rect))
+
