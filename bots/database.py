@@ -338,7 +338,7 @@ class DATABASE:
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
         result.update( result1 )
 
-        sql="""select count(*) as numOfKind from robots where type='%s';"""%(robotType)
+        sql="""select count(*) as numOfKind, type as robotType from robots where type='%s';"""%(robotType)
         result2 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
         result.update( result2 )
 
