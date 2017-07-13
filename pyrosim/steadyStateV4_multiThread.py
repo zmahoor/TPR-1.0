@@ -26,7 +26,7 @@ from pygameWrapper import PYGAMEWRAPPER
 
 SUB_POPULATION_SIZE = 5
 REWARD_WINDOW_W     = 900
-REWARD_WINDOW_H     = 280
+REWARD_WINDOW_H     = 300
 FONT_SIZE           = 23
 INJECTION_PERIOD    = 30 * 60
 
@@ -39,7 +39,7 @@ db     = None
 injectionTimer = None
 removeInjected = False
 window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
-toBe_Displayed = None
+robotInfo = None
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -140,38 +140,43 @@ def Remove_File(filePath):
     except:
         print "Was not able to remove the injected robot from the diversity pool.."
 
+def Make_Robot_Info_Line( robotInfo ):
+
+        # print ('current robot info: ', robotInfo)
+
+        if robotInfo == None: return None
+
+        robotType = robotInfo['robotType']
+        numOfKind = robotInfo['numOfKind'] if robotInfo['numOfKind'] != None else 0
+        numYes    = robotInfo['numYes'] if robotInfo['numYes'] != None else 0
+        numNo     = robotInfo['numNo'] if robotInfo['numNo'] != None else 0
+        numLike   = robotInfo['numLike'] if robotInfo['numLike'] != None else 0
+        numDislike = robotInfo['numDislike'] if robotInfo['numDislike'] != None else 0
+        lifePeriod = robotInfo['first'] - robotInfo['last']
+
+        txt1 = "This robot is one out of "+ str(numOfKind) + " " + robotType +\
+         "s and has been alive for " + str(lifePeriod)+"."
+
+        txt2 =  "Has colleted " + str(numYes) + " yes, "+ str(numNo) + " no, "\
+         + str(numLike) + " likes, and " + str(numDislike) + " for the current command."
+
+        # print txt1
+        # print txt2
+
+        return txt1, txt2
+
 def Draw_Reinforcment_Window(run_event):
 
     global currentCommand
     global currentColor
     global injectionTimer
-    global db
-
-    robotID   = toBe_Displayed['robotID']
-    robotType = toBe_Displayed['type']
-
-    robotInfo = db.Fetch_Robot_Information(robotID, robotType, cmdTxt)
-
-    print ('current robot info: ', robotInfo)
-
-    numOfKind = robotInfo['numOfKind'] if robotInfo['numOfKind'] != None else 0
-    numYes    = robotInfo['numYes'] if robotInfo['numYes'] != None else 0
-    numNo     = robotInfo['numNo'] if robotInfo['numNo'] != None else 0
-    numLike   = robotInfo['numLike'] if robotInfo['numLike'] != None else 0
-    numLike   = robotInfo['numDislike'] if robotInfo['numDislike'] != None else 0
-
-    lifePeriod = robotInfo['first'] - robotInfo['last']
-
-    txt1 = "This robot is one of "+ str(numOfKind)+ " out of "+ robotType
-    txt2 = ("Has been alive overal for " + lifePeriod + " and colleted " str(numYes) + " Yes "\
-         + str(numNo) + " No " + str(numLike) + " likes and " + str(numDislike) + "for the current command."
-
-    print txt1
-    print txt2
-
+    global robotInfo
 
     WSPACE = 5
 
+    shortTimer = TIMER(2)
+    txt1 = ""
+    txt2 = ""
     while run_event.is_set():
 
         for event in pygame.event.get():
@@ -180,7 +185,10 @@ def Draw_Reinforcment_Window(run_event):
 
         window.Wipe()
 
-        cmdTxt = currentCommand['cmdTxt']
+        cmdTxt    = currentCommand['cmdTxt']
+
+        tmp = Make_Robot_Info_Line( robotInfo )
+        if tmp != None: txt1, txt2 = tmp
 
         myy = 10
 
@@ -212,27 +220,27 @@ def Draw_Reinforcment_Window(run_event):
         window.Draw_Text("!"+ currentColor[0] + "l ", x=window.text_x+window.text_width+WSPACE,\
          y=myy, color=currentColor.upper())
         window.Draw_Text("if you [L]ike the ["+ currentColor[0].upper() + "]"+\
-            currentColor[1:]+ " robot or " , x=window.text_x+window.text_width+WSPACE, y=myy)
+            currentColor[1:]+ " robot or" , x=window.text_x+window.text_width+WSPACE, y=myy)
 
         window.Draw_Text("!"+ currentColor[0] + "d", x=window.text_x+window.text_width+WSPACE,\
          y=myy, color=currentColor.upper())
-        window.Draw_Text("if you [D]islike the it." , x=window.text_x+window.text_width+WSPACE, y=myy)
+        window.Draw_Text("if you [D]islike it." , x=window.text_x+window.text_width+WSPACE, y=myy)
 
         myy += 40
+        window.Draw_Text(txt1, x=10, y=myy)
 
-        # window.Draw_Text(, x=window.text_x+window.text_width+WSPACE, y=myy)
-        # window.Draw_Text, x=window.text_x+window.text_width+WSPACE, y=myy)
+        myy += 40
+        window.Draw_Text(txt2, x=10, y=myy)
 
-        myy += 60
-
+        myy += 40
         rtime = injectionTimer.Time_Remaining()
         if rtime < 0: rtime = 0
         minute, second = divmod(rtime, 60)
         hour, minute   = divmod(minute, 60)
         rtime = "%d:%02d:%02d"%(hour, minute, second)
 
-        window.Draw_Rect(10, myy, 320, 30 , color = 'TAN')
-        window.Draw_Text("A new comer in silver color robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
+        window.Draw_Rect(10, myy, 420, 30 , color = 'TAN')
+        window.Draw_Text("A new robot in silver color will be born in " + rtime, x=10, y=myy, color='BROWN') 
 
         window.Draw_Text("Need help? Type", x= 640, y=myy) 
         window.Draw_Text("?rewards", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
@@ -468,7 +476,7 @@ def Steady_State(run_event):
     global currentColor
     global colorIndex
     global wordVector
-    global toBe_Displayed
+    global robotInfo
 
     generation  = 1
 
@@ -511,10 +519,13 @@ def Steady_State(run_event):
             toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
             currentColor   = validColors[colorIndex % len(validColors)]
 
+        print toBe_Displayed
+
         robotID   = toBe_Displayed['robotID']
         robotType = toBe_Displayed['type']
         randomIndividual = Load_Controller_From_File(robotID, robotType)
-            
+        
+
         if randomIndividual == None:
             print "Could not load robot ", robotID, " with type: ", robotType
             db.Kill_Robot(robotID)
@@ -534,6 +545,8 @@ def Steady_State(run_event):
          ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\
          " and current time: ", currentTime
         
+        robotInfo = db.Fetch_Robot_Information(robotID, robotType, currentCommand['cmdTxt'])
+
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)
 
