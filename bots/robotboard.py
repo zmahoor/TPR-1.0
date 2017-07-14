@@ -15,7 +15,7 @@ UPDATE_PERIOD = 2
 DRAW_PERIOD   = 30
 WSPACE = 85
 #get screen
-WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
+WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, title="Robot's Information", fontSize = FONT_SIZE)
 SCREEN = WINDOW.screen
 BG_COLOR = (0,191,255)
 #create new table object
@@ -36,20 +36,23 @@ def Draw_Robot_Window( robotInfo ):
         numDislike = robotInfo['numDislike'] if robotInfo['numDislike'] != None else 0
         cmdTxt     = robotInfo['cmdTxt']
 
-        dt = robotInfo['first']- robotInfo['last']
+        if robotInfo['birthDate']!=None:
+            dt = robotInfo['birthDate'] - datetime.datetime.now()
+        else:
+            dt = robotInfo['firstDisplay']- robotInfo['lastDisplay']
 
         minute, second = divmod(dt.seconds, 60)
         hour, minute   = divmod(minute, 60)
         day, hour      = divmod(hour, 24)
 
-        age = "%dd %dh:%02dm:%02d"%(day, hour, minute, second)
+        age = "%dd %dh:%02dm:%02ds"%(day, hour, minute, second)
 
         title = ["robotID", "Age", "Type", "Yes's", "No's", "Likes", "Dislikes"]
 
         value = [str(robotID), str(age), robotType+"(1 of "+ str(numOfKind)+")",str(numYes),\
          str(numNo), str(numLike), str(numDislike)]
 
-        x_pos = [5, 120, 270, 500, 580, 690, 780]
+        x_pos = [5, 120, 275, 500, 580, 690, 780]
 
         for i in range(0, len(value)):
 

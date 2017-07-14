@@ -2,7 +2,7 @@ import pygame
 
 class PYGAMEWRAPPER:
                 
-    def __init__(self,width=800,height=240, fontSize=17):
+    def __init__(self,width=800,height=240, title="test", fontSize=17):
 
         #initialize pygame modules
         pygame.init()
@@ -14,6 +14,8 @@ class PYGAMEWRAPPER:
 
         #set screen
         self.screen = pygame.display.set_mode(size)
+
+        pygame.display.set_caption(title)
 
         self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf", fontSize)
 

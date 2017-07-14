@@ -169,18 +169,20 @@ class DATABASE:
         err_msg = "Failed to add this new command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Add_To_Robot_Table(self, robotType):
-        robotID = 0
-        sql = "INSERT INTO robots(type) VALUES('%s');"%(robotType)
-        err_msg = "Failed to insert the robot into the robots table..."
+    def Add_To_Robot_Table(self, robotType, parentID=0):
 
+        robotID = 0
+        birthDate = datetime.datetime.now()
+        birthDate = birthDate.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = "INSERT INTO robots(type, birthDate, parentID) VALUES('%s', '%s', '%d');"%(robotType, birthDate, parentID)
         try:
             self.cursor.execute(sql)
             robotID = self.connection.insert_id()
             self.connection.commit()
         except:
             self.connection.rollback()
-            print("unable to insert the robot")
+            print("Failed to insert the robot into the robots table...")
 
         return robotID
 
@@ -348,20 +350,20 @@ class DATABASE:
 
     def Fetch_Robot_Information(self):
 
-        sql="""SELECT d.robotID, d.cmdTxt, r.type from display as d
+        sql="""SELECT d.robotID, d.cmdTxt, r.type, r.birthDate, r.parentID from display as d
          join robots as r ON d.robotID=r.robotID order by d.startTime desc limit 1;"""
         result = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result == None: return None
 
-        robotID = result['robotID']
-        cmdTxt  = result['cmdTxt']
+        robotID   = result['robotID']
+        cmdTxt    = result['cmdTxt']
         robotType = result['type']
 
-        result = {}
+        # result = {}
 
-        sql="""SELECT robotID, sum(numYes) as numYes, sum(numNo) as numNo, sum(numDislike) as numDislike,
-         sum(numLike) as numLike, cmdTxt from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
+        sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo, sum(numDislike) as numDislike,
+         sum(numLike) as numLike from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result1 != None:
@@ -373,7 +375,7 @@ class DATABASE:
         if result2 != None:
             result.update( result2 )
 
-        sql="""SELECT min(startTime) as first, max(startTime) as last from display where robotID='%d' """%(robotID)
+        sql="""SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay from display where robotID='%d' """%(robotID)
         result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
         result.update( result3 )
 

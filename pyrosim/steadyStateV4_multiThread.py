@@ -38,7 +38,7 @@ currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
 db     = None
 injectionTimer = None
 removeInjected = False
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
+window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, title="Reinforcements", fontSize=FONT_SIZE)
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -159,14 +159,16 @@ def Draw_Reinforcment_Window(run_event):
         cmdTxt    = currentCommand['cmdTxt']
 
         myy = 10
-        window.Draw_Text("New here? Type ?", x= 10, y=myy, fontSize=FONT_SIZE)
+        window.Draw_Text("New here? Type", x= 700, y=myy, fontSize=FONT_SIZE)
+        window.Draw_Text("?", x=window.text_x+window.text_width+WSPACE, y=myy-5, color='BROWN',\
+         fontSize=FONT_SIZE+8)
 
         myy += 40
         window.Draw_Text("Type", x= 10, y=myy, fontSize=FONT_SIZE)
         window.Draw_Text("!"+ currentColor[0] + "y", x=window.text_x+window.text_width+WSPACE,\
          y=myy, color=currentColor.upper(), fontSize=FONT_SIZE)
 
-        window.Draw_Text("if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
+        window.Draw_Text("if Yes, the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
          " robot is obeying the command", x=window.text_x+window.text_width+WSPACE, y=myy,\
           fontSize=FONT_SIZE)
 
@@ -178,7 +180,7 @@ def Draw_Reinforcment_Window(run_event):
         window.Draw_Text("!"+ currentColor[0] + "n", x=window.text_x+window.text_width+WSPACE,\
          y=myy, color=currentColor.upper(), fontSize=FONT_SIZE)
 
-        window.Draw_Text("if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
+        window.Draw_Text("if No, the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
          " robot is [N]ot obeying the command", x=window.text_x+window.text_width+WSPACE, y=myy,\
           fontSize=FONT_SIZE)
 
@@ -207,13 +209,14 @@ def Draw_Reinforcment_Window(run_event):
         if rtime < 0: rtime = 0
         minute, second = divmod(rtime, 60)
         hour, minute   = divmod(minute, 60)
-        rtime = "%d:%02d:%02d"%(hour, minute, second)
+        rtime = "%02dm:%02ds"%(minute, second)
 
         window.Draw_Rect(10, myy, 570, 30 , color = 'TAN')
         window.Draw_Text("An unseen silver robot will be added to the population in " + rtime,\
          x=10, y=myy, color='BROWN', fontSize=FONT_SIZE) 
 
-        window.Draw_Text("Need help? Type ?reinforcement", x= 600, y=myy, fontSize=FONT_SIZE) 
+        window.Draw_Text("Need help? Type", x= 600, y=myy, fontSize=FONT_SIZE) 
+        window.Draw_Text("?reinforcement", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN', fontSize=FONT_SIZE)
         window.Refresh()
 
 def Select_Random_Individual(popSize):
@@ -344,12 +347,17 @@ def Compete_Based_On_Obedience(record1, record2):
     db.Kill_Robot(loser['robotID'])
 
     winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
-    if winnerIndividual == None:  
-        db.Kill_Robot(winner['robotID'])
-    
-    mutatedOne = Create_Mutation(winnerIndividual)
 
-    return mutatedOne
+    if winnerIndividual == None:  
+        print 'Not able loading it from the file...Killing robot ', winner['robotID']
+        db.Kill_Robot(winner['robotID'])
+        print 'Replacing it with a random one from the same type.'
+        mutatedOne = INDIVIDUAL(0, winner['type'])
+
+    else:
+        mutatedOne = Create_Mutation(winnerIndividual)
+
+    Add_New_Robot(mutatedOne, winner['robotID'])
 
 def Compete_Based_On_Dominance(individual1, individual2):
 
@@ -359,30 +367,32 @@ def Compete_Based_On_Dominance(individual1, individual2):
     elif not Dominance(individual1, individual2):
         return None
 
-    print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
-    print "Killing the loser...", loser['robotID']
+    print "Winner is: ", winner['robotID']
+    print "Loser is: ", loser['robotID']
+    print "Killing the loser..."
 
     db.Kill_Robot(loser['robotID'])
 
     winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
-    if winnerIndividual == None:  
-        db.Kill_Robot(winner['robotID'])
-    
-    mutatedOne = Create_Mutation(winnerIndividual)
 
-    return mutatedOne
+    if winnerIndividual == None:  
+        print 'Not able loading it from the file...Killing robot ', winner['robotID']
+        db.Kill_Robot(winner['robotID'])
+        print 'Replacing with a random one from the same type.'
+        mutatedOne = INDIVIDUAL(0, winner['type'])
+
+    else:
+        mutatedOne = Create_Mutation(winnerIndividual)
+
+    Add_New_Robot(mutatedOne, winner['robotID'])
 
 def Create_Mutation(individual):
 
-    if individual == None:
-        return None
+    newIndividual = deepcopy(individual)
+    newIndividual.Mutate()
+    print 'Mutate the brain of robot: ', newIndividual.id
 
-    else:
-        newIndividual = deepcopy(individual)
-        newIndividual.Mutate()
-        print 'Mutate the brain of robot: ', newIndividual.id
-
-        return newIndividual
+    return newIndividual
 
 def Dominance(individual1, individual2):
 
@@ -391,11 +401,12 @@ def Dominance(individual1, individual2):
     moreObedient    = individual1['totalFitness'] > individual2['totalFitness']
     return notShownMore and likedMore and moreObedient
 
-def Add_New_Robot(newIndividual):
+def Add_New_Robot(newIndividual, parentID=0):
 
-    robotID = db.Add_To_Robot_Table(newIndividual.robotType)
+    print 'Trying to add a new robot...'
+    robotID = db.Add_To_Robot_Table(newIndividual.robotType, parentID)
+    print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID, 'parentID: ', parentID
 
-    print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual, newIndividual.robotType)
 
@@ -488,7 +499,7 @@ def Steady_State(run_event):
             toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
             currentColor   = validColors[colorIndex % len(validColors)]
 
-        print toBe_Displayed
+        # print toBe_Displayed
 
         robotID   = toBe_Displayed['robotID']
         robotType = toBe_Displayed['type']
@@ -515,10 +526,8 @@ def Steady_State(run_event):
         
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)
-
-        newIndividual = Compete_While_Waiting_For(aliveIndividuals, robotID)
-        if newIndividual != None:
-            Add_New_Robot(newIndividual)
+        
+        Compete_While_Waiting_For(aliveIndividuals, robotID)
 
         randomIndividual.Wait_For_Me()
 
