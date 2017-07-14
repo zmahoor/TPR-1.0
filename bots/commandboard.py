@@ -59,7 +59,7 @@ while 1:
     WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
     WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
     WINDOW.Draw_Text('TOP COMMANDS LEARNED BY THE ROBOTS', x = 0.10*WIDTH, y = 1, fontSize=FONT_SIZE)
-    WINDOW.Draw_Text('Need help? Type ?commands', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Need help? Type ?commandScores', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
     
     if updateTimer.Time_Elapsed():
 
