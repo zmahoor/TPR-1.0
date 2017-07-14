@@ -24,45 +24,40 @@ t.connect(username, key, channel, host, port)
 t.pong()
 
 #General help message
-gen = """Type "?project" for more info on this project\
-       , type "?robots" for more info on the robots\
-       , type "?commands" for more info on the commands\
-       , type "?votes" for more info on reinforcements\
-       , type "?rewards" for more info on the simulation\
-       , type "?myscore" to see your own score\
-       , type "?scores" for information on the scoring system."""
-
-#Project help message
-proj = 'Twitch Plays Robotics is a comunity-driven project to teach robots language.'
+gen = """Twitch Plays Robotics is a community-driven project to teach robots language.\
+ To learn more about any aspect of the project, type ?robots, ?reinforcement,\
+  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io."""
 
 #Robot help message
-bot = """These robots are displayed every 30 seconds and learn from your feedback."""
-
-#Commands help message
-cmd = """Commands are typed in the chat, and the one asked for the most over\
-        every 3 miutes will become the command the robot will try.\
-        Ever try asking a dog to learn a new trick? Think of it like that!"""
+bot = """Every 30 seconds one robot, out a population of 50, is simulated.\
+ It "hears" the current command and senses its environment.\
+  There are 10 species of bots: have you seen them all?"""
 
 #Reinforcements help message
-rewards = """Reinforcements help the robot learn. Saying "yes" to the robot\
-        is rewarding it, e.g. giving a dog a treat."""
+rewards = """Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes.\
+ Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,\
+  and are replaced with randomly-modified copies of more obedient (y>n)\
+   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,\
+    to become more obedient and popular."""
 
-#Simulation help message
-sim = """The simulation is created in a physics engine called Open Dynamics\
-        Engine (ODE.) The robots inside of it are made through a python wrapper\
-        called PyRoSim (Python Robotics Simulator.)"""
+scores = """You get one point every time you reinforce a robot with y, n, l, or d,\
+ and each time you vote for a command. To see your score, type ?myscore"""
 
-scores = """To collect points, give reinforcement to robots or vote for commands.\
-         To see your points type ?myscore."""
+commandScores = """We wish to discover which commands are most learnable by the robots.\
+ A command is considered learnable if, over time, robots become increasingly obedient\
+  to that command. In other words, bots collect an increasing number\
+   of yes's from the crowd, under that command, over time."""
 
-votes = """You can vote for a command by typing !command. Don't forget the exclamation mark!"""
+votes = """Every three minutes, the command most voted on by the crowd is issued to the robot.\
+ There is no set list; you can type in anything you like.\
+  You can vote for a command by typing !command. Don't forget the exclamation mark!"""
 
 first_time = 'Congratulations! You just earned your first point.'
 
 #Organize messages by type
-help_type = {'general'   : gen, 'project'       : proj,
-             'robots'    : bot, 'commands'      : cmd,
-             'rewards'   : rewards, 'simulator' : sim,
+help_type = {'general'   : gen,
+             'robots'    : bot, 'commandScores' : commandScores,
+             'rewards'   : rewards,
              'scores'    : scores, 'votes'      : votes}
 
 # sleep to avoid getting blocked from twitch. There is a limit on the number of messages 
