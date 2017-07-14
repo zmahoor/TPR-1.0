@@ -198,6 +198,16 @@ class DATABASE:
         err_msg = "Failed to update number of evaluations for a robot..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
+    def Flush_Old_Unprocessed_Helps(self):
+
+        sql = "UPDATE helps SET processed=1 WHERE processed=0;"
+        self.Execute_Update_Sql_Command(sql)
+
+    def Flush_Old_Unprocessed_Chats(self):
+
+        sql = "UPDATE chats SET processed=1 WHERE processed=0;"
+        self.Execute_Update_Sql_Command(sql)
+
     def Update_User_Parent(self, user, parent):
 
         sql = """UPDATE users set parentName='%s' WHERE userName='%s' 
@@ -329,21 +339,41 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
-    def Fetch_Robot_Information(self, robotID, robotType, cmdTxt):
+    def Fetch_User_Feedback(self, username):
+
+        sql ="""select count(*) as num, reward as feedback_type from reward_log
+         where userName='%s' group by reward;"""%(username)
+
+        return self.Execute_Select_Sql_Command(sql, 'Failed fetching feedback info for a user.')
+
+    def Fetch_Robot_Information(self):
+
+        sql="""SELECT d.robotID, d.cmdTxt, r.type from display as d
+         join robots as r ON d.robotID=r.robotID order by d.startTime desc limit 1;"""
+        result = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+
+        if result == None: return None
+
+        robotID = result['robotID']
+        cmdTxt  = result['cmdTxt']
+        robotType = result['type']
 
         result = {}
 
-        sql=""" select sum(numYes) as numYes, sum(numNo) as numNo, sum(numDislike) as numDislike,
-         sum(numLike) as numLike from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
+        sql="""SELECT robotID, sum(numYes) as numYes, sum(numNo) as numNo, sum(numDislike) as numDislike,
+         sum(numLike) as numLike, cmdTxt from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
-        result.update( result1 )
 
-        sql="""select count(*) as numOfKind, type as robotType from robots where type='%s';"""%(robotType)
+        if result1 != None:
+            result.update( result1 )
+
+        sql="""SELECT count(*) as numOfKind, type as robotType from robots where type='%s' and dead=0;"""%(robotType)
         result2 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
-        result.update( result2 )
 
+        if result2 != None:
+            result.update( result2 )
 
-        sql="""select min(startTime) as first, max(startTime) as last from display where robotID='%d' """%(robotID)
+        sql="""SELECT min(startTime) as first, max(startTime) as last from display where robotID='%d' """%(robotID)
         result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
         result.update( result3 )
 
