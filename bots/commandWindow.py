@@ -17,9 +17,11 @@ COMMAND_WINDOW_H = 275
 Y_COOR = [65, 115, 165]
 NAME_X = [ 800, 800, 800]
 
+FONT_SIZE=23
+
 COLORS      = ['RED', 'BLUE', 'DARKGREEN']
 
-window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H, fontSize=25)
+window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H, fontSize=23)
 animated_list = []
 currentCommand = DEFAULT_COMMAND
 
@@ -40,8 +42,9 @@ def Draw_Command_Window(timeRemaining):
     window.Wipe()
 
     myy=10
-    window.Draw_Text('Type !command to vote for the next command (for example type !move).', x = 10, y = 2)
-    window.Draw_Text('Top commands for the next robots are:', x = 10, y = 28)
+    window.Draw_Text('Type !command to vote for the next command (for example type !move).',\
+     x = 10, y = 2, fontSize=FONT_SIZE)
+    window.Draw_Text('Top commands for the next robots are:', x = 10, y = 28, fontSize=FONT_SIZE)
 
     if timeRemaining < 0: timeRemaining = 0
     minute, second = divmod(timeRemaining, 60)
@@ -71,7 +74,7 @@ def Draw_Command_Window(timeRemaining):
             name = users[0]
 
             if  NAME_X[i] >= 700:
-                window.Draw_Text(name, x = NAME_X[i], y = Y_COOR[i], color = 'DARKGRAY')
+                window.Draw_Text(name, x = NAME_X[i], y = Y_COOR[i], color = 'DARKGRAY', fontSize=FONT_SIZE)
                 NAME_X[i] -= 1          
 
             else:
@@ -79,12 +82,13 @@ def Draw_Command_Window(timeRemaining):
                 animated_list[i]['users'].pop(0)
 
         window.Draw_Rect(X_VAL, Y_COOR[i]+8, 3*votes + 15, 20, color = COLORS[i])
-        window.Draw_Text(str(votes), x = X_VAL + 2, y = Y_COOR[i]-1, color = 'WHITE')
-        window.Draw_Text(cmdTxt, x = 25, y = Y_COOR[i]) 
+        window.Draw_Text(str(votes), x = X_VAL + 2, y = Y_COOR[i]-1, color = 'WHITE', fontSize=FONT_SIZE)
+        window.Draw_Text(cmdTxt, x = 25, y = Y_COOR[i], fontSize=FONT_SIZE) 
 
 
-    window.Draw_Text("Command with the most votes will be sent to the robot in " + timeRemaining, x = 10, y = 220) 
-    window.Draw_Text("Need help? Type ?votes ", x = 675, y = 220) 
+    window.Draw_Text("Command with the most votes will be sent to the robot in " + timeRemaining,\
+     x = 10, y = 220, fontSize=FONT_SIZE) 
+    window.Draw_Text("Need help? Type ?votes ", x = 675, y = 220, fontSize=FONT_SIZE) 
 
 
     window.Refresh()

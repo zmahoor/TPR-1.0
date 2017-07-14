@@ -69,6 +69,8 @@ help_type = {'general'   : gen, 'project'       : proj,
 # a bot can send to channel. 
 SLEEP_RATE = 20/30
 
+db.Flush_Old_Unprocessed_Helps()
+
 while True:
 
     # to send a pong message to twitch server otherwise the connection is closed.

@@ -5,6 +5,7 @@ import random
 from database import DATABASE
 import pygame
 from timer import TIMER
+import numpy as np
 
 DB = DATABASE()
 WIDTH     = 440
@@ -24,20 +25,14 @@ updateTimer = TIMER(UPDATE_PERIOD)
 #picks a random one to be displayed at the bottom of the table
 def get_NewUser():
 
-    newUser = ('  ', 0, 99999)
-    test = DB.Fetch_Recent_Active_Users(interval = 10)
-        
-    print 'test', test
+    recent_users = DB.Fetch_Recent_Active_Users(interval = 10)
+    if recent_users == None: return None
 
-    if test != ():
-        size = len(test)
-        if size == 1:
-            r = 0
-        else:
-            r = random.randint(0,size-1)
-        newUser = (test[r].get('userName'),test[r].get('score'),test[r].get('rank'))
-
-    return newUser
+    if len(recent_users)>0:
+        index = np.random.randint(0, len(recent_users))
+        return recent_users[index]
+    else:
+        return None
 
 #This function takes apart the database information and puts it 
 #into a format that the table class can use
@@ -68,11 +63,11 @@ while 1:
     
     table.Update(newList, newUser)
     
-    WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0)    
-    WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = 15+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('TOP USERS TEACHING THE ROBOTS', x = 0.15*WIDTH, y = 1)
-    WINDOW.Draw_Text('Need help? Type ?scores', x = .12*WIDTH, y = HEIGHT - 25)
+    WINDOW.Draw_Text('USERNAME', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)    
+    WINDOW.Draw_Text('SCORE', x = .7*WIDTH, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('TOP USERS TEACHING THE ROBOTS', x = 0.15*WIDTH, y = 1, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Need help? Type ?scores', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
 
     if updateTimer.Time_Elapsed():
 

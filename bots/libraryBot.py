@@ -6,7 +6,7 @@ import re
 # !r !g !b
 def validPrefix():
     global validColors
-    return [ "!"+color[0] for color in validColors] + ["!"+specialColor[0]]
+    return ["!"+color[0] for color in validColors] + ["!"+specialColor[0]]
 
 # !rn 
 def isRewardSignal(string):
@@ -44,6 +44,8 @@ def getParentInfo(data):
     return data[1:]
 
 db = database.DATABASE()
+
+db.Flush_Old_Unprocessed_Chats()
 
 while(True):
 

@@ -15,13 +15,22 @@ class PYGAMEWRAPPER:
         #set screen
         self.screen = pygame.display.set_mode(size)
 
-        #define font to be used
         self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf", fontSize)
 
-    def Draw_Text(self, textString , x = 10 , y = 10, color = 'BLACK' ):
+        #define font to be used
+
+    def Draw_Text(self, textString, x=10, y=10, color='BLACK', bold=False, underline=False, changeFont=False, fontSize=17):
 
         #get color
         col = self.Get_Color(color)
+
+        self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf", fontSize)
+
+        if bold: self.myfont.set_bold(True)
+        else : self.myfont.set_bold(False)
+
+        if underline: self.myfont.set_underline(True)
+        else: self.myfont.set_underline(False)
 
         #set area for text to be drawn on
         label = self.myfont.render(textString, 1, col)
@@ -43,10 +52,14 @@ class PYGAMEWRAPPER:
         #refresh screen
         pygame.display.flip()
 
-    def Wipe(self):
+    def Wipe(self, backgroundColor= (255, 255, 255)):
 
         #set background
-        backgroundColor = 255, 255, 255
+        # backgroundColor = 255, 255, 255
+
+        self.screen.fill(backgroundColor)
+
+    def Fill_Background(self, color):
 
         self.screen.fill(backgroundColor)
     
@@ -74,22 +87,22 @@ class PYGAMEWRAPPER:
         #define RGB values for common colors
         colors = {'BLACK'       : (  0,   0,   0),
                   'WHITE'       : (255, 255, 255),
-                  'RED'         : (255,   0,   0),
-                  'GREEN'       : (  0, 255,   0),
-                  'BLUE'        : (  0,   0, 255),
+                  'RED'         : (202,   0,  32),
+                  'GREEN'       : (27, 120,   55),
+                  'BLUE'        : ( 33, 102, 172),
                   'GRAY'        : (123, 123, 123),
                   'SILVER'      : (190, 190, 190),
                   'DARKGRAY'    : ( 75,  75,  75),
                   'PINK'        : (255,  10, 190),
                   'LIGHTBLUE'   : (173, 216, 230),
-                  'LIGHTGREEN'  : (100, 255,   0),
-                  'DARKGREEN'   : ( 11, 128,  11),
+                  'LIGHTGREEN'  : (166, 219, 160),
+                  'DARKGREEN'   : ( 0,  136,  55),
                   'VIOLET'      : ( 70,   0, 130),
                   'GOLD'        : (255, 192,   0),
-                  'ORANGE'      : (255, 165,   0),
-                  'PURPLE'      : (255, 0  , 255),
-                  'CYAN'        : (0, 255  , 255),
-                  'BROWN'       : (102, 51 ,   0),
+                  'ORANGE'      : (230,  97,   1),
+                  'PURPLE'      : (123, 50,  148),
+                  'CYAN'        : ( 90, 180, 172),
+                  'BROWN'       : (166, 97 ,  26),
                   'YELLOW'      : (255, 255,   0),
                   'TAN'         : (241, 232, 220)}
 

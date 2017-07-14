@@ -5,6 +5,7 @@ import random
 from database import DATABASE
 import pygame
 from timer import TIMER
+import numpy as np
 
 DB = DATABASE()
 FONT_SIZE = 20
@@ -19,17 +20,14 @@ updateTimer = TIMER(UPDATE_PERIOD)
     
 def get_NewCmd():
     #gets recent commands and picks one at random
-    newCmd = ('   ', 0, 99999)
-    test = DB.Fetch_Recent_Typed_Command(interval = 10)
-    print 'test', test
-    if test != ():
-        size = len(test)
-        if size == 1:
-            r = 0
-        else:
-            r = random.randint(0,size-1)
-        newCmd = (test[r].get('cmd'), test[r].get('score'), test[r].get('rank'))
-    return newCmd
+    recent_cmd = DB.Fetch_Recent_Typed_Command(interval = 10)
+
+    if recent_cmd == None: return None
+    if len(recent_cmd)>0:
+        index = np.random.randint(0, len(recent_cmd))
+        return recent_cmd[index]
+    else:
+        return None
 
 def Parse_Scores(li):
     #converts dict into list of tuples
@@ -57,11 +55,11 @@ while 1:
     WINDOW.Wipe()
     
     table.Update(newList, newCmd)
-    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = 15+.5*HEIGHT/12.0)
-    WINDOW.Draw_Text('TOP COMMANDS LEARNED BY THE ROBOTS', x = 0.10*WIDTH, y = 1)
-    WINDOW.Draw_Text('Need help? Type ?commands', x = .12*WIDTH, y = HEIGHT - 25)
+    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('TOP COMMANDS LEARNED BY THE ROBOTS', x = 0.10*WIDTH, y = 1, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Need help? Type ?commands', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
     
     if updateTimer.Time_Elapsed():
 
