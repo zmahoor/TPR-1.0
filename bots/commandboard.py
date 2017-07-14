@@ -11,10 +11,12 @@ DB = DATABASE()
 FONT_SIZE = 20
 WIDTH = 440
 HEIGHT = 360
-WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, fontSize = FONT_SIZE)
+TITLE = "Commands' progress"
+WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, title=TITLE, fontSize = FONT_SIZE)
 SCREEN = WINDOW.screen
 UPDATE_PERIOD = 10
-    
+WSPACE = 5   
+
 table = TABLE(WINDOW, width = WIDTH, height = HEIGHT)
 updateTimer = TIMER(UPDATE_PERIOD)
     
@@ -55,11 +57,12 @@ while 1:
     WINDOW.Wipe()
     
     table.Update(newList, newCmd)
-    WINDOW.Draw_Text('COMMAND', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
-    WINDOW.Draw_Text('RANK', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
-    WINDOW.Draw_Text('SCORE', x = 0.7*WIDTH, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
-    WINDOW.Draw_Text('TOP COMMANDS LEARNED BY THE ROBOTS', x = 0.10*WIDTH, y = 1, fontSize=FONT_SIZE)
-    WINDOW.Draw_Text('Need help? Type ?commandScores', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Command', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Rank', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Score', x = 0.7*WIDTH, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Top Commands Learned by the Robots', x = 0.10*WIDTH, y = 1, bold=True, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text('Need help? Type', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
+    WINDOW.Draw_Text("?commandScores", x=WINDOW.text_x+WINDOW.text_width+WSPACE, y=HEIGHT-25, color='BROWN', fontSize=FONT_SIZE)
     
     if updateTimer.Time_Elapsed():
 

@@ -19,7 +19,7 @@ class TABLE:
 
     def Update(self, new, bottom):
         
-        FONT_SIZE = 20
+        FONT_SIZE = 23
         #get size of newList that populates table (if not empty or None)
         try:
             size = len(new)
@@ -49,7 +49,7 @@ class TABLE:
             else:
                 col = 'TAN'
             window.Draw_Rect(0, top_rect, self.WIDTH, height_rect, color = col)
-            window.Draw_Text(str(i+1), x = 4, y = top_rect + (.4*height_rect),fontSize=FONT_SIZE)
+            window.Draw_Text(str(i+1), x = 4, y = top_rect + (.3*height_rect),fontSize=FONT_SIZE)
             
             #name is the command name or username, depending on input
             name = new[i][0]
@@ -60,15 +60,15 @@ class TABLE:
             #capitalize name if exists to enhance readability
             if name != None:
                 
-                name = name.upper()
+                # name = name.upper()
                 display.append(name)
             #draw name and score to the table
             if score != None and name != None:
 
                 if len(name) > 23 : name = name[0:23]
 
-                window.Draw_Text(name, x = self.WIDTH*.15, y = top_rect + (.4*height_rect), fontSize=FONT_SIZE)
-                window.Draw_Text(str(int(score)), x = self.WIDTH*.7, y = top_rect + (.4*height_rect),fontSize=FONT_SIZE)
+                window.Draw_Text(name, x = self.WIDTH*.15, y = top_rect + (.3*height_rect), fontSize=FONT_SIZE)
+                window.Draw_Text(str(int(score)), x = self.WIDTH*.7, y = top_rect + (.3*height_rect), fontSize=FONT_SIZE)
                         
             top_rect = top_rect + height_rect
         
@@ -86,13 +86,12 @@ class TABLE:
             rank   = bottom['rank']
             
             #capitalize the name if exists
-            name = name.upper()
             if name not in display:
                 if len(name) > 23: 
                     name = name[0:23]
 
                 #draw the name and score to the screen in the bottom row 
-                window.Draw_Text(str(rank), x = 4, y = top_rect + (.4*height_rect), fontSize=FONT_SIZE)
-                window.Draw_Text(name, x = self.WIDTH*.15, y = top_rect + (.4*height_rect), fontSize=FONT_SIZE)  
-                window.Draw_Text(str(int(score)), x = self.WIDTH*.7, y = top_rect + (.4*height_rect), fontSize=FONT_SIZE)
+                window.Draw_Text(str(rank), x = 4, y = top_rect + (.25*height_rect), fontSize=FONT_SIZE)
+                window.Draw_Text(name, x = self.WIDTH*.15, y = top_rect + (.25*height_rect), fontSize=FONT_SIZE)  
+                window.Draw_Text(str(int(score)), x = self.WIDTH*.7, y = top_rect + (.25*height_rect), fontSize=FONT_SIZE)
 
