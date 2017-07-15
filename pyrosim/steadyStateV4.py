@@ -469,7 +469,12 @@ def Steady_State(run_event):
         aliveIndividuals = db.Fetch_Alive_Robots("all")
 
         print "Num of alive individuals: ", len(aliveIndividuals)
-        assert len(aliveIndividuals) > 2, 'Not enough individuals in the population. Run with --initPopulation flag.'
+
+        if len(aliveIndividuals) <= 2:
+            print 'Not enough individuals in the population. Run with --initPopulation flag.'
+            run_event.clear()
+            print 'ctrl + c to break from this program...sorry I have no better way to kill you..'
+            break
 
         if injectionTimer.Time_Elapsed():
 
@@ -491,7 +496,7 @@ def Steady_State(run_event):
             aliveIndividuals = db.Fetch_Alive_Robots("all")
 
             toBe_Displayed = next((item for item in aliveIndividuals if item['robotID'] == robotID), None)
-            if toBe_Displayed == None: return
+            if toBe_Displayed == None: continue
 
             currentColor = specialColor
 
@@ -509,7 +514,7 @@ def Steady_State(run_event):
         if randomIndividual == None:
             print "Could not load robot ", robotID, " with type: ", robotType
             db.Kill_Robot(robotID)
-            return
+            continue
 
         tempCurrentCommand = db.Get_Current_Command()
         if tempCurrentCommand != None:
