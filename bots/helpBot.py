@@ -57,8 +57,8 @@ silver ="""Every silver robot is a new unseen robot that is added to the populat
 first_time = 'Congratulations! You just earned your first point.'
 
 #Organize messages by type
-help_type = {'general'   : gen, 'silverRobots': silver
-             'robots'    : bot, 'commandScores' : commandScores,
+help_type = {'general'   : gen, 'silverrobots': silver,
+             'robots'    : bot, 'commandscores' : commandScores,
              'rewards'   : rewards,
              'scores'    : scores, 'votes'      : votes}
 
