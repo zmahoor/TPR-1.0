@@ -65,7 +65,7 @@ while 1:
     table.Update(newList, newUser)
     
     WINDOW.Draw_Text('Username', x = WIDTH*0.15, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
-    WINDOW.Draw_Text('Ranke', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)    
+    WINDOW.Draw_Text('Rank', x = 4, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)    
     WINDOW.Draw_Text('Score', x = .7*WIDTH, y = 15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
     WINDOW.Draw_Text('Top Users Teaching the Robots', x = 0.15*WIDTH, y = 1, bold=True, fontSize=FONT_SIZE)
     WINDOW.Draw_Text('Need help? Type', x = .12*WIDTH, y = HEIGHT - 25, fontSize=FONT_SIZE)
