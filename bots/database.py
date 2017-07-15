@@ -105,7 +105,7 @@ class DATABASE:
         self.Execute_Update_Sql_Command(sql, err_msg)
     
     def Add_To_Help_Table(self, user, txt, time):
-        sql = """INSERT IGNORE INTO helps(txt, userName, timeArrival) 
+        sql = """INSERT INTO helps(txt, userName, timeArrival) 
         VALUES('%s','%s','%s');"""%(txt, user, time)
 
         err_msg = "Failed to insert help request.."
