@@ -3,11 +3,11 @@ HOST    = "irc.twitch.tv"
 PORT    = 6667
 PASS    = "oauth:en2uoj77da5z68rnufdhpculxd1qbo"
 IDENT   = "tpr_bot2"
-CHANNEL = "mungozero"
+# CHANNEL = "mungozero"
+CHANNEL = "twitchplaysrobotics"
 
 #mysql info
 # MYSQL_HOST = '45.79.171.136'
-#MYSQL_HOST = '132.198.138.134'
 MYSQL_HOST = '132.198.138.119'
 MYSQL_DB   = 'TwitchPlays'
 MYSQL_USER = 'root'
@@ -20,6 +20,6 @@ filteredUsers = ["tpr_bot2", "tpr_bot1", "tpr_bot3", "tpr_bot"]
 validRobots   = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot',\
  'spherebot', 'snakebot', 'crabbot']
 
-maxCommandLength = 50
+maxCommandLength = 100
 minCommandLength = 2
 DEFAULT_COMMAND  = "move"

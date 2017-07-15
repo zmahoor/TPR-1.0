@@ -9,8 +9,6 @@ import glob
 from keras.models import load_model
 import pygame
 import argparse
-from threading import Thread, Event
-import time
 
 from individual import INDIVIDUAL
 from timer import TIMER
@@ -28,17 +26,17 @@ SUB_POPULATION_SIZE = 5
 REWARD_WINDOW_W     = 900
 REWARD_WINDOW_H     = 280
 FONT_SIZE           = 23
-INJECTION_PERIOD    = 30 * 60
+INJECTION_PERIOD    = 60 * 60
 
 colorIndex     = 0
 currentColor   = validColors[colorIndex % len(validColors)]
+currentCommand = {}
 wordVector     = []
-currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
 
+window = None
 db     = None
 injectionTimer = None
 removeInjected = False
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, title="Reinforcements", fontSize=FONT_SIZE)
 
 def Store_Sensors_To_File(individual, currentTime):
 
@@ -139,85 +137,70 @@ def Remove_File(filePath):
     except:
         print "Was not able to remove the injected robot from the diversity pool.."
 
-
-def Draw_Reinforcment_Window(run_event):
+def Draw_Reinforcment_Window():
 
     global currentCommand
     global currentColor
-    global injectionTimer
+    global window
 
     WSPACE = 5
+    window.Wipe()
+
+    cmdTxt = currentCommand['cmdTxt']
+
+    myy = 10
+
+    window.Draw_Text("New here? Type", x= 10, y=myy)
+    window.Draw_Text("?", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
+
+    myy += 40
+    window.Draw_Text("Type", x= 10, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "y", x=window.text_x+window.text_width+WSPACE,\
+     y=myy, color=currentColor.upper())
+
+    window.Draw_Text("if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
+     " robot is obeying the command", x=window.text_x+window.text_width+WSPACE, y=myy)
+
+    window.Draw_Text("["+ cmdTxt +"].", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
+
+    myy += 40
+    window.Draw_Text("Type", x= 10, y= myy)
+    window.Draw_Text("!"+ currentColor[0] + "n", x=window.text_x+window.text_width+WSPACE,\
+     y=myy, color=currentColor.upper())
+
+    window.Draw_Text("if the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
+     " robot is [N]ot obeying the command", x=window.text_x+window.text_width+WSPACE, y=myy)
+
+    window.Draw_Text("["+ cmdTxt +"].", x= window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
+
+    myy += 40
+    window.Draw_Text("Type", x= 10, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "l ", x=window.text_x+window.text_width+WSPACE,\
+     y=myy, color=currentColor.upper())
+    window.Draw_Text("if you [L]ike the ["+ currentColor[0].upper() + "]"+\
+        currentColor[1:]+ " robot." , x=window.text_x+window.text_width+WSPACE, y=myy)
     
-    while run_event.is_set():
+    myy += 40
+    window.Draw_Text("Type", x= 10, y=myy)
+    window.Draw_Text("!"+ currentColor[0] + "d", x=window.text_x+window.text_width+WSPACE,\
+     y=myy, color=currentColor.upper())
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                window.Quit()
+    window.Draw_Text("if you [D]islike the ["+ currentColor[0].upper() + "]"+\
+     currentColor[1:]+ " robot." , x=window.text_x+window.text_width+WSPACE, y=myy)
 
-        window.Wipe()
+    myy += 60
 
-        cmdTxt    = currentCommand['cmdTxt']
+    minute, second = divmod(injectionTimer.Time_Remaining(), 60)
+    hour, minute   = divmod(minute, 60)
+    rtime = "%d:%02d:%02d"%(hour, minute, second)
 
-        myy = 10
-        window.Draw_Text("New here? Type", x= 700, y=myy, fontSize=FONT_SIZE)
-        window.Draw_Text("?", x=window.text_x+window.text_width+WSPACE, y=myy-5, color='BROWN',\
-         fontSize=FONT_SIZE+8)
+    window.Draw_Rect(10, myy, 320, 30 , color = 'TAN')
+    window.Draw_Text("A silver robot will be born in " + rtime, x=10, y=myy, color='BROWN') 
 
-        myy += 40
-        window.Draw_Text("Type", x= 10, y=myy, fontSize=FONT_SIZE)
-        window.Draw_Text("!"+ currentColor[0] + "y", x=window.text_x+window.text_width+WSPACE,\
-         y=myy, color=currentColor.upper(), fontSize=FONT_SIZE)
+    window.Draw_Text("Need help? Type", x= 640, y=myy) 
+    window.Draw_Text("?rewards", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN')
 
-        window.Draw_Text("if Yes, the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
-         " robot is obeying the command", x=window.text_x+window.text_width+WSPACE, y=myy,\
-          fontSize=FONT_SIZE)
-
-        window.Draw_Text("["+ cmdTxt +"].", x=window.text_x+window.text_width+WSPACE,\
-         y=myy, color='BROWN', fontSize=FONT_SIZE)
-
-        myy += 40
-        window.Draw_Text("Type", x= 10, y= myy, fontSize=FONT_SIZE)
-        window.Draw_Text("!"+ currentColor[0] + "n", x=window.text_x+window.text_width+WSPACE,\
-         y=myy, color=currentColor.upper(), fontSize=FONT_SIZE)
-
-        window.Draw_Text("if No, the ["+ currentColor[0].upper() + "]"+ currentColor[1:]+\
-         " robot is [N]ot obeying the command", x=window.text_x+window.text_width+WSPACE, y=myy,\
-          fontSize=FONT_SIZE)
-
-        window.Draw_Text("["+ cmdTxt +"].", x= window.text_x+window.text_width+WSPACE,\
-         y=myy, color='BROWN', fontSize=FONT_SIZE)
-
-        myy += 40
-        window.Draw_Text("Type", x= 10, y=myy, fontSize=FONT_SIZE)
-
-        window.Draw_Text("!"+ currentColor[0] + "l ", x=window.text_x+window.text_width+WSPACE,\
-         y=myy, color=currentColor.upper(), fontSize=FONT_SIZE)
-
-        window.Draw_Text("if you [L]ike the ["+ currentColor[0].upper() + "]"+\
-            currentColor[1:]+ " robot." , x=window.text_x+window.text_width+WSPACE, y=myy, fontSize=FONT_SIZE)
-        
-        myy += 40
-        window.Draw_Text("Type", x= 10, y=myy,fontSize=FONT_SIZE)
-        window.Draw_Text("!"+ currentColor[0] + "d", x=window.text_x+window.text_width+WSPACE,\
-         y=myy, color=currentColor.upper(), fontSize=FONT_SIZE)
-
-        window.Draw_Text("if you [D]islike the ["+ currentColor[0].upper() + "]"+\
-         currentColor[1:]+ " robot." , x=window.text_x+window.text_width+WSPACE, y=myy, fontSize=FONT_SIZE)
-
-        myy += 60
-        rtime = injectionTimer.Time_Remaining()
-        if rtime < 0: rtime = 0
-        minute, second = divmod(rtime, 60)
-        hour, minute   = divmod(minute, 60)
-        rtime = "%02dm:%02ds"%(minute, second)
-
-        window.Draw_Rect(10, myy, 570, 30 , color = 'TAN')
-        window.Draw_Text("The next silver robot will be born into the population in " + rtime,\
-         x=10, y=myy, color='BLACK', fontSize=FONT_SIZE) 
-
-        window.Draw_Text("Need help? Type", x= 600, y=myy, fontSize=FONT_SIZE) 
-        window.Draw_Text("?reinforcement", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN', fontSize=FONT_SIZE)
-        window.Refresh()
+    window.Refresh()
 
 def Select_Random_Individual(popSize):
     return np.random.randint(popSize)
@@ -347,17 +330,12 @@ def Compete_Based_On_Obedience(record1, record2):
     db.Kill_Robot(loser['robotID'])
 
     winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
-
     if winnerIndividual == None:  
-        print 'Not able loading it from the file...Killing robot ', winner['robotID']
         db.Kill_Robot(winner['robotID'])
-        print 'Replacing it with a random one from the same type.'
-        mutatedOne = INDIVIDUAL(0, winner['type'])
+    
+    mutatedOne = Create_Mutation(winnerIndividual)
 
-    else:
-        mutatedOne = Create_Mutation(winnerIndividual)
-
-    Add_New_Robot(mutatedOne, winner['robotID'])
+    return mutatedOne
 
 def Compete_Based_On_Dominance(individual1, individual2):
 
@@ -367,32 +345,30 @@ def Compete_Based_On_Dominance(individual1, individual2):
     elif not Dominance(individual1, individual2):
         return None
 
-    print "Winner is: ", winner['robotID']
-    print "Loser is: ", loser['robotID']
-    print "Killing the loser..."
+    print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
+    print "Killing the loser...", loser['robotID']
 
     db.Kill_Robot(loser['robotID'])
 
     winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
-
     if winnerIndividual == None:  
-        print 'Not able loading it from the file...Killing robot ', winner['robotID']
         db.Kill_Robot(winner['robotID'])
-        print 'Replacing with a random one from the same type.'
-        mutatedOne = INDIVIDUAL(0, winner['type'])
+    
+    mutatedOne = Create_Mutation(winnerIndividual)
 
-    else:
-        mutatedOne = Create_Mutation(winnerIndividual)
-
-    Add_New_Robot(mutatedOne, winner['robotID'])
+    return mutatedOne
 
 def Create_Mutation(individual):
 
-    newIndividual = deepcopy(individual)
-    newIndividual.Mutate()
-    print 'Mutate the brain of robot: ', newIndividual.id
+    if individual == None:
+        return None
 
-    return newIndividual
+    else:
+        newIndividual = deepcopy(individual)
+        newIndividual.Mutate()
+        print 'Mutate the brain of robot: ', newIndividual.id
+
+        return newIndividual
 
 def Dominance(individual1, individual2):
 
@@ -401,12 +377,11 @@ def Dominance(individual1, individual2):
     moreObedient    = individual1['totalFitness'] > individual2['totalFitness']
     return notShownMore and likedMore and moreObedient
 
-def Add_New_Robot(newIndividual, parentID=0):
+def Add_New_Robot(newIndividual):
 
-    print 'Trying to add a new robot...'
-    robotID = db.Add_To_Robot_Table(newIndividual.robotType, parentID)
-    print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID, 'parentID: ', parentID
+    robotID = db.Add_To_Robot_Table(newIndividual.robotType)
 
+    print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual, newIndividual.robotType)
 
@@ -449,101 +424,96 @@ def Initialize_Global_Population():
             Initialize_Sub_Population(SUB_POPULATION_SIZE-count, rtype)
     print '\n'
 
-def Steady_State(run_event):
+def Steady_State():
 
     global injectionTimer
     global currentCommand
     global currentColor
     global colorIndex
     global wordVector
-    global robotInfo
+    global db
 
-    generation  = 1
+    aliveIndividuals = db.Fetch_Alive_Robots("all")
 
-    while run_event.is_set():
+    print "Num of alive individuals: ", len(aliveIndividuals)
+    assert len(aliveIndividuals) > 2, 'Not enough individuals in the population. Run with --initPopulation flag.'
 
-        print "Generation: ", generation
+    if injectionTimer.Time_Elapsed():
+
+        print 'Time to inject a new individual..'
+        injectionTimer.Reset()
+
+        min_Evaluated_Robot = min(aliveIndividuals, key=lambda x:x['numEvals'])
+        print "To be killed to make space fot the incoming robot :(", min_Evaluated_Robot
+
+        injectionType = validRobots[np.random.randint(0, len(validRobots))]
+        toBe_Injected = Load_From_Diversity_Pool(injectionType)
+
+        if toBe_Injected == None:
+            toBe_Injected = INDIVIDUAL(0, randomType)
+
+        robotID = Add_New_Robot(toBe_Injected)
+        db.Kill_Robot(min_Evaluated_Robot['robotID'])
 
         aliveIndividuals = db.Fetch_Alive_Robots("all")
 
-        print "Num of alive individuals: ", len(aliveIndividuals)
-        assert len(aliveIndividuals) > 2, 'Not enough individuals in the population. Run with --initPopulation flag.'
+        toBe_Displayed = next((item for item in aliveIndividuals if item['robotID'] == robotID), None)
 
-        if injectionTimer.Time_Elapsed():
+        if toBe_Displayed == None: return
 
-            print 'Time to inject a new individual..'
-            injectionTimer.Reset()
+        currentColor = specialColor
 
-            min_Evaluated_Robot = min(aliveIndividuals, key=lambda x:x['numEvals'])
-            print "To be killed to make space fot the incoming robot :(", min_Evaluated_Robot
-
-            injectionType = validRobots[np.random.randint(0, len(validRobots))]
-            toBe_Injected = Load_From_Diversity_Pool(injectionType)
-
-            if toBe_Injected == None:
-                toBe_Injected = INDIVIDUAL(0, injectionType)
-
-            robotID = Add_New_Robot(toBe_Injected)
-            db.Kill_Robot(min_Evaluated_Robot['robotID'])
-
-            aliveIndividuals = db.Fetch_Alive_Robots("all")
-
-            toBe_Displayed = next((item for item in aliveIndividuals if item['robotID'] == robotID), None)
-
-            if toBe_Displayed == None: return
-
-            currentColor = specialColor
-
-        else:
-            toBe_Displayed_Index = Select_Random_Individual(len(aliveIndividuals))
-            toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
-            currentColor   = validColors[colorIndex % len(validColors)]
-
-        # print toBe_Displayed
-
-        robotID   = toBe_Displayed['robotID']
-        robotType = toBe_Displayed['type']
-        randomIndividual = Load_Controller_From_File(robotID, robotType)
+    else:
         
-        if randomIndividual == None:
-            print "Could not load robot ", robotID, " with type: ", robotType
-            db.Kill_Robot(robotID)
-            return
+        toBe_Displayed_Index = Select_Random_Individual(len(aliveIndividuals))
+        toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
+        currentColor   = validColors[colorIndex % len(validColors)]
 
-        tempCurrentCommand = db.Get_Current_Command()
-        if tempCurrentCommand != None:
-            currentCommand = tempCurrentCommand
-
-        wordVector     = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
-        currentTime    = datetime.datetime.now()
-
-        db.Add_Command_To_Display_Table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
-
-        print "Displaying robot: ", toBe_Displayed
-        print "Displaying color: ", currentColor
-        print "Acting command: ", currentCommand
-        print "Current time: ", currentTime
+    robotID   = toBe_Displayed['robotID']
+    robotType = toBe_Displayed['type']
+    randomIndividual = Load_Controller_From_File(robotID, robotType)
         
-        randomIndividual.Set_Color(currentColor)
-        randomIndividual.Start_Evaluate(False, False, wordVector)
-        
-        Compete_While_Waiting_For(aliveIndividuals, robotID)
+    if randomIndividual == None:
+        print "Could not load robot ", robotID, " with type: ", robotType
+        db.Kill_Robot(robotID)
+        return
 
-        randomIndividual.Wait_For_Me()
+    currentTime    = datetime.datetime.now()
+    currentCommand = db.Get_Current_Command()
 
-        Store_Sensors_To_File(randomIndividual, currentTime)
+    if currentCommand == None or currentCommand == ():
+        currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
 
-        colorIndex += 1
-        print
+    wordVector     = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
 
-        generation += 1
-        print
+    Draw_Reinforcment_Window()
+
+    db.Add_Command_To_Display_Table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
+
+    print "Displaying robot ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
+     ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\
+     " and current time: ", currentTime
+    
+    randomIndividual.Set_Color(currentColor)
+    randomIndividual.Start_Evaluate(False, False, wordVector)
+
+    newIndividual = Compete_While_Waiting_For(aliveIndividuals, robotID)
+    if newIndividual != None:
+        Add_New_Robot(newIndividual)
+
+    randomIndividual.Wait_For_Me()
+
+    Store_Sensors_To_File(randomIndividual, currentTime)
+
+    colorIndex += 1
+    print
 
 def main(args):
 
-    global db
-    global removeInjected
     global injectionTimer
+    global db
+    global window
+    global removeInjected
 
     db = DATABASE()
 
@@ -553,31 +523,22 @@ def main(args):
     if initPopulation:
         Initialize_Global_Population()
 
+    window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, fontSize=FONT_SIZE)
     injectionTimer = TIMER(INJECTION_PERIOD)
+    generation  = 1
 
-    run_event = Event()
-    run_event.set()
+    while True:
 
-    dthread = Thread(target=Draw_Reinforcment_Window, args=[run_event])
-    dthread.daemon = True
+        print "Generation: ", generation
 
-    sthread = Thread(target=Steady_State, args=[run_event])
-    sthread.daemon = True
+        Steady_State()
 
-    dthread.start()
-    sthread.start()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                window.Quit()
 
-    try:
-        while True:
-            time.sleep(0.1)
-
-    except KeyboardInterrupt:
-        print('Closing both windows with ctrl+c...')
-        run_event.clear()
-        dthread.join()
-        sthread.join()
-        print('Closed both threads successfully... Have a good day:)')
-
+        generation += 1
+        print
 
 if __name__ == "__main__":
 
