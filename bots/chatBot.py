@@ -31,10 +31,12 @@ while True:
                 username = str(message['username'].lower())
                 # t.send_message("Thank you for your message!")
 
-                print(username + ": " + msg)
                 currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
+                print(currentTime, username + ": " + msg)
+
                 if(username not in filteredUsers):
+                    print('Adding to the chat table...')
                     db.Add_To_Chat_Table(username, currentTime, msg)
 
             except Exception as e:

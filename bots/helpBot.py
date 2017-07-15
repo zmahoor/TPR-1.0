@@ -7,6 +7,7 @@ from database import DATABASE
 from twitch import Twitch
 import time
 from settings import *
+import datetime
 
 t  = Twitch()
 db = DATABASE()
@@ -82,26 +83,27 @@ while True:
     
     msg = records['txt']
     username = records['userName']
-    print msg, username
+
+    print datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), records
 
     msg_to_send = msg[1:].rstrip()
 
     if (msg == '?myscore'):
         result = db.Fetch_User_Score(username)
         sent = t.send_message("@"+ username + ", your score:"+ str(result['score']))
-        print('sent score info', sent)
+        print('Num of bytes sent out:', sent)
 
     elif (msg == 'first_time_contribution'):
         sent = t.send_message('@' + username + ' ' + first_time)
-        print('first time contribution: ', sent)
+        print('Num of bytes sent out: ', sent)
 
     elif msg_to_send in help_type:
         sent = t.send_message('@' + username + ' ' + help_type.get(msg_to_send))
-        print('sent filtered', sent)
+        print('Num of bytes sent out: ', sent)
 
     else:
         sent = t.send_message('@' + username + ' ' + help_type.get('general'))
-        print('sent general', sent)
+        print('Num of bytes sent out:', sent)
 
     time.sleep(SLEEP_RATE)
 

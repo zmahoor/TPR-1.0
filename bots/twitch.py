@@ -7,6 +7,7 @@ import sys
 import re
 import string
 import threading
+import datetime
 
 class Twitch:
 
@@ -95,7 +96,7 @@ class Twitch:
     def pong(self):
         try:
             self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
-            print("PONG SENT!")
+            print( datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "PONG SENT!")
 
         except KeyboardInterrupt:
             sys.exit()
