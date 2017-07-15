@@ -1,7 +1,7 @@
 from settings import *
 import database
-from time import *
 import re
+import datetime
 
 # !r !g !b
 def validPrefix():
@@ -56,15 +56,13 @@ while(True):
     if newRow == None: continue
    
     timeArrival = newRow['timeArrival']
-    user = newRow['username']
-    message = newRow['txt']
+    user        = newRow['username']
+    message     = newRow['txt']
 
     # check the user table and if the user is new then insert it
     db.Add_To_User_Table(user, timeArrival)
 
-    #message begins with '?' send message to helpbot to chat to user
-
-    # print user, message, timeArrival
+    print datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), newRow
 
     # if this message is the user's first contribution--reward or command--, 
     # mark that in the help table. helpBot will later send a message to this user.
@@ -122,8 +120,7 @@ while(True):
         db.Add_To_Unique_Commands_Table(command, timeArrival, randIndex)
 
     else:
-        #if does not start with ? or !, it is raw chat
-        message_type = 0
-        #keep in chats table???
+        print(message, " discarded.")
+
 
 
