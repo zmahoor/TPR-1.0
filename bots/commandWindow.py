@@ -30,7 +30,11 @@ mydatabase  = database.DATABASE()
 currentTime = datetime.datetime.now()
 currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
 
+print 'Seting the default command as the active command...'
 mydatabase.Add_To_Unique_Commands_Table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
+mydatabase.Set_Current_Command(DEFAULT_COMMAND)
+
+print 'Flushing previous unprocessed commands...'
 mydatabase.Find_Most_Voted_Command()
 mydatabase.Tobe_Animated_In_Command_Window()
 
