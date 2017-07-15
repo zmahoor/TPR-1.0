@@ -10,41 +10,14 @@ import constants as c
 
 class POPULATION:
 
-    archive = {}
-
-    asize = 0
-
     def __init__(self, ps, robotType):
 
         self.p = {}
         self.popSize = ps
+        self.robotType = robotType
 
         for i in range(0, self.popSize):
             self.p[i] = INDIVIDUAL(i, robotType) 
-
-    def Compute_External_Novelty(self):
-
-        self.novelty = np.zeros((self.popSize, self.popSize + POPULATION.asize))
-
-        # distance to all the other individuals
-        for i in range(0, self.popSize):
-
-            self.novelty[i][i] = float('inf')
-
-            for j in range(i+1, self.popSize):
-                vec1 = self.p[i].head_trajectory
-                vec2 = self.p[j].head_trajectory
-                dist = LA.norm(vec1-vec2)
-                self.novelty[i][j] = self.novelty[j][i] = dist
-
-        # distance to all the individuals in archive
-        for i in range(0, self.popSize):
-
-            for j in range(0, POPULATION.asize):
-                vec1 = self.p[i].head_trajectory
-                vec2 = POPULATION.archive[j].head_trajectory
-                dist = LA.norm(vec1-vec2)
-                self.novelty[i][self.popSize+j] = dist
     
     def Print(self):
 
@@ -52,9 +25,7 @@ class POPULATION:
             self.p[i].Print()
         print
 
-    def Sensors_Have_Changed(self, index):
-
-        sensorDict = self.p[index].Get_Raw_Sensors()
+    def Sensors_Have_Changed(self, sensorDict):
 
         for sensorType in sensorDict.keys():
 
@@ -64,84 +35,53 @@ class POPULATION:
 
         return False
 
-    def Evaluate_External_Novelty(self, pp, pb, knn=5):
+    def Evaluate_Internal_Novelty(self, pp, pb):
 
-        for i in self.p:
-            self.p[i].Start_Evaluate(pp, pb, (c.NUM_BIAS_NEURONS+c.NUM_COMMAND_NEURONS)*[1.0])
-
-        for i in self.p:
-            self.p[i].Get_Head_Trajectory()
-
-        self.Compute_External_Novelty()
-
-        for i in self.p:
-
-            if not self.Sensors_Have_Changed( i ):
-                self.p[i].fitness = 0
-
-            else:
-                #find the k nearest neighbors
-                idx = np.argpartition(self.novelty[i], knn)
-                self.p[i].fitness = np.average(self.novelty[i][idx[:knn]])
-
-    def Evaluate_Internal_Novelty(self, pp, pb, brange=3):
-
-        temp = {}
+        tempSensors = {}
 
         for i in self.p: 
-            temp[i]=[]
+            tempSensors[i]=[]
 
-        for b in np.linspace(0, 1, brange):
+        for b in [-1, +1]:
 
             for i in self.p:
                 self.p[i].Start_Evaluate(pp, pb, c.NUM_BIAS_NEURONS*[1.0]+[b]\
                  if c.NUM_BIAS_NEURONS>0 else [b])
 
             for i in self.p:
-                self.p[i].Get_Head_Trajectory()
+                self.p[i].Wait_For_Me()
             
             for i in self.p:
-                temp[i].append(self.p[i].head_trajectory)
+                tempSensors[i].append(self.p[i].Get_Raw_Sensors())
+
+        self.Compute_Fitness(tempSensors)
+
+    def Compute_Fitness(self, tempSensors ):
 
         for i in self.p:
 
-            novelty = np.zeros((brange, brange))
-            for j in range(0, brange):
+            neg_One_Sensors = tempSensors[i][0]
+            pos_One_Sensors = tempSensors[i][1]
 
-                novelty[j][j] = float('inf')
-                for k in range(j+1, brange):
-                    novelty[k][j] = novelty[j][k] = LA.norm(temp[i][j] - temp[i][k])
+            self.p[i].fitness = 0
 
-            self.p[i].fitness = np.min(novelty)
+            if self.Sensors_Have_Changed( neg_One_Sensors ):
+                if self.Sensors_Have_Changed( pos_One_Sensors ):
 
-    def Print_Archive(self):
+                    neg_One_Head_Traj = np.hstack((neg_One_Sensors['P0_X'],\
+                         neg_One_Sensors['P0_Y'], neg_One_Sensors['P0_Z'] ))
 
-        print "archive size: ", POPULATION.asize
+                    pos_One_Head_Traj = np.hstack((pos_One_Sensors['P0_X'],\
+                         pos_One_Sensors['P0_Y'], pos_One_Sensors['P0_Z'] ))
 
-    def Unique(self, i):
-
-        for a in range(0, POPULATION.asize):
-            if ( POPULATION.archive[a].head_trajectory == self.p[i].head_trajectory).all():
-                return False
-
-        return True
-
-    def Update_Archive(self, threshold):
-
-        for i in self.p:
-
-            if self.p[i].fitness > threshold and self.Unique(i):
-
-                POPULATION.archive[POPULATION.asize] = deepcopy(self.p[i])
-                POPULATION.archive[POPULATION.asize].id = POPULATION.asize
-                POPULATION.asize = POPULATION.asize + 1
+                    self.p[i].fitness = LA.norm(neg_One_Head_Traj - pos_One_Head_Traj)
 
     def Mutate(self):
 
         for i in self.p:
             self.p[i].Mutate()
 
-    def ReplaceWith(self, other):
+    def Replace_With(self, other):
 
         for i in self.p:
             if (self.p[i].fitness < other.p[i].fitness):
@@ -152,10 +92,23 @@ class POPULATION:
         for i in self.p:
             self.p[i].Store_To_Diversity_Pool()
 
-    def Store_Archive(self):
+    def Find_Best(self):
+
+        best = -float('inf')
+        best_index = -1
+
+        for i in self.p:
+
+            if self.p[i].fitness > best:
+                best = self.p[i].fitness
+                best_index = i
+
+        return best_index
+
+    def Kill_And_Replace(self, index):
         
-        for i in POPULATION.archive:
-            POPULATION.archive[i].Store_To_Diversity_Pool()
+        del self.p[index]
+        self.p[index] = INDIVIDUAL(index, self.robotType)
 
     def Store_All_Above_Average(self):
 
