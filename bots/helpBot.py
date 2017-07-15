@@ -25,7 +25,7 @@ t.pong()
 
 #General help message
 gen = """Twitch Plays Robotics is a community-driven project to teach robots language.\
- To learn more about any aspect of the project, type ?robots, ?reinforcement,\
+ To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,\
   ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io."""
 
 #Robot help message
@@ -52,10 +52,12 @@ votes = """Every three minutes, the command most voted on by the crowd is issued
  There is no set list; you can type in anything you like.\
   You can vote for a command by typing !command. Don't forget the exclamation mark!"""
 
+silver ="""Every silver robot is a new unseen robot that is added to the population of robots every hour."""
+
 first_time = 'Congratulations! You just earned your first point.'
 
 #Organize messages by type
-help_type = {'general'   : gen,
+help_type = {'general'   : gen, 'silverRobots': silver
              'robots'    : bot, 'commandScores' : commandScores,
              'rewards'   : rewards,
              'scores'    : scores, 'votes'      : votes}

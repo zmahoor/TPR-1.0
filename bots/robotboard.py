@@ -26,8 +26,13 @@ def Draw_Robot_Window( robotInfo ):
         # print ('current robot info: ', robotInfo)
         if robotInfo == None: return None
 
-        robotType  = 'treebot_'+robotInfo['robotType'] if robotInfo['robotType']\
-         in ['1', '2', '3', '4']  else robotInfo['robotType']
+        allTypes = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',\
+        'quadruped':'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',\
+         'starfishbot':'starfishbot', 'spherebot':'spherebot', 'snakebot':'snakebot'}
+
+        typeKey    = robotInfo['robotType']
+        robotType  = allTypes[typeKey]
+
         robotID    = robotInfo['robotID']
         numOfKind  = robotInfo['numOfKind'] if robotInfo['numOfKind'] != None else 0
         numYes     = robotInfo['numYes'] if robotInfo['numYes'] != None else 0
@@ -49,7 +54,7 @@ def Draw_Robot_Window( robotInfo ):
 
         title = ["robotID", "Age", "Type", "Yes's", "No's", "Likes", "Dislikes"]
 
-        value = [str(robotID), str(age), robotType+"(1 of "+ str(numOfKind)+")",str(numYes),\
+        value = [str(robotID), str(age), "1 of "+str(numOfKind)+" "+robotType+"s",str(numYes),\
          str(numNo), str(numLike), str(numDislike)]
 
         x_pos = [5, 120, 275, 500, 580, 690, 780]
@@ -59,9 +64,9 @@ def Draw_Robot_Window( robotInfo ):
             WINDOW.Draw_Text(title[i], x=x_pos[i], y=10, color='WHITE', fontSize=23)
             WINDOW.Draw_Text(value[i], x=x_pos[i], y=40, color='WHITE', fontSize=23)
         
-        WINDOW.Draw_Text("Robot is trying: ", x=5, y=110, color='WHITE', fontSize=30)
+        WINDOW.Draw_Text("Robot is trying to: ", x=5, y=110, color='WHITE', fontSize=30)
         WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,\
-         y= 100, color='WHITE', bold=True, underline=False, fontSize=30)
+         y= 110, color='WHITE', bold=True, underline=False, fontSize=30)
 
         WINDOW.Draw_Text("Need help? Type ?robots", x=675, y=90, color='WHITE', fontSize=23)
 

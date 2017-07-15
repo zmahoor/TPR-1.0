@@ -212,8 +212,8 @@ def Draw_Reinforcment_Window(run_event):
         rtime = "%02dm:%02ds"%(minute, second)
 
         window.Draw_Rect(10, myy, 570, 30 , color = 'TAN')
-        window.Draw_Text("An unseen silver robot will be added to the population in " + rtime,\
-         x=10, y=myy, color='BROWN', fontSize=FONT_SIZE) 
+        window.Draw_Text("The next silver robot will be born into the population in " + rtime,\
+         x=10, y=myy, color='BLACK', fontSize=FONT_SIZE) 
 
         window.Draw_Text("Need help? Type", x= 600, y=myy, fontSize=FONT_SIZE) 
         window.Draw_Text("?reinforcement", x=window.text_x+window.text_width+WSPACE, y=myy, color='BROWN', fontSize=FONT_SIZE)

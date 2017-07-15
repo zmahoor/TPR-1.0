@@ -42,8 +42,11 @@ def Draw_Command_Window(timeRemaining):
     window.Wipe()
 
     myy=10
-    window.Draw_Text('Type !command where \"command\" is anything you think robots can learn (for example type !move).',\
-     x = 10, y = 2, fontSize=FONT_SIZE)
+    window.Draw_Text("Type !command, where", x=10, y=2, fontSize=FONT_SIZE)
+    window.Draw_Text("command", x=window.text_x+window.text_width+WSPACE, y=2, bold=True, fontSize=FONT_SIZE)
+    window.Draw_Text("is anything you think robots can learn (e.g. !move).",\
+     x=window.text_x+window.text_width+WSPACE, y = 2, fontSize=FONT_SIZE)
+
     window.Draw_Text('Top voted commands for the next robots are:', x = 10, y = 28, fontSize=FONT_SIZE)
 
     if timeRemaining < 0: timeRemaining = 0
@@ -85,7 +88,6 @@ def Draw_Command_Window(timeRemaining):
         window.Draw_Text(str(votes), x = X_VAL + 2, y = Y_COOR[i]-1, color = 'WHITE', fontSize=FONT_SIZE)
         window.Draw_Text("votes", x=X_VAL+2+ 3*votes + 15, y= Y_COOR[i]-1, fontSize=FONT_SIZE)
         window.Draw_Text(cmdTxt, x = 25, y = Y_COOR[i], fontSize=FONT_SIZE) 
-
 
     window.Draw_Text("Command with the most votes will be sent to the robot in " + timeRemaining,\
      x = 10, y = 220, fontSize=FONT_SIZE) 
