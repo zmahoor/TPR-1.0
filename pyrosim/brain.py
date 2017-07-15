@@ -11,7 +11,9 @@ class BRAIN:
 
         self.neurons = NEURONS(numSensors,numJoints,sensorsList)
 
-        self.synapses = SYNAPSES(numSensors,numJoints)
+        numSensorNeurons = self.neurons.numSensorNeurons
+
+        self.synapses = SYNAPSES(numSensorNeurons,numJoints)
 
     def Mutate(self):
 

@@ -10,8 +10,6 @@ from starfishbot import ROBOT as SFB
 from crabbot import ROBOT as CB
 from spherebot import ROBOT as SPB
 
-from environment import ENVIRONMENT
-
 import constants as c
 
 color = np.random.random(3)
@@ -25,15 +23,14 @@ robot = CB()
 # robot = SPB()
 # robot = SFB()
 # robot = SNB()
-# robot.Send_To_Simulator(sim, color, 1.0)
+
 robot.Send_To_Simulator(sim, color, (c.NUM_BIAS_NEURONS+c.NUM_COMMAND_NEURONS)*[1.0])
-
-# environment = ENVIRONMENT()
-# print "parts: ", robot.Num_Body_Parts()
-# environment.Send_To_Simulator(sim, robot.Num_Body_Parts())
-
 sim.Start()
 sim.Wait_To_Finish()
+
+# robot.Get_Raw_Sensors(sim)
+# print robot.raw_sensors
+
 # fitness = robot.Evaluate(sim, 'movement')
 # robot.Store_Sensors(1)
 del sim
