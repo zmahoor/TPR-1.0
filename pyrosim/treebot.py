@@ -15,12 +15,13 @@ class ROBOT:
     def __init__(self, maxDepth):
 
         self.body = BODY(int(maxDepth))
+        
+        print self.body.numSensors, self.body.numJoints, self.body.sensorsCreated
 
         self.brain = BRAIN( self.body.numSensors, 
             self.body.numJoints-4 if self.body.eyes else self.body.numJoints,
          self.body.sensorsCreated)
 
-        # print self.body.numSensors, self.body.numJoints, self.body.sensorsCreated
 
     def Evaluate(self,simulator,whatToMaximize):
 
