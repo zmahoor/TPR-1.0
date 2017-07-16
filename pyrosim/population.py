@@ -27,10 +27,8 @@ class POPULATION:
 
     def Sensors_Have_Changed(self, sensorDict):
 
-        for sensorType in sensorDict.keys():
-
-            sensorValues = sensorDict[sensorType]
-            if np.absolute(sensorValues[-1]-sensorValues[-2]) != 0:
+        for sensorValue in sensorDict.values():
+            if np.absolute(sensorValue[-1] - sensorValue[-2]) != 0:
                 return True
 
         return False
@@ -45,8 +43,8 @@ class POPULATION:
         for b in [-1, +1]:
 
             for i in self.p:
-                self.p[i].Start_Evaluate(pp, pb, c.NUM_BIAS_NEURONS*[1.0]+[b]\
-                 if c.NUM_BIAS_NEURONS>0 else [b])
+                self.p[i].Start_Evaluate(pp, pb, 
+                    c.NUM_BIAS_NEURONS*[1.0]+[b] if c.NUM_BIAS_NEURONS>0 else [b])
 
             for i in self.p:
                 self.p[i].Wait_For_Me()
@@ -65,13 +63,12 @@ class POPULATION:
 
             self.p[i].fitness = 0
 
-            if self.Sensors_Have_Changed( neg_One_Sensors ):
-                if self.Sensors_Have_Changed( pos_One_Sensors ):
+            if self.Sensors_Have_Changed( neg_One_Sensors ) and self.Sensors_Have_Changed( pos_One_Sensors ):
 
-                    neg_One_Head_Traj = np.hstack((neg_One_Sensors['P0_X'],\
+                    neg_One_Head_Traj = np.hstack((neg_One_Sensors['P0_X'],
                          neg_One_Sensors['P0_Y'], neg_One_Sensors['P0_Z'] ))
 
-                    pos_One_Head_Traj = np.hstack((pos_One_Sensors['P0_X'],\
+                    pos_One_Head_Traj = np.hstack((pos_One_Sensors['P0_X'],
                          pos_One_Sensors['P0_Y'], pos_One_Sensors['P0_Z'] ))
 
                     self.p[i].fitness = LA.norm(neg_One_Head_Traj - pos_One_Head_Traj)
