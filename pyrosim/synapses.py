@@ -14,6 +14,8 @@ class SYNAPSES:
 
         self.numBiasNeurons = c.NUM_BIAS_NEURONS + c.NUM_COMMAND_NEURONS
 
+        print self.numSensorNeurons, self.numMotorNeurons, self.numBiasNeurons
+
         self.Create_BH()
 
         self.Create_SH()
