@@ -169,7 +169,7 @@ class INDIVIDUAL:
             os.makedirs(path)
 
         currentTime = datetime.datetime.now()
-        currentTime = currentTime.strftime("%Y-%m-%d %H-%M-%S")
+        currentTime = currentTime.strftime("%Y-%m-%d_%H-%M-%S")
         path += '/robot_'+str(self.id)+'_'+currentTime+'.dat'
 
         f = open(path, 'wb')
