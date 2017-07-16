@@ -42,9 +42,7 @@ def Draw_Robot_Window( robotInfo ):
         cmdTxt     = robotInfo['cmdTxt']
 
         if robotInfo['birthDate']!=None:
-            dt = robotInfo['birthDate'] - datetime.datetime.now()
-        else:
-            dt = robotInfo['firstDisplay']- robotInfo['lastDisplay']
+            dt = datetime.datetime.now() - robotInfo['birthDate']
 
         minute, second = divmod(dt.seconds, 60)
         hour, minute   = divmod(minute, 60)
@@ -64,7 +62,7 @@ def Draw_Robot_Window( robotInfo ):
             WINDOW.Draw_Text(title[i], x=x_pos[i], y=10, color='WHITE', fontSize=23)
             WINDOW.Draw_Text(value[i], x=x_pos[i], y=40, color='WHITE', fontSize=23)
         
-        WINDOW.Draw_Text("Robot is trying to: ", x=5, y=110, color='WHITE', fontSize=30)
+        WINDOW.Draw_Text("Robot is trying to ", x=5, y=110, color='WHITE', fontSize=30)
         WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,\
          y= 110, color='WHITE', bold=True, underline=False, fontSize=30)
 
