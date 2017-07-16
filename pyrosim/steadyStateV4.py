@@ -28,7 +28,7 @@ SUB_POPULATION_SIZE = 5
 REWARD_WINDOW_W     = 900
 REWARD_WINDOW_H     = 280
 FONT_SIZE           = 23
-INJECTION_PERIOD    = 30 * 60
+INJECTION_PERIOD    = 60 * 60
 
 colorIndex     = 0
 currentColor   = validColors[colorIndex % len(validColors)]
