@@ -113,13 +113,15 @@ class INDIVIDUAL:
 
         return self.robot.raw_sensors
 
-    def Get_Head_Trajectory(self):
+    def Wait_and_Get_Raw_Sensors(self):
 
         self.sim.Wait_To_Finish()
 
-        self.robot.Get_Raw_Sensors(self.sim)
+        self.sensorArray = self.sim.dataFromPython
 
         self.head_trajectory = np.array(self.robot.Get_Head_Trajectory(self.sim))
+
+        del self.sim
 
     def Start_Evaluate(self, pp, pb, command):
 

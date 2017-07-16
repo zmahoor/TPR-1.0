@@ -28,6 +28,9 @@ robot.Send_To_Simulator(sim, color, (c.NUM_BIAS_NEURONS+c.NUM_COMMAND_NEURONS)*[
 sim.Start()
 sim.Wait_To_Finish()
 
+print type(sim.dataFromPython)
+print sim.dataFromPython.shape
+
 # robot.Get_Raw_Sensors(sim)
 # print robot.raw_sensors
 

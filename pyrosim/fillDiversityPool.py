@@ -55,10 +55,12 @@ def Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest):
 
     parents = Load_Population_From_File(robotType)
 
+
     if parents == None:
         parents = POPULATION(popSize, robotType)
 
     parents.Evaluate_Internal_Novelty(False, True)
+
 
     g = 1
     while not endTimer.Time_Elapsed():
@@ -87,8 +89,8 @@ def Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest):
 
     Store_Population_To_File( parents, robotType)
 
-    del parents
-    del children
+    # del parents
+    # del children
 
     return
 
