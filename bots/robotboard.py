@@ -9,7 +9,7 @@ import datetime
 
 DB = DATABASE()
 WIDTH     = 900
-HEIGHT    = 150
+HEIGHT    = 160
 FONT_SIZE = 23
 UPDATE_PERIOD = 2
 DRAW_PERIOD   = 30
@@ -17,7 +17,7 @@ WSPACE = 85
 #get screen
 WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, title="Robot's Information", fontSize = FONT_SIZE)
 SCREEN = WINDOW.screen
-BG_COLOR = (0,191,255)
+BG_COLOR = (30, 144, 255)
 #create new table object
 updateTimer = TIMER(UPDATE_PERIOD)
 
