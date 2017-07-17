@@ -381,6 +381,12 @@ class DATABASE:
 
         return result
 
+    def Fetch_For_Abuse_Bot( self ):
+
+        sql="select userName, cmdTxt from command_log where timeArrival>=NOW() - interval 24 hour;"
+        err_msg = 'Unable fetching from the command log.'
+        return self.Execute_Select_Sql_Command(sql, err_msg)
+
     def Fetch_From_Disply_Table(self, condition='all'):
 
         if  condition== 'all':
