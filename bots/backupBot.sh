@@ -1,6 +1,7 @@
 #!/bin/bash
 RSYNC=/usr/bin/rsync
 SSH=/usr/bin/ssh
+MYSQLDUMP=/usr/local/bin/mysqldump
 #-------------------------To be set by user-------------------------------------
 MAIN_DIR="/Users/twitchplaysrobotics/TPR-1.0"
 BACKUP_DIR="/Users/twitchplaysrobotics/TPR-backup"
@@ -28,7 +29,7 @@ echo $MAIN_SENSORS_DIR
 echo $BACKUP_SENSORS_DIR
 
 DBFILE=${MAIN_DB_DIR}db_$(date +'%Y-%m-%d-%H')$EXT
-mysqldump --opt --user=${USERNAME} --password=${PASS} ${DBNAME} | gzip > ${DBFILE}  
+$MYSQLDUMP --opt --user=${USERNAME} --password=${PASS} ${DBNAME} | gzip > ${DBFILE}  
 
 cd $MAIN_DB_DIR; ls -tp *$EXT| grep -v '/$' | tail -n +$(($THRESHOLD+1)) | tr '\n' '\0' | xargs -0 rm --; cd -
 

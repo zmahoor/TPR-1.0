@@ -1,0 +1,16 @@
+Database version : {u'VERSION()': '5.7.18'} 
+Connecting to twitch.tv
+Connected to twitch
+Sending our details to twitch...
+:tmi.twitch.tv 001 tpr_bot2 :Welcome, GLHF!
+:tmi.twitch.tv 002 tpr_bot2 :Your host is tmi.twitch.tv
+:tmi.twitch.tv 003 tpr_bot2 :This server is rather new
+:tmi.twitch.tv 004 tpr_bot2 :-
+:tmi.twitch.tv 375 tpr_bot2 :-
+:tmi.twitch.tv 372 tpr_bot2 :You are in a maze of twisty passages, all alike.
+:tmi.twitch.tv 376 tpr_bot2 :>
+:tpr_bot2!tpr_bot2@tpr_bot2.tmi.twitch.tv JOIN #twitchplaysrobotics
+:tpr_bot2.tmi.twitch.tv 353 tpr_bot2 = #twitchplaysrobotics :tpr_bot2
+:tpr_bot2.tmi.twitch.tv 366 tpr_bot2 #twitchplaysrobotics :End of /NAMES list
+Joined twitchplaysrobotics channel..
+Sent: PRIVMSG #twitchplaysrobotics :Joined chat...

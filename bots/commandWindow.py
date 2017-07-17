@@ -58,7 +58,7 @@ def Draw_Command_Window(timeRemaining):
     hour, minute   = divmod(minute, 60)
     timeRemaining  = "%02dm:%02ds"%(minute, second)
 
-    MAX = 460
+    MAX = 500
 
     size = min(len(animated_list), 3)
     if size == 0:     
@@ -91,6 +91,9 @@ def Draw_Command_Window(timeRemaining):
         window.Draw_Rect(X_VAL, Y_COOR[i]+8, 3*votes + 15, 22, color = COLORS[i])
         window.Draw_Text(str(votes), x = X_VAL + 2, y = Y_COOR[i]-1, color = 'WHITE', fontSize=FONT_SIZE)
         window.Draw_Text("votes", x=X_VAL+2+ 3*votes + 15, y= Y_COOR[i]-1, fontSize=FONT_SIZE)
+
+        if len(cmdTxt) > 50: cmdTxt = cmdTxt[0:50]
+
         window.Draw_Text(cmdTxt, x = 25, y = Y_COOR[i], fontSize=FONT_SIZE) 
 
     window.Draw_Text("Command with the most votes will be sent to the robot in " + timeRemaining,\
