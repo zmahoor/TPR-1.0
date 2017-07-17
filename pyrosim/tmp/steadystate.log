@@ -1,0 +1,63 @@
+Database version : {u'VERSION()': '5.7.18'} 
+Generation:  1
+Num of alive individuals:  50
+Successful loading  ../controllers/crabbot/robot_5493.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5493, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 49), u'totalFitness': 0.0, u'parentID': 0, u'type': 'crabbot', u'numEvals': 0}
+Displaying color:  red
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 12, 11, 14, 46), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': 3.0}
+Current time:  2017-07-15 17:47:19.369913
+Competing controllers:  5465  and  5484
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5465, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 47), u'totalFitness': 0.0, u'parentID': 0, u'type': '4', u'numEvals': 0}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5484, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 1}
+Successful writing  ../sensors/2017/7/15/robot_5493_2017-07-15 17:47:19.dat
+
+
+Generation:  2
+Num of alive individuals:  50
+Successful loading  ../controllers/3/robot_5458.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5458, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 46), u'totalFitness': 0.0, u'parentID': 0, u'type': '3', u'numEvals': 0}
+Displaying color:  green
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 12, 11, 14, 46), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': 3.0}
+Current time:  2017-07-15 17:47:49.769597
+Competing controllers:  5470  and  5461
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5470, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 1}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5461, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 47), u'totalFitness': 0.0, u'parentID': 0, u'type': '3', u'numEvals': 0}
+Successful writing  ../sensors/2017/7/15/robot_5458_2017-07-15 17:47:49.dat
+
+
+Generation:  3
+Num of alive individuals:  50
+Successful loading  ../controllers/crabbot/robot_5495.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5495, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 49), u'totalFitness': 0.0, u'parentID': 0, u'type': 'crabbot', u'numEvals': 2}
+Displaying color:  blue
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 12, 11, 14, 46), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': 3.0}
+Current time:  2017-07-15 17:48:20.152576
+Competing controllers:  5469  and  5487
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5469, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 0}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5487, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 2}
+Successful writing  ../sensors/2017/7/15/robot_5495_2017-07-15 17:48:20.dat
+
+
+Generation:  4
+Num of alive individuals:  50
+Successful loading  ../controllers/starfishbot/robot_5472.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5472, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'starfishbot', u'numEvals': 0}
+Displaying color:  orange
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 12, 11, 14, 46), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': 3.0}
+Current time:  2017-07-15 17:48:50.481633
+Competing controllers:  5476  and  5489
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5476, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'shinbot', u'numEvals': 1}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5489, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 3}
+Successful writing  ../sensors/2017/7/15/robot_5472_2017-07-15 17:48:50.dat
+
+
+Generation:  5
+Num of alive individuals:  50
+Successful loading  ../controllers/shinbot/robot_5476.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5476, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'shinbot', u'numEvals': 1}
+Displaying color:  cyan
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 12, 11, 14, 46), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': 3.0}
+Current time:  2017-07-15 17:49:20.769217
+Competing controllers:  5490  and  5472
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5490, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 3}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 5472, u'birthDate': datetime.datetime(2017, 7, 15, 17, 21, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'starfishbot', u'numEvals': 1}
