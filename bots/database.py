@@ -362,8 +362,7 @@ class DATABASE:
 
         # result = {}
 
-        sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo, sum(numDislike) as numDislike,
-         sum(numLike) as numLike from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
+        sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result1 != None:
@@ -377,7 +376,15 @@ class DATABASE:
 
         sql="""SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay from display where robotID='%d' """%(robotID)
         result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
-        result.update( result3 )
+
+        if result3 != None:
+            result.update( result3 )
+
+        sql="""SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from display where robotID='%d';"""%(robotID)
+        result4 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+
+        if result4 != None:
+            result.update( result4 )
 
         return result
 

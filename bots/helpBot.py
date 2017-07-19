@@ -60,7 +60,7 @@ first_time = 'Congratulations! You just earned your first point.'
 #Organize messages by type
 help_type = {'general'   : gen, 'silverrobots': silver,
              'robots'    : bot, 'commandscores' : commandScores,
-             'rewards'   : rewards,
+             'reinforcement'   : rewards, 'reinforcements'   : rewards,
              'scores'    : scores, 'votes'      : votes}
 
 # sleep to avoid getting blocked from twitch. There is a limit on the number of messages 
