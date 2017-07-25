@@ -11,9 +11,9 @@ f = open(sys.argv[1],'r')
 individual = pickle.load(f)
 f.close()
 
-for command in [ -1, +1 ]:
+for command in [-1]:
 	wordVector = c.NUM_BIAS_NEURONS*[1.0] + [command]
-	individual.Start_Evaluate(False, False, wordVector)
+	individual.Start_Evaluate(True, False, wordVector)
 
 print 'fitness: ', individual.fitness
 

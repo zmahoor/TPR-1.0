@@ -8,12 +8,14 @@ import os
 import datetime
 
 from snakebot import ROBOT as SNB
+from snakeplusbot import ROBOT as SNPB
 from quadruped import ROBOT as QB
 from shinbot import ROBOT as SHB
 from treebot import ROBOT as TB
 from starfishbot import ROBOT as SFB
 from crabbot import ROBOT as CB
 from spherebot import ROBOT as SPB
+from humanoid import ROBOT as HB
 
 class INDIVIDUAL:
 
@@ -39,6 +41,10 @@ class INDIVIDUAL:
 
             self.robot = SNB()
 
+        elif robotType == 'snakeplusbot':
+
+            self.robot = SNPB()
+
         elif robotType == 'quadruped':
 
             self.robot = QB()
@@ -58,6 +64,10 @@ class INDIVIDUAL:
         elif robotType == 'crabbot':
 
             self.robot = CB()
+
+        elif robotType == 'humanoid':
+
+            self.robot = HB()
 
         else: 
             print "robot not known"

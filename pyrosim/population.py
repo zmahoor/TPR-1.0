@@ -65,11 +65,19 @@ class POPULATION:
 
             if self.Sensors_Have_Changed( neg_One_Sensors ) and self.Sensors_Have_Changed( pos_One_Sensors ):
 
-                    neg_One_Head_Traj = np.hstack((neg_One_Sensors['P0_X'],
-                         neg_One_Sensors['P0_Y'], neg_One_Sensors['P0_Z'] ))
+                    head_x = [key for key in neg_One_Sensors if key.endswith("_X")][0]
+                    head_y = [key for key in neg_One_Sensors if key.endswith("_Y")][0]
+                    head_z = [key for key in neg_One_Sensors if key.endswith("_Z")][0]
 
-                    pos_One_Head_Traj = np.hstack((pos_One_Sensors['P0_X'],
-                         pos_One_Sensors['P0_Y'], pos_One_Sensors['P0_Z'] ))
+                    neg_One_Head_Traj = np.hstack((neg_One_Sensors[head_x],
+                         neg_One_Sensors[head_y], neg_One_Sensors[head_z] ))
+
+                    head_x = [key for key in pos_One_Sensors if key.endswith("_X")][0]
+                    head_y = [key for key in pos_One_Sensors if key.endswith("_Y")][0]
+                    head_z = [key for key in pos_One_Sensors if key.endswith("_Z")][0]
+
+                    pos_One_Head_Traj = np.hstack((pos_One_Sensors[head_x],
+                         pos_One_Sensors[head_y], pos_One_Sensors[head_z] ))
 
                     self.p[i].fitness = LA.norm(neg_One_Head_Traj - pos_One_Head_Traj)
 
