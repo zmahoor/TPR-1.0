@@ -11,6 +11,9 @@ from crabbot import ROBOT as CB
 from spherebot import ROBOT as SPB
 from snakeplusbot import ROBOT as SNPB
 from humanoid import ROBOT as HB
+from frogbot import ROBOT as FB
+from quadrupedplus import ROBOT as QPB
+from crabplusbot import ROBOT as CPB
 
 import constants as c
 
@@ -18,7 +21,10 @@ color = np.random.random(3)
 
 sim = PYROSIM(playPaused= True, playBlind=False, evalTime=200)
 
-robot = HB()
+robot = QPB()
+# robot = CPB()
+# robot  = FB()
+# robot = HB()
 # robot = SNPB()
 # robot = CB()
 # robot = QB()

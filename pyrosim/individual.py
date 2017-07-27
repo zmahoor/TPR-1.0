@@ -16,6 +16,9 @@ from starfishbot import ROBOT as SFB
 from crabbot import ROBOT as CB
 from spherebot import ROBOT as SPB
 from humanoid import ROBOT as HB
+from frogbot import ROBOT as FB
+from quadrupedplus import ROBOT as QPB
+from crabplusbot import ROBOT as CPB
 
 class INDIVIDUAL:
 
@@ -49,6 +52,10 @@ class INDIVIDUAL:
 
             self.robot = QB()
 
+        elif robotType == 'quadrupedplus':
+
+            self.robot = QPB()
+
         elif robotType == 'shinbot':
 
             self.robot = SHB()
@@ -65,9 +72,17 @@ class INDIVIDUAL:
 
             self.robot = CB()
 
+        elif robotType == 'crabplusbot':
+
+            self.robot = CPB()
+
         elif robotType == 'humanoid':
 
             self.robot = HB()
+
+        elif robotType == 'frogbot':
+
+            self.robot = FB()
 
         else: 
             print "robot not known"
