@@ -31,6 +31,8 @@ sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 data_generation  = False
 synthetic_data   = False
 
+main_path = "/Users/twitchplaysrobotics/TPR-backup"
+
 class CRITIC:
 
     def __init__(self, params):
@@ -89,9 +91,15 @@ class CRITIC:
 
             sensors = (sensors - _min) / (_max - _min)
 
+            print np.min(wordToVec), np.max(wordToVec)
+
+            wordToVec = (wordToVec - np.min(wordToVec)) / (np.max(wordToVec) - np.min(wordToVec))
+
             print "range: "
             print np.min(np.min(sensors, axis=1), axis=0)
             print np.max(np.max(sensors, axis=1), axis=0)
+
+            print np.min(wordToVec), np.max(wordToVec)
 
             print wordToVec.shape, sensors.shape, obedience.shape
 
@@ -131,37 +139,6 @@ class CRITIC:
         print "predicted: ", predicted.shape
         
         return predicted
-
-def Delete_Sensor_File(record):
-
-    robotID   = record['robotID']
-    startTime = record['startTime']
-    
-    path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
-        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' +\
-         startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
-
-    print path
-
-    if not os.path.isfile(path): return
-
-    try:
-        os.remove(fileToBeRemoved)
-    except:
-        print "unable to remove this file.."
-
-def Delete_Useless_Sensor_Files():
-
-    records = mydatabase.Fetch_From_Disply_Table('all')
-
-    for record in records:
-
-        if record['numYes'] == 0 and record['numNo'] == 0 and \
-            record['numLike'] ==0 and record['numDislike'] == 0:
-
-            print 'zero feedback...removing it.'
-
-            Delete_Sensor_File(record)
 
 def Generate_Data(batch_size, mydatabase):
     
@@ -266,9 +243,9 @@ def Load_Sensors_From_File(record):
     robotID   = record['robotID']
     startTime = record['startTime']
     
-    path = "../sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
+    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
         "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' +\
-         startTime.strftime("%Y-%m-%d %H:%M:%S") + ".dat"
+         startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
 
     # print path
 
