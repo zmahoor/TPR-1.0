@@ -360,8 +360,6 @@ class DATABASE:
         cmdTxt    = result['cmdTxt']
         robotType = result['type']
 
-        # result = {}
-
         sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 

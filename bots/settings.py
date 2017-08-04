@@ -18,7 +18,8 @@ validColors   = ['red', 'green', 'blue', 'orange', 'cyan', 'purple']
 specialColor  = 'silver'
 filteredUsers = ["tpr_bot2", "tpr_bot1", "tpr_bot3", "tpr_bot"]
 validRobots   = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot',\
- 'spherebot', 'snakebot', 'crabbot']
+ 'spherebot', 'snakebot', 'crabbot', 'humanoid', 'snakeplusbot', 'quadrupedplus',\
+ 'crabplusbot']
 
 maxCommandLength = 100
 minCommandLength = 2

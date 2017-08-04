@@ -50,7 +50,7 @@ def Store_Sensors_To_File(individual, currentTime):
         os.makedirs(path)
 
     # create file
-    currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
+    currentTime = currentTime.strftime("%Y-%m-%d-%H-%M-%S")
     path += '/robot_' + str(individual.id) + "_" + currentTime + ".dat"
     sensorValues = individual.Get_Raw_Sensors()
     Write_File(path, sensorValues)
@@ -212,8 +212,11 @@ def Draw_Reinforcment_Window(run_event):
         hour, minute   = divmod(minute, 60)
         rtime = "%02dm:%02ds"%(minute, second)
 
-        window.Draw_Rect(10, myy, 570, 30 , color = 'TAN')
-        window.Draw_Text("The next silver robot will be born into the population in " + rtime,\
+        window.Draw_Rect(10, myy, 420, 30 , color = 'TAN')
+        # window.Draw_Text("The next silver robot will be born into the population in " + rtime,\
+        #  x=10, y=myy, color='BLACK', fontSize=FONT_SIZE) 
+
+        window.Draw_Text("The next silver robot will be displayed in " + rtime,\
          x=10, y=myy, color='BLACK', fontSize=FONT_SIZE) 
 
         window.Draw_Text("Need help? Type", x= 600, y=myy, fontSize=FONT_SIZE) 
@@ -529,6 +532,7 @@ def Steady_State(run_event):
         print "Displaying color: ", currentColor
         print "Acting command: ", currentCommand
         print "Current time: ", currentTime
+        print "wordVector: ", wordVector
         
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)
@@ -556,8 +560,8 @@ def main(args):
     initPopulation = args.initPopulation
     removeInjected = args.removeInjected
 
-    if initPopulation:
-        Initialize_Global_Population()
+    # if initPopulation:
+    #     Initialize_Global_Population()
 
     injectionTimer = TIMER(INJECTION_PERIOD)
 
