@@ -153,7 +153,7 @@ class SYNAPSES:
 
         h = random.randint(0, c.NUM_HIDDEN_NEURONS - 1 )
 
-        self.sh[b,h].Mutate()
+        self.bh[b,h].Mutate()
 
     def Print_BH(self):
 
