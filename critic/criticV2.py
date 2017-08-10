@@ -52,7 +52,7 @@ class CRITIC:
         lstm2    = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
         
-        x = Dense(12, activation='relu')(x)
+        x = Dense(12, activation='relu')(dropout2)
 
         output = Dense(1, activation='linear', name='output')(x)
 
@@ -75,7 +75,9 @@ class CRITIC:
         else:
             data = Load_Training_Data( mydatabase )
 
-        sensors, wordToVec, obedience = data
+        sensors, obedience = data
+
+        print sensors.shape, obedience.shape
 
         _min = np.min(np.min(sensors, axis=1), axis=0)
         _max = np.max(np.max(sensors, axis=1), axis=0)
@@ -86,17 +88,11 @@ class CRITIC:
 
         sensors = (sensors - _min) / (_max - _min)
 
-        print np.min(wordToVec), np.max(wordToVec)
-
-        wordToVec = (wordToVec - np.min(wordToVec)) / (np.max(wordToVec) - np.min(wordToVec))
-
         print "range: "
         print np.min(np.min(sensors, axis=1), axis=0)
         print np.max(np.max(sensors, axis=1), axis=0)
 
-        print np.min(wordToVec), np.max(wordToVec)
-
-        print wordToVec.shape, sensors.shape, obedience.shape
+        print sensors.shape, obedience.shape
 
         start_time = time.time()
 
@@ -143,6 +139,7 @@ def Load_Training_Data(mydatabase):
         command = record['cmdTxt']
         if command not in valid_commands: continue
 
+        print command,
         sensors = Load_Sensors_From_File(record)
         if sensors == None: 
             # print('Not able to load the sensor file.') 
@@ -152,20 +149,26 @@ def Load_Training_Data(mydatabase):
         if features == None: continue
 
         tfeatures  = features[0]
-        if tfeatures.shape != (sequence_len, num_features): continue
+        # print tfeatures.shape
+
+        if tfeatures.shape != (sequence_len, num_features): 
+            continue
         
         obedience  = float(record['numYes'] - record['numNo']) \
                             / float(record['numYes'] + record['numNo'])
+
+        print tfeatures.shape, obedience
+
+        if obedience == 0: continue
 
         if obedience > 0: 
             obedience = 1
         elif obedience < 0:
             obedience = 0
 
-        if obedience != 0:
+        sensor_input.append(tfeatures)
+        output.append(obedience)
 
-            sensor_input.append(tfeatures)
-            output.append(obedience)
 
     return (np.array(sensor_input), np.array(output))
 
@@ -194,7 +197,7 @@ def Read_File(filePath):
     try:
         with open(filePath, 'r') as f:
             sensors = pickle.load(f)
-        print "Successful loading ", filePath
+        print "Loading ", filePath,
     except:
         print "Failed loading ", filePath 
     
