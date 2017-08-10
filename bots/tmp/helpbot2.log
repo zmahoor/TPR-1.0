@@ -1,0 +1,2471 @@
+Database version : {u'VERSION()': '5.7.18'} 
+Connecting to twitch.tv
+Connected to twitch
+Sending our details to twitch...
+:tmi.twitch.tv 001 tpr_bot2 :Welcome, GLHF!
+:tmi.twitch.tv 002 tpr_bot2 :Your host is tmi.twitch.tv
+:tmi.twitch.tv 003 tpr_bot2 :This server is rather new
+:tmi.twitch.tv 004 tpr_bot2 :-
+:tmi.twitch.tv 375 tpr_bot2 :-
+:tmi.twitch.tv 372 tpr_bot2 :You are in a maze of twisty passages, all alike.
+:tmi.twitch.tv 376 tpr_bot2 :>
+:tpr_bot2!tpr_bot2@tpr_bot2.tmi.twitch.tv JOIN #twitchplaysrobotics
+:tpr_bot2.tmi.twitch.tv 353 tpr_bot2 = #twitchplaysrobotics :tpr_bot2
+:tpr_bot2.tmi.twitch.tv 366 tpr_bot2 #twitchplaysrobotics :End of /NAMES list
+Joined twitchplaysrobotics channel..
+Sent: PRIVMSG #twitchplaysrobotics :Joined chat...
+('2017-08-04 16:12:58', 'PONG SENT!')
+2017-08-04 16:13:05 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 4, 16, 13, 5), u'txt': '?myscore', u'helpID': 643, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor, your score:3.0
+('Num of bytes sent out:', 56)
+('2017-08-04 16:17:58', 'PONG SENT!')
+('2017-08-04 16:22:58', 'PONG SENT!')
+('2017-08-04 16:27:58', 'PONG SENT!')
+('2017-08-04 16:32:58', 'PONG SENT!')
+('2017-08-04 16:37:58', 'PONG SENT!')
+('2017-08-04 16:42:58', 'PONG SENT!')
+2017-08-04 16:45:05 {u'userName': 'aralokespizza', u'timeArrival': datetime.datetime(2017, 8, 4, 16, 45, 5), u'txt': '?robots', u'helpID': 644, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@aralokespizza Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 226)
+('2017-08-04 16:47:58', 'PONG SENT!')
+('2017-08-04 16:52:58', 'PONG SENT!')
+('2017-08-04 16:57:58', 'PONG SENT!')
+('2017-08-04 17:02:58', 'PONG SENT!')
+('2017-08-04 17:07:58', 'PONG SENT!')
+('2017-08-04 17:12:58', 'PONG SENT!')
+('2017-08-04 17:17:58', 'PONG SENT!')
+('2017-08-04 17:22:58', 'PONG SENT!')
+('2017-08-04 17:27:58', 'PONG SENT!')
+('2017-08-04 17:32:58', 'PONG SENT!')
+('2017-08-04 17:37:58', 'PONG SENT!')
+('2017-08-04 17:42:58', 'PONG SENT!')
+2017-08-04 17:47:02 {u'userName': 'jaxinator03', u'timeArrival': datetime.datetime(2017, 8, 4, 17, 47, 2), u'txt': 'first_time_contribution', u'helpID': 645, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jaxinator03 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+2017-08-04 17:47:21 {u'userName': 'jaxinator03', u'timeArrival': datetime.datetime(2017, 8, 4, 17, 47, 21), u'txt': '?', u'helpID': 646, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jaxinator03 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 303)
+2017-08-04 17:47:43 {u'userName': 'jaxinator03', u'timeArrival': datetime.datetime(2017, 8, 4, 17, 47, 43), u'txt': '?robots', u'helpID': 647, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jaxinator03 Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 224)
+('2017-08-04 17:47:58', 'PONG SENT!')
+2017-08-04 17:48:12 {u'userName': 'jaxinator03', u'timeArrival': datetime.datetime(2017, 8, 4, 17, 48, 11), u'txt': '?reinforcement', u'helpID': 648, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jaxinator03 Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 370)
+('2017-08-04 17:52:58', 'PONG SENT!')
+2017-08-04 17:54:33 {u'userName': 'fur1ousg', u'timeArrival': datetime.datetime(2017, 8, 4, 17, 54, 33), u'txt': '?reinforcement', u'helpID': 649, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fur1ousg Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 367)
+2017-08-04 17:55:23 {u'userName': 'fur1ousg', u'timeArrival': datetime.datetime(2017, 8, 4, 17, 55, 23), u'txt': 'first_time_contribution', u'helpID': 650, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fur1ousg Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-04 17:57:58', 'PONG SENT!')
+('2017-08-04 18:02:58', 'PONG SENT!')
+('2017-08-04 18:07:58', 'PONG SENT!')
+('2017-08-04 18:12:58', 'PONG SENT!')
+('2017-08-04 18:17:58', 'PONG SENT!')
+('2017-08-04 18:22:58', 'PONG SENT!')
+('2017-08-04 18:27:58', 'PONG SENT!')
+('2017-08-04 18:32:58', 'PONG SENT!')
+('2017-08-04 18:37:58', 'PONG SENT!')
+('2017-08-04 18:42:58', 'PONG SENT!')
+('2017-08-04 18:47:58', 'PONG SENT!')
+('2017-08-04 18:52:58', 'PONG SENT!')
+('2017-08-04 18:57:58', 'PONG SENT!')
+2017-08-04 19:02:26 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 4, 19, 2, 26), u'txt': '?', u'helpID': 651, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+('2017-08-04 19:02:58', 'PONG SENT!')
+2017-08-04 19:07:46 {u'userName': 'lma_a', u'timeArrival': datetime.datetime(2017, 8, 4, 19, 7, 46), u'txt': 'first_time_contribution', u'helpID': 652, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lma_a Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 89)
+('2017-08-04 19:07:58', 'PONG SENT!')
+2017-08-04 19:10:17 {u'userName': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 4, 19, 10, 17), u'txt': 'first_time_contribution', u'helpID': 653, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@junglegeee Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-04 19:12:58', 'PONG SENT!')
+('2017-08-04 19:17:58', 'PONG SENT!')
+('2017-08-04 19:22:58', 'PONG SENT!')
+('2017-08-04 19:27:58', 'PONG SENT!')
+('2017-08-04 19:32:58', 'PONG SENT!')
+('2017-08-04 19:37:58', 'PONG SENT!')
+('2017-08-04 19:42:58', 'PONG SENT!')
+('2017-08-04 19:47:58', 'PONG SENT!')
+('2017-08-04 19:52:58', 'PONG SENT!')
+('2017-08-04 19:57:58', 'PONG SENT!')
+2017-08-04 20:02:38 {u'userName': 'haiousyt', u'timeArrival': datetime.datetime(2017, 8, 4, 20, 2, 38), u'txt': '?robots', u'helpID': 654, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@haiousyt Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 221)
+('2017-08-04 20:02:58', 'PONG SENT!')
+('2017-08-04 20:07:58', 'PONG SENT!')
+('2017-08-04 20:12:58', 'PONG SENT!')
+('2017-08-04 20:17:58', 'PONG SENT!')
+('2017-08-04 20:22:58', 'PONG SENT!')
+2017-08-04 20:27:18 {u'userName': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 4, 20, 27, 18), u'txt': '?', u'helpID': 655, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@junglegeee Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 302)
+('2017-08-04 20:27:58', 'PONG SENT!')
+('2017-08-04 20:32:58', 'PONG SENT!')
+('2017-08-04 20:37:58', 'PONG SENT!')
+('2017-08-04 20:42:58', 'PONG SENT!')
+('2017-08-04 20:47:58', 'PONG SENT!')
+('2017-08-04 20:52:58', 'PONG SENT!')
+('2017-08-04 20:57:58', 'PONG SENT!')
+('2017-08-04 21:02:58', 'PONG SENT!')
+('2017-08-04 21:07:58', 'PONG SENT!')
+('2017-08-04 21:12:58', 'PONG SENT!')
+('2017-08-04 21:17:58', 'PONG SENT!')
+('2017-08-04 21:22:58', 'PONG SENT!')
+('2017-08-04 21:27:58', 'PONG SENT!')
+('2017-08-04 21:32:58', 'PONG SENT!')
+('2017-08-04 21:37:58', 'PONG SENT!')
+('2017-08-04 21:42:58', 'PONG SENT!')
+('2017-08-04 21:47:58', 'PONG SENT!')
+('2017-08-04 21:52:58', 'PONG SENT!')
+('2017-08-04 21:57:58', 'PONG SENT!')
+2017-08-04 22:02:20 {u'userName': 'fakepyry', u'timeArrival': datetime.datetime(2017, 8, 4, 22, 2, 20), u'txt': 'first_time_contribution', u'helpID': 656, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fakepyry Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-04 22:02:58', 'PONG SENT!')
+2017-08-04 22:03:02 {u'userName': 'fakepyry', u'timeArrival': datetime.datetime(2017, 8, 4, 22, 3, 2), u'txt': '?reinforcement', u'helpID': 657, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fakepyry Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 367)
+('2017-08-04 22:07:58', 'PONG SENT!')
+('2017-08-04 22:12:58', 'PONG SENT!')
+('2017-08-04 22:17:58', 'PONG SENT!')
+('2017-08-04 22:22:58', 'PONG SENT!')
+('2017-08-04 22:27:58', 'PONG SENT!')
+('2017-08-04 22:32:58', 'PONG SENT!')
+('2017-08-04 22:37:58', 'PONG SENT!')
+('2017-08-04 22:42:58', 'PONG SENT!')
+('2017-08-04 22:47:58', 'PONG SENT!')
+('2017-08-04 22:52:58', 'PONG SENT!')
+('2017-08-04 22:57:58', 'PONG SENT!')
+('2017-08-04 23:02:58', 'PONG SENT!')
+2017-08-04 23:06:06 {u'userName': 'uzipaz', u'timeArrival': datetime.datetime(2017, 8, 4, 23, 6, 6), u'txt': 'first_time_contribution', u'helpID': 658, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@uzipaz Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-04 23:07:58', 'PONG SENT!')
+('2017-08-04 23:12:58', 'PONG SENT!')
+('2017-08-04 23:17:58', 'PONG SENT!')
+('2017-08-04 23:22:58', 'PONG SENT!')
+('2017-08-04 23:27:58', 'PONG SENT!')
+('2017-08-04 23:32:58', 'PONG SENT!')
+('2017-08-04 23:37:58', 'PONG SENT!')
+('2017-08-04 23:42:58', 'PONG SENT!')
+('2017-08-04 23:47:58', 'PONG SENT!')
+('2017-08-04 23:52:58', 'PONG SENT!')
+('2017-08-04 23:57:58', 'PONG SENT!')
+('2017-08-05 00:02:58', 'PONG SENT!')
+('2017-08-05 00:07:58', 'PONG SENT!')
+('2017-08-05 00:12:58', 'PONG SENT!')
+('2017-08-05 00:17:58', 'PONG SENT!')
+('2017-08-05 00:22:58', 'PONG SENT!')
+('2017-08-05 00:27:58', 'PONG SENT!')
+2017-08-05 00:30:22 {u'userName': 'gui0jtwitch', u'timeArrival': datetime.datetime(2017, 8, 5, 0, 30, 22), u'txt': 'first_time_contribution', u'helpID': 659, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@gui0jtwitch Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+('2017-08-05 00:32:58', 'PONG SENT!')
+('2017-08-05 00:37:58', 'PONG SENT!')
+('2017-08-05 00:42:58', 'PONG SENT!')
+('2017-08-05 00:47:58', 'PONG SENT!')
+('2017-08-05 00:52:58', 'PONG SENT!')
+('2017-08-05 00:57:58', 'PONG SENT!')
+('2017-08-05 01:02:58', 'PONG SENT!')
+('2017-08-05 01:07:58', 'PONG SENT!')
+('2017-08-05 01:12:58', 'PONG SENT!')
+('2017-08-05 01:17:58', 'PONG SENT!')
+('2017-08-05 01:22:58', 'PONG SENT!')
+('2017-08-05 01:27:58', 'PONG SENT!')
+('2017-08-05 01:32:58', 'PONG SENT!')
+('2017-08-05 01:37:58', 'PONG SENT!')
+('2017-08-05 01:42:58', 'PONG SENT!')
+('2017-08-05 01:47:58', 'PONG SENT!')
+('2017-08-05 01:52:58', 'PONG SENT!')
+('2017-08-05 01:57:58', 'PONG SENT!')
+('2017-08-05 02:02:58', 'PONG SENT!')
+('2017-08-05 02:07:58', 'PONG SENT!')
+('2017-08-05 02:12:58', 'PONG SENT!')
+('2017-08-05 02:17:58', 'PONG SENT!')
+('2017-08-05 02:22:58', 'PONG SENT!')
+('2017-08-05 02:27:58', 'PONG SENT!')
+('2017-08-05 02:32:58', 'PONG SENT!')
+('2017-08-05 02:37:58', 'PONG SENT!')
+('2017-08-05 02:42:58', 'PONG SENT!')
+('2017-08-05 02:47:58', 'PONG SENT!')
+('2017-08-05 02:52:58', 'PONG SENT!')
+('2017-08-05 02:57:58', 'PONG SENT!')
+('2017-08-05 03:02:58', 'PONG SENT!')
+('2017-08-05 03:07:58', 'PONG SENT!')
+('2017-08-05 03:12:58', 'PONG SENT!')
+('2017-08-05 03:17:58', 'PONG SENT!')
+('2017-08-05 03:22:58', 'PONG SENT!')
+('2017-08-05 03:27:58', 'PONG SENT!')
+('2017-08-05 03:32:58', 'PONG SENT!')
+('2017-08-05 03:37:58', 'PONG SENT!')
+2017-08-05 03:41:48 {u'userName': 'bnnko', u'timeArrival': datetime.datetime(2017, 8, 5, 3, 41, 48), u'txt': 'first_time_contribution', u'helpID': 660, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@bnnko Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 89)
+('2017-08-05 03:42:58', 'PONG SENT!')
+('2017-08-05 03:47:58', 'PONG SENT!')
+('2017-08-05 03:52:58', 'PONG SENT!')
+('2017-08-05 03:57:58', 'PONG SENT!')
+('2017-08-05 04:02:58', 'PONG SENT!')
+('2017-08-05 04:07:58', 'PONG SENT!')
+('2017-08-05 04:12:58', 'PONG SENT!')
+('2017-08-05 04:17:58', 'PONG SENT!')
+2017-08-05 04:18:40 {u'userName': 'kobbis', u'timeArrival': datetime.datetime(2017, 8, 5, 4, 18, 40), u'txt': '?', u'helpID': 661, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kobbis Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 298)
+2017-08-05 04:19:04 {u'userName': 'kobbis', u'timeArrival': datetime.datetime(2017, 8, 5, 4, 19, 4), u'txt': '?robots', u'helpID': 662, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kobbis Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 219)
+2017-08-05 04:19:29 {u'userName': 'kobbis', u'timeArrival': datetime.datetime(2017, 8, 5, 4, 19, 29), u'txt': '?vots', u'helpID': 663, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kobbis Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 298)
+2017-08-05 04:19:34 {u'userName': 'kobbis', u'timeArrival': datetime.datetime(2017, 8, 5, 4, 19, 34), u'txt': '?votes', u'helpID': 664, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kobbis Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 263)
+('2017-08-05 04:22:58', 'PONG SENT!')
+('2017-08-05 04:27:58', 'PONG SENT!')
+2017-08-05 04:29:24 {u'userName': 'antiniquasquad', u'timeArrival': datetime.datetime(2017, 8, 5, 4, 29, 24), u'txt': 'first_time_contribution', u'helpID': 665, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@antiniquasquad Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+('2017-08-05 04:32:58', 'PONG SENT!')
+('2017-08-05 04:37:58', 'PONG SENT!')
+('2017-08-05 04:42:58', 'PONG SENT!')
+('2017-08-05 04:47:58', 'PONG SENT!')
+('2017-08-05 04:52:58', 'PONG SENT!')
+('2017-08-05 04:57:58', 'PONG SENT!')
+('2017-08-05 05:02:58', 'PONG SENT!')
+('2017-08-05 05:07:58', 'PONG SENT!')
+('2017-08-05 05:12:58', 'PONG SENT!')
+('2017-08-05 05:17:58', 'PONG SENT!')
+('2017-08-05 05:22:58', 'PONG SENT!')
+('2017-08-05 05:27:58', 'PONG SENT!')
+('2017-08-05 05:32:58', 'PONG SENT!')
+('2017-08-05 05:37:58', 'PONG SENT!')
+('2017-08-05 05:42:58', 'PONG SENT!')
+('2017-08-05 05:47:58', 'PONG SENT!')
+('2017-08-05 05:52:58', 'PONG SENT!')
+('2017-08-05 05:57:58', 'PONG SENT!')
+('2017-08-05 06:02:58', 'PONG SENT!')
+('2017-08-05 06:07:58', 'PONG SENT!')
+('2017-08-05 06:12:58', 'PONG SENT!')
+('2017-08-05 06:17:58', 'PONG SENT!')
+('2017-08-05 06:22:58', 'PONG SENT!')
+2017-08-05 06:24:15 {u'userName': 'ghrimbone', u'timeArrival': datetime.datetime(2017, 8, 5, 6, 24, 15), u'txt': 'first_time_contribution', u'helpID': 666, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@ghrimbone Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-05 06:27:58', 'PONG SENT!')
+('2017-08-05 06:32:58', 'PONG SENT!')
+('2017-08-05 06:37:58', 'PONG SENT!')
+('2017-08-05 06:42:58', 'PONG SENT!')
+2017-08-05 06:44:24 {u'userName': 'jaguvaari', u'timeArrival': datetime.datetime(2017, 8, 5, 6, 44, 24), u'txt': 'first_time_contribution', u'helpID': 667, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jaguvaari Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-05 06:47:58', 'PONG SENT!')
+('2017-08-05 06:52:58', 'PONG SENT!')
+2017-08-05 06:53:52 {u'userName': 'z400hero', u'timeArrival': datetime.datetime(2017, 8, 5, 6, 53, 52), u'txt': 'first_time_contribution', u'helpID': 668, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@z400hero Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-05 06:57:58', 'PONG SENT!')
+2017-08-05 06:58:13 {u'userName': 'lukaskai123', u'timeArrival': datetime.datetime(2017, 8, 5, 6, 58, 13), u'txt': '?reinforcement', u'helpID': 669, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lukaskai123 Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 370)
+2017-08-05 06:58:54 {u'userName': 'lukaskai123', u'timeArrival': datetime.datetime(2017, 8, 5, 6, 58, 54), u'txt': 'first_time_contribution', u'helpID': 670, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lukaskai123 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+2017-08-05 07:00:21 {u'userName': 'lukaskai123', u'timeArrival': datetime.datetime(2017, 8, 5, 7, 0, 21), u'txt': '?', u'helpID': 671, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lukaskai123 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 303)
+2017-08-05 07:02:31 {u'userName': 'lukaskai123', u'timeArrival': datetime.datetime(2017, 8, 5, 7, 2, 31), u'txt': '?silverrobots', u'helpID': 672, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lukaskai123 Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 139)
+('2017-08-05 07:02:58', 'PONG SENT!')
+('2017-08-05 07:07:59', 'PONG SENT!')
+('2017-08-05 07:12:59', 'PONG SENT!')
+('2017-08-05 07:17:59', 'PONG SENT!')
+('2017-08-05 07:22:59', 'PONG SENT!')
+('2017-08-05 07:27:59', 'PONG SENT!')
+('2017-08-05 07:32:59', 'PONG SENT!')
+('2017-08-05 07:37:59', 'PONG SENT!')
+('2017-08-05 07:42:59', 'PONG SENT!')
+('2017-08-05 07:47:59', 'PONG SENT!')
+('2017-08-05 07:52:59', 'PONG SENT!')
+('2017-08-05 07:57:59', 'PONG SENT!')
+('2017-08-05 08:02:59', 'PONG SENT!')
+('2017-08-05 08:07:59', 'PONG SENT!')
+('2017-08-05 08:12:59', 'PONG SENT!')
+2017-08-05 08:14:48 {u'userName': 'aphobius', u'timeArrival': datetime.datetime(2017, 8, 5, 8, 14, 48), u'txt': 'first_time_contribution', u'helpID': 673, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@aphobius Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-05 08:17:59', 'PONG SENT!')
+('2017-08-05 08:22:59', 'PONG SENT!')
+('2017-08-05 08:27:59', 'PONG SENT!')
+('2017-08-05 08:32:59', 'PONG SENT!')
+('2017-08-05 08:37:59', 'PONG SENT!')
+('2017-08-05 08:42:59', 'PONG SENT!')
+2017-08-05 08:44:17 {u'userName': 'chris_is_too_awesome', u'timeArrival': datetime.datetime(2017, 8, 5, 8, 44, 17), u'txt': 'first_time_contribution', u'helpID': 674, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@chris_is_too_awesome Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 104)
+('2017-08-05 08:47:59', 'PONG SENT!')
+('2017-08-05 08:52:59', 'PONG SENT!')
+('2017-08-05 08:57:59', 'PONG SENT!')
+('2017-08-05 09:02:59', 'PONG SENT!')
+('2017-08-05 09:07:59', 'PONG SENT!')
+('2017-08-05 09:12:59', 'PONG SENT!')
+('2017-08-05 09:17:59', 'PONG SENT!')
+2017-08-05 09:19:58 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 5, 9, 19, 58), u'txt': '?', u'helpID': 675, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+('2017-08-05 09:22:59', 'PONG SENT!')
+('2017-08-05 09:27:59', 'PONG SENT!')
+('2017-08-05 09:32:59', 'PONG SENT!')
+('2017-08-05 09:37:59', 'PONG SENT!')
+('2017-08-05 09:42:59', 'PONG SENT!')
+('2017-08-05 09:47:59', 'PONG SENT!')
+('2017-08-05 09:52:59', 'PONG SENT!')
+('2017-08-05 09:57:59', 'PONG SENT!')
+('2017-08-05 10:02:59', 'PONG SENT!')
+('2017-08-05 10:07:59', 'PONG SENT!')
+('2017-08-05 10:12:59', 'PONG SENT!')
+('2017-08-05 10:17:59', 'PONG SENT!')
+('2017-08-05 10:22:59', 'PONG SENT!')
+2017-08-05 10:23:43 {u'userName': 'mokmoon123', u'timeArrival': datetime.datetime(2017, 8, 5, 10, 23, 43), u'txt': 'first_time_contribution', u'helpID': 676, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@mokmoon123 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-05 10:27:59', 'PONG SENT!')
+('2017-08-05 10:32:59', 'PONG SENT!')
+('2017-08-05 10:37:59', 'PONG SENT!')
+2017-08-05 10:41:09 {u'userName': 'arditxh', u'timeArrival': datetime.datetime(2017, 8, 5, 10, 41, 9), u'txt': 'first_time_contribution', u'helpID': 677, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@arditxh Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-05 10:42:59', 'PONG SENT!')
+Unable to send pong message..
+Connecting to twitch.tv
+Connected to twitch
+Sending our details to twitch...
+:tmi.twitch.tv 001 tpr_bot2 :Welcome, GLHF!
+:tmi.twitch.tv 002 tpr_bot2 :Your host is tmi.twitch.tv
+:tmi.twitch.tv 003 tpr_bot2 :This server is rather new
+:tmi.twitch.tv 004 tpr_bot2 :-
+:tmi.twitch.tv 375 tpr_bot2 :-
+:tmi.twitch.tv 372 tpr_bot2 :You are in a maze of twisty passages, all alike.
+:tmi.twitch.tv 376 tpr_bot2 :>
+:tpr_bot2!tpr_bot2@tpr_bot2.tmi.twitch.tv JOIN #twitchplaysrobotics
+:tpr_bot2.tmi.twitch.tv 353 tpr_bot2 = #twitchplaysrobotics :tpr_bot2
+:tpr_bot2.tmi.twitch.tv 366 tpr_bot2 #twitchplaysrobotics :End of /NAMES list
+Joined twitchplaysrobotics channel..
+Sent: PRIVMSG #twitchplaysrobotics :Joined chat...
+('2017-08-05 10:52:59', 'PONG SENT!')
+('2017-08-05 10:57:59', 'PONG SENT!')
+('2017-08-05 11:02:59', 'PONG SENT!')
+('2017-08-05 11:07:59', 'PONG SENT!')
+('2017-08-05 11:12:59', 'PONG SENT!')
+('2017-08-05 11:17:59', 'PONG SENT!')
+('2017-08-05 11:22:59', 'PONG SENT!')
+('2017-08-05 11:27:59', 'PONG SENT!')
+('2017-08-05 11:32:59', 'PONG SENT!')
+('2017-08-05 11:37:59', 'PONG SENT!')
+('2017-08-05 11:42:59', 'PONG SENT!')
+('2017-08-05 11:47:59', 'PONG SENT!')
+('2017-08-05 11:52:59', 'PONG SENT!')
+('2017-08-05 11:57:59', 'PONG SENT!')
+2017-08-05 11:59:54 {u'userName': 'sakuya351', u'timeArrival': datetime.datetime(2017, 8, 5, 11, 59, 54), u'txt': '?', u'helpID': 678, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@sakuya351 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 301)
+2017-08-05 12:00:50 {u'userName': 'sakuya351', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 0, 50), u'txt': '?robots', u'helpID': 679, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@sakuya351 Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+2017-08-05 12:01:23 {u'userName': 'sakuya351', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 1, 23), u'txt': '?silverrobots', u'helpID': 680, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@sakuya351 Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 137)
+2017-08-05 12:02:00 {u'userName': 'sakuya351', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 2), u'txt': '?reinforcement', u'helpID': 681, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@sakuya351 Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 368)
+2017-08-05 12:02:21 {u'userName': 'casuallydeep', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 2, 21), u'txt': 'first_time_contribution', u'helpID': 682, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@casuallydeep Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 96)
+('2017-08-05 12:02:59', 'PONG SENT!')
+2017-08-05 12:03:21 {u'userName': 'sakuya351', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 3, 21), u'txt': '?votes', u'helpID': 683, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@sakuya351 Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 266)
+2017-08-05 12:03:51 {u'userName': 'sakuya351', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 3, 51), u'txt': 'first_time_contribution', u'helpID': 684, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@sakuya351 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-05 12:07:59', 'PONG SENT!')
+('2017-08-05 12:12:59', 'PONG SENT!')
+('2017-08-05 12:17:59', 'PONG SENT!')
+('2017-08-05 12:22:59', 'PONG SENT!')
+('2017-08-05 12:27:59', 'PONG SENT!')
+('2017-08-05 12:32:59', 'PONG SENT!')
+('2017-08-05 12:37:59', 'PONG SENT!')
+('2017-08-05 12:42:59', 'PONG SENT!')
+('2017-08-05 12:47:59', 'PONG SENT!')
+2017-08-05 12:51:21 {u'userName': 'qw3rtys', u'timeArrival': datetime.datetime(2017, 8, 5, 12, 51, 21), u'txt': 'first_time_contribution', u'helpID': 685, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@qw3rtys Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-05 12:52:59', 'PONG SENT!')
+('2017-08-05 12:57:59', 'PONG SENT!')
+('2017-08-05 13:02:59', 'PONG SENT!')
+('2017-08-05 13:07:59', 'PONG SENT!')
+('2017-08-05 13:12:59', 'PONG SENT!')
+('2017-08-05 13:17:59', 'PONG SENT!')
+('2017-08-05 13:22:59', 'PONG SENT!')
+('2017-08-05 13:27:59', 'PONG SENT!')
+('2017-08-05 13:32:59', 'PONG SENT!')
+('2017-08-05 13:37:59', 'PONG SENT!')
+('2017-08-05 13:42:59', 'PONG SENT!')
+('2017-08-05 13:47:59', 'PONG SENT!')
+('2017-08-05 13:52:59', 'PONG SENT!')
+('2017-08-05 13:57:59', 'PONG SENT!')
+('2017-08-05 14:02:59', 'PONG SENT!')
+('2017-08-05 14:07:59', 'PONG SENT!')
+('2017-08-05 14:12:59', 'PONG SENT!')
+2017-08-05 14:13:21 {u'userName': 'holzleim', u'timeArrival': datetime.datetime(2017, 8, 5, 14, 13, 21), u'txt': 'first_time_contribution', u'helpID': 686, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@holzleim Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-05 14:17:59', 'PONG SENT!')
+('2017-08-05 14:22:59', 'PONG SENT!')
+('2017-08-05 14:27:59', 'PONG SENT!')
+('2017-08-05 14:32:59', 'PONG SENT!')
+('2017-08-05 14:37:59', 'PONG SENT!')
+('2017-08-05 14:42:59', 'PONG SENT!')
+('2017-08-05 14:47:59', 'PONG SENT!')
+('2017-08-05 14:52:59', 'PONG SENT!')
+('2017-08-05 14:57:59', 'PONG SENT!')
+('2017-08-05 15:02:59', 'PONG SENT!')
+2017-08-05 15:04:49 {u'userName': 'akela51', u'timeArrival': datetime.datetime(2017, 8, 5, 15, 4, 49), u'txt': 'first_time_contribution', u'helpID': 687, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@akela51 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-05 15:07:59', 'PONG SENT!')
+('2017-08-05 15:12:59', 'PONG SENT!')
+('2017-08-05 15:17:59', 'PONG SENT!')
+('2017-08-05 15:22:59', 'PONG SENT!')
+('2017-08-05 15:27:59', 'PONG SENT!')
+('2017-08-05 15:32:59', 'PONG SENT!')
+('2017-08-05 15:37:59', 'PONG SENT!')
+('2017-08-05 15:42:59', 'PONG SENT!')
+('2017-08-05 15:47:59', 'PONG SENT!')
+('2017-08-05 15:52:59', 'PONG SENT!')
+('2017-08-05 15:57:59', 'PONG SENT!')
+('2017-08-05 16:02:59', 'PONG SENT!')
+('2017-08-05 16:07:59', 'PONG SENT!')
+('2017-08-05 16:12:59', 'PONG SENT!')
+('2017-08-05 16:17:59', 'PONG SENT!')
+('2017-08-05 16:22:59', 'PONG SENT!')
+('2017-08-05 16:27:59', 'PONG SENT!')
+('2017-08-05 16:32:59', 'PONG SENT!')
+('2017-08-05 16:37:59', 'PONG SENT!')
+('2017-08-05 16:42:59', 'PONG SENT!')
+('2017-08-05 16:47:59', 'PONG SENT!')
+('2017-08-05 16:52:59', 'PONG SENT!')
+('2017-08-05 16:57:59', 'PONG SENT!')
+('2017-08-05 17:02:59', 'PONG SENT!')
+('2017-08-05 17:07:59', 'PONG SENT!')
+('2017-08-05 17:12:59', 'PONG SENT!')
+2017-08-05 17:16:30 {u'userName': 'fantasy70', u'timeArrival': datetime.datetime(2017, 8, 5, 17, 16, 30), u'txt': 'first_time_contribution', u'helpID': 688, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fantasy70 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-05 17:18:00', 'PONG SENT!')
+('2017-08-05 17:23:00', 'PONG SENT!')
+('2017-08-05 17:28:00', 'PONG SENT!')
+2017-08-05 17:29:23 {u'userName': 'senhor_ce', u'timeArrival': datetime.datetime(2017, 8, 5, 17, 29, 22), u'txt': 'first_time_contribution', u'helpID': 689, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@senhor_ce Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-05 17:33:00', 'PONG SENT!')
+('2017-08-05 17:38:00', 'PONG SENT!')
+('2017-08-05 17:43:00', 'PONG SENT!')
+('2017-08-05 17:48:00', 'PONG SENT!')
+('2017-08-05 17:53:00', 'PONG SENT!')
+('2017-08-05 17:58:00', 'PONG SENT!')
+('2017-08-05 18:03:00', 'PONG SENT!')
+('2017-08-05 18:08:00', 'PONG SENT!')
+('2017-08-05 18:13:00', 'PONG SENT!')
+('2017-08-05 18:18:00', 'PONG SENT!')
+('2017-08-05 18:23:00', 'PONG SENT!')
+('2017-08-05 18:28:00', 'PONG SENT!')
+('2017-08-05 18:33:00', 'PONG SENT!')
+('2017-08-05 18:38:00', 'PONG SENT!')
+('2017-08-05 18:43:00', 'PONG SENT!')
+('2017-08-05 18:48:00', 'PONG SENT!')
+('2017-08-05 18:53:00', 'PONG SENT!')
+2017-08-05 18:53:26 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 18, 53, 26), u'txt': '?', u'helpID': 690, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 305)
+2017-08-05 18:54:00 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 18, 54), u'txt': 'first_time_contribution', u'helpID': 691, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 97)
+('2017-08-05 18:58:00', 'PONG SENT!')
+2017-08-05 19:02:25 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 2, 25), u'txt': '?silverrobots', u'helpID': 692, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 141)
+('2017-08-05 19:03:00', 'PONG SENT!')
+('2017-08-05 19:08:00', 'PONG SENT!')
+2017-08-05 19:12:05 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 12, 5), u'txt': '?reinforcement', u'helpID': 693, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 372)
+('2017-08-05 19:13:00', 'PONG SENT!')
+2017-08-05 19:13:39 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 13, 39), u'txt': '?myscore', u'helpID': 694, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride, your score:30.0
+('Num of bytes sent out:', 63)
+('2017-08-05 19:18:00', 'PONG SENT!')
+2017-08-05 19:20:07 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 20, 7), u'txt': '?myscore', u'helpID': 695, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride, your score:42.0
+('Num of bytes sent out:', 63)
+2017-08-05 19:20:45 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 20, 45), u'txt': '?robots', u'helpID': 696, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 226)
+2017-08-05 19:21:38 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 21, 38), u'txt': '?commandscores', u'helpID': 697, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride We wish to discover which commands are most learnable by the robots. A command is considered learnable if, over time, robots become increasingly obedient  to that command. In other words, bots collect an increasing number   of yes's from the crowd, under that command, over time.
+('Num of bytes sent out: ', 326)
+('2017-08-05 19:23:00', 'PONG SENT!')
+('2017-08-05 19:28:00', 'PONG SENT!')
+2017-08-05 19:29:19 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 29, 19), u'txt': '?commandscores', u'helpID': 698, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride We wish to discover which commands are most learnable by the robots. A command is considered learnable if, over time, robots become increasingly obedient  to that command. In other words, bots collect an increasing number   of yes's from the crowd, under that command, over time.
+('Num of bytes sent out: ', 326)
+('2017-08-05 19:33:00', 'PONG SENT!')
+2017-08-05 19:35:46 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 35, 46), u'txt': '?commands', u'helpID': 699, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 305)
+('2017-08-05 19:38:00', 'PONG SENT!')
+2017-08-05 19:41:53 {u'userName': 'allencmcbride', u'timeArrival': datetime.datetime(2017, 8, 5, 19, 41, 53), u'txt': '?myscore', u'helpID': 700, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@allencmcbride, your score:117.0
+('Num of bytes sent out:', 64)
+('2017-08-05 19:43:00', 'PONG SENT!')
+('2017-08-05 19:48:00', 'PONG SENT!')
+('2017-08-05 19:53:00', 'PONG SENT!')
+('2017-08-05 19:58:00', 'PONG SENT!')
+('2017-08-05 20:03:00', 'PONG SENT!')
+('2017-08-05 20:08:00', 'PONG SENT!')
+('2017-08-05 20:13:00', 'PONG SENT!')
+('2017-08-05 20:18:00', 'PONG SENT!')
+('2017-08-05 20:23:00', 'PONG SENT!')
+('2017-08-05 20:28:00', 'PONG SENT!')
+('2017-08-05 20:33:00', 'PONG SENT!')
+('2017-08-05 20:38:00', 'PONG SENT!')
+('2017-08-05 20:43:00', 'PONG SENT!')
+('2017-08-05 20:48:00', 'PONG SENT!')
+('2017-08-05 20:53:00', 'PONG SENT!')
+('2017-08-05 20:58:00', 'PONG SENT!')
+('2017-08-05 21:03:00', 'PONG SENT!')
+2017-08-05 21:07:30 {u'userName': 'pancakes9000', u'timeArrival': datetime.datetime(2017, 8, 5, 21, 7, 30), u'txt': 'first_time_contribution', u'helpID': 701, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pancakes9000 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 96)
+('2017-08-05 21:08:00', 'PONG SENT!')
+('2017-08-05 21:13:00', 'PONG SENT!')
+('2017-08-05 21:18:00', 'PONG SENT!')
+('2017-08-05 21:23:00', 'PONG SENT!')
+('2017-08-05 21:28:00', 'PONG SENT!')
+('2017-08-05 21:33:00', 'PONG SENT!')
+('2017-08-05 21:38:00', 'PONG SENT!')
+('2017-08-05 21:43:00', 'PONG SENT!')
+('2017-08-05 21:48:00', 'PONG SENT!')
+('2017-08-05 21:53:00', 'PONG SENT!')
+('2017-08-05 21:58:00', 'PONG SENT!')
+('2017-08-05 22:03:00', 'PONG SENT!')
+('2017-08-05 22:08:00', 'PONG SENT!')
+('2017-08-05 22:13:00', 'PONG SENT!')
+('2017-08-05 22:18:00', 'PONG SENT!')
+('2017-08-05 22:23:00', 'PONG SENT!')
+('2017-08-05 22:28:00', 'PONG SENT!')
+('2017-08-05 22:33:00', 'PONG SENT!')
+('2017-08-05 22:38:00', 'PONG SENT!')
+('2017-08-05 22:43:00', 'PONG SENT!')
+('2017-08-05 22:48:00', 'PONG SENT!')
+('2017-08-05 22:53:00', 'PONG SENT!')
+('2017-08-05 22:58:00', 'PONG SENT!')
+('2017-08-05 23:03:00', 'PONG SENT!')
+('2017-08-05 23:08:00', 'PONG SENT!')
+('2017-08-05 23:13:00', 'PONG SENT!')
+('2017-08-05 23:18:00', 'PONG SENT!')
+2017-08-05 23:22:50 {u'userName': 'doodoopodamus', u'timeArrival': datetime.datetime(2017, 8, 5, 23, 22, 50), u'txt': 'first_time_contribution', u'helpID': 702, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@doodoopodamus Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 97)
+('2017-08-05 23:23:00', 'PONG SENT!')
+('2017-08-05 23:28:00', 'PONG SENT!')
+('2017-08-05 23:33:00', 'PONG SENT!')
+('2017-08-05 23:38:00', 'PONG SENT!')
+('2017-08-05 23:43:00', 'PONG SENT!')
+('2017-08-05 23:48:00', 'PONG SENT!')
+('2017-08-05 23:53:00', 'PONG SENT!')
+('2017-08-05 23:58:00', 'PONG SENT!')
+('2017-08-06 00:03:00', 'PONG SENT!')
+('2017-08-06 00:08:00', 'PONG SENT!')
+('2017-08-06 00:13:00', 'PONG SENT!')
+('2017-08-06 00:18:00', 'PONG SENT!')
+('2017-08-06 00:23:00', 'PONG SENT!')
+('2017-08-06 00:28:00', 'PONG SENT!')
+2017-08-06 00:32:16 {u'userName': 'gibe_succ', u'timeArrival': datetime.datetime(2017, 8, 6, 0, 32, 15), u'txt': 'first_time_contribution', u'helpID': 703, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@gibe_succ Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+2017-08-06 00:32:57 {u'userName': 'gibe_succ', u'timeArrival': datetime.datetime(2017, 8, 6, 0, 32, 57), u'txt': '?robots', u'helpID': 704, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@gibe_succ Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+('2017-08-06 00:33:00', 'PONG SENT!')
+2017-08-06 00:35:01 {u'userName': 'gibe_succ', u'timeArrival': datetime.datetime(2017, 8, 6, 0, 35, 1), u'txt': '?reinforcement', u'helpID': 705, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@gibe_succ Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 368)
+('2017-08-06 00:38:00', 'PONG SENT!')
+('2017-08-06 00:43:00', 'PONG SENT!')
+('2017-08-06 00:48:00', 'PONG SENT!')
+('2017-08-06 00:53:00', 'PONG SENT!')
+('2017-08-06 00:58:00', 'PONG SENT!')
+('2017-08-06 01:03:00', 'PONG SENT!')
+('2017-08-06 01:08:00', 'PONG SENT!')
+('2017-08-06 01:13:00', 'PONG SENT!')
+('2017-08-06 01:18:00', 'PONG SENT!')
+('2017-08-06 01:23:00', 'PONG SENT!')
+('2017-08-06 01:28:00', 'PONG SENT!')
+('2017-08-06 01:33:00', 'PONG SENT!')
+('2017-08-06 01:38:00', 'PONG SENT!')
+('2017-08-06 01:43:00', 'PONG SENT!')
+('2017-08-06 01:48:00', 'PONG SENT!')
+('2017-08-06 01:53:00', 'PONG SENT!')
+('2017-08-06 01:58:00', 'PONG SENT!')
+('2017-08-06 02:03:00', 'PONG SENT!')
+('2017-08-06 02:08:00', 'PONG SENT!')
+('2017-08-06 02:13:00', 'PONG SENT!')
+('2017-08-06 02:18:00', 'PONG SENT!')
+('2017-08-06 02:23:00', 'PONG SENT!')
+('2017-08-06 02:28:00', 'PONG SENT!')
+2017-08-06 02:28:50 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 28, 49), u'txt': 'first_time_contribution', u'helpID': 706, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 104)
+2017-08-06 02:31:31 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 31, 31), u'txt': '?', u'helpID': 707, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 312)
+2017-08-06 02:31:47 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 31, 47), u'txt': '?myscore', u'helpID': 708, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:7.0
+('Num of bytes sent out:', 69)
+('2017-08-06 02:33:00', 'PONG SENT!')
+2017-08-06 02:35:37 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 35, 37), u'txt': '?myscore', u'helpID': 709, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:18.0
+('Num of bytes sent out:', 70)
+('2017-08-06 02:38:00', 'PONG SENT!')
+2017-08-06 02:40:31 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 40, 31), u'txt': '?reinforcement', u'helpID': 710, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11 Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 379)
+('2017-08-06 02:43:00', 'PONG SENT!')
+2017-08-06 02:46:50 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 46, 50), u'txt': '?myscore', u'helpID': 711, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:60.0
+('Num of bytes sent out:', 70)
+('2017-08-06 02:48:00', 'PONG SENT!')
+2017-08-06 02:49:04 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 49, 4), u'txt': '?scores', u'helpID': 712, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11 You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 195)
+2017-08-06 02:52:54 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 52, 54), u'txt': '?myscore', u'helpID': 713, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:83.0
+('Num of bytes sent out:', 70)
+('2017-08-06 02:53:00', 'PONG SENT!')
+2017-08-06 02:55:43 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 55, 43), u'txt': '?myscore', u'helpID': 714, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:97.0
+('Num of bytes sent out:', 70)
+2017-08-06 02:56:15 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 56, 15), u'txt': '?myscore', u'helpID': 715, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:100.0
+('Num of bytes sent out:', 71)
+2017-08-06 02:57:39 {u'userName': 'firestarlovesanime11', u'timeArrival': datetime.datetime(2017, 8, 6, 2, 57, 39), u'txt': '?myscore', u'helpID': 716, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@firestarlovesanime11, your score:104.0
+('Num of bytes sent out:', 71)
+('2017-08-06 02:58:00', 'PONG SENT!')
+('2017-08-06 03:03:00', 'PONG SENT!')
+('2017-08-06 03:08:00', 'PONG SENT!')
+('2017-08-06 03:13:00', 'PONG SENT!')
+('2017-08-06 03:18:00', 'PONG SENT!')
+('2017-08-06 03:23:00', 'PONG SENT!')
+('2017-08-06 03:28:00', 'PONG SENT!')
+('2017-08-06 03:33:00', 'PONG SENT!')
+('2017-08-06 03:38:00', 'PONG SENT!')
+('2017-08-06 03:43:00', 'PONG SENT!')
+('2017-08-06 03:48:00', 'PONG SENT!')
+('2017-08-06 03:53:00', 'PONG SENT!')
+('2017-08-06 03:58:00', 'PONG SENT!')
+('2017-08-06 04:03:00', 'PONG SENT!')
+('2017-08-06 04:08:00', 'PONG SENT!')
+('2017-08-06 04:13:00', 'PONG SENT!')
+('2017-08-06 04:18:00', 'PONG SENT!')
+('2017-08-06 04:23:00', 'PONG SENT!')
+('2017-08-06 04:28:00', 'PONG SENT!')
+('2017-08-06 04:33:00', 'PONG SENT!')
+('2017-08-06 04:38:00', 'PONG SENT!')
+('2017-08-06 04:43:00', 'PONG SENT!')
+('2017-08-06 04:48:00', 'PONG SENT!')
+('2017-08-06 04:53:00', 'PONG SENT!')
+('2017-08-06 04:58:00', 'PONG SENT!')
+('2017-08-06 05:03:00', 'PONG SENT!')
+('2017-08-06 05:08:00', 'PONG SENT!')
+('2017-08-06 05:13:00', 'PONG SENT!')
+('2017-08-06 05:18:00', 'PONG SENT!')
+('2017-08-06 05:23:00', 'PONG SENT!')
+('2017-08-06 05:28:00', 'PONG SENT!')
+('2017-08-06 05:33:00', 'PONG SENT!')
+('2017-08-06 05:38:00', 'PONG SENT!')
+('2017-08-06 05:43:00', 'PONG SENT!')
+2017-08-06 05:46:08 {u'userName': 'k0b3r', u'timeArrival': datetime.datetime(2017, 8, 6, 5, 46, 7), u'txt': '?', u'helpID': 717, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@k0b3r Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 297)
+('2017-08-06 05:48:00', 'PONG SENT!')
+('2017-08-06 05:53:00', 'PONG SENT!')
+('2017-08-06 05:58:00', 'PONG SENT!')
+2017-08-06 05:59:16 {u'userName': 'coldspring_', u'timeArrival': datetime.datetime(2017, 8, 6, 5, 59, 16), u'txt': 'first_time_contribution', u'helpID': 718, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@coldspring_ Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+2017-08-06 06:00:44 {u'userName': 'coldspring_', u'timeArrival': datetime.datetime(2017, 8, 6, 6, 0, 44), u'txt': '?scores', u'helpID': 719, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@coldspring_ You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 186)
+2017-08-06 06:00:55 {u'userName': 'coldspring_', u'timeArrival': datetime.datetime(2017, 8, 6, 6, 0, 55), u'txt': '?myscore', u'helpID': 720, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@coldspring_, your score:4.0
+('Num of bytes sent out:', 60)
+2017-08-06 06:02:19 {u'userName': 'coldspring_', u'timeArrival': datetime.datetime(2017, 8, 6, 6, 2, 19), u'txt': '?reinforcement', u'helpID': 721, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@coldspring_ Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 370)
+2017-08-06 06:02:27 {u'userName': 'coldspring_', u'timeArrival': datetime.datetime(2017, 8, 6, 6, 2, 27), u'txt': '?votes', u'helpID': 722, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@coldspring_ Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 268)
+('2017-08-06 06:03:00', 'PONG SENT!')
+('2017-08-06 06:08:00', 'PONG SENT!')
+('2017-08-06 06:13:00', 'PONG SENT!')
+('2017-08-06 06:18:00', 'PONG SENT!')
+('2017-08-06 06:23:00', 'PONG SENT!')
+2017-08-06 06:26:45 {u'userName': 'mindconstructor', u'timeArrival': datetime.datetime(2017, 8, 6, 6, 26, 45), u'txt': 'first_time_contribution', u'helpID': 723, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@mindconstructor Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 99)
+('2017-08-06 06:28:00', 'PONG SENT!')
+('2017-08-06 06:33:00', 'PONG SENT!')
+('2017-08-06 06:38:00', 'PONG SENT!')
+('2017-08-06 06:43:00', 'PONG SENT!')
+('2017-08-06 06:48:00', 'PONG SENT!')
+2017-08-06 06:48:11 {u'userName': 'mysticxkairos', u'timeArrival': datetime.datetime(2017, 8, 6, 6, 48, 11), u'txt': 'first_time_contribution', u'helpID': 724, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@mysticxkairos Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 97)
+('2017-08-06 06:53:00', 'PONG SENT!')
+('2017-08-06 06:58:00', 'PONG SENT!')
+('2017-08-06 07:03:00', 'PONG SENT!')
+2017-08-06 07:07:31 {u'userName': 'seeludo', u'timeArrival': datetime.datetime(2017, 8, 6, 7, 7, 31), u'txt': 'first_time_contribution', u'helpID': 725, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@seeludo Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-06 07:08:00', 'PONG SENT!')
+('2017-08-06 07:13:00', 'PONG SENT!')
+('2017-08-06 07:18:00', 'PONG SENT!')
+('2017-08-06 07:23:00', 'PONG SENT!')
+('2017-08-06 07:28:00', 'PONG SENT!')
+('2017-08-06 07:33:00', 'PONG SENT!')
+('2017-08-06 07:38:00', 'PONG SENT!')
+2017-08-06 07:42:13 {u'userName': 'grewoss', u'timeArrival': datetime.datetime(2017, 8, 6, 7, 42, 13), u'txt': 'first_time_contribution', u'helpID': 726, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@grewoss Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-06 07:43:00', 'PONG SENT!')
+('2017-08-06 07:48:00', 'PONG SENT!')
+('2017-08-06 07:53:00', 'PONG SENT!')
+('2017-08-06 07:58:00', 'PONG SENT!')
+('2017-08-06 08:03:00', 'PONG SENT!')
+('2017-08-06 08:08:00', 'PONG SENT!')
+('2017-08-06 08:13:00', 'PONG SENT!')
+('2017-08-06 08:18:00', 'PONG SENT!')
+2017-08-06 08:19:54 {u'userName': 'arturasm', u'timeArrival': datetime.datetime(2017, 8, 6, 8, 19, 54), u'txt': 'first_time_contribution', u'helpID': 727, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@arturasm Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-06 08:23:00', 'PONG SENT!')
+('2017-08-06 08:28:00', 'PONG SENT!')
+('2017-08-06 08:33:00', 'PONG SENT!')
+('2017-08-06 08:38:00', 'PONG SENT!')
+('2017-08-06 08:43:00', 'PONG SENT!')
+('2017-08-06 08:48:00', 'PONG SENT!')
+('2017-08-06 08:53:00', 'PONG SENT!')
+('2017-08-06 08:58:00', 'PONG SENT!')
+('2017-08-06 09:03:00', 'PONG SENT!')
+('2017-08-06 09:08:00', 'PONG SENT!')
+('2017-08-06 09:13:00', 'PONG SENT!')
+('2017-08-06 09:18:00', 'PONG SENT!')
+('2017-08-06 09:23:00', 'PONG SENT!')
+('2017-08-06 09:28:00', 'PONG SENT!')
+('2017-08-06 09:33:00', 'PONG SENT!')
+('2017-08-06 09:38:00', 'PONG SENT!')
+('2017-08-06 09:43:00', 'PONG SENT!')
+('2017-08-06 09:48:00', 'PONG SENT!')
+2017-08-06 09:52:41 {u'userName': 'underthesameskyy', u'timeArrival': datetime.datetime(2017, 8, 6, 9, 52, 41), u'txt': 'first_time_contribution', u'helpID': 728, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@underthesameskyy Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 100)
+('2017-08-06 09:53:00', 'PONG SENT!')
+('2017-08-06 09:58:00', 'PONG SENT!')
+2017-08-06 10:01:45 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 6, 10, 1, 45), u'txt': '?', u'helpID': 729, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+('2017-08-06 10:03:00', 'PONG SENT!')
+('2017-08-06 10:08:00', 'PONG SENT!')
+('2017-08-06 10:13:00', 'PONG SENT!')
+('2017-08-06 10:18:00', 'PONG SENT!')
+('2017-08-06 10:23:00', 'PONG SENT!')
+('2017-08-06 10:28:00', 'PONG SENT!')
+('2017-08-06 10:33:00', 'PONG SENT!')
+('2017-08-06 10:38:00', 'PONG SENT!')
+('2017-08-06 10:43:00', 'PONG SENT!')
+('2017-08-06 10:48:00', 'PONG SENT!')
+('2017-08-06 10:53:00', 'PONG SENT!')
+('2017-08-06 10:58:00', 'PONG SENT!')
+('2017-08-06 11:03:00', 'PONG SENT!')
+2017-08-06 11:03:55 {u'userName': 'diesel0991', u'timeArrival': datetime.datetime(2017, 8, 6, 11, 3, 55), u'txt': 'first_time_contribution', u'helpID': 730, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@diesel0991 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-06 11:08:00', 'PONG SENT!')
+('2017-08-06 11:13:01', 'PONG SENT!')
+('2017-08-06 11:18:01', 'PONG SENT!')
+('2017-08-06 11:23:01', 'PONG SENT!')
+('2017-08-06 11:28:01', 'PONG SENT!')
+('2017-08-06 11:33:01', 'PONG SENT!')
+('2017-08-06 11:38:01', 'PONG SENT!')
+('2017-08-06 11:43:01', 'PONG SENT!')
+('2017-08-06 11:48:01', 'PONG SENT!')
+('2017-08-06 11:53:01', 'PONG SENT!')
+('2017-08-06 11:58:01', 'PONG SENT!')
+('2017-08-06 12:03:01', 'PONG SENT!')
+('2017-08-06 12:08:01', 'PONG SENT!')
+('2017-08-06 12:13:01', 'PONG SENT!')
+('2017-08-06 12:18:01', 'PONG SENT!')
+('2017-08-06 12:23:01', 'PONG SENT!')
+('2017-08-06 12:28:01', 'PONG SENT!')
+('2017-08-06 12:33:01', 'PONG SENT!')
+('2017-08-06 12:38:01', 'PONG SENT!')
+('2017-08-06 12:43:01', 'PONG SENT!')
+('2017-08-06 12:48:01', 'PONG SENT!')
+('2017-08-06 12:53:01', 'PONG SENT!')
+('2017-08-06 12:58:01', 'PONG SENT!')
+('2017-08-06 13:03:01', 'PONG SENT!')
+2017-08-06 13:07:48 {u'userName': 'kphooghuis', u'timeArrival': datetime.datetime(2017, 8, 6, 13, 7, 48), u'txt': 'first_time_contribution', u'helpID': 731, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kphooghuis Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-06 13:08:01', 'PONG SENT!')
+2017-08-06 13:08:30 {u'userName': 'kphooghuis', u'timeArrival': datetime.datetime(2017, 8, 6, 13, 8, 30), u'txt': '?robots', u'helpID': 732, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kphooghuis Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 223)
+('2017-08-06 13:13:01', 'PONG SENT!')
+('2017-08-06 13:18:01', 'PONG SENT!')
+2017-08-06 13:18:45 {u'userName': 'kingyolog', u'timeArrival': datetime.datetime(2017, 8, 6, 13, 18, 45), u'txt': 'first_time_contribution', u'helpID': 733, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kingyolog Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-06 13:23:01', 'PONG SENT!')
+('2017-08-06 13:28:01', 'PONG SENT!')
+('2017-08-06 13:33:01', 'PONG SENT!')
+('2017-08-06 13:38:01', 'PONG SENT!')
+('2017-08-06 13:43:01', 'PONG SENT!')
+('2017-08-06 13:48:01', 'PONG SENT!')
+('2017-08-06 13:53:01', 'PONG SENT!')
+('2017-08-06 13:58:01', 'PONG SENT!')
+('2017-08-06 14:03:01', 'PONG SENT!')
+('2017-08-06 14:08:01', 'PONG SENT!')
+('2017-08-06 14:13:01', 'PONG SENT!')
+('2017-08-06 14:18:01', 'PONG SENT!')
+('2017-08-06 14:23:01', 'PONG SENT!')
+('2017-08-06 14:28:01', 'PONG SENT!')
+('2017-08-06 14:33:01', 'PONG SENT!')
+('2017-08-06 14:38:01', 'PONG SENT!')
+('2017-08-06 14:43:01', 'PONG SENT!')
+2017-08-06 14:44:00 {u'userName': 'unfosforo', u'timeArrival': datetime.datetime(2017, 8, 6, 14, 44), u'txt': 'first_time_contribution', u'helpID': 734, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@unfosforo Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+2017-08-06 14:47:35 {u'userName': 'unfosforo', u'timeArrival': datetime.datetime(2017, 8, 6, 14, 47, 35), u'txt': '?scores', u'helpID': 735, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@unfosforo You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 184)
+('2017-08-06 14:48:01', 'PONG SENT!')
+2017-08-06 14:48:36 {u'userName': 'paganswordsman', u'timeArrival': datetime.datetime(2017, 8, 6, 14, 48, 36), u'txt': 'first_time_contribution', u'helpID': 736, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@paganswordsman Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+('2017-08-06 14:53:01', 'PONG SENT!')
+('2017-08-06 14:58:01', 'PONG SENT!')
+('2017-08-06 15:03:01', 'PONG SENT!')
+2017-08-06 15:07:47 {u'userName': 'mistymidnightplays', u'timeArrival': datetime.datetime(2017, 8, 6, 15, 7, 47), u'txt': 'first_time_contribution', u'helpID': 737, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@mistymidnightplays Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 102)
+('2017-08-06 15:08:01', 'PONG SENT!')
+('2017-08-06 15:13:01', 'PONG SENT!')
+('2017-08-06 15:18:01', 'PONG SENT!')
+('2017-08-06 15:23:01', 'PONG SENT!')
+('2017-08-06 15:28:01', 'PONG SENT!')
+('2017-08-06 15:33:01', 'PONG SENT!')
+('2017-08-06 15:38:01', 'PONG SENT!')
+('2017-08-06 15:43:01', 'PONG SENT!')
+('2017-08-06 15:48:01', 'PONG SENT!')
+('2017-08-06 15:53:01', 'PONG SENT!')
+('2017-08-06 15:58:01', 'PONG SENT!')
+('2017-08-06 16:03:01', 'PONG SENT!')
+('2017-08-06 16:08:01', 'PONG SENT!')
+('2017-08-06 16:13:01', 'PONG SENT!')
+('2017-08-06 16:18:01', 'PONG SENT!')
+('2017-08-06 16:23:01', 'PONG SENT!')
+('2017-08-06 16:28:01', 'PONG SENT!')
+('2017-08-06 16:33:01', 'PONG SENT!')
+('2017-08-06 16:38:01', 'PONG SENT!')
+2017-08-06 16:39:23 {u'userName': 'pupmon1', u'timeArrival': datetime.datetime(2017, 8, 6, 16, 39, 23), u'txt': 'first_time_contribution', u'helpID': 738, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pupmon1 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+2017-08-06 16:39:48 {u'userName': 'pupmon1', u'timeArrival': datetime.datetime(2017, 8, 6, 16, 39, 48), u'txt': '?robots', u'helpID': 739, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pupmon1 Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 220)
+('2017-08-06 16:43:01', 'PONG SENT!')
+('2017-08-06 16:48:01', 'PONG SENT!')
+('2017-08-06 16:53:01', 'PONG SENT!')
+('2017-08-06 16:58:01', 'PONG SENT!')
+2017-08-06 16:58:19 {u'userName': 'pupmon1', u'timeArrival': datetime.datetime(2017, 8, 6, 16, 58, 19), u'txt': '?scores', u'helpID': 740, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pupmon1 You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 182)
+('2017-08-06 17:03:01', 'PONG SENT!')
+('2017-08-06 17:08:01', 'PONG SENT!')
+('2017-08-06 17:13:01', 'PONG SENT!')
+('2017-08-06 17:18:01', 'PONG SENT!')
+2017-08-06 17:19:46 {u'userName': 'pupmon1', u'timeArrival': datetime.datetime(2017, 8, 6, 17, 19, 46), u'txt': '?', u'helpID': 741, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pupmon1 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+2017-08-06 17:20:03 {u'userName': 'pupmon1', u'timeArrival': datetime.datetime(2017, 8, 6, 17, 20, 3), u'txt': '?silverrobots', u'helpID': 742, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pupmon1 Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 135)
+('2017-08-06 17:23:01', 'PONG SENT!')
+('2017-08-06 17:28:01', 'PONG SENT!')
+('2017-08-06 17:33:01', 'PONG SENT!')
+('2017-08-06 17:38:01', 'PONG SENT!')
+2017-08-06 17:42:45 {u'userName': 'pixilatedraven', u'timeArrival': datetime.datetime(2017, 8, 6, 17, 42, 45), u'txt': 'first_time_contribution', u'helpID': 743, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pixilatedraven Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+('2017-08-06 17:43:01', 'PONG SENT!')
+2017-08-06 17:46:20 {u'userName': 'cookielord1138', u'timeArrival': datetime.datetime(2017, 8, 6, 17, 46, 20), u'txt': '?', u'helpID': 744, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@cookielord1138 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 306)
+2017-08-06 17:46:34 {u'userName': 'cookielord1138', u'timeArrival': datetime.datetime(2017, 8, 6, 17, 46, 34), u'txt': '?myscore', u'helpID': 745, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@cookielord1138, your score:0.0
+('Num of bytes sent out:', 63)
+2017-08-06 17:46:40 {u'userName': 'cookielord1138', u'timeArrival': datetime.datetime(2017, 8, 6, 17, 46, 40), u'txt': '?robots', u'helpID': 746, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@cookielord1138 Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 227)
+('2017-08-06 17:48:01', 'PONG SENT!')
+('2017-08-06 17:53:01', 'PONG SENT!')
+('2017-08-06 17:58:01', 'PONG SENT!')
+('2017-08-06 18:03:01', 'PONG SENT!')
+('2017-08-06 18:08:01', 'PONG SENT!')
+('2017-08-06 18:13:01', 'PONG SENT!')
+('2017-08-06 18:18:01', 'PONG SENT!')
+('2017-08-06 18:23:01', 'PONG SENT!')
+('2017-08-06 18:28:01', 'PONG SENT!')
+('2017-08-06 18:33:01', 'PONG SENT!')
+('2017-08-06 18:38:01', 'PONG SENT!')
+('2017-08-06 18:43:01', 'PONG SENT!')
+('2017-08-06 18:48:01', 'PONG SENT!')
+('2017-08-06 18:53:01', 'PONG SENT!')
+('2017-08-06 18:58:01', 'PONG SENT!')
+('2017-08-06 19:03:01', 'PONG SENT!')
+('2017-08-06 19:08:01', 'PONG SENT!')
+2017-08-06 19:10:14 {u'userName': 'theboysurvivor', u'timeArrival': datetime.datetime(2017, 8, 6, 19, 10, 14), u'txt': 'first_time_contribution', u'helpID': 747, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@theboysurvivor Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+2017-08-06 19:11:00 {u'userName': 'theboysurvivor', u'timeArrival': datetime.datetime(2017, 8, 6, 19, 11), u'txt': '?scores', u'helpID': 748, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@theboysurvivor You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 189)
+('2017-08-06 19:13:01', 'PONG SENT!')
+('2017-08-06 19:18:01', 'PONG SENT!')
+('2017-08-06 19:23:01', 'PONG SENT!')
+('2017-08-06 19:28:01', 'PONG SENT!')
+('2017-08-06 19:33:01', 'PONG SENT!')
+('2017-08-06 19:38:01', 'PONG SENT!')
+('2017-08-06 19:43:01', 'PONG SENT!')
+('2017-08-06 19:48:01', 'PONG SENT!')
+('2017-08-06 19:53:01', 'PONG SENT!')
+('2017-08-06 19:58:01', 'PONG SENT!')
+('2017-08-06 20:03:01', 'PONG SENT!')
+('2017-08-06 20:08:01', 'PONG SENT!')
+('2017-08-06 20:13:01', 'PONG SENT!')
+('2017-08-06 20:18:01', 'PONG SENT!')
+('2017-08-06 20:23:01', 'PONG SENT!')
+('2017-08-06 20:28:01', 'PONG SENT!')
+('2017-08-06 20:33:01', 'PONG SENT!')
+('2017-08-06 20:38:01', 'PONG SENT!')
+('2017-08-06 20:43:01', 'PONG SENT!')
+('2017-08-06 20:48:01', 'PONG SENT!')
+('2017-08-06 20:53:01', 'PONG SENT!')
+2017-08-06 20:57:20 {u'userName': 'arnoldpapa', u'timeArrival': datetime.datetime(2017, 8, 6, 20, 57, 19), u'txt': 'first_time_contribution', u'helpID': 749, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@arnoldpapa Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-06 20:58:01', 'PONG SENT!')
+('2017-08-06 21:03:01', 'PONG SENT!')
+('2017-08-06 21:08:01', 'PONG SENT!')
+('2017-08-06 21:13:01', 'PONG SENT!')
+('2017-08-06 21:18:01', 'PONG SENT!')
+('2017-08-06 21:23:01', 'PONG SENT!')
+('2017-08-06 21:28:01', 'PONG SENT!')
+('2017-08-06 21:33:01', 'PONG SENT!')
+('2017-08-06 21:38:01', 'PONG SENT!')
+2017-08-06 21:41:00 {u'userName': 'paganswordsman', u'timeArrival': datetime.datetime(2017, 8, 6, 21, 41), u'txt': '?', u'helpID': 750, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@paganswordsman Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 306)
+2017-08-06 21:41:34 {u'userName': 'paganswordsman', u'timeArrival': datetime.datetime(2017, 8, 6, 21, 41, 34), u'txt': '?silverrobots', u'helpID': 751, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@paganswordsman Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 142)
+2017-08-06 21:42:32 {u'userName': 'paganswordsman', u'timeArrival': datetime.datetime(2017, 8, 6, 21, 42, 32), u'txt': '?robots', u'helpID': 752, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@paganswordsman Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 227)
+2017-08-06 21:43:01 {u'userName': 'paganswordsman', u'timeArrival': datetime.datetime(2017, 8, 6, 21, 43, 1), u'txt': '?reinforcements', u'helpID': 753, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@paganswordsman Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 373)
+('2017-08-06 21:43:01', 'PONG SENT!')
+('2017-08-06 21:48:01', 'PONG SENT!')
+('2017-08-06 21:53:01', 'PONG SENT!')
+('2017-08-06 21:58:01', 'PONG SENT!')
+('2017-08-06 22:03:01', 'PONG SENT!')
+('2017-08-06 22:08:01', 'PONG SENT!')
+('2017-08-06 22:13:01', 'PONG SENT!')
+('2017-08-06 22:18:01', 'PONG SENT!')
+2017-08-06 22:18:32 {u'userName': 'togoshige', u'timeArrival': datetime.datetime(2017, 8, 6, 22, 18, 32), u'txt': 'first_time_contribution', u'helpID': 754, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@togoshige Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-06 22:23:01', 'PONG SENT!')
+('2017-08-06 22:28:01', 'PONG SENT!')
+('2017-08-06 22:33:01', 'PONG SENT!')
+('2017-08-06 22:38:01', 'PONG SENT!')
+('2017-08-06 22:43:01', 'PONG SENT!')
+('2017-08-06 22:48:01', 'PONG SENT!')
+('2017-08-06 22:53:01', 'PONG SENT!')
+('2017-08-06 22:58:01', 'PONG SENT!')
+('2017-08-06 23:03:01', 'PONG SENT!')
+('2017-08-06 23:08:01', 'PONG SENT!')
+2017-08-06 23:09:21 {u'userName': 'lord_reggie', u'timeArrival': datetime.datetime(2017, 8, 6, 23, 9, 21), u'txt': 'first_time_contribution', u'helpID': 755, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lord_reggie Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+('2017-08-06 23:13:01', 'PONG SENT!')
+('2017-08-06 23:18:01', 'PONG SENT!')
+('2017-08-06 23:23:01', 'PONG SENT!')
+('2017-08-06 23:28:01', 'PONG SENT!')
+('2017-08-06 23:33:01', 'PONG SENT!')
+('2017-08-06 23:38:01', 'PONG SENT!')
+('2017-08-06 23:43:01', 'PONG SENT!')
+('2017-08-06 23:48:01', 'PONG SENT!')
+('2017-08-06 23:53:01', 'PONG SENT!')
+('2017-08-06 23:58:01', 'PONG SENT!')
+('2017-08-07 00:03:01', 'PONG SENT!')
+('2017-08-07 00:08:01', 'PONG SENT!')
+('2017-08-07 00:13:01', 'PONG SENT!')
+('2017-08-07 00:18:01', 'PONG SENT!')
+('2017-08-07 00:23:01', 'PONG SENT!')
+('2017-08-07 00:28:01', 'PONG SENT!')
+('2017-08-07 00:33:01', 'PONG SENT!')
+('2017-08-07 00:38:01', 'PONG SENT!')
+('2017-08-07 00:43:01', 'PONG SENT!')
+('2017-08-07 00:48:01', 'PONG SENT!')
+('2017-08-07 00:53:01', 'PONG SENT!')
+('2017-08-07 00:58:01', 'PONG SENT!')
+('2017-08-07 01:03:01', 'PONG SENT!')
+('2017-08-07 01:08:01', 'PONG SENT!')
+('2017-08-07 01:13:01', 'PONG SENT!')
+('2017-08-07 01:18:01', 'PONG SENT!')
+('2017-08-07 01:23:01', 'PONG SENT!')
+('2017-08-07 01:28:01', 'PONG SENT!')
+('2017-08-07 01:33:01', 'PONG SENT!')
+('2017-08-07 01:38:01', 'PONG SENT!')
+('2017-08-07 01:43:01', 'PONG SENT!')
+('2017-08-07 01:48:01', 'PONG SENT!')
+('2017-08-07 01:53:01', 'PONG SENT!')
+('2017-08-07 01:58:01', 'PONG SENT!')
+('2017-08-07 02:03:01', 'PONG SENT!')
+('2017-08-07 02:08:01', 'PONG SENT!')
+('2017-08-07 02:13:01', 'PONG SENT!')
+('2017-08-07 02:18:01', 'PONG SENT!')
+2017-08-07 02:20:16 {u'userName': 'rhallion', u'timeArrival': datetime.datetime(2017, 8, 7, 2, 20, 16), u'txt': 'first_time_contribution', u'helpID': 756, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@rhallion Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-07 02:23:01', 'PONG SENT!')
+('2017-08-07 02:28:01', 'PONG SENT!')
+('2017-08-07 02:33:01', 'PONG SENT!')
+('2017-08-07 02:38:01', 'PONG SENT!')
+('2017-08-07 02:43:01', 'PONG SENT!')
+('2017-08-07 02:48:01', 'PONG SENT!')
+('2017-08-07 02:53:01', 'PONG SENT!')
+('2017-08-07 02:58:01', 'PONG SENT!')
+('2017-08-07 03:03:01', 'PONG SENT!')
+('2017-08-07 03:08:01', 'PONG SENT!')
+('2017-08-07 03:13:01', 'PONG SENT!')
+('2017-08-07 03:18:01', 'PONG SENT!')
+('2017-08-07 03:23:01', 'PONG SENT!')
+('2017-08-07 03:28:01', 'PONG SENT!')
+('2017-08-07 03:33:01', 'PONG SENT!')
+('2017-08-07 03:38:01', 'PONG SENT!')
+('2017-08-07 03:43:01', 'PONG SENT!')
+('2017-08-07 03:48:01', 'PONG SENT!')
+('2017-08-07 03:53:01', 'PONG SENT!')
+('2017-08-07 03:58:01', 'PONG SENT!')
+('2017-08-07 04:03:01', 'PONG SENT!')
+('2017-08-07 04:08:01', 'PONG SENT!')
+('2017-08-07 04:13:01', 'PONG SENT!')
+('2017-08-07 04:18:01', 'PONG SENT!')
+('2017-08-07 04:23:01', 'PONG SENT!')
+('2017-08-07 04:28:01', 'PONG SENT!')
+('2017-08-07 04:33:01', 'PONG SENT!')
+('2017-08-07 04:38:01', 'PONG SENT!')
+('2017-08-07 04:43:01', 'PONG SENT!')
+('2017-08-07 04:48:01', 'PONG SENT!')
+('2017-08-07 04:53:01', 'PONG SENT!')
+('2017-08-07 04:58:01', 'PONG SENT!')
+('2017-08-07 05:03:01', 'PONG SENT!')
+('2017-08-07 05:08:01', 'PONG SENT!')
+('2017-08-07 05:13:01', 'PONG SENT!')
+('2017-08-07 05:18:01', 'PONG SENT!')
+('2017-08-07 05:23:01', 'PONG SENT!')
+('2017-08-07 05:28:01', 'PONG SENT!')
+('2017-08-07 05:33:01', 'PONG SENT!')
+('2017-08-07 05:38:01', 'PONG SENT!')
+('2017-08-07 05:43:01', 'PONG SENT!')
+('2017-08-07 05:48:01', 'PONG SENT!')
+('2017-08-07 05:53:01', 'PONG SENT!')
+('2017-08-07 05:58:01', 'PONG SENT!')
+('2017-08-07 06:03:01', 'PONG SENT!')
+2017-08-07 06:04:25 {u'userName': 'graham1642', u'timeArrival': datetime.datetime(2017, 8, 7, 6, 4, 25), u'txt': 'first_time_contribution', u'helpID': 757, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@graham1642 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-07 06:08:01', 'PONG SENT!')
+('2017-08-07 06:13:01', 'PONG SENT!')
+('2017-08-07 06:18:01', 'PONG SENT!')
+('2017-08-07 06:23:01', 'PONG SENT!')
+('2017-08-07 06:28:01', 'PONG SENT!')
+('2017-08-07 06:33:01', 'PONG SENT!')
+('2017-08-07 06:38:01', 'PONG SENT!')
+('2017-08-07 06:43:01', 'PONG SENT!')
+('2017-08-07 06:48:01', 'PONG SENT!')
+('2017-08-07 06:53:01', 'PONG SENT!')
+('2017-08-07 06:58:01', 'PONG SENT!')
+('2017-08-07 07:03:01', 'PONG SENT!')
+('2017-08-07 07:08:01', 'PONG SENT!')
+('2017-08-07 07:13:01', 'PONG SENT!')
+('2017-08-07 07:18:01', 'PONG SENT!')
+('2017-08-07 07:23:01', 'PONG SENT!')
+('2017-08-07 07:28:01', 'PONG SENT!')
+('2017-08-07 07:33:01', 'PONG SENT!')
+2017-08-07 07:37:19 {u'userName': 'ruslan2697', u'timeArrival': datetime.datetime(2017, 8, 7, 7, 37, 19), u'txt': 'first_time_contribution', u'helpID': 758, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@ruslan2697 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-07 07:38:01', 'PONG SENT!')
+('2017-08-07 07:43:02', 'PONG SENT!')
+('2017-08-07 07:48:02', 'PONG SENT!')
+2017-08-07 07:48:06 {u'userName': 'cihandar', u'timeArrival': datetime.datetime(2017, 8, 7, 7, 48, 6), u'txt': 'first_time_contribution', u'helpID': 759, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@cihandar Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-07 07:53:02', 'PONG SENT!')
+('2017-08-07 07:58:02', 'PONG SENT!')
+('2017-08-07 08:03:02', 'PONG SENT!')
+('2017-08-07 08:08:02', 'PONG SENT!')
+('2017-08-07 08:13:02', 'PONG SENT!')
+('2017-08-07 08:18:02', 'PONG SENT!')
+('2017-08-07 08:23:02', 'PONG SENT!')
+('2017-08-07 08:28:02', 'PONG SENT!')
+2017-08-07 08:32:42 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 32, 42), u'txt': 'first_time_contribution', u'helpID': 760, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+('2017-08-07 08:33:02', 'PONG SENT!')
+2017-08-07 08:33:14 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 33, 14), u'txt': '?votes', u'helpID': 761, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 271)
+2017-08-07 08:34:23 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 34, 23), u'txt': '?reinforcement', u'helpID': 762, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 373)
+2017-08-07 08:36:18 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 36, 18), u'txt': '?scores', u'helpID': 763, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 189)
+2017-08-07 08:37:53 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 37, 53), u'txt': '?robots', u'helpID': 764, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 227)
+('2017-08-07 08:38:02', 'PONG SENT!')
+2017-08-07 08:41:28 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 41, 28), u'txt': '?', u'helpID': 765, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 306)
+2017-08-07 08:41:54 {u'userName': 'enchantingvids', u'timeArrival': datetime.datetime(2017, 8, 7, 8, 41, 54), u'txt': '?silverrobots', u'helpID': 766, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@enchantingvids Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 142)
+('2017-08-07 08:43:02', 'PONG SENT!')
+('2017-08-07 08:48:02', 'PONG SENT!')
+('2017-08-07 08:53:02', 'PONG SENT!')
+('2017-08-07 08:58:02', 'PONG SENT!')
+('2017-08-07 09:03:02', 'PONG SENT!')
+('2017-08-07 09:08:02', 'PONG SENT!')
+('2017-08-07 09:13:02', 'PONG SENT!')
+('2017-08-07 09:18:02', 'PONG SENT!')
+('2017-08-07 09:23:02', 'PONG SENT!')
+('2017-08-07 09:28:02', 'PONG SENT!')
+('2017-08-07 09:33:02', 'PONG SENT!')
+('2017-08-07 09:38:02', 'PONG SENT!')
+('2017-08-07 09:43:02', 'PONG SENT!')
+('2017-08-07 09:48:02', 'PONG SENT!')
+('2017-08-07 09:53:02', 'PONG SENT!')
+('2017-08-07 09:58:02', 'PONG SENT!')
+('2017-08-07 10:03:02', 'PONG SENT!')
+('2017-08-07 10:08:02', 'PONG SENT!')
+('2017-08-07 10:13:02', 'PONG SENT!')
+('2017-08-07 10:18:02', 'PONG SENT!')
+('2017-08-07 10:23:02', 'PONG SENT!')
+('2017-08-07 10:28:02', 'PONG SENT!')
+('2017-08-07 10:33:02', 'PONG SENT!')
+('2017-08-07 10:38:02', 'PONG SENT!')
+('2017-08-07 10:43:02', 'PONG SENT!')
+('2017-08-07 10:48:02', 'PONG SENT!')
+('2017-08-07 10:53:02', 'PONG SENT!')
+('2017-08-07 10:58:02', 'PONG SENT!')
+('2017-08-07 11:03:02', 'PONG SENT!')
+('2017-08-07 11:08:02', 'PONG SENT!')
+('2017-08-07 11:13:02', 'PONG SENT!')
+('2017-08-07 11:18:02', 'PONG SENT!')
+('2017-08-07 11:23:02', 'PONG SENT!')
+('2017-08-07 11:28:02', 'PONG SENT!')
+('2017-08-07 11:33:02', 'PONG SENT!')
+('2017-08-07 11:38:02', 'PONG SENT!')
+('2017-08-07 11:43:02', 'PONG SENT!')
+('2017-08-07 11:48:02', 'PONG SENT!')
+('2017-08-07 11:53:02', 'PONG SENT!')
+('2017-08-07 11:58:02', 'PONG SENT!')
+('2017-08-07 12:03:02', 'PONG SENT!')
+('2017-08-07 12:08:02', 'PONG SENT!')
+('2017-08-07 12:13:02', 'PONG SENT!')
+2017-08-07 12:17:48 {u'userName': 'diceyface', u'timeArrival': datetime.datetime(2017, 8, 7, 12, 17, 48), u'txt': '?', u'helpID': 767, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@diceyface Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 301)
+('2017-08-07 12:18:02', 'PONG SENT!')
+2017-08-07 12:18:09 {u'userName': 'nickbbeats', u'timeArrival': datetime.datetime(2017, 8, 7, 12, 18, 9), u'txt': 'first_time_contribution', u'helpID': 768, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@nickbbeats Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-07 12:23:02', 'PONG SENT!')
+2017-08-07 12:23:14 {u'userName': 'djassassin1135', u'timeArrival': datetime.datetime(2017, 8, 7, 12, 23, 14), u'txt': 'first_time_contribution', u'helpID': 769, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@djassassin1135 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+('2017-08-07 12:28:02', 'PONG SENT!')
+('2017-08-07 12:33:02', 'PONG SENT!')
+2017-08-07 12:37:45 {u'userName': 'nikolail', u'timeArrival': datetime.datetime(2017, 8, 7, 12, 37, 45), u'txt': 'first_time_contribution', u'helpID': 770, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@nikolail Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-07 12:38:02', 'PONG SENT!')
+('2017-08-07 12:43:02', 'PONG SENT!')
+('2017-08-07 12:48:02', 'PONG SENT!')
+('2017-08-07 12:53:02', 'PONG SENT!')
+('2017-08-07 12:58:02', 'PONG SENT!')
+('2017-08-07 13:03:02', 'PONG SENT!')
+2017-08-07 13:05:44 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 7, 13, 5, 44), u'txt': '?', u'helpID': 771, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+('2017-08-07 13:08:02', 'PONG SENT!')
+('2017-08-07 13:13:02', 'PONG SENT!')
+('2017-08-07 13:18:02', 'PONG SENT!')
+('2017-08-07 13:23:02', 'PONG SENT!')
+('2017-08-07 13:28:02', 'PONG SENT!')
+('2017-08-07 13:33:02', 'PONG SENT!')
+('2017-08-07 13:38:02', 'PONG SENT!')
+('2017-08-07 13:43:02', 'PONG SENT!')
+2017-08-07 13:45:46 {u'userName': 'k_edge', u'timeArrival': datetime.datetime(2017, 8, 7, 13, 45, 45), u'txt': 'first_time_contribution', u'helpID': 772, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@k_edge Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-07 13:48:02', 'PONG SENT!')
+('2017-08-07 13:53:02', 'PONG SENT!')
+('2017-08-07 13:58:02', 'PONG SENT!')
+('2017-08-07 14:03:02', 'PONG SENT!')
+('2017-08-07 14:08:02', 'PONG SENT!')
+('2017-08-07 14:13:02', 'PONG SENT!')
+('2017-08-07 14:18:02', 'PONG SENT!')
+('2017-08-07 14:23:02', 'PONG SENT!')
+('2017-08-07 14:28:02', 'PONG SENT!')
+('2017-08-07 14:33:02', 'PONG SENT!')
+('2017-08-07 14:38:02', 'PONG SENT!')
+('2017-08-07 14:43:02', 'PONG SENT!')
+('2017-08-07 14:48:02', 'PONG SENT!')
+('2017-08-07 14:53:02', 'PONG SENT!')
+2017-08-07 14:54:54 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 7, 14, 54, 53), u'txt': '?', u'helpID': 773, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+2017-08-07 14:54:58 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 7, 14, 54, 58), u'txt': '?votes', u'helpID': 774, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 264)
+('2017-08-07 14:58:02', 'PONG SENT!')
+('2017-08-07 15:03:02', 'PONG SENT!')
+2017-08-07 15:07:24 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 7, 15, 7, 24), u'txt': '?reinforcement', u'helpID': 775, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 366)
+('2017-08-07 15:08:02', 'PONG SENT!')
+('2017-08-07 15:13:02', 'PONG SENT!')
+('2017-08-07 15:18:02', 'PONG SENT!')
+('2017-08-07 15:23:02', 'PONG SENT!')
+('2017-08-07 15:28:02', 'PONG SENT!')
+('2017-08-07 15:33:02', 'PONG SENT!')
+('2017-08-07 15:38:02', 'PONG SENT!')
+('2017-08-07 15:43:02', 'PONG SENT!')
+2017-08-07 15:45:17 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 7, 15, 45, 17), u'txt': 'first_time_contribution', u'helpID': 776, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+2017-08-07 15:47:33 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 7, 15, 47, 33), u'txt': '?scores', u'helpID': 777, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 183)
+('2017-08-07 15:48:02', 'PONG SENT!')
+('2017-08-07 15:53:02', 'PONG SENT!')
+('2017-08-07 15:58:02', 'PONG SENT!')
+('2017-08-07 16:03:02', 'PONG SENT!')
+('2017-08-07 16:08:02', 'PONG SENT!')
+('2017-08-07 16:13:02', 'PONG SENT!')
+('2017-08-07 16:18:02', 'PONG SENT!')
+('2017-08-07 16:23:02', 'PONG SENT!')
+('2017-08-07 16:28:02', 'PONG SENT!')
+('2017-08-07 16:33:02', 'PONG SENT!')
+('2017-08-07 16:38:02', 'PONG SENT!')
+2017-08-07 16:38:31 {u'userName': 'rickgiuly', u'timeArrival': datetime.datetime(2017, 8, 7, 16, 38, 30), u'txt': 'first_time_contribution', u'helpID': 778, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@rickgiuly Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-07 16:43:02', 'PONG SENT!')
+('2017-08-07 16:48:02', 'PONG SENT!')
+('2017-08-07 16:53:02', 'PONG SENT!')
+('2017-08-07 16:58:02', 'PONG SENT!')
+('2017-08-07 17:03:02', 'PONG SENT!')
+('2017-08-07 17:08:02', 'PONG SENT!')
+('2017-08-07 17:13:02', 'PONG SENT!')
+2017-08-07 17:15:11 {u'userName': 'rickgiuly', u'timeArrival': datetime.datetime(2017, 8, 7, 17, 15, 11), u'txt': '?robots', u'helpID': 779, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@rickgiuly Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+('2017-08-07 17:18:02', 'PONG SENT!')
+('2017-08-07 17:23:02', 'PONG SENT!')
+('2017-08-07 17:28:02', 'PONG SENT!')
+('2017-08-07 17:33:02', 'PONG SENT!')
+('2017-08-07 17:38:02', 'PONG SENT!')
+('2017-08-07 17:43:02', 'PONG SENT!')
+('2017-08-07 17:48:02', 'PONG SENT!')
+('2017-08-07 17:53:02', 'PONG SENT!')
+('2017-08-07 17:58:02', 'PONG SENT!')
+('2017-08-07 18:03:02', 'PONG SENT!')
+('2017-08-07 18:08:02', 'PONG SENT!')
+('2017-08-07 18:13:02', 'PONG SENT!')
+('2017-08-07 18:18:02', 'PONG SENT!')
+('2017-08-07 18:23:02', 'PONG SENT!')
+('2017-08-07 18:28:02', 'PONG SENT!')
+('2017-08-07 18:33:02', 'PONG SENT!')
+('2017-08-07 18:38:02', 'PONG SENT!')
+('2017-08-07 18:43:02', 'PONG SENT!')
+('2017-08-07 18:48:02', 'PONG SENT!')
+('2017-08-07 18:53:02', 'PONG SENT!')
+('2017-08-07 18:58:02', 'PONG SENT!')
+('2017-08-07 19:03:02', 'PONG SENT!')
+('2017-08-07 19:08:02', 'PONG SENT!')
+('2017-08-07 19:13:02', 'PONG SENT!')
+('2017-08-07 19:18:02', 'PONG SENT!')
+('2017-08-07 19:23:02', 'PONG SENT!')
+('2017-08-07 19:28:02', 'PONG SENT!')
+('2017-08-07 19:33:02', 'PONG SENT!')
+('2017-08-07 19:38:02', 'PONG SENT!')
+('2017-08-07 19:43:02', 'PONG SENT!')
+('2017-08-07 19:48:02', 'PONG SENT!')
+('2017-08-07 19:53:02', 'PONG SENT!')
+('2017-08-07 19:58:02', 'PONG SENT!')
+('2017-08-07 20:03:02', 'PONG SENT!')
+('2017-08-07 20:08:02', 'PONG SENT!')
+2017-08-07 20:10:02 {u'userName': 'unethicist', u'timeArrival': datetime.datetime(2017, 8, 7, 20, 10, 2), u'txt': 'first_time_contribution', u'helpID': 780, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@unethicist Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-07 20:13:02', 'PONG SENT!')
+2017-08-07 20:17:30 {u'userName': 'unethicist', u'timeArrival': datetime.datetime(2017, 8, 7, 20, 17, 30), u'txt': '?reinforcement', u'helpID': 781, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@unethicist Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 369)
+('2017-08-07 20:18:02', 'PONG SENT!')
+('2017-08-07 20:23:02', 'PONG SENT!')
+('2017-08-07 20:28:02', 'PONG SENT!')
+('2017-08-07 20:33:02', 'PONG SENT!')
+('2017-08-07 20:38:02', 'PONG SENT!')
+('2017-08-07 20:43:02', 'PONG SENT!')
+('2017-08-07 20:48:02', 'PONG SENT!')
+('2017-08-07 20:53:02', 'PONG SENT!')
+('2017-08-07 20:58:02', 'PONG SENT!')
+('2017-08-07 21:03:02', 'PONG SENT!')
+('2017-08-07 21:08:02', 'PONG SENT!')
+('2017-08-07 21:13:02', 'PONG SENT!')
+('2017-08-07 21:18:02', 'PONG SENT!')
+('2017-08-07 21:23:02', 'PONG SENT!')
+('2017-08-07 21:28:02', 'PONG SENT!')
+2017-08-07 21:33:00 {u'userName': 'inuzi', u'timeArrival': datetime.datetime(2017, 8, 7, 21, 33), u'txt': 'first_time_contribution', u'helpID': 782, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@inuzi Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 89)
+('2017-08-07 21:33:02', 'PONG SENT!')
+('2017-08-07 21:38:02', 'PONG SENT!')
+('2017-08-07 21:43:02', 'PONG SENT!')
+('2017-08-07 21:48:02', 'PONG SENT!')
+('2017-08-07 21:53:02', 'PONG SENT!')
+('2017-08-07 21:58:02', 'PONG SENT!')
+('2017-08-07 22:03:02', 'PONG SENT!')
+('2017-08-07 22:08:02', 'PONG SENT!')
+('2017-08-07 22:13:02', 'PONG SENT!')
+('2017-08-07 22:18:02', 'PONG SENT!')
+('2017-08-07 22:23:02', 'PONG SENT!')
+('2017-08-07 22:28:02', 'PONG SENT!')
+('2017-08-07 22:33:02', 'PONG SENT!')
+('2017-08-07 22:38:02', 'PONG SENT!')
+('2017-08-07 22:43:02', 'PONG SENT!')
+('2017-08-07 22:48:02', 'PONG SENT!')
+('2017-08-07 22:53:02', 'PONG SENT!')
+('2017-08-07 22:58:02', 'PONG SENT!')
+('2017-08-07 23:03:02', 'PONG SENT!')
+('2017-08-07 23:08:02', 'PONG SENT!')
+('2017-08-07 23:13:02', 'PONG SENT!')
+('2017-08-07 23:18:02', 'PONG SENT!')
+('2017-08-07 23:23:02', 'PONG SENT!')
+('2017-08-07 23:28:02', 'PONG SENT!')
+('2017-08-07 23:33:02', 'PONG SENT!')
+('2017-08-07 23:38:02', 'PONG SENT!')
+('2017-08-07 23:43:02', 'PONG SENT!')
+('2017-08-07 23:48:02', 'PONG SENT!')
+('2017-08-07 23:53:02', 'PONG SENT!')
+('2017-08-07 23:58:02', 'PONG SENT!')
+('2017-08-08 00:03:02', 'PONG SENT!')
+('2017-08-08 00:08:02', 'PONG SENT!')
+('2017-08-08 00:13:02', 'PONG SENT!')
+('2017-08-08 00:18:02', 'PONG SENT!')
+('2017-08-08 00:23:02', 'PONG SENT!')
+('2017-08-08 00:28:02', 'PONG SENT!')
+('2017-08-08 00:33:02', 'PONG SENT!')
+('2017-08-08 00:38:02', 'PONG SENT!')
+('2017-08-08 00:43:02', 'PONG SENT!')
+('2017-08-08 00:48:02', 'PONG SENT!')
+('2017-08-08 00:53:02', 'PONG SENT!')
+('2017-08-08 00:58:02', 'PONG SENT!')
+('2017-08-08 01:03:02', 'PONG SENT!')
+('2017-08-08 01:08:02', 'PONG SENT!')
+('2017-08-08 01:13:02', 'PONG SENT!')
+('2017-08-08 01:18:02', 'PONG SENT!')
+('2017-08-08 01:23:03', 'PONG SENT!')
+2017-08-08 01:23:38 {u'userName': 'twitch375', u'timeArrival': datetime.datetime(2017, 8, 8, 1, 23, 38), u'txt': 'first_time_contribution', u'helpID': 783, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@twitch375 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-08 01:28:03', 'PONG SENT!')
+2017-08-08 01:29:00 {u'userName': 'usa_slothleader', u'timeArrival': datetime.datetime(2017, 8, 8, 1, 28, 59), u'txt': 'first_time_contribution', u'helpID': 784, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@usa_slothleader Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 99)
+('2017-08-08 01:33:03', 'PONG SENT!')
+('2017-08-08 01:38:03', 'PONG SENT!')
+('2017-08-08 01:43:03', 'PONG SENT!')
+('2017-08-08 01:48:03', 'PONG SENT!')
+('2017-08-08 01:53:03', 'PONG SENT!')
+('2017-08-08 01:58:03', 'PONG SENT!')
+('2017-08-08 02:03:03', 'PONG SENT!')
+('2017-08-08 02:08:03', 'PONG SENT!')
+('2017-08-08 02:13:03', 'PONG SENT!')
+('2017-08-08 02:18:03', 'PONG SENT!')
+('2017-08-08 02:23:03', 'PONG SENT!')
+2017-08-08 02:24:08 {u'userName': 'zorkthemini', u'timeArrival': datetime.datetime(2017, 8, 8, 2, 24, 8), u'txt': 'first_time_contribution', u'helpID': 785, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zorkthemini Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+('2017-08-08 02:28:03', 'PONG SENT!')
+('2017-08-08 02:33:03', 'PONG SENT!')
+('2017-08-08 02:38:03', 'PONG SENT!')
+('2017-08-08 02:43:03', 'PONG SENT!')
+('2017-08-08 02:48:03', 'PONG SENT!')
+('2017-08-08 02:53:03', 'PONG SENT!')
+('2017-08-08 02:58:03', 'PONG SENT!')
+2017-08-08 03:02:22 {u'userName': 'bravewall', u'timeArrival': datetime.datetime(2017, 8, 8, 3, 2, 22), u'txt': 'first_time_contribution', u'helpID': 786, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@bravewall Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-08 03:03:03', 'PONG SENT!')
+('2017-08-08 03:08:03', 'PONG SENT!')
+('2017-08-08 03:13:03', 'PONG SENT!')
+('2017-08-08 03:18:03', 'PONG SENT!')
+('2017-08-08 03:23:03', 'PONG SENT!')
+('2017-08-08 03:28:03', 'PONG SENT!')
+('2017-08-08 03:33:03', 'PONG SENT!')
+('2017-08-08 03:38:03', 'PONG SENT!')
+('2017-08-08 03:43:03', 'PONG SENT!')
+('2017-08-08 03:48:03', 'PONG SENT!')
+('2017-08-08 03:53:03', 'PONG SENT!')
+('2017-08-08 03:58:03', 'PONG SENT!')
+('2017-08-08 04:03:03', 'PONG SENT!')
+2017-08-08 04:07:34 {u'userName': 'dasgerry', u'timeArrival': datetime.datetime(2017, 8, 8, 4, 7, 34), u'txt': '?robots', u'helpID': 787, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@dasgerry Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 221)
+('2017-08-08 04:08:03', 'PONG SENT!')
+('2017-08-08 04:13:03', 'PONG SENT!')
+('2017-08-08 04:18:03', 'PONG SENT!')
+('2017-08-08 04:23:03', 'PONG SENT!')
+('2017-08-08 04:28:03', 'PONG SENT!')
+('2017-08-08 04:33:03', 'PONG SENT!')
+('2017-08-08 04:38:03', 'PONG SENT!')
+('2017-08-08 04:43:03', 'PONG SENT!')
+('2017-08-08 04:48:03', 'PONG SENT!')
+('2017-08-08 04:53:03', 'PONG SENT!')
+('2017-08-08 04:58:03', 'PONG SENT!')
+('2017-08-08 05:03:03', 'PONG SENT!')
+('2017-08-08 05:08:03', 'PONG SENT!')
+('2017-08-08 05:13:03', 'PONG SENT!')
+('2017-08-08 05:18:03', 'PONG SENT!')
+('2017-08-08 05:23:03', 'PONG SENT!')
+('2017-08-08 05:28:03', 'PONG SENT!')
+('2017-08-08 05:33:03', 'PONG SENT!')
+('2017-08-08 05:38:03', 'PONG SENT!')
+('2017-08-08 05:43:03', 'PONG SENT!')
+('2017-08-08 05:48:03', 'PONG SENT!')
+('2017-08-08 05:53:03', 'PONG SENT!')
+('2017-08-08 05:58:03', 'PONG SENT!')
+('2017-08-08 06:03:03', 'PONG SENT!')
+('2017-08-08 06:08:03', 'PONG SENT!')
+('2017-08-08 06:13:03', 'PONG SENT!')
+('2017-08-08 06:18:03', 'PONG SENT!')
+('2017-08-08 06:23:03', 'PONG SENT!')
+('2017-08-08 06:28:03', 'PONG SENT!')
+('2017-08-08 06:33:03', 'PONG SENT!')
+('2017-08-08 06:38:03', 'PONG SENT!')
+('2017-08-08 06:43:03', 'PONG SENT!')
+('2017-08-08 06:48:03', 'PONG SENT!')
+('2017-08-08 06:53:03', 'PONG SENT!')
+('2017-08-08 06:58:03', 'PONG SENT!')
+('2017-08-08 07:03:03', 'PONG SENT!')
+('2017-08-08 07:08:03', 'PONG SENT!')
+('2017-08-08 07:13:03', 'PONG SENT!')
+('2017-08-08 07:18:03', 'PONG SENT!')
+('2017-08-08 07:23:03', 'PONG SENT!')
+('2017-08-08 07:28:03', 'PONG SENT!')
+2017-08-08 07:31:50 {u'userName': 'kzoper', u'timeArrival': datetime.datetime(2017, 8, 8, 7, 31, 50), u'txt': 'first_time_contribution', u'helpID': 788, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kzoper Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-08 07:33:03', 'PONG SENT!')
+2017-08-08 07:36:54 {u'userName': 'blueswede_', u'timeArrival': datetime.datetime(2017, 8, 8, 7, 36, 54), u'txt': 'first_time_contribution', u'helpID': 789, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@blueswede_ Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-08 07:38:03', 'PONG SENT!')
+2017-08-08 07:38:18 {u'userName': 'blueswede_', u'timeArrival': datetime.datetime(2017, 8, 8, 7, 38, 18), u'txt': '?robots', u'helpID': 790, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@blueswede_ Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 223)
+('2017-08-08 07:43:03', 'PONG SENT!')
+2017-08-08 07:47:37 {u'userName': 'blueswede_', u'timeArrival': datetime.datetime(2017, 8, 8, 7, 47, 37), u'txt': '?scores', u'helpID': 791, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@blueswede_ You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 185)
+('2017-08-08 07:48:03', 'PONG SENT!')
+('2017-08-08 07:53:03', 'PONG SENT!')
+('2017-08-08 07:58:03', 'PONG SENT!')
+('2017-08-08 08:03:03', 'PONG SENT!')
+('2017-08-08 08:08:03', 'PONG SENT!')
+('2017-08-08 08:13:03', 'PONG SENT!')
+('2017-08-08 08:18:03', 'PONG SENT!')
+('2017-08-08 08:23:03', 'PONG SENT!')
+('2017-08-08 08:28:03', 'PONG SENT!')
+('2017-08-08 08:33:03', 'PONG SENT!')
+('2017-08-08 08:38:03', 'PONG SENT!')
+('2017-08-08 08:43:03', 'PONG SENT!')
+('2017-08-08 08:48:03', 'PONG SENT!')
+('2017-08-08 08:53:03', 'PONG SENT!')
+('2017-08-08 08:58:03', 'PONG SENT!')
+('2017-08-08 09:03:03', 'PONG SENT!')
+('2017-08-08 09:08:03', 'PONG SENT!')
+('2017-08-08 09:13:03', 'PONG SENT!')
+('2017-08-08 09:18:03', 'PONG SENT!')
+('2017-08-08 09:23:03', 'PONG SENT!')
+('2017-08-08 09:28:03', 'PONG SENT!')
+('2017-08-08 09:33:03', 'PONG SENT!')
+('2017-08-08 09:38:03', 'PONG SENT!')
+('2017-08-08 09:43:03', 'PONG SENT!')
+('2017-08-08 09:48:03', 'PONG SENT!')
+('2017-08-08 09:53:03', 'PONG SENT!')
+2017-08-08 09:55:38 {u'userName': 'theeeik', u'timeArrival': datetime.datetime(2017, 8, 8, 9, 55, 38), u'txt': 'first_time_contribution', u'helpID': 792, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@theeeik Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-08 09:58:03', 'PONG SENT!')
+('2017-08-08 10:03:03', 'PONG SENT!')
+('2017-08-08 10:08:03', 'PONG SENT!')
+('2017-08-08 10:13:03', 'PONG SENT!')
+('2017-08-08 10:18:03', 'PONG SENT!')
+('2017-08-08 10:23:03', 'PONG SENT!')
+('2017-08-08 10:28:03', 'PONG SENT!')
+('2017-08-08 10:33:03', 'PONG SENT!')
+2017-08-08 10:33:35 {u'userName': 'senorpieg', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 33, 35), u'txt': 'first_time_contribution', u'helpID': 793, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@senorpieg Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+2017-08-08 10:34:35 {u'userName': 'senorpieg', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 34, 35), u'txt': '?robots', u'helpID': 794, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@senorpieg Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+('2017-08-08 10:38:03', 'PONG SENT!')
+2017-08-08 10:41:40 {u'userName': 'senorpieg', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 41, 40), u'txt': '?reinforcement', u'helpID': 795, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@senorpieg Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 368)
+('2017-08-08 10:43:03', 'PONG SENT!')
+2017-08-08 10:43:27 {u'userName': 'jackcq395', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 43, 27), u'txt': 'first_time_contribution', u'helpID': 796, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jackcq395 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+2017-08-08 10:48:01 {u'userName': 'jackcq395', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 48, 1), u'txt': '?', u'helpID': 797, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jackcq395 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 301)
+('2017-08-08 10:48:03', 'PONG SENT!')
+2017-08-08 10:48:21 {u'userName': 'senorpieg', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 48, 21), u'txt': '?reinforcement', u'helpID': 798, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@senorpieg Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 368)
+2017-08-08 10:50:08 {u'userName': 'troopa64', u'timeArrival': datetime.datetime(2017, 8, 8, 10, 50, 8), u'txt': 'first_time_contribution', u'helpID': 799, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@troopa64 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-08 10:53:03', 'PONG SENT!')
+('2017-08-08 10:58:03', 'PONG SENT!')
+2017-08-08 11:00:04 {u'userName': 'ccfcsell', u'timeArrival': datetime.datetime(2017, 8, 8, 11, 0, 4), u'txt': 'first_time_contribution', u'helpID': 800, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@ccfcsell Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-08 11:03:03', 'PONG SENT!')
+2017-08-08 11:04:09 {u'userName': 'senorpieg', u'timeArrival': datetime.datetime(2017, 8, 8, 11, 4, 9), u'txt': '?robots', u'helpID': 801, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@senorpieg Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+2017-08-08 11:06:54 {u'userName': 'cyberdubs', u'timeArrival': datetime.datetime(2017, 8, 8, 11, 6, 54), u'txt': '?robots', u'helpID': 802, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@cyberdubs Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+('2017-08-08 11:08:03', 'PONG SENT!')
+('2017-08-08 11:13:03', 'PONG SENT!')
+('2017-08-08 11:18:03', 'PONG SENT!')
+('2017-08-08 11:23:03', 'PONG SENT!')
+('2017-08-08 11:28:03', 'PONG SENT!')
+('2017-08-08 11:33:03', 'PONG SENT!')
+2017-08-08 11:37:05 {u'userName': 'ping039', u'timeArrival': datetime.datetime(2017, 8, 8, 11, 37, 5), u'txt': 'first_time_contribution', u'helpID': 803, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@ping039 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-08 11:38:03', 'PONG SENT!')
+('2017-08-08 11:43:03', 'PONG SENT!')
+('2017-08-08 11:48:03', 'PONG SENT!')
+('2017-08-08 11:53:03', 'PONG SENT!')
+('2017-08-08 11:58:03', 'PONG SENT!')
+('2017-08-08 12:03:03', 'PONG SENT!')
+2017-08-08 12:06:43 {u'userName': 'scorch0062', u'timeArrival': datetime.datetime(2017, 8, 8, 12, 6, 43), u'txt': 'first_time_contribution', u'helpID': 804, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@scorch0062 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-08 12:08:03', 'PONG SENT!')
+('2017-08-08 12:13:03', 'PONG SENT!')
+('2017-08-08 12:18:03', 'PONG SENT!')
+('2017-08-08 12:23:03', 'PONG SENT!')
+('2017-08-08 12:28:03', 'PONG SENT!')
+('2017-08-08 12:33:03', 'PONG SENT!')
+('2017-08-08 12:38:03', 'PONG SENT!')
+('2017-08-08 12:43:03', 'PONG SENT!')
+('2017-08-08 12:48:03', 'PONG SENT!')
+('2017-08-08 12:53:03', 'PONG SENT!')
+('2017-08-08 12:58:03', 'PONG SENT!')
+('2017-08-08 13:03:03', 'PONG SENT!')
+('2017-08-08 13:08:03', 'PONG SENT!')
+('2017-08-08 13:13:03', 'PONG SENT!')
+('2017-08-08 13:18:03', 'PONG SENT!')
+('2017-08-08 13:23:03', 'PONG SENT!')
+('2017-08-08 13:28:03', 'PONG SENT!')
+('2017-08-08 13:33:03', 'PONG SENT!')
+('2017-08-08 13:38:03', 'PONG SENT!')
+('2017-08-08 13:43:03', 'PONG SENT!')
+('2017-08-08 13:48:03', 'PONG SENT!')
+('2017-08-08 13:53:03', 'PONG SENT!')
+('2017-08-08 13:58:03', 'PONG SENT!')
+('2017-08-08 14:03:03', 'PONG SENT!')
+('2017-08-08 14:08:03', 'PONG SENT!')
+('2017-08-08 14:13:03', 'PONG SENT!')
+('2017-08-08 14:18:03', 'PONG SENT!')
+('2017-08-08 14:23:03', 'PONG SENT!')
+('2017-08-08 14:28:03', 'PONG SENT!')
+('2017-08-08 14:33:03', 'PONG SENT!')
+2017-08-08 14:33:55 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 33, 55), u'txt': '?', u'helpID': 805, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 300)
+2017-08-08 14:34:18 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 34, 18), u'txt': '?robots', u'helpID': 806, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 221)
+2017-08-08 14:34:44 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 34, 44), u'txt': '?silverrobots', u'helpID': 807, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 136)
+2017-08-08 14:35:46 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 35, 46), u'txt': '?reinforcement', u'helpID': 808, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 367)
+('2017-08-08 14:38:03', 'PONG SENT!')
+2017-08-08 14:41:25 {u'userName': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 41, 25), u'txt': '?votes', u'helpID': 809, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@admanta_ Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 265)
+('2017-08-08 14:43:03', 'PONG SENT!')
+('2017-08-08 14:48:03', 'PONG SENT!')
+2017-08-08 14:51:22 {u'userName': 'emkamk', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 51, 21), u'txt': 'first_time_contribution', u'helpID': 810, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@emkamk Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-08 14:53:03', 'PONG SENT!')
+2017-08-08 14:57:05 {u'userName': 'emkamk', u'timeArrival': datetime.datetime(2017, 8, 8, 14, 57, 5), u'txt': '?', u'helpID': 811, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@emkamk Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 298)
+('2017-08-08 14:58:03', 'PONG SENT!')
+('2017-08-08 15:03:03', 'PONG SENT!')
+('2017-08-08 15:08:03', 'PONG SENT!')
+('2017-08-08 15:13:03', 'PONG SENT!')
+('2017-08-08 15:18:03', 'PONG SENT!')
+('2017-08-08 15:23:03', 'PONG SENT!')
+('2017-08-08 15:28:03', 'PONG SENT!')
+('2017-08-08 15:33:03', 'PONG SENT!')
+('2017-08-08 15:38:03', 'PONG SENT!')
+('2017-08-08 15:43:03', 'PONG SENT!')
+('2017-08-08 15:48:03', 'PONG SENT!')
+('2017-08-08 15:53:03', 'PONG SENT!')
+('2017-08-08 15:58:03', 'PONG SENT!')
+('2017-08-08 16:03:03', 'PONG SENT!')
+('2017-08-08 16:08:03', 'PONG SENT!')
+('2017-08-08 16:13:03', 'PONG SENT!')
+('2017-08-08 16:18:03', 'PONG SENT!')
+('2017-08-08 16:23:03', 'PONG SENT!')
+('2017-08-08 16:28:03', 'PONG SENT!')
+2017-08-08 16:32:20 {u'userName': 'rclaser', u'timeArrival': datetime.datetime(2017, 8, 8, 16, 32, 20), u'txt': '?scores', u'helpID': 812, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@rclaser You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 182)
+2017-08-08 16:32:39 {u'userName': 'rclaser', u'timeArrival': datetime.datetime(2017, 8, 8, 16, 32, 39), u'txt': '?myscore', u'helpID': 813, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@rclaser, your score:156.0
+('Num of bytes sent out:', 58)
+('2017-08-08 16:33:03', 'PONG SENT!')
+('2017-08-08 16:38:03', 'PONG SENT!')
+('2017-08-08 16:43:03', 'PONG SENT!')
+('2017-08-08 16:48:03', 'PONG SENT!')
+('2017-08-08 16:53:03', 'PONG SENT!')
+('2017-08-08 16:58:03', 'PONG SENT!')
+2017-08-08 16:58:36 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 8, 16, 58, 36), u'txt': '?', u'helpID': 814, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+('2017-08-08 17:03:03', 'PONG SENT!')
+('2017-08-08 17:08:03', 'PONG SENT!')
+('2017-08-08 17:13:03', 'PONG SENT!')
+('2017-08-08 17:18:03', 'PONG SENT!')
+('2017-08-08 17:23:03', 'PONG SENT!')
+('2017-08-08 17:28:03', 'PONG SENT!')
+('2017-08-08 17:33:03', 'PONG SENT!')
+('2017-08-08 17:38:03', 'PONG SENT!')
+('2017-08-08 17:43:03', 'PONG SENT!')
+('2017-08-08 17:48:03', 'PONG SENT!')
+('2017-08-08 17:53:03', 'PONG SENT!')
+('2017-08-08 17:58:03', 'PONG SENT!')
+('2017-08-08 18:03:03', 'PONG SENT!')
+('2017-08-08 18:08:03', 'PONG SENT!')
+('2017-08-08 18:13:03', 'PONG SENT!')
+('2017-08-08 18:18:03', 'PONG SENT!')
+('2017-08-08 18:23:03', 'PONG SENT!')
+('2017-08-08 18:28:03', 'PONG SENT!')
+2017-08-08 18:29:47 {u'userName': 'ledemonex', u'timeArrival': datetime.datetime(2017, 8, 8, 18, 29, 47), u'txt': 'first_time_contribution', u'helpID': 815, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@ledemonex Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-08 18:33:03', 'PONG SENT!')
+('2017-08-08 18:38:03', 'PONG SENT!')
+('2017-08-08 18:43:03', 'PONG SENT!')
+('2017-08-08 18:48:03', 'PONG SENT!')
+('2017-08-08 18:53:03', 'PONG SENT!')
+('2017-08-08 18:58:03', 'PONG SENT!')
+('2017-08-08 19:03:03', 'PONG SENT!')
+('2017-08-08 19:08:03', 'PONG SENT!')
+('2017-08-08 19:13:04', 'PONG SENT!')
+('2017-08-08 19:18:04', 'PONG SENT!')
+('2017-08-08 19:23:04', 'PONG SENT!')
+('2017-08-08 19:28:04', 'PONG SENT!')
+('2017-08-08 19:33:04', 'PONG SENT!')
+('2017-08-08 19:38:04', 'PONG SENT!')
+('2017-08-08 19:43:04', 'PONG SENT!')
+('2017-08-08 19:48:04', 'PONG SENT!')
+('2017-08-08 19:53:04', 'PONG SENT!')
+('2017-08-08 19:58:04', 'PONG SENT!')
+('2017-08-08 20:03:04', 'PONG SENT!')
+('2017-08-08 20:08:04', 'PONG SENT!')
+('2017-08-08 20:13:04', 'PONG SENT!')
+('2017-08-08 20:18:04', 'PONG SENT!')
+('2017-08-08 20:23:04', 'PONG SENT!')
+('2017-08-08 20:28:04', 'PONG SENT!')
+('2017-08-08 20:33:04', 'PONG SENT!')
+('2017-08-08 20:38:04', 'PONG SENT!')
+('2017-08-08 20:43:04', 'PONG SENT!')
+('2017-08-08 20:48:04', 'PONG SENT!')
+('2017-08-08 20:53:04', 'PONG SENT!')
+('2017-08-08 20:58:04', 'PONG SENT!')
+('2017-08-08 21:03:04', 'PONG SENT!')
+('2017-08-08 21:08:04', 'PONG SENT!')
+('2017-08-08 21:13:04', 'PONG SENT!')
+('2017-08-08 21:18:04', 'PONG SENT!')
+('2017-08-08 21:23:04', 'PONG SENT!')
+('2017-08-08 21:28:04', 'PONG SENT!')
+('2017-08-08 21:33:04', 'PONG SENT!')
+('2017-08-08 21:38:04', 'PONG SENT!')
+('2017-08-08 21:43:04', 'PONG SENT!')
+('2017-08-08 21:48:04', 'PONG SENT!')
+('2017-08-08 21:53:04', 'PONG SENT!')
+('2017-08-08 21:58:04', 'PONG SENT!')
+('2017-08-08 22:03:04', 'PONG SENT!')
+('2017-08-08 22:08:04', 'PONG SENT!')
+('2017-08-08 22:13:04', 'PONG SENT!')
+('2017-08-08 22:18:04', 'PONG SENT!')
+('2017-08-08 22:23:04', 'PONG SENT!')
+('2017-08-08 22:28:04', 'PONG SENT!')
+('2017-08-08 22:33:04', 'PONG SENT!')
+('2017-08-08 22:38:04', 'PONG SENT!')
+('2017-08-08 22:43:04', 'PONG SENT!')
+('2017-08-08 22:48:04', 'PONG SENT!')
+('2017-08-08 22:53:04', 'PONG SENT!')
+('2017-08-08 22:58:04', 'PONG SENT!')
+('2017-08-08 23:03:04', 'PONG SENT!')
+('2017-08-08 23:08:04', 'PONG SENT!')
+('2017-08-08 23:13:04', 'PONG SENT!')
+('2017-08-08 23:18:04', 'PONG SENT!')
+('2017-08-08 23:23:04', 'PONG SENT!')
+('2017-08-08 23:28:04', 'PONG SENT!')
+('2017-08-08 23:33:04', 'PONG SENT!')
+('2017-08-08 23:38:04', 'PONG SENT!')
+2017-08-08 23:41:31 {u'userName': 'pyroprincessx3', u'timeArrival': datetime.datetime(2017, 8, 8, 23, 41, 31), u'txt': 'first_time_contribution', u'helpID': 816, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pyroprincessx3 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+2017-08-08 23:42:36 {u'userName': 'pyroprincessx3', u'timeArrival': datetime.datetime(2017, 8, 8, 23, 42, 36), u'txt': '?scores', u'helpID': 817, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pyroprincessx3 You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 189)
+2017-08-08 23:42:48 {u'userName': 'pyroprincessx3', u'timeArrival': datetime.datetime(2017, 8, 8, 23, 42, 48), u'txt': '?myscore', u'helpID': 818, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pyroprincessx3, your score:3.0
+('Num of bytes sent out:', 63)
+('2017-08-08 23:43:04', 'PONG SENT!')
+2017-08-08 23:46:04 {u'userName': 'pyroprincessx3', u'timeArrival': datetime.datetime(2017, 8, 8, 23, 46, 4), u'txt': '?', u'helpID': 819, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pyroprincessx3 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 306)
+2017-08-08 23:47:55 {u'userName': 'pyroprincessx3', u'timeArrival': datetime.datetime(2017, 8, 8, 23, 47, 55), u'txt': '?scores', u'helpID': 820, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@pyroprincessx3 You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 189)
+('2017-08-08 23:48:04', 'PONG SENT!')
+('2017-08-08 23:53:04', 'PONG SENT!')
+('2017-08-08 23:58:04', 'PONG SENT!')
+('2017-08-09 00:03:04', 'PONG SENT!')
+('2017-08-09 00:08:04', 'PONG SENT!')
+('2017-08-09 00:13:04', 'PONG SENT!')
+('2017-08-09 00:18:04', 'PONG SENT!')
+('2017-08-09 00:23:04', 'PONG SENT!')
+('2017-08-09 00:28:04', 'PONG SENT!')
+('2017-08-09 00:33:04', 'PONG SENT!')
+('2017-08-09 00:38:04', 'PONG SENT!')
+2017-08-09 00:38:51 {u'userName': 'awf123', u'timeArrival': datetime.datetime(2017, 8, 9, 0, 38, 51), u'txt': 'first_time_contribution', u'helpID': 821, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@awf123 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+2017-08-09 00:42:38 {u'userName': 'awf123', u'timeArrival': datetime.datetime(2017, 8, 9, 0, 42, 37), u'txt': '?', u'helpID': 822, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@awf123 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 298)
+('2017-08-09 00:43:04', 'PONG SENT!')
+('2017-08-09 00:48:04', 'PONG SENT!')
+('2017-08-09 00:53:04', 'PONG SENT!')
+('2017-08-09 00:58:04', 'PONG SENT!')
+('2017-08-09 01:03:04', 'PONG SENT!')
+('2017-08-09 01:08:04', 'PONG SENT!')
+('2017-08-09 01:13:04', 'PONG SENT!')
+('2017-08-09 01:18:04', 'PONG SENT!')
+('2017-08-09 01:23:04', 'PONG SENT!')
+('2017-08-09 01:28:04', 'PONG SENT!')
+('2017-08-09 01:33:04', 'PONG SENT!')
+('2017-08-09 01:38:04', 'PONG SENT!')
+('2017-08-09 01:43:04', 'PONG SENT!')
+2017-08-09 01:45:28 {u'userName': 'killler1116', u'timeArrival': datetime.datetime(2017, 8, 9, 1, 45, 28), u'txt': 'first_time_contribution', u'helpID': 823, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@killler1116 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+2017-08-09 01:47:12 {u'userName': 'killler1116', u'timeArrival': datetime.datetime(2017, 8, 9, 1, 47, 12), u'txt': '?robots', u'helpID': 824, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@killler1116 Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 224)
+('2017-08-09 01:48:04', 'PONG SENT!')
+('2017-08-09 01:53:04', 'PONG SENT!')
+2017-08-09 01:56:30 {u'userName': 'statlerpat', u'timeArrival': datetime.datetime(2017, 8, 9, 1, 56, 30), u'txt': 'first_time_contribution', u'helpID': 825, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@statlerpat Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-09 01:58:04', 'PONG SENT!')
+('2017-08-09 02:03:04', 'PONG SENT!')
+('2017-08-09 02:08:04', 'PONG SENT!')
+('2017-08-09 02:13:04', 'PONG SENT!')
+('2017-08-09 02:18:04', 'PONG SENT!')
+('2017-08-09 02:23:04', 'PONG SENT!')
+('2017-08-09 02:28:04', 'PONG SENT!')
+('2017-08-09 02:33:04', 'PONG SENT!')
+('2017-08-09 02:38:04', 'PONG SENT!')
+('2017-08-09 02:43:04', 'PONG SENT!')
+('2017-08-09 02:48:04', 'PONG SENT!')
+('2017-08-09 02:53:04', 'PONG SENT!')
+('2017-08-09 02:58:04', 'PONG SENT!')
+('2017-08-09 03:03:04', 'PONG SENT!')
+('2017-08-09 03:08:04', 'PONG SENT!')
+('2017-08-09 03:13:04', 'PONG SENT!')
+('2017-08-09 03:18:04', 'PONG SENT!')
+('2017-08-09 03:23:04', 'PONG SENT!')
+('2017-08-09 03:28:04', 'PONG SENT!')
+('2017-08-09 03:33:04', 'PONG SENT!')
+('2017-08-09 03:38:04', 'PONG SENT!')
+('2017-08-09 03:43:04', 'PONG SENT!')
+('2017-08-09 03:48:04', 'PONG SENT!')
+('2017-08-09 03:53:04', 'PONG SENT!')
+('2017-08-09 03:58:04', 'PONG SENT!')
+('2017-08-09 04:03:04', 'PONG SENT!')
+('2017-08-09 04:08:04', 'PONG SENT!')
+('2017-08-09 04:13:04', 'PONG SENT!')
+('2017-08-09 04:18:04', 'PONG SENT!')
+('2017-08-09 04:23:04', 'PONG SENT!')
+('2017-08-09 04:28:04', 'PONG SENT!')
+('2017-08-09 04:33:04', 'PONG SENT!')
+('2017-08-09 04:38:04', 'PONG SENT!')
+('2017-08-09 04:43:04', 'PONG SENT!')
+('2017-08-09 04:48:04', 'PONG SENT!')
+('2017-08-09 04:53:04', 'PONG SENT!')
+('2017-08-09 04:58:04', 'PONG SENT!')
+('2017-08-09 05:03:04', 'PONG SENT!')
+('2017-08-09 05:08:04', 'PONG SENT!')
+('2017-08-09 05:13:04', 'PONG SENT!')
+('2017-08-09 05:18:04', 'PONG SENT!')
+('2017-08-09 05:23:04', 'PONG SENT!')
+('2017-08-09 05:28:04', 'PONG SENT!')
+('2017-08-09 05:33:04', 'PONG SENT!')
+('2017-08-09 05:38:04', 'PONG SENT!')
+('2017-08-09 05:43:04', 'PONG SENT!')
+('2017-08-09 05:48:04', 'PONG SENT!')
+('2017-08-09 05:53:04', 'PONG SENT!')
+('2017-08-09 05:58:04', 'PONG SENT!')
+('2017-08-09 06:03:04', 'PONG SENT!')
+('2017-08-09 06:08:04', 'PONG SENT!')
+('2017-08-09 06:13:04', 'PONG SENT!')
+('2017-08-09 06:18:04', 'PONG SENT!')
+('2017-08-09 06:23:04', 'PONG SENT!')
+('2017-08-09 06:28:04', 'PONG SENT!')
+('2017-08-09 06:33:04', 'PONG SENT!')
+('2017-08-09 06:38:04', 'PONG SENT!')
+('2017-08-09 06:43:04', 'PONG SENT!')
+('2017-08-09 06:48:04', 'PONG SENT!')
+('2017-08-09 06:53:04', 'PONG SENT!')
+('2017-08-09 06:58:04', 'PONG SENT!')
+('2017-08-09 07:03:04', 'PONG SENT!')
+('2017-08-09 07:08:04', 'PONG SENT!')
+('2017-08-09 07:13:04', 'PONG SENT!')
+('2017-08-09 07:18:04', 'PONG SENT!')
+('2017-08-09 07:23:04', 'PONG SENT!')
+('2017-08-09 07:28:04', 'PONG SENT!')
+('2017-08-09 07:33:04', 'PONG SENT!')
+('2017-08-09 07:38:04', 'PONG SENT!')
+('2017-08-09 07:43:04', 'PONG SENT!')
+('2017-08-09 07:48:04', 'PONG SENT!')
+('2017-08-09 07:53:04', 'PONG SENT!')
+('2017-08-09 07:58:04', 'PONG SENT!')
+('2017-08-09 08:03:04', 'PONG SENT!')
+('2017-08-09 08:08:04', 'PONG SENT!')
+('2017-08-09 08:13:04', 'PONG SENT!')
+('2017-08-09 08:18:04', 'PONG SENT!')
+('2017-08-09 08:23:04', 'PONG SENT!')
+2017-08-09 08:27:36 {u'userName': 'kphooghuis', u'timeArrival': datetime.datetime(2017, 8, 9, 8, 27, 36), u'txt': '?robots', u'helpID': 826, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kphooghuis Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 223)
+('2017-08-09 08:28:04', 'PONG SENT!')
+('2017-08-09 08:33:04', 'PONG SENT!')
+2017-08-09 08:33:31 {u'userName': 'kphooghuis', u'timeArrival': datetime.datetime(2017, 8, 9, 8, 33, 31), u'txt': '?reinforcement', u'helpID': 827, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@kphooghuis Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 369)
+('2017-08-09 08:38:04', 'PONG SENT!')
+('2017-08-09 08:43:04', 'PONG SENT!')
+('2017-08-09 08:48:04', 'PONG SENT!')
+('2017-08-09 08:53:04', 'PONG SENT!')
+('2017-08-09 08:58:04', 'PONG SENT!')
+Unable to send pong message..
+Connecting to twitch.tv
+Connected to twitch
+Sending our details to twitch...
+:tmi.twitch.tv 001 tpr_bot2 :Welcome, GLHF!
+:tmi.twitch.tv 002 tpr_bot2 :Your host is tmi.twitch.tv
+:tmi.twitch.tv 003 tpr_bot2 :This server is rather new
+:tmi.twitch.tv 004 tpr_bot2 :-
+:tmi.twitch.tv 375 tpr_bot2 :-
+:tmi.twitch.tv 372 tpr_bot2 :You are in a maze of twisty passages, all alike.
+:tmi.twitch.tv 376 tpr_bot2 :>
+:tpr_bot2!tpr_bot2@tpr_bot2.tmi.twitch.tv JOIN #twitchplaysrobotics
+:tpr_bot2.tmi.twitch.tv 353 tpr_bot2 = #twitchplaysrobotics :tpr_bot2
+:tpr_bot2.tmi.twitch.tv 366 tpr_bot2 #twitchplaysrobotics :End of /NAMES list
+Joined twitchplaysrobotics channel..
+Sent: PRIVMSG #twitchplaysrobotics :Joined chat...
+('2017-08-09 09:08:05', 'PONG SENT!')
+2017-08-09 09:09:48 {u'userName': 'datdolpin', u'timeArrival': datetime.datetime(2017, 8, 9, 9, 9, 48), u'txt': 'first_time_contribution', u'helpID': 828, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@datdolpin Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-09 09:13:05', 'PONG SENT!')
+('2017-08-09 09:18:05', 'PONG SENT!')
+('2017-08-09 09:23:05', 'PONG SENT!')
+('2017-08-09 09:28:05', 'PONG SENT!')
+('2017-08-09 09:33:05', 'PONG SENT!')
+('2017-08-09 09:38:05', 'PONG SENT!')
+('2017-08-09 09:43:05', 'PONG SENT!')
+2017-08-09 09:45:55 {u'userName': 'datdolpin', u'timeArrival': datetime.datetime(2017, 8, 9, 9, 45, 55), u'txt': '?', u'helpID': 829, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@datdolpin Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 301)
+2017-08-09 09:46:17 {u'userName': 'datdolpin', u'timeArrival': datetime.datetime(2017, 8, 9, 9, 46, 17), u'txt': '?robots', u'helpID': 830, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@datdolpin Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+('2017-08-09 09:48:05', 'PONG SENT!')
+2017-08-09 09:51:09 {u'userName': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 9, 9, 51, 9), u'txt': '?votes', u'helpID': 831, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@zmahoor Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 264)
+('2017-08-09 09:53:05', 'PONG SENT!')
+('2017-08-09 09:58:05', 'PONG SENT!')
+('2017-08-09 10:03:05', 'PONG SENT!')
+('2017-08-09 10:08:05', 'PONG SENT!')
+('2017-08-09 10:13:05', 'PONG SENT!')
+('2017-08-09 10:18:05', 'PONG SENT!')
+('2017-08-09 10:23:05', 'PONG SENT!')
+('2017-08-09 10:28:05', 'PONG SENT!')
+('2017-08-09 10:33:05', 'PONG SENT!')
+('2017-08-09 10:38:05', 'PONG SENT!')
+('2017-08-09 10:43:05', 'PONG SENT!')
+('2017-08-09 10:48:05', 'PONG SENT!')
+('2017-08-09 10:53:05', 'PONG SENT!')
+('2017-08-09 10:58:05', 'PONG SENT!')
+('2017-08-09 11:03:05', 'PONG SENT!')
+('2017-08-09 11:08:05', 'PONG SENT!')
+('2017-08-09 11:13:05', 'PONG SENT!')
+('2017-08-09 11:18:05', 'PONG SENT!')
+('2017-08-09 11:23:05', 'PONG SENT!')
+('2017-08-09 11:28:05', 'PONG SENT!')
+('2017-08-09 11:33:05', 'PONG SENT!')
+('2017-08-09 11:38:05', 'PONG SENT!')
+('2017-08-09 11:43:05', 'PONG SENT!')
+('2017-08-09 11:48:05', 'PONG SENT!')
+2017-08-09 11:49:53 {u'userName': 'bulldog0701', u'timeArrival': datetime.datetime(2017, 8, 9, 11, 49, 53), u'txt': 'first_time_contribution', u'helpID': 832, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@bulldog0701 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 95)
+('2017-08-09 11:53:05', 'PONG SENT!')
+('2017-08-09 11:58:05', 'PONG SENT!')
+('2017-08-09 12:03:05', 'PONG SENT!')
+2017-08-09 12:05:22 {u'userName': 'jasherrl', u'timeArrival': datetime.datetime(2017, 8, 9, 12, 5, 22), u'txt': 'first_time_contribution', u'helpID': 833, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jasherrl Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+2017-08-09 12:05:50 {u'userName': 'jasherrl', u'timeArrival': datetime.datetime(2017, 8, 9, 12, 5, 50), u'txt': '?votes', u'helpID': 834, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@jasherrl Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 265)
+2017-08-09 12:07:07 {u'userName': 'fenix72rus', u'timeArrival': datetime.datetime(2017, 8, 9, 12, 7, 7), u'txt': 'first_time_contribution', u'helpID': 835, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fenix72rus Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 94)
+('2017-08-09 12:08:05', 'PONG SENT!')
+('2017-08-09 12:13:05', 'PONG SENT!')
+('2017-08-09 12:18:05', 'PONG SENT!')
+('2017-08-09 12:23:05', 'PONG SENT!')
+('2017-08-09 12:28:05', 'PONG SENT!')
+('2017-08-09 12:33:05', 'PONG SENT!')
+('2017-08-09 12:38:05', 'PONG SENT!')
+('2017-08-09 12:43:05', 'PONG SENT!')
+('2017-08-09 12:48:05', 'PONG SENT!')
+('2017-08-09 12:53:05', 'PONG SENT!')
+('2017-08-09 12:58:05', 'PONG SENT!')
+('2017-08-09 13:03:05', 'PONG SENT!')
+('2017-08-09 13:08:05', 'PONG SENT!')
+('2017-08-09 13:13:05', 'PONG SENT!')
+('2017-08-09 13:18:05', 'PONG SENT!')
+('2017-08-09 13:23:05', 'PONG SENT!')
+('2017-08-09 13:28:05', 'PONG SENT!')
+('2017-08-09 13:33:05', 'PONG SENT!')
+('2017-08-09 13:38:05', 'PONG SENT!')
+('2017-08-09 13:43:05', 'PONG SENT!')
+('2017-08-09 13:48:05', 'PONG SENT!')
+('2017-08-09 13:53:05', 'PONG SENT!')
+('2017-08-09 13:58:05', 'PONG SENT!')
+('2017-08-09 14:03:05', 'PONG SENT!')
+('2017-08-09 14:08:05', 'PONG SENT!')
+('2017-08-09 14:13:05', 'PONG SENT!')
+('2017-08-09 14:18:05', 'PONG SENT!')
+('2017-08-09 14:23:05', 'PONG SENT!')
+('2017-08-09 14:28:05', 'PONG SENT!')
+2017-08-09 14:32:33 {u'userName': 'trjyls', u'timeArrival': datetime.datetime(2017, 8, 9, 14, 32, 33), u'txt': 'first_time_contribution', u'helpID': 836, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@trjyls Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-09 14:33:05', 'PONG SENT!')
+('2017-08-09 14:38:05', 'PONG SENT!')
+('2017-08-09 14:43:05', 'PONG SENT!')
+('2017-08-09 14:48:05', 'PONG SENT!')
+('2017-08-09 14:53:05', 'PONG SENT!')
+('2017-08-09 14:58:05', 'PONG SENT!')
+('2017-08-09 15:03:05', 'PONG SENT!')
+('2017-08-09 15:08:05', 'PONG SENT!')
+('2017-08-09 15:13:05', 'PONG SENT!')
+('2017-08-09 15:18:05', 'PONG SENT!')
+('2017-08-09 15:23:05', 'PONG SENT!')
+('2017-08-09 15:28:05', 'PONG SENT!')
+('2017-08-09 15:33:05', 'PONG SENT!')
+('2017-08-09 15:38:05', 'PONG SENT!')
+('2017-08-09 15:43:05', 'PONG SENT!')
+('2017-08-09 15:48:05', 'PONG SENT!')
+('2017-08-09 15:53:05', 'PONG SENT!')
+('2017-08-09 15:58:05', 'PONG SENT!')
+('2017-08-09 16:03:05', 'PONG SENT!')
+('2017-08-09 16:08:05', 'PONG SENT!')
+2017-08-09 16:10:33 {u'userName': 'extramrdo', u'timeArrival': datetime.datetime(2017, 8, 9, 16, 10, 33), u'txt': 'first_time_contribution', u'helpID': 837, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@extramrdo Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+2017-08-09 16:10:47 {u'userName': 'extramrdo', u'timeArrival': datetime.datetime(2017, 8, 9, 16, 10, 47), u'txt': '?reinforcement', u'helpID': 838, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@extramrdo Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 368)
+2017-08-09 16:12:53 {u'userName': 'extramrdo', u'timeArrival': datetime.datetime(2017, 8, 9, 16, 12, 53), u'txt': '?votes', u'helpID': 839, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@extramrdo Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 266)
+('2017-08-09 16:13:05', 'PONG SENT!')
+('2017-08-09 16:18:05', 'PONG SENT!')
+('2017-08-09 16:23:05', 'PONG SENT!')
+('2017-08-09 16:28:05', 'PONG SENT!')
+('2017-08-09 16:33:05', 'PONG SENT!')
+('2017-08-09 16:38:05', 'PONG SENT!')
+('2017-08-09 16:43:05', 'PONG SENT!')
+('2017-08-09 16:48:05', 'PONG SENT!')
+('2017-08-09 16:53:05', 'PONG SENT!')
+('2017-08-09 16:58:05', 'PONG SENT!')
+('2017-08-09 17:03:05', 'PONG SENT!')
+('2017-08-09 17:08:05', 'PONG SENT!')
+('2017-08-09 17:13:05', 'PONG SENT!')
+('2017-08-09 17:18:05', 'PONG SENT!')
+('2017-08-09 17:23:05', 'PONG SENT!')
+('2017-08-09 17:28:05', 'PONG SENT!')
+('2017-08-09 17:33:05', 'PONG SENT!')
+('2017-08-09 17:38:05', 'PONG SENT!')
+('2017-08-09 17:43:05', 'PONG SENT!')
+('2017-08-09 17:48:05', 'PONG SENT!')
+('2017-08-09 17:53:05', 'PONG SENT!')
+('2017-08-09 17:58:05', 'PONG SENT!')
+('2017-08-09 18:03:05', 'PONG SENT!')
+('2017-08-09 18:08:05', 'PONG SENT!')
+('2017-08-09 18:13:05', 'PONG SENT!')
+2017-08-09 18:14:54 {u'userName': '24bitderp', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 14, 54), u'txt': 'first_time_contribution', u'helpID': 840, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@24bitderp Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+2017-08-09 18:16:51 {u'userName': 'awesomebuddygamestv', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 16, 50), u'txt': 'first_time_contribution', u'helpID': 841, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@awesomebuddygamestv Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 103)
+('2017-08-09 18:18:05', 'PONG SENT!')
+('2017-08-09 18:23:05', 'PONG SENT!')
+('2017-08-09 18:28:05', 'PONG SENT!')
+2017-08-09 18:29:44 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 29, 44), u'txt': '?robots', u'helpID': 842, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 226)
+2017-08-09 18:30:11 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 30, 11), u'txt': '?', u'helpID': 843, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 305)
+2017-08-09 18:30:44 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 30, 43), u'txt': '?silverrobots', u'helpID': 844, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Every silver robot is a new unseen robot that is added to the population of robots every hour.
+('Num of bytes sent out: ', 141)
+2017-08-09 18:30:57 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 30, 57), u'txt': '?votes', u'helpID': 845, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 270)
+2017-08-09 18:31:19 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 31, 19), u'txt': '?reinforcement', u'helpID': 846, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 372)
+2017-08-09 18:31:42 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 31, 42), u'txt': 'first_time_contribution', u'helpID': 847, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 97)
+2017-08-09 18:32:35 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 32, 35), u'txt': '?', u'helpID': 848, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 305)
+2017-08-09 18:33:00 {u'userName': 'themasterzer0', u'timeArrival': datetime.datetime(2017, 8, 9, 18, 33), u'txt': '?commandscores', u'helpID': 849, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@themasterzer0 We wish to discover which commands are most learnable by the robots. A command is considered learnable if, over time, robots become increasingly obedient  to that command. In other words, bots collect an increasing number   of yes's from the crowd, under that command, over time.
+('Num of bytes sent out: ', 326)
+('2017-08-09 18:33:05', 'PONG SENT!')
+('2017-08-09 18:38:05', 'PONG SENT!')
+('2017-08-09 18:43:05', 'PONG SENT!')
+('2017-08-09 18:48:05', 'PONG SENT!')
+('2017-08-09 18:53:05', 'PONG SENT!')
+('2017-08-09 18:58:05', 'PONG SENT!')
+('2017-08-09 19:03:05', 'PONG SENT!')
+('2017-08-09 19:08:05', 'PONG SENT!')
+('2017-08-09 19:13:05', 'PONG SENT!')
+('2017-08-09 19:18:05', 'PONG SENT!')
+('2017-08-09 19:23:05', 'PONG SENT!')
+('2017-08-09 19:28:05', 'PONG SENT!')
+('2017-08-09 19:33:05', 'PONG SENT!')
+('2017-08-09 19:38:05', 'PONG SENT!')
+('2017-08-09 19:43:05', 'PONG SENT!')
+('2017-08-09 19:48:05', 'PONG SENT!')
+('2017-08-09 19:53:05', 'PONG SENT!')
+('2017-08-09 19:58:05', 'PONG SENT!')
+('2017-08-09 20:03:05', 'PONG SENT!')
+('2017-08-09 20:08:05', 'PONG SENT!')
+('2017-08-09 20:13:05', 'PONG SENT!')
+('2017-08-09 20:18:05', 'PONG SENT!')
+2017-08-09 20:18:37 {u'userName': 'vojt64', u'timeArrival': datetime.datetime(2017, 8, 9, 20, 18, 37), u'txt': 'first_time_contribution', u'helpID': 850, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@vojt64 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-09 20:23:05', 'PONG SENT!')
+('2017-08-09 20:28:05', 'PONG SENT!')
+('2017-08-09 20:33:05', 'PONG SENT!')
+('2017-08-09 20:38:05', 'PONG SENT!')
+('2017-08-09 20:43:05', 'PONG SENT!')
+('2017-08-09 20:48:05', 'PONG SENT!')
+('2017-08-09 20:53:05', 'PONG SENT!')
+('2017-08-09 20:58:05', 'PONG SENT!')
+('2017-08-09 21:03:05', 'PONG SENT!')
+('2017-08-09 21:08:05', 'PONG SENT!')
+('2017-08-09 21:13:05', 'PONG SENT!')
+('2017-08-09 21:18:05', 'PONG SENT!')
+('2017-08-09 21:23:05', 'PONG SENT!')
+('2017-08-09 21:28:05', 'PONG SENT!')
+('2017-08-09 21:33:05', 'PONG SENT!')
+('2017-08-09 21:38:05', 'PONG SENT!')
+('2017-08-09 21:43:05', 'PONG SENT!')
+2017-08-09 21:44:09 {u'userName': 'impirat0r', u'timeArrival': datetime.datetime(2017, 8, 9, 21, 44, 9), u'txt': 'first_time_contribution', u'helpID': 851, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@impirat0r Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-09 21:48:05', 'PONG SENT!')
+('2017-08-09 21:53:05', 'PONG SENT!')
+('2017-08-09 21:58:05', 'PONG SENT!')
+('2017-08-09 22:03:05', 'PONG SENT!')
+('2017-08-09 22:08:05', 'PONG SENT!')
+('2017-08-09 22:13:05', 'PONG SENT!')
+('2017-08-09 22:18:05', 'PONG SENT!')
+('2017-08-09 22:23:05', 'PONG SENT!')
+('2017-08-09 22:28:05', 'PONG SENT!')
+('2017-08-09 22:33:05', 'PONG SENT!')
+('2017-08-09 22:38:05', 'PONG SENT!')
+('2017-08-09 22:43:05', 'PONG SENT!')
+('2017-08-09 22:48:05', 'PONG SENT!')
+('2017-08-09 22:53:05', 'PONG SENT!')
+('2017-08-09 22:58:05', 'PONG SENT!')
+('2017-08-09 23:03:05', 'PONG SENT!')
+('2017-08-09 23:08:05', 'PONG SENT!')
+('2017-08-09 23:13:05', 'PONG SENT!')
+('2017-08-09 23:18:05', 'PONG SENT!')
+('2017-08-09 23:23:05', 'PONG SENT!')
+('2017-08-09 23:28:05', 'PONG SENT!')
+('2017-08-09 23:33:05', 'PONG SENT!')
+('2017-08-09 23:38:05', 'PONG SENT!')
+2017-08-09 23:38:31 {u'userName': 'swirlza', u'timeArrival': datetime.datetime(2017, 8, 9, 23, 38, 31), u'txt': 'first_time_contribution', u'helpID': 852, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@swirlza Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-09 23:43:05', 'PONG SENT!')
+('2017-08-09 23:48:05', 'PONG SENT!')
+('2017-08-09 23:53:05', 'PONG SENT!')
+('2017-08-09 23:58:05', 'PONG SENT!')
+('2017-08-10 00:03:05', 'PONG SENT!')
+('2017-08-10 00:08:06', 'PONG SENT!')
+('2017-08-10 00:13:06', 'PONG SENT!')
+('2017-08-10 00:18:06', 'PONG SENT!')
+('2017-08-10 00:23:06', 'PONG SENT!')
+('2017-08-10 00:28:06', 'PONG SENT!')
+2017-08-10 00:28:55 {u'userName': 'bach_anglaise', u'timeArrival': datetime.datetime(2017, 8, 10, 0, 28, 55), u'txt': 'first_time_contribution', u'helpID': 853, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@bach_anglaise Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 97)
+('2017-08-10 00:33:06', 'PONG SENT!')
+('2017-08-10 00:38:06', 'PONG SENT!')
+2017-08-10 00:39:31 {u'userName': 'mitoconpower', u'timeArrival': datetime.datetime(2017, 8, 10, 0, 39, 31), u'txt': 'first_time_contribution', u'helpID': 854, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@mitoconpower Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 96)
+('2017-08-10 00:43:06', 'PONG SENT!')
+('2017-08-10 00:48:06', 'PONG SENT!')
+('2017-08-10 00:53:06', 'PONG SENT!')
+('2017-08-10 00:58:06', 'PONG SENT!')
+('2017-08-10 01:03:06', 'PONG SENT!')
+('2017-08-10 01:08:06', 'PONG SENT!')
+('2017-08-10 01:13:06', 'PONG SENT!')
+('2017-08-10 01:18:06', 'PONG SENT!')
+('2017-08-10 01:23:06', 'PONG SENT!')
+('2017-08-10 01:28:06', 'PONG SENT!')
+('2017-08-10 01:33:06', 'PONG SENT!')
+('2017-08-10 01:38:06', 'PONG SENT!')
+('2017-08-10 01:43:06', 'PONG SENT!')
+('2017-08-10 01:48:06', 'PONG SENT!')
+('2017-08-10 01:53:06', 'PONG SENT!')
+('2017-08-10 01:58:06', 'PONG SENT!')
+('2017-08-10 02:03:06', 'PONG SENT!')
+('2017-08-10 02:08:06', 'PONG SENT!')
+('2017-08-10 02:13:06', 'PONG SENT!')
+('2017-08-10 02:18:06', 'PONG SENT!')
+('2017-08-10 02:23:06', 'PONG SENT!')
+('2017-08-10 02:28:06', 'PONG SENT!')
+('2017-08-10 02:33:06', 'PONG SENT!')
+('2017-08-10 02:38:06', 'PONG SENT!')
+('2017-08-10 02:43:06', 'PONG SENT!')
+('2017-08-10 02:48:06', 'PONG SENT!')
+('2017-08-10 02:53:06', 'PONG SENT!')
+('2017-08-10 02:58:06', 'PONG SENT!')
+('2017-08-10 03:03:06', 'PONG SENT!')
+('2017-08-10 03:08:06', 'PONG SENT!')
+('2017-08-10 03:13:06', 'PONG SENT!')
+('2017-08-10 03:18:06', 'PONG SENT!')
+('2017-08-10 03:23:06', 'PONG SENT!')
+('2017-08-10 03:28:06', 'PONG SENT!')
+('2017-08-10 03:33:06', 'PONG SENT!')
+('2017-08-10 03:38:06', 'PONG SENT!')
+('2017-08-10 03:43:06', 'PONG SENT!')
+('2017-08-10 03:48:06', 'PONG SENT!')
+('2017-08-10 03:53:06', 'PONG SENT!')
+('2017-08-10 03:58:06', 'PONG SENT!')
+('2017-08-10 04:03:06', 'PONG SENT!')
+2017-08-10 04:05:36 {u'userName': 'lalooooooii', u'timeArrival': datetime.datetime(2017, 8, 10, 4, 5, 36), u'txt': '?', u'helpID': 855, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@lalooooooii Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 303)
+('2017-08-10 04:08:06', 'PONG SENT!')
+('2017-08-10 04:13:06', 'PONG SENT!')
+('2017-08-10 04:18:06', 'PONG SENT!')
+2017-08-10 04:21:10 {u'userName': 'katznmaus', u'timeArrival': datetime.datetime(2017, 8, 10, 4, 21, 10), u'txt': 'first_time_contribution', u'helpID': 856, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@katznmaus Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-10 04:23:06', 'PONG SENT!')
+('2017-08-10 04:28:06', 'PONG SENT!')
+('2017-08-10 04:33:06', 'PONG SENT!')
+('2017-08-10 04:38:06', 'PONG SENT!')
+('2017-08-10 04:43:06', 'PONG SENT!')
+('2017-08-10 04:48:06', 'PONG SENT!')
+('2017-08-10 04:53:06', 'PONG SENT!')
+('2017-08-10 04:58:06', 'PONG SENT!')
+('2017-08-10 05:03:06', 'PONG SENT!')
+('2017-08-10 05:08:06', 'PONG SENT!')
+('2017-08-10 05:13:06', 'PONG SENT!')
+('2017-08-10 05:18:06', 'PONG SENT!')
+('2017-08-10 05:23:06', 'PONG SENT!')
+('2017-08-10 05:28:06', 'PONG SENT!')
+('2017-08-10 05:33:06', 'PONG SENT!')
+('2017-08-10 05:38:06', 'PONG SENT!')
+('2017-08-10 05:43:06', 'PONG SENT!')
+('2017-08-10 05:48:06', 'PONG SENT!')
+('2017-08-10 05:53:06', 'PONG SENT!')
+('2017-08-10 05:58:06', 'PONG SENT!')
+('2017-08-10 06:03:06', 'PONG SENT!')
+('2017-08-10 06:08:06', 'PONG SENT!')
+('2017-08-10 06:13:06', 'PONG SENT!')
+('2017-08-10 06:18:06', 'PONG SENT!')
+('2017-08-10 06:23:06', 'PONG SENT!')
+('2017-08-10 06:28:06', 'PONG SENT!')
+('2017-08-10 06:33:06', 'PONG SENT!')
+('2017-08-10 06:38:06', 'PONG SENT!')
+('2017-08-10 06:43:06', 'PONG SENT!')
+('2017-08-10 06:48:06', 'PONG SENT!')
+('2017-08-10 06:53:06', 'PONG SENT!')
+('2017-08-10 06:58:06', 'PONG SENT!')
+('2017-08-10 07:03:06', 'PONG SENT!')
+('2017-08-10 07:08:06', 'PONG SENT!')
+('2017-08-10 07:13:06', 'PONG SENT!')
+('2017-08-10 07:18:06', 'PONG SENT!')
+('2017-08-10 07:23:06', 'PONG SENT!')
+('2017-08-10 07:28:06', 'PONG SENT!')
+('2017-08-10 07:33:06', 'PONG SENT!')
+('2017-08-10 07:38:06', 'PONG SENT!')
+('2017-08-10 07:43:06', 'PONG SENT!')
+('2017-08-10 07:48:06', 'PONG SENT!')
+('2017-08-10 07:53:06', 'PONG SENT!')
+('2017-08-10 07:58:06', 'PONG SENT!')
+('2017-08-10 08:03:06', 'PONG SENT!')
+('2017-08-10 08:08:06', 'PONG SENT!')
+('2017-08-10 08:13:06', 'PONG SENT!')
+('2017-08-10 08:18:06', 'PONG SENT!')
+('2017-08-10 08:23:06', 'PONG SENT!')
+2017-08-10 08:26:51 {u'userName': 'fuchs_ohne_gans', u'timeArrival': datetime.datetime(2017, 8, 10, 8, 26, 51), u'txt': 'first_time_contribution', u'helpID': 857, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@fuchs_ohne_gans Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 99)
+('2017-08-10 08:28:06', 'PONG SENT!')
+('2017-08-10 08:33:06', 'PONG SENT!')
+('2017-08-10 08:38:06', 'PONG SENT!')
+('2017-08-10 08:43:06', 'PONG SENT!')
+('2017-08-10 08:48:06', 'PONG SENT!')
+('2017-08-10 08:53:06', 'PONG SENT!')
+('2017-08-10 08:58:06', 'PONG SENT!')
+('2017-08-10 09:03:06', 'PONG SENT!')
+('2017-08-10 09:08:06', 'PONG SENT!')
+('2017-08-10 09:13:06', 'PONG SENT!')
+('2017-08-10 09:18:06', 'PONG SENT!')
+('2017-08-10 09:23:06', 'PONG SENT!')
+('2017-08-10 09:28:06', 'PONG SENT!')
+('2017-08-10 09:33:06', 'PONG SENT!')
+('2017-08-10 09:38:06', 'PONG SENT!')
+('2017-08-10 09:43:06', 'PONG SENT!')
+('2017-08-10 09:48:06', 'PONG SENT!')
+('2017-08-10 09:53:06', 'PONG SENT!')
+('2017-08-10 09:58:06', 'PONG SENT!')
+('2017-08-10 10:03:06', 'PONG SENT!')
+('2017-08-10 10:08:06', 'PONG SENT!')
+('2017-08-10 10:13:06', 'PONG SENT!')
+('2017-08-10 10:18:06', 'PONG SENT!')
+('2017-08-10 10:23:06', 'PONG SENT!')
+('2017-08-10 10:28:06', 'PONG SENT!')
+('2017-08-10 10:33:06', 'PONG SENT!')
+('2017-08-10 10:38:06', 'PONG SENT!')
+('2017-08-10 10:43:06', 'PONG SENT!')
+('2017-08-10 10:48:06', 'PONG SENT!')
+('2017-08-10 10:53:06', 'PONG SENT!')
+('2017-08-10 10:58:06', 'PONG SENT!')
+('2017-08-10 11:03:06', 'PONG SENT!')
+('2017-08-10 11:08:06', 'PONG SENT!')
+2017-08-10 11:10:13 {u'userName': 'caramono_', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 10, 13), u'txt': '?robots', u'helpID': 858, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@caramono_ Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 222)
+2017-08-10 11:11:58 {u'userName': 'caramono_', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 11, 58), u'txt': 'first_time_contribution', u'helpID': 859, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@caramono_ Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 93)
+('2017-08-10 11:13:06', 'PONG SENT!')
+('2017-08-10 11:18:06', 'PONG SENT!')
+('2017-08-10 11:23:06', 'PONG SENT!')
+2017-08-10 11:24:02 {u'userName': 'yappey', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 24, 2), u'txt': 'first_time_contribution', u'helpID': 860, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@yappey Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 90)
+('2017-08-10 11:28:06', 'PONG SENT!')
+('2017-08-10 11:33:06', 'PONG SENT!')
+2017-08-10 11:34:46 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 34, 46), u'txt': '?', u'helpID': 861, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+2017-08-10 11:35:04 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 35, 4), u'txt': '?votes', u'helpID': 862, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 264)
+2017-08-10 11:35:50 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 35, 50), u'txt': 'first_time_contribution', u'helpID': 863, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 91)
+('2017-08-10 11:38:06', 'PONG SENT!')
+2017-08-10 11:38:36 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 38, 36), u'txt': '?robots', u'helpID': 864, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Every 30 seconds one robot, out a population of 50, is simulated. It "hears" the current command and senses its environment.  There are 10 species of bots: have you seen them all?
+('Num of bytes sent out: ', 220)
+2017-08-10 11:39:38 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 39, 38), u'txt': '?commanscores', u'helpID': 865, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Twitch Plays Robotics is a community-driven project to teach robots language. To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,  ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io.
+('Num of bytes sent out:', 299)
+2017-08-10 11:39:50 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 39, 50), u'txt': '?commandscores', u'helpID': 866, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn We wish to discover which commands are most learnable by the robots. A command is considered learnable if, over time, robots become increasingly obedient  to that command. In other words, bots collect an increasing number   of yes's from the crowd, under that command, over time.
+('Num of bytes sent out: ', 320)
+2017-08-10 11:42:49 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 42, 49), u'txt': '?votes', u'helpID': 867, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Every three minutes, the command most voted on by the crowd is issued to the robot. There is no set list; you can type in anything you like.  You can vote for a command by typing !command. Don't forget the exclamation mark!
+('Num of bytes sent out: ', 264)
+('2017-08-10 11:43:06', 'PONG SENT!')
+2017-08-10 11:46:52 {u'userName': 'indefyn', u'timeArrival': datetime.datetime(2017, 8, 10, 11, 46, 52), u'txt': '?reinforcement', u'helpID': 868, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@indefyn Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes. Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,  and are replaced with randomly-modified copies of more obedient (y>n)   and popular (l>d) survivors. Thus, the robots evolve, based on your guidance,    to become more obedient and popular.
+('Num of bytes sent out: ', 366)
+('2017-08-10 11:48:06', 'PONG SENT!')
+('2017-08-10 11:53:06', 'PONG SENT!')
+('2017-08-10 11:58:06', 'PONG SENT!')
+('2017-08-10 12:03:06', 'PONG SENT!')
+('2017-08-10 12:08:06', 'PONG SENT!')
+('2017-08-10 12:13:06', 'PONG SENT!')
+('2017-08-10 12:18:06', 'PONG SENT!')
+('2017-08-10 12:23:06', 'PONG SENT!')
+('2017-08-10 12:28:06', 'PONG SENT!')
+('2017-08-10 12:33:06', 'PONG SENT!')
+('2017-08-10 12:38:06', 'PONG SENT!')
+2017-08-10 12:42:58 {u'userName': 'turtlesyndrome', u'timeArrival': datetime.datetime(2017, 8, 10, 12, 42, 57), u'txt': 'first_time_contribution', u'helpID': 869, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@turtlesyndrome Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 98)
+('2017-08-10 12:43:06', 'PONG SENT!')
+2017-08-10 12:43:35 {u'userName': 'turtlesyndrome', u'timeArrival': datetime.datetime(2017, 8, 10, 12, 43, 35), u'txt': '?scores', u'helpID': 870, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@turtlesyndrome You get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. To see your score, type ?myscore
+('Num of bytes sent out: ', 189)
+2017-08-10 12:43:44 {u'userName': 'turtlesyndrome', u'timeArrival': datetime.datetime(2017, 8, 10, 12, 43, 44), u'txt': '?myscore', u'helpID': 871, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@turtlesyndrome, your score:0.0
+('Num of bytes sent out:', 63)
+('2017-08-10 12:48:06', 'PONG SENT!')
+('2017-08-10 12:53:06', 'PONG SENT!')
+('2017-08-10 12:58:06', 'PONG SENT!')
+('2017-08-10 13:03:06', 'PONG SENT!')
+2017-08-10 13:03:20 {u'userName': 'dssgwd40', u'timeArrival': datetime.datetime(2017, 8, 10, 13, 3, 20), u'txt': 'first_time_contribution', u'helpID': 872, u'processed': 0}
+Sent: PRIVMSG #twitchplaysrobotics :@dssgwd40 Congratulations! You just earned your first point.
+('Num of bytes sent out: ', 92)
+('2017-08-10 13:08:06', 'PONG SENT!')
+('2017-08-10 13:13:06', 'PONG SENT!')
+('2017-08-10 13:18:06', 'PONG SENT!')
+('2017-08-10 13:23:06', 'PONG SENT!')
+('2017-08-10 13:28:06', 'PONG SENT!')
+('2017-08-10 13:33:06', 'PONG SENT!')
+('2017-08-10 13:38:06', 'PONG SENT!')
+('2017-08-10 13:43:06', 'PONG SENT!')
+('2017-08-10 13:48:06', 'PONG SENT!')
+('2017-08-10 13:53:06', 'PONG SENT!')
+('2017-08-10 13:58:06', 'PONG SENT!')
+('2017-08-10 14:03:06', 'PONG SENT!')
+('2017-08-10 14:08:06', 'PONG SENT!')
+('2017-08-10 14:13:06', 'PONG SENT!')
+('2017-08-10 14:18:06', 'PONG SENT!')
+('2017-08-10 14:23:06', 'PONG SENT!')
+('2017-08-10 14:28:06', 'PONG SENT!')
+('2017-08-10 14:33:06', 'PONG SENT!')
+('2017-08-10 14:38:06', 'PONG SENT!')
+('2017-08-10 14:43:06', 'PONG SENT!')
+('2017-08-10 14:48:06', 'PONG SENT!')
+('2017-08-10 14:53:07', 'PONG SENT!')
+('2017-08-10 14:58:07', 'PONG SENT!')
+('2017-08-10 15:03:07', 'PONG SENT!')
+('2017-08-10 15:08:07', 'PONG SENT!')
+('2017-08-10 15:13:07', 'PONG SENT!')
+('2017-08-10 15:18:07', 'PONG SENT!')
+('2017-08-10 15:23:07', 'PONG SENT!')
+('2017-08-10 15:28:07', 'PONG SENT!')
+('2017-08-10 15:33:07', 'PONG SENT!')
+('2017-08-10 15:38:07', 'PONG SENT!')
+('2017-08-10 15:43:07', 'PONG SENT!')
+('2017-08-10 15:48:07', 'PONG SENT!')
+('2017-08-10 15:53:07', 'PONG SENT!')
+('2017-08-10 15:58:07', 'PONG SENT!')
+('2017-08-10 16:03:07', 'PONG SENT!')
+('2017-08-10 16:08:07', 'PONG SENT!')
+('2017-08-10 16:13:07', 'PONG SENT!')
+('2017-08-10 16:18:07', 'PONG SENT!')
+('2017-08-10 16:23:07', 'PONG SENT!')
+('2017-08-10 16:28:07', 'PONG SENT!')
+('2017-08-10 16:33:07', 'PONG SENT!')
+('2017-08-10 16:38:07', 'PONG SENT!')
+('2017-08-10 16:43:07', 'PONG SENT!')
