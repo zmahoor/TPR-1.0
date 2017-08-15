@@ -350,7 +350,7 @@ class DATABASE:
 
     def Fetch_Robot_Information(self):
 
-        sql="""SELECT d.robotID, d.cmdTxt, r.type, r.birthDate, r.parentID from display as d
+        sql="""SELECT d.robotID, d.cmdTxt, d.color, r.type, r.birthDate, r.parentID from display as d
          join robots as r ON d.robotID=r.robotID order by d.startTime desc limit 1;"""
         result = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
@@ -426,6 +426,17 @@ class DATABASE:
         err_msg = "Failed to retrieve scores of top users..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
+    def Fetch_Top_Daily_Users(self, topn):
+
+        current_time = datetime.datetime.now()
+        current_time = current_time.strftime("%Y-%m-%d 00:00:00")
+
+        sql = """SELECT userName, score FROM users where userName in 
+        (SELECT distinct username FROM chats WHERE timeArrival BETWEEN '%s' and '%s'+interval 1 day)
+        ORDER BY score DESC LIMIT %d;"""%(current_time, current_time, topn)
+
+        err_msg = "Failed to retrieve scores of top users..."
+        return self.Execute_Select_Sql_Command(sql, err_msg)
     #return a list of all commands along with their scores and ranks
     # that were typed (interval) seconds before the current time
     def Fetch_Recent_Typed_Command(self, interval=10):
