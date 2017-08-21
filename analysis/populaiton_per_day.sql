@@ -1,3 +1,0 @@
-#select type, count(*) from TwitchPlays.robots where birthDate between '2017-07-18 10:00:00'  and '2017-07-18 10:00:00'  + interval 7 day and (deathDate > '2017-07-18 10:00:00' + interval 7 day or deathDate is NULL ) group by type;
-
-#select count(*) from TwitchPlays.robots where birthDate between '2017-07-18 10:00:00'  and '2017-07-18 10:00:00'  + interval 1 day and (deathDate > '2017-07-18 10:00:00' + interval 1 day or deathDate is NULL );
