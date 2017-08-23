@@ -1,7 +1,7 @@
 import sys 
 import matplotlib.pyplot as plt
 
-sys.path.append('./bots')
+sys.path.append('../bots')
 
 from database import DATABASE
 from settings import *
