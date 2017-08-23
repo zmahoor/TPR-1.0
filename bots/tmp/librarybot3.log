@@ -1,0 +1,1700 @@
+Database version : {u'VERSION()': '5.7.18'} 
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'djsapsan' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 09:43:54 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 43, 54), u'txt': '!gn', u'processed': 0, u'chatID': 23735}
+('!gn', ' reward entered.')
+2017-08-14 09:43:59 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 43, 59), u'txt': 'sn', u'processed': 0, u'chatID': 23736}
+('sn', ' discarded.')
+2017-08-14 09:44:00 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 44), u'txt': '!sn', u'processed': 0, u'chatID': 23737}
+('!sn', ' reward entered.')
+2017-08-14 09:44:02 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 44, 2), u'txt': '!sd', u'processed': 0, u'chatID': 23738}
+('!sd', ' reward entered.')
+2017-08-14 09:44:17 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 44, 17), u'txt': '!cl', u'processed': 0, u'chatID': 23739}
+('!cl', ' reward entered.')
+2017-08-14 09:44:21 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 44, 21), u'txt': '!cy', u'processed': 0, u'chatID': 23740}
+('!cy', ' reward entered.')
+2017-08-14 09:44:47 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 44, 47), u'txt': '!pl', u'processed': 0, u'chatID': 23741}
+('!pl', ' reward entered.')
+2017-08-14 09:44:49 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 44, 49), u'txt': '!py', u'processed': 0, u'chatID': 23742}
+('!py', ' reward entered.')
+2017-08-14 09:45:22 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 45, 22), u'txt': '!rd', u'processed': 0, u'chatID': 23743}
+('!rd', ' reward entered.')
+2017-08-14 09:45:24 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 45, 24), u'txt': '!rn', u'processed': 0, u'chatID': 23744}
+('!rn', ' reward entered.')
+2017-08-14 09:45:47 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 45, 47), u'txt': '!gl', u'processed': 0, u'chatID': 23745}
+('!gl', ' reward entered.')
+2017-08-14 09:45:51 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 45, 51), u'txt': '!gn', u'processed': 0, u'chatID': 23746}
+('!gn', ' reward entered.')
+2017-08-14 09:46:31 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 46, 31), u'txt': '!bl', u'processed': 0, u'chatID': 23747}
+('!bl', ' reward entered.')
+2017-08-14 09:46:33 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 46, 33), u'txt': '!by', u'processed': 0, u'chatID': 23748}
+('!by', ' reward entered.')
+2017-08-14 09:46:59 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 46, 59), u'txt': '!ol', u'processed': 0, u'chatID': 23749}
+('!ol', ' reward entered.')
+2017-08-14 09:47:03 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 47, 3), u'txt': '!oy', u'processed': 0, u'chatID': 23750}
+('!oy', ' reward entered.')
+2017-08-14 09:47:30 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 47, 30), u'txt': '!cl', u'processed': 0, u'chatID': 23751}
+('!cl', ' reward entered.')
+2017-08-14 09:47:33 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 47, 33), u'txt': '!cn', u'processed': 0, u'chatID': 23752}
+('!cn', ' reward entered.')
+2017-08-14 09:47:52 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 47, 52), u'txt': '!pd', u'processed': 0, u'chatID': 23753}
+('!pd', ' reward entered.')
+2017-08-14 09:47:54 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 47, 54), u'txt': '!py', u'processed': 0, u'chatID': 23754}
+('!py', ' reward entered.')
+2017-08-14 09:48:26 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 48, 26), u'txt': '!rl', u'processed': 0, u'chatID': 23755}
+('!rl', ' reward entered.')
+2017-08-14 09:48:31 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 48, 31), u'txt': '!rn', u'processed': 0, u'chatID': 23756}
+('!rn', ' reward entered.')
+2017-08-14 09:49:13 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 13), u'txt': '!gl', u'processed': 0, u'chatID': 23757}
+('!gl', ' reward entered.')
+2017-08-14 09:49:16 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 16), u'txt': '!gy', u'processed': 0, u'chatID': 23758}
+('!gy', ' reward entered.')
+2017-08-14 09:49:21 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 21), u'txt': '!bl', u'processed': 0, u'chatID': 23759}
+('!bl', ' reward entered.')
+2017-08-14 09:49:24 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 24), u'txt': '!bn', u'processed': 0, u'chatID': 23760}
+('!bn', ' reward entered.')
+2017-08-14 09:49:31 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 31), u'txt': '!lie', u'processed': 0, u'chatID': 23761}
+('!lie', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'lie' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-14 09:49:57 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 57), u'txt': '!ol', u'processed': 0, u'chatID': 23762}
+('!ol', ' reward entered.')
+2017-08-14 09:49:58 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 49, 58), u'txt': '!on', u'processed': 0, u'chatID': 23763}
+('!on', ' reward entered.')
+2017-08-14 09:50:28 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 50, 28), u'txt': '!cl', u'processed': 0, u'chatID': 23764}
+('!cl', ' reward entered.')
+2017-08-14 09:50:29 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 50, 29), u'txt': '!cn', u'processed': 0, u'chatID': 23765}
+('!cn', ' reward entered.')
+2017-08-14 09:50:53 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 50, 53), u'txt': '!pd', u'processed': 0, u'chatID': 23766}
+('!pd', ' reward entered.')
+2017-08-14 09:50:55 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 50, 55), u'txt': '!py', u'processed': 0, u'chatID': 23767}
+('!py', ' reward entered.')
+2017-08-14 09:51:13 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 51, 13), u'txt': '!lie', u'processed': 0, u'chatID': 23768}
+('!lie', ' command entered.')
+2017-08-14 09:51:25 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 51, 24), u'txt': '!rl', u'processed': 0, u'chatID': 23769}
+('!rl', ' reward entered.')
+2017-08-14 09:51:28 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 51, 28), u'txt': '!rn', u'processed': 0, u'chatID': 23770}
+('!rn', ' reward entered.')
+2017-08-14 09:51:53 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 51, 53), u'txt': '!gl', u'processed': 0, u'chatID': 23771}
+('!gl', ' reward entered.')
+2017-08-14 09:51:57 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 51, 57), u'txt': '!gn', u'processed': 0, u'chatID': 23772}
+('!gn', ' reward entered.')
+2017-08-14 09:52:27 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 52, 27), u'txt': '!bl', u'processed': 0, u'chatID': 23773}
+('!bl', ' reward entered.')
+2017-08-14 09:52:34 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 52, 34), u'txt': '!bn', u'processed': 0, u'chatID': 23774}
+('!bn', ' reward entered.')
+2017-08-14 09:53:02 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 53, 2), u'txt': '!ol', u'processed': 0, u'chatID': 23775}
+('!ol', ' reward entered.')
+2017-08-14 09:53:10 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 53, 10), u'txt': '!on', u'processed': 0, u'chatID': 23776}
+('!on', ' reward entered.')
+2017-08-14 09:53:35 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 9, 53, 35), u'txt': '!cl', u'processed': 0, u'chatID': 23777}
+('!cl', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'zmahoor' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 10:04:23 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 10, 4, 23), u'txt': '?', u'processed': 0, u'chatID': 23778}
+('?', ' help requested.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'zutkak' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 11:05:19 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 5, 19), u'txt': '!rn', u'processed': 0, u'chatID': 23779}
+('!rn', ' reward entered.')
+2017-08-14 11:05:31 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 5, 31), u'txt': '!gn', u'processed': 0, u'chatID': 23780}
+('!gn', ' reward entered.')
+2017-08-14 11:05:39 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 5, 39), u'txt': '!bn', u'processed': 0, u'chatID': 23781}
+('!bn', ' reward entered.')
+2017-08-14 11:05:52 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 5, 52), u'txt': '!on', u'processed': 0, u'chatID': 23782}
+('!on', ' reward entered.')
+2017-08-14 11:05:58 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 5, 58), u'txt': '!cy', u'processed': 0, u'chatID': 23783}
+('!cy', ' reward entered.')
+2017-08-14 11:06:10 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 6, 10), u'txt': '!pn', u'processed': 0, u'chatID': 23784}
+('!pn', ' reward entered.')
+2017-08-14 11:06:24 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 6, 24), u'txt': '!rn', u'processed': 0, u'chatID': 23785}
+('!rn', ' reward entered.')
+2017-08-14 11:06:29 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 6, 29), u'txt': '!hn', u'processed': 0, u'chatID': 23786}
+('!hn', ' discarded.')
+2017-08-14 11:06:31 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 6, 31), u'txt': '!gn', u'processed': 0, u'chatID': 23787}
+('!gn', ' reward entered.')
+2017-08-14 11:06:42 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 6, 42), u'txt': '!bn', u'processed': 0, u'chatID': 23788}
+('!bn', ' reward entered.')
+2017-08-14 11:06:53 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 6, 53), u'txt': '!oy', u'processed': 0, u'chatID': 23789}
+('!oy', ' reward entered.')
+2017-08-14 11:07:01 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 7, 1), u'txt': '!cn', u'processed': 0, u'chatID': 23790}
+('!cn', ' reward entered.')
+2017-08-14 11:07:02 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 7, 2), u'txt': '!cl', u'processed': 0, u'chatID': 23791}
+('!cl', ' reward entered.')
+2017-08-14 11:07:11 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 7, 11), u'txt': '!py', u'processed': 0, u'chatID': 23792}
+('!py', ' reward entered.')
+2017-08-14 11:07:23 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 7, 23), u'txt': '!rn', u'processed': 0, u'chatID': 23793}
+('!rn', ' reward entered.')
+2017-08-14 11:07:32 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 7, 32), u'txt': '!gy', u'processed': 0, u'chatID': 23794}
+('!gy', ' reward entered.')
+2017-08-14 11:07:34 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 14, 11, 7, 34), u'txt': '!gl', u'processed': 0, u'chatID': 23795}
+('!gl', ' reward entered.')
+2017-08-14 14:45:33 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 45, 33), u'txt': '!bl', u'processed': 0, u'chatID': 23796}
+('!bl', ' reward entered.')
+2017-08-14 14:45:39 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 45, 39), u'txt': '!by', u'processed': 0, u'chatID': 23797}
+('!by', ' reward entered.')
+2017-08-14 14:45:49 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 45, 49), u'txt': '!od', u'processed': 0, u'chatID': 23798}
+('!od', ' reward entered.')
+2017-08-14 14:45:51 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 45, 51), u'txt': '!on', u'processed': 0, u'chatID': 23799}
+('!on', ' reward entered.')
+2017-08-14 14:46:18 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 46, 18), u'txt': '!cl', u'processed': 0, u'chatID': 23800}
+('!cl', ' reward entered.')
+2017-08-14 14:46:30 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 46, 30), u'txt': '!cn', u'processed': 0, u'chatID': 23801}
+('!cn', ' reward entered.')
+2017-08-14 14:58:42 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 58, 42), u'txt': '@djsapsan let me know if you have any questions about these robots.', u'processed': 0, u'chatID': 23802}
+('@djsapsan let me know if you have any questions about these robots.', ' discarded.')
+2017-08-14 14:59:15 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 14, 59, 15), u'txt': 'also, i am gathering feedback from our users to improve this study.', u'processed': 0, u'chatID': 23803}
+('also, i am gathering feedback from our users to improve this study.', ' discarded.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'doctorjoshuvm' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 15:25:43 {u'username': 'doctorjoshuvm', u'timeArrival': datetime.datetime(2017, 8, 14, 15, 25, 43), u'txt': '?', u'processed': 0, u'chatID': 23804}
+('?', ' help requested.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'qubit10' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 16:13:36 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 13, 36), u'txt': '!gn', u'processed': 0, u'chatID': 23805}
+('!gn', ' reward entered.')
+2017-08-14 16:13:45 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 13, 45), u'txt': '!gd', u'processed': 0, u'chatID': 23806}
+('!gd', ' reward entered.')
+2017-08-14 16:14:39 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 14, 39), u'txt': '!on', u'processed': 0, u'chatID': 23807}
+('!on', ' reward entered.')
+2017-08-14 16:14:45 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 14, 45), u'txt': '!ol', u'processed': 0, u'chatID': 23808}
+('!ol', ' reward entered.')
+2017-08-14 16:15:11 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 15, 11), u'txt': '!cn', u'processed': 0, u'chatID': 23809}
+('!cn', ' reward entered.')
+2017-08-14 16:15:13 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 15, 13), u'txt': '!cl', u'processed': 0, u'chatID': 23810}
+('!cl', ' reward entered.')
+2017-08-14 16:15:43 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 15, 43), u'txt': '!pn', u'processed': 0, u'chatID': 23811}
+('!pn', ' reward entered.')
+2017-08-14 16:15:46 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 15, 46), u'txt': '!pl', u'processed': 0, u'chatID': 23812}
+('!pl', ' reward entered.')
+2017-08-14 16:16:09 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 16, 9), u'txt': '?', u'processed': 0, u'chatID': 23813}
+('?', ' help requested.')
+2017-08-14 16:16:52 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 16, 52), u'txt': 'ah, why is every robot keeps moving backward', u'processed': 0, u'chatID': 23814}
+('ah, why is every robot keeps moving backward', ' discarded.')
+2017-08-14 16:17:18 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 17, 18), u'txt': ':)', u'processed': 0, u'chatID': 23815}
+(':)', ' discarded.')
+2017-08-14 16:18:07 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 18, 7), u'txt': '@zmahoor is that you zahra?', u'processed': 0, u'chatID': 23816}
+('@zmahoor is that you zahra?', ' discarded.')
+2017-08-14 16:18:29 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 18, 29), u'txt': 'this is nirav, we met in the knoxville ai group.. :)', u'processed': 0, u'chatID': 23817}
+('this is nirav, we met in the knoxville ai group.. :)', ' discarded.')
+2017-08-14 16:18:52 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 18, 52), u'txt': 'hey', u'processed': 0, u'chatID': 23818}
+('hey', ' discarded.')
+2017-08-14 16:18:53 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 18, 53), u'txt': ':)', u'processed': 0, u'chatID': 23819}
+(':)', ' discarded.')
+2017-08-14 16:19:03 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 19, 2), u'txt': 'i remember you :)', u'processed': 0, u'chatID': 23820}
+('i remember you :)', ' discarded.')
+2017-08-14 16:19:16 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 19, 16), u'txt': 'i heard you guys doing a tensor flow project', u'processed': 0, u'chatID': 23821}
+('i heard you guys doing a tensor flow project', ' discarded.')
+2017-08-14 16:20:07 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 20, 7), u'txt': 'yes, we are, slowly but surely, .', u'processed': 0, u'chatID': 23822}
+('yes, we are, slowly but surely, .', ' discarded.')
+2017-08-14 16:20:29 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 20, 29), u'txt': ':)', u'processed': 0, u'chatID': 23823}
+(':)', ' discarded.')
+2017-08-14 16:20:30 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 20, 30), u'txt': 'we are suppose to build an app to map a statement to an emoji', u'processed': 0, u'chatID': 23824}
+('we are suppose to build an app to map a statement to an emoji', ' discarded.')
+2017-08-14 16:20:50 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 20, 50), u'txt': 'sentiment analysis', u'processed': 0, u'chatID': 23825}
+('sentiment analysis', ' discarded.')
+2017-08-14 16:21:23 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 21, 23), u'txt': 'yah, it should be simple to do, but both of us are too busy with other things.', u'processed': 0, u'chatID': 23826}
+('yah, it should be simple to do, but both of us are too busy with other things.', ' discarded.')
+2017-08-14 16:22:02 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 22, 2), u'txt': 'i never got around tensor flow but here i learnt keras', u'processed': 0, u'chatID': 23827}
+('i never got around tensor flow but here i learnt keras', ' discarded.')
+2017-08-14 16:22:17 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 22, 17), u'txt': 'it is very user friendly and easy to work', u'processed': 0, u'chatID': 23828}
+('it is very user friendly and easy to work', ' discarded.')
+2017-08-14 16:23:03 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 23, 3), u'txt': 'https://keras.io', u'processed': 0, u'chatID': 23829}
+('https://keras.io', ' discarded.')
+2017-08-14 16:23:58 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 23, 58), u'txt': 'yes', u'processed': 0, u'chatID': 23830}
+('yes', ' discarded.')
+2017-08-14 16:24:11 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 24, 11), u'txt': 'it can be tensor flow or theano', u'processed': 0, u'chatID': 23831}
+('it can be tensor flow or theano', ' discarded.')
+2017-08-14 16:24:25 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 24, 25), u'txt': 'the backend', u'processed': 0, u'chatID': 23832}
+('the backend', ' discarded.')
+2017-08-14 16:25:21 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 25, 21), u'txt': 'when are you planning to graduate?', u'processed': 0, u'chatID': 23833}
+('when are you planning to graduate?', ' discarded.')
+2017-08-14 16:25:50 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 25, 50), u'txt': 'i have one more year left. now finishing up my dissertation and starting apply for post-doc soon.', u'processed': 0, u'chatID': 23834}
+('i have one more year left. now finishing up my dissertation and starting apply for post-doc soon.', ' discarded.')
+2017-08-14 16:26:10 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 26, 10), u'txt': 'i thought you were planning to apply for data-science positions', u'processed': 0, u'chatID': 23835}
+('i thought you were planning to apply for data-science positions', ' discarded.')
+2017-08-14 16:27:02 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 2), u'txt': 'insight', u'processed': 0, u'chatID': 23836}
+('insight', ' discarded.')
+2017-08-14 16:27:03 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 3), u'txt': '?', u'processed': 0, u'chatID': 23837}
+('?', ' help requested.')
+2017-08-14 16:27:11 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 11), u'txt': 'or data incubator?', u'processed': 0, u'chatID': 23838}
+('or data incubator?', ' discarded.')
+2017-08-14 16:27:13 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 13), u'txt': 'yes, i love what i do, and sadly that is coming the way of logic. lol', u'processed': 0, u'chatID': 23839}
+('yes, i love what i do, and sadly that is coming the way of logic. lol', ' discarded.')
+2017-08-14 16:27:23 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 23), u'txt': 'i got into data incubator', u'processed': 0, u'chatID': 23840}
+('i got into data incubator', ' discarded.')
+2017-08-14 16:27:27 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 27), u'txt': 'as a scholar', u'processed': 0, u'chatID': 23841}
+('as a scholar', ' discarded.')
+2017-08-14 16:27:48 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 48), u'txt': 'i know it. i am planning to do the next round of data insight', u'processed': 0, u'chatID': 23842}
+('i know it. i am planning to do the next round of data insight', ' discarded.')
+2017-08-14 16:27:54 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 27, 54), u'txt': 'if i get in.', u'processed': 0, u'chatID': 23843}
+('if i get in.', ' discarded.')
+2017-08-14 16:28:48 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 28, 47), u'txt': 'my friend who got her phd in physics did the insight fellowship', u'processed': 0, u'chatID': 23844}
+('my friend who got her phd in physics did the insight fellowship', ' discarded.')
+2017-08-14 16:29:14 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 29, 14), u'txt': 'insight is different though.', u'processed': 0, u'chatID': 23845}
+('insight is different though.', ' discarded.')
+2017-08-14 16:29:18 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 29, 18), u'txt': 'the interview process', u'processed': 0, u'chatID': 23846}
+('the interview process', ' discarded.')
+2017-08-14 16:30:18 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 30, 18), u'txt': 'did you interview with insight as well?', u'processed': 0, u'chatID': 23847}
+('did you interview with insight as well?', ' discarded.')
+2017-08-14 16:31:57 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 31, 57), u'txt': 'i was about 1 year ahead of time.', u'processed': 0, u'chatID': 23848}
+('i was about 1 year ahead of time.', ' discarded.')
+2017-08-14 16:33:17 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 33, 17), u'txt': 'oh i see. my husband will be doing the data engineering fellowship with insight.', u'processed': 0, u'chatID': 23849}
+('oh i see. my husband will be doing the data engineering fellowship with insight.', ' discarded.')
+2017-08-14 16:33:33 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 33, 33), u'txt': 'they did not tell him about that requir', u'processed': 0, u'chatID': 23850}
+('they did not tell him about that requir', ' discarded.')
+2017-08-14 16:33:34 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 33, 34), u'txt': ':)', u'processed': 0, u'chatID': 23851}
+(':)', ' discarded.')
+2017-08-14 16:33:41 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 33, 41), u'txt': 'requirement', u'processed': 0, u'chatID': 23852}
+('requirement', ' discarded.')
+2017-08-14 16:34:43 {u'username': 'qubit10', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 34, 43), u'txt': 'i dont know if the requirement is different.', u'processed': 0, u'chatID': 23853}
+('i dont know if the requirement is different.', ' discarded.')
+2017-08-14 16:38:25 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 38, 25), u'txt': 'maybe.. the goal is to get a full time job by the end of the program.', u'processed': 0, u'chatID': 23854}
+('maybe.. the goal is to get a full time job by the end of the program.', ' discarded.')
+2017-08-14 16:39:10 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 16, 39, 10), u'txt': 'i can tell you post-doc life is not fun :)', u'processed': 0, u'chatID': 23855}
+('i can tell you post-doc life is not fun :)', ' discarded.')
+2017-08-14 17:16:43 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 14, 17, 16, 42), u'txt': ':)', u'processed': 0, u'chatID': 23856}
+(':)', ' discarded.')
+2017-08-14 17:54:58 {u'username': 'cracker3001', u'timeArrival': datetime.datetime(2017, 8, 14, 17, 54, 58), u'txt': '!gn', u'processed': 0, u'chatID': 23857}
+('!gn', 'first time contribution')
+('!gn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'cracker3001' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 17:55:47 {u'username': 'cracker3001', u'timeArrival': datetime.datetime(2017, 8, 14, 17, 55, 47), u'txt': '!on', u'processed': 0, u'chatID': 23858}
+('!on', ' reward entered.')
+2017-08-14 21:20:35 {u'username': 'joelbanana', u'timeArrival': datetime.datetime(2017, 8, 14, 21, 20, 35), u'txt': '!ol', u'processed': 0, u'chatID': 23859}
+('!ol', 'first time contribution')
+('!ol', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'joelbanana' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 21:21:04 {u'username': 'joelbanana', u'timeArrival': datetime.datetime(2017, 8, 14, 21, 21, 4), u'txt': '!sd', u'processed': 0, u'chatID': 23860}
+('!sd', ' reward entered.')
+2017-08-14 21:40:12 {u'username': 'doctorjoshuvm', u'timeArrival': datetime.datetime(2017, 8, 14, 21, 40, 12), u'txt': '?', u'processed': 0, u'chatID': 23861}
+('?', ' help requested.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'admanta_' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 22:42:35 {u'username': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 14, 22, 42, 35), u'txt': '!bn', u'processed': 0, u'chatID': 23862}
+('!bn', ' reward entered.')
+2017-08-14 22:42:38 {u'username': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 14, 22, 42, 38), u'txt': '!bd', u'processed': 0, u'chatID': 23863}
+('!bd', ' reward entered.')
+2017-08-14 22:42:56 {u'username': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 14, 22, 42, 56), u'txt': '!oy', u'processed': 0, u'chatID': 23864}
+('!oy', ' reward entered.')
+2017-08-14 22:42:59 {u'username': 'admanta_', u'timeArrival': datetime.datetime(2017, 8, 14, 22, 42, 59), u'txt': '!ol', u'processed': 0, u'chatID': 23865}
+('!ol', ' reward entered.')
+2017-08-14 23:41:57 {u'username': 'rockinbacon', u'timeArrival': datetime.datetime(2017, 8, 14, 23, 41, 57), u'txt': '!walk', u'processed': 0, u'chatID': 23866}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'walk' for key 'PRIMARY'")
+  self._do_get_result()
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'rockinbacon' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-14 23:42:18 {u'username': 'rockinbacon', u'timeArrival': datetime.datetime(2017, 8, 14, 23, 42, 17), u'txt': '!stop', u'processed': 0, u'chatID': 23867}
+('!stop', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'stop' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-14 23:42:42 {u'username': 'rockinbacon', u'timeArrival': datetime.datetime(2017, 8, 14, 23, 42, 42), u'txt': '!halt', u'processed': 0, u'chatID': 23868}
+('!halt', ' command entered.')
+2017-08-15 00:22:06 {u'username': 'ivanvarela', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 22, 6), u'txt': 'wtf', u'processed': 0, u'chatID': 23869}
+('wtf', ' discarded.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'ivanvarela' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 00:24:04 {u'username': 'ivanvarela', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 24, 4), u'txt': '!ry', u'processed': 0, u'chatID': 23870}
+('!ry', 'first time contribution')
+('!ry', ' reward entered.')
+2017-08-15 00:30:26 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 30, 26), u'txt': '?', u'processed': 0, u'chatID': 23871}
+('?', ' help requested.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'cyb3rhack3r' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 00:30:40 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 30, 40), u'txt': '!cn', u'processed': 0, u'chatID': 23872}
+('!cn', 'first time contribution')
+('!cn', ' reward entered.')
+2017-08-15 00:30:59 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 30, 59), u'txt': '!pn', u'processed': 0, u'chatID': 23873}
+('!pn', ' reward entered.')
+2017-08-15 00:31:26 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 31, 26), u'txt': '!rn', u'processed': 0, u'chatID': 23874}
+('!rn', ' reward entered.')
+2017-08-15 00:31:58 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 31, 58), u'txt': '!gn', u'processed': 0, u'chatID': 23875}
+('!gn', ' reward entered.')
+2017-08-15 00:32:23 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 32, 23), u'txt': '!bn', u'processed': 0, u'chatID': 23876}
+('!bn', ' reward entered.')
+2017-08-15 00:32:55 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 32, 55), u'txt': '!on', u'processed': 0, u'chatID': 23877}
+('!on', ' reward entered.')
+2017-08-15 00:33:27 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 33, 27), u'txt': '!cn', u'processed': 0, u'chatID': 23878}
+('!cn', ' reward entered.')
+2017-08-15 00:34:02 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 34, 2), u'txt': '!py', u'processed': 0, u'chatID': 23879}
+('!py', ' reward entered.')
+2017-08-15 00:34:25 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 34, 25), u'txt': '!ry', u'processed': 0, u'chatID': 23880}
+('!ry', ' reward entered.')
+2017-08-15 00:34:47 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 34, 47), u'txt': '!jump', u'processed': 0, u'chatID': 23881}
+('!jump', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'jump' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 00:34:56 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 34, 56), u'txt': '!gy', u'processed': 0, u'chatID': 23882}
+('!gy', ' reward entered.')
+2017-08-15 00:35:26 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 35, 26), u'txt': '!by', u'processed': 0, u'chatID': 23883}
+('!by', ' reward entered.')
+2017-08-15 00:36:00 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 36), u'txt': '!on', u'processed': 0, u'chatID': 23884}
+('!on', ' reward entered.')
+2017-08-15 00:36:25 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 36, 25), u'txt': '!cy', u'processed': 0, u'chatID': 23885}
+('!cy', ' reward entered.')
+2017-08-15 00:36:32 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 36, 32), u'txt': '!jump', u'processed': 0, u'chatID': 23886}
+('!jump', ' command entered.')
+2017-08-15 00:37:03 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 37, 3), u'txt': '!pn', u'processed': 0, u'chatID': 23887}
+('!pn', ' reward entered.')
+2017-08-15 00:37:39 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 37, 39), u'txt': '!rn', u'processed': 0, u'chatID': 23888}
+('!rn', ' reward entered.')
+2017-08-15 00:38:02 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 38, 2), u'txt': '!gn', u'processed': 0, u'chatID': 23889}
+('!gn', ' reward entered.')
+2017-08-15 00:38:19 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 38, 19), u'txt': '?silverrobots', u'processed': 0, u'chatID': 23890}
+('?silverrobots', ' help requested.')
+2017-08-15 00:38:33 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 38, 33), u'txt': '!bn', u'processed': 0, u'chatID': 23891}
+('!bn', ' reward entered.')
+2017-08-15 00:38:56 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 38, 56), u'txt': '?reinforcement', u'processed': 0, u'chatID': 23892}
+('?reinforcement', ' help requested.')
+2017-08-15 00:39:15 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 39, 15), u'txt': '!on', u'processed': 0, u'chatID': 23893}
+('!on', ' reward entered.')
+2017-08-15 00:39:34 {u'username': 'cyb3rhack3r', u'timeArrival': datetime.datetime(2017, 8, 15, 0, 39, 34), u'txt': '!cn', u'processed': 0, u'chatID': 23894}
+('!cn', ' reward entered.')
+2017-08-15 03:19:51 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 19, 51), u'txt': '!gn', u'processed': 0, u'chatID': 23895}
+('!gn', 'first time contribution')
+('!gn', ' reward entered.')
+2017-08-15 03:20:14 {u'username': 'squishyjh', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 20, 14), u'txt': 'clintclean', u'processed': 0, u'chatID': 23896}
+('clintclean', ' discarded.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'adorablewhale' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 03:20:23 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 20, 23), u'txt': '!gn', u'processed': 0, u'chatID': 23897}
+('!gn', ' reward entered.')
+2017-08-15 03:20:27 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 20, 27), u'txt': '!bn', u'processed': 0, u'chatID': 23898}
+('!bn', ' reward entered.')
+2017-08-15 03:20:32 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 20, 32), u'txt': '!bn', u'processed': 0, u'chatID': 23899}
+('!bn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'squishyjh' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 03:21:10 {u'username': 'squishyjh', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 21, 10), u'txt': '!od', u'processed': 0, u'chatID': 23900}
+('!od', 'first time contribution')
+('!od', ' reward entered.')
+2017-08-15 03:21:19 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 21, 19), u'txt': '!sn', u'processed': 0, u'chatID': 23901}
+('!sn', ' reward entered.')
+2017-08-15 03:22:03 {u'username': 'squishyjh', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 22, 3), u'txt': '!pl', u'processed': 0, u'chatID': 23902}
+('!pl', ' reward entered.')
+2017-08-15 03:22:13 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 22, 13), u'txt': '!command shake', u'processed': 0, u'chatID': 23903}
+('!command shake', ' command entered.')
+2017-08-15 03:22:28 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 22, 28), u'txt': '!move shake', u'processed': 0, u'chatID': 23904}
+('!move shake', ' command entered.')
+2017-08-15 03:23:07 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 23, 7), u'txt': '!gn', u'processed': 0, u'chatID': 23905}
+('!gn', ' reward entered.')
+2017-08-15 03:23:08 {u'username': 'squishyjh', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 23, 8), u'txt': '!dab', u'processed': 0, u'chatID': 23906}
+('!dab', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'dab' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 03:25:28 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 25, 28), u'txt': '!ry', u'processed': 0, u'chatID': 23907}
+('!ry', ' reward entered.')
+2017-08-15 03:25:58 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 25, 58), u'txt': '!gn', u'processed': 0, u'chatID': 23908}
+('!gn', ' reward entered.')
+2017-08-15 03:26:32 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 26, 32), u'txt': '!by', u'processed': 0, u'chatID': 23909}
+('!by', ' reward entered.')
+2017-08-15 03:27:06 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 27, 6), u'txt': '!oy', u'processed': 0, u'chatID': 23910}
+('!oy', ' reward entered.')
+2017-08-15 03:27:29 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 27, 29), u'txt': '!cn', u'processed': 0, u'chatID': 23911}
+('!cn', ' reward entered.')
+2017-08-15 03:27:54 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 27, 54), u'txt': '!py', u'processed': 0, u'chatID': 23912}
+('!py', ' reward entered.')
+2017-08-15 03:28:36 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 28, 36), u'txt': '!rm', u'processed': 0, u'chatID': 23913}
+('!rm', ' discarded.')
+2017-08-15 03:28:53 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 28, 53), u'txt': '!gy', u'processed': 0, u'chatID': 23914}
+('!gy', ' reward entered.')
+2017-08-15 03:29:26 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 29, 26), u'txt': '!bn', u'processed': 0, u'chatID': 23915}
+('!bn', ' reward entered.')
+2017-08-15 03:29:33 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 29, 33), u'txt': '!dab', u'processed': 0, u'chatID': 23916}
+('!dab', ' command entered.')
+2017-08-15 03:30:13 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 30, 13), u'txt': '!od', u'processed': 0, u'chatID': 23917}
+('!od', ' reward entered.')
+2017-08-15 03:30:58 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 30, 58), u'txt': 'lul', u'processed': 0, u'chatID': 23918}
+('lul', ' discarded.')
+2017-08-15 03:31:10 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 31, 10), u'txt': '!pl', u'processed': 0, u'chatID': 23919}
+('!pl', ' reward entered.')
+2017-08-15 03:31:31 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 31, 31), u'txt': '!rm', u'processed': 0, u'chatID': 23920}
+('!rm', ' discarded.')
+2017-08-15 03:32:07 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 32, 7), u'txt': '!gm', u'processed': 0, u'chatID': 23921}
+('!gm', ' discarded.')
+2017-08-15 03:32:16 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 32, 16), u'txt': '!gn', u'processed': 0, u'chatID': 23922}
+('!gn', ' reward entered.')
+2017-08-15 03:32:27 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 32, 27), u'txt': '!bn', u'processed': 0, u'chatID': 23923}
+('!bn', ' reward entered.')
+2017-08-15 03:33:00 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 33), u'txt': '!on', u'processed': 0, u'chatID': 23924}
+('!on', ' reward entered.')
+2017-08-15 03:33:41 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 33, 41), u'txt': '!cn', u'processed': 0, u'chatID': 23925}
+('!cn', ' reward entered.')
+2017-08-15 03:34:05 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 34, 5), u'txt': '!py', u'processed': 0, u'chatID': 23926}
+('!py', ' reward entered.')
+2017-08-15 03:34:36 {u'username': 'adorablewhale', u'timeArrival': datetime.datetime(2017, 8, 15, 3, 34, 36), u'txt': '!rm', u'processed': 0, u'chatID': 23927}
+('!rm', ' discarded.')
+2017-08-15 05:52:16 {u'username': 'kidkun3', u'timeArrival': datetime.datetime(2017, 8, 15, 5, 52, 16), u'txt': '!walk', u'processed': 0, u'chatID': 23928}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'kidkun3' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 05:52:50 {u'username': 'kidkun3', u'timeArrival': datetime.datetime(2017, 8, 15, 5, 52, 49), u'txt': '!walk', u'processed': 0, u'chatID': 23929}
+('!walk', ' command entered.')
+2017-08-15 05:53:03 {u'username': 'kidkun3', u'timeArrival': datetime.datetime(2017, 8, 15, 5, 53, 3), u'txt': '!gl', u'processed': 0, u'chatID': 23930}
+('!gl', ' reward entered.')
+2017-08-15 05:54:03 {u'username': 'kidkun3', u'timeArrival': datetime.datetime(2017, 8, 15, 5, 54, 3), u'txt': '!cl', u'processed': 0, u'chatID': 23931}
+('!cl', ' reward entered.')
+2017-08-15 05:54:16 {u'username': 'kidkun3', u'timeArrival': datetime.datetime(2017, 8, 15, 5, 54, 16), u'txt': '!fly', u'processed': 0, u'chatID': 23932}
+('!fly', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'fly' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 06:53:12 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 53, 12), u'txt': '?', u'processed': 0, u'chatID': 23933}
+('?', ' help requested.')
+2017-08-15 06:54:05 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 54, 5), u'txt': '!by', u'processed': 0, u'chatID': 23934}
+('!by', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'juliuzns' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 06:54:05 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 54, 5), u'txt': '!gn', u'processed': 0, u'chatID': 23935}
+('!gn', 'first time contribution')
+('!gn', ' reward entered.')
+2017-08-15 06:54:23 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 54, 23), u'txt': '!by', u'processed': 0, u'chatID': 23936}
+('!by', ' reward entered.')
+2017-08-15 06:54:36 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 54, 36), u'txt': '!on', u'processed': 0, u'chatID': 23937}
+('!on', ' reward entered.')
+2017-08-15 06:55:08 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 55, 8), u'txt': '!cn', u'processed': 0, u'chatID': 23938}
+('!cn', ' reward entered.')
+2017-08-15 06:55:41 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 55, 41), u'txt': '!py', u'processed': 0, u'chatID': 23939}
+('!py', ' reward entered.')
+2017-08-15 06:56:01 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 56, 1), u'txt': '!pl', u'processed': 0, u'chatID': 23940}
+('!pl', ' reward entered.')
+2017-08-15 06:56:20 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 56, 20), u'txt': '!rn', u'processed': 0, u'chatID': 23941}
+('!rn', ' reward entered.')
+2017-08-15 06:56:36 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 56, 36), u'txt': '?scores', u'processed': 0, u'chatID': 23942}
+('?scores', ' help requested.')
+2017-08-15 06:56:55 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 56, 55), u'txt': '!gy', u'processed': 0, u'chatID': 23943}
+('!gy', ' reward entered.')
+2017-08-15 06:56:56 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 56, 56), u'txt': '!gl', u'processed': 0, u'chatID': 23944}
+('!gl', ' reward entered.')
+2017-08-15 06:57:31 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 57, 31), u'txt': '!bd', u'processed': 0, u'chatID': 23945}
+('!bd', ' reward entered.')
+2017-08-15 06:58:03 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 15, 6, 58, 3), u'txt': '!on', u'processed': 0, u'chatID': 23946}
+('!on', ' reward entered.')
+2017-08-15 07:01:45 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 1, 45), u'txt': '!pn', u'processed': 0, u'chatID': 23947}
+('!pn', ' reward entered.')
+2017-08-15 07:02:18 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 2, 18), u'txt': '!rn', u'processed': 0, u'chatID': 23948}
+('!rn', ' reward entered.')
+2017-08-15 07:02:25 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 2, 25), u'txt': '!rl', u'processed': 0, u'chatID': 23949}
+('!rl', ' reward entered.')
+2017-08-15 07:02:44 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 2, 44), u'txt': '!gy', u'processed': 0, u'chatID': 23950}
+('!gy', ' reward entered.')
+2017-08-15 07:02:51 {u'username': 'zutkak', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 2, 51), u'txt': '!gl', u'processed': 0, u'chatID': 23951}
+('!gl', ' reward entered.')
+2017-08-15 07:25:58 {u'username': 'xancor1', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 25, 58), u'txt': '!cy', u'processed': 0, u'chatID': 23952}
+('!cy', 'first time contribution')
+('!cy', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'xancor1' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 07:26:20 {u'username': 'xancor1', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 26, 20), u'txt': '!pn', u'processed': 0, u'chatID': 23953}
+('!pn', ' reward entered.')
+2017-08-15 07:27:01 {u'username': 'xancor1', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 27, 1), u'txt': '!ry', u'processed': 0, u'chatID': 23954}
+('!ry', ' reward entered.')
+2017-08-15 07:27:16 {u'username': 'xancor1', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 27, 16), u'txt': '!gn', u'processed': 0, u'chatID': 23955}
+('!gn', ' reward entered.')
+2017-08-15 07:27:50 {u'username': 'xancor1', u'timeArrival': datetime.datetime(2017, 8, 15, 7, 27, 50), u'txt': '!bn', u'processed': 0, u'chatID': 23956}
+('!bn', ' reward entered.')
+2017-08-15 08:35:30 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 8, 35, 30), u'txt': '!on', u'processed': 0, u'chatID': 23957}
+('!on', ' reward entered.')
+2017-08-15 09:00:10 {u'username': 'doctorjoshuvm', u'timeArrival': datetime.datetime(2017, 8, 15, 9, 0, 10), u'txt': '?', u'processed': 0, u'chatID': 23958}
+('?', ' help requested.')
+2017-08-15 10:12:19 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 10, 12, 19), u'txt': '?', u'processed': 0, u'chatID': 23959}
+('?', ' help requested.')
+2017-08-15 11:11:41 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 11, 41), u'txt': '!walk', u'processed': 0, u'chatID': 23960}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'nickpwned' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 11:11:58 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 11, 58), u'txt': '!pn', u'processed': 0, u'chatID': 23961}
+('!pn', ' reward entered.')
+2017-08-15 11:12:11 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 12, 11), u'txt': '!rl', u'processed': 0, u'chatID': 23962}
+('!rl', ' reward entered.')
+2017-08-15 11:12:42 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 12, 42), u'txt': '!gy', u'processed': 0, u'chatID': 23963}
+('!gy', ' reward entered.')
+2017-08-15 11:13:41 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 13, 41), u'txt': '!command !jump', u'processed': 0, u'chatID': 23964}
+('!command !jump', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'command !jump' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 11:14:00 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 14), u'txt': '!jump', u'processed': 0, u'chatID': 23965}
+('!jump', ' command entered.')
+2017-08-15 11:14:55 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 14, 55), u'txt': '!jump', u'processed': 0, u'chatID': 23966}
+('!jump', ' command entered.')
+2017-08-15 11:15:18 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 15, 18), u'txt': '!en', u'processed': 0, u'chatID': 23967}
+('!en', ' discarded.')
+2017-08-15 11:15:21 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 15, 21), u'txt': '!rn', u'processed': 0, u'chatID': 23968}
+('!rn', ' reward entered.')
+2017-08-15 11:15:47 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 15, 47), u'txt': '!gy', u'processed': 0, u'chatID': 23969}
+('!gy', ' reward entered.')
+2017-08-15 11:16:17 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 16, 17), u'txt': '!bn', u'processed': 0, u'chatID': 23970}
+('!bn', ' reward entered.')
+2017-08-15 11:17:16 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 17, 16), u'txt': '!cd', u'processed': 0, u'chatID': 23971}
+('!cd', ' reward entered.')
+2017-08-15 11:17:21 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 17, 21), u'txt': '!cn', u'processed': 0, u'chatID': 23972}
+('!cn', ' reward entered.')
+2017-08-15 11:17:45 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 17, 45), u'txt': '!pn', u'processed': 0, u'chatID': 23973}
+('!pn', ' reward entered.')
+2017-08-15 11:18:22 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 18, 22), u'txt': '!rn', u'processed': 0, u'chatID': 23974}
+('!rn', ' reward entered.')
+2017-08-15 11:18:48 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 18, 48), u'txt': '!gn', u'processed': 0, u'chatID': 23975}
+('!gn', ' reward entered.')
+2017-08-15 11:19:19 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 19, 19), u'txt': '!bl', u'processed': 0, u'chatID': 23976}
+('!bl', ' reward entered.')
+2017-08-15 11:19:23 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 19, 23), u'txt': '!bn', u'processed': 0, u'chatID': 23977}
+('!bn', ' reward entered.')
+2017-08-15 11:19:50 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 19, 50), u'txt': '!oy', u'processed': 0, u'chatID': 23978}
+('!oy', ' reward entered.')
+2017-08-15 11:19:59 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 19, 59), u'txt': '!od', u'processed': 0, u'chatID': 23979}
+('!od', ' reward entered.')
+2017-08-15 11:20:05 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 20, 5), u'txt': '!ol', u'processed': 0, u'chatID': 23980}
+('!ol', ' reward entered.')
+2017-08-15 11:20:21 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 20, 21), u'txt': '!cn', u'processed': 0, u'chatID': 23981}
+('!cn', ' reward entered.')
+2017-08-15 11:20:54 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 20, 54), u'txt': '!pl', u'processed': 0, u'chatID': 23982}
+('!pl', ' reward entered.')
+2017-08-15 11:21:02 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 21, 2), u'txt': '!py', u'processed': 0, u'chatID': 23983}
+('!py', ' reward entered.')
+2017-08-15 11:21:22 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 21, 22), u'txt': '!rn', u'processed': 0, u'chatID': 23984}
+('!rn', ' reward entered.')
+2017-08-15 11:21:55 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 21, 55), u'txt': '!gy', u'processed': 0, u'chatID': 23985}
+('!gy', ' reward entered.')
+2017-08-15 11:22:22 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 22, 22), u'txt': '!bn', u'processed': 0, u'chatID': 23986}
+('!bn', ' reward entered.')
+2017-08-15 11:22:54 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 22, 54), u'txt': '!on', u'processed': 0, u'chatID': 23987}
+('!on', ' reward entered.')
+2017-08-15 11:24:08 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 24, 8), u'txt': '!pl', u'processed': 0, u'chatID': 23988}
+('!pl', ' reward entered.')
+2017-08-15 11:24:23 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 24, 23), u'txt': '!rn', u'processed': 0, u'chatID': 23989}
+('!rn', ' reward entered.')
+2017-08-15 11:24:25 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 24, 25), u'txt': '!rl', u'processed': 0, u'chatID': 23990}
+('!rl', ' reward entered.')
+2017-08-15 11:24:59 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 24, 59), u'txt': '!gl', u'processed': 0, u'chatID': 23991}
+('!gl', ' reward entered.')
+2017-08-15 11:25:18 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 25, 18), u'txt': '?votes', u'processed': 0, u'chatID': 23992}
+('?votes', ' help requested.')
+2017-08-15 11:25:34 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 25, 34), u'txt': '!bn', u'processed': 0, u'chatID': 23993}
+('!bn', ' reward entered.')
+2017-08-15 11:26:32 {u'username': 'nickpwned', u'timeArrival': datetime.datetime(2017, 8, 15, 11, 26, 32), u'txt': '!cn', u'processed': 0, u'chatID': 23994}
+('!cn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'mohsenmahoor' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 13:02:55 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 2, 55), u'txt': '!jump', u'processed': 0, u'chatID': 23995}
+('!jump', ' command entered.')
+2017-08-15 13:04:08 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 4, 8), u'txt': '!jump', u'processed': 0, u'chatID': 23996}
+('!jump', ' command entered.')
+2017-08-15 13:04:15 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 4, 15), u'txt': '!cy', u'processed': 0, u'chatID': 23997}
+('!cy', ' reward entered.')
+2017-08-15 13:04:18 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 4, 18), u'txt': '!cl', u'processed': 0, u'chatID': 23998}
+('!cl', ' reward entered.')
+2017-08-15 13:04:38 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 4, 38), u'txt': '!cy', u'processed': 0, u'chatID': 23999}
+('!cy', ' reward entered.')
+2017-08-15 13:04:46 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 4, 46), u'txt': '!py', u'processed': 0, u'chatID': 24000}
+('!py', ' reward entered.')
+2017-08-15 13:04:50 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 4, 50), u'txt': '!pl', u'processed': 0, u'chatID': 24001}
+('!pl', ' reward entered.')
+2017-08-15 13:05:00 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 5), u'txt': '!spin', u'processed': 0, u'chatID': 24002}
+('!spin', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'spin' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 13:05:46 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 5, 46), u'txt': '!gn', u'processed': 0, u'chatID': 24003}
+('!gn', ' reward entered.')
+2017-08-15 13:05:49 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 5, 49), u'txt': '!gn', u'processed': 0, u'chatID': 24004}
+('!gn', 'first time contribution')
+('!gn', ' reward entered.')
+2017-08-15 13:06:00 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6), u'txt': '!gd', u'processed': 0, u'chatID': 24005}
+('!gd', ' reward entered.')
+2017-08-15 13:06:05 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 5), u'txt': '!spin', u'processed': 0, u'chatID': 24006}
+('!spin', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'shokanshi' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 13:06:25 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 25), u'txt': '!bn', u'processed': 0, u'chatID': 24007}
+('!bn', ' reward entered.')
+2017-08-15 13:06:28 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 28), u'txt': '!spin', u'processed': 0, u'chatID': 24008}
+('!spin', ' command entered.')
+2017-08-15 13:06:38 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 38), u'txt': '!bd', u'processed': 0, u'chatID': 24009}
+('!bd', ' reward entered.')
+2017-08-15 13:06:50 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 50), u'txt': '!oy', u'processed': 0, u'chatID': 24010}
+('!oy', ' reward entered.')
+2017-08-15 13:06:51 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 51), u'txt': '!oy', u'processed': 0, u'chatID': 24011}
+('!oy', ' reward entered.')
+2017-08-15 13:06:55 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 6, 55), u'txt': '!ol', u'processed': 0, u'chatID': 24012}
+('!ol', ' reward entered.')
+2017-08-15 13:07:07 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 7), u'txt': 'what a cutie', u'processed': 0, u'chatID': 24013}
+('what a cutie', ' discarded.')
+2017-08-15 13:07:08 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 8), u'txt': '!ol', u'processed': 0, u'chatID': 24014}
+('!ol', ' reward entered.')
+2017-08-15 13:07:18 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 18), u'txt': '!cy', u'processed': 0, u'chatID': 24015}
+('!cy', ' reward entered.')
+2017-08-15 13:07:19 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 19), u'txt': '!cy', u'processed': 0, u'chatID': 24016}
+('!cy', ' reward entered.')
+2017-08-15 13:07:22 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 22), u'txt': '!cl', u'processed': 0, u'chatID': 24017}
+('!cl', ' reward entered.')
+2017-08-15 13:07:37 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 37), u'txt': '!walk', u'processed': 0, u'chatID': 24018}
+('!walk', ' command entered.')
+2017-08-15 13:07:50 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 50), u'txt': '!walk', u'processed': 0, u'chatID': 24019}
+('!walk', ' command entered.')
+2017-08-15 13:07:52 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 52), u'txt': '!py', u'processed': 0, u'chatID': 24020}
+('!py', ' reward entered.')
+2017-08-15 13:07:58 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 7, 58), u'txt': '!pl', u'processed': 0, u'chatID': 24021}
+('!pl', ' reward entered.')
+2017-08-15 13:08:24 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 8, 24), u'txt': '!rn', u'processed': 0, u'chatID': 24022}
+('!rn', ' reward entered.')
+2017-08-15 13:08:31 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 8, 31), u'txt': '!rd', u'processed': 0, u'chatID': 24023}
+('!rd', ' reward entered.')
+2017-08-15 13:08:52 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 8, 52), u'txt': '!gy', u'processed': 0, u'chatID': 24024}
+('!gy', ' reward entered.')
+2017-08-15 13:09:22 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 9, 22), u'txt': '!bn', u'processed': 0, u'chatID': 24025}
+('!bn', ' reward entered.')
+2017-08-15 13:09:35 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 9, 35), u'txt': '!bd', u'processed': 0, u'chatID': 24026}
+('!bd', ' reward entered.')
+2017-08-15 13:09:51 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 9, 51), u'txt': '!oy', u'processed': 0, u'chatID': 24027}
+('!oy', ' reward entered.')
+2017-08-15 13:09:55 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 9, 55), u'txt': '!oy', u'processed': 0, u'chatID': 24028}
+('!oy', ' reward entered.')
+2017-08-15 13:10:10 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 10, 10), u'txt': 'a werid walk, but he is trying', u'processed': 0, u'chatID': 24029}
+('a werid walk, but he is trying', ' discarded.')
+2017-08-15 13:10:34 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 10, 34), u'txt': '!cd', u'processed': 0, u'chatID': 24030}
+('!cd', ' reward entered.')
+2017-08-15 13:11:04 {u'username': 'shokanshi', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 11, 4), u'txt': '!py', u'processed': 0, u'chatID': 24031}
+('!py', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'twitchplaysrobotics' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 13:19:08 {u'username': 'twitchplaysrobotics', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 19, 8), u'txt': '@mohsenmahoor please let me know if you have any feedback', u'processed': 0, u'chatID': 24032}
+('@mohsenmahoor please let me know if you have any feedback', ' discarded.')
+2017-08-15 13:58:54 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 58, 54), u'txt': 'ioy', u'processed': 0, u'chatID': 24033}
+('ioy', ' discarded.')
+2017-08-15 13:58:58 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 58, 58), u'txt': '!oy', u'processed': 0, u'chatID': 24034}
+('!oy', ' reward entered.')
+2017-08-15 13:59:14 {u'username': 'twitchplaysrobotics', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 59, 14), u'txt': 'hey mosi', u'processed': 0, u'chatID': 24035}
+('hey mosi', ' discarded.')
+2017-08-15 13:59:30 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 59, 30), u'txt': 'hey', u'processed': 0, u'chatID': 24036}
+('hey', ' discarded.')
+2017-08-15 13:59:45 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 59, 45), u'txt': 'do you have any feedback for this syste', u'processed': 0, u'chatID': 24037}
+('do you have any feedback for this syste', ' discarded.')
+2017-08-15 13:59:59 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 13, 59, 59), u'txt': 'i am trying to improve this platform', u'processed': 0, u'chatID': 24038}
+('i am trying to improve this platform', ' discarded.')
+2017-08-15 14:00:55 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 0, 55), u'txt': 'i have, but i am not sure if that works', u'processed': 0, u'chatID': 24039}
+('i have, but i am not sure if that works', ' discarded.')
+2017-08-15 14:01:04 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 1, 4), u'txt': 'let me know', u'processed': 0, u'chatID': 24040}
+('let me know', ' discarded.')
+2017-08-15 14:01:28 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 1, 28), u'txt': 'anything helps', u'processed': 0, u'chatID': 24041}
+('anything helps', ' discarded.')
+2017-08-15 14:01:30 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 1, 30), u'txt': '!by', u'processed': 0, u'chatID': 24042}
+('!by', ' reward entered.')
+2017-08-15 14:02:04 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 2, 4), u'txt': 'the system is a little bit confusing, at least for me', u'processed': 0, u'chatID': 24043}
+('the system is a little bit confusing, at least for me', ' discarded.')
+2017-08-15 14:02:14 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 2, 14), u'txt': 'at the beginning', u'processed': 0, u'chatID': 24044}
+('at the beginning', ' discarded.')
+2017-08-15 14:02:30 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 2, 29), u'txt': '?', u'processed': 0, u'chatID': 24045}
+('?', ' help requested.')
+2017-08-15 14:02:32 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 2, 32), u'txt': '!cn', u'processed': 0, u'chatID': 24046}
+('!cn', ' reward entered.')
+2017-08-15 14:02:51 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 2, 50), u'txt': 'besides being confusing, what else?', u'processed': 0, u'chatID': 24047}
+('besides being confusing, what else?', ' discarded.')
+2017-08-15 14:03:07 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 3, 7), u'txt': 'yes, for those who have not any experience', u'processed': 0, u'chatID': 24048}
+('yes, for those who have not any experience', ' discarded.')
+2017-08-15 14:04:48 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 4, 48), u'txt': 'i do not have any reference, for example for "spin" or "rotating"', u'processed': 0, u'chatID': 24049}
+('i do not have any reference, for example for "spin" or "rotating"', ' discarded.')
+2017-08-15 14:05:05 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 5, 5), u'txt': '!od', u'processed': 0, u'chatID': 24050}
+('!od', ' reward entered.')
+2017-08-15 14:05:12 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 5, 12), u'txt': '!dance', u'processed': 0, u'chatID': 24051}
+('!dance', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'dance' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 14:05:25 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 5, 25), u'txt': '!cy', u'processed': 0, u'chatID': 24052}
+('!cy', ' reward entered.')
+2017-08-15 14:05:42 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 5, 42), u'txt': '!cl', u'processed': 0, u'chatID': 24053}
+('!cl', ' reward entered.')
+2017-08-15 14:05:42 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 5, 42), u'txt': 'you mean it is hard to tell whether a robot is spinning or not.', u'processed': 0, u'chatID': 24054}
+('you mean it is hard to tell whether a robot is spinning or not.', ' discarded.')
+2017-08-15 14:05:48 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 5, 47), u'txt': 'i understand', u'processed': 0, u'chatID': 24055}
+('i understand', ' discarded.')
+2017-08-15 14:06:22 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 6, 22), u'txt': 'yes, i can not tell if it is rolling or not', u'processed': 0, u'chatID': 24056}
+('yes, i can not tell if it is rolling or not', ' discarded.')
+2017-08-15 14:06:36 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 6, 36), u'txt': '!dance', u'processed': 0, u'chatID': 24057}
+('!dance', ' command entered.')
+2017-08-15 14:06:47 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 6, 47), u'txt': '!rn', u'processed': 0, u'chatID': 24058}
+('!rn', ' reward entered.')
+2017-08-15 14:06:52 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 6, 52), u'txt': '!rd', u'processed': 0, u'chatID': 24059}
+('!rd', ' reward entered.')
+2017-08-15 14:07:00 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 7), u'txt': '!gy', u'processed': 0, u'chatID': 24060}
+('!gy', ' reward entered.')
+2017-08-15 14:07:03 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 7, 3), u'txt': '!gl', u'processed': 0, u'chatID': 24061}
+('!gl', ' reward entered.')
+2017-08-15 14:07:30 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 7, 30), u'txt': '!by', u'processed': 0, u'chatID': 24062}
+('!by', ' reward entered.')
+2017-08-15 14:07:35 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 7, 35), u'txt': '!bl', u'processed': 0, u'chatID': 24063}
+('!bl', ' reward entered.')
+2017-08-15 14:07:54 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 7, 54), u'txt': '!dance', u'processed': 0, u'chatID': 24064}
+('!dance', ' command entered.')
+2017-08-15 14:08:25 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 8, 24), u'txt': 'what is the difference between "dance" and "roll"', u'processed': 0, u'chatID': 24065}
+('what is the difference between "dance" and "roll"', ' discarded.')
+2017-08-15 14:08:35 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 8, 35), u'txt': '!cy', u'processed': 0, u'chatID': 24066}
+('!cy', ' reward entered.')
+2017-08-15 14:08:37 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 8, 37), u'txt': '!cl', u'processed': 0, u'chatID': 24067}
+('!cl', ' reward entered.')
+2017-08-15 14:08:38 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 8, 38), u'txt': 'would be better if we showed two robots side by side and your job was to compare the two', u'processed': 0, u'chatID': 24068}
+('would be better if we showed two robots side by side and your job was to compare the two', ' discarded.')
+2017-08-15 14:08:53 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 8, 52), u'txt': 'yes', u'processed': 0, u'chatID': 24069}
+('yes', ' discarded.')
+2017-08-15 14:08:56 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 8, 56), u'txt': 'and tell which one is better at dancing', u'processed': 0, u'chatID': 24070}
+('and tell which one is better at dancing', ' discarded.')
+2017-08-15 14:09:13 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 9, 13), u'txt': 'exaclty', u'processed': 0, u'chatID': 24071}
+('exaclty', ' discarded.')
+2017-08-15 14:09:40 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 9, 40), u'txt': '!stop', u'processed': 0, u'chatID': 24072}
+('!stop', ' command entered.')
+2017-08-15 14:10:02 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 2), u'txt': '!gy', u'processed': 0, u'chatID': 24073}
+('!gy', ' reward entered.')
+2017-08-15 14:10:03 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 3), u'txt': '!gl', u'processed': 0, u'chatID': 24074}
+('!gl', ' reward entered.')
+2017-08-15 14:10:14 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 14), u'txt': '!gy', u'processed': 0, u'chatID': 24075}
+('!gy', ' reward entered.')
+2017-08-15 14:10:17 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 17), u'txt': '!gl', u'processed': 0, u'chatID': 24076}
+('!gl', ' reward entered.')
+2017-08-15 14:10:28 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 28), u'txt': '!sit', u'processed': 0, u'chatID': 24077}
+('!sit', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'sit' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 14:10:34 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 34), u'txt': 'how do feel about our robots?', u'processed': 0, u'chatID': 24078}
+('how do feel about our robots?', ' discarded.')
+2017-08-15 14:10:58 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 10, 58), u'txt': 'these are good', u'processed': 0, u'chatID': 24079}
+('these are good', ' discarded.')
+2017-08-15 14:11:15 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 11, 15), u'txt': 'they are quite smart', u'processed': 0, u'chatID': 24080}
+('they are quite smart', ' discarded.')
+2017-08-15 14:11:44 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 11, 44), u'txt': 'but they have delay in doing actions', u'processed': 0, u'chatID': 24081}
+('but they have delay in doing actions', ' discarded.')
+2017-08-15 14:12:05 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 12, 5), u'txt': '!py', u'processed': 0, u'chatID': 24082}
+('!py', ' reward entered.')
+2017-08-15 14:12:07 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 12, 7), u'txt': '!pl', u'processed': 0, u'chatID': 24083}
+('!pl', ' reward entered.')
+2017-08-15 14:12:12 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 12, 12), u'txt': 'what do you mean?', u'processed': 0, u'chatID': 24084}
+('what do you mean?', ' discarded.')
+2017-08-15 14:12:49 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 12, 49), u'txt': 'it takes time to do the command, from the old one to the new one', u'processed': 0, u'chatID': 24085}
+('it takes time to do the command, from the old one to the new one', ' discarded.')
+2017-08-15 14:13:12 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 13, 12), u'txt': '!gy', u'processed': 0, u'chatID': 24086}
+('!gy', ' reward entered.')
+2017-08-15 14:13:17 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 13, 17), u'txt': '!gl', u'processed': 0, u'chatID': 24087}
+('!gl', ' reward entered.')
+2017-08-15 14:13:36 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 13, 36), u'txt': 'ah i see. it takes 3 minutes to change the command', u'processed': 0, u'chatID': 24088}
+('ah i see. it takes 3 minutes to change the command', ' discarded.')
+2017-08-15 14:13:40 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 13, 40), u'txt': '!by', u'processed': 0, u'chatID': 24089}
+('!by', ' reward entered.')
+2017-08-15 14:13:42 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 13, 42), u'txt': '!bl', u'processed': 0, u'chatID': 24090}
+('!bl', ' reward entered.')
+2017-08-15 14:13:56 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 13, 56), u'txt': 'ok. got it', u'processed': 0, u'chatID': 24091}
+('ok. got it', ' discarded.')
+2017-08-15 14:14:39 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 14, 39), u'txt': 'i see', u'processed': 0, u'chatID': 24092}
+('i see', ' discarded.')
+2017-08-15 14:14:45 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 14, 45), u'txt': '!cy', u'processed': 0, u'chatID': 24093}
+('!cy', ' reward entered.')
+2017-08-15 14:14:48 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 14, 48), u'txt': '!cl', u'processed': 0, u'chatID': 24094}
+('!cl', ' reward entered.')
+2017-08-15 14:14:57 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 14, 57), u'txt': 'do you think 3 minutes is too long?', u'processed': 0, u'chatID': 24095}
+('do you think 3 minutes is too long?', ' discarded.')
+2017-08-15 14:15:13 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 15, 13), u'txt': '!pl', u'processed': 0, u'chatID': 24096}
+('!pl', ' reward entered.')
+2017-08-15 14:15:20 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 15, 20), u'txt': '!pn', u'processed': 0, u'chatID': 24097}
+('!pn', ' reward entered.')
+2017-08-15 14:15:39 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 15, 38), u'txt': '!rl', u'processed': 0, u'chatID': 24098}
+('!rl', ' reward entered.')
+2017-08-15 14:15:48 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 15, 48), u'txt': '!ry', u'processed': 0, u'chatID': 24099}
+('!ry', ' reward entered.')
+2017-08-15 14:16:02 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 2), u'txt': 'not really, i did not know that. i thought its doing right away', u'processed': 0, u'chatID': 24100}
+('not really, i did not know that. i thought its doing right away', ' discarded.')
+2017-08-15 14:16:11 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 11), u'txt': '!gl', u'processed': 0, u'chatID': 24101}
+('!gl', ' reward entered.')
+2017-08-15 14:16:15 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 15), u'txt': '!gn', u'processed': 0, u'chatID': 24102}
+('!gn', ' reward entered.')
+2017-08-15 14:16:19 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 19), u'txt': '!gd', u'processed': 0, u'chatID': 24103}
+('!gd', ' reward entered.')
+2017-08-15 14:16:23 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 23), u'txt': 'ign', u'processed': 0, u'chatID': 24104}
+('ign', ' discarded.')
+2017-08-15 14:16:25 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 25), u'txt': 'the current command is "move forward"', u'processed': 0, u'chatID': 24105}
+('the current command is "move forward"', ' discarded.')
+2017-08-15 14:16:36 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 36), u'txt': '!bl', u'processed': 0, u'chatID': 24106}
+('!bl', ' reward entered.')
+2017-08-15 14:16:37 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 37), u'txt': '!bn', u'processed': 0, u'chatID': 24107}
+('!bn', ' reward entered.')
+2017-08-15 14:16:41 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 41), u'txt': 'for 3 minutes robots will try "move forward"', u'processed': 0, u'chatID': 24108}
+('for 3 minutes robots will try "move forward"', ' discarded.')
+2017-08-15 14:16:43 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 43), u'txt': '!bn', u'processed': 0, u'chatID': 24109}
+('!bn', ' reward entered.')
+2017-08-15 14:16:54 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 54), u'txt': 'lets try some funny', u'processed': 0, u'chatID': 24110}
+('lets try some funny', ' discarded.')
+2017-08-15 14:16:56 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 56), u'txt': 'now, got iy', u'processed': 0, u'chatID': 24111}
+('now, got iy', ' discarded.')
+2017-08-15 14:16:58 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 16, 58), u'txt': '!handshake', u'processed': 0, u'chatID': 24112}
+('!handshake', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'handshake' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 14:17:02 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 2), u'txt': 'sorry it is "move backward"', u'processed': 0, u'chatID': 24113}
+('sorry it is "move backward"', ' discarded.')
+2017-08-15 14:17:06 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 6), u'txt': '!od', u'processed': 0, u'chatID': 24114}
+('!od', ' reward entered.')
+2017-08-15 14:17:11 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 11), u'txt': '!on', u'processed': 0, u'chatID': 24115}
+('!on', ' reward entered.')
+2017-08-15 14:17:16 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 16), u'txt': '!on', u'processed': 0, u'chatID': 24116}
+('!on', ' reward entered.')
+2017-08-15 14:17:17 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 17), u'txt': 'thanks', u'processed': 0, u'chatID': 24117}
+('thanks', ' discarded.')
+2017-08-15 14:17:19 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 19), u'txt': '!od', u'processed': 0, u'chatID': 24118}
+('!od', ' reward entered.')
+2017-08-15 14:17:28 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 28), u'txt': 'nops', u'processed': 0, u'chatID': 24119}
+('nops', ' discarded.')
+2017-08-15 14:17:43 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 43), u'txt': 'lol that bot', u'processed': 0, u'chatID': 24120}
+('lol that bot', ' discarded.')
+2017-08-15 14:17:51 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 50), u'txt': '!cl', u'processed': 0, u'chatID': 24121}
+('!cl', ' reward entered.')
+2017-08-15 14:17:51 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 51), u'txt': '!cn', u'processed': 0, u'chatID': 24122}
+('!cn', ' reward entered.')
+2017-08-15 14:17:53 {u'username': 'mohsenmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 17, 53), u'txt': '!dance', u'processed': 0, u'chatID': 24123}
+('!dance', ' command entered.')
+2017-08-15 14:18:16 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 18, 15), u'txt': 'that man something see', u'processed': 0, u'chatID': 24124}
+('that man something see', ' discarded.')
+2017-08-15 14:18:31 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 18, 31), u'txt': '!pl', u'processed': 0, u'chatID': 24125}
+('!pl', ' reward entered.')
+2017-08-15 14:18:41 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 18, 41), u'txt': '!ry', u'processed': 0, u'chatID': 24126}
+('!ry', ' reward entered.')
+2017-08-15 14:19:08 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 7), u'txt': 'every robot is being displayed for 3 seconds.. do you think 30 seconds is too long?', u'processed': 0, u'chatID': 24127}
+('every robot is being displayed for 3 seconds.. do you think 30 seconds is too long?', ' discarded.')
+2017-08-15 14:19:14 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 14), u'txt': '30 seconds', u'processed': 0, u'chatID': 24128}
+('30 seconds', ' discarded.')
+2017-08-15 14:19:21 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 21), u'txt': 'yea', u'processed': 0, u'chatID': 24129}
+('yea', ' discarded.')
+2017-08-15 14:19:28 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 28), u'txt': '20 sec better', u'processed': 0, u'chatID': 24130}
+('20 sec better', ' discarded.')
+2017-08-15 14:19:41 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 41), u'txt': '!by', u'processed': 0, u'chatID': 24131}
+('!by', ' reward entered.')
+2017-08-15 14:19:52 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 52), u'txt': '!bn', u'processed': 0, u'chatID': 24132}
+('!bn', ' reward entered.')
+2017-08-15 14:19:59 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 19, 59), u'txt': 'good.. i was thinking to make it shorter', u'processed': 0, u'chatID': 24133}
+('good.. i was thinking to make it shorter', ' discarded.')
+2017-08-15 14:20:25 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 20, 25), u'txt': 'i thing spherebots is broken', u'processed': 0, u'chatID': 24134}
+('i thing spherebots is broken', ' discarded.')
+2017-08-15 14:20:30 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 20, 30), u'txt': 'think*', u'processed': 0, u'chatID': 24135}
+('think*', ' discarded.')
+2017-08-15 14:20:47 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 20, 47), u'txt': '!cy', u'processed': 0, u'chatID': 24136}
+('!cy', ' reward entered.')
+2017-08-15 14:21:11 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 21, 11), u'txt': '!py', u'processed': 0, u'chatID': 24137}
+('!py', ' reward entered.')
+2017-08-15 14:21:40 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 21, 40), u'txt': 'there is a pendulum inside the spherebot', u'processed': 0, u'chatID': 24138}
+('there is a pendulum inside the spherebot', ' discarded.')
+2017-08-15 14:21:51 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 21, 51), u'txt': '!rn', u'processed': 0, u'chatID': 24139}
+('!rn', ' reward entered.')
+2017-08-15 14:21:58 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 21, 58), u'txt': 'the pendulum is moving and causing the sphere to move', u'processed': 0, u'chatID': 24140}
+('the pendulum is moving and causing the sphere to move', ' discarded.')
+2017-08-15 14:22:23 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 22, 23), u'txt': 'yea but ... for me its weird look', u'processed': 0, u'chatID': 24141}
+('yea but ... for me its weird look', ' discarded.')
+2017-08-15 14:22:45 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 22, 45), u'txt': 'i see...', u'processed': 0, u'chatID': 24142}
+('i see...', ' discarded.')
+2017-08-15 14:35:18 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 35, 18), u'txt': '!bl', u'processed': 0, u'chatID': 24143}
+('!bl', ' reward entered.')
+2017-08-15 14:35:19 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 35, 19), u'txt': '!bn', u'processed': 0, u'chatID': 24144}
+('!bn', ' reward entered.')
+2017-08-15 14:35:36 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 35, 36), u'txt': '!ol', u'processed': 0, u'chatID': 24145}
+('!ol', ' reward entered.')
+2017-08-15 14:35:37 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 35, 37), u'txt': '!on', u'processed': 0, u'chatID': 24146}
+('!on', ' reward entered.')
+2017-08-15 14:36:05 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 36, 5), u'txt': '!sd', u'processed': 0, u'chatID': 24147}
+('!sd', ' reward entered.')
+2017-08-15 14:36:08 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 36, 8), u'txt': '!sn', u'processed': 0, u'chatID': 24148}
+('!sn', ' reward entered.')
+2017-08-15 14:36:29 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 14, 36, 29), u'txt': 'do you have any feedback for us?', u'processed': 0, u'chatID': 24149}
+('do you have any feedback for us?', ' discarded.')
+2017-08-15 15:23:55 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 15, 23, 55), u'txt': '!bd', u'processed': 0, u'chatID': 24150}
+('!bd', ' reward entered.')
+2017-08-15 15:24:58 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 15, 24, 58), u'txt': '!cd', u'processed': 0, u'chatID': 24151}
+('!cd', ' reward entered.')
+2017-08-15 15:24:59 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 15, 15, 24, 59), u'txt': '!cy', u'processed': 0, u'chatID': 24152}
+('!cy', ' reward entered.')
+2017-08-15 15:34:56 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 15, 34, 56), u'txt': '?', u'processed': 0, u'chatID': 24153}
+('?', ' help requested.')
+2017-08-15 16:31:25 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 16, 31, 25), u'txt': '?', u'processed': 0, u'chatID': 24154}
+('?', ' help requested.')
+2017-08-15 17:27:31 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 27, 31), u'txt': '?', u'processed': 0, u'chatID': 24155}
+('?', ' help requested.')
+2017-08-15 17:44:37 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 44, 37), u'txt': 'hi', u'processed': 0, u'chatID': 24156}
+('hi', ' discarded.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'comicscare1709' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 17:45:00 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 45), u'txt': '!gd', u'processed': 0, u'chatID': 24157}
+('!gd', 'first time contribution')
+('!gd', ' reward entered.')
+2017-08-15 17:45:55 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 45, 55), u'txt': '?reinforcement', u'processed': 0, u'chatID': 24158}
+('?reinforcement', ' help requested.')
+2017-08-15 17:46:30 {u'username': 'terminatoreeagle', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 46, 30), u'txt': 'up', u'processed': 0, u'chatID': 24159}
+('up', ' discarded.')
+2017-08-15 17:46:51 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 46, 51), u'txt': '!py', u'processed': 0, u'chatID': 24160}
+('!py', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'terminatoreeagle' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 17:46:53 {u'username': 'terminatoreeagle', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 46, 53), u'txt': 'stop', u'processed': 0, u'chatID': 24161}
+('stop', ' discarded.')
+2017-08-15 17:47:24 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 47, 24), u'txt': '!ry', u'processed': 0, u'chatID': 24162}
+('!ry', ' reward entered.')
+2017-08-15 17:47:58 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 47, 58), u'txt': '!gn', u'processed': 0, u'chatID': 24163}
+('!gn', ' reward entered.')
+2017-08-15 17:48:23 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 48, 23), u'txt': '!walk', u'processed': 0, u'chatID': 24164}
+('!walk', ' command entered.')
+2017-08-15 17:49:58 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 49, 58), u'txt': '!fight', u'processed': 0, u'chatID': 24165}
+('!fight', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'fight' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 17:50:19 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 50, 19), u'txt': '?vote', u'processed': 0, u'chatID': 24166}
+('?vote', ' help requested.')
+2017-08-15 17:50:49 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 50, 49), u'txt': '!fight', u'processed': 0, u'chatID': 24167}
+('!fight', ' command entered.')
+2017-08-15 17:51:52 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 51, 52), u'txt': '!die', u'processed': 0, u'chatID': 24168}
+('!die', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'die' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 17:53:30 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 53, 30), u'txt': '!rd', u'processed': 0, u'chatID': 24169}
+('!rd', ' reward entered.')
+2017-08-15 17:58:24 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 58, 24), u'txt': '!vote evolve', u'processed': 0, u'chatID': 24170}
+('!vote evolve', ' command entered.')
+2017-08-15 17:58:52 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 58, 52), u'txt': '!evolve', u'processed': 0, u'chatID': 24171}
+('!evolve', ' command entered.')
+2017-08-15 17:59:09 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 17, 59, 9), u'txt': 'oops', u'processed': 0, u'chatID': 24172}
+('oops', ' discarded.')
+2017-08-15 18:01:19 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 1, 19), u'txt': '!kill', u'processed': 0, u'chatID': 24173}
+('!kill', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'kill' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 18:01:37 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 1, 37), u'txt': '!play', u'processed': 0, u'chatID': 24174}
+('!play', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'play' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-15 18:04:16 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 4, 16), u'txt': '!jump up', u'processed': 0, u'chatID': 24175}
+('!jump up', ' command entered.')
+2017-08-15 18:15:38 {u'username': 'r4ptorzgaming', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 15, 38), u'txt': '!walk', u'processed': 0, u'chatID': 24176}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'r4ptorzgaming' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-15 18:15:57 {u'username': 'r4ptorzgaming', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 15, 57), u'txt': '!dance', u'processed': 0, u'chatID': 24177}
+('!dance', ' command entered.')
+2017-08-15 18:16:29 {u'username': 'r4ptorzgaming', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 16, 29), u'txt': '!walk', u'processed': 0, u'chatID': 24178}
+('!walk', ' command entered.')
+2017-08-15 18:16:59 {u'username': 'r4ptorzgaming', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 16, 59), u'txt': '!cl', u'processed': 0, u'chatID': 24179}
+('!cl', ' reward entered.')
+2017-08-15 18:18:31 {u'username': 'r4ptorzgaming', u'timeArrival': datetime.datetime(2017, 8, 15, 18, 18, 31), u'txt': '!gd', u'processed': 0, u'chatID': 24180}
+('!gd', ' reward entered.')
+2017-08-15 20:11:33 {u'username': 'jabbersss', u'timeArrival': datetime.datetime(2017, 8, 15, 20, 11, 33), u'txt': 'reinforcement', u'processed': 0, u'chatID': 24181}
+('reinforcement', ' discarded.')
+2017-08-15 23:13:07 {u'username': 'bananamoonpi', u'timeArrival': datetime.datetime(2017, 8, 15, 23, 13, 7), u'txt': '!bn', u'processed': 0, u'chatID': 24182}
+('!bn', 'first time contribution')
+('!bn', ' reward entered.')
+2017-08-16 03:54:26 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 54, 26), u'txt': '!rn', u'processed': 0, u'chatID': 24183}
+('!rn', 'first time contribution')
+('!rn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'tazerburgerz' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 03:55:11 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 55, 11), u'txt': '!bn', u'processed': 0, u'chatID': 24184}
+('!bn', ' reward entered.')
+2017-08-16 03:55:47 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 55, 47), u'txt': '!on', u'processed': 0, u'chatID': 24185}
+('!on', ' reward entered.')
+2017-08-16 03:56:16 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 56, 16), u'txt': '!cn', u'processed': 0, u'chatID': 24186}
+('!cn', ' reward entered.')
+2017-08-16 03:56:43 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 56, 43), u'txt': '!py', u'processed': 0, u'chatID': 24187}
+('!py', ' reward entered.')
+2017-08-16 03:56:46 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 56, 46), u'txt': '!lp', u'processed': 0, u'chatID': 24188}
+('!lp', ' discarded.')
+2017-08-16 03:57:25 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 57, 25), u'txt': '!rn', u'processed': 0, u'chatID': 24189}
+('!rn', ' reward entered.')
+2017-08-16 03:57:46 {u'username': 'tazerburgerz', u'timeArrival': datetime.datetime(2017, 8, 16, 3, 57, 46), u'txt': '!gn', u'processed': 0, u'chatID': 24190}
+('!gn', ' reward entered.')
+2017-08-16 04:57:21 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 57, 21), u'txt': '!on', u'processed': 0, u'chatID': 24191}
+('!on', ' reward entered.')
+2017-08-16 04:57:42 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 57, 42), u'txt': '!cy', u'processed': 0, u'chatID': 24192}
+('!cy', ' reward entered.')
+2017-08-16 04:57:44 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 57, 44), u'txt': '!cl', u'processed': 0, u'chatID': 24193}
+('!cl', ' reward entered.')
+2017-08-16 04:58:14 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 58, 14), u'txt': '!py', u'processed': 0, u'chatID': 24194}
+('!py', ' reward entered.')
+2017-08-16 04:58:50 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 58, 50), u'txt': '!ry', u'processed': 0, u'chatID': 24195}
+('!ry', ' reward entered.')
+2017-08-16 04:58:52 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 58, 52), u'txt': '!rl', u'processed': 0, u'chatID': 24196}
+('!rl', ' reward entered.')
+2017-08-16 04:59:12 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 59, 12), u'txt': '!gy', u'processed': 0, u'chatID': 24197}
+('!gy', ' reward entered.')
+2017-08-16 04:59:14 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 59, 14), u'txt': '!gl', u'processed': 0, u'chatID': 24198}
+('!gl', ' reward entered.')
+2017-08-16 04:59:48 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 59, 48), u'txt': '!bn', u'processed': 0, u'chatID': 24199}
+('!bn', ' reward entered.')
+2017-08-16 04:59:51 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 4, 59, 51), u'txt': '!bd', u'processed': 0, u'chatID': 24200}
+('!bd', ' reward entered.')
+2017-08-16 05:00:23 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 0, 23), u'txt': '!oy', u'processed': 0, u'chatID': 24201}
+('!oy', ' reward entered.')
+2017-08-16 05:01:03 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 1, 3), u'txt': '!cn', u'processed': 0, u'chatID': 24202}
+('!cn', ' reward entered.')
+2017-08-16 05:01:28 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 1, 28), u'txt': '!pn', u'processed': 0, u'chatID': 24203}
+('!pn', ' reward entered.')
+2017-08-16 05:01:36 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 1, 36), u'txt': '?robots', u'processed': 0, u'chatID': 24204}
+('?robots', ' help requested.')
+2017-08-16 05:01:55 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 1, 55), u'txt': '!rn', u'processed': 0, u'chatID': 24205}
+('!rn', ' reward entered.')
+2017-08-16 05:02:15 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 2, 15), u'txt': '!gy', u'processed': 0, u'chatID': 24206}
+('!gy', ' reward entered.')
+2017-08-16 05:02:17 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 2, 17), u'txt': '!gl', u'processed': 0, u'chatID': 24207}
+('!gl', ' reward entered.')
+2017-08-16 05:03:00 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 3), u'txt': '!bn', u'processed': 0, u'chatID': 24208}
+('!bn', ' reward entered.')
+2017-08-16 05:03:28 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 3, 28), u'txt': '!ol', u'processed': 0, u'chatID': 24209}
+('!ol', ' reward entered.')
+2017-08-16 05:03:34 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 3, 34), u'txt': '!on', u'processed': 0, u'chatID': 24210}
+('!on', ' reward entered.')
+2017-08-16 05:03:54 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 3, 54), u'txt': '!cn', u'processed': 0, u'chatID': 24211}
+('!cn', ' reward entered.')
+2017-08-16 05:04:30 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 4, 30), u'txt': '!pn', u'processed': 0, u'chatID': 24212}
+('!pn', ' reward entered.')
+2017-08-16 05:04:57 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 4, 57), u'txt': '!rn', u'processed': 0, u'chatID': 24213}
+('!rn', ' reward entered.')
+2017-08-16 05:05:39 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 5, 39), u'txt': '!gy', u'processed': 0, u'chatID': 24214}
+('!gy', ' reward entered.')
+2017-08-16 05:05:57 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 5, 57), u'txt': '!by', u'processed': 0, u'chatID': 24215}
+('!by', ' reward entered.')
+2017-08-16 05:06:01 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 6, 1), u'txt': '!bl', u'processed': 0, u'chatID': 24216}
+('!bl', ' reward entered.')
+2017-08-16 05:06:28 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 6, 28), u'txt': '!on', u'processed': 0, u'chatID': 24217}
+('!on', ' reward entered.')
+2017-08-16 05:06:50 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 6, 50), u'txt': '!cl', u'processed': 0, u'chatID': 24218}
+('!cl', ' reward entered.')
+2017-08-16 05:06:56 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 6, 56), u'txt': '!cn', u'processed': 0, u'chatID': 24219}
+('!cn', ' reward entered.')
+2017-08-16 05:07:20 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 7, 20), u'txt': '!pn', u'processed': 0, u'chatID': 24220}
+('!pn', ' reward entered.')
+2017-08-16 05:07:24 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 7, 24), u'txt': '!pd', u'processed': 0, u'chatID': 24221}
+('!pd', ' reward entered.')
+2017-08-16 05:07:51 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 7, 51), u'txt': '!rn', u'processed': 0, u'chatID': 24222}
+('!rn', ' reward entered.')
+2017-08-16 05:08:39 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 8, 39), u'txt': '!gn', u'processed': 0, u'chatID': 24223}
+('!gn', ' reward entered.')
+2017-08-16 05:09:04 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 9, 4), u'txt': '!bn', u'processed': 0, u'chatID': 24224}
+('!bn', ' reward entered.')
+2017-08-16 05:09:25 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 9, 25), u'txt': '!ol', u'processed': 0, u'chatID': 24225}
+('!ol', ' reward entered.')
+2017-08-16 05:09:28 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 9, 28), u'txt': '!oy', u'processed': 0, u'chatID': 24226}
+('!oy', ' reward entered.')
+2017-08-16 05:10:01 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 10, 1), u'txt': '!cn', u'processed': 0, u'chatID': 24227}
+('!cn', ' reward entered.')
+2017-08-16 05:10:29 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 10, 29), u'txt': '!pn', u'processed': 0, u'chatID': 24228}
+('!pn', ' reward entered.')
+2017-08-16 05:10:31 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 10, 31), u'txt': '!pd', u'processed': 0, u'chatID': 24229}
+('!pd', ' reward entered.')
+2017-08-16 05:11:05 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 11, 5), u'txt': '!rn', u'processed': 0, u'chatID': 24230}
+('!rn', ' reward entered.')
+2017-08-16 05:11:36 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 11, 36), u'txt': '!gy', u'processed': 0, u'chatID': 24231}
+('!gy', ' reward entered.')
+2017-08-16 05:11:38 {u'username': 'juliuzns', u'timeArrival': datetime.datetime(2017, 8, 16, 5, 11, 38), u'txt': '!gl', u'processed': 0, u'chatID': 24232}
+('!gl', ' reward entered.')
+2017-08-16 06:44:37 {u'username': 'highlord1', u'timeArrival': datetime.datetime(2017, 8, 16, 6, 44, 37), u'txt': '!oy', u'processed': 0, u'chatID': 24233}
+('!oy', 'first time contribution')
+('!oy', ' reward entered.')
+2017-08-16 07:07:12 {u'username': 'jistax', u'timeArrival': datetime.datetime(2017, 8, 16, 7, 7, 12), u'txt': '!cy', u'processed': 0, u'chatID': 24234}
+('!cy', 'first time contribution')
+('!cy', ' reward entered.')
+2017-08-16 08:19:55 {u'username': 'gummybear101010', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 19, 55), u'txt': '!walk', u'processed': 0, u'chatID': 24235}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'gummybear101010' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 08:21:23 {u'username': 'gummybear101010', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 21, 23), u'txt': '!pn', u'processed': 0, u'chatID': 24236}
+('!pn', ' reward entered.')
+2017-08-16 08:21:53 {u'username': 'gummybear101010', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 21, 53), u'txt': '!py', u'processed': 0, u'chatID': 24237}
+('!py', ' reward entered.')
+2017-08-16 08:21:58 {u'username': 'gummybear101010', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 21, 58), u'txt': '!rd', u'processed': 0, u'chatID': 24238}
+('!rd', ' reward entered.')
+2017-08-16 08:22:09 {u'username': 'gummybear101010', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 22, 9), u'txt': '!gn', u'processed': 0, u'chatID': 24239}
+('!gn', ' reward entered.')
+2017-08-16 08:22:20 {u'username': 'gummybear101010', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 22, 20), u'txt': '!gd', u'processed': 0, u'chatID': 24240}
+('!gd', ' reward entered.')
+2017-08-16 08:33:20 {u'username': 'frowrik', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 33, 20), u'txt': '!command', u'processed': 0, u'chatID': 24241}
+('!command', 'first time contribution')
+('!command', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'command' for key 'PRIMARY'")
+  self._do_get_result()
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'frowrik' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 08:33:51 {u'username': 'frowrik', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 33, 51), u'txt': '!move', u'processed': 0, u'chatID': 24242}
+('!move', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'move' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-16 08:35:25 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 35, 25), u'txt': '!oy', u'processed': 0, u'chatID': 24243}
+('!oy', 'first time contribution')
+('!oy', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'kgemmricher' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 08:36:02 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 36, 2), u'txt': '!cy', u'processed': 0, u'chatID': 24244}
+('!cy', ' reward entered.')
+2017-08-16 08:36:17 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 36, 17), u'txt': '?scores', u'processed': 0, u'chatID': 24245}
+('?scores', ' help requested.')
+2017-08-16 08:36:27 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 36, 27), u'txt': '!py', u'processed': 0, u'chatID': 24246}
+('!py', ' reward entered.')
+2017-08-16 08:36:46 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 36, 46), u'txt': '!pd', u'processed': 0, u'chatID': 24247}
+('!pd', ' reward entered.')
+2017-08-16 08:36:57 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 36, 57), u'txt': '!rd', u'processed': 0, u'chatID': 24248}
+('!rd', ' reward entered.')
+2017-08-16 08:37:22 {u'username': 'kgemmricher', u'timeArrival': datetime.datetime(2017, 8, 16, 8, 37, 22), u'txt': '?', u'processed': 0, u'chatID': 24249}
+('?', ' help requested.')
+2017-08-16 09:25:29 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 16, 9, 25, 29), u'txt': '?', u'processed': 0, u'chatID': 24250}
+('?', ' help requested.')
+2017-08-16 12:22:00 {u'username': 'drynzen', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 22), u'txt': '!rd', u'processed': 0, u'chatID': 24251}
+('!rd', 'first time contribution')
+('!rd', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'drynzen' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 12:23:18 {u'username': 'drynzen', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 23, 18), u'txt': '!bn', u'processed': 0, u'chatID': 24252}
+('!bn', ' reward entered.')
+2017-08-16 12:23:38 {u'username': 'drynzen', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 23, 38), u'txt': '!on', u'processed': 0, u'chatID': 24253}
+('!on', ' reward entered.')
+2017-08-16 12:27:44 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 27, 44), u'txt': '!fight', u'processed': 0, u'chatID': 24254}
+('!fight', ' command entered.')
+2017-08-16 12:29:45 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 29, 45), u'txt': '!od', u'processed': 0, u'chatID': 24255}
+('!od', ' reward entered.')
+2017-08-16 12:31:23 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 31, 23), u'txt': '! rl', u'processed': 0, u'chatID': 24256}
+('! rl', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry ' rl' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-16 12:31:31 {u'username': 'comicscare1709', u'timeArrival': datetime.datetime(2017, 8, 16, 12, 31, 31), u'txt': '!rl', u'processed': 0, u'chatID': 24257}
+('!rl', ' reward entered.')
+2017-08-16 16:36:31 {u'username': 'doctorjoshuvm', u'timeArrival': datetime.datetime(2017, 8, 16, 16, 36, 31), u'txt': '?', u'processed': 0, u'chatID': 24258}
+('?', ' help requested.')
+2017-08-16 17:18:44 {u'username': 'supergamemaker', u'timeArrival': datetime.datetime(2017, 8, 16, 17, 18, 44), u'txt': '!walk', u'processed': 0, u'chatID': 24259}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+2017-08-16 18:29:49 {u'username': 'j99970', u'timeArrival': datetime.datetime(2017, 8, 16, 18, 29, 49), u'txt': '!gn n', u'processed': 0, u'chatID': 24260}
+('!gn n', 'first time contribution')
+('!gn n', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'j99970' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 18:30:16 {u'username': 'j99970', u'timeArrival': datetime.datetime(2017, 8, 16, 18, 30, 16), u'txt': '!b b n', u'processed': 0, u'chatID': 24261}
+('!b b n', ' command entered.')
+2017-08-16 18:30:41 {u'username': 'j99970', u'timeArrival': datetime.datetime(2017, 8, 16, 18, 30, 41), u'txt': '!o n', u'processed': 0, u'chatID': 24262}
+('!o n', ' command entered.')
+2017-08-16 18:31:08 {u'username': 'j99970', u'timeArrival': datetime.datetime(2017, 8, 16, 18, 31, 8), u'txt': '!c n', u'processed': 0, u'chatID': 24263}
+('!c n', ' command entered.')
+2017-08-16 18:51:36 {u'username': 'broccoli_wizard', u'timeArrival': datetime.datetime(2017, 8, 16, 18, 51, 36), u'txt': '!bn', u'processed': 0, u'chatID': 24264}
+('!bn', 'first time contribution')
+('!bn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'broccoli_wizard' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 18:51:58 {u'username': 'broccoli_wizard', u'timeArrival': datetime.datetime(2017, 8, 16, 18, 51, 58), u'txt': '!oy', u'processed': 0, u'chatID': 24265}
+('!oy', ' reward entered.')
+2017-08-16 19:14:23 {u'username': 'misterfishy12', u'timeArrival': datetime.datetime(2017, 8, 16, 19, 14, 23), u'txt': '!walk', u'processed': 0, u'chatID': 24266}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'misterfishy12' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 19:14:40 {u'username': 'misterfishy12', u'timeArrival': datetime.datetime(2017, 8, 16, 19, 14, 40), u'txt': '!stop', u'processed': 0, u'chatID': 24267}
+('!stop', ' command entered.')
+2017-08-16 19:15:04 {u'username': 'misterfishy12', u'timeArrival': datetime.datetime(2017, 8, 16, 19, 15, 4), u'txt': '!flip', u'processed': 0, u'chatID': 24268}
+('!flip', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'flip' for key 'PRIMARY'")
+  self._do_get_result()
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'rodrigoxbg' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-16 19:31:05 {u'username': 'rodrigoxbg', u'timeArrival': datetime.datetime(2017, 8, 16, 19, 31, 5), u'txt': '!spin', u'processed': 0, u'chatID': 24269}
+('!spin', ' command entered.')
+2017-08-16 22:08:42 {u'username': 'zmahoor', u'timeArrival': datetime.datetime(2017, 8, 16, 22, 8, 42), u'txt': '?', u'processed': 0, u'chatID': 24270}
+('?', ' help requested.')
+2017-08-17 02:18:58 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 18, 58), u'txt': '!on', u'processed': 0, u'chatID': 24271}
+('!on', 'first time contribution')
+('!on', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'marlon99rocks' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 02:19:12 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 19, 12), u'txt': '!oy', u'processed': 0, u'chatID': 24272}
+('!oy', ' reward entered.')
+2017-08-17 02:19:29 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 19, 29), u'txt': '!cy', u'processed': 0, u'chatID': 24273}
+('!cy', ' reward entered.')
+2017-08-17 02:19:56 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 19, 56), u'txt': '!pn', u'processed': 0, u'chatID': 24274}
+('!pn', ' reward entered.')
+2017-08-17 02:20:09 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 20, 9), u'txt': '!pl', u'processed': 0, u'chatID': 24275}
+('!pl', ' reward entered.')
+2017-08-17 02:20:31 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 20, 31), u'txt': '!rl', u'processed': 0, u'chatID': 24276}
+('!rl', ' reward entered.')
+2017-08-17 02:20:57 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 20, 57), u'txt': '!gy', u'processed': 0, u'chatID': 24277}
+('!gy', ' reward entered.')
+2017-08-17 02:21:29 {u'username': 'marlon99rocks', u'timeArrival': datetime.datetime(2017, 8, 17, 2, 21, 29), u'txt': '!by', u'processed': 0, u'chatID': 24278}
+('!by', ' reward entered.')
+2017-08-17 04:45:29 {u'username': 'kauddix', u'timeArrival': datetime.datetime(2017, 8, 17, 4, 45, 29), u'txt': '!ry', u'processed': 0, u'chatID': 24279}
+('!ry', 'first time contribution')
+('!ry', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'kauddix' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 04:45:48 {u'username': 'kauddix', u'timeArrival': datetime.datetime(2017, 8, 17, 4, 45, 48), u'txt': 'walk', u'processed': 0, u'chatID': 24280}
+('walk', ' discarded.')
+2017-08-17 06:28:20 {u'username': 'wetteerbro', u'timeArrival': datetime.datetime(2017, 8, 17, 6, 28, 20), u'txt': '!bd', u'processed': 0, u'chatID': 24281}
+('!bd', 'first time contribution')
+('!bd', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'wetteerbro' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 06:35:04 {u'username': 'wetteerbro', u'timeArrival': datetime.datetime(2017, 8, 17, 6, 35, 4), u'txt': '!walk', u'processed': 0, u'chatID': 24282}
+('!walk', ' command entered.')
+2017-08-17 10:16:16 {u'username': 'chln93', u'timeArrival': datetime.datetime(2017, 8, 17, 10, 16, 16), u'txt': 'g', u'processed': 0, u'chatID': 24283}
+('g', ' discarded.')
+2017-08-17 11:53:13 {u'username': 'wattzy49', u'timeArrival': datetime.datetime(2017, 8, 17, 11, 53, 13), u'txt': '!walk', u'processed': 0, u'chatID': 24284}
+('!walk', 'first time contribution')
+('!walk', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'wattzy49' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 11:53:33 {u'username': 'wattzy49', u'timeArrival': datetime.datetime(2017, 8, 17, 11, 53, 33), u'txt': '!cd', u'processed': 0, u'chatID': 24285}
+('!cd', ' reward entered.')
+2017-08-17 12:18:27 {u'username': 'skywalker0112', u'timeArrival': datetime.datetime(2017, 8, 17, 12, 18, 27), u'txt': '!cy', u'processed': 0, u'chatID': 24286}
+('!cy', 'first time contribution')
+('!cy', ' reward entered.')
+2017-08-17 12:52:21 {u'username': 'traumatr1gg3r', u'timeArrival': datetime.datetime(2017, 8, 17, 12, 52, 21), u'txt': '!sn', u'processed': 0, u'chatID': 24287}
+('!sn', 'first time contribution')
+('!sn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'traumatr1gg3r' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 12:52:41 {u'username': 'traumatr1gg3r', u'timeArrival': datetime.datetime(2017, 8, 17, 12, 52, 41), u'txt': '!sy', u'processed': 0, u'chatID': 24288}
+('!sy', ' reward entered.')
+2017-08-17 12:53:06 {u'username': 'traumatr1gg3r', u'timeArrival': datetime.datetime(2017, 8, 17, 12, 53, 6), u'txt': '!rn', u'processed': 0, u'chatID': 24289}
+('!rn', ' reward entered.')
+2017-08-17 12:53:20 {u'username': 'traumatr1gg3r', u'timeArrival': datetime.datetime(2017, 8, 17, 12, 53, 20), u'txt': '!ry', u'processed': 0, u'chatID': 24290}
+('!ry', ' reward entered.')
+
+(2013, 'Lost connection to MySQL server during query ([Errno 54] Connection reset by peer)')
+Database version : {u'VERSION()': '5.7.18'} 
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'junglegeee' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 21:04:33 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 4, 33), u'txt': '?', u'processed': 0, u'chatID': 24291}
+('?', ' help requested.')
+2017-08-17 21:09:12 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 9, 12), u'txt': '?', u'processed': 0, u'chatID': 24292}
+('?', ' help requested.')
+2017-08-17 21:10:40 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 10, 40), u'txt': '!ol', u'processed': 0, u'chatID': 24293}
+('!ol', ' reward entered.')
+2017-08-17 21:11:05 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 11, 5), u'txt': '!cl', u'processed': 0, u'chatID': 24294}
+('!cl', ' reward entered.')
+2017-08-17 21:11:12 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 11, 12), u'txt': '!cn', u'processed': 0, u'chatID': 24295}
+('!cn', ' reward entered.')
+2017-08-17 21:11:49 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 11, 49), u'txt': '!pn', u'processed': 0, u'chatID': 24296}
+('!pn', ' reward entered.')
+2017-08-17 21:12:33 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 12, 33), u'txt': '!pd', u'processed': 0, u'chatID': 24297}
+('!pd', ' reward entered.')
+2017-08-17 21:12:40 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 12, 40), u'txt': '!ry', u'processed': 0, u'chatID': 24298}
+('!ry', ' reward entered.')
+2017-08-17 21:15:15 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 15, 15), u'txt': '!ol', u'processed': 0, u'chatID': 24299}
+('!ol', ' reward entered.')
+2017-08-17 21:15:28 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 15, 28), u'txt': '!on', u'processed': 0, u'chatID': 24300}
+('!on', ' reward entered.')
+2017-08-17 21:16:19 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 16, 19), u'txt': '!cy', u'processed': 0, u'chatID': 24301}
+('!cy', ' reward entered.')
+2017-08-17 21:16:26 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 16, 26), u'txt': '!cl', u'processed': 0, u'chatID': 24302}
+('!cl', ' reward entered.')
+2017-08-17 21:17:50 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 17, 50), u'txt': '!rn', u'processed': 0, u'chatID': 24303}
+('!rn', ' reward entered.')
+2017-08-17 21:19:01 {u'username': 'dablob448', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 19, 1), u'txt': '!gn', u'processed': 0, u'chatID': 24304}
+('!gn', 'first time contribution')
+('!gn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'dablob448' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 21:19:28 {u'username': 'dablob448', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 19, 28), u'txt': 'ded', u'processed': 0, u'chatID': 24305}
+('ded', ' discarded.')
+2017-08-17 21:20:41 {u'username': 'dablob448', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 20, 41), u'txt': '?', u'processed': 0, u'chatID': 24306}
+('?', ' help requested.')
+2017-08-17 21:20:47 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 20, 47), u'txt': '!cn', u'processed': 0, u'chatID': 24307}
+('!cn', ' reward entered.')
+2017-08-17 21:21:05 {u'username': 'dablob448', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 21, 5), u'txt': '!rn', u'processed': 0, u'chatID': 24308}
+('!rn', ' reward entered.')
+2017-08-17 21:21:21 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 21, 21), u'txt': '!pn', u'processed': 0, u'chatID': 24309}
+('!pn', ' reward entered.')
+2017-08-17 21:21:44 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 21, 44), u'txt': '?votes', u'processed': 0, u'chatID': 24310}
+('?votes', ' help requested.')
+2017-08-17 21:22:08 {u'username': 'dablob448', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 22, 8), u'txt': '!by', u'processed': 0, u'chatID': 24311}
+('!by', ' reward entered.')
+2017-08-17 21:22:16 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 22, 16), u'txt': '!rn', u'processed': 0, u'chatID': 24312}
+('!rn', ' reward entered.')
+2017-08-17 21:22:46 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 22, 46), u'txt': 'the stream is buffering for me', u'processed': 0, u'chatID': 24313}
+('the stream is buffering for me', ' discarded.')
+2017-08-17 21:23:36 {u'username': 'junglegeee', u'timeArrival': datetime.datetime(2017, 8, 17, 21, 23, 36), u'txt': '!by', u'processed': 0, u'chatID': 24314}
+('!by', ' reward entered.')
+2017-08-17 22:19:58 {u'username': 'pikachu32x', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 19, 58), u'txt': '!rd', u'processed': 0, u'chatID': 24315}
+('!rd', 'first time contribution')
+('!rd', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'pikachu32x' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 22:20:18 {u'username': 'pikachu32x', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 20, 18), u'txt': '!gd', u'processed': 0, u'chatID': 24316}
+('!gd', ' reward entered.')
+2017-08-17 22:47:01 {u'username': 'leifthrasirv', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 47, 1), u'txt': '!jump', u'processed': 0, u'chatID': 24317}
+('!jump', 'first time contribution')
+('!jump', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'leifthrasirv' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 22:48:19 {u'username': 'leifthrasirv', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 48, 19), u'txt': '!bn', u'processed': 0, u'chatID': 24318}
+('!bn', ' reward entered.')
+2017-08-17 22:50:29 {u'username': 'leifthrasirv', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 50, 29), u'txt': '!rn', u'processed': 0, u'chatID': 24319}
+('!rn', ' reward entered.')
+2017-08-17 22:51:41 {u'username': 'leifthrasirv', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 51, 41), u'txt': '?help', u'processed': 0, u'chatID': 24320}
+('?help', ' help requested.')
+2017-08-17 22:52:02 {u'username': 'leifthrasirv', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 52, 2), u'txt': '!ol', u'processed': 0, u'chatID': 24321}
+('!ol', ' reward entered.')
+2017-08-17 22:52:36 {u'username': 'leifthrasirv', u'timeArrival': datetime.datetime(2017, 8, 17, 22, 52, 36), u'txt': '?commandscores', u'processed': 0, u'chatID': 24322}
+('?commandscores', ' help requested.')
+2017-08-17 23:47:20 {u'username': 'mrarnimal', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 47, 20), u'txt': '!oy', u'processed': 0, u'chatID': 24323}
+('!oy', 'first time contribution')
+('!oy', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'mrarnimal' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 23:47:42 {u'username': 'mrarnimal', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 47, 42), u'txt': '!cl', u'processed': 0, u'chatID': 24324}
+('!cl', ' reward entered.')
+2017-08-17 23:47:55 {u'username': 'mrarnimal', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 47, 55), u'txt': '!cy', u'processed': 0, u'chatID': 24325}
+('!cy', ' reward entered.')
+2017-08-17 23:47:57 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 47, 57), u'txt': '!cl', u'processed': 0, u'chatID': 24326}
+('!cl', 'first time contribution')
+('!cl', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'chesterlescure' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-17 23:48:12 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 48, 12), u'txt': '!pd', u'processed': 0, u'chatID': 24327}
+('!pd', ' reward entered.')
+2017-08-17 23:48:56 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 48, 56), u'txt': '!rn', u'processed': 0, u'chatID': 24328}
+('!rn', ' reward entered.')
+2017-08-17 23:49:10 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 49, 10), u'txt': '!gy', u'processed': 0, u'chatID': 24329}
+('!gy', ' reward entered.')
+2017-08-17 23:49:22 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 49, 22), u'txt': '!gd', u'processed': 0, u'chatID': 24330}
+('!gd', ' reward entered.')
+2017-08-17 23:49:48 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 49, 48), u'txt': '!bl', u'processed': 0, u'chatID': 24331}
+('!bl', ' reward entered.')
+2017-08-17 23:49:55 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 49, 55), u'txt': '!by', u'processed': 0, u'chatID': 24332}
+('!by', ' reward entered.')
+2017-08-17 23:50:16 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 50, 16), u'txt': '!oy', u'processed': 0, u'chatID': 24333}
+('!oy', ' reward entered.')
+2017-08-17 23:50:26 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 50, 26), u'txt': '!od', u'processed': 0, u'chatID': 24334}
+('!od', ' reward entered.')
+2017-08-17 23:50:45 {u'username': 'chesterlescure', u'timeArrival': datetime.datetime(2017, 8, 17, 23, 50, 45), u'txt': '!cn', u'processed': 0, u'chatID': 24335}
+('!cn', ' reward entered.')
+2017-08-18 01:17:35 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 17, 35), u'txt': '!command suck', u'processed': 0, u'chatID': 24336}
+('!command suck', 'first time contribution')
+('!command suck', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'knightzito23' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-18 01:17:57 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 17, 57), u'txt': '!rn', u'processed': 0, u'chatID': 24337}
+('!rn', ' reward entered.')
+2017-08-18 01:18:03 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 18, 3), u'txt': '!rn', u'processed': 0, u'chatID': 24338}
+('!rn', 'first time contribution')
+('!rn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'lowtierking' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-18 01:18:30 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 18, 30), u'txt': '!gn', u'processed': 0, u'chatID': 24339}
+('!gn', ' reward entered.')
+2017-08-18 01:18:33 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 18, 33), u'txt': '!gn', u'processed': 0, u'chatID': 24340}
+('!gn', ' reward entered.')
+2017-08-18 01:18:50 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 18, 50), u'txt': 'bn', u'processed': 0, u'chatID': 24341}
+('bn', ' discarded.')
+2017-08-18 01:18:52 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 18, 52), u'txt': '!bn', u'processed': 0, u'chatID': 24342}
+('!bn', ' reward entered.')
+2017-08-18 01:18:53 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 18, 53), u'txt': '!bn', u'processed': 0, u'chatID': 24343}
+('!bn', ' reward entered.')
+2017-08-18 01:19:26 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 19, 26), u'txt': '!oy', u'processed': 0, u'chatID': 24344}
+('!oy', ' reward entered.')
+2017-08-18 01:19:36 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 19, 36), u'txt': '!oy', u'processed': 0, u'chatID': 24345}
+('!oy', ' reward entered.')
+2017-08-18 01:20:01 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 20, 1), u'txt': '!cn', u'processed': 0, u'chatID': 24346}
+('!cn', ' reward entered.')
+2017-08-18 01:20:02 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 20, 2), u'txt': '!cn', u'processed': 0, u'chatID': 24347}
+('!cn', ' reward entered.')
+2017-08-18 01:20:31 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 20, 31), u'txt': '!pn', u'processed': 0, u'chatID': 24348}
+('!pn', ' reward entered.')
+2017-08-18 01:20:35 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 20, 35), u'txt': '!pn', u'processed': 0, u'chatID': 24349}
+('!pn', ' reward entered.')
+2017-08-18 01:20:56 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 20, 56), u'txt': '!rn', u'processed': 0, u'chatID': 24350}
+('!rn', ' reward entered.')
+2017-08-18 01:20:58 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 20, 58), u'txt': '!ry', u'processed': 0, u'chatID': 24351}
+('!ry', ' reward entered.')
+2017-08-18 01:21:02 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 21, 2), u'txt': '!ry', u'processed': 0, u'chatID': 24352}
+('!ry', ' reward entered.')
+2017-08-18 01:21:15 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 21, 15), u'txt': '!fly', u'processed': 0, u'chatID': 24353}
+('!fly', ' command entered.')
+2017-08-18 01:21:38 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 21, 38), u'txt': '!gn', u'processed': 0, u'chatID': 24354}
+('!gn', ' reward entered.')
+2017-08-18 01:21:38 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 21, 38), u'txt': '!gn', u'processed': 0, u'chatID': 24355}
+('!gn', ' reward entered.')
+2017-08-18 01:21:41 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 21, 41), u'txt': '!fly', u'processed': 0, u'chatID': 24356}
+('!fly', ' command entered.')
+2017-08-18 01:22:00 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 22), u'txt': '!bn', u'processed': 0, u'chatID': 24357}
+('!bn', ' reward entered.')
+2017-08-18 01:22:06 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 22, 6), u'txt': '!bn', u'processed': 0, u'chatID': 24358}
+('!bn', ' reward entered.')
+2017-08-18 01:22:41 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 22, 41), u'txt': '!on', u'processed': 0, u'chatID': 24359}
+('!on', ' reward entered.')
+2017-08-18 01:22:42 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 22, 42), u'txt': '!on', u'processed': 0, u'chatID': 24360}
+('!on', ' reward entered.')
+2017-08-18 01:23:01 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 23, 1), u'txt': '!cn', u'processed': 0, u'chatID': 24361}
+('!cn', ' reward entered.')
+2017-08-18 01:23:04 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 23, 4), u'txt': '!cn', u'processed': 0, u'chatID': 24362}
+('!cn', ' reward entered.')
+2017-08-18 01:23:28 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 23, 28), u'txt': '!pn', u'processed': 0, u'chatID': 24363}
+('!pn', ' reward entered.')
+2017-08-18 01:23:39 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 23, 39), u'txt': '!pn', u'processed': 0, u'chatID': 24364}
+('!pn', ' reward entered.')
+2017-08-18 01:24:08 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 24, 8), u'txt': '!rn', u'processed': 0, u'chatID': 24365}
+('!rn', ' reward entered.')
+2017-08-18 01:24:12 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 24, 12), u'txt': '!rn', u'processed': 0, u'chatID': 24366}
+('!rn', ' reward entered.')
+2017-08-18 01:24:41 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 24, 41), u'txt': '!gn', u'processed': 0, u'chatID': 24367}
+('!gn', ' reward entered.')
+2017-08-18 01:24:42 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 24, 42), u'txt': '!gn', u'processed': 0, u'chatID': 24368}
+('!gn', ' reward entered.')
+2017-08-18 01:25:03 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 3), u'txt': '!bd', u'processed': 0, u'chatID': 24369}
+('!bd', ' reward entered.')
+2017-08-18 01:25:06 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 6), u'txt': '!bn', u'processed': 0, u'chatID': 24370}
+('!bn', ' reward entered.')
+2017-08-18 01:25:07 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 7), u'txt': '!bd', u'processed': 0, u'chatID': 24371}
+('!bd', ' reward entered.')
+2017-08-18 01:25:16 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 16), u'txt': '!levitate', u'processed': 0, u'chatID': 24372}
+('!levitate', ' command entered.')
+2017-08-18 01:25:33 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 33), u'txt': '!levitate', u'processed': 0, u'chatID': 24373}
+('!levitate', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'levitate' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-18 01:25:39 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 39), u'txt': '!on', u'processed': 0, u'chatID': 24374}
+('!on', ' reward entered.')
+2017-08-18 01:25:41 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 25, 41), u'txt': '!on', u'processed': 0, u'chatID': 24375}
+('!on', ' reward entered.')
+2017-08-18 01:26:06 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 26, 6), u'txt': '!cn', u'processed': 0, u'chatID': 24376}
+('!cn', ' reward entered.')
+2017-08-18 01:26:10 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 26, 10), u'txt': '!cn', u'processed': 0, u'chatID': 24377}
+('!cn', ' reward entered.')
+2017-08-18 01:26:32 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 26, 32), u'txt': '!roll forward', u'processed': 0, u'chatID': 24378}
+('!roll forward', ' command entered.')
+2017-08-18 01:26:46 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 26, 46), u'txt': '!pn', u'processed': 0, u'chatID': 24379}
+('!pn', ' reward entered.')
+2017-08-18 01:26:47 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 26, 47), u'txt': '!roll forward', u'processed': 0, u'chatID': 24380}
+('!roll forward', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'roll forward' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-18 01:26:54 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 26, 54), u'txt': '!pn', u'processed': 0, u'chatID': 24381}
+('!pn', ' reward entered.')
+2017-08-18 01:27:04 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 27, 4), u'txt': '!rn', u'processed': 0, u'chatID': 24382}
+('!rn', ' reward entered.')
+2017-08-18 01:27:13 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 27, 13), u'txt': '!rn', u'processed': 0, u'chatID': 24383}
+('!rn', ' reward entered.')
+2017-08-18 01:27:34 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 27, 34), u'txt': '!gn', u'processed': 0, u'chatID': 24384}
+('!gn', ' reward entered.')
+2017-08-18 01:27:40 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 27, 40), u'txt': '!gn', u'processed': 0, u'chatID': 24385}
+('!gn', ' reward entered.')
+2017-08-18 01:28:19 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 28, 19), u'txt': '!bn', u'processed': 0, u'chatID': 24386}
+('!bn', ' reward entered.')
+2017-08-18 01:28:48 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 28, 48), u'txt': '!on', u'processed': 0, u'chatID': 24387}
+('!on', ' reward entered.')
+2017-08-18 01:29:12 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 29, 12), u'txt': '!bn', u'processed': 0, u'chatID': 24388}
+('!bn', ' reward entered.')
+2017-08-18 01:29:17 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 29, 17), u'txt': '!cn', u'processed': 0, u'chatID': 24389}
+('!cn', ' reward entered.')
+2017-08-18 01:29:22 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 29, 22), u'txt': '!cn', u'processed': 0, u'chatID': 24390}
+('!cn', ' reward entered.')
+2017-08-18 01:29:43 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 29, 43), u'txt': '!pn', u'processed': 0, u'chatID': 24391}
+('!pn', ' reward entered.')
+2017-08-18 01:29:44 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 29, 44), u'txt': '!pn', u'processed': 0, u'chatID': 24392}
+('!pn', ' reward entered.')
+2017-08-18 01:30:12 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 30, 12), u'txt': '!rn', u'processed': 0, u'chatID': 24393}
+('!rn', ' reward entered.')
+2017-08-18 01:30:15 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 30, 15), u'txt': '!rn', u'processed': 0, u'chatID': 24394}
+('!rn', ' reward entered.')
+2017-08-18 01:30:44 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 30, 44), u'txt': '!gn', u'processed': 0, u'chatID': 24395}
+('!gn', ' reward entered.')
+2017-08-18 01:30:49 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 30, 49), u'txt': '!gn', u'processed': 0, u'chatID': 24396}
+('!gn', ' reward entered.')
+2017-08-18 01:31:08 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 31, 8), u'txt': '!bn', u'processed': 0, u'chatID': 24397}
+('!bn', ' reward entered.')
+2017-08-18 01:31:15 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 31, 15), u'txt': '!bn', u'processed': 0, u'chatID': 24398}
+('!bn', ' reward entered.')
+2017-08-18 01:31:42 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 31, 41), u'txt': '!on', u'processed': 0, u'chatID': 24399}
+('!on', ' reward entered.')
+2017-08-18 01:31:50 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 31, 50), u'txt': '!on', u'processed': 0, u'chatID': 24400}
+('!on', ' reward entered.')
+2017-08-18 01:32:29 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 32, 29), u'txt': '!hold still', u'processed': 0, u'chatID': 24401}
+('!hold still', ' command entered.')
+2017-08-18 01:32:51 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 32, 51), u'txt': '!py', u'processed': 0, u'chatID': 24402}
+('!py', ' reward entered.')
+2017-08-18 01:33:21 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 33, 21), u'txt': '!rn', u'processed': 0, u'chatID': 24403}
+('!rn', ' reward entered.')
+2017-08-18 01:33:33 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 33, 33), u'txt': '!y', u'processed': 0, u'chatID': 24404}
+('!y', ' discarded.')
+2017-08-18 01:33:51 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 33, 51), u'txt': '!gy', u'processed': 0, u'chatID': 24405}
+('!gy', ' reward entered.')
+2017-08-18 01:34:24 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 34, 24), u'txt': '!bn', u'processed': 0, u'chatID': 24406}
+('!bn', ' reward entered.')
+2017-08-18 01:35:14 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 35, 14), u'txt': '!cn', u'processed': 0, u'chatID': 24407}
+('!cn', ' reward entered.')
+2017-08-18 01:35:49 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 35, 49), u'txt': '!py', u'processed': 0, u'chatID': 24408}
+('!py', ' reward entered.')
+2017-08-18 01:36:28 {u'username': 'knightzito23', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 36, 28), u'txt': '!rn', u'processed': 0, u'chatID': 24409}
+('!rn', ' reward entered.')
+2017-08-18 01:39:11 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 39, 11), u'txt': '!commit mass genocide', u'processed': 0, u'chatID': 24410}
+('!commit mass genocide', ' command entered.')
+2017-08-18 01:41:26 {u'username': 'lowtierking', u'timeArrival': datetime.datetime(2017, 8, 18, 1, 41, 26), u'txt': '!cy', u'processed': 0, u'chatID': 24411}
+('!cy', ' reward entered.')
+2017-08-18 03:21:39 {u'username': 'minibuka1', u'timeArrival': datetime.datetime(2017, 8, 18, 3, 21, 39), u'txt': '!gy', u'processed': 0, u'chatID': 24412}
+('!gy', 'first time contribution')
+('!gy', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'minibuka1' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-18 03:21:51 {u'username': 'minibuka1', u'timeArrival': datetime.datetime(2017, 8, 18, 3, 21, 51), u'txt': '!by', u'processed': 0, u'chatID': 24413}
+('!by', ' reward entered.')
+2017-08-18 03:22:00 {u'username': 'minibuka1', u'timeArrival': datetime.datetime(2017, 8, 18, 3, 22), u'txt': '!bl', u'processed': 0, u'chatID': 24414}
+('!bl', ' reward entered.')
+2017-08-18 04:33:09 {u'username': 'hammersedge', u'timeArrival': datetime.datetime(2017, 8, 18, 4, 33, 9), u'txt': '?', u'processed': 0, u'chatID': 24415}
+('?', ' help requested.')
+2017-08-18 04:59:45 {u'username': 'nighthawk52', u'timeArrival': datetime.datetime(2017, 8, 18, 4, 59, 45), u'txt': 'what is this', u'processed': 0, u'chatID': 24416}
+('what is this', ' discarded.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'nighthawk52' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-18 05:00:39 {u'username': 'nighthawk52', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 0, 39), u'txt': '!command', u'processed': 0, u'chatID': 24417}
+('!command', 'first time contribution')
+('!command', ' command entered.')
+2017-08-18 05:00:58 {u'username': 'nighthawk52', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 0, 58), u'txt': '!jump', u'processed': 0, u'chatID': 24418}
+('!jump', ' command entered.')
+2017-08-18 05:33:38 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 33, 38), u'txt': '!rn', u'processed': 0, u'chatID': 24419}
+('!rn', 'first time contribution')
+('!rn', ' reward entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'undera4' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-18 05:33:54 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 33, 54), u'txt': '!rl', u'processed': 0, u'chatID': 24420}
+('!rl', ' reward entered.')
+2017-08-18 05:33:59 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 33, 59), u'txt': '!rd', u'processed': 0, u'chatID': 24421}
+('!rd', ' reward entered.')
+2017-08-18 05:34:05 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 34, 5), u'txt': '!gl', u'processed': 0, u'chatID': 24422}
+('!gl', ' reward entered.')
+2017-08-18 05:34:10 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 34, 10), u'txt': '!gn', u'processed': 0, u'chatID': 24423}
+('!gn', ' reward entered.')
+2017-08-18 05:34:30 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 34, 30), u'txt': '!bn', u'processed': 0, u'chatID': 24424}
+('!bn', ' reward entered.')
+2017-08-18 05:34:32 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 34, 32), u'txt': '!bd', u'processed': 0, u'chatID': 24425}
+('!bd', ' reward entered.')
+2017-08-18 05:35:02 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 35, 2), u'txt': '!ol', u'processed': 0, u'chatID': 24426}
+('!ol', ' reward entered.')
+2017-08-18 05:35:10 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 35, 10), u'txt': '!oy', u'processed': 0, u'chatID': 24427}
+('!oy', ' reward entered.')
+2017-08-18 05:35:31 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 35, 31), u'txt': '!rn', u'processed': 0, u'chatID': 24428}
+('!rn', ' reward entered.')
+2017-08-18 05:35:37 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 35, 37), u'txt': '!cn', u'processed': 0, u'chatID': 24429}
+('!cn', ' reward entered.')
+2017-08-18 05:35:40 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 35, 40), u'txt': '!cl', u'processed': 0, u'chatID': 24430}
+('!cl', ' reward entered.')
+2017-08-18 05:36:00 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 36), u'txt': '!pl', u'processed': 0, u'chatID': 24431}
+('!pl', ' reward entered.')
+2017-08-18 05:36:02 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 36, 2), u'txt': '!py', u'processed': 0, u'chatID': 24432}
+('!py', ' reward entered.')
+2017-08-18 05:36:31 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 36, 31), u'txt': '!rl', u'processed': 0, u'chatID': 24433}
+('!rl', ' reward entered.')
+2017-08-18 05:36:33 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 36, 33), u'txt': '!rn', u'processed': 0, u'chatID': 24434}
+('!rn', ' reward entered.')
+2017-08-18 05:37:03 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 37, 3), u'txt': '!gl', u'processed': 0, u'chatID': 24435}
+('!gl', ' reward entered.')
+2017-08-18 05:37:08 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 37, 8), u'txt': '!gn', u'processed': 0, u'chatID': 24436}
+('!gn', ' reward entered.')
+2017-08-18 05:37:33 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 37, 33), u'txt': '!by', u'processed': 0, u'chatID': 24437}
+('!by', ' reward entered.')
+2017-08-18 05:37:38 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 37, 38), u'txt': '!bl', u'processed': 0, u'chatID': 24438}
+('!bl', ' reward entered.')
+2017-08-18 05:38:06 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 38, 6), u'txt': '!oy', u'processed': 0, u'chatID': 24439}
+('!oy', ' reward entered.')
+2017-08-18 05:38:09 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 38, 9), u'txt': '!ol', u'processed': 0, u'chatID': 24440}
+('!ol', ' reward entered.')
+2017-08-18 05:38:30 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 38, 30), u'txt': '!stand', u'processed': 0, u'chatID': 24441}
+('!stand', ' command entered.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'stand' for key 'PRIMARY'")
+  self._do_get_result()
+2017-08-18 05:38:39 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 38, 39), u'txt': '!cn', u'processed': 0, u'chatID': 24442}
+('!cn', ' reward entered.')
+2017-08-18 05:38:59 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 38, 59), u'txt': '!cd', u'processed': 0, u'chatID': 24443}
+('!cd', ' reward entered.')
+2017-08-18 05:39:11 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 39, 11), u'txt': '!pn', u'processed': 0, u'chatID': 24444}
+('!pn', ' reward entered.')
+2017-08-18 05:39:13 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 39, 13), u'txt': '!pl', u'processed': 0, u'chatID': 24445}
+('!pl', ' reward entered.')
+2017-08-18 05:39:35 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 39, 35), u'txt': '!rd', u'processed': 0, u'chatID': 24446}
+('!rd', ' reward entered.')
+2017-08-18 05:39:37 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 39, 37), u'txt': '!rn', u'processed': 0, u'chatID': 24447}
+('!rn', ' reward entered.')
+2017-08-18 05:40:08 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 40, 8), u'txt': '!gy', u'processed': 0, u'chatID': 24448}
+('!gy', ' reward entered.')
+2017-08-18 05:40:13 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 40, 13), u'txt': '!gl', u'processed': 0, u'chatID': 24449}
+('!gl', ' reward entered.')
+2017-08-18 05:40:38 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 40, 38), u'txt': '!bn', u'processed': 0, u'chatID': 24450}
+('!bn', ' reward entered.')
+2017-08-18 05:40:40 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 40, 40), u'txt': '!bd', u'processed': 0, u'chatID': 24451}
+('!bd', ' reward entered.')
+2017-08-18 05:41:13 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 41, 13), u'txt': '!oy', u'processed': 0, u'chatID': 24452}
+('!oy', ' reward entered.')
+2017-08-18 05:41:16 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 41, 16), u'txt': '!ol', u'processed': 0, u'chatID': 24453}
+('!ol', ' reward entered.')
+2017-08-18 05:41:39 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 41, 39), u'txt': '!cn', u'processed': 0, u'chatID': 24454}
+('!cn', ' reward entered.')
+2017-08-18 05:41:41 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 41, 41), u'txt': '!cd', u'processed': 0, u'chatID': 24455}
+('!cd', ' reward entered.')
+2017-08-18 05:42:13 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 42, 13), u'txt': '!pn', u'processed': 0, u'chatID': 24456}
+('!pn', ' reward entered.')
+2017-08-18 05:42:15 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 42, 15), u'txt': '!pd', u'processed': 0, u'chatID': 24457}
+('!pd', ' reward entered.')
+2017-08-18 05:42:44 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 42, 44), u'txt': '!ry', u'processed': 0, u'chatID': 24458}
+('!ry', ' reward entered.')
+2017-08-18 05:42:46 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 42, 46), u'txt': '!rl', u'processed': 0, u'chatID': 24459}
+('!rl', ' reward entered.')
+2017-08-18 05:43:03 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 43, 3), u'txt': '!jump', u'processed': 0, u'chatID': 24460}
+('!jump', ' command entered.')
+2017-08-18 05:43:15 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 43, 15), u'txt': '!gn', u'processed': 0, u'chatID': 24461}
+('!gn', ' reward entered.')
+2017-08-18 05:43:16 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 43, 16), u'txt': '!gl', u'processed': 0, u'chatID': 24462}
+('!gl', ' reward entered.')
+2017-08-18 05:43:42 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 43, 42), u'txt': '!bn', u'processed': 0, u'chatID': 24463}
+('!bn', ' reward entered.')
+2017-08-18 05:43:44 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 43, 44), u'txt': '!bl', u'processed': 0, u'chatID': 24464}
+('!bl', ' reward entered.')
+2017-08-18 05:44:18 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 44, 18), u'txt': '!on', u'processed': 0, u'chatID': 24465}
+('!on', ' reward entered.')
+2017-08-18 05:44:27 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 44, 27), u'txt': '!ol', u'processed': 0, u'chatID': 24466}
+('!ol', ' reward entered.')
+2017-08-18 05:44:48 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 44, 48), u'txt': '!cm', u'processed': 0, u'chatID': 24467}
+('!cm', ' discarded.')
+2017-08-18 05:44:51 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 44, 51), u'txt': '!cn', u'processed': 0, u'chatID': 24468}
+('!cn', ' reward entered.')
+2017-08-18 05:44:55 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 44, 55), u'txt': '!cd', u'processed': 0, u'chatID': 24469}
+('!cd', ' reward entered.')
+2017-08-18 05:45:15 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 45, 15), u'txt': '!pn', u'processed': 0, u'chatID': 24470}
+('!pn', ' reward entered.')
+2017-08-18 05:45:18 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 45, 18), u'txt': '!pl', u'processed': 0, u'chatID': 24471}
+('!pl', ' reward entered.')
+2017-08-18 05:46:40 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 46, 40), u'txt': '!gn', u'processed': 0, u'chatID': 24472}
+('!gn', ' reward entered.')
+2017-08-18 05:46:43 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 46, 43), u'txt': '!bn', u'processed': 0, u'chatID': 24473}
+('!bn', ' reward entered.')
+2017-08-18 05:47:21 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 47, 21), u'txt': '!oy', u'processed': 0, u'chatID': 24474}
+('!oy', ' reward entered.')
+2017-08-18 05:47:49 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 47, 49), u'txt': '!cd', u'processed': 0, u'chatID': 24475}
+('!cd', ' reward entered.')
+2017-08-18 05:47:52 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 47, 52), u'txt': '!n', u'processed': 0, u'chatID': 24476}
+('!n', ' discarded.')
+2017-08-18 05:47:54 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 47, 54), u'txt': '!cn', u'processed': 0, u'chatID': 24477}
+('!cn', ' reward entered.')
+2017-08-18 05:48:21 {u'username': 'undera4', u'timeArrival': datetime.datetime(2017, 8, 18, 5, 48, 21), u'txt': '!pn', u'processed': 0, u'chatID': 24478}
+('!pn', ' reward entered.')
+2017-08-18 06:39:27 {u'username': 'straycatca', u'timeArrival': datetime.datetime(2017, 8, 18, 6, 39, 27), u'txt': 'y', u'processed': 0, u'chatID': 24479}
+('y', ' discarded.')
+2017-08-18 06:48:17 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 18, 6, 48, 17), u'txt': '!gl', u'processed': 0, u'chatID': 24480}
+('!gl', ' reward entered.')
+2017-08-18 06:48:18 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 18, 6, 48, 18), u'txt': '!bl', u'processed': 0, u'chatID': 24481}
+('!bl', ' reward entered.')
+2017-08-18 06:48:22 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 18, 6, 48, 22), u'txt': '!bn', u'processed': 0, u'chatID': 24482}
+('!bn', ' reward entered.')
+2017-08-18 06:49:00 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 18, 6, 49), u'txt': '!od', u'processed': 0, u'chatID': 24483}
+('!od', ' reward entered.')
+2017-08-18 06:49:03 {u'username': 'djsapsan', u'timeArrival': datetime.datetime(2017, 8, 18, 6, 49, 3), u'txt': '!on', u'processed': 0, u'chatID': 24484}
+('!on', ' reward entered.')
+2017-08-18 09:51:38 {u'username': 'tristah', u'timeArrival': datetime.datetime(2017, 8, 18, 9, 51, 38), u'txt': '?robots', u'processed': 0, u'chatID': 24485}
+('?robots', ' help requested.')
+/Library/Python/2.7/site-packages/pymysql/cursors.py:323: Warning: (1062, "Duplicate entry 'tristah' for key 'userName_UNIQUE'")
+  self._do_get_result()
+2017-08-18 09:52:12 {u'username': 'tristah', u'timeArrival': datetime.datetime(2017, 8, 18, 9, 52, 12), u'txt': '!rn', u'processed': 0, u'chatID': 24486}
+('!rn', 'first time contribution')
+('!rn', ' reward entered.')
+2017-08-18 09:53:36 {u'username': 'tristah', u'timeArrival': datetime.datetime(2017, 8, 18, 9, 53, 36), u'txt': '!flip', u'processed': 0, u'chatID': 24487}
+('!flip', ' command entered.')
+2017-08-18 09:53:43 {u'username': 'tristah', u'timeArrival': datetime.datetime(2017, 8, 18, 9, 53, 43), u'txt': '!walk', u'processed': 0, u'chatID': 24488}
+('!walk', ' command entered.')
+2017-08-18 09:54:07 {u'username': 'tristah', u'timeArrival': datetime.datetime(2017, 8, 18, 9, 54, 7), u'txt': '!flip', u'processed': 0, u'chatID': 24489}
+('!flip', ' command entered.')
+closed the connection...

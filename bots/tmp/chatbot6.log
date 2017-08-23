@@ -1,0 +1,547 @@
+Database version : {u'VERSION()': '5.7.18'} 
+Connecting to twitch.tv
+Connected to twitch
+Sending our details to twitch...
+:tmi.twitch.tv 001 tpr_bot2 :Welcome, GLHF!
+:tmi.twitch.tv 002 tpr_bot2 :Your host is tmi.twitch.tv
+:tmi.twitch.tv 003 tpr_bot2 :This server is rather new
+:tmi.twitch.tv 004 tpr_bot2 :-
+:tmi.twitch.tv 375 tpr_bot2 :-
+:tmi.twitch.tv 372 tpr_bot2 :You are in a maze of twisty passages, all alike.
+:tmi.twitch.tv 376 tpr_bot2 :>
+:tpr_bot2!tpr_bot2@tpr_bot2.tmi.twitch.tv JOIN #twitchplaysrobotics
+:tpr_bot2.tmi.twitch.tv 353 tpr_bot2 = #twitchplaysrobotics :tpr_bot2
+:tpr_bot2.tmi.twitch.tv 366 tpr_bot2 #twitchplaysrobotics :End of /NAMES list
+Joined twitchplaysrobotics channel..
+Sent: PRIVMSG #twitchplaysrobotics :Joined chat...
+('2017-08-15 17:27:31', 'zmahoor: ?')
+Adding to the chat table...
+('2017-08-15 17:27:31', 'tpr_bot2: @zmahoor twitch plays robotics is a community-driven project to teach robots language. to learn more about any aspect of the project, type ?robots, ?silverrobots ?reinforcement, ?votes, ?scores, ?myscore, or ?commandscores. more details at https://tpr-uvm.github.io.')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-15 17:44:37', 'comicscare1709: hi')
+Adding to the chat table...
+('2017-08-15 17:45:00', 'comicscare1709: !gd')
+Adding to the chat table...
+('2017-08-15 17:45:00', 'tpr_bot2: @comicscare1709 congratulations! you just earned your first point.')
+('recieved ping...', ' sending pong...')
+('2017-08-15 17:45:55', 'comicscare1709: ?reinforcement')
+Adding to the chat table...
+('2017-08-15 17:45:56', 'tpr_bot2: @comicscare1709 robots collect [y]ess, [n]os, [l]ikes and [d]islikes. robots that are disobedient (y<n) and unpopular (l<d) are periodically killed, and are replaced with randomly-modified copies of more obedient (y>n) and popular (l>d) survivors. thus, the robots evolve, based on your guidance, to become more obedient and popular.')
+('2017-08-15 17:46:30', 'terminatoreeagle: up')
+Adding to the chat table...
+('2017-08-15 17:46:51', 'comicscare1709: !py')
+Adding to the chat table...
+('2017-08-15 17:46:53', 'terminatoreeagle: stop')
+Adding to the chat table...
+('2017-08-15 17:47:24', 'comicscare1709: !ry')
+Adding to the chat table...
+('2017-08-15 17:47:58', 'comicscare1709: !gn')
+Adding to the chat table...
+('2017-08-15 17:48:23', 'comicscare1709: !walk')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-15 17:49:58', 'comicscare1709: !fight')
+Adding to the chat table...
+('2017-08-15 17:50:19', 'comicscare1709: ?vote')
+Adding to the chat table...
+('2017-08-15 17:50:19', 'tpr_bot2: @comicscare1709 twitch plays robotics is a community-driven project to teach robots language. to learn more about any aspect of the project, type ?robots, ?silverrobots ?reinforcement, ?votes, ?scores, ?myscore, or ?commandscores. more details at https://tpr-uvm.github.io.')
+('2017-08-15 17:50:49', 'comicscare1709: !fight')
+Adding to the chat table...
+('2017-08-15 17:51:52', 'comicscare1709: !die')
+Adding to the chat table...
+('2017-08-15 17:53:30', 'comicscare1709: !rd')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-15 17:58:24', 'comicscare1709: !vote evolve')
+Adding to the chat table...
+('2017-08-15 17:58:52', 'comicscare1709: !evolve')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-15 17:59:09', 'comicscare1709: oops')
+Adding to the chat table...
+('2017-08-15 18:01:19', 'comicscare1709: !kill')
+Adding to the chat table...
+('2017-08-15 18:01:37', 'comicscare1709: !play')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-15 18:04:16', 'comicscare1709: !jump up')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-15 18:15:38', 'r4ptorzgaming: !walk')
+Adding to the chat table...
+('2017-08-15 18:15:38', 'tpr_bot2: @r4ptorzgaming congratulations! you just earned your first point.')
+('2017-08-15 18:15:57', 'r4ptorzgaming: !dance')
+Adding to the chat table...
+('2017-08-15 18:16:29', 'r4ptorzgaming: !walk')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-15 18:16:59', 'r4ptorzgaming: !cl')
+Adding to the chat table...
+('2017-08-15 18:18:31', 'r4ptorzgaming: !gd')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-15 20:11:33', 'jabbersss: reinforcement')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-15 23:13:07', 'bananamoonpi: !bn')
+Adding to the chat table...
+('2017-08-15 23:13:07', 'tpr_bot2: @bananamoonpi congratulations! you just earned your first point.')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 03:54:26', 'tazerburgerz: !rn')
+Adding to the chat table...
+('2017-08-16 03:54:26', 'tpr_bot2: @tazerburgerz congratulations! you just earned your first point.')
+('2017-08-16 03:55:11', 'tazerburgerz: !bn')
+Adding to the chat table...
+('2017-08-16 03:55:47', 'tazerburgerz: !on')
+Adding to the chat table...
+('2017-08-16 03:56:16', 'tazerburgerz: !cn')
+Adding to the chat table...
+('2017-08-16 03:56:43', 'tazerburgerz: !py')
+Adding to the chat table...
+('2017-08-16 03:56:46', 'tazerburgerz: !lp')
+Adding to the chat table...
+('2017-08-16 03:57:25', 'tazerburgerz: !rn')
+Adding to the chat table...
+('2017-08-16 03:57:46', 'tazerburgerz: !gn')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 04:57:21', 'juliuzns: !on')
+Adding to the chat table...
+('2017-08-16 04:57:42', 'juliuzns: !cy')
+Adding to the chat table...
+('2017-08-16 04:57:44', 'juliuzns: !cl')
+Adding to the chat table...
+('2017-08-16 04:58:14', 'juliuzns: !py')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-16 04:58:50', 'juliuzns: !ry')
+Adding to the chat table...
+('2017-08-16 04:58:52', 'juliuzns: !rl')
+Adding to the chat table...
+('2017-08-16 04:59:12', 'juliuzns: !gy')
+Adding to the chat table...
+('2017-08-16 04:59:14', 'juliuzns: !gl')
+Adding to the chat table...
+('2017-08-16 04:59:48', 'juliuzns: !bn')
+Adding to the chat table...
+('2017-08-16 04:59:51', 'juliuzns: !bd')
+Adding to the chat table...
+('2017-08-16 05:00:23', 'juliuzns: !oy')
+Adding to the chat table...
+('2017-08-16 05:01:03', 'juliuzns: !cn')
+Adding to the chat table...
+('2017-08-16 05:01:28', 'juliuzns: !pn')
+Adding to the chat table...
+('2017-08-16 05:01:36', 'juliuzns: ?robots')
+Adding to the chat table...
+('2017-08-16 05:01:36', 'tpr_bot2: @juliuzns every 30 seconds one robot, out a population of 50, is simulated. it "hears" the current command and senses its environment. there are 10 species of bots: have you seen them all?')
+('2017-08-16 05:01:55', 'juliuzns: !rn')
+Adding to the chat table...
+('2017-08-16 05:02:15', 'juliuzns: !gy')
+Adding to the chat table...
+('2017-08-16 05:02:17', 'juliuzns: !gl')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-16 05:03:00', 'juliuzns: !bn')
+Adding to the chat table...
+('2017-08-16 05:03:28', 'juliuzns: !ol')
+Adding to the chat table...
+('2017-08-16 05:03:34', 'juliuzns: !on')
+Adding to the chat table...
+('2017-08-16 05:03:54', 'juliuzns: !cn')
+Adding to the chat table...
+('2017-08-16 05:04:30', 'juliuzns: !pn')
+Adding to the chat table...
+('2017-08-16 05:04:57', 'juliuzns: !rn')
+Adding to the chat table...
+('2017-08-16 05:05:39', 'juliuzns: !gy')
+Adding to the chat table...
+('2017-08-16 05:05:57', 'juliuzns: !by')
+Adding to the chat table...
+('2017-08-16 05:06:01', 'juliuzns: !bl')
+Adding to the chat table...
+('2017-08-16 05:06:28', 'juliuzns: !on')
+Adding to the chat table...
+('2017-08-16 05:06:50', 'juliuzns: !cl')
+Adding to the chat table...
+('2017-08-16 05:06:56', 'juliuzns: !cn')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-16 05:07:20', 'juliuzns: !pn')
+Adding to the chat table...
+('2017-08-16 05:07:24', 'juliuzns: !pd')
+Adding to the chat table...
+('2017-08-16 05:07:51', 'juliuzns: !rn')
+Adding to the chat table...
+('2017-08-16 05:08:39', 'juliuzns: !gn')
+Adding to the chat table...
+('2017-08-16 05:09:04', 'juliuzns: !bn')
+Adding to the chat table...
+('2017-08-16 05:09:25', 'juliuzns: !ol')
+Adding to the chat table...
+('2017-08-16 05:09:28', 'juliuzns: !oy')
+Adding to the chat table...
+('2017-08-16 05:10:01', 'juliuzns: !cn')
+Adding to the chat table...
+('2017-08-16 05:10:29', 'juliuzns: !pn')
+Adding to the chat table...
+('2017-08-16 05:10:31', 'juliuzns: !pd')
+Adding to the chat table...
+('2017-08-16 05:11:05', 'juliuzns: !rn')
+Adding to the chat table...
+('2017-08-16 05:11:36', 'juliuzns: !gy')
+Adding to the chat table...
+('2017-08-16 05:11:38', 'juliuzns: !gl')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 06:44:37', 'highlord1: !oy')
+Adding to the chat table...
+('2017-08-16 06:44:38', 'tpr_bot2: @highlord1 congratulations! you just earned your first point.')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 07:07:12', 'jistax: !cy')
+Adding to the chat table...
+('2017-08-16 07:07:12', 'tpr_bot2: @jistax congratulations! you just earned your first point.')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 08:19:55', 'gummybear101010: !walk')
+Adding to the chat table...
+('2017-08-16 08:19:55', 'tpr_bot2: @gummybear101010 congratulations! you just earned your first point.')
+('2017-08-16 08:21:23', 'gummybear101010: !pn')
+Adding to the chat table...
+('2017-08-16 08:21:53', 'gummybear101010: !py')
+Adding to the chat table...
+('2017-08-16 08:21:58', 'gummybear101010: !rd')
+Adding to the chat table...
+('2017-08-16 08:22:09', 'gummybear101010: !gn')
+Adding to the chat table...
+('2017-08-16 08:22:20', 'gummybear101010: !gd')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 08:33:20', 'frowrik: !command')
+Adding to the chat table...
+('2017-08-16 08:33:20', 'tpr_bot2: @frowrik congratulations! you just earned your first point.')
+('2017-08-16 08:33:51', 'frowrik: !move')
+Adding to the chat table...
+('2017-08-16 08:35:25', 'kgemmricher: !oy')
+Adding to the chat table...
+('2017-08-16 08:35:25', 'tpr_bot2: @kgemmricher congratulations! you just earned your first point.')
+('2017-08-16 08:36:02', 'kgemmricher: !cy')
+Adding to the chat table...
+('2017-08-16 08:36:17', 'kgemmricher: ?scores')
+Adding to the chat table...
+('2017-08-16 08:36:17', 'tpr_bot2: @kgemmricher you get one point every time you reinforce a robot with y, n, l, or d, and each time you vote for a command. to see your score, type ?myscore')
+('2017-08-16 08:36:27', 'kgemmricher: !py')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-16 08:36:46', 'kgemmricher: !pd')
+Adding to the chat table...
+('2017-08-16 08:36:57', 'kgemmricher: !rd')
+Adding to the chat table...
+('2017-08-16 08:37:22', 'kgemmricher: ?')
+Adding to the chat table...
+('2017-08-16 08:37:22', 'tpr_bot2: @kgemmricher twitch plays robotics is a community-driven project to teach robots language. to learn more about any aspect of the project, type ?robots, ?silverrobots ?reinforcement, ?votes, ?scores, ?myscore, or ?commandscores. more details at https://tpr-uvm.github.io.')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 09:25:29', 'zmahoor: ?')
+Adding to the chat table...
+('2017-08-16 09:25:29', 'tpr_bot2: @zmahoor twitch plays robotics is a community-driven project to teach robots language. to learn more about any aspect of the project, type ?robots, ?silverrobots ?reinforcement, ?votes, ?scores, ?myscore, or ?commandscores. more details at https://tpr-uvm.github.io.')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('2017-08-16 12:22:00', 'drynzen: !rd')
+Adding to the chat table...
+('2017-08-16 12:22:00', 'tpr_bot2: @drynzen congratulations! you just earned your first point.')
+('2017-08-16 12:23:18', 'drynzen: !bn')
+Adding to the chat table...
+('2017-08-16 12:23:38', 'drynzen: !on')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-16 12:27:44', 'comicscare1709: !fight')
+Adding to the chat table...
+('2017-08-16 12:29:45', 'comicscare1709: !od')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('2017-08-16 12:31:23', 'comicscare1709: ! rl')
+Adding to the chat table...
+('2017-08-16 12:31:31', 'comicscare1709: !rl')
+Adding to the chat table...
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+('recieved ping...', ' sending pong...')
+Traceback (most recent call last):
+  File "chatBot.py", line 20, in <module>
+    newMessages = t.recieve_messages(amount = 1024)
+  File "/Users/twitchplaysrobotics/TPR-1.0/bots/twitch.py", line 123, in recieve_messages
+    data = self.sock.recv(amount)
+KeyboardInterrupt

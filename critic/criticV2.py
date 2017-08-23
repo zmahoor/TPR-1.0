@@ -24,14 +24,12 @@ import constants as c
 from database import DATABASE
 from settings import *
 
-SENSOR_DROP_RATE = 18
-num_features     = 6
+SENSOR_DROP_RATE = 5
+num_features     = 1
 sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
-valid_commands   = {'move', 'jump', 'backflip', 'move forward', 'stop',\
-                     'sping', 'walk', 'roll', 'dance', 'forward', 'flip',\
-                      'move backward', 'run'}
+valid_commands   = {'jump'}
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -63,17 +61,12 @@ class CRITIC:
         self.model.compile(optimizer='rmsprop', loss={'output': 'mse'},
             loss_weights={'output': 1.})
 
-        self.checkpointer = ModelCheckpoint(filepath='temp_model.h5', verbose=1, save_best_only=True)
+        self.checkpointer = ModelCheckpoint(filepath='model.h5', 
+            verbose=1, save_best_only=True)
         
         print "Compilation Time : ", time.time() - start
 
-    def train_model(self, mydatabase):
-
-        if synthetic_data:
-            print('Generate synthetic data.')
-            data = Generate_Synthetic_Data( self.params['training_size'] )
-        else:
-            data = Load_Training_Data( mydatabase )
+    def train_model(self, data):
 
         sensors, obedience = data
 
@@ -82,31 +75,33 @@ class CRITIC:
         _min = np.min(np.min(sensors, axis=1), axis=0)
         _max = np.max(np.max(sensors, axis=1), axis=0)
 
-        data_stats = {}
-        data_stats['_min'] = _min
-        data_stats['_max'] = _max
-
         sensors = (sensors - _min) / (_max - _min)
 
-        print "range: "
-        print np.min(np.min(sensors, axis=1), axis=0)
+        print "sensors range: ",
+        print np.min(np.min(sensors, axis=1), axis=0),
         print np.max(np.max(sensors, axis=1), axis=0)
 
-        print sensors.shape, obedience.shape
+        _min = np.min(obedience)
+        _max = np.max(obedience)
+
+        obedience = (obedience - _min) / (_max - _min)
+
+        np.random.shuffle(obedience)
+
+        print "obedience range: ",
+        print np.min(obedience),
+        print np.max(obedience)
 
         start_time = time.time()
 
         try:
             self.model.fit({'sensor_input': sensors}, {'output': obedience},
                 epochs=self.params['epochs'], batch_size=self.params['batch_size'],
-                validation_split=self.params['validation_split'], callbacks=[self.checkpointer])
+                validation_split=self.params['validation_split'], 
+                callbacks=[self.checkpointer])
 
         except KeyboardInterrupt:
             print 'Training duration (s) : ', time.time() - start_time
-
-        with open('data_stats.dat', 'wb') as f:
-            print 'Writing training data\'s stats...'
-            pickle.dump(data_stats, f)
 
         self.model.save('model.h5')  # creates a HDF5 file 'my_model.h5'
 
@@ -159,16 +154,8 @@ def Load_Training_Data(mydatabase):
 
         print tfeatures.shape, obedience
 
-        if obedience == 0: continue
-
-        if obedience > 0: 
-            obedience = 1
-        elif obedience < 0:
-            obedience = 0
-
         sensor_input.append(tfeatures)
         output.append(obedience)
-
 
     return (np.array(sensor_input), np.array(output))
 
@@ -198,6 +185,7 @@ def Read_File(filePath):
         with open(filePath, 'r') as f:
             sensors = pickle.load(f)
         print "Loading ", filePath,
+
     except:
         print "Failed loading ", filePath 
     
@@ -273,79 +261,45 @@ def Extract_Features(sample):
         touch = Touch_Feature_Extraction(touch)
     else: return None
 
-    features = np.array([posX, posY, posZ, ray, touch, prop]).T
+    # features = np.array([posX, posY, posZ, ray, touch, prop]).T
+
+    # features = np.array([posX, posY, posZ, prop]).T
+
+    features = np.array([touch]).T
 
     # print 'sensors: ', timeSeriedFeatures.shape
 
     return (features, True)
 
-def Generate_Synthetic_Data( num_samples ):
-
-    sensors    = np.random.rand( num_samples, sequence_len, num_features)
-    obedience  = 2*np.random.rand(num_samples, 1)-1
-    
-    return (sensors,  obedience)
-
 def main(args):
-        
-    global synthetic_data
-    
-    synthetic_data = args.synthetic_data
-    synthetic_size = args.synthetic_size
-    batch_size     = args.batch_size
-    val_split      = args.val_split
-    epoch          = args.epoch
+            
+    batch_size = args.batch_size
+    val_split  = args.val_split
+    epoch      = args.epoch
 
-    if synthetic_data == False:
-        mydatabase = DATABASE()
+    mydatabase = DATABASE()
 
-    else: 
-        mydatabase = None
-
-    params = {'epochs':epoch, 'batch_size': batch_size,'validation_split':val_split,
-        'training_size':synthetic_size}
+    params = {'epochs':epoch, 'batch_size': batch_size,'validation_split':val_split}
 
     c = CRITIC(params)
     c.setup_model()
-    c.train_model(mydatabase)
 
-    if synthetic_data:
+    data = Load_Training_Data( mydatabase )
 
-        testing_data = Generate_Synthetic_Data(100)
-
-        print "range: "
-        print np.min(np.min(testing_data[0], axis=1), axis=0)
-        print np.max(np.max(testing_data[0], axis=1), axis=0)
-
-        print c.predict( {'sensor_input': testing_data[0]})
-
-        score = c.model.evaluate({'sensor_input': testing_data[0]}, 
-            {'output': testing_data[2]},\
-            batch_size=32, verbose=1, sample_weight=None)
-
-        print c.model.metrics_names, score
+    c.train_model(data)
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Critic Model.')
     
-    parser.add_argument('--synthetic_data', action='store_true',\
-     help='create synthetic trainig data.')
-
-    parser.add_argument('--generate', action='store_true',\
-     help='generate data and bring them to the memory per batch.')
-
     parser.add_argument('--batch_size', '-b', type = int, default=512, help=\
         'batchSize, default=512.')
 
     parser.add_argument('--epoch', '-e', type = int, default=1000, help=\
         'Number of learning epochs, default=1000.')
 
-    parser.add_argument('--val_split', '-v', type = float, default=0.05, help=\
-        'Validatio split, default=0.05.')
-
-    parser.add_argument('--synthetic_size', '-s', type = int, default=10000, help=\
-        'Num of synthetic training set, default=10000.')
+    parser.add_argument('--val_split', '-v', type = float, default=0.3, help=\
+        'Validatio split, default=0.3.')
 
     args = parser.parse_args()
 
