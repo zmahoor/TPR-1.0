@@ -1,6 +1,6 @@
 import sys
 import csv
-
+import numpy as np
 sys.path.append('../../bots')
 
 from database import DATABASE
@@ -28,50 +28,55 @@ for i in range(0, len(validRobots)):
 print header
 writer.writerow(header)
 
-score_list = ['total']
+score_matrix = np.zeros((len(commands)+2, len(validRobots)))
 
-for i in range(0, len(validRobots)):
-	robot = validRobots[i]
+MIN = -1
+MAX = 1
 
-	sql = """SELECT sum(numYes) as sumYes, sum(numNo) as sumNo 
-		FROM display as d join robots as r on d.robotID=r.robotID
-		where r.type='%s';"""%(robot)
+for i in range( len(commands)+2 ):
 
-	total_fitness = db.Execute_SelectOne_Sql_Command(sql, 
-						err_msg="Failed executing the select.")
+	if i == 0: 
+		command = 'total'
+		row  = ['total']
 
-	obedience = (total_fitness['sumYes'] - total_fitness['sumNo'])
+	elif i == len(commands)+1:
+		command = 'others'
+		row  = ['others']
 
-	# obedience = (total_fitness['sumYes'] - total_fitness['sumNo'])/(total_fitness['sumYes'] + total_fitness['sumNo'])
-	score_list.append(str(obedience))
+	else:
+		command = commands[i-1]
+		row = [command]
 
-print score_list
-writer.writerow(score_list)
+	for j in range(len(validRobots)):
+		robot = validRobots[j]
 
-# for each default command
-for command in commands:
+		if i == 0:
+			sql = """SELECT sum(numYes) as sumYes, sum(numNo) as sumNo 
+			FROM display as d join robots as r on d.robotID=r.robotID
+			where r.type='%s';"""%(robot)
 
-	score_list  = [command]
 
-	for i in range(0, len(validRobots)):
-		robot = validRobots[i]
+		elif i == len(commands)+1:
+			sql = """SELECT sum(numYes) as sumYes, sum(numNo) as sumNo 
+			FROM display as d join robots as r on d.robotID=r.robotID
+			where r.type='%s' and cmdTxt not in """%(robot)
 
-		sql = """SELECT cmdTxt, sum(numYes) as sumYes, sum(numNo) as sumNo 
+			sql +=  '('+ ",".join(["'"+k+"'" for k in commands]) + ');'
+
+		else:
+			sql = """SELECT cmdTxt, sum(numYes) as sumYes, sum(numNo) as sumNo 
 			FROM display as d join robots as r on d.robotID=r.robotID
 			where r.type='%s' and cmdTxt='%s';"""%(robot, command)
 
-		cmd_fitness = db.Execute_SelectOne_Sql_Command(sql, 
-							err_msg="Failed executing the select.")
+		results = db.Execute_SelectOne_Sql_Command(sql, 
+				 err_msg="Failed executing the select.")
 
-		obedience = (cmd_fitness['sumYes'] - total_fitness['sumNo'])
-		# obedience = (cmd_fitness['sumYes'] - total_fitness['sumNo'])/(cmd_fitness['sumYes'] + cmd_fitness['sumNo'])
-		score_list.append(str(obedience))
+		obedience = (results['sumYes']-results['sumNo'])/(results['sumYes']+results['sumNo'])
+		score_matrix[i][j] = obedience = (obedience - MIN) / (MAX-MIN)
+		row.append(str(obedience))
 
-	print command, score_list
-	print
-
-	writer.writerow(score_list)
-
+	writer.writerow(row)
+	print command, row, '\n'
 
 outfile.close()
 
