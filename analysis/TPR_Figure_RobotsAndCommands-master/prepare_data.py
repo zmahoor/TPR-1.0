@@ -1,52 +1,83 @@
 import sys
 import csv
-
-sys.path.append('../bots')
+import numpy as np
+sys.path.append('../../bots')
 
 from database import DATABASE
 
 db = DATABASE()
 
-topn_robots = 7
-topn_cmds   = 7
+outfile = open("data.csv", "w")
+writer  = csv.writer(outfile, delimiter=",")
 
-sql    = """SELECT * FROM robots order by totalFitness DESC limit %d;"""%(topn_robots)
-robots = db.Execute_Select_Sql_Command(sql, err_msg="Failed executing the select.")
+validRobots = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot',
+			'spherebot', 'snakebot', 'crabbot']
 
-# print robots
+names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
+    'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot', 
+    'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot',}
 
-totalFitness = [robot['totalFitness'] for robot in robots]
+commands = ['move', 'jump', 'move forward', 'backflip', 'stop', 'spin', 'walk', 
+			'roll',  'move backward', 'dance', 'run', 'flip']
 
-print totalFitness
+header = ['species']
+for i in range(0, len(validRobots)):
+	robot = validRobots[i]
+	header.append(names[robot])
 
-stats      = open("output.csv",'w') 
-csv_writer = csv.writer(stats, dialect='excel')
-csv_writer.writerow(totalFitness)
+print header
+writer.writerow(header)
 
-sql  = "SELECT cmdTxt, totalLearnability FROM unique_commands order by totalLearnability DESC limit %d;"%(topn_cmds)
-top_commands = db.Execute_Select_Sql_Command(sql, err_msg="Failed executing the select.")
+score_matrix = np.zeros((len(commands)+2, len(validRobots)))
 
-print top_commands
-print 
+MIN = -1
+MAX = 1
 
-for command in top_commands:
+for i in range( len(commands)+2 ):
 
-	cmdTxt      = command['cmdTxt']
-	fitnessList = []
+	if i == 0: 
+		command = 'total'
+		row  = ['total']
 
-	for robot in robots:
+	elif i == len(commands)+1:
+		command = 'others'
+		row  = ['others']
 
-		robotID = robot['robotID']
+	else:
+		command = commands[i-1]
+		row = [command]
 
-		print robotID, cmdTxt
+	for j in range(len(validRobots)):
+		robot = validRobots[j]
 
-		sql = """SELECT cmdTxt, sum(numYes)-sum(numNo) as fitness FROM display where robotID=%d and cmdTxt='%s';"""%(robotID, cmdTxt)
+		if i == 0:
+			sql = """SELECT sum(numYes) as sumYes, sum(numNo) as sumNo 
+			FROM display as d join robots as r on d.robotID=r.robotID
+			where r.type='%s';"""%(robot)
 
-		command_fitness = db.Execute_SelectOne_Sql_Command(sql, err_msg="Failed executing the select.")
-		fitnessList.append(command_fitness['fitness'])
 
-	print fitnessList
-	
-	csv_writer.writerow(fitnessList)
+		elif i == len(commands)+1:
+			sql = """SELECT sum(numYes) as sumYes, sum(numNo) as sumNo 
+			FROM display as d join robots as r on d.robotID=r.robotID
+			where r.type='%s' and cmdTxt not in """%(robot)
 
-stats.close()
+			sql +=  '('+ ",".join(["'"+k+"'" for k in commands]) + ');'
+
+		else:
+			sql = """SELECT cmdTxt, sum(numYes) as sumYes, sum(numNo) as sumNo 
+			FROM display as d join robots as r on d.robotID=r.robotID
+			where r.type='%s' and cmdTxt='%s';"""%(robot, command)
+
+		results = db.Execute_SelectOne_Sql_Command(sql, 
+				 err_msg="Failed executing the select.")
+
+		obedience = (results['sumYes']-results['sumNo'])/(results['sumYes']+results['sumNo'])
+		score_matrix[i][j] = obedience = (obedience - MIN) / (MAX-MIN)
+		row.append(str(obedience))
+
+	writer.writerow(row)
+	print command, row, '\n'
+
+outfile.close()
+
+

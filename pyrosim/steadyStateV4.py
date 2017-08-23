@@ -38,7 +38,8 @@ currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
 db     = None
 injectionTimer = None
 removeInjected = False
-window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, title="Reinforcements", fontSize=FONT_SIZE)
+window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H, 
+                        title="Reinforcements", fontSize=FONT_SIZE)
 
 def Store_Sensors_To_File(individual, currentTime):
 
