@@ -16,10 +16,10 @@ for day in range(14, 15):
 
 	print "day -------------------------------: ", day
 
-	sql = """select min(timeArrival) as first, max(timeArrival) as last, username
-			 from chats where timeArrival between
- 			'2017-08-%d 10:00:00'  and '2017-08-%d 10:00:00' + interval 1 day group 
- 			by username order by first,last;"""%(day, day)
+	sql = """select min(timeArrival) as first, max(timeArrival) as last, username 
+			from chats where timeArrival between
+ 		    2017-08-%d 10:00:00'  and '2017-08-%d 10:00:00' + interval 1 day 
+ 		    group by username order by first,last;"""%(day, day)
 
  	result   = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
 

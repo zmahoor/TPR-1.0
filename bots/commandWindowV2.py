@@ -20,7 +20,8 @@ WSPACE = 5
 FONT_SIZE = 23
 TITLE = "Top Voted Commands"
 COLORS      = ['RED', 'BLUE', 'DARKGREEN']
-DEFAULT_COMMANDS = ['jump', 'stop', 'backflip', 'spin', 'roll', 'walk', 'move backward', 'move forward', 'dance', 'run', 'flip']
+DEFAULT_COMMANDS = ['jump', 'stop', 'backflip', 'spin', 'roll', 'walk', 'move backward',
+             'move forward', 'dance', 'run', 'flip']
 
 window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H, title= TITLE, fontSize=23)
 animated_list = []

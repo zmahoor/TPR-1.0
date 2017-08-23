@@ -1,0 +1,341 @@
+Using TensorFlow backend.
+2017-07-23 11:48:56.375 python[1805:17396] 11:48:56.374 WARNING:  140: This application, or a library it uses, is using the deprecated Carbon Component Manager for hosting Audio Units. Support for this will be removed in a future release. Also, this makes the host incompatible with version 3 audio units. Please transition to the API's in AudioComponent.h.
+Database version : {u'VERSION()': '5.7.18'} 
+Generation:  1
+Num of alive individuals:  50
+Successful loading  ../controllers/spherebot/robot_556.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 556, u'birthDate': datetime.datetime(2017, 7, 23, 10, 20, 36), u'totalFitness': 0.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 3}
+Displaying color:  red
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:48:56.705305
+wordVector:  [1.0, 1.0]
+Competing controllers:  495  and  539
+{u'totalLikeability': 3.0, u'dead': 0, u'robotID': 495, u'birthDate': datetime.datetime(2017, 7, 22, 14, 39, 45), u'totalFitness': 2.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 44}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 539, u'birthDate': datetime.datetime(2017, 7, 23, 3, 19, 24), u'totalFitness': 0.0, u'parentID': 0, u'type': '1', u'numEvals': 24}
+Successful writing  ../sensors/2017/7/23/robot_556_2017-07-23 11:48:56.dat
+
+
+Generation:  2
+Num of alive individuals:  50
+Successful loading  ../controllers/snakebot/robot_379.dat
+Displaying robot:  {u'totalLikeability': 5.0, u'dead': 0, u'robotID': 379, u'birthDate': datetime.datetime(2017, 7, 20, 21, 27, 7), u'totalFitness': -2.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 133}
+Displaying color:  green
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:49:27.146226
+wordVector:  [1.0, 1.0]
+Competing controllers:  506  and  468
+{u'totalLikeability': 3.0, u'dead': 0, u'robotID': 506, u'birthDate': datetime.datetime(2017, 7, 22, 15, 31, 47), u'totalFitness': -4.0, u'parentID': 475, u'type': 'quadruped', u'numEvals': 46}
+{u'totalLikeability': 5.0, u'dead': 0, u'robotID': 468, u'birthDate': datetime.datetime(2017, 7, 22, 1, 23, 11), u'totalFitness': -8.0, u'parentID': 457, u'type': 'quadruped', u'numEvals': 80}
+Successful writing  ../sensors/2017/7/23/robot_379_2017-07-23 11:49:27.dat
+
+
+Generation:  3
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_559.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 559, u'birthDate': datetime.datetime(2017, 7, 23, 11, 20, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 1}
+Displaying color:  blue
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:49:57.571700
+wordVector:  [1.0, 1.0]
+Competing controllers:  505  and  545
+{u'totalLikeability': 1.0, u'dead': 0, u'robotID': 505, u'birthDate': datetime.datetime(2017, 7, 22, 15, 26, 42), u'totalFitness': 0.0, u'parentID': 489, u'type': 'spherebot', u'numEvals': 37}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 545, u'birthDate': datetime.datetime(2017, 7, 23, 6, 19, 52), u'totalFitness': 0.0, u'parentID': 0, u'type': '2', u'numEvals': 12}
+Successful writing  ../sensors/2017/7/23/robot_559_2017-07-23 11:49:57.dat
+
+
+Generation:  4
+Num of alive individuals:  50
+Successful loading  ../controllers/1/robot_512.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 512, u'birthDate': datetime.datetime(2017, 7, 22, 16, 40, 4), u'totalFitness': 1.0, u'parentID': 0, u'type': '1', u'numEvals': 30}
+Displaying color:  orange
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:50:27.997073
+wordVector:  [1.0, 1.0]
+Competing controllers:  523  and  550
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 523, u'birthDate': datetime.datetime(2017, 7, 22, 22, 46, 19), u'totalFitness': 0.0, u'parentID': 491, u'type': 'spherebot', u'numEvals': 31}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 550, u'birthDate': datetime.datetime(2017, 7, 23, 7, 26, 44), u'totalFitness': 0.0, u'parentID': 503, u'type': 'spherebot', u'numEvals': 9}
+Successful writing  ../sensors/2017/7/23/robot_512_2017-07-23 11:50:27.dat
+
+
+Generation:  5
+Num of alive individuals:  50
+Successful loading  ../controllers/spherebot/robot_523.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 523, u'birthDate': datetime.datetime(2017, 7, 22, 22, 46, 19), u'totalFitness': 0.0, u'parentID': 491, u'type': 'spherebot', u'numEvals': 31}
+Displaying color:  cyan
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:50:58.382004
+wordVector:  [1.0, 1.0]
+Competing controllers:  551  and  512
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 551, u'birthDate': datetime.datetime(2017, 7, 23, 8, 20, 15), u'totalFitness': 0.0, u'parentID': 0, u'type': '1', u'numEvals': 7}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 512, u'birthDate': datetime.datetime(2017, 7, 22, 16, 40, 4), u'totalFitness': 1.0, u'parentID': 0, u'type': '1', u'numEvals': 31}
+Successful writing  ../sensors/2017/7/23/robot_523_2017-07-23 11:50:58.dat
+
+
+Generation:  6
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_558.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 558, u'birthDate': datetime.datetime(2017, 7, 23, 11, 15, 12), u'totalFitness': 0.0, u'parentID': 516, u'type': 'quadruped', u'numEvals': 1}
+Displaying color:  purple
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:51:28.795339
+wordVector:  [1.0, 1.0]
+Competing controllers:  517  and  176
+{u'totalLikeability': -1.0, u'dead': 0, u'robotID': 517, u'birthDate': datetime.datetime(2017, 7, 22, 21, 25, 34), u'totalFitness': 1.0, u'parentID': 508, u'type': 'quadruped', u'numEvals': 30}
+{u'totalLikeability': 7.0, u'dead': 0, u'robotID': 176, u'birthDate': datetime.datetime(2017, 7, 18, 22, 47, 37), u'totalFitness': 38.0, u'parentID': 162, u'type': 'snakebot', u'numEvals': 244}
+Successful writing  ../sensors/2017/7/23/robot_558_2017-07-23 11:51:28.dat
+
+
+Generation:  7
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_475.dat
+Displaying robot:  {u'totalLikeability': 5.0, u'dead': 0, u'robotID': 475, u'birthDate': datetime.datetime(2017, 7, 22, 3, 37, 26), u'totalFitness': -1.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 63}
+Displaying color:  red
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:51:59.337138
+wordVector:  [1.0, 1.0]
+Competing controllers:  276  and  556
+{u'totalLikeability': 11.0, u'dead': 0, u'robotID': 276, u'birthDate': datetime.datetime(2017, 7, 19, 18, 21, 44), u'totalFitness': -23.0, u'parentID': 0, u'type': 'shinbot', u'numEvals': 192}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 556, u'birthDate': datetime.datetime(2017, 7, 23, 10, 20, 36), u'totalFitness': 0.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 4}
+Successful writing  ../sensors/2017/7/23/robot_475_2017-07-23 11:51:59.dat
+
+
+Generation:  8
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_558.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 558, u'birthDate': datetime.datetime(2017, 7, 23, 11, 15, 12), u'totalFitness': 0.0, u'parentID': 516, u'type': 'quadruped', u'numEvals': 2}
+Displaying color:  green
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:52:29.841229
+wordVector:  [1.0, 1.0]
+Competing controllers:  379  and  537
+{u'totalLikeability': 5.0, u'dead': 0, u'robotID': 379, u'birthDate': datetime.datetime(2017, 7, 20, 21, 27, 7), u'totalFitness': -2.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 134}
+{u'totalLikeability': 1.0, u'dead': 0, u'robotID': 537, u'birthDate': datetime.datetime(2017, 7, 23, 2, 22, 20), u'totalFitness': 0.0, u'parentID': 529, u'type': 'quadruped', u'numEvals': 27}
+Successful writing  ../sensors/2017/7/23/robot_558_2017-07-23 11:52:29.dat
+
+
+Generation:  9
+Num of alive individuals:  50
+Successful loading  ../controllers/spherebot/robot_530.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 530, u'birthDate': datetime.datetime(2017, 7, 22, 23, 32, 9), u'totalFitness': -1.0, u'parentID': 491, u'type': 'spherebot', u'numEvals': 24}
+Displaying color:  blue
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:53:00.353044
+wordVector:  [1.0, 1.0]
+Competing controllers:  539  and  90
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 539, u'birthDate': datetime.datetime(2017, 7, 23, 3, 19, 24), u'totalFitness': 0.0, u'parentID': 0, u'type': '1', u'numEvals': 24}
+{u'totalLikeability': 29.0, u'dead': 0, u'robotID': 90, u'birthDate': datetime.datetime(2017, 7, 18, 15, 12, 40), u'totalFitness': -29.0, u'parentID': 32, u'type': 'shinbot', u'numEvals': 245}
+Successful writing  ../sensors/2017/7/23/robot_530_2017-07-23 11:53:00.dat
+
+
+Generation:  10
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_541.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 541, u'birthDate': datetime.datetime(2017, 7, 23, 3, 58, 41), u'totalFitness': 0.0, u'parentID': 516, u'type': 'quadruped', u'numEvals': 22}
+Displaying color:  orange
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:53:30.881807
+wordVector:  [1.0, 1.0]
+Competing controllers:  329  and  18
+{u'totalLikeability': 7.0, u'dead': 0, u'robotID': 329, u'birthDate': datetime.datetime(2017, 7, 20, 8, 2), u'totalFitness': -1.0, u'parentID': 176, u'type': 'snakebot', u'numEvals': 142}
+{u'totalLikeability': 58.0, u'dead': 0, u'robotID': 18, u'birthDate': datetime.datetime(2017, 7, 18, 10, 13, 42), u'totalFitness': 33.0, u'parentID': 0, u'type': '4', u'numEvals': 278}
+Successful writing  ../sensors/2017/7/23/robot_541_2017-07-23 11:53:30.dat
+
+
+Generation:  11
+Num of alive individuals:  50
+Successful loading  ../controllers/2/robot_545.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 545, u'birthDate': datetime.datetime(2017, 7, 23, 6, 19, 52), u'totalFitness': 0.0, u'parentID': 0, u'type': '2', u'numEvals': 12}
+Displaying color:  cyan
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:54:01.431326
+wordVector:  [1.0, 1.0]
+Competing controllers:  329  and  475
+{u'totalLikeability': 7.0, u'dead': 0, u'robotID': 329, u'birthDate': datetime.datetime(2017, 7, 20, 8, 2), u'totalFitness': -1.0, u'parentID': 176, u'type': 'snakebot', u'numEvals': 142}
+{u'totalLikeability': 5.0, u'dead': 0, u'robotID': 475, u'birthDate': datetime.datetime(2017, 7, 22, 3, 37, 26), u'totalFitness': -1.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 64}
+Successful writing  ../sensors/2017/7/23/robot_545_2017-07-23 11:54:01.dat
+
+
+Generation:  12
+Num of alive individuals:  50
+Successful loading  ../controllers/shinbot/robot_90.dat
+Displaying robot:  {u'totalLikeability': 29.0, u'dead': 0, u'robotID': 90, u'birthDate': datetime.datetime(2017, 7, 18, 15, 12, 40), u'totalFitness': -29.0, u'parentID': 32, u'type': 'shinbot', u'numEvals': 245}
+Displaying color:  purple
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:54:31.940116
+wordVector:  [1.0, 1.0]
+Competing controllers:  82  and  495
+{u'totalLikeability': 23.0, u'dead': 0, u'robotID': 82, u'birthDate': datetime.datetime(2017, 7, 18, 14, 25, 34), u'totalFitness': 13.0, u'parentID': 70, u'type': 'starfishbot', u'numEvals': 269}
+{u'totalLikeability': 3.0, u'dead': 0, u'robotID': 495, u'birthDate': datetime.datetime(2017, 7, 22, 14, 39, 45), u'totalFitness': 2.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 44}
+Successful writing  ../sensors/2017/7/23/robot_90_2017-07-23 11:54:31.dat
+
+
+Generation:  13
+Num of alive individuals:  50
+Successful loading  ../controllers/snakebot/robot_379.dat
+Displaying robot:  {u'totalLikeability': 5.0, u'dead': 0, u'robotID': 379, u'birthDate': datetime.datetime(2017, 7, 20, 21, 27, 7), u'totalFitness': -2.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 134}
+Displaying color:  red
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:55:02.384481
+wordVector:  [1.0, 1.0]
+Competing controllers:  53  and  329
+{u'totalLikeability': 29.0, u'dead': 0, u'robotID': 53, u'birthDate': datetime.datetime(2017, 7, 18, 11, 14, 12), u'totalFitness': -4.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 261}
+{u'totalLikeability': 7.0, u'dead': 0, u'robotID': 329, u'birthDate': datetime.datetime(2017, 7, 20, 8, 2), u'totalFitness': -1.0, u'parentID': 176, u'type': 'snakebot', u'numEvals': 142}
+Successful writing  ../sensors/2017/7/23/robot_379_2017-07-23 11:55:02.dat
+
+
+Generation:  14
+Num of alive individuals:  50
+Successful loading  ../controllers/spherebot/robot_550.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 550, u'birthDate': datetime.datetime(2017, 7, 23, 7, 26, 44), u'totalFitness': 0.0, u'parentID': 503, u'type': 'spherebot', u'numEvals': 9}
+Displaying color:  green
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:55:32.752972
+wordVector:  [1.0, 1.0]
+Competing controllers:  484  and  447
+{u'totalLikeability': -2.0, u'dead': 0, u'robotID': 484, u'birthDate': datetime.datetime(2017, 7, 22, 8, 38, 37), u'totalFitness': 2.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 36}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 447, u'birthDate': datetime.datetime(2017, 7, 21, 18, 4, 49), u'totalFitness': 11.0, u'parentID': 404, u'type': 'snakebot', u'numEvals': 105}
+Successful writing  ../sensors/2017/7/23/robot_550_2017-07-23 11:55:32.dat
+
+
+Generation:  15
+Num of alive individuals:  50
+Successful loading  ../controllers/2/robot_214.dat
+Displaying robot:  {u'totalLikeability': 18.0, u'dead': 0, u'robotID': 214, u'birthDate': datetime.datetime(2017, 7, 19, 6, 18, 20), u'totalFitness': -20.0, u'parentID': 0, u'type': '2', u'numEvals': 220}
+Displaying color:  blue
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:56:03.173151
+wordVector:  [1.0, 1.0]
+Competing controllers:  548  and  550
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 548, u'birthDate': datetime.datetime(2017, 7, 23, 7, 18, 4), u'totalFitness': 0.0, u'parentID': 508, u'type': 'quadruped', u'numEvals': 10}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 550, u'birthDate': datetime.datetime(2017, 7, 23, 7, 26, 44), u'totalFitness': 0.0, u'parentID': 503, u'type': 'spherebot', u'numEvals': 10}
+Successful writing  ../sensors/2017/7/23/robot_214_2017-07-23 11:56:03.dat
+
+
+Generation:  16
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_555.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 555, u'birthDate': datetime.datetime(2017, 7, 23, 9, 45, 22), u'totalFitness': 0.0, u'parentID': 495, u'type': 'quadruped', u'numEvals': 4}
+Displaying color:  orange
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:56:40.923638
+wordVector:  [1.0, 1.0]
+Competing controllers:  517  and  484
+{u'totalLikeability': -1.0, u'dead': 0, u'robotID': 517, u'birthDate': datetime.datetime(2017, 7, 22, 21, 25, 34), u'totalFitness': 1.0, u'parentID': 508, u'type': 'quadruped', u'numEvals': 30}
+{u'totalLikeability': -2.0, u'dead': 0, u'robotID': 484, u'birthDate': datetime.datetime(2017, 7, 22, 8, 38, 37), u'totalFitness': 2.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 36}
+Successful writing  ../sensors/2017/7/23/robot_555_2017-07-23 11:56:40.dat
+
+
+Generation:  17
+Num of alive individuals:  50
+Successful loading  ../controllers/spherebot/robot_505.dat
+Displaying robot:  {u'totalLikeability': 1.0, u'dead': 0, u'robotID': 505, u'birthDate': datetime.datetime(2017, 7, 22, 15, 26, 42), u'totalFitness': 0.0, u'parentID': 489, u'type': 'spherebot', u'numEvals': 37}
+Displaying color:  cyan
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:57:15.012491
+wordVector:  [1.0, 1.0]
+Competing controllers:  389  and  526
+{u'totalLikeability': 2.0, u'dead': 0, u'robotID': 389, u'birthDate': datetime.datetime(2017, 7, 21, 0, 8, 10), u'totalFitness': 0.0, u'parentID': 376, u'type': 'snakebot', u'numEvals': 132}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 526, u'birthDate': datetime.datetime(2017, 7, 22, 23, 16, 52), u'totalFitness': 0.0, u'parentID': 491, u'type': 'spherebot', u'numEvals': 29}
+Successful writing  ../sensors/2017/7/23/robot_505_2017-07-23 11:57:15.dat
+
+
+Generation:  18
+Num of alive individuals:  50
+Successful loading  ../controllers/snakebot/robot_379.dat
+Displaying robot:  {u'totalLikeability': 5.0, u'dead': 0, u'robotID': 379, u'birthDate': datetime.datetime(2017, 7, 20, 21, 27, 7), u'totalFitness': -2.0, u'parentID': 0, u'type': 'snakebot', u'numEvals': 135}
+Displaying color:  purple
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:57:45.489413
+wordVector:  [1.0, 1.0]
+Competing controllers:  176  and  559
+{u'totalLikeability': 7.0, u'dead': 0, u'robotID': 176, u'birthDate': datetime.datetime(2017, 7, 18, 22, 47, 37), u'totalFitness': 38.0, u'parentID': 162, u'type': 'snakebot', u'numEvals': 244}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 559, u'birthDate': datetime.datetime(2017, 7, 23, 11, 20, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 2}
+Successful writing  ../sensors/2017/7/23/robot_379_2017-07-23 11:57:45.dat
+
+
+Generation:  19
+Num of alive individuals:  50
+Successful loading  ../controllers/snakebot/robot_525.dat
+Displaying robot:  {u'totalLikeability': -1.0, u'dead': 0, u'robotID': 525, u'birthDate': datetime.datetime(2017, 7, 22, 23, 9, 13), u'totalFitness': 2.0, u'parentID': 329, u'type': 'snakebot', u'numEvals': 30}
+Displaying color:  red
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:58:15.910744
+wordVector:  [1.0, 1.0]
+Competing controllers:  537  and  508
+{u'totalLikeability': 1.0, u'dead': 0, u'robotID': 537, u'birthDate': datetime.datetime(2017, 7, 23, 2, 22, 20), u'totalFitness': 0.0, u'parentID': 529, u'type': 'quadruped', u'numEvals': 27}
+{u'totalLikeability': 2.0, u'dead': 0, u'robotID': 508, u'birthDate': datetime.datetime(2017, 7, 22, 15, 39, 57), u'totalFitness': 3.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 35}
+Successful writing  ../sensors/2017/7/23/robot_525_2017-07-23 11:58:15.dat
+
+
+Generation:  20
+Num of alive individuals:  50
+Successful loading  ../controllers/1/robot_499.dat
+Displaying robot:  {u'totalLikeability': 1.0, u'dead': 0, u'robotID': 499, u'birthDate': datetime.datetime(2017, 7, 22, 15, 4, 46), u'totalFitness': -6.0, u'parentID': 465, u'type': '1', u'numEvals': 38}
+Displaying color:  green
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:58:46.341988
+wordVector:  [1.0, 1.0]
+Competing controllers:  553  and  475
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 553, u'birthDate': datetime.datetime(2017, 7, 23, 9, 20, 25), u'totalFitness': 0.0, u'parentID': 0, u'type': 'shinbot', u'numEvals': 5}
+{u'totalLikeability': 5.0, u'dead': 0, u'robotID': 475, u'birthDate': datetime.datetime(2017, 7, 22, 3, 37, 26), u'totalFitness': -1.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 64}
+Successful writing  ../sensors/2017/7/23/robot_499_2017-07-23 11:58:46.dat
+
+
+Generation:  21
+Num of alive individuals:  50
+Successful loading  ../controllers/2/robot_545.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 545, u'birthDate': datetime.datetime(2017, 7, 23, 6, 19, 52), u'totalFitness': 0.0, u'parentID': 0, u'type': '2', u'numEvals': 13}
+Displaying color:  blue
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:59:16.768958
+wordVector:  [1.0, 1.0]
+Competing controllers:  222  and  551
+{u'totalLikeability': 9.0, u'dead': 0, u'robotID': 222, u'birthDate': datetime.datetime(2017, 7, 19, 8, 18, 50), u'totalFitness': -2.0, u'parentID': 0, u'type': '3', u'numEvals': 214}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 551, u'birthDate': datetime.datetime(2017, 7, 23, 8, 20, 15), u'totalFitness': 0.0, u'parentID': 0, u'type': '1', u'numEvals': 7}
+Successful writing  ../sensors/2017/7/23/robot_545_2017-07-23 11:59:16.dat
+
+
+Generation:  22
+Num of alive individuals:  50
+Successful loading  ../controllers/snakebot/robot_205.dat
+Displaying robot:  {u'totalLikeability': 10.0, u'dead': 0, u'robotID': 205, u'birthDate': datetime.datetime(2017, 7, 19, 2, 7, 3), u'totalFitness': 14.0, u'parentID': 162, u'type': 'snakebot', u'numEvals': 227}
+Displaying color:  orange
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 11:59:47.140284
+wordVector:  [1.0, 1.0]
+Competing controllers:  503  and  551
+{u'totalLikeability': 1.0, u'dead': 0, u'robotID': 503, u'birthDate': datetime.datetime(2017, 7, 22, 15, 24, 40), u'totalFitness': 2.0, u'parentID': 491, u'type': 'spherebot', u'numEvals': 41}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 551, u'birthDate': datetime.datetime(2017, 7, 23, 8, 20, 15), u'totalFitness': 0.0, u'parentID': 0, u'type': '1', u'numEvals': 7}
+Successful writing  ../sensors/2017/7/23/robot_205_2017-07-23 11:59:47.dat
+
+
+Generation:  23
+Num of alive individuals:  50
+Successful loading  ../controllers/1/robot_512.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 512, u'birthDate': datetime.datetime(2017, 7, 22, 16, 40, 4), u'totalFitness': 1.0, u'parentID': 0, u'type': '1', u'numEvals': 31}
+Displaying color:  cyan
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 12:00:17.393947
+wordVector:  [1.0, 1.0]
+Competing controllers:  495  and  556
+{u'totalLikeability': 3.0, u'dead': 0, u'robotID': 495, u'birthDate': datetime.datetime(2017, 7, 22, 14, 39, 45), u'totalFitness': 2.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 44}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 556, u'birthDate': datetime.datetime(2017, 7, 23, 10, 20, 36), u'totalFitness': 0.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 4}
+Successful writing  ../sensors/2017/7/23/robot_512_2017-07-23 12:00:17.dat
+
+
+Generation:  24
+Num of alive individuals:  50
+Successful loading  ../controllers/quadruped/robot_559.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 559, u'birthDate': datetime.datetime(2017, 7, 23, 11, 20, 48), u'totalFitness': 0.0, u'parentID': 0, u'type': 'quadruped', u'numEvals': 2}
+Displaying color:  purple
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 10, 11, 9), u'wordToVec': 1.0, u'cmdTxt': 'move', u'totalLearnability': -533.0}
+Current time:  2017-07-23 12:00:47.618828
+wordVector:  [1.0, 1.0]
+Competing controllers:  491  and  501
+{u'totalLikeability': 5.0, u'dead': 0, u'robotID': 491, u'birthDate': datetime.datetime(2017, 7, 22, 12, 39, 22), u'totalFitness': 13.0, u'parentID': 0, u'type': 'spherebot', u'numEvals': 46}
+{u'totalLikeability': 1.0, u'dead': 0, u'robotID': 501, u'birthDate': datetime.datetime(2017, 7, 22, 15, 15, 58), u'totalFitness': 2.0, u'parentID': 484, u'type': 'spherebot', u'numEvals': 30}
+Closing both windows with ctrl+c...
+Successful writing  ../sensors/2017/7/23/robot_559_2017-07-23 12:00:47.dat
+
+
+Closed both threads successfully... Have a good day:)

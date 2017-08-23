@@ -1,6 +1,10 @@
+import sys 
+
+sys.path.append('../bots')
+
 from database import DATABASE
 
-path_to_log    = "/Users/twitchplaysrobotics/steadystate-log/steadystate_5.log"
+path_to_log    = "/Users/twitchplaysrobotics/TPR-1.0/pyrosim/tmp/steadystate_14.log"
 
 db = DATABASE()
 

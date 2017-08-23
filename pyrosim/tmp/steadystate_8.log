@@ -1,0 +1,47 @@
+Using TensorFlow backend.
+2017-08-04 14:04:11.110 python[88216:68171668] 14:04:11.109 WARNING:  140: This application, or a library it uses, is using the deprecated Carbon Component Manager for hosting Audio Units. Support for this will be removed in a future release. Also, this makes the host incompatible with version 3 audio units. Please transition to the API's in AudioComponent.h.
+Database version : {u'VERSION()': '5.7.18'} 
+Generation:  1
+Num of alive individuals:  50
+Successful loading  ../controllers/spherebot/robot_1311.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 1311, u'birthDate': datetime.datetime(2017, 8, 4, 12, 31, 44), u'totalFitness': 0.0, u'parentID': 0, u'deathDate': None, u'type': 'spherebot', u'numEvals': 6}
+Displaying color:  red
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 19, 39, 35), u'wordToVec': 0.003024, u'cmdTxt': 'move backward', u'totalLearnability': 23.0}
+Current time:  2017-08-04 14:04:11.564045
+wordVector:  [1.0, 0.003024]
+Competing controllers:  1174  and  1279
+{u'totalLikeability': 4.0, u'dead': 0, u'robotID': 1174, u'birthDate': datetime.datetime(2017, 8, 1, 22, 24, 46), u'totalFitness': 0.0, u'parentID': 1147, u'deathDate': None, u'type': 'quadruped', u'numEvals': 155}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 1279, u'birthDate': datetime.datetime(2017, 8, 3, 12, 59, 22), u'totalFitness': -1.0, u'parentID': 1253, u'deathDate': None, u'type': 'quadruped', u'numEvals': 58}
+Successful writing  ../sensors/2017/8/4/robot_1311_2017-08-04-14-04-11.dat
+
+
+Generation:  2
+Num of alive individuals:  50
+Successful loading  ../controllers/snakebot/robot_912.dat
+Displaying robot:  {u'totalLikeability': 6.0, u'dead': 0, u'robotID': 912, u'birthDate': datetime.datetime(2017, 7, 27, 15, 24, 13), u'totalFitness': 19.0, u'parentID': 905, u'deathDate': None, u'type': 'snakebot', u'numEvals': 439}
+Displaying color:  green
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 19, 39, 35), u'wordToVec': 0.003024, u'cmdTxt': 'move backward', u'totalLearnability': 23.0}
+Current time:  2017-08-04 14:04:42.197428
+wordVector:  [1.0, 0.003024]
+Competing controllers:  1250  and  1107
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 1250, u'birthDate': datetime.datetime(2017, 8, 3, 4, 44, 42), u'totalFitness': 3.0, u'parentID': 1157, u'deathDate': None, u'type': 'starfishbot', u'numEvals': 82}
+{u'totalLikeability': 10.0, u'dead': 0, u'robotID': 1107, u'birthDate': datetime.datetime(2017, 7, 31, 21, 57, 59), u'totalFitness': 8.0, u'parentID': 0, u'deathDate': None, u'type': 'crabbot', u'numEvals': 192}
+Successful writing  ../sensors/2017/8/4/robot_912_2017-08-04-14-04-42.dat
+
+
+Generation:  3
+Num of alive individuals:  50
+Successful loading  ../controllers/starfishbot/robot_1313.dat
+Displaying robot:  {u'totalLikeability': 0.0, u'dead': 0, u'robotID': 1313, u'birthDate': datetime.datetime(2017, 8, 4, 13, 31, 47), u'totalFitness': 0.0, u'parentID': 1260, u'deathDate': None, u'type': 'starfishbot', u'numEvals': 0}
+Displaying color:  blue
+Acting command:  {u'active': 1, u'timeAdded': datetime.datetime(2017, 7, 18, 19, 39, 35), u'wordToVec': 0.003024, u'cmdTxt': 'move backward', u'totalLearnability': 23.0}
+Current time:  2017-08-04 14:05:12.728508
+wordVector:  [1.0, 0.003024]
+Competing controllers:  1226  and  1286
+{u'totalLikeability': -3.0, u'dead': 0, u'robotID': 1226, u'birthDate': datetime.datetime(2017, 8, 2, 22, 55, 33), u'totalFitness': 10.0, u'parentID': 1224, u'deathDate': None, u'type': 'quadruped', u'numEvals': 90}
+{u'totalLikeability': 0.0, u'dead': 0, u'robotID': 1286, u'birthDate': datetime.datetime(2017, 8, 3, 17, 25, 15), u'totalFitness': 0.0, u'parentID': 0, u'deathDate': None, u'type': 'snakebot', u'numEvals': 50}
+Closing both windows with ctrl+c...
+Successful writing  ../sensors/2017/8/4/robot_1313_2017-08-04-14-05-12.dat
+
+
+Closed both threads successfully... Have a good day:)
