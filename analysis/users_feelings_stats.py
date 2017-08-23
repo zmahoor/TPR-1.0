@@ -1,21 +1,19 @@
 import sys 
 import matplotlib.pyplot as plt
 
-sys.path.append('./bots')
+sys.path.append('../bots')
 
 from database import DATABASE
-from settings import *
 
 mydatabase = DATABASE()
 
 sql = "select robotID, sum(numDislike) as numDislike, sum(numLike) as numLike from display group by robotID;"
-
 records = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
 
 count_disagreement = 0.0
-count_total = 0.0
+count_total   = 0.0
 count_dislike = 0.0
-count_likes = 0.0
+count_likes   = 0.0
 
 for record in records:
 

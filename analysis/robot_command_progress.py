@@ -19,8 +19,9 @@ ax  = fig.add_subplot(111)
 
 for day in range(18, 32):
 
-	sql = """select r.type, sum(numYes) as sumYes, sum(numNo) as sumNo from display as d join robots as r on
-	d.robotID=r.robotID where d.startTime between '2017-07-%d 00:00:00' and '2017-07-%d 00:00:00'+interval 1 \
+	sql = """select r.type, sum(numYes) as sumYes, sum(numNo) as sumNo from 
+	display as d join robots as r on d.robotID=r.robotID where d.startTime between
+	'2017-07-%d 00:00:00' and '2017-07-%d 00:00:00'+interval 1 
 	day and cmdTxt='%s' group by r.type;"""%(day, day, cmd)
 
 	records = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
