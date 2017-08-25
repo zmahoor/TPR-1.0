@@ -24,12 +24,12 @@ import constants as c
 from database import DATABASE
 from settings import *
 
-SENSOR_DROP_RATE = 5
-num_features     = 1
+SENSOR_DROP_RATE = 18
+num_features     = 4
 sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
-valid_commands   = {'jump'}
+valid_commands   = {'move'}
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -86,7 +86,7 @@ class CRITIC:
 
         obedience = (obedience - _min) / (_max - _min)
 
-        np.random.shuffle(obedience)
+        # np.random.shuffle(obedience)
 
         print "obedience range: ",
         print np.min(obedience),
@@ -263,9 +263,9 @@ def Extract_Features(sample):
 
     # features = np.array([posX, posY, posZ, ray, touch, prop]).T
 
-    # features = np.array([posX, posY, posZ, prop]).T
+    features = np.array([posX, posY, posZ, prop]).T
 
-    features = np.array([touch]).T
+    # features = np.array([touch]).T
 
     # print 'sensors: ', timeSeriedFeatures.shape
 
@@ -299,7 +299,7 @@ if __name__ == "__main__":
         'Number of learning epochs, default=1000.')
 
     parser.add_argument('--val_split', '-v', type = float, default=0.3, help=\
-        'Validatio split, default=0.3.')
+        'Validation split, default=0.3.')
 
     args = parser.parse_args()
 
