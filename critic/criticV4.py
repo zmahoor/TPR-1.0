@@ -30,8 +30,8 @@ num_features     = 4
 sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
-_COMMAND    = {'jump'}
-_MORPHOLOGY = 'snakebot'
+_COMMAND    = {'move'}
+_MORPHOLOGY = 'spherebot'
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -107,11 +107,7 @@ def Load_Training_Data(mydatabase):
     sql = """SELECT d.robotID, sum(numYes) as sumYes, sum(numNo) as sumNo, d.cmdTxt 
     from display as d JOIN robots as r ON d.robotID=r.robotID 
     WHERE d.cmdTxt='%s' and r.type='%s' group by d.robotID having 
-    (sumNo+sumYes)>0;"""%(_COMMAND, _MORPHOLOGY)
-
-    # sql = """SELECT d.robotID, sum(numYes) as sumYes, sum(numNo) as sumNo, d.cmdTxt 
-    # from display as d WHERE d.cmdTxt='%s' group by d.robotID having 
-    # (sumNo+sumYes)>0;"""%(_COMMAND)
+    (sumNo+sumYes)>0;"""%('move', _MORPHOLOGY)
 
     err_msg = "Failed to retrieve record of a dispaly..."
     robots  = mydatabase.Execute_Select_Sql_Command(sql, err_msg)
@@ -126,7 +122,7 @@ def Load_Training_Data(mydatabase):
         robotID = robot['robotID']
 
         sql = """SELECT startTime, robotID from display where robotID=%d and 
-            cmdTxt='%s' and (numYes<>0 or numNo<>0);"""%(robotID, _COMMAND)
+            cmdTxt='%s' and (numYes<>0 or numNo<>0);"""%(robotID, 'move')
 
         record  = mydatabase.Execute_SelectOne_Sql_Command(sql, err_msg)
 
@@ -142,6 +138,38 @@ def Load_Training_Data(mydatabase):
             continue
         
         obedience  = float(robot['sumYes']-robot['sumNo']) \
+                    / float(robot['sumYes']+robot['sumNo'])
+
+        # print tfeatures.shape, obedience
+
+        sensor_input.append(tfeatures)
+        output.append(obedience)
+
+    sql = """SELECT d.robotID, sum(numYes) as sumYes, sum(numNo) as sumNo, d.cmdTxt 
+    from display as d JOIN robots as r ON d.robotID=r.robotID 
+    WHERE d.cmdTxt='%s' and r.type='%s' group by d.robotID having 
+    (sumNo+sumYes)>0;"""%('stop', _MORPHOLOGY)
+
+    err_msg = "Failed to retrieve record of a dispaly..."
+    robots  = mydatabase.Execute_Select_Sql_Command(sql, err_msg)
+
+    print('Number of samples: ', len(robots))
+
+    for robot in robots:
+        robotID = robot['robotID']
+        sql = """SELECT startTime, robotID from display where robotID=%d and 
+            cmdTxt='%s' and (numYes<>0 or numNo<>0);"""%(robotID, 'stop')
+
+        record  = mydatabase.Execute_SelectOne_Sql_Command(sql, err_msg)
+        sensors = Load_Sensors_From_File(record)
+
+        features = Extract_Features( sensors )
+        if features == None: continue
+        tfeatures  = features[0]
+        if tfeatures.shape != (sequence_len, num_features): 
+            continue
+        
+        obedience  =-float(robot['sumYes']-robot['sumNo']) \
                     / float(robot['sumYes']+robot['sumNo'])
 
         # print tfeatures.shape, obedience
@@ -275,13 +303,13 @@ def main(args):
     data = Load_Training_Data( mydatabase )
     sensors, obedience = data
 
+    print np.histogram(obedience, bins=10)
+
     print sensors.shape, obedience.shape
 
     _min = np.min(np.min(sensors, axis=1), axis=0)
     _max = np.max(np.max(sensors, axis=1), axis=0)
     sensors = (sensors - _min) / (_max - _min)
-
-    print np.histogram(obedience, bins=10)
 
     obedience = (obedience-np.min(obedience))/(np.max(obedience)-np.min(obedience))        
 

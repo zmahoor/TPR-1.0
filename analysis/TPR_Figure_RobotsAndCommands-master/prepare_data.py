@@ -11,11 +11,14 @@ outfile = open("data.csv", "w")
 writer  = csv.writer(outfile, delimiter=",")
 
 validRobots = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot',
-			'spherebot', 'snakebot', 'crabbot']
+			'spherebot', 'snakebot', 'crabbot', 'humanoid', 'snakeplusbot', 
+			'quadrupedplus', 'crabplusbot']
 
 names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
     'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot', 
-    'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot',}
+    'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot', 
+    'snakeplusbot':'snakebot+', 'humanoid': 'humanoid', 'crabplusbot':'crabbot+',
+     'quadrupedplus':'quadruped+'}
 
 commands = ['move', 'jump', 'move forward', 'backflip', 'stop', 'spin', 'walk', 
 			'roll',  'move backward', 'dance', 'run', 'flip']
@@ -71,7 +74,11 @@ for i in range( len(commands)+2 ):
 		results = db.Execute_SelectOne_Sql_Command(sql, 
 				 err_msg="Failed executing the select.")
 
-		obedience = (results['sumYes']-results['sumNo'])/(results['sumYes']+results['sumNo'])
+		print robot, results
+		if results == None or (results['sumYes']==0 and results['sumNo']==0): 
+			obedience = 0
+		else:
+			obedience = (results['sumYes']-results['sumNo'])/(results['sumYes']+results['sumNo'])
 		score_matrix[i][j] = obedience = (obedience - MIN) / (MAX-MIN)
 		row.append(str(obedience))
 
