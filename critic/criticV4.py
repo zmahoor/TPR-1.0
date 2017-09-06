@@ -31,7 +31,7 @@ sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
 _COMMAND    = {'move'}
-_MORPHOLOGY = 'spherebot'
+_MORPHOLOGY = 'starfishbot'
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -53,7 +53,6 @@ class CRITIC:
         dropout1 = Dropout(0.2)(lstm1)
         lstm2    = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
-        # output1  = Dense(12, activation='tanh')(dropout2)
         output   = Dense(1, activation='relu', name='output')(dropout2)
 
         model = Model(inputs=[sensor_input], outputs=[output])
@@ -64,8 +63,9 @@ class CRITIC:
         
     def train_model(self, sensors, obedience):
 
-        cv_scores = []
+        cv_scores  = []
         pcv_scores = []
+        rcv_scores = []
 
         kfold = KFold(n_splits=self.params['n_split'], shuffle=True,
                     random_state=seed)
@@ -76,31 +76,32 @@ class CRITIC:
             model = self.setup_model()
 
             scores = model.evaluate(sensors[test], obedience[test], verbose=0)
+            rcv_scores.append(scores[1])
+            print "Random control Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
 
             # train the model
             model.fit({'sensor_input': sensors[train]}, {'output': obedience[train]},
                 epochs=self.params['epochs'], batch_size=self.params['batch_size'],
                 verbose=0)
+            print 'Training duration (s) : ', time.time() - start_time,
 
             # test the model with non-permutated reinforcements
             scores = model.evaluate(sensors[test], obedience[test], verbose=0)
-
-            print 'Training duration (s) : ', time.time() - start_time,
-            print "Non-permutated Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
+            print "Regular Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
             cv_scores.append(scores[1])
 
-            # test the model with permutated reinforcements
-            
+            # test the model with permuted reinforcements
             random_obedience = deepcopy(obedience[test]) #np.random.uniform(0, 1, len(test))
             np.random.shuffle(random_obedience)
             pscores = model.evaluate(sensors[test], random_obedience, verbose=0)
 
-            print "Permutated Test: %s: %.4f"%(model.metrics_names[1], pscores[1])
+            print "Permuted Test: %s: %.4f"%(model.metrics_names[1], pscores[1])
             pcv_scores.append(pscores[1])
 
-        print("Non-permutated Test: %.3f (+/- %.3f)" % (np.mean(cv_scores), np.std(cv_scores)))
-        print("Permutated Test: %.3f (+/- %.3f)" % (np.mean(pcv_scores), 
-                        np.std(pcv_scores)))
+        print("Regular Test: %.3f (+/- %.3f)" % (np.mean(cv_scores), np.std(cv_scores)))
+        print("Permuted Test: %.3f (+/- %.3f)" % (np.mean(pcv_scores), np.std(pcv_scores)))
+        print("Random Test: %.3f (+/- %.3f)" % (np.mean(rcv_scores), np.std(rcv_scores)))
+
 
 def Load_Training_Data(mydatabase):
     
@@ -137,7 +138,7 @@ def Load_Training_Data(mydatabase):
         if tfeatures.shape != (sequence_len, num_features): 
             continue
         
-        obedience  = float(robot['sumYes']-robot['sumNo']) \
+        obedience = float(robot['sumYes']-robot['sumNo']) \
                     / float(robot['sumYes']+robot['sumNo'])
 
         # print tfeatures.shape, obedience
@@ -206,7 +207,6 @@ def Read_File(filePath):
 
     except:
         print "Failed loading ", filePath 
-    
     return sensors
 
 def Propriceptive_Feature_Extraction(values):
@@ -328,7 +328,6 @@ if __name__ == "__main__":
     parser.add_argument('--n_split', '-n', type = int, default=10, help=\
         'Validatio split, default=10.')
 
-    # parser.add_argument('--shuffle', '-s', action='store_true', help='Shuffle obedience.')
     args = parser.parse_args()
 
     main(args)

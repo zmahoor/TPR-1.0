@@ -59,7 +59,6 @@ def Store_Controller_To_File(individual, robotType):
 def Load_Controller_From_File(robotID, robotType):
 
     brainPath = "../controllers/"+ robotType +"/robot_"+ str(robotID) +".dat" 
-
     if not os.path.isfile(brainPath): 
         return None
 
@@ -70,9 +69,7 @@ def Load_From_Diversity_Pool(robotType):
     global removeInjected
 
     path = "../diversity_pool/"+ robotType + "/*.dat" 
-
     brainPaths = list(glob.iglob(path))
-
     if len(brainPaths) == 0: return None
 
     randomIndex = np.random.randint(low=0, high=len(brainPaths))
@@ -140,12 +137,12 @@ def Compete_While_Waiting_For(pop, ignoreID):
         return None
 
     while True:
-        ind1 = Select_Random_Individual(len(pop))
+        ind1 = np.random.randint(len(pop))
         if pop[ind1]['robotID'] != ignoreID:
             break
 
     while True:
-        ind2 = Select_Random_Individual(len(pop))
+        ind2 = np.random.randint(len(pop))
         if ind2 != ind1 and pop[ind2]['robotID'] != ignoreID:
             break
     print "Competing controllers: ", pop[ind1]['robotID'], " and " , pop[ind2]['robotID']
@@ -160,12 +157,12 @@ def Compete_While_Waiting_For(pop, ignoreID):
     else:
         return None
 
-def Compete_Based_On_Dominance(individual1, individual2):
+def Compete_Based_On_Dominance(lh_individual, rh_individual):
 
-    winner, loser = individual1, individual2
-    if Dominance(individual2, individual1):
-        winner, loser = individual2, individual1
-    elif not Dominance(individual1, individual2):
+    winner, loser = lh_individual, rh_individual
+    if Dominance(rh_individual, lh_individual):
+        winner, loser = rh_individual, lh_individual
+    elif not Dominance(lh_individual, rh_individual):
         return None
 
     print "Winner is: ", winner['robotID']
@@ -195,12 +192,14 @@ def Create_Mutation(individual):
 
     return newIndividual
 
-def Dominance(individual1, individual2):
+def Dominance(lh_individual, rh_individual):
 
-    notShownMore    = individual1['numEvals'] <= individual2['numEvals']
-    likedMore       = individual1['totalLikeability'] > individual2['totalLikeability']
-    moreObedient    = individual1['totalFitness'] > individual2['totalFitness']
-    return notShownMore and likedMore and moreObedient
+    notShownMore = lh_individual['numEvals'] <= rh_individual['numEvals']
+    lh_obedience = float(lh_individual['sumYes']-lh_individual['sumNo'])/(lh_individual['sumYes']+lh_individual['sumNo'])
+    rh_obedience = float(rh_individual['sumYes']-rh_individual['sumNo'])/(rh_individual['sumYes']+rh_individual['sumNo'])
+    moreObedient = lh_obedience > rh_obedience
+
+    return notShownMore and moreObedient
 
 def Add_New_Robot(newIndividual, parentID=0):
 
@@ -241,9 +240,7 @@ def Steady_State():
     while True:
 
         print "Generation: ", generation
-
         aliveIndividuals = db.Fetch_Alive_Robots("all")
-
         print "Num of alive individuals: ", len(aliveIndividuals)
 
         if len(aliveIndividuals) <= 2:
@@ -254,7 +251,7 @@ def Steady_State():
 
         if injectionTimer.Time_Elapsed():
 
-            print 'Time to inject a new individual..'
+            print "Time to inject a new individual.."
             injectionTimer.Reset()
 
             min_Evaluated_Robot = min(aliveIndividuals, key=lambda x:x['numEvals'])
@@ -312,9 +309,7 @@ def Steady_State():
         randomIndividual.Start_Evaluate(False, False, wordVector)
         
         Compete_While_Waiting_For(aliveIndividuals, robotID)
-
         randomIndividual.Wait_For_Me()
-
         Store_Sensors_To_File(randomIndividual, currentTime)
 
         colorIndex += 1

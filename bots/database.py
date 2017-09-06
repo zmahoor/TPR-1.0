@@ -145,15 +145,25 @@ class DATABASE:
         err_msg = "Failed to insert the reward into the display table..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Add_To_RewardLog_Table(self, username, color, reward, time):
-        sql = """INSERT INTO reward_log(userName, reward, color, timeArrival) VALUES
-        ('%s', '%s', '%s', '%s');"""%(username, reward, color, time)
+    def Add_To_RewardLog_Table(self, username, color, reward, arrivalTime):
+
+        sql = """SELECT displayID from display WHERE color='%s' and '%s' BETWEEN startTime
+             and startTime+INTERVAL 2 MINUTE ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+
+        result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
+
+        if result == None or result['displayID'] == None: displayID = -1
+        else: displayID = result['displayID']
+
+
+        sql = """INSERT INTO reward_log(userName, reward, color, timeArrival, displayID) VALUES
+        ('%s', '%s', '%s', '%s');"""%(username, reward, color, arrivalTime, displayID)
 
         err_msg = "Failed to log this reward..."
-
         self.Execute_Update_Sql_Command(sql, err_msg)
 
     def Add_To_CommandLog_Table(self, username, command, time):
+
         sql = """INSERT INTO command_log(userName, cmdTxt, timeArrival) VALUES
         ('%s', '%s', '%s');"""%(username, command, time)
 
@@ -175,7 +185,9 @@ class DATABASE:
         birthDate = datetime.datetime.now()
         birthDate = birthDate.strftime("%Y-%m-%d %H:%M:%S")
 
-        sql = "INSERT INTO robots(type, birthDate, parentID) VALUES('%s', '%s', '%d');"%(robotType, birthDate, parentID)
+        sql = """INSERT INTO robots(type, birthDate, parentID) 
+        VALUES('%s', '%s', '%d');"""%(robotType, birthDate, parentID)
+
         try:
             self.cursor.execute(sql)
             robotID = self.connection.insert_id()
@@ -216,6 +228,50 @@ class DATABASE:
         and parentName is NULL;"""%(parent, user)
         err_msg = "Failed to update the user's parent..."
         self.Execute_Update_Sql_Command(sql, err_msg)
+
+    def Update_Robot_Feedback(self, color, reward, arrivalTime):
+
+        if reward == 'y':
+            sql = """ UPDATE robots set sumYes=sumYes+1 WHERE 
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        elif reward == 'n':
+            sql = """ UPDATE robots set sumNo=sumNo+1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+        
+        elif reward == 'l':
+            sql = """ UPDATE robots set sumLike=sumLike+1 WHERE 
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        elif reward == 'd':
+            sql = """ UPDATE robots set sumDislike=sumDislike+1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        else: return
+
+        err_msg = "Failed to update the robot's fittness..."
+        self.Execute_Update_Sql_Command(sql, err_msg)
+
+    def Update_Total_Likeability(self, color, reward, arrivalTime):
+        if reward == 'l':
+            sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE 
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        elif reward == 'd':
+            sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
     def Update_Total_Fitness(self, color, reward, arrivalTime):
         if reward == 'y':
@@ -321,7 +377,11 @@ class DATABASE:
     
     #update the robot with dead flag as 1--kill it--
     def Kill_Robot(self, robotID):
-        sql = "UPDATE robots set dead=1 WHERE robotID='%d';"%(robotID)
+
+        deathDate = datetime.datetime.now()
+        deathDate = deathDate.strftime("%Y-%m-%d %H:%M:%S")
+
+        sql = """UPDATE robots set dead=1, deathDate='%s' WHERE robotID=%d;"""%(deathDate, robotID)
         err_msg = "Failed to kill the robot..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
@@ -360,25 +420,29 @@ class DATABASE:
         cmdTxt    = result['cmdTxt']
         robotType = result['type']
 
-        sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
+        sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where
+         robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result1 != None:
             result.update( result1 )
 
-        sql="""SELECT count(*) as numOfKind, type as robotType from robots where type='%s' and dead=0;"""%(robotType)
+        sql="""SELECT count(*) as numOfKind, type as robotType from robots where
+         type='%s' and dead=0;"""%(robotType)
         result2 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result2 != None:
             result.update( result2 )
 
-        sql="""SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay from display where robotID='%d' """%(robotID)
+        sql="""SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay
+         from display where robotID='%d' """%(robotID)
         result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result3 != None:
             result.update( result3 )
 
-        sql="""SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from display where robotID='%d';"""%(robotID)
+        sql="""SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from 
+        display where robotID='%d';"""%(robotID)
         result4 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
         if result4 != None:
@@ -437,6 +501,7 @@ class DATABASE:
 
         err_msg = "Failed to retrieve scores of top users..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
+
     #return a list of all commands along with their scores and ranks
     # that were typed (interval) seconds before the current time
     def Fetch_Recent_Typed_Command(self, interval=10):

@@ -24,8 +24,6 @@ with open(path_to_log, 'r') as input_file:
 
             db.Execute_Update_Sql_Command(sql, err_msg="Falid to update: %d"%(loser_id) )
 
-
-
 injectd  = False
 
 with open(path_to_log, 'r') as input_file:
