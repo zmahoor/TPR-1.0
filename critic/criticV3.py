@@ -30,7 +30,7 @@ num_features     = 4
 sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
-_COMMAND    = {'jump'}
+_COMMAND    = 'jump'
 _MORPHOLOGY = 'snakebot'
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"

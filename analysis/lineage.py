@@ -5,11 +5,6 @@ sys.path.append('../bots')
 
 from database import DATABASE
 import matplotlib.pyplot as plt
-import datetime
-
-validRobots = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot',
-			'spherebot', 'snakebot', 'crabbot', 'humanoid', 'snakeplusbot', 
-			'quadrupedplus', 'crabplusbot']
 
 names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
     'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot', 
@@ -32,9 +27,7 @@ colors = ['#67001f','#b2182b','#d6604d','#f4a582','#fddbc7','#d1e5f0','#92c5de',
 
 i = 0
 for robot in robots:
-	rtype = robot['type']
-	count = robot['count']
-	plt.bar(i, count, color = colors[i], label = names[rtype])
+	plt.bar(i, robot['count'], color = colors[i], label = names[robot['type']])
 	i += 1
 	
 plt.title('Offspring Amount by Robot Type')

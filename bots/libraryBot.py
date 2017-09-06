@@ -44,7 +44,6 @@ def getParentInfo(data):
     return data[1:]
 
 db = database.DATABASE()
-
 db.Flush_Old_Unprocessed_Chats()
 
 while(True):
@@ -61,7 +60,6 @@ while(True):
 
     # check the user table and if the user is new then insert it
     db.Add_To_User_Table(user, timeArrival)
-
     print datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), newRow
 
     # if this message is the user's first contribution--reward or command--, 
@@ -71,52 +69,40 @@ while(True):
         if db.First_Time_Contributer(user):
 
             print(message, 'first time contribution')
-
             db.Add_To_Help_Table(user, "first_time_contribution", timeArrival)
 
     if (message[0] == '?'):
 
         db.Add_To_Help_Table(user, message, timeArrival)
-
         print(message, " help requested.")
     
     #set the username after @ as the parent of this user
     # elif (message[0] == '#'):
 
     #     print(message, " set parent.")
-
     #     parent = getParentInfo(message)
-
     #     db.Update_User_Parent(user, parent)
 
     #Or reinforcement then move to reinforcements table
     elif isRewardSignal(message):
 
         print(message, " reward entered.")
-
         color, reward = parseReward(message)
-
         db.Add_To_RewardLog_Table(user, color, reward, timeArrival)
-
         db.Add_Reward_To_Display_Table(color, reward, timeArrival)
+        db.Update_Robot_Feedback(color, reward, timeArrival)
 
-        db.Update_Total_Fitness(color, reward, timeArrival)
-
-        db.Update_Total_Likeability(color, reward, timeArrival)
+        # db.Update_Total_Fitness(color, reward, timeArrival)
+        # db.Update_Total_Likeability(color, reward, timeArrival)
 
     #Either command then move to commands table
     elif isCommand(message):
 
         print(message, " command entered.")
-
         command = parseCommand(message)
-
         db.Add_To_CommandLog_Table(user, command, timeArrival)
-
         randIndex = db.Get_New_Word_Vector()
-
         # print command, timeArrival, randIndex
-
         db.Add_To_Unique_Commands_Table(command, timeArrival, randIndex)
 
     else:
