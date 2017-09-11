@@ -80,6 +80,9 @@ for i in range( len(commands)+2 ):
 		else:
 			obedience = (results['sumYes']-results['sumNo'])/(results['sumYes']+results['sumNo'])
 		score_matrix[i][j] = obedience = (obedience - MIN) / (MAX-MIN)
+
+		if row[0] == 'total':
+			obedience = (results['sumYes']+results['sumNo'])
 		row.append(str(obedience))
 
 	writer.writerow(row)

@@ -14,6 +14,7 @@ import sys
 import pickle
 import os 
 import argparse
+from scipy.stats.stats import ttest_ind
 
 seed = 1234
 np.random.seed(seed)
@@ -31,7 +32,7 @@ sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
 _COMMAND    = {'move'}
-_MORPHOLOGY = 'starfishbot'
+_MORPHOLOGY = '3'
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -102,6 +103,8 @@ class CRITIC:
         print("Permuted Test: %.3f (+/- %.3f)" % (np.mean(pcv_scores), np.std(pcv_scores)))
         print("Random Test: %.3f (+/- %.3f)" % (np.mean(rcv_scores), np.std(rcv_scores)))
 
+        print("Ttest simple Exp. vs Permuted", ttest_ind(cv_scores, pcv_scores))
+        print("Ttest simple Exp. vs Random", ttest_ind(cv_scores, rcv_scores))
 
 def Load_Training_Data(mydatabase):
     
@@ -254,7 +257,7 @@ def Extract_Features(sample):
 
         if key.startswith('P') and key.endswith('_X') :
             posX = Position_Feature_Extraction(sample[key])
-        
+
         elif key.startswith('P') and key.endswith('_Y'):
             posY = Position_Feature_Extraction(sample[key])
 
@@ -271,6 +274,13 @@ def Extract_Features(sample):
         elif key.startswith('P'):
             prop.append(sample[key])
 
+    head = np.array([posX, posY, posZ])
+    # print posX.shape, head.shape
+
+    head = np.linalg.norm(head, axis=0)
+
+    # print head.shape
+
     if len(prop) != 0:
         prop = Propriceptive_Feature_Extraction(prop)
     else: return None
@@ -279,9 +289,10 @@ def Extract_Features(sample):
         touch = Touch_Feature_Extraction(touch)
     else: return None
 
-    # features = np.array([posX, posY, posZ, ray, touch, prop]).T
-    features = np.array([posX, posY, posZ, prop]).T
-    # features = np.array([touch]).T
+    features = np.array([posX, posY, posZ , prop]).T
+    # features = np.array([head, prop]).T
+
+    # print features.shape
 
     # print 'sensors: ', timeSeriedFeatures.shape
 
