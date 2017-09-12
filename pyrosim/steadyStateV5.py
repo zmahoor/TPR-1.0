@@ -127,8 +127,13 @@ def Remove_File(filePath):
     except:
         print "Was not able to remove the injected robot from the diversity pool.."
 
-def Select_Random_Individual(popSize):
-    return np.random.randint(popSize)
+def Select_Individual(pop):
+
+    if i in range(0, len(pop)):
+        if not db.Was_Evaluated( pop[i]['robotID'], currentCommand ):
+            return i
+
+    return np.random.randint(len(pop))
 
 def Compete_While_Waiting_For(pop, ignoreID):
 
@@ -274,7 +279,8 @@ def Steady_State():
             currentColor = specialColor
 
         else:
-            toBe_Displayed_Index = Select_Random_Individual(len(aliveIndividuals))
+            #find a controller that was not evaluated under the current command
+            toBe_Displayed_Index = Select_Individual(aliveIndividuals)
             toBe_Displayed = aliveIndividuals[toBe_Displayed_Index]
             currentColor   = validColors[colorIndex % len(validColors)]
 

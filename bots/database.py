@@ -401,6 +401,19 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
+    def Was_Evaluated( robotID, currentCommand ):
+
+        sql="""select count(*) as count, robotID from display where robotID=%d 
+            and cmdTxt='%s';"""%(robotID, currentCommand)
+
+        result = self.Execute_SelectOne_Sql_Command(sql, "not able to fetch.")
+
+        if result== None: return False
+        if result['count']== None or result['count']==0: return False
+        
+        return True
+
+
     def Fetch_User_Feedback(self, username):
 
         sql ="""select count(*) as num, reward as feedback_type from reward_log
