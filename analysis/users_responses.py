@@ -9,10 +9,11 @@ import numpy as np
 db = DATABASE()
 
 names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
-    'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot', 
-    'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot', 
-    'snakeplusbot':'snakebot+', 'humanoid': 'humanoid', 'crabplusbot':'crabbot+',
-     'quadrupedplus':'quadruped+'}
+'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot',
+'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot',
+'snakeplusbot':'snakebot+', 'humanoid': 'humanoid', 'crabplusbot':'crabbot+',
+'quadrupedplus':'quadruped+'}
+
 
 sql="""SELECT count(*) as count, type FROM TwitchPlays.display as d join TwitchPlays.robots as r
 on d.robotID=r.robotID where (numYes+numNo)>=2 group by r.type;"""
