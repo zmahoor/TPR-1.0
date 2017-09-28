@@ -14,6 +14,9 @@ import sys
 import pickle
 import os 
 import argparse
+from scipy.stats.stats import ttest_ind
+from keras import backend as K
+import tensorflow as tf
 
 seed = 1234
 np.random.seed(seed)
@@ -30,200 +33,185 @@ num_features     = 4
 sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
-_COMMAND    = 'jump'
-_MORPHOLOGY = 'snakebot'
+_COMMAND    = {'move', 'stop'}
+# _COMMAND    = {'jump'}
 
+_MORPHOLOGY = '2'
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
 # fix random seed for reproducibility
 np.random.seed(1234)
 
+
 class CRITIC:
 
     def __init__(self, params):
-
         self.model = None
         self.params = params
 
     def setup_model(self):
-
         sensor_input = Input(shape=(sequence_len, num_features), name='sensor_input')
-
         lstm1    = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
         lstm2    = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
         # output1  = Dense(12, activation='tanh')(dropout2)
         output   = Dense(1, activation='relu', name='output')(dropout2)
-
         model = Model(inputs=[sensor_input], outputs=[output])
-        model.compile(optimizer='rmsprop', loss={'output': 'mse'},
-                    loss_weights={'output': 1.}, metrics=['mae'])
+        model.compile(optimizer='rmsprop', loss={'output': 'mse'}, loss_weights={'output': 1.}, metrics=['mae'])
 
         return model
-        
+
     def train_model(self, sensors, obedience):
-
-        cv_scores = []
-        pcv_scores = []
-
-        kfold = KFold(n_splits=self.params['n_split'], shuffle=True,
-                    random_state=seed)
+        cv_scores, pcv_scores, rcv_scores = [], [], []
+        kfold = KFold(n_splits=self.params['n_split'], shuffle=True, random_state=seed)
 
         for train, test in kfold.split(sensors, obedience):
-
             start_time = time.time()
             model = self.setup_model()
 
             scores = model.evaluate(sensors[test], obedience[test], verbose=0)
+            rcv_scores.append(scores[1])
+            print "Random control Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
 
             # train the model
             model.fit({'sensor_input': sensors[train]}, {'output': obedience[train]},
-                epochs=self.params['epochs'], batch_size=self.params['batch_size'],
-                verbose=0)
+                epochs=self.params['epochs'], batch_size=self.params['batch_size'], verbose=0)
 
-            # test the model with non-permutated reinforcements
+            # test the model with non-permuted reinforcements
             scores = model.evaluate(sensors[test], obedience[test], verbose=0)
 
-            print 'Training duration (s) : ', time.time() - start_time,
-            print "Non-permutated Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
+            # print 'Training duration (s) : ', time.time() - start_time,
+            print "Regular Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
             cv_scores.append(scores[1])
 
-            # test the model with permutated reinforcements
-            
+            # test the model with permuted reinforcements
             random_obedience = deepcopy(obedience[test]) #np.random.uniform(0, 1, len(test))
             np.random.shuffle(random_obedience)
             pscores = model.evaluate(sensors[test], random_obedience, verbose=0)
 
-            print "Permutated Test: %s: %.4f"%(model.metrics_names[1], pscores[1])
+            print "Permuted Test: %s: %.4f"%(model.metrics_names[1], pscores[1])
             pcv_scores.append(pscores[1])
 
-        print("Non-permutated Test: %.3f (+/- %.3f)" % (np.mean(cv_scores), np.std(cv_scores)))
-        print("Permutated Test: %.3f (+/- %.3f)" % (np.mean(pcv_scores), 
-                        np.std(pcv_scores)))
+        print("Regular Test: %.3f (+/- %.3f)" % (np.mean(cv_scores), np.std(cv_scores)))
+        print("Permuted Test: %.3f (+/- %.3f)" % (np.mean(pcv_scores), np.std(pcv_scores)))
+        print("Random Test: %.3f (+/- %.3f)" % (np.mean(rcv_scores), np.std(rcv_scores)))
+
+        print("Ttest simple Exp. vs Permuted", ttest_ind(cv_scores, pcv_scores))
+        print("Ttest simple Exp. vs Random", ttest_ind(cv_scores, rcv_scores))
+
+
+def custom_loss(y_true, y_pred):
+    pos_y_true = tf.gather( y_true, tf.where( tf.equal( y_true, +1)))
+    pos_y_pred = tf.gather( y_pred, tf.where( tf.equal( y_true, +1)))
+    pos_count  = tf.reduce_sum(tf.cast(tf.equal(y_true, +1), tf.float32))
+
+    neg_y_true = tf.gather( y_true, tf.where( tf.less( y_true, +1)))
+    neg_y_pred = tf.gather( y_pred, tf.where( tf.less( y_true, +1)))
+    neg_count  = tf.reduce_sum(tf.cast(tf.less(y_true, +1), tf.float32))
+
+    first_sum = tf.div(tf.reduce_sum(tf.abs(tf.subtract(pos_y_true, pos_y_pred))), 2.0*pos_count)
+    second_sum= tf.div(tf.reduce_sum(tf.abs(tf.subtract(neg_y_true, neg_y_pred))), 2.0*neg_count)
+
+    return (first_sum + second_sum) / 2.0
+
 
 def Load_Training_Data(mydatabase):
-    
-    sql = """SELECT d.robotID, sum(numYes) as sumYes, sum(numNo) as sumNo, d.cmdTxt 
-    from display as d JOIN robots as r ON d.robotID=r.robotID 
-    WHERE d.cmdTxt='%s' and r.type='%s' group by d.robotID having 
-    (sumNo+sumYes)>0;"""%(_COMMAND, _MORPHOLOGY)
+    sql = """SELECT d.robotID, numYes, numNo, d.cmdTxt, startTime, cmdTxt from display as d JOIN
+     robots as r ON d.robotID=r.robotID WHERE d.cmdTxt in """ + '(' + ",".join(["'"+c+"'" for c in _COMMAND]) + ')' + \
+          " and r.type='%s' and (numYes+numNo)>0;"%_MORPHOLOGY
+    robots = mydatabase.Execute_Select_Sql_Command(sql, "Failed to retrieve record of a dispaly...")
+    print('Number of samples: ', len(robots), " Morphology: ", _MORPHOLOGY, "Command: ", _COMMAND)
 
-    # sql = """SELECT d.robotID, sum(numYes) as sumYes, sum(numNo) as sumNo, d.cmdTxt 
-    # from display as d WHERE d.cmdTxt='%s' group by d.robotID having 
-    # (sumNo+sumYes)>0;"""%(_COMMAND)
-
-    err_msg = "Failed to retrieve record of a dispaly..."
-    robots  = mydatabase.Execute_Select_Sql_Command(sql, err_msg)
-
-    print('Number of samples: ', len(robots))
-
-    sensor_input = []
-    output       = []
+    sensor_input, output = [], []
 
     for robot in robots:
+        sensors = Load_Sensors_From_File(robot)
+        if sensors is None: continue
 
-        robotID = robot['robotID']
-
-        sql = """SELECT startTime, robotID from display where robotID=%d and 
-            cmdTxt='%s' and (numYes<>0 or numNo<>0);"""%(robotID, _COMMAND)
-
-        record  = mydatabase.Execute_SelectOne_Sql_Command(sql, err_msg)
-
-        sensors = Load_Sensors_From_File(record)
-        if sensors == None: 
-            # print('Not able to load the sensor file.') 
-            continue
-
-        features = Extract_Features( sensors )
-        if features == None: continue
-        tfeatures  = features[0]
-        if tfeatures.shape != (sequence_len, num_features): 
-            continue
+        tfeatures = Extract_Features(sensors)
+        if tfeatures is None or tfeatures.shape != (sequence_len, num_features): continue
         
-        obedience  = float(robot['sumYes']-robot['sumNo']) \
-                    / float(robot['sumYes']+robot['sumNo'])
+        obedience = float(robot['numYes']-robot['numNo'])/float(robot['numYes']+robot['numNo'])
 
+        if robot['cmdTxt'] == 'stop': obedience *= -1
         # print tfeatures.shape, obedience
 
         sensor_input.append(tfeatures)
         output.append(obedience)
 
-    return (np.array(sensor_input), np.array(output))
+    neg_count = output.count(-1)
+    pos_count = output.count(+1)
+    diff = abs(neg_count - pos_count)
+
+    if neg_count > pos_count:
+        extra_indices = np.random.choice([idx for idx in range(len(output)) if output[idx] == +1], diff)
+        sensor_input.extend([sensor_input[idx] for idx in extra_indices])
+        output.extend([+1 for _ in range(diff)])
+
+    elif neg_count < pos_count:
+        extra_indices = np.random.choice([idx for idx in range(len(output)) if output[idx] == -1], diff)
+        sensor_input.extend([sensor_input[idx] for idx in extra_indices])
+        output.extend([-1 for _ in range(diff)])
+
+    return np.array(sensor_input), np.array(output)
+
 
 def Load_Sensors_From_File(record):
-
     robotID   = record['robotID']
     startTime = record['startTime']
     
-    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
-        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' +\
-         startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
+    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+ "/" + str(startTime.day)+\
+           "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
 
     if not os.path.isfile(path): 
         print "Failed loading ", path
         return None
-
     sensors = Read_File(path)
     return sensors
 
+
 def Read_File(filePath):
-
     sensors = None
-
     try:
         with open(filePath, 'r') as f:
             sensors = pickle.load(f)
         # print "Loading ", filePath,
-
     except:
         print "Failed loading ", filePath 
     
     return sensors
 
-def Propriceptive_Feature_Extraction(values):
 
+def Propriceptive_Feature_Extraction(values):
     values = np.array(values).T
     temp   = np.diff(values, axis=0)
-    temp   = np.absolute(values)
+    temp   = np.absolute(temp)
     temp   = np.average(temp, axis=1)
     temp   = np.hstack((temp, np.array(temp[-1])))
-
     return temp[1::SENSOR_DROP_RATE]
+
 
 def Ray_Feature_Extraction(values):
-    
     return values[1::SENSOR_DROP_RATE]
+
 
 def Position_Feature_Extraction(values):
-
     return values[1::SENSOR_DROP_RATE]
 
-def Touch_Feature_Extraction(values):
 
+def Touch_Feature_Extraction(values):
     values = np.array(values).T
     temp   = np.average(values, axis=1)
-
     return temp[1::SENSOR_DROP_RATE]
 
+
 def Extract_Features(sample):
-
-    touch = []
-    prop  = []
-    ray   = None
-    posX  = None
-    posY  = None
-    posZ  = None
-
-    features = None
+    touch, prop = [], []
+    ray, posX, posY, posZ, features = None, None, None, None, None
     # print sample.keys()
-    
-    if 'R0' not in sample.keys(): 
-        print 'R0 is missing in sensors.'
-        return None
 
     for key in sample.keys():
-
         if key.startswith('P') and key.endswith('_X') :
             posX = Position_Feature_Extraction(sample[key])
         
@@ -254,19 +242,15 @@ def Extract_Features(sample):
     # features = np.array([posX, posY, posZ, ray, touch, prop]).T
     features = np.array([posX, posY, posZ, prop]).T
     # features = np.array([touch]).T
-
     # print 'sensors: ', timeSeriedFeatures.shape
+    return features
 
-    return (features, True)
 
 def main(args):
-            
     batch_size = args.batch_size
     n_split    = args.n_split
     epoch      = args.epoch
-
     mydatabase = DATABASE()
-
     params = {'epochs':epoch, 'batch_size':batch_size, 'n_split':n_split}
 
     c = CRITIC(params)
@@ -287,10 +271,10 @@ def main(args):
 
     c.train_model(sensors, obedience)
 
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Critic Model.')
-    
     parser.add_argument('--batch_size', '-b', type = int, default=512, help=\
         'batchSize, default=512.')
 

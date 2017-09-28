@@ -15,6 +15,8 @@ import pickle
 import os 
 import argparse
 from scipy.stats.stats import ttest_ind
+from keras import backend as K
+import tensorflow as tf
 
 seed = 1234
 np.random.seed(seed)
@@ -32,12 +34,27 @@ sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
 _COMMAND    = {'move'}
-_MORPHOLOGY = '3'
+_MORPHOLOGY = 'starfishbot'
 
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
 # fix random seed for reproducibility
 np.random.seed(1234)
+
+
+def custom_loss(y_true, y_pred):
+    pos_y_true = tf.gather( y_true, tf.where( tf.equal( y_true, +1))) 
+    pos_y_pred = tf.gather( y_pred, tf.where( tf.equal( y_true, +1)))
+    pos_count  = tf.reduce_sum(tf.cast(tf.equal(y_true, +1), tf.float32))
+
+    neg_y_true = tf.gather( y_true, tf.where( tf.less( y_true, +1))) 
+    neg_y_pred = tf.gather( y_pred, tf.where( tf.less( y_true, +1)))
+    neg_count  = tf.reduce_sum(tf.cast(tf.less(y_true, +1), tf.float32))
+
+    first_sum = tf.div(tf.reduce_sum(tf.abs(tf.subtract(pos_y_true, pos_y_pred))), 2.0*pos_count)
+    second_sum= tf.div(tf.reduce_sum(tf.abs(tf.subtract(neg_y_true, neg_y_pred))), 2.0*neg_count)
+
+    return (first_sum + second_sum) / 2.0
 
 class CRITIC:
 
@@ -57,7 +74,7 @@ class CRITIC:
         output   = Dense(1, activation='relu', name='output')(dropout2)
 
         model = Model(inputs=[sensor_input], outputs=[output])
-        model.compile(optimizer='rmsprop', loss={'output': 'mse'},
+        model.compile(optimizer='rmsprop', loss={'output': custom_loss},
                     loss_weights={'output': 1.}, metrics=['mae'])
 
         return model
@@ -141,8 +158,7 @@ def Load_Training_Data(mydatabase):
         if tfeatures.shape != (sequence_len, num_features): 
             continue
         
-        obedience = float(robot['sumYes']-robot['sumNo']) \
-                    / float(robot['sumYes']+robot['sumNo'])
+        obedience = float(robot['sumYes']-robot['sumNo']) / float(robot['sumYes']+robot['sumNo'])
 
         # print tfeatures.shape, obedience
 
@@ -183,14 +199,12 @@ def Load_Training_Data(mydatabase):
 
     return (np.array(sensor_input), np.array(output))
 
-def Load_Sensors_From_File(record):
 
+def Load_Sensors_From_File(record):
     robotID   = record['robotID']
     startTime = record['startTime']
-    
-    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+\
-        "/" + str(startTime.day)+ "/robot_" + str(robotID) + '_' +\
-         startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
+    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+ "/" + str(startTime.day)+\
+           "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
 
     if not os.path.isfile(path): 
         print "Failed loading ", path
@@ -199,43 +213,40 @@ def Load_Sensors_From_File(record):
     sensors = Read_File(path)
     return sensors
 
+
 def Read_File(filePath):
-
     sensors = None
-
     try:
         with open(filePath, 'r') as f:
             sensors = pickle.load(f)
         # print "Loading ", filePath,
-
     except:
         print "Failed loading ", filePath 
     return sensors
 
-def Propriceptive_Feature_Extraction(values):
 
+def Propriceptive_Feature_Extraction(values):
     values = np.array(values).T
     temp   = np.diff(values, axis=0)
-    temp   = np.absolute(values)
+    temp   = np.absolute(temp)
     temp   = np.average(temp, axis=1)
     temp   = np.hstack((temp, np.array(temp[-1])))
-
     return temp[1::SENSOR_DROP_RATE]
+
 
 def Ray_Feature_Extraction(values):
-    
     return values[1::SENSOR_DROP_RATE]
+
 
 def Position_Feature_Extraction(values):
-
     return values[1::SENSOR_DROP_RATE]
 
-def Touch_Feature_Extraction(values):
 
+def Touch_Feature_Extraction(values):
     values = np.array(values).T
     temp   = np.average(values, axis=1)
-
     return temp[1::SENSOR_DROP_RATE]
+
 
 def Extract_Features(sample):
 

@@ -1,8 +1,11 @@
+pyrosim/tmp/*
 *.o
+**/.DS_Store
 *.d
 *.pyc
 pyrosim/simulator
 controllers/*
 sensors/*
 db/*
+secondary_population/*
 diversity_pool/*
