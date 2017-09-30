@@ -9,11 +9,11 @@ print csv
 csv_sort = csv.sort_values('total', axis=1, ascending=False)
 print csv_sort
 
-fig, ax  = plt.subplots()
+fig, ax = plt.subplots()
 csv_sort.drop(csv_sort.index[[0]], inplace=True)
 print "after dropping total: ", csv_sort
 
-heatmap  = ax.pcolor(csv_sort, cmap=plt.cm.Blues, alpha=0.8)
+heatmap = ax.pcolor(csv_sort, cmap=plt.cm.Blues, alpha=0.8)
 
 fig = plt.gcf()
 fig.set_size_inches(9, 11)
