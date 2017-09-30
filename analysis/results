@@ -1,36 +1,5 @@
 Prediction model for "move" 10 fold cross validation epoch 500
 Normalized sensors and obedience in range [0,1], Sensors [100*4]
-
-Training duration (s) :  1135.96481419   mean_absolute_error: 0.308
-Training duration (s) :  1126.59309578   mean_absolute_error: 0.265
-Training duration (s) :  1105.25396991   mean_absolute_error: 0.304
-Training duration (s) :  1102.66862702   mean_absolute_error: 0.295
-Training duration (s) :  1128.1859982   mean_absolute_error: 0.331
-Training duration (s) :  1124.88716292   mean_absolute_error: 0.296
-Training duration (s) :  1102.98114514   mean_absolute_error: 0.282
-Training duration (s) :  1122.28641701   mean_absolute_error: 0.270
-Training duration (s) :  1147.11700106   mean_absolute_error: 0.311
-Training duration (s) :  1162.02317905   mean_absolute_error: 0.276
-0.294 (+/- 0.020)
-
-Prediction model for "move" 10 fold cross validation epoch 500 permuted obedience 
-of the train and test sets
-Normalized sensors and obedience in range [0,1], Sensors [100*4]
-Training duration (s) :  1279.63193107   mean_absolute_error: 0.383
-Training duration (s) :  1279.43186784   mean_absolute_error: 0.381
-Training duration (s) :  1283.65414596   mean_absolute_error: 0.386
-Training duration (s) :  1284.10931897   mean_absolute_error: 0.364
-Training duration (s) :  1315.43344879   mean_absolute_error: 0.369
-Training duration (s) :  1318.64902115   mean_absolute_error: 0.391
-Training duration (s) :  1280.04367805   mean_absolute_error: 0.371
-Training duration (s) :  1280.02013302   mean_absolute_error: 0.384
-Training duration (s) :  1265.17204785   mean_absolute_error: 0.374
-Training duration (s) :  1286.29901505   mean_absolute_error: 0.366
-0.377 (+/- 0.009)
-
-
-Prediction model for "move" 10 fold cross validation epoch 500
-Normalized sensors and obedience in range [0,1], Sensors [100*4]
 622 unique samples after aggregating evaluations
 (622, 100, 4) (622,)
 Training duration (s) :  90.1156289577 Non-permutated Test: mean_absolute_error: 0.3411 Permutated Test: mean_absolute_error: 0.3523
@@ -101,7 +70,7 @@ Permutated Test: 0.231 (+/- 0.060)
 
 Prediction model for "move" 10 fold cross validation epoch 100, activation func:relu
 Normalized sensors and obedience in range [0,1], Sensors [100*4]
-109 unique samples after aggregating evaluations
+unique samples after aggregating evaluations
 (92, 100, 4) (92,) command=move and species=snakebot
 Training duration (s) :  43.0704948902 Non-permutated Test: mean_absolute_error: 0.2242 Permutated Test: mean_absolute_error: 0.2055
 Training duration (s) :  42.6550650597 Non-permutated Test: mean_absolute_error: 0.3230 Permutated Test: mean_absolute_error: 0.3140
@@ -119,7 +88,7 @@ Permutated Test: 0.253 (+/- 0.058)
 
 Prediction model for 10 fold cross validation epoch 100, activation func:relu
 Normalized sensors and obedience in range [0,1], Sensors [100*4]
-109 unique samples after aggregating evaluations
+unique samples after aggregating evaluations
 (135, 100, 4) (135,) command=move,stop and species=snakebot
 Training duration (s) :  42.3784799576 Non-permutated Test: mean_absolute_error: 0.2066 Permutated Test: mean_absolute_error: 0.1990
 Training duration (s) :  41.8166048527 Non-permutated Test: mean_absolute_error: 0.2246 Permutated Test: mean_absolute_error: 0.2257
@@ -136,8 +105,9 @@ Permutated Test: 0.207 (+/- 0.038)
 
 Prediction model for 10 fold cross validation epoch 100, activation func:relu
 Normalized sensors and obedience in range [0,1], Sensors [100*4]
-109 unique samples after aggregating evaluations
+unique samples after aggregating evaluations
 (167, 100, 4) (167,) command=move,stop and species=starfishbot
+(array([ 17,   1,   1,   0,   0,   6,   1,   6,   3, 132]), array([-1. , -0.8, -0.6, -0.4, -0.2,  0. ,  0.2,  0.4,  0.6,  0.8,  1. ]))
 Training duration (s) :  42.5712649822 Non-permutated Test: mean_absolute_error: 0.1423 Permutated Test: mean_absolute_error: 0.3438
 Training duration (s) :  44.2676429749 Non-permutated Test: mean_absolute_error: 0.1247 Permutated Test: mean_absolute_error: 0.1176
 Training duration (s) :  45.5699877739 Non-permutated Test: mean_absolute_error: 0.1449 Permutated Test: mean_absolute_error: 0.3399
@@ -150,11 +120,15 @@ Training duration (s) :  45.5904548168 Non-permutated Test: mean_absolute_error:
 Training duration (s) :  49.5304288864 Non-permutated Test: mean_absolute_error: 0.1582 Permutated Test: mean_absolute_error: 0.2694
 Non-permutated Test: 0.151 (+/- 0.035)
 Permutated Test: 0.242 (+/- 0.088)
+Random Test: 0.811 (+/- 0.051)
+('Ttest simple Exp. vs Permuted', Ttest_indResult(statistic=-2.9050513805748901, pvalue=0.0094418033346471402))
+('Ttest simple Exp. vs Random', Ttest_indResult(statistic=-32.139141342157799, pvalue=2.3711447737621815e-17))
 
 Prediction model for 10 fold cross validation epoch 100, activation func:relu
 Normalized sensors and obedience in range [0,1], Sensors [100*4]
-109 unique samples after aggregating evaluations
+ unique samples after aggregating evaluations
 (71, 100, 4) (71,) command=move,stop and species=3
+(array([25,  3,  1,  5,  1,  3,  0,  9,  1, 23]), array([-1. , -0.8, -0.6, -0.4, -0.2,  0. ,  0.2,  0.4,  0.6,  0.8,  1. ]))
 Training duration (s) :  43.6929929256 Non-permutated Test: mean_absolute_error: 0.2656 Permutated Test: mean_absolute_error: 0.3981
 Training duration (s) :  41.8786389828 Non-permutated Test: mean_absolute_error: 0.2754 Permutated Test: mean_absolute_error: 0.2754
 Training duration (s) :  41.6388158798 Non-permutated Test: mean_absolute_error: 0.2217 Permutated Test: mean_absolute_error: 0.4964
@@ -167,11 +141,13 @@ Training duration (s) :  43.7655148506 Non-permutated Test: mean_absolute_error:
 Training duration (s) :  41.7672219276 Non-permutated Test: mean_absolute_error: 0.3406 Permutated Test: mean_absolute_error: 0.3491
 Non-permutated Test: 0.286 (+/- 0.091)
 Permutated Test: 0.384 (+/- 0.091)
-
+Random Test: 0.491 (+/- 0.136)
+('Ttest simple Exp. vs Permuted', Ttest_indResult(statistic=-2.2238610974452144, pvalue=0.039196049451439979))
+('Ttest simple Exp. vs Random', Ttest_indResult(statistic=-3.6967374194859928, pvalue=0.0016506094285154702))
 
 Prediction model for 10 fold cross validation epoch 100, activation func:relu
 Normalized sensors and obedience in range [0,1], Sensors [100*4]
-109 unique samples after aggregating evaluations
+ unique samples after aggregating evaluations
 (94, 100, 4) (94,) command=move,stop and species=quadruped
 Training duration (s) :  43.3306670189 Non-permutated Test: mean_absolute_error: 0.3977 Permutated Test: mean_absolute_error: 0.4065
 Training duration (s) :  40.8261711597 Non-permutated Test: mean_absolute_error: 0.3960 Permutated Test: mean_absolute_error: 0.4154
@@ -201,3 +177,4 @@ Training duration (s) :  45.7815518379 Non-permutated Test: mean_absolute_error:
 Training duration (s) :  41.5934278965 Non-permutated Test: mean_absolute_error: 0.2577 Permutated Test: mean_absolute_error: 0.2577
 Non-permutated Test: 0.312 (+/- 0.051)
 Permutated Test: 0.312 (+/- 0.049)
+

@@ -17,6 +17,7 @@ import argparse
 from scipy.stats.stats import ttest_ind
 from keras import backend as K
 import tensorflow as tf
+import csv
 
 seed = 1234
 np.random.seed(seed)
@@ -33,11 +34,13 @@ num_features     = 4
 sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
-_COMMAND    = {'move', 'stop'}
-# _COMMAND    = {'jump'}
-
-_MORPHOLOGY = '2'
+_COMMAND = {'move', 'stop'}
+MAX_POS_SAMPLES = 100
+_MORPHOLOGY = 'quadruped'
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
+
+names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot', 'quadruped':'quadruped', 'starfishbot':'starfishbot',
+         'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot'}
 
 # fix random seed for reproducibility
 np.random.seed(1234)
@@ -51,12 +54,12 @@ class CRITIC:
 
     def setup_model(self):
         sensor_input = Input(shape=(sequence_len, num_features), name='sensor_input')
-        lstm1    = LSTM(12, return_sequences=True)(sensor_input)
+        lstm1 = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
-        lstm2    = LSTM(12, return_sequences=False)(dropout1)
+        lstm2 = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
-        # output1  = Dense(12, activation='tanh')(dropout2)
-        output   = Dense(1, activation='relu', name='output')(dropout2)
+        # output1 = Dense(12, activation='tanh')(dropout2)
+        output = Dense(1, activation='relu', name='output')(dropout2)
         model = Model(inputs=[sensor_input], outputs=[output])
         model.compile(optimizer='rmsprop', loss={'output': 'mse'}, loss_weights={'output': 1.}, metrics=['mae'])
 
@@ -95,10 +98,11 @@ class CRITIC:
 
         print("Regular Test: %.3f (+/- %.3f)" % (np.mean(cv_scores), np.std(cv_scores)))
         print("Permuted Test: %.3f (+/- %.3f)" % (np.mean(pcv_scores), np.std(pcv_scores)))
-        print("Random Test: %.3f (+/- %.3f)" % (np.mean(rcv_scores), np.std(rcv_scores)))
+        # print("Random Test: %.3f (+/- %.3f)" % (np.mean(rcv_scores), np.std(rcv_scores)))
 
         print("Ttest simple Exp. vs Permuted", ttest_ind(cv_scores, pcv_scores))
-        print("Ttest simple Exp. vs Random", ttest_ind(cv_scores, rcv_scores))
+        # print("Ttest simple Exp. vs Random", ttest_ind(cv_scores, rcv_scores))
+        return pcv_scores, cv_scores
 
 
 def custom_loss(y_true, y_pred):
@@ -125,6 +129,7 @@ def Load_Training_Data(mydatabase):
 
     sensor_input, output = [], []
 
+    pos_count = 0
     for robot in robots:
         sensors = Load_Sensors_From_File(robot)
         if sensors is None: continue
@@ -133,9 +138,13 @@ def Load_Training_Data(mydatabase):
         if tfeatures is None or tfeatures.shape != (sequence_len, num_features): continue
         
         obedience = float(robot['numYes']-robot['numNo'])/float(robot['numYes']+robot['numNo'])
-
         if robot['cmdTxt'] == 'stop': obedience *= -1
         # print tfeatures.shape, obedience
+
+        if obedience == +1:
+            pos_count += 1
+            if pos_count > MAX_POS_SAMPLES:
+                continue
 
         sensor_input.append(tfeatures)
         output.append(obedience)
@@ -158,7 +167,7 @@ def Load_Training_Data(mydatabase):
 
 
 def Load_Sensors_From_File(record):
-    robotID   = record['robotID']
+    robotID = record['robotID']
     startTime = record['startTime']
     
     path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+ "/" + str(startTime.day)+\
@@ -184,11 +193,11 @@ def Read_File(filePath):
 
 
 def Propriceptive_Feature_Extraction(values):
-    values = np.array(values).T
-    temp   = np.diff(values, axis=0)
-    temp   = np.absolute(temp)
-    temp   = np.average(temp, axis=1)
-    temp   = np.hstack((temp, np.array(temp[-1])))
+    temp = np.array(values).T
+    temp = np.diff(temp, axis=0)
+    temp = np.absolute(temp)
+    temp = np.average(temp, axis=1)
+    temp = np.hstack((temp, np.array(temp[-1])))
     return temp[1::SENSOR_DROP_RATE]
 
 
@@ -202,7 +211,7 @@ def Position_Feature_Extraction(values):
 
 def Touch_Feature_Extraction(values):
     values = np.array(values).T
-    temp   = np.average(values, axis=1)
+    temp = np.average(values, axis=1)
     return temp[1::SENSOR_DROP_RATE]
 
 
@@ -239,52 +248,62 @@ def Extract_Features(sample):
         touch = Touch_Feature_Extraction(touch)
     else: return None
 
-    # features = np.array([posX, posY, posZ, ray, touch, prop]).T
     features = np.array([posX, posY, posZ, prop]).T
-    # features = np.array([touch]).T
-    # print 'sensors: ', timeSeriedFeatures.shape
     return features
 
 
 def main(args):
+    global _MORPHOLOGY
     batch_size = args.batch_size
-    n_split    = args.n_split
-    epoch      = args.epoch
+    n_split = args.n_split
+    epoch = args.epoch
     mydatabase = DATABASE()
+
     params = {'epochs':epoch, 'batch_size':batch_size, 'n_split':n_split}
 
+    outfile_regular = open("critic_results_regular.csv", "w")
+    writer_regular = csv.writer(outfile_regular, delimiter=",")
+
+    outfile_permuted = open("critic_results_permuted.csv", "w")
+    writer_permuted = csv.writer(outfile_permuted, delimiter=",")
+
+    writer_permuted.writerow(['trials'] + map(str, range(n_split)))
+    writer_regular.writerow(['trials'] + map(str, range(n_split)))
+
     c = CRITIC(params)
-    c.setup_model()
 
-    data = Load_Training_Data( mydatabase )
-    sensors, obedience = data
+    for key, val in names.items():
 
-    print sensors.shape, obedience.shape
+        _MORPHOLOGY = key
+        c.setup_model()
+        data = Load_Training_Data(mydatabase)
+        sensors, obedience = data
 
-    _min = np.min(np.min(sensors, axis=1), axis=0)
-    _max = np.max(np.max(sensors, axis=1), axis=0)
-    sensors = (sensors - _min) / (_max - _min)
+        print sensors.shape, obedience.shape
+        _min = np.min(np.min(sensors, axis=1), axis=0)
+        _max = np.max(np.max(sensors, axis=1), axis=0)
+        sensors = (sensors - _min) / (_max - _min)
+        obedience = (obedience-np.min(obedience))/(np.max(obedience)-np.min(obedience))
+        counts, bins = np.histogram(obedience, bins=10)
 
-    print np.histogram(obedience, bins=10)
+        if counts[-1] < 100:
+            print "Not enough data."
+            continue
+        print "Data Histogram: ", bins, counts
 
-    obedience = (obedience-np.min(obedience))/(np.max(obedience)-np.min(obedience))        
+        pcv_scores, cv_scores = c.train_model(sensors, obedience)
+        writer_permuted.writerow([val] + map(str, pcv_scores))
+        writer_regular.writerow([val] + map(str, cv_scores))
 
-    c.train_model(sensors, obedience)
+    outfile_regular.close()
+    outfile_permuted.close()
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(description='Critic Model.')
-    parser.add_argument('--batch_size', '-b', type = int, default=512, help=\
-        'batchSize, default=512.')
-
-    parser.add_argument('--epoch', '-e', type = int, default=100, help=\
-        'Number of learning epochs, default=1000.')
-
-    parser.add_argument('--n_split', '-n', type = int, default=10, help=\
-        'Validatio split, default=10.')
-
+    parser.add_argument('--batch_size', '-b', type = int, default=512, help='batchSize, default=512.')
+    parser.add_argument('--epoch', '-e', type = int, default=100, help='Number of learning epochs, default=1000.')
+    parser.add_argument('--n_split', '-n', type = int, default=10, help='Validatio split, default=10.')
     # parser.add_argument('--shuffle', '-s', action='store_true', help='Shuffle obedience.')
     args = parser.parse_args()
-
     main(args)
