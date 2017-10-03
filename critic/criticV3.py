@@ -35,7 +35,7 @@ sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data   = False
 
 _COMMAND = {'move', 'stop'}
-MAX_POS_SAMPLES = 100
+MAX_POS_SAMPLES = 150
 _MORPHOLOGY = 'quadruped'
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -261,10 +261,10 @@ def main(args):
 
     params = {'epochs':epoch, 'batch_size':batch_size, 'n_split':n_split}
 
-    outfile_regular = open("critic_results_regular.csv", "w")
+    outfile_regular = open("critic_results_regular_150.csv", "w")
     writer_regular = csv.writer(outfile_regular, delimiter=",")
 
-    outfile_permuted = open("critic_results_permuted.csv", "w")
+    outfile_permuted = open("critic_results_permuted_150.csv", "w")
     writer_permuted = csv.writer(outfile_permuted, delimiter=",")
 
     writer_permuted.writerow(['trials'] + map(str, range(n_split)))
@@ -286,7 +286,7 @@ def main(args):
         obedience = (obedience-np.min(obedience))/(np.max(obedience)-np.min(obedience))
         counts, bins = np.histogram(obedience, bins=10)
 
-        if counts[-1] < 100:
+        if counts[-1] < MAX_POS_SAMPLES:
             print "Not enough data."
             continue
         print "Data Histogram: ", bins, counts
@@ -301,9 +301,9 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Critic Model.')
-    parser.add_argument('--batch_size', '-b', type = int, default=512, help='batchSize, default=512.')
-    parser.add_argument('--epoch', '-e', type = int, default=100, help='Number of learning epochs, default=1000.')
-    parser.add_argument('--n_split', '-n', type = int, default=10, help='Validatio split, default=10.')
+    parser.add_argument('--batch_size', '-b', type=int, default=512, help='batchSize, default=512.')
+    parser.add_argument('--epoch', '-e', type=int, default=100, help='Number of learning epochs, default=1000.')
+    parser.add_argument('--n_split', '-n', type=int, default=10, help='Validation split, default=10.')
     # parser.add_argument('--shuffle', '-s', action='store_true', help='Shuffle obedience.')
     args = parser.parse_args()
     main(args)
