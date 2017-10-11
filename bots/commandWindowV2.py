@@ -12,7 +12,7 @@ from copy import deepcopy
 
 COMMAND_DURATION = 3 * 60
 DB_FETCH_DURATION = 5
-COMMAND_WINDOW_W = 900
+COMMAND_WINDOW_W = 440
 COMMAND_WINDOW_H = 275
 Y_COOR = [65, 115, 165]
 NAME_X = [ 800, 800, 800]
@@ -46,15 +46,8 @@ def Draw_Command_Window(timeRemaining):
 
     window.Wipe()
     myy = 10
-    window.Draw_Text("To vote for the next command, type in the chat a command preceded by ! (for example !walk).",
-                     x=10, fontSize=FONT_SIZE)
-    # window.Draw_Text("Command is anything you wish to teach robots.",\
-    #                   x=10, y=40, fontSize=FONT_SIZE)
-
-    # window.Draw_Text("Type !command, where", x=10, y=2, fontSize=FONT_SIZE)
-    # window.Draw_Text("command", x=window.text_x+window.text_width+WSPACE, y=2, bold=True, fontSize=FONT_SIZE)
-    # window.Draw_Text("is anything you think robots can learn (e.g. !move).",\
-    #  x=window.text_x+window.text_width+WSPACE, y=2, fontSize=FONT_SIZE)
+    # window.Draw_Text("To vote for the next command, type in the chat a command preceded by ! (for example !walk).",
+    #                  x=10, fontSize=FONT_SIZE)
 
     window.Draw_Text('Top voted commands are:', x=10, y=40, fontSize=FONT_SIZE)
 
