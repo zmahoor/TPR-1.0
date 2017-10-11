@@ -376,16 +376,15 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
-    def Was_Evaluated(self, robotID, currentCommand):
-        sql = """select count(*) as count, robotID from display where robotID=%d 
-            and cmdTxt='%s';""" %(robotID, currentCommand)
-
+    def Minimum_Evaluation(self, currentCommand):
+        sql = """select count(*) as _count, d.robotID from TPR_Sept.display as d join TPR_Sept.robots as r 
+        on d.robotID=r.robotID where cmdTxt='%s' and dead=0 group by d.robotID order by _count ASC;""" %(currentCommand)
         result = self.Execute_SelectOne_Sql_Command(sql, "Not able to fetch.")
 
-        if result is None: return False
-        if result['count'] is None or result['count'] == 0: return False
-        
-        return True
+        if result is not None:
+            return result['robotID']
+        else:
+            return -1
 
     def Fetch_User_Feedback(self, username):
         sql ="""select count(*) as num, reward as feedback_type from reward_log

@@ -8,19 +8,15 @@ numEnvs = 2
 
 # ------------- Other parameters -------------------
 
-evaluationTime = 1800
+evaluationTime = 1200
 maxChildren = 2
-
 length = 0.5 / 4.0
-
 radius = 0.05 / 4.0
-
 numGenerations = 300
 
 # ------------------ Robot parameters --------------
 
 JOINT_ANGLE_MAX = -3.14159/8.0
-
 JOINT_ANGLE_MUTATION_MAGNITUDE = 3.14159/8.0
 
 # ----------- Neural network parameters ------------
