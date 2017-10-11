@@ -62,26 +62,25 @@ def Draw_Robot_Window(robotInfo):
 
     if not blinkTimer.Time_Elapsed():
         WINDOW.Draw_Text(cmdTxt, x=WINDOW.text_x+WINDOW.text_width,
-                        y=myy, color='YELLOW', bold=True, underline=False, fontSize=35)
+                         y=myy, color='YELLOW', bold=True, underline=False, fontSize=35)
     else:
         WINDOW.Draw_Text(cmdTxt, x=WINDOW.text_x+WINDOW.text_width,
-                        y=myy, color='WHITE', bold=True, underline=False, fontSize=30)
+                         y=myy, color='WHITE', bold=True, underline=False, fontSize=30)
 
     WINDOW.Draw_Text("Need help? Type ?", x=675, y=myy, color='WHITE',
                      fontSize=FONT_SIZE+5)
     myy += 40
-    WINDOW.Draw_Text("If you think it is, type !"+color+"y. ("+str(numYes)+")", 
+    WINDOW.Draw_Text("If you think it is, type !"+color+"y.            ("+str(numYes)+")",
                      x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
     myy += 40
-    WINDOW.Draw_Text("If not, type !"+color+"n.                ("+str(numNo)+")",
-                    x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
+    WINDOW.Draw_Text("If not, type !"+color+"n.                              ("+str(numNo)+")",
+                     x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
     myy += 40
-    WINDOW.Draw_Text("If you like this robot, type !"+color+"l. ("+str(numLike)+")",
-                    x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
+    WINDOW.Draw_Text("If you like this robot, type !"+color+"l.      ("+str(numLike)+")",
+                     x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
     myy += 40
-    WINDOW.Draw_Text("If you dislike it, type !"+color+"d.        ("+str(numDislike)+")",
-                    x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
-
+    WINDOW.Draw_Text("If you dislike it, type !"+color+"d.              ("+str(numDislike)+")",
+                     x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
     prev_cmd = cmdTxt
 
 
