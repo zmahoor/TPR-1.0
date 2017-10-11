@@ -8,18 +8,17 @@ from timer import TIMER
 import numpy as np
 
 DB = DATABASE()
-FONT_SIZE = 20
-WIDTH = 440
-HEIGHT = 360
+FONT_SIZE, WSPACE = 20, 5
+WIDTH, HEIGHT = 440, 360
 TITLE = "Commands' progress"
 WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, title=TITLE, fontSize = FONT_SIZE)
 SCREEN = WINDOW.screen
 UPDATE_PERIOD = 10
-WSPACE = 5   
 
 table = TABLE(WINDOW, width = WIDTH, height = HEIGHT)
 updateTimer = TIMER(UPDATE_PERIOD)
-    
+
+
 def get_NewCmd():
     #gets recent commands and picks one at random
     recent_cmd = DB.Fetch_Recent_Typed_Command(interval = 10)
@@ -35,7 +34,6 @@ def Parse_Scores(li):
     #converts dict into list of tuples
     #allows universal passing to table object
     scorelist = []
-
     if li == None: return []
 
     for i in li:
@@ -44,16 +42,15 @@ def Parse_Scores(li):
         scorelist.append((n,s))
     return scorelist
 
+
 newList = Parse_Scores(DB.Fetch_Topn_Unique_Commands(10))
 newCmd = get_NewCmd()
 print 'user', newCmd
 
-while 1:
-
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             WINDOW.Quit()
-                        
     WINDOW.Wipe()
     
     table.Update(newList, newCmd)
@@ -65,10 +62,8 @@ while 1:
     WINDOW.Draw_Text("?commandScores", x=WINDOW.text_x+WINDOW.text_width+WSPACE, y=HEIGHT-25, color='BROWN', fontSize=FONT_SIZE)
     
     if updateTimer.Time_Elapsed():
-
         newList = Parse_Scores(DB.Fetch_Topn_Unique_Commands(10))
-        newCmd  = get_NewCmd()
-        
+        newCmd = get_NewCmd()
         updateTimer.Reset()
         print 'user', newCmd
 

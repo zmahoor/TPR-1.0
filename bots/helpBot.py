@@ -1,5 +1,7 @@
-###USE TPR_BOT3 FOR SENDING MESSAGES
-# This bot picks an unprocessed help message from database and sends a response.
+'''
+This bot picks an unprocessed help message from database and sends a response.
+
+'''
 
 import string
 import pymysql
@@ -9,14 +11,18 @@ import time
 from settings import *
 import datetime
 
-t  = Twitch()
+t = Twitch()
 db = DATABASE()
 
 username = IDENT #Your twitch username. ALL LOWER CASE
-key      = PASS #Key acquired from twitch.tv account page
-channel  = CHANNEL
-port     = PORT
-host     = HOST
+key = PASS #Key acquired from twitch.tv account page
+channel = CHANNEL
+port = PORT
+host = HOST
+
+# sleep to avoid getting blocked from twitch. There is a limit on the number of messages
+# a bot can send to channel.
+SLEEP_RATE = 20/30
 
 t.connect(username, key, channel, host, port)
 
@@ -24,17 +30,17 @@ t.connect(username, key, channel, host, port)
 # is closed. This is a good option when a bot is not actively listening to a channel.
 t.pong()
 
-#General help message
+# General help message
 gen = """Twitch Plays Robotics is a community-driven project to teach robots language.\
  To learn more about any aspect of the project, type ?robots, ?silverRobots ?reinforcement,\
   ?votes, ?scores, ?myscore, or ?commandScores. More details at https://tpr-uvm.github.io."""
 
-#Robot help message
+# Robot help message
 bot = """Every 30 seconds one robot, out a population of 50, is simulated.\
  It "hears" the current command and senses its environment.\
   There are 10 species of bots: have you seen them all?"""
 
-#Reinforcements help message
+# Reinforcements help message
 rewards = """Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes.\
  Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,\
   and are replaced with randomly-modified copies of more obedient (y>n)\
@@ -53,24 +59,20 @@ votes = """Every three minutes, the command most voted on by the crowd is issued
  There is no set list; you can type in anything you like.\
   You can vote for a command by typing !command. Don't forget the exclamation mark!"""
 
-silver ="""Every silver robot is a new unseen robot that is added to the population of robots every hour."""
+silver = """Every silver robot is a new unseen robot that is added to the population of robots every hour."""
 
 first_time = 'Congratulations! You just earned your first point.'
 
-#Organize messages by type
-help_type = {'general'   : gen, 'silverrobots': silver,
-             'robots'    : bot, 'commandscores' : commandScores,
-             'reinforcement'   : rewards, 'reinforcements'   : rewards,
-             'scores'    : scores, 'votes'      : votes}
+# Organize messages by type
+help_type = {'general': gen, 'silverrobots': silver,
+             'robots': bot, 'commandscores': commandScores,
+             'reinforcement': rewards, 'reinforcements': rewards,
+             'scores': scores, 'votes': votes}
 
-# sleep to avoid getting blocked from twitch. There is a limit on the number of messages 
-# a bot can send to channel. 
-SLEEP_RATE = 20/30
 
 db.Flush_Old_Unprocessed_Helps()
 
 while True:
-
     # to send a pong message to twitch server otherwise the connection is closed.
     # receive_message(..) in twitch class is a blocking function and not suitable 
     # for help bot.
@@ -79,21 +81,19 @@ while True:
     # get the oldest unprocessed request for help with flag=0.
     records = db.Fetch_Oldest_Help()
 
-    if records == None: continue
+    if records is None: continue
     
     msg = records['txt']
     username = records['userName']
-
     print datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), records
-
     msg_to_send = msg[1:].rstrip()
 
-    if (msg == '?myscore'):
+    if msg == '?myscore':
         result = db.Fetch_User_Score(username)
         sent = t.send_message("@"+ username + ", your score:"+ str(result['score']))
         print('Num of bytes sent out:', sent)
 
-    elif (msg == 'first_time_contribution'):
+    elif msg == 'first_time_contribution':
         sent = t.send_message('@' + username + ' ' + first_time)
         print('Num of bytes sent out: ', sent)
 
@@ -107,6 +107,3 @@ while True:
 
     time.sleep(SLEEP_RATE)
 
-
-    
-			

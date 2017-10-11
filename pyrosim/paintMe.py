@@ -22,12 +22,10 @@ i=0
 current_color = ""
 
 while True:
-
     tmp = mydatabase.Fetch_New_Color()
     if tmp != "": current_color = tmp
 
     child = deepcopy(parent)
-
     child.Mutate()
     child.Set_Color(current_color)
     child.Evaluate(False, False)
@@ -39,7 +37,6 @@ while True:
         # child.Evaluate(False, True)
         # child.Compute_Fitness()
         parent = child
-
     i += 1
 
     

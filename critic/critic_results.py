@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats.stats import ttest_ind
 
+filename1 = 'critic_results_regular'
+filename2 = 'critic_results_permuted'
+
 def stars(p):
    if p < 0.0001:
        return "****"
@@ -16,8 +19,8 @@ def stars(p):
        return "-"
 
 
-regular = pd.read_csv("/Users/twitchplaysrobotics/TPR-1.0/critic/critic_results_regular_150.csv", index_col=0).transpose()
-permuted = pd.read_csv("/Users/twitchplaysrobotics/TPR-1.0/critic/critic_results_permuted_150.csv", index_col=0).transpose()
+regular = pd.read_csv("/Users/zahra/TPR-1.0/critic/"+filename1+".csv", index_col=0).transpose()
+permuted = pd.read_csv("/Users/zahra/TPR-1.0/critic/"+filename2+".csv", index_col=0).transpose()
 
 regular_mean, regular_std = regular.mean(), regular.std()
 permuted_mean, permuted_std = permuted.mean(), permuted.std()
@@ -28,7 +31,7 @@ print permuted_std
 
 regular_permuted_p_value = ttest_ind(regular, permuted)
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(8,6))
 
 x = []
 for _ in range(len(regular.columns)):
@@ -52,11 +55,12 @@ for key in regular:
             verticalalignment='center')
     i += 2
 
-ax.set_ylabel("Error")
+ax.set_ylabel("Mean Absolute Error")
 ax.set_xticks(x)
 ax.set_xticklabels(x_ticks)
 ax.set_title("Mean Error of Predictive Model Across 30 Trials for each Species")
-ax.legend((points[0], points[1]), ("Experiment", "Permuted Control"), loc=2,  numpoints=1, fontsize=14)
+ax.legend((points[0], points[1]), ("Experiment", "Permuted Control"), loc=0,  numpoints=1, fontsize=14)
 plt.xlim((x[0] - .1, x[len(x) - 1] + .1))
 plt.ylim((.05, .7))
-plt.show()
+plt.savefig(filename1+'.eps', format='eps', dpi=900)
+# plt.show()

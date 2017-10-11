@@ -23,7 +23,7 @@ class Twitch:
 
     def connect(self, user, key, channel, host, port):
         self.user = user
-        self.oauth= key
+        self.oauth = key
 
         print("Connecting to twitch.tv")
 
@@ -81,7 +81,6 @@ class Twitch:
     def send_message(self, message):
         messageTemp = "PRIVMSG #" + self.channel + " :" + message.rstrip()
         # print messageTemp
-        
         try:
             sent = self.sock.send(messageTemp + "\r\n")
             print("Sent: %s" %(messageTemp))
@@ -89,14 +88,13 @@ class Twitch:
             print("Lost connection to Twitch, attempting to reconnect...")
             self.connect(self.user, self.oauth, self.channel, self.host, self.port)
             sent = None
-
         return sent
 
     # to send a pong message every 5 mintues.
     def pong(self):
         try:
             self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
-            print( datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "PONG SENT!")
+            print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "PONG SENT!")
 
         except KeyboardInterrupt:
             sys.exit()
