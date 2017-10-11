@@ -11,28 +11,21 @@ key = PASS # Key acquired from twitch.tv account page
 channel = CHANNEL
 port = PORT
 host = HOST
-
 t.connect(username, key, channel, host, port)
  
 # The main loop
 while True:
-
     newMessages = t.recieve_messages(amount=1024)
     # print("mess: ", newMessages)
-
     if newMessages:
-
         for message in newMessages:
-
             # Try block, some characters are not understood by python and can cause exceptions
             try:
                 # Get info from message.
                 msg = str(message['message'].lower().replace("'", ''))
                 username = str(message['username'].lower())
                 # t.send_message("Thank you for your message!")
-
                 currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
-
                 print(currentTime, username + ": " + msg)
 
                 if username not in filteredUsers:

@@ -13,7 +13,7 @@ def validPrefix():
 # !rn 
 def isRewardSignal(string):
     global validColors
-    validRS = [p+"y" for p in validPrefix()]+[p+"n" for p in validPrefix()] +\
+    validRS = [p+"y" for p in validPrefix()]+[p+"n" for p in validPrefix()]+\
               [p+"l" for p in validPrefix()]+[p+"d" for p in validPrefix()]
     return string in validRS
 
@@ -49,13 +49,9 @@ db = database.DATABASE()
 db.Flush_Old_Unprocessed_Chats()
 
 while True:
-
     newRow = db.Fetch_An_Unprocessed_Chat()
-
     # print("newRow: ", newRow)
-
     if newRow is None: continue
-   
     timeArrival, user, message = newRow['timeArrival'], newRow['username'], newRow['txt']
 
     # print newRow
