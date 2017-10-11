@@ -29,7 +29,7 @@ mydatabase  = database.DATABASE()
 currentTime = datetime.datetime.now()
 currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
 
-print 'Seting the default command as the active command...'
+print 'Setting the default command as the active command...'
 mydatabase.Add_To_Unique_Commands_Table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
 mydatabase.Set_Current_Command(DEFAULT_COMMAND)
 
