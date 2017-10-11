@@ -46,8 +46,8 @@ def Draw_Command_Window(timeRemaining):
 
     window.Wipe()
     myy = 10
-    window.Draw_Text("To vote for the next command, type in the chat a command preceded by ! (for example !walk).",\
-                    x=10, fontSize=FONT_SIZE)
+    window.Draw_Text("To vote for the next command, type in the chat a command preceded by ! (for example !walk).",
+                     x=10, fontSize=FONT_SIZE)
     # window.Draw_Text("Command is anything you wish to teach robots.",\
     #                   x=10, y=40, fontSize=FONT_SIZE)
 
@@ -108,7 +108,6 @@ def process(tobe_animated):
     for item in tobe_animated:
         cmdTxt, userName = item['cmdTxt'], item['userName']
         match = next((item for item in animated_list if item['cmdTxt'] == cmdTxt), None)
-
         if match is not None:
             match['votes'] += 1
             match['users'].append(userName)
@@ -117,7 +116,6 @@ def process(tobe_animated):
             animated_list.append(temp)
 
     animated_list = sorted(animated_list, key=lambda k: k['votes'], reverse=True)
-
     print animated_list
     print
 
