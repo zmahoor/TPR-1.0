@@ -8,51 +8,48 @@ import numpy as np
 import datetime
 
 DB = DATABASE()
-WIDTH     = 900
-HEIGHT    = 200
+WIDTH = 900
+HEIGHT = 200
 FONT_SIZE = 23
 UPDATE_PERIOD = 2
 BLINK_PERIOD = 10
-DRAW_PERIOD  = 30
+DRAW_PERIOD = 30
 WSPACE = 85
 #get screen
-WINDOW = PYGAMEWRAPPER(width = WIDTH, height = HEIGHT, title="Robot's Information",
+WINDOW = PYGAMEWRAPPER(width=WIDTH, height=HEIGHT, title="Robot's Information",
                      fontSize = FONT_SIZE)
 SCREEN = WINDOW.screen
 BG_COLOR = (30, 144, 255)
 #create new table object
 updateTimer = TIMER(UPDATE_PERIOD)
 blinkTimer  = TIMER(BLINK_PERIOD)
-
 prev_cmd = ""
 
+
 def Draw_Robot_Window( robotInfo ):
-
     global prev_cmd
-
     # print ('current robot info: ', robotInfo)
-    if robotInfo == None: return None
+    if robotInfo is None: return None
 
-    allTypes = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',\
-    'quadruped':'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',\
-     'starfishbot':'starfishbot', 'spherebot':'spherebot', 'snakebot':'snakebot',\
-     'snakeplusbot':'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot':'crabplusbot',\
-     'quadrupedplus':'quadrupedplus'}
+    allTypes = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot',\
+                'quadruped':'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',\
+                'starfishbot': 'starfishbot', 'spherebot': 'spherebot', 'snakebot': 'snakebot',\
+                'snakeplusbot': 'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot': 'crabplusbot',\
+                'quadrupedplus': 'quadrupedplus'}
 
     typeKey    = robotInfo['robotType']
     robotType  = allTypes[typeKey]
 
     robotID    = robotInfo['robotID']
     color      = robotInfo['color']
-    numOfKind  = robotInfo['numOfKind'] if robotInfo['numOfKind'] != None else 0
-    numYes     = robotInfo['numYes'] if robotInfo['numYes'] != None else 0
-    numNo      = robotInfo['numNo'] if robotInfo['numNo'] != None else 0
-    numLike    = robotInfo['numLike'] if robotInfo['numLike'] != None else 0
-    numDislike = robotInfo['numDislike'] if robotInfo['numDislike'] != None else 0
+    numOfKind  = robotInfo['numOfKind'] if robotInfo['numOfKind'] is not None else 0
+    numYes     = robotInfo['numYes'] if robotInfo['numYes'] is not None else 0
+    numNo      = robotInfo['numNo'] if robotInfo['numNo'] is not None else 0
+    numLike    = robotInfo['numLike'] if robotInfo['numLike'] is not None else 0
+    numDislike = robotInfo['numDislike'] if robotInfo['numDislike'] is not None else 0
     cmdTxt     = robotInfo['cmdTxt']
 
     dt = datetime.datetime.now() - robotInfo['birthDate']
-
     minute, second = divmod(dt.days*86400 + dt.seconds, 60)
     hour, minute   = divmod(minute, 60)
     day, hour      = divmod(hour, 24)
@@ -67,19 +64,16 @@ def Draw_Robot_Window( robotInfo ):
 
     if not blinkTimer.Time_Elapsed():
         WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,\
-         y=myy, color='YELLOW', bold=True, underline=False, fontSize=35)
-
+                        y=myy, color='YELLOW', bold=True, underline=False, fontSize=35)
     else:
-
         WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,\
-         y=myy, color='WHITE', bold=True, underline=False, fontSize=30)
+                        y=myy, color='WHITE', bold=True, underline=False, fontSize=30)
 
     WINDOW.Draw_Text("Need help? Type ?", x=675, y=myy, color='WHITE',
                      fontSize=FONT_SIZE+5)
-
     myy += 40
     WINDOW.Draw_Text("If you think it is, type !"+color+"y. ("+str(numYes)+")", 
-                    x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
+                     x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
     myy += 40
     WINDOW.Draw_Text("If not, type !"+color+"n.                ("+str(numNo)+")",
                     x=5, y=myy, color='WHITE', fontSize=FONT_SIZE)
@@ -92,18 +86,17 @@ def Draw_Robot_Window( robotInfo ):
 
     prev_cmd = cmdTxt
 
-robotInfo = DB.Fetch_Robot_Information()
- 
-while True:
 
+robotInfo = DB.Fetch_Robot_Information()
+
+
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             WINDOW.Quit()
-                        
     WINDOW.Wipe(BG_COLOR)    
 
     if updateTimer.Time_Elapsed():
-
         # fetch from database
         robotInfo = DB.Fetch_Robot_Information()
         updateTimer.Reset()
