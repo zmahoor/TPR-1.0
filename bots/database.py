@@ -433,13 +433,10 @@ class DATABASE:
         return result
 
     def Fetch_For_Abuse_Bot(self):
-
-        sql="select userName, cmdTxt from command_log where timeArrival>=NOW() - interval 24 hour;"
-        err_msg = 'Unable fetching from the command log.'
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        sql = "select userName, cmdTxt from command_log where timeArrival>=NOW() - interval 24 hour;"
+        return self.Execute_Select_Sql_Command(sql, 'Unable fetching from the command log.')
 
     def Fetch_From_Disply_Table(self, condition='all'):
-
         if condition == 'all':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, d.startTime
@@ -457,7 +454,6 @@ class DATABASE:
         return self.Execute_Select_Sql_Command(sql, err_msg)
 
     def Fetch_User_Score(self, user):
-
         sql = "SELECT * FROM users WHERE userName='%s';"%(user)
         err_msg = "Failed to retrieve a user's score"
         return self.Execute_SelectOne_Sql_Command(sql, err_msg)
@@ -566,7 +562,7 @@ class DATABASE:
         
     def First_Time_Contributer(self, username):
 
-        sql ="""SELECT userName FROM reward_log where userName='%s' union 
+        sql = """SELECT userName FROM reward_log where userName='%s' union 
         SELECT userName FROM command_log where userName='%s';""" %(username, username)
 
         err_msg = "Failed to fetch information about this user..."
@@ -579,7 +575,7 @@ class DATABASE:
 
     def Tobe_Animated_In_Command_Window( self ):
 
-        sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
+        sql = """SELECT userName, cmdTxt, timeArrival FROM command_log
         WHERE animationFlag=0;"""
 
         err_msg = "unable fetching the most recent type command"
@@ -591,14 +587,13 @@ class DATABASE:
         return result
 
     def Fetch_For_Command_Window(self, interval=10):
-
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
 
         current_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
         prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
 
-        sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
+        sql = """SELECT userName, cmdTxt, timeArrival FROM command_log
         WHERE timeArrival BETWEEN '%s' and '%s';""" %(prev_time, current_time)
 
         err_msg = "unable fetching the most recent type command"

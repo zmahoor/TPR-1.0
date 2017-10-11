@@ -64,7 +64,6 @@ def Draw_Command_Window(timeRemaining):
     timeRemaining = "%02dm:%02ds" %(minute, second)
 
     MAX = 500
-
     size = min(len(animated_list), 3)
     if size == 0:     
         X_VAL = 10

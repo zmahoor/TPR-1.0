@@ -17,12 +17,12 @@ DRAW_PERIOD = 30
 WSPACE = 85
 #get screen
 WINDOW = PYGAMEWRAPPER(width=WIDTH, height=HEIGHT, title="Robot's Information",
-                     fontSize = FONT_SIZE)
+                       fontSize=FONT_SIZE)
 SCREEN = WINDOW.screen
 BG_COLOR = (30, 144, 255)
 #create new table object
 updateTimer = TIMER(UPDATE_PERIOD)
-blinkTimer  = TIMER(BLINK_PERIOD)
+blinkTimer = TIMER(BLINK_PERIOD)
 prev_cmd = ""
 
 
@@ -30,16 +30,14 @@ def Draw_Robot_Window( robotInfo ):
     global prev_cmd
     # print ('current robot info: ', robotInfo)
     if robotInfo is None: return None
-
-    allTypes = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot',\
-                'quadruped':'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',\
-                'starfishbot': 'starfishbot', 'spherebot': 'spherebot', 'snakebot': 'snakebot',\
-                'snakeplusbot': 'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot': 'crabplusbot',\
+    allTypes = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot',
+                'quadruped':'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',
+                'starfishbot': 'starfishbot', 'spherebot': 'spherebot', 'snakebot': 'snakebot',
+                'snakeplusbot': 'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot': 'crabplusbot',
                 'quadrupedplus': 'quadrupedplus'}
 
     typeKey    = robotInfo['robotType']
     robotType  = allTypes[typeKey]
-
     robotID    = robotInfo['robotID']
     color      = robotInfo['color']
     numOfKind  = robotInfo['numOfKind'] if robotInfo['numOfKind'] is not None else 0
@@ -54,7 +52,7 @@ def Draw_Robot_Window( robotInfo ):
     hour, minute   = divmod(minute, 60)
     day, hour      = divmod(hour, 24)
 
-    age = "%dd %dh:%02dm:%02ds"%(day, hour, minute, second)
+    age = "%dd %dh:%02dm:%02ds" %(day, hour, minute, second)
 
     myy = 10
     WINDOW.Draw_Text("This robot is trying to ", x=5, y=myy, color='WHITE', fontSize=30)
@@ -63,10 +61,10 @@ def Draw_Robot_Window( robotInfo ):
         blinkTimer.Reset()
 
     if not blinkTimer.Time_Elapsed():
-        WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,\
+        WINDOW.Draw_Text(cmdTxt, x=WINDOW.text_x+WINDOW.text_width,
                         y=myy, color='YELLOW', bold=True, underline=False, fontSize=35)
     else:
-        WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,\
+        WINDOW.Draw_Text(cmdTxt, x=WINDOW.text_x+WINDOW.text_width,
                         y=myy, color='WHITE', bold=True, underline=False, fontSize=30)
 
     WINDOW.Draw_Text("Need help? Type ?", x=675, y=myy, color='WHITE',
