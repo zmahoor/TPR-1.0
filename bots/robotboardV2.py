@@ -26,7 +26,7 @@ blinkTimer = TIMER(BLINK_PERIOD)
 prev_cmd = ""
 
 
-def Draw_Robot_Window( robotInfo ):
+def Draw_Robot_Window(robotInfo):
     global prev_cmd
     # print ('current robot info: ', robotInfo)
     if robotInfo is None: return None

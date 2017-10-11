@@ -52,11 +52,9 @@ newUser = get_NewUser()
 print 'user', newUser
 
 while True:
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             WINDOW.Quit()
-                        
     WINDOW.Wipe()
     table.Update(newList, newUser)
     

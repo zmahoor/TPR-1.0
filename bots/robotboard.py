@@ -24,7 +24,7 @@ updateTimer = TIMER(UPDATE_PERIOD)
 blinkTimer = TIMER(BLINK_PERIOD)
 prev_cmd = ""
 
-def Draw_Robot_Window( robotInfo ):
+def Draw_Robot_Window(robotInfo):
     global prev_cmd
     # print ('current robot info: ', robotInfo)
     if robotInfo is None: return None
@@ -33,7 +33,7 @@ def Draw_Robot_Window( robotInfo ):
                 'quadruped': 'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',
                 'starfishbot': 'starfishbot', 'spherebot':'spherebot', 'snakebot': 'snakebot',
                 'snakeplusbot': 'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot': 'crabplusbot',
-                'quadrupedplus':   'quadrupedplus'}
+                'quadrupedplus': 'quadrupedplus'}
 
     typeKey    = robotInfo['robotType']
     robotType  = allTypes[typeKey]
