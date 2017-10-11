@@ -39,7 +39,6 @@ class TABLE:
         display = []
 
         for i in range(0, min(self.USERS, size)):
-
             # add ranks for 1-10
             if i%2 == 0:
                 col = 'LIGHTBLUE'
@@ -55,10 +54,10 @@ class TABLE:
             score = new[i][1]
 
             # capitalize name if exists to enhance readability
-            if name != None:
-                
+            if name is not None:
                 # name = name.upper()
                 display.append(name)
+
             # draw name and score to the table
             if score is not None and name is not None:
                 if len(name) > 23: name = name[0:23]

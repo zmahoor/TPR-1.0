@@ -18,22 +18,23 @@ sys.path.append('../bots')
 from database import DATABASE
 from settings import *
 
+MAIN_PATH = 'TPR_Sept'
 SUB_POPULATION_SIZE = 5
-INJECTION_PERIOD    = 60 * 60
+INJECTION_PERIOD = 60 * 60
 
-colorIndex     = 0
-currentColor   = validColors[colorIndex % len(validColors)]
-wordVector     = []
+colorIndex = 0
+currentColor = validColors[colorIndex % len(validColors)]
+wordVector = []
 currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
 
-db     = None
+db = None
 injectionTimer = None
 removeInjected = False
 
 
 def Store_Sensors_To_File(individual, currentTime):
     # get directory
-    path = "../sensors/"+ str(currentTime.year) + "/" + str(currentTime.month)+\
+    path = "../" + MAIN_PATH + "/sensors/"+ str(currentTime.year) + "/" + str(currentTime.month)+\
         "/" + str(currentTime.day)
     # print path
     if not os.path.exists(path):
@@ -48,7 +49,7 @@ def Store_Sensors_To_File(individual, currentTime):
 
 def Store_Controller_To_File(individual, robotType):
     # get directory
-    path = "../controllers/"+ robotType
+    path = ".." + MAIN_PATH + "/controllers/"+ robotType
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -58,7 +59,7 @@ def Store_Controller_To_File(individual, robotType):
 
 
 def Load_Controller_From_File(robotID, robotType):
-    brainPath = "../controllers/" + robotType + "/robot_" + str(robotID) + ".dat"
+    brainPath = "../" + MAIN_PATH + "controllers/" + robotType + "/robot_" + str(robotID) + ".dat"
     if not os.path.isfile(brainPath): 
         return None
     return Read_File(brainPath)
@@ -66,7 +67,7 @@ def Load_Controller_From_File(robotID, robotType):
 
 def Load_From_Diversity_Pool(robotType):
     global removeInjected
-    path = "../diversity_pool/"+ robotType + "/*.dat" 
+    path = "../diversity_pool/" + robotType + "/*.dat"
     brainPaths = list(glob.iglob(path))
     if len(brainPaths) == 0: return None
 

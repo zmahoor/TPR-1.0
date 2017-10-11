@@ -15,11 +15,11 @@ UPDATE_PERIOD = 2
 BLINK_PERIOD = 10
 DRAW_PERIOD = 30
 WSPACE = 85
-#get screen
+# get screen
 WINDOW = PYGAMEWRAPPER(width=WIDTH, height=HEIGHT, title="Robot's Information", fontSize=FONT_SIZE)
 SCREEN = WINDOW.screen
 BG_COLOR = (30, 144, 255)
-#create new table object
+# create new table object
 updateTimer = TIMER(UPDATE_PERIOD)
 blinkTimer = TIMER(BLINK_PERIOD)
 prev_cmd = ""
