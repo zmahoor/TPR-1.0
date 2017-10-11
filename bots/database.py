@@ -6,12 +6,12 @@ from settings import *
 import sys
 import numpy as np
 
+
 class DATABASE:
 
     def __init__(self):
-
         self.connect()
-    
+
     def connect(self):
         try:
             self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
@@ -35,7 +35,6 @@ class DATABASE:
             print 'unabled to closed the connection...'
 
     def Execute_Update_Sql_Command(self, sql_command, err_msg=""):
-
         try:
             self.cursor.execute(sql_command)
             self.connection.commit()
@@ -53,7 +52,6 @@ class DATABASE:
             print (err_msg)
 
     def Execute_Select_Sql_Command(self, sql_command, err_msg=""):
-
         results = None
         try:
             self.cursor.execute(sql_command)
@@ -71,11 +69,9 @@ class DATABASE:
         except pymysql.ProgrammingError, e:
             print str(e)
             print (err_msg)
-
         return results
 
     def Execute_SelectOne_Sql_Command(self, sql_command, err_msg=""):
-
         results = None
         try:
             self.cursor.execute(sql_command)
@@ -119,21 +115,20 @@ class DATABASE:
         
     def Add_Reward_To_Display_Table(self, color, reward, arrivalTime):
         # if the startTime is beyond 2 minutes, discard this reward
-        
         if reward == 'y':
             sql = """ UPDATE display set numYes=numYes+1 WHERE color='%s'
             and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+             ORDER BY startTime DESC LIMIT 1;""" %(color, arrivalTime)
 
         elif reward == 'n':
             sql = """ UPDATE display set numNo=numNo+1 WHERE color='%s'
             and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+             ORDER BY startTime DESC LIMIT 1;""" %(color, arrivalTime)
 
         elif reward == 'l':
             sql = """ UPDATE display set numLike=numLike+1 WHERE color='%s'
             and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+             ORDER BY startTime DESC LIMIT 1;""" %(color, arrivalTime)
 
         elif reward == 'd':
             sql = """ UPDATE display set numDislike=numDislike+1 WHERE color='%s'
@@ -146,18 +141,17 @@ class DATABASE:
         self.Execute_Update_Sql_Command(sql, err_msg)
 
     def Add_To_RewardLog_Table(self, username, color, reward, arrivalTime):
-
         sql = """SELECT displayID from display WHERE color='%s' and '%s' BETWEEN startTime
              and startTime+INTERVAL 2 MINUTE ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
-        result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        result = self.Execute_SelectOne_Sql_Command(sql, "Failed adding reward to log table.")
 
-        if result == None or result['displayID'] == None: displayID = -1
+        if result is None or result['displayID'] is None: displayID = -1
         else: displayID = result['displayID']
 
 
         sql = """INSERT INTO reward_log(userName, reward, color, timeArrival, displayID) VALUES
-        ('%s', '%s', '%s', '%s');"""%(username, reward, color, arrivalTime, displayID)
+        ('%s', '%s', '%s', '%s', '%d');"""%(username, reward, color, arrivalTime, displayID)
 
         err_msg = "Failed to log this reward..."
         self.Execute_Update_Sql_Command(sql, err_msg)
@@ -166,9 +160,7 @@ class DATABASE:
 
         sql = """INSERT INTO command_log(userName, cmdTxt, timeArrival) VALUES
         ('%s', '%s', '%s');"""%(username, command, time)
-
-        err_msg = "Failed to log this command..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.Execute_Update_Sql_Command(sql, "Failed to log this command...")
 
     def Add_To_Unique_Commands_Table(self, command, time, wordToVec, active=0):
 
@@ -260,54 +252,41 @@ class DATABASE:
         err_msg = "Failed to update the robot's fittness..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Update_Total_Likeability(self, color, reward, arrivalTime):
-        if reward == 'l':
-            sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE 
-            robotID = (SELECT robotID FROM display WHERE color='%s'
-            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-
-        elif reward == 'd':
-            sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
-            robotID = (SELECT robotID FROM display WHERE color='%s'
-            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-
-    def Update_Total_Fitness(self, color, reward, arrivalTime):
-        if reward == 'y':
-            sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE 
-            robotID = (SELECT robotID FROM display WHERE color='%s'
-            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-
-        elif reward == 'n':
-            sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
-            robotID = (SELECT robotID FROM display WHERE color='%s'
-            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-
-        else: return
-
-        err_msg = "Failed to update the robot's fittness..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
-
-    def Update_Total_Likeability(self, color, reward, arrivalTime):
-        if reward == 'l':
-            sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE 
-            robotID = (SELECT robotID FROM display WHERE color='%s'
-            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-
-        elif reward == 'd':
-            sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
-            robotID = (SELECT robotID FROM display WHERE color='%s'
-            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-
-        else: return
-
-        err_msg = "Failed to update the robot's fittness..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+    # def Update_Total_Fitness(self, color, reward, arrivalTime):
+    #     if reward == 'y':
+    #         sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE
+    #         robotID = (SELECT robotID FROM display WHERE color='%s'
+    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+    #
+    #     elif reward == 'n':
+    #         sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
+    #         robotID = (SELECT robotID FROM display WHERE color='%s'
+    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+    #
+    #     else: return
+    #
+    #     err_msg = "Failed to update the robot's fittness..."
+    #     self.Execute_Update_Sql_Command(sql, err_msg)
+    #
+    # def Update_Total_Likeability(self, color, reward, arrivalTime):
+    #     if reward == 'l':
+    #         sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE
+    #         robotID = (SELECT robotID FROM display WHERE color='%s'
+    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+    #
+    #     elif reward == 'd':
+    #         sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
+    #         robotID = (SELECT robotID FROM display WHERE color='%s'
+    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+    #
+    #     else: return
+    #
+    #     err_msg = "Failed to update the robot's fittness..."
+    #     self.Execute_Update_Sql_Command(sql, err_msg)
 
     def Update_Users_Score(self):
 
@@ -315,16 +294,14 @@ class DATABASE:
         err_msg = "Failed to fetch all usernames..."
         records = self.Execute_Select_Sql_Command(sql, err_msg)
 
-        if records == None: return
+        if records is None: return
 
         for row in records:
-
             user = row['userName']
             # print user
-
-            sql= """UPDATE users SET score=(SELECT count(*) FROM reward_log WHERE
+            sql = """UPDATE users SET score=(SELECT count(*) FROM reward_log WHERE
              userName = '%s') + (SELECT count(*) FROM command_log WHERE
-             userName = '%s') WHERE userName = '%s' ;"""%(user, user, user)
+             userName = '%s') WHERE userName = '%s' ;""" %(user, user, user)
             
             err_msg = "Failed to update user's score..."
             self.Execute_Update_Sql_Command(sql, err_msg)
@@ -336,16 +313,14 @@ class DATABASE:
         err_msg = "Faild to fetch command names..."
         records = self.Execute_Select_Sql_Command(sql, err_msg)
 
-        if records == None: return
+        if records is None: return
 
         for row in records:
             # print row
-            command    = row['cmdTxt']
-            start_time = row['firstTime']
-            last_time  = row['lastTime']
-            first_sum  = 0
-            second_sum = 0
-            mid_time   = start_time + (last_time - start_time)/2
+            command = row['cmdTxt']
+            start_time, last_time = row['firstTime'], row['lastTime']
+            first_sum, second_sum = 0, 0
+            mid_time = start_time + (last_time - start_time)/2
             # print mid_time
 
             sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as firstSum FROM 
@@ -355,7 +330,7 @@ class DATABASE:
 
             # print result
 
-            if result['cmdTxt'] != None: 
+            if result['cmdTxt'] is not None:
                 first_sum = result['firstSum']
 
             sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as secondSum FROM
@@ -364,7 +339,7 @@ class DATABASE:
             result = self.Execute_SelectOne_Sql_Command(sql)
             # print result
 
-            if result['cmdTxt'] != None: 
+            if result['cmdTxt'] is not None:
                 second_sum = result['secondSum']
 
             # print command ,first_sum-second_sum
@@ -392,7 +367,7 @@ class DATABASE:
         results = self.Execute_Select_Sql_Command(sql, err_msg)
 
         newIndex = 0
-        if results != None:
+        if results is not None:
             newIndex = 2*np.random.random()-1
 
             while newIndex in results:
@@ -401,24 +376,20 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
-    def Was_Evaluated( robotID, currentCommand ):
+    def Was_Evaluated(self, robotID, currentCommand):
+        sql = """select count(*) as count, robotID from display where robotID=%d 
+            and cmdTxt='%s';""" %(robotID, currentCommand)
 
-        sql="""select count(*) as count, robotID from display where robotID=%d 
-            and cmdTxt='%s';"""%(robotID, currentCommand)
+        result = self.Execute_SelectOne_Sql_Command(sql, "Not able to fetch.")
 
-        result = self.Execute_SelectOne_Sql_Command(sql, "not able to fetch.")
-
-        if result== None: return False
-        if result['count']== None or result['count']==0: return False
+        if result is None: return False
+        if result['count'] is None or result['count'] == 0: return False
         
         return True
 
-
     def Fetch_User_Feedback(self, username):
-
         sql ="""select count(*) as num, reward as feedback_type from reward_log
          where userName='%s' group by reward;"""%(username)
-
         return self.Execute_Select_Sql_Command(sql, 'Failed fetching feedback info for a user.')
 
     def Fetch_Robot_Information(self):
@@ -427,43 +398,41 @@ class DATABASE:
          join robots as r ON d.robotID=r.robotID order by d.startTime desc limit 1;"""
         result = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
-        if result == None: return None
+        if result is None: return None
 
-        robotID   = result['robotID']
-        cmdTxt    = result['cmdTxt']
-        robotType = result['type']
+        robotID, cmdTxt, robotType = result['robotID'], result['cmdTxt'], result['type']
 
         sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where
          robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
         result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
-        if result1 != None:
-            result.update( result1 )
+        if result1 is not None:
+            result.update(result1)
 
         sql="""SELECT count(*) as numOfKind, type as robotType from robots where
-         type='%s' and dead=0;"""%(robotType)
+         type='%s' and dead=0;""" %(robotType)
         result2 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
-        if result2 != None:
-            result.update( result2 )
+        if result2 is not None:
+            result.update(result2)
 
         sql="""SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay
-         from display where robotID='%d' """%(robotID)
+         from display where robotID='%d' """ %(robotID)
         result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
-        if result3 != None:
-            result.update( result3 )
+        if result3 is not None:
+            result.update(result3)
 
         sql="""SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from 
-        display where robotID='%d';"""%(robotID)
+        display where robotID='%d';""" %(robotID)
         result4 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
 
-        if result4 != None:
-            result.update( result4 )
+        if result4 is not None:
+            result.update(result4)
 
         return result
 
-    def Fetch_For_Abuse_Bot( self ):
+    def Fetch_For_Abuse_Bot(self):
 
         sql="select userName, cmdTxt from command_log where timeArrival>=NOW() - interval 24 hour;"
         err_msg = 'Unable fetching from the command log.'
@@ -471,7 +440,7 @@ class DATABASE:
 
     def Fetch_From_Disply_Table(self, condition='all'):
 
-        if  condition== 'all':
+        if condition == 'all':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, d.startTime
             from display as d JOIN robots as r ON d.robotID=r.robotID 
@@ -498,7 +467,7 @@ class DATABASE:
         if topn == 'all':
             sql = """SELECT userName, score FROM users ORDER BY score DESC;"""
         else:
-            sql = """SELECT userName, score FROM users ORDER BY score DESC LIMIT %d;"""%(topn)
+            sql = """SELECT userName, score FROM users ORDER BY score DESC LIMIT %d;""" %(topn)
 
         err_msg = "Failed to retrieve scores of top users..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
@@ -564,7 +533,7 @@ class DATABASE:
         if robotType== "all":
             sql = "SELECT * FROM robots WHERE dead=0;"
         else:
-            sql = "SELECT * FROM robots WHERE dead=0 and type='%s';"%(robotType)
+            sql = "SELECT * FROM robots WHERE dead=0 and type='%s';" %(robotType)
 
         err_msg = "Failed to retrieve alive robots..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
@@ -574,10 +543,10 @@ class DATABASE:
         sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         result = self.Execute_SelectOne_Sql_Command(sql)
 
-        if result != None:
+        if result is not None:
             chatID = result['chatID']
             #update the processed flag as 1 for that piece of chat
-            sql = "UPDATE chats SET processed=1 WHERE chatID='%d';"%(chatID)
+            sql = "UPDATE chats SET processed=1 WHERE chatID='%d';" %(chatID)
             self.Execute_Update_Sql_Command(sql)
 
         return result
@@ -588,9 +557,9 @@ class DATABASE:
         err_msg = "Failed to fetch the oldest unprocessed help request..."
         result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
 
-        if result != None:
+        if result is not None:
             helpID = result['helpID']
-            sql = "UPDATE helps SET processed=1 WHERE helpID='%d';"%(helpID)
+            sql = "UPDATE helps SET processed=1 WHERE helpID='%d';" %(helpID)
             self.Execute_Update_Sql_Command(sql, err_msg)
 
         return result
@@ -598,7 +567,7 @@ class DATABASE:
     def First_Time_Contributer(self, username):
 
         sql ="""SELECT userName FROM reward_log where userName='%s' union 
-        SELECT userName FROM command_log where userName='%s';"""%(username, username)
+        SELECT userName FROM command_log where userName='%s';""" %(username, username)
 
         err_msg = "Failed to fetch information about this user..."
         result = self.Execute_Select_Sql_Command(sql, err_msg)
@@ -630,7 +599,7 @@ class DATABASE:
         prev_time = prev_time.strftime("%Y-%m-%d %H:%M:%S")
 
         sql ="""SELECT userName, cmdTxt, timeArrival FROM command_log
-        WHERE timeArrival BETWEEN '%s' and '%s';"""%(prev_time, current_time)
+        WHERE timeArrival BETWEEN '%s' and '%s';""" %(prev_time, current_time)
 
         err_msg = "unable fetching the most recent type command"
 
@@ -643,7 +612,7 @@ class DATABASE:
             ORDER BY score;"""
         else:
             sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
-            ORDER BY score DESC LIMIT %d;"""%(topn)
+            ORDER BY score DESC LIMIT %d;""" %topn
 
         err_msg = "Failed to retrieve the topn unique commands..."
         return self.Execute_Select_Sql_Command(sql, err_msg)
@@ -664,26 +633,26 @@ class DATABASE:
 
     def Set_Current_Command(self, currentCommand):
 
-        sql     = """SELECT * from unique_commands where active=1;"""
+        sql = """SELECT * from unique_commands where active=1;"""
         err_msg = "Failed to fetch the previous command..."
         result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
 
         prevCommand = ""
-        if result!= None:
+        if result is not None:
             prevCommand = result['cmdTxt']
 
         if prevCommand == currentCommand : return 
 
-        sql= """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';"""%(currentCommand)
+        sql= """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';""" %currentCommand
         err_msg = "Failed to set the current command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
-        sql= """UPDATE unique_commands set active=0 WHERE cmdTxt='%s';"""%(prevCommand)
+        sql= """UPDATE unique_commands set active=0 WHERE cmdTxt='%s';""" %prevCommand
         err_msg = "Failed to usnset the previous command..."
         self.Execute_Update_Sql_Command(sql, err_msg)
 
     def Get_Current_Command(self):
 
-        sql= """SELECT * FROM unique_commands WHERE active=1;"""
-        err_msg ="Failed to get the current command..."
+        sql = """SELECT * FROM unique_commands WHERE active=1;"""
+        err_msg = "Failed to get the current command..."
         return self.Execute_SelectOne_Sql_Command(sql, err_msg)
