@@ -59,7 +59,7 @@ class INDIVIDUAL:
             return
 
     def __getstate__(self):
-        return(self.id, self.color, self.fitness, self.robotType, self.head_trajectory, self.robot)
+        return self.id, self.color, self.fitness, self.robotType, self.head_trajectory, self.robot
 
     def __setstate__(self, state):
         self.id, self.color, self.fitness, self.robotType, self.head_trajectory, self.robot = state
@@ -75,17 +75,17 @@ class INDIVIDUAL:
         elif color == 'blue':
             self.color = [0, 0, 1]
         elif color == 'yellow':
-            self.color = [1 ,1, 0]
-        elif color == 'purple' or color =='magenta':
+            self.color = [1, 1, 0]
+        elif color == 'purple' or color == 'magenta':
             self.color = [1, 0, 1]
         elif color == 'white':
-            self.color = [1, 1, 1 ]
+            self.color = [1, 1, 1]
         elif color == 'cyan':
             self.color = [0, 1, 1]
         elif color == 'black':
             self.color = [0, 0, 0]
         elif color == 'orange':
-            self.color = [1, 153.0/255.0, 0 ]
+            self.color = [1, 153.0/255.0, 0]
         elif color == 'silver':
             self.color = [0.75, 0.75, 0.75]
         # else: self.color = [0.5, 0.5, 0.5]

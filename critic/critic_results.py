@@ -6,14 +6,15 @@ from scipy.stats.stats import ttest_ind
 filename1 = 'critic_results_regular'
 filename2 = 'critic_results_permuted'
 
+
 def stars(p):
    if p < 0.0001:
        return "****"
-   elif (p < 0.001):
+   elif p < 0.001:
        return "***"
-   elif (p < 0.01):
+   elif p < 0.01:
        return "**"
-   elif (p < 0.05):
+   elif p < 0.05:
        return "*"
    else:
        return "-"

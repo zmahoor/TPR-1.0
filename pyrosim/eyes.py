@@ -51,7 +51,6 @@ class EYES:
 
     def Add_Sensors(self,sensorsCreated):
         sensorInd = len(sensorsCreated)
-
         self.left_raySensor = RAY_SENSOR(sensorID=sensorInd,
                                          objectIndex=self.leftPupil_ID, x=self.leftPupil[0],
                                          y=self.leftPupil[1], z=self.leftPupil[2], r1=0, r2=-1, r3=0)
@@ -96,34 +95,34 @@ class EYES:
         ###########################JOINTS#######################################
 
         sim.Send_Joint(jointID=self.numJoints, firstObjectID=self.head_ID,
-                        secondObjectID=self.leftEye_ID,
-                        n1=1, n2=0, n3=0,
-                        x=self.lefEye[0], y=self.lefEye[1], z=self.lefEye[2],
-                        lo=0, hi=0)
+                       secondObjectID=self.leftEye_ID,
+                       n1=1, n2=0, n3=0,
+                       x=self.lefEye[0], y=self.lefEye[1], z=self.lefEye[2],
+                       lo=0, hi=0)
 
         self.numJoints += 1
 
         sim.Send_Joint(jointID=self.numJoints, firstObjectID=self.head_ID,
-                        secondObjectID=self.rightEye_ID,
-                        n1=1, n2=0, n3=0,
-                        x=self.rightEye[0], y=self.rightEye[1], z=self.rightEye[2],
-                        lo=0, hi=0)
+                       secondObjectID=self.rightEye_ID,
+                       n1=1, n2=0, n3=0,
+                       x=self.rightEye[0], y=self.rightEye[1], z=self.rightEye[2],
+                       lo=0, hi=0)
         
         self.numJoints += 1
 
         sim.Send_Joint(jointID=self.numJoints, firstObjectID=self.leftEye_ID,
-                        secondObjectID=self.leftPupil_ID,
-                        n1=1, n2=0, n3=0,
-                        x=self.leftPupil[0], y=self.leftPupil[1], z=self.leftPupil[2],
-                        lo=0, hi=0)
+                       secondObjectID=self.leftPupil_ID,
+                       n1=1, n2=0, n3=0,
+                       x=self.leftPupil[0], y=self.leftPupil[1], z=self.leftPupil[2],
+                       lo=0, hi=0)
 
         self.numJoints += 1
 
-        sim.Send_Joint(jointID = self.numJoints, firstObjectID=self.rightEye_ID,
-                        secondObjectID=self.rightPupil_ID,
-                        n1=1, n2 =0, n3 =0,
-                        x=self.rightPupil[0], y=self.rightPupil[1], z=self.rightPupil[2],
-                        lo=0, hi=0)
+        sim.Send_Joint(jointID=self.numJoints, firstObjectID=self.rightEye_ID,
+                       secondObjectID=self.rightPupil_ID,
+                       n1=1, n2=0, n3 =0,
+                       x=self.rightPupil[0], y=self.rightPupil[1], z=self.rightPupil[2],
+                       lo=0, hi=0)
 
         if self.left_raySensor:
             self.left_raySensor.Send_To_Simulator(sim) 

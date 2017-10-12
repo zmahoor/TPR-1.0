@@ -15,10 +15,10 @@ class ROBOT:
                            self.sensorsCreated)
 
     def Initialize_Body(self):
-        self.num_joints     = 0
-        self.num_objects    = 0
-        self.head_ID        = 0
-        self.num_sensors    = 0
+        self.num_joints = 0
+        self.num_objects = 0
+        self.head_ID = 0
+        self.num_sensors = 0
         self.num_motor_neurons = 8
         self.sensorsCreated = {}
         self.Add_Sensors()
@@ -76,7 +76,7 @@ class ROBOT:
         self.num_objects=0
         # box 
         sim.Send_Box(objectID=self.num_objects, x=0, y=0, z=c.L, length=c.L, width=2*c.L,
-         height=2*c.R, r=color[0], g=color[1], b=color[2])
+                     height=2*c.R, r=color[0], g=color[1], b=color[2])
 
         # sim.Send_Sphere(objectID = self.num_objects , x=0, y=0, z=c.L, radius=c.L,
         #  r=color[0], g=color[1], b=color[2])
@@ -97,18 +97,17 @@ class ROBOT:
         self.num_objects += 1
 
         sim.Send_Cylinder(objectID=self.num_objects, x=c.L-c.R, y=-c.L/2-c.R, z=c.L, r1=1, r2=0, r3=0,
-                         length=.5*c.L, radius=c.R,  r=color[0], g=color[1], b=color[2])
+                          length=.5*c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
         # ## vertical segments
-        
         sim.Send_Cylinder(objectID=self.num_objects, x=-0.5*(c.L+c.R), y=(c.L/2-c.R)-math.sin(math.pi/4)*(.5*c.L+c.R),
                           z=(c.L+2*c.R+math.sin(math.pi/4)*(.5*c.L+c.R))/2, r1=0, r2=0, r3=1,
                           length=math.sin(math.pi/4)*(c.L+2*c.R)+2*c.R, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
         sim.Send_Cylinder(objectID=self.num_objects, x=-(1.5*c.L-2*c.R), y=-c.L/2-c.R, z=.5*c.L, r1=0,
-         r2=0, r3=1, length=c.L-c.R, radius=c.R, r=color[0], g=color[1], b=color[2])
+                          r2=0, r3=1, length=c.L-c.R, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
         sim.Send_Cylinder(objectID=self.num_objects, x=0.5*(c.L+c.R), y=(c.L/2-c.R)-math.sin(math.pi/4)*(.5*c.L+c.R),
@@ -123,43 +122,42 @@ class ROBOT:
 
     def Send_Joints(self, sim):
         self.num_joints = 0
-
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=1,
-                       n1=1, n2 =0, n3 =0, x=-0.5*(c.L+c.R), y=(c.L/2-c.R)+math.sin(math.pi/4)*(.5*c.L+c.R),
+                       n1=1, n2=0, n3=0, x=-0.5*(c.L+c.R), y=(c.L/2-c.R)+math.sin(math.pi/4)*(.5*c.L+c.R),
                        z=(c.L+2*c.R)-math.sin(math.pi/4)*(.5*c.L+c.R))
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=2,
-                       n1=0, n2=-1, n3=0, x=-c.L/2, y=-c.L/2, z=c.L + c.R)
+                       n1=0, n2=-1, n3=0, x=-c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=3,
-                        n1=1, n2=0 , n3=0, x=0.5*(c.L+c.R), y=(c.L/2-c.R)+math.sin(math.pi/4)*(.5*c.L+c.R),
+                       n1=1, n2=0, n3=0, x=0.5*(c.L+c.R), y=(c.L/2-c.R)+math.sin(math.pi/4)*(.5*c.L+c.R),
                        z=(c.L+2*c.R)-math.sin(math.pi/4)*(.5*c.L+c.R))
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0 , secondObjectID=4,
-         n1 =0 , n2 =1 , n3 =0, x=c.L/2, y=-c.L/2, z=c.L + c.R)
+                        n1=0, n2=1, n3=0, x=c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         ############
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=1, secondObjectID=5,
-                        n1 =1, n2=0, n3 =0,x=-0.5*(c.L+c.R), y=(c.L/2-c.R)-math.sin(math.pi/4)*(.5*c.L+c.R),
+                       n1=1, n2=0, n3 =0,x=-0.5*(c.L+c.R), y=(c.L/2-c.R)-math.sin(math.pi/4)*(.5*c.L+c.R),
                        z=(c.L+2*c.R+math.sin(math.pi/4)*(.5*c.L+c.R)))
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=2, secondObjectID=6,
-                        n1=0 , n2=1, n3=0, x=(-c.L+c.R)-0.25*c.L, y=-c.L/2-c.R, z=c.L)
+                        n1=0, n2=1, n3=0, x=(-c.L+c.R)-0.25*c.L, y=-c.L/2-c.R, z=c.L)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=3 , secondObjectID=7,
-                        n1=1 , n2=0 , n3=0, x=0.5*(c.L+c.R), y=(c.L/2-c.R)-math.sin(math.pi/4)*(.5*c.L+c.R),
+                        n1=1, n2=0 , n3=0, x=0.5*(c.L+c.R), y=(c.L/2-c.R)-math.sin(math.pi/4)*(.5*c.L+c.R),
                        z=(c.L+2*c.R+math.sin(math.pi/4)*(.5*c.L+c.R)))
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=4, secondObjectID=8,
-                        n1 =1, n2 =-1, n3=0, x=(c.L-c.R)+0.25*c.L, y=-c.L/2-c.R, z=c.L)
+                        n1=1, n2=-1, n3=0, x=(c.L-c.R)+0.25*c.L, y=-c.L/2-c.R, z=c.L)
         self.num_joints += 1
 
     def Add_Sensors(self):

@@ -12,13 +12,13 @@ class ROBOT:
     def __init__(self):
         self.Initialize_Body()
         self.brain = BRAIN(self.num_sensors, self.num_motor_neurons,
-            self.sensorsCreated)
+                           self.sensorsCreated)
 
     def Initialize_Body(self):
-        self.num_joints     = 0
-        self.num_objects    = 0
-        self.head_ID        = 0
-        self.num_sensors    = 0
+        self.num_joints = 0
+        self.num_objects = 0
+        self.head_ID = 0
+        self.num_sensors = 0
         self.num_motor_neurons = 12
         self.sensorsCreated = {}
 
@@ -26,15 +26,11 @@ class ROBOT:
         print self.num_sensors, self.num_motor_neurons, self.sensorsCreated
 
     def Send_To_Simulator(self, sim, color, biasValues):
-        jointsCreated  = {}
-        objectsCreated = {}
-
         self.Send_Objects(sim, color)
-
         self.Send_Joints(sim)
 
-        jointsCreated[0] = self.num_joints
-        objectsCreated[0]= self.num_objects
+        jointsCreated = {0: self.num_joints}
+        objectsCreated = {0: self.num_objects}
 
         self.eyes = EYES(self.head_ID, [0, -c.L, 4*c.R+c.L], 0.025, [1,0,0], [0,-1,0], 0.018)
         self.eyes.Create_Eyes(jointsCreated, objectsCreated)

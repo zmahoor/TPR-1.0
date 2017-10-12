@@ -15,10 +15,10 @@ class ROBOT:
                            self.sensorsCreated)
 
     def Initialize_Body(self):
-        self.num_joints     = 0
-        self.num_objects    = 0
-        self.head_ID        = 9
-        self.num_sensors    = 0
+        self.num_joints = 0
+        self.num_objects = 0
+        self.head_ID = 9
+        self.num_sensors = 0
         self.num_motor_neurons = 9
         self.sensorsCreated = {}
         self.Add_Sensors()
@@ -62,6 +62,7 @@ class ROBOT:
             self.raw_sensors['P'+str(s)] = copy.deepcopy(sim.Get_Sensor_Data(s+4, 0))
 
         self.raw_sensors['R0'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-3, 0))
+
         self.raw_sensors['P'+str(self.head_ID)+'_X'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 0))
         self.raw_sensors['P'+str(self.head_ID)+'_Y'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 1))
         self.raw_sensors['P'+str(self.head_ID)+'_Z'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 2))
@@ -121,36 +122,34 @@ class ROBOT:
                         mass=0.1, radius=2*c.R,  r=color[0], g=color[1], b=color[2])
         self.head_ID = self.num_objects
         self.num_objects += 1
-         
 
     def Send_Joints(self, sim):
         self.num_joints = 0
-
         # feet to legs
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=2,
                        n1=1, n2=0, n3=0, x=-.5*c.L, y=0, z=.5*c.R, lo=-math.pi/10, hi=math.pi/10)
         self.num_joints += 1
         
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=1, secondObjectID=3,
-                        n1=1, n2=0 , n3=0, x=.5*c.L, y=0, z=.5*c.R,lo=-math.pi/10, hi=math.pi/10)
+                       n1=1, n2=0, n3=0, x=.5*c.L, y=0, z=.5*c.R,lo=-math.pi/10, hi=math.pi/10)
         self.num_joints += 1
         
         # legs to torso
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=2, secondObjectID=4,
-                        n1=1, n2=0 , n3=0, x=-.5*c.L, y=0, z=2*c.L, lo=-math.pi/4, hi=math.pi/4)
+                        n1=1, n2=0, n3=0, x=-.5*c.L, y=0, z=2*c.L, lo=-math.pi/4, hi=math.pi/4)
         self.num_joints += 1
         
-        sim.Send_Joint(jointID=self.num_joints, firstObjectID=3, secondObjectID = 4,
+        sim.Send_Joint(jointID=self.num_joints, firstObjectID=3, secondObjectID=4,
                          n1=1, n2=0, n3=0, x=.5*c.L, y=0, z=2*c.L,lo=-math.pi/4, hi=math.pi/4)
         self.num_joints += 1
         
         # torso to shoulder
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=4, secondObjectID=5,
-                        n1=0, n2=-1 , n3=0, x=-.75*c.L, y=0, z=4*c.L-c.R, lo=-0.1, hi=math.pi)
+                       n1=0, n2=-1, n3=0, x=-.75*c.L, y=0, z=4*c.L-c.R, lo=-0.1, hi=math.pi)
         self.num_joints += 1
         
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=4, secondObjectID=6,
-                        n1=0, n2=1 , n3=0, x=.75*c.L, y=0, z=4*c.L-c.R, lo=-0.1, hi=math.pi)
+                        n1=0, n2=1, n3=0, x=.75*c.L, y=0, z=4*c.L-c.R, lo=-0.1, hi=math.pi)
         self.num_joints += 1
         
         # shoulder to arms
@@ -159,7 +158,7 @@ class ROBOT:
         self.num_joints += 1
         
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=6, secondObjectID=8,
-                        n1=1, n2=0 , n3 =0, x=.75*(c.L+c.R), y=0, z=4*c.L-c.R, lo=-math.pi/4, hi=math.pi/2)
+                        n1=1, n2=0, n3 =0, x=.75*(c.L+c.R), y=0, z=4*c.L-c.R, lo=-math.pi/4, hi=math.pi/2)
         self.num_joints += 1
 
         # torso to head

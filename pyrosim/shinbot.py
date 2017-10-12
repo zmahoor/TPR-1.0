@@ -12,13 +12,13 @@ class ROBOT:
     def __init__(self):
         self.Initialize_Body()
         self.brain = BRAIN(self.num_sensors, self.num_motor_neurons,
-                            self.sensorsCreated)
+                           self.sensorsCreated)
 
     def Initialize_Body(self):
-        self.num_joints     = 0
-        self.num_objects    = 0
-        self.head_ID        = 0
-        self.num_sensors    = 0
+        self.num_joints = 0
+        self.num_objects = 0
+        self.head_ID = 0
+        self.num_sensors = 0
         self.num_motor_neurons = 4
         self.sensorsCreated = {}
         self.Add_Sensors()
@@ -37,10 +37,10 @@ class ROBOT:
         jointsCreated[0] = self.num_joints
         objectsCreated[0]= self.num_objects
 
-        self.eyes = EYES(self.head_ID, [0, -c.L, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
+        self.eyes = EYES(self.head_ID, [0, -c.L, 3*c.R+c.L], 0.015, [1, 0, 0], [0, -1, 0], 0.015)
         self.eyes.Create_Eyes(jointsCreated, objectsCreated)
 
-        self.num_joints  = jointsCreated[0]
+        self.num_joints = jointsCreated[0]
         self.num_objects = objectsCreated[0]
 
         self.eyes.Send_Eyes_To_Simulator(sim)
@@ -81,38 +81,38 @@ class ROBOT:
         self.head_ID = 0
         self.num_objects += 1
 
-        sim.Send_Cylinder(objectID=self.num_objects, x=-c.L/2-c.R, y=c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=2,
-                        length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
+        sim.Send_Cylinder(objectID=self.num_objects, x=-c.L/2-c.R, y=c.L/2, z=(c.L+c.R)/2, r1=1, r2=0, r3=2,
+                          length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        sim.Send_Cylinder(objectID=self.num_objects, x=-c.L/2-c.R, y=-c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=2,
-                            length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
+        sim.Send_Cylinder(objectID=self.num_objects, x=-c.L/2-c.R, y=-c.L/2, z=(c.L+c.R)/2, r1=1, r2=0, r3=2,
+                          length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        sim.Send_Cylinder(objectID=self.num_objects, x=c.L/2+c.R, y=c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=-2,
-                        length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
+        sim.Send_Cylinder(objectID=self.num_objects, x=c.L/2+c.R, y=c.L/2, z=(c.L+c.R)/2, r1=1, r2=0, r3=-2,
+                          length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        sim.Send_Cylinder(objectID=self.num_objects, x=c.L/2+c.R, y=-c.L/2, z=(c.L+c.R)/2, r1=1 , r2=0, r3=-2,
-                        length=c.L, radius=c.R,  r=color[0], g=color[1], b=color[2])
+        sim.Send_Cylinder(objectID=self.num_objects, x=c.L/2+c.R, y=-c.L/2, z=(c.L+c.R)/2, r1=1, r2=0, r3=-2,
+                          length=c.L, radius=c.R,  r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
     def Send_Joints(self, sim):
         self.num_joints = 0
-        sim.Send_Joint(jointID=self.num_joints, firstObjectID = 0, secondObjectID=1,
-                        n1=-1, n2=0, n3=0, x=-c.L/2, y=c.L/2, z=c.L+c.R)
+        sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=1,
+                       n1=-1, n2=0, n3=0, x=-c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=2,
-                        n1=-1, n2 =0 , n3 =0, x=-c.L/2, y=-c.L/2, z=c.L+c.R)
+                       n1=-1, n2=0, n3=0, x=-c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=3,
-                        n1=1, n2=0, n3=0, x=c.L/2, y=c.L/2, z=c.L + c.R)
+                       n1=1, n2=0, n3=0, x=c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=4,
-                        n1=1, n2=0, n3=0, x=c.L/2, y=-c.L/2, z=c.L + c.R)
+                       n1=1, n2=0, n3=0, x=c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
     def Add_Sensors(self):
@@ -149,6 +149,6 @@ class ROBOT:
 
         sim.Send_Ray_Sensor(sensorID=self.num_sensors-2, objectID=self.num_objects-2,
                             x=self.eyes.rightPupil[0], y=self.eyes.rightPupil[1],
-                             z=self.eyes.rightPupil[2], r1=0, r2=-1, r3=0)
+                            z=self.eyes.rightPupil[2], r1=0, r2=-1, r3=0)
 
         sim.Send_Position_Sensor(sensorID=self.num_sensors-1, objectID=0)
