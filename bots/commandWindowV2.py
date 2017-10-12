@@ -12,13 +12,13 @@ from copy import deepcopy
 
 COMMAND_DURATION = 3 * 60
 DB_FETCH_DURATION = 5
-COMMAND_WINDOW_W = 440
-COMMAND_WINDOW_H = 275
+COMMAND_WINDOW_W = 900
+COMMAND_WINDOW_H = 210
 Y_COOR = [65, 115, 165]
 NAME_X = [ 800, 800, 800]
 WSPACE = 5
 FONT_SIZE = 23
-TITLE = "Top Voted Commands"
+TITLE = "TPR-  Top Voted Commands"
 COLORS = ['RED', 'BLUE', 'DARKGREEN']
 DEFAULT_COMMANDS = ['jump', 'stop', 'backflip', 'spin', 'roll', 'walk', 'move backward',
                     'move forward', 'dance', 'run', 'flip']
@@ -46,8 +46,8 @@ def draw_command_window(timeRemaining):
 
     window.Wipe()
     myy = 10
-    # window.Draw_Text("To vote for the next command, type in the chat a command preceded by ! (for example !walk).",
-    #                  x=10, fontSize=FONT_SIZE)
+    window.Draw_Text("To vote for the next command, type in the chat a command preceded by ! (for example !walk).",
+                     x=10, fontSize=FONT_SIZE)
 
     window.Draw_Text('Top voted commands are:', x=10, y=40, fontSize=FONT_SIZE)
 
