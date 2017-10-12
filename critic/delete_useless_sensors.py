@@ -31,7 +31,7 @@ def Delete_Sensor_File(record):
 
 def Delete_Useless_Sensor_Files():
 
-    records = mydatabase.Fetch_From_Disply_Table('all')
+    records = mydatabase.fetch_from_display_table('all')
 
     delete_count = 0
 

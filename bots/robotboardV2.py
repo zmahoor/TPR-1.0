@@ -15,12 +15,12 @@ UPDATE_PERIOD = 2
 BLINK_PERIOD = 10
 DRAW_PERIOD = 30
 WSPACE = 85
-#get screen
+# get screen
 WINDOW = PYGAMEWRAPPER(width=WIDTH, height=HEIGHT, title="Robot's Information",
                        fontSize=FONT_SIZE)
 SCREEN = WINDOW.screen
 BG_COLOR = (30, 144, 255)
-#create new table object
+# create new table object
 updateTimer = TIMER(UPDATE_PERIOD)
 blinkTimer = TIMER(BLINK_PERIOD)
 prev_cmd = ""
@@ -36,21 +36,21 @@ def Draw_Robot_Window(robotInfo):
                 'snakeplusbot': 'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot': 'crabplusbot',
                 'quadrupedplus': 'quadrupedplus'}
 
-    typeKey    = robotInfo['robotType']
-    robotType  = allTypes[typeKey]
-    robotID    = robotInfo['robotID']
-    color      = robotInfo['color']
-    numOfKind  = robotInfo['numOfKind'] if robotInfo['numOfKind'] is not None else 0
-    numYes     = robotInfo['numYes'] if robotInfo['numYes'] is not None else 0
-    numNo      = robotInfo['numNo'] if robotInfo['numNo'] is not None else 0
-    numLike    = robotInfo['numLike'] if robotInfo['numLike'] is not None else 0
+    typeKey = robotInfo['robotType']
+    robotType = allTypes[typeKey]
+    robotID = robotInfo['robotID']
+    color = robotInfo['color']
+    numOfKind = robotInfo['numOfKind'] if robotInfo['numOfKind'] is not None else 0
+    numYes = robotInfo['numYes'] if robotInfo['numYes'] is not None else 0
+    numNo = robotInfo['numNo'] if robotInfo['numNo'] is not None else 0
+    numLike = robotInfo['numLike'] if robotInfo['numLike'] is not None else 0
     numDislike = robotInfo['numDislike'] if robotInfo['numDislike'] is not None else 0
-    cmdTxt     = robotInfo['cmdTxt']
+    cmdTxt = robotInfo['cmdTxt']
 
     dt = datetime.datetime.now() - robotInfo['birthDate']
     minute, second = divmod(dt.days*86400 + dt.seconds, 60)
-    hour, minute   = divmod(minute, 60)
-    day, hour      = divmod(hour, 24)
+    hour, minute = divmod(minute, 60)
+    day, hour = divmod(hour, 24)
 
     age = "%dd %dh:%02dm:%02ds" %(day, hour, minute, second)
 
@@ -84,7 +84,7 @@ def Draw_Robot_Window(robotInfo):
     prev_cmd = cmdTxt
 
 
-robotInfo = DB.Fetch_Robot_Information()
+robotInfo = DB.fetch_robot_information()
 
 
 while True:
@@ -95,7 +95,7 @@ while True:
 
     if updateTimer.Time_Elapsed():
         # fetch from database
-        robotInfo = DB.Fetch_Robot_Information()
+        robotInfo = DB.fetch_robot_information()
         updateTimer.Reset()
 
     Draw_Robot_Window(robotInfo)

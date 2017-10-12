@@ -24,10 +24,12 @@ updateTimer = TIMER(UPDATE_PERIOD)
 blinkTimer = TIMER(BLINK_PERIOD)
 prev_cmd = ""
 
-def Draw_Robot_Window(robotInfo):
+
+def draw_robot_window(robotInfo):
     global prev_cmd
     # print ('current robot info: ', robotInfo)
-    if robotInfo is None: return None
+    if robotInfo is None:
+        return None
 
     allTypes = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot',
                 'quadruped': 'quadruped', 'shinbot': 'tablebot', 'crabbot': 'crabbot',
@@ -35,20 +37,20 @@ def Draw_Robot_Window(robotInfo):
                 'snakeplusbot': 'snakeplusbot', 'humanoid': 'humanoid', 'crabplusbot': 'crabplusbot',
                 'quadrupedplus': 'quadrupedplus'}
 
-    typeKey    = robotInfo['robotType']
-    robotType  = allTypes[typeKey]
-    robotID    = robotInfo['robotID']
-    numOfKind  = robotInfo['numOfKind'] if robotInfo['numOfKind'] is not None else 0
-    numYes     = robotInfo['numYes'] if robotInfo['numYes'] is not None else 0
-    numNo      = robotInfo['numNo'] if robotInfo['numNo'] is not None else 0
-    numLike    = robotInfo['numLike'] if robotInfo['numLike'] is not None else 0
+    typeKey = robotInfo['robotType']
+    robotType = allTypes[typeKey]
+    robotID = robotInfo['robotID']
+    numOfKind = robotInfo['numOfKind'] if robotInfo['numOfKind'] is not None else 0
+    numYes = robotInfo['numYes'] if robotInfo['numYes'] is not None else 0
+    numNo = robotInfo['numNo'] if robotInfo['numNo'] is not None else 0
+    numLike = robotInfo['numLike'] if robotInfo['numLike'] is not None else 0
     numDislike = robotInfo['numDislike'] if robotInfo['numDislike'] is not None else 0
-    cmdTxt     = robotInfo['cmdTxt']
+    cmdTxt = robotInfo['cmdTxt']
 
-    dt = datetime.datetime.now() - robotInfo['birthDate']
+    dt = datetime.datetime.now()-robotInfo['birthDate']
     minute, second = divmod(dt.days*86400+dt.seconds, 60)
-    hour, minute   = divmod(minute, 60)
-    day, hour      = divmod(hour, 24)
+    hour, minute = divmod(minute, 60)
+    day, hour = divmod(hour, 24)
 
     age = "%dd %dh:%02dm:%02ds"%(day, hour, minute, second)
     title = ["robotID", "Age", "Type", "Yes's", "No's", "Likes", "Dislikes"]
@@ -67,16 +69,16 @@ def Draw_Robot_Window(robotInfo):
 
     if not blinkTimer.Time_Elapsed():
         WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,
-                        y=110, color='YELLOW', bold=True, underline=False, fontSize=35)
+                         y=110, color='YELLOW', bold=True, underline=False, fontSize=35)
     else:
         WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,
-                 y=110, color='WHITE', bold=True, underline=False, fontSize=30)
+                         y=110, color='WHITE', bold=True, underline=False, fontSize=30)
 
     WINDOW.Draw_Text("Need help? Type ?robots", x=675, y=90, color='WHITE', fontSize=23)
     prev_cmd = cmdTxt
 
 
-robotInfo = DB.Fetch_Robot_Information()
+robotInfo = DB.fetch_robot_information()
  
 while True:
     for event in pygame.event.get():
@@ -87,8 +89,8 @@ while True:
 
     if updateTimer.Time_Elapsed():
         # fetch from database
-        robotInfo = DB.Fetch_Robot_Information()
+        robotInfo = DB.fetch_robot_information()
         updateTimer.Reset()
 
-    Draw_Robot_Window(robotInfo)
+    draw_robot_window(robotInfo)
     WINDOW.Refresh()

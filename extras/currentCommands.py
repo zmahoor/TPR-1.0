@@ -28,7 +28,7 @@ NUM_CYCLES 	= 18
 
 # add the default command to the unique_commands table and let it to be active command.
 currentTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-DB.Add_To_Unique_Commands_Table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
+DB.add_to_unique_commands_table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
 
 #List format
 # [ (c_1, v_1, [users]), (c_2, v_2, [users]), ... (c_n, v_n, [users]) ]
@@ -89,7 +89,7 @@ def Get_Commands():
 
         cmds_to_return = []
         
-        full_cmd_list = DB.Fetch_For_Command_Window(interval = reset * TIME_OF_CYCLE)
+        full_cmd_list = DB.fetch_for_command_window(interval =reset * TIME_OF_CYCLE)
 	print reset
 	#print 'COMMANDS'     
 
@@ -198,8 +198,8 @@ while 1:
                         print li
                         print "newActive: ", newActive
                 
-                        DB.Set_Current_Command(newActive)
+                        DB.set_current_command(newActive)
                 else:
-                        DB.Set_Current_Command(DEFAULT_COMMAND)
+                        DB.set_current_command(DEFAULT_COMMAND)
                           
 	WINDOW.Refresh()

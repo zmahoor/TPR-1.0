@@ -15,7 +15,7 @@ sys.path.append('../bots')
 from settings import *
 
 
-def Load_Population_From_File( robotType ):
+def load_population_from_file(robotType):
     path = '../secondary_population/population_of_' + str(robotType) + '.dat'
     population = None
     try:
@@ -27,7 +27,7 @@ def Load_Population_From_File( robotType ):
     return population
 
 
-def Store_Population_To_File(population, robotType):
+def store_population_to_file(population, robotType):
     path = '../secondary_population'
     if not os.path.exists(path):
         os.makedirs(path)
@@ -40,9 +40,9 @@ def Store_Population_To_File(population, robotType):
         print ('Failed writing the population of: ', robotType)
 
 
-def Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest):
-    endTimer = TIMER( tPeriod * 60)
-    parents = Load_Population_From_File(robotType)
+def fill_diversity_pool(robotType, tPeriod, popSize, numBest):
+    endTimer = TIMER(tPeriod * 60)
+    parents = load_population_from_file(robotType)
     if parents is None:
         parents = POPULATION(popSize, robotType)
     parents.Evaluate_Internal_Novelty(False, True)
@@ -68,7 +68,7 @@ def Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest):
             parents.p[best].Store_To_Diversity_Pool()
             parents.Kill_And_Replace( best )
 
-    Store_Population_To_File( parents, robotType)
+    store_population_to_file( parents, robotType)
     return
 
 
@@ -77,16 +77,16 @@ def main(args):
     popSize = args.pop_size
     tPeriod = args.evolution_period
     robotType = args.robot
-    Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest)
+    fill_diversity_pool(robotType, tPeriod, popSize, numBest)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Diversity pool using intenal novelty.')
+    parser = argparse.ArgumentParser(description='Diversity pool using internal novelty.')
     parser.add_argument('--robot', '-r', type=str, default='4',
                         help='Morphology types: {1,2,3,4,spherebot,crabbot,quadruped,shinbot,snakebot}, default=1')
 
     parser.add_argument('--pop_size', '-p', type=int, default=20, help=
-                        'Size of populaiton, default=30.')
+                        'Size of population, default=30.')
     
     parser.add_argument('--evolution_period', '-t', type=int, default=60, help=
                         'Experiment time in minutes, default=60.')

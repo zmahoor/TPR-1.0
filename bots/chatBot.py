@@ -30,7 +30,7 @@ while True:
 
                 if username not in filteredUsers:
                     print('Adding to the chat table...')
-                    db.Add_To_Chat_Table(username, currentTime, msg)
+                    db.add_to_chat_table(username, currentTime, msg)
 
             except Exception as e:
                 print str(e)

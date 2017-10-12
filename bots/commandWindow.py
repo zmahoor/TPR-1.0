@@ -30,19 +30,19 @@ currentTime = datetime.datetime.now()
 currentTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
 
 print 'Setting the default command as the active command...'
-mydatabase.Add_To_Unique_Commands_Table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
-mydatabase.Set_Current_Command(DEFAULT_COMMAND)
+mydatabase.add_to_unique_commands_table(DEFAULT_COMMAND, currentTime, 1.0, active=1)
+mydatabase.set_current_command(DEFAULT_COMMAND)
 
 print 'Flushing previous unprocessed commands...'
-mydatabase.Find_Most_Voted_Command()
-mydatabase.Tobe_Animated_In_Command_Window()
+mydatabase.find_most_voted_command()
+mydatabase.tobe_animated_in_command_window()
 
-def Draw_Command_Window(timeRemaining):
 
+def draw_command_window(timeRemaining):
     global currentCommand
     global animated_list
-    window.Wipe()
 
+    window.Wipe()
     myy = 10
     window.Draw_Text("Type !command, where", x=10, y=2, fontSize=FONT_SIZE)
     window.Draw_Text("command", x=window.text_x+window.text_width+WSPACE, y=2, bold=True, fontSize=FONT_SIZE)
@@ -52,8 +52,8 @@ def Draw_Command_Window(timeRemaining):
 
     if timeRemaining < 0: timeRemaining = 0
     minute, second = divmod(timeRemaining, 60)
-    hour, minute   = divmod(minute, 60)
-    timeRemaining  = "%02dm:%02ds"%(minute, second)
+    hour, minute = divmod(minute, 60)
+    timeRemaining = "%02dm:%02ds"%(minute, second)
 
     MAX = 500
     size = min(len(animated_list), 3)
@@ -62,7 +62,8 @@ def Draw_Command_Window(timeRemaining):
     else:
         X_VAL = max(10, max(len(animated_list[i]['cmdTxt']*14) for i in range(0, size)))
     X_VAL = X_VAL + 25
-    if X_VAL > MAX: X_VAL = MAX
+    if X_VAL > MAX:
+        X_VAL = MAX
 
     for i in range(0, min(len(animated_list), 3)):
         cmdTxt, votes, users = animated_list[i]['cmdTxt'], animated_list[i]['votes'], animated_list[i]['users']
@@ -92,8 +93,9 @@ def Draw_Command_Window(timeRemaining):
     window.Refresh()
 
 
-def process( tobe_animated ):
+def process(tobe_animated):
     global animated_list
+
     for item in tobe_animated:
         cmdTxt, userName = item['cmdTxt'], item['userName']
         match = next((item for item in animated_list if item['cmdTxt'] == cmdTxt), None)
@@ -112,7 +114,7 @@ def main():
     global currentCommand
     global animated_list
     commandTimer = TIMER(COMMAND_DURATION)
-    smallTimer   = TIMER(DB_FETCH_DURATION)
+    smallTimer = TIMER(DB_FETCH_DURATION)
 
     while True:
         for event in pygame.event.get():
@@ -121,21 +123,21 @@ def main():
 
         if commandTimer.Time_Elapsed():
             animated_list[:] = []
-            temp = mydatabase.Find_Most_Voted_Command()
+            temp = mydatabase.find_most_voted_command()
             print "Most voted command: ", temp
 
             if temp is not None: currentCommand = temp['cmdTxt']
             else: currentCommand = DEFAULT_COMMAND
-            mydatabase.Set_Current_Command(currentCommand)
+            mydatabase.set_current_command(currentCommand)
             commandTimer.Reset()
 
         elif not commandTimer.Time_Elapsed():
             if smallTimer.Time_Elapsed():
-                tobe_animated = mydatabase.Tobe_Animated_In_Command_Window()
+                tobe_animated = mydatabase.tobe_animated_in_command_window()
                 if tobe_animated is not None:
                     process( tobe_animated)
                 smallTimer.Reset()
-            Draw_Command_Window(commandTimer.Time_Remaining())
+            draw_command_window(commandTimer.Time_Remaining())
 
 
 main()

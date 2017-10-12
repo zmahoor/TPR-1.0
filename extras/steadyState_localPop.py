@@ -173,11 +173,11 @@ def Compete_Based_On_Dominance(individual1, individual2):
         return None
     print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
 
-    mydatabase.Kill_Robot(loser['robotID'])
+    mydatabase.kill_robot(loser['robotID'])
 
     newInd = Load_Controller_From_File(winner['robotID'])
     if newInd == None:  
-        mydatabase.Kill_Robot(winner['robotID'])
+        mydatabase.kill_robot(winner['robotID'])
     else:
         newInd.Mutate()
 
@@ -192,7 +192,7 @@ def Dominance(individual1, individual2):
 
 def Add_New_Robot(newIndividual):
 
-    robotID = mydatabase.Add_To_Robot_Table(robotType)
+    robotID = mydatabase.add_to_robot_table(robotType)
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual)
 
@@ -218,7 +218,7 @@ def Morphology_Cycle(morphologyTimer):
 
     while not morphologyTimer.Time_Elapsed():
 
-        aliveIndividuals = mydatabase.Fetch_Alive_Robots(robotType)
+        aliveIndividuals = mydatabase.fetch_alive_robots(robotType)
 
         Initialize_Sub_Population(SUB_POPULATION_SIZE - len(aliveIndividuals))
 
@@ -227,12 +227,12 @@ def Morphology_Cycle(morphologyTimer):
         randomIndividual = Load_Controller_From_File(robotID)
 
         if randomIndividual == None:
-            mydatabase.Kill_Robot(aliveIndividuals[index]['robotID'])
+            mydatabase.kill_robot(aliveIndividuals[index]['robotID'])
             continue
 
         currentColor   = validColors[colorIndex % len(validColors)]
         currentTime    = datetime.datetime.now()
-        currentCommand = mydatabase.Get_Current_Command()
+        currentCommand = mydatabase.get_current_command()
         
         if currentCommand == None or currentCommand == ():
             currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
@@ -241,8 +241,8 @@ def Morphology_Cycle(morphologyTimer):
 
         Draw_Reinforcment_Window()
 
-        mydatabase.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
-            currentCommand['cmdTxt'], currentColor[0], currentTime)
+        mydatabase.add_command_to_display_table(aliveIndividuals[index]['robotID'],
+                                                currentCommand['cmdTxt'], currentColor[0], currentTime)
 
         print "Displaying controller ", randomIndividual.id, " of type ", robotType,\
          " with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\

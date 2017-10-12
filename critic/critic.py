@@ -141,7 +141,7 @@ class CRITIC:
 
 def Generate_Data(batch_size, mydatabase):
     
-    records = mydatabase.Fetch_From_Disply_Table('all_yes_or_no')
+    records = mydatabase.fetch_from_display_table('all_yes_or_no')
 
     print('Number of possible samples: ', len(records))
 
@@ -198,7 +198,7 @@ def Generate_Data(batch_size, mydatabase):
 
 def Load_Training_Data(mydatabase):
     
-    records = mydatabase.Fetch_From_Disply_Table('all_yes_or_no')
+    records = mydatabase.fetch_from_display_table('all_yes_or_no')
 
     print('Number of possible samples: ', len(records))
 

@@ -12,11 +12,11 @@ import datetime
 class Twitch:
 
     def __init(self, sock=None):
-        self.user    = ""
-        self.oauth   = ""
+        self.user = ""
+        self.oauth = ""
         self.channel = ""
-        self.port    = ""
-        self.host    = ""
+        self.port = ""
+        self.host = ""
         self.channel = ""
 
         self.sock = None
@@ -90,8 +90,11 @@ class Twitch:
             sent = None
         return sent
 
-    # to send a pong message every 5 mintues.
+
     def pong(self):
+        """
+        To send a pong message every 5 minutes.
+        """
         try:
             self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
             print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "PONG SENT!")
@@ -107,8 +110,12 @@ class Twitch:
         t.daemon = True
         t.start()
 
-    # if the incoming message is ping, then send a pong.
     def is_ping_message(self, data):
+        """
+        If the incoming message is ping, then send a pong.
+        :param data:
+        :return:
+        """
         if "PING :tmi.twitch.tv\r" in data:
             print('recieved ping...', ' sending pong...')
             self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
@@ -138,7 +145,8 @@ class Twitch:
 
 
     def check_has_message(self, data):
-        return re.match(r'^:[a-zA-Z0-9_]+\![a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\.tmi\.twitch\.tv) PRIVMSG #[a-zA-Z0-9_]+ :.+$', data)
+        return re.match(r'^:[a-zA-Z0-9_]+\![a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\.tmi\.twitch\.tv) PRIVMSG #[a-zA-Z0-9_]+ :.+$',
+                        data)
 
     def parse_message(self, data):
         return {

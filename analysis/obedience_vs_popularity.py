@@ -116,7 +116,7 @@ db = DATABASE()
 
 for key, val in names.items():
     sql = """select * from robots where type='%s'"""%key
-    result = db.Execute_Select_Sql_Command(sql, "Failed to fetch")
+    result = db.execute_select_sql_command(sql, "Failed to fetch")
 
     x = [(r['sumYes']-r['sumNo'])/float(r['sumYes']+r['sumNo']) if (r['sumYes']+r['sumNo']) > 0 else 0 for r in result]
     y = [(r['sumLike']-r['sumDislike'])/float(r['sumLike']+r['sumDislike']) if (r['sumLike']+r['sumDislike']) > 0 else 0 for r in result]

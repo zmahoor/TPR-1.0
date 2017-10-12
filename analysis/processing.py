@@ -22,7 +22,7 @@ with open(path_to_log, 'r') as input_file:
 
             sql = """UPDATE robots set deathDate='%s' where robotID='%d';"""%(death_time, loser_id)
 
-            db.Execute_Update_Sql_Command(sql, err_msg="Falid to update: %d"%(loser_id) )
+            db.execute_update_sql_command(sql, err_msg="Falid to update: %d" % (loser_id))
 
 injectd  = False
 
@@ -44,4 +44,4 @@ with open(path_to_log, 'r') as input_file:
 
             sql = """UPDATE robots set deathDate='%s' where robotID='%d';"""%(death_time, loser_id)
 
-            db.Execute_Update_Sql_Command(sql, err_msg="Falid to update: %d"%(loser_id) )
+            db.execute_update_sql_command(sql, err_msg="Falid to update: %d" % (loser_id))

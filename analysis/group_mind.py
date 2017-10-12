@@ -128,7 +128,7 @@ def shuffle_feedback( feedback ):
 data = {}
 
 sql="""SELECT robotID, cmdTxt from display where (numYes+numYes)>=2 group by robotID, cmdTxt;"""
-records = db.Execute_Select_Sql_Command(sql, 'Failed fetch...')
+records = db.execute_select_sql_command(sql, 'Failed fetch...')
 
 for record in records:
 
@@ -141,7 +141,7 @@ for record in records:
     TwitchPlays.reward_log as r join TwitchPlays.display as d on d.displayID=r.displayID where 
     robotID=%d and cmdTxt='%s' and (r.reward='y' or r.reward='n');"""%(robotID, cmdTxt)
 
-    evaluations = db.Execute_Select_Sql_Command(sql, 'Failed fetch...')
+    evaluations = db.execute_select_sql_command(sql, 'Failed fetch...')
 
     if len(evaluations) < 2: continue
     # print evaluations

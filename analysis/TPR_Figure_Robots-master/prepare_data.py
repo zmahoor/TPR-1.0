@@ -28,7 +28,7 @@ for day in range(1, 8):
 			(deathDate > '2017-07-18 10:00:00'+
 		 	 interval %d day or deathDate is NULL ) group by type;"""%(day, day)
 
-	results = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
+	results = mydatabase.execute_select_sql_command(sql, "failed all the information.")
 
 	print day, results
 	print 

@@ -181,11 +181,11 @@ def Compete_Based_On_Dominance(individual1, individual2):
     print "Winner is: ", winner['robotID'], " loser is: ", loser['robotID']
     print "Killing the loser...", loser['robotID']
 
-    db.Kill_Robot(loser['robotID'])
+    db.kill_robot(loser['robotID'])
 
     winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
     if winnerIndividual == None:  
-        db.Kill_Robot(winner['robotID'])
+        db.kill_robot(winner['robotID'])
     
     mutatedOne = Create_Mutation(winnerIndividual)
 
@@ -226,7 +226,7 @@ def Dominance(individual1, individual2):
 
 def Add_New_Robot(newIndividual):
 
-    robotID = db.Add_To_Robot_Table(newIndividual.robotType)
+    robotID = db.add_to_robot_table(newIndividual.robotType)
 
     print 'New robot added... type: ', newIndividual.robotType, ' and ID:', robotID
     newIndividual.Set_ID(robotID)
@@ -251,7 +251,7 @@ def Initialize_Global_Population():
     print "\n\n"
     print "Initializing the global population..."
 
-    aliveIndividuals = db.Fetch_Alive_Robots("all")
+    aliveIndividuals = db.fetch_alive_robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
     print '\n'
@@ -275,7 +275,7 @@ def Steady_State():
     global currentColor
     global colorIndex
 
-    aliveIndividuals = db.Fetch_Alive_Robots("all")
+    aliveIndividuals = db.fetch_alive_robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population.'
@@ -285,12 +285,12 @@ def Steady_State():
         aliveIndividuals[index]['type'])
 
     if randomIndividual == None:
-        db.Kill_Robot(aliveIndividuals[index]['robotID'])
+        db.kill_robot(aliveIndividuals[index]['robotID'])
         return
 
     currentColor   = validColors[colorIndex % len(validColors)]
     currentTime    = datetime.datetime.now()
-    currentCommand = db.Get_Current_Command()
+    currentCommand = db.get_current_command()
 
     if currentCommand == None or currentCommand == ():
         currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
@@ -299,8 +299,8 @@ def Steady_State():
 
     Draw_Reinforcment_Window()
 
-    db.Add_Command_To_Display_Table(aliveIndividuals[index]['robotID'],
-        currentCommand['cmdTxt'], currentColor[0], currentTime)
+    db.add_command_to_display_table(aliveIndividuals[index]['robotID'],
+                                    currentCommand['cmdTxt'], currentColor[0], currentTime)
 
     print "Displaying controller ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
      ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'], "and current time: ",\
