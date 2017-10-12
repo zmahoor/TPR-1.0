@@ -20,7 +20,7 @@ sql="""SELECT d.displayID, d.robotID, userName, reward, r.timeArrival, d.cmdTxt,
 FROM TwitchPlays.display as d join TwitchPlays.reward_log as r on d.displayID=r.displayID 
 join TwitchPlays.robots  as ro on ro.robotID=d.robotID where r.reward='y' or r.reward='n'
 order by r.timeArrival ASC;"""
-records = db.Execute_Select_Sql_Command(sql, ' ')
+records = db.execute_select_sql_command(sql, ' ')
 
 displays_dict, command_robot = {}, {}
 robot_disagreements, command_disagreements, robot_command_disagreements = Counter(), Counter(), Counter()

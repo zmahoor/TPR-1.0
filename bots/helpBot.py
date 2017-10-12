@@ -70,7 +70,7 @@ help_type = {'general': gen, 'silverrobots': silver,
              'scores': scores, 'votes': votes}
 
 
-db.Flush_Old_Unprocessed_Helps()
+db.flush_old_unprocessed_helps()
 
 while True:
     # to send a pong message to twitch server otherwise the connection is closed.
@@ -79,7 +79,7 @@ while True:
     # msg_from_twitch = t.recieve_messages(amount = 1024)
 
     # get the oldest unprocessed request for help with flag=0.
-    records = db.Fetch_Oldest_Help()
+    records = db.fetch_oldest_help()
 
     if records is None: continue
     
@@ -89,7 +89,7 @@ while True:
     msg_to_send = msg[1:].rstrip()
 
     if msg == '?myscore':
-        result = db.Fetch_User_Score(username)
+        result = db.fetch_user_score(username)
         sent = t.send_message("@"+ username + ", your score:"+ str(result['score']))
         print('Num of bytes sent out:', sent)
 

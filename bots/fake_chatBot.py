@@ -49,7 +49,7 @@ while True:
         currentTime = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
         if username not in filteredUsers:
-            db.Add_To_Chat_Table(username, currentTime, msg)
+            db.add_to_chat_table(username, currentTime, msg)
     except Exception as e:
         print str(e)
         print("something went wrong. Unable inserting this message.")

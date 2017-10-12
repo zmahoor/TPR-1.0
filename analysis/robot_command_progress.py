@@ -24,7 +24,7 @@ for day in range(18, 32):
 	'2017-07-%d 00:00:00' and '2017-07-%d 00:00:00'+interval 1 
 	day and cmdTxt='%s' group by r.type;"""%(day, day, cmd)
 
-	records = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
+	records = mydatabase.execute_select_sql_command(sql, "failed all the information.")
 
 	print records
 

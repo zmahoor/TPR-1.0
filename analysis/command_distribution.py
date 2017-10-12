@@ -17,7 +17,7 @@ names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
 sql = """select cmdTxt, count(distinct robotID) as count from display where 
         (numYes>0 or numNo>0) group by cmdTxt order by count ASC;"""
 
-records = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
+records = mydatabase.execute_select_sql_command(sql, "failed all the information.")
 
 counts   = [value['count'] for value in  records]
 commands = [value['cmdTxt'] for value in  records]
@@ -43,7 +43,7 @@ sql = """select count(distinct d.robotID) as count, r.type from display as d joi
         on d.robotID=r.robotID where d.cmdTxt='%s'
         and (d.numYes>0 or d.numNo>0) group by r.type order by count ASC;"""%(COMMAND)
         
-records = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
+records = mydatabase.execute_select_sql_command(sql, "failed all the information.")
 
 print records
 

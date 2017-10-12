@@ -323,7 +323,7 @@ def Steady_State():
     global wordVector
     global db
 
-    aliveIndividuals = db.Fetch_Alive_Robots("all")
+    aliveIndividuals = db.fetch_alive_robots("all")
 
     print "Num of alive individuals: ", len(aliveIndividuals)
     assert len(aliveIndividuals) > 2, 'Not enough individuals in the population. Run with --initPopulation flag.'
@@ -343,9 +343,9 @@ def Steady_State():
             toBe_Injected = INDIVIDUAL(0, randomType)
 
         robotID = Add_New_Robot(toBe_Injected)
-        db.Kill_Robot(min_Evaluated_Robot['robotID'])
+        db.kill_robot(min_Evaluated_Robot['robotID'])
 
-        aliveIndividuals = db.Fetch_Alive_Robots("all")
+        aliveIndividuals = db.fetch_alive_robots("all")
 
         toBe_Displayed = next((item for item in aliveIndividuals if item['robotID'] == robotID), None)
 
@@ -361,12 +361,12 @@ def Steady_State():
         
     if randomIndividual == None:
         print "Could not load robot ", robotID, " with type: ", robotType
-        db.Kill_Robot(robotID)
+        db.kill_robot(robotID)
         return
 
     currentColor   = validColors[colorIndex % len(validColors)]
     currentTime    = datetime.datetime.now()
-    currentCommand = db.Get_Current_Command()
+    currentCommand = db.get_current_command()
 
     if currentCommand == None or currentCommand == ():
         currentCommand = {'wordToVec': 1.0, 'cmdTxt': DEFAULT_COMMAND}
@@ -375,7 +375,7 @@ def Steady_State():
 
     Draw_Reinforcment_Window()
 
-    db.Add_Command_To_Display_Table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
+    db.add_command_to_display_table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
 
     print "Displaying robot ", randomIndividual.id, ". type: ", randomIndividual.robotType,\
      ", with color: ", currentColor, " and current command: ", currentCommand['cmdTxt'],\

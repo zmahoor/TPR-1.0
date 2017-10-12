@@ -25,7 +25,7 @@ db = DATABASE()
 #     db.Execute_Update_Sql_Command(sql, err_msg="Falid to update: %d"%(robotID) )
 
 sql=""" SELECT displayID, robotID, color, startTime FROM TwitchPlays.display;"""
-evaluations = db.Execute_Select_Sql_Command(sql , "failed all the information.")
+evaluations = db.execute_select_sql_command(sql, "failed all the information.")
 
 for evaluation in evaluations:
 
@@ -41,7 +41,7 @@ for evaluation in evaluations:
 
     sql="""UPDATE TwitchPlays.reward_log set displayID=%d where timeArrival between
     '%s' and '%s'+interval 2 minute and color='%s';"""%(displayID, startTime, startTime, color)
-    db.Execute_Update_Sql_Command(sql, err_msg="Falid to update: %d"%(displayID) )
+    db.execute_update_sql_command(sql, err_msg="Falid to update: %d" % (displayID))
 
     # print records
 

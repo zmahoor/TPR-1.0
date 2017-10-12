@@ -15,7 +15,7 @@ names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
 db = DATABASE()
 
 sql = """SELECT count(*) as count, type FROM robots where parentID!=0 group by type;"""
-robots = db.Execute_Select_Sql_Command(sql, ' ')
+robots = db.execute_select_sql_command(sql, ' ')
 
 robots = sorted(robots, key=lambda k: k['count']) 
 

@@ -15,7 +15,7 @@ class TABLE:
         
         self.USERS = 5
 
-    def Update(self, new, bottom):
+    def update(self, new, bottom):
         FONT_SIZE = 23
         # get size of newList that populates table (if not empty or None)
         try:
@@ -60,7 +60,8 @@ class TABLE:
 
             # draw name and score to the table
             if score is not None and name is not None:
-                if len(name) > 23: name = name[0:23]
+                if len(name) > 23:
+                    name = name[0:23]
                 window.Draw_Text(name, x=self.WIDTH*.15, y=top_rect + (.3*height_rect), fontSize=FONT_SIZE)
                 window.Draw_Text(str(int(score)), x=self.WIDTH*.7, y=top_rect + (.3*height_rect), fontSize=FONT_SIZE)
             top_rect = top_rect + height_rect

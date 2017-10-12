@@ -17,11 +17,11 @@ names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
 
 sql="""SELECT count(*) as count, type FROM TwitchPlays.display as d join TwitchPlays.robots as r
 on d.robotID=r.robotID where (numYes+numNo)>=2 group by r.type;"""
-robots_total = db.Execute_Select_Sql_Command(sql, ' ')
+robots_total = db.execute_select_sql_command(sql, ' ')
 
 sql="""SELECT count(*) as count, type FROM TwitchPlays.display as d join TwitchPlays.robots as r
 on d.robotID=r.robotID where (numYes>=1 and numNo>=1) group by r.type;"""
-robots_disagrees = db.Execute_Select_Sql_Command(sql, ' ')
+robots_disagrees = db.execute_select_sql_command(sql, ' ')
 
 prop = {}
 
@@ -56,13 +56,13 @@ sql  = "SELECT count(*) as count, cmdTxt FROM TwitchPlays.display where cmdTxt i
 sql += '('+ ",".join(["'"+k+"'" for k in commands]) + ')'
 sql += " and (numYes+numNo)>=2 group by cmdTxt;"
 print sql
-robots_total = db.Execute_Select_Sql_Command(sql, ' ')
+robots_total = db.execute_select_sql_command(sql, ' ')
 
 sql = "SELECT count(*) as count, cmdTxt FROM TwitchPlays.display where cmdTxt in "
 sql += '('+ ",".join(["'"+k+"'" for k in commands]) + ')'
 sql += " and (numYes>=1 and numNo>=1) group by cmdTxt;"
 print sql
-robots_disagrees = db.Execute_Select_Sql_Command(sql, ' ')
+robots_disagrees = db.execute_select_sql_command(sql, ' ')
 
 prop = {}
 
@@ -97,7 +97,7 @@ validRobots = ['1', '2', '3', '4' , 'quadruped', 'starfishbot', 'shinbot',
 sql="""SELECT sum(numYes) as sumYes, sum(numNo) as sumNo, type FROM 
 TwitchPlays.display as d join TwitchPlays.robots as r
 on d.robotID=r.robotID group by d.robotID having (sumYes+sumNo)>=2;"""
-robots = db.Execute_Select_Sql_Command(sql, ' ')
+robots = db.execute_select_sql_command(sql, ' ')
 
 opinion={}
 for robot in validRobots: opinion[robot]=[0, 0]
@@ -137,7 +137,7 @@ for cmd in commands:
 
     sql="""SELECT sum(numYes) as sumYes, sum(numNo) as sumNo FROM 
     TwitchPlays.display where cmdTxt='%s' group by robotID having (sumYes+sumNo)>=2;"""%(cmd)
-    robots = db.Execute_Select_Sql_Command(sql, ' ')
+    robots = db.execute_select_sql_command(sql, ' ')
 
     for robot in robots:
         opinion[cmd][0] += 1

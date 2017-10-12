@@ -13,28 +13,40 @@ class DATABASE:
         self.connect()
 
     def connect(self):
+        """
+
+        :return:
+        """
         try:
             self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
                 password=MYSQL_PASS, db=MYSQL_DB, connect_timeout=60)
-
             self.cursor = self.connection.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("SELECT VERSION()")
             data = self.cursor.fetchone()
-            print ("Database version : %s " % data)
-
+            print ("Database version : %s " %data)
         except Exception as e:
             print "Unable to connect to database...check your internet connection or the settings"
             print str(e)
             sys.exit()
 
     def close(self):
+        """
+
+        :return:
+        """
         try:
             self.connection.close()
             print 'closed the connection...'
         except:
-            print 'unabled to closed the connection...'
+            print 'Unable to close the connection...'
 
-    def Execute_Update_Sql_Command(self, sql_command, err_msg=""):
+    def execute_update_sql_command(self, sql_command, err_msg=""):
+        """
+
+        :param sql_command:
+        :param err_msg:
+        :return:
+        """
         try:
             self.cursor.execute(sql_command)
             self.connection.commit()
@@ -51,69 +63,91 @@ class DATABASE:
             print str(e)
             print (err_msg)
 
-    def Execute_Select_Sql_Command(self, sql_command, err_msg=""):
+    def execute_select_sql_command(self, sql_command, err_msg=""):
+        """
+
+        :param sql_command:
+        :param err_msg:
+        :return:
+        """
         results = None
         try:
             self.cursor.execute(sql_command)
             results = self.cursor.fetchall()
             self.connection.commit()
-
         except KeyboardInterrupt:
             self.close()
             sys.exit()
-
         except (pymysql.OperationalError, pymysql.InternalError), e:
             self.connect()
             print str(e)
-
         except pymysql.ProgrammingError, e:
             print str(e)
             print (err_msg)
         return results
 
-    def Execute_SelectOne_Sql_Command(self, sql_command, err_msg=""):
+    def execute_select_one_sql_command(self, sql_command, err_msg=""):
         results = None
         try:
             self.cursor.execute(sql_command)
             results = self.cursor.fetchone()
             self.connection.commit()
-
         except KeyboardInterrupt:
             self.close()
             sys.exit()
-
         except (pymysql.OperationalError, pymysql.InternalError), e:
             print(err_msg)
             print str(e)
             self.connect()
-
         except pymysql.ProgrammingError, e:
             print(err_msg)
             print str(e)
 
         return results
 
-    def Add_To_Chat_Table(self, username, current_time, msg):
+    def add_to_chat_table(self, username, current_time, msg):
+        """
+        Insert username, message and current time to the chat table.
+        :param username:
+        :param current_time:
+        :param msg:
+        :return:
+        """
         sql = """INSERT INTO chats(timeArrival, username, txt) VALUES
         ('%s', '%s', '%s');"""%(current_time, username, msg)
-
-        err_msg = "Failed to insert the chat message..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, "Failed to insert the chat message...")
     
-    def Add_To_Help_Table(self, user, txt, time):
+    def add_to_help_table(self, user, txt, time):
+        """
+
+        :param user:
+        :param txt:
+        :param time:
+        :return:
+        """
         sql = """INSERT INTO helps(txt, userName, timeArrival) 
         VALUES('%s','%s','%s');"""%(txt, user, time)
+        self.execute_update_sql_command(sql, "Failed to insert help request..")
 
-        err_msg = "Failed to insert help request.."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+    def add_to_user_table(self, username, time):
+        """
 
-    def Add_To_User_Table(self, username, time):
-
-        sql = """INSERT IGNORE INTO users(userName, timeAdded) VALUES('%s', '%s');"""%(username, time)
-        err_msg = "Fialed to insert a new user..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        :param username:
+        :param time:
+        :return:
+        """
+        sql = """INSERT IGNORE INTO users(userName, timeAdded)
+         VALUES('%s', '%s');"""%(username, time)
+        self.execute_update_sql_command(sql, "Failed to insert a new user...")
         
-    def Add_Reward_To_Display_Table(self, color, reward, arrivalTime):
+    def add_reward_to_display_table(self, color, reward, arrivalTime):
+        """
+
+        :param color:
+        :param reward:
+        :param arrivalTime:
+        :return:
+        """
         # if the startTime is beyond 2 minutes, discard this reward
         if reward == 'y':
             sql = """ UPDATE display set numYes=numYes+1 WHERE color='%s'
@@ -136,43 +170,65 @@ class DATABASE:
              ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
 
         else: return
+        self.execute_update_sql_command(sql,
+                                        "Failed to insert the reward into the display table...")
 
-        err_msg = "Failed to insert the reward into the display table..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+    def add_to_Reward_log_table(self, username, color, reward, arrivalTime):
+        """
 
-    def Add_To_RewardLog_Table(self, username, color, reward, arrivalTime):
+        :param username:
+        :param color:
+        :param reward:
+        :param arrivalTime:
+        :return:
+        """
         sql = """SELECT displayID from display WHERE color='%s' and '%s' BETWEEN startTime
              and startTime+INTERVAL 2 MINUTE ORDER BY startTime DESC LIMIT 1;"""%(color, arrivalTime)
+        result = self.execute_select_one_sql_command(sql, "Failed adding reward to log table.")
 
-        result = self.Execute_SelectOne_Sql_Command(sql, "Failed adding reward to log table.")
-
-        if result is None or result['displayID'] is None: displayID = -1
-        else: displayID = result['displayID']
-
+        if result is None or result['displayID'] is None:
+            displayID = -1
+        else:
+            displayID = result['displayID']
 
         sql = """INSERT INTO reward_log(userName, reward, color, timeArrival, displayID) VALUES
         ('%s', '%s', '%s', '%s', '%d');"""%(username, reward, color, arrivalTime, displayID)
+        self.execute_update_sql_command(sql, "Failed to log this reward...")
 
-        err_msg = "Failed to log this reward..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+    def add_to_command_log_table(self, username, command, time):
+        """
 
-    def Add_To_CommandLog_Table(self, username, command, time):
+        :param username:
+        :param command:
+        :param time:
+        :return:
+        """
 
         sql = """INSERT INTO command_log(userName, cmdTxt, timeArrival) VALUES
         ('%s', '%s', '%s');"""%(username, command, time)
-        self.Execute_Update_Sql_Command(sql, "Failed to log this command...")
+        self.execute_update_sql_command(sql, "Failed to log this command...")
 
-    def Add_To_Unique_Commands_Table(self, command, time, wordToVec, active=0):
+    def add_to_unique_commands_table(self, command, time, wordToVec, active=0):
+        """
 
+        :param command:
+        :param time:
+        :param wordToVec:
+        :param active:
+        :return:
+        """
         sql = """INSERT IGNORE INTO unique_commands(cmdTxt, timeAdded, 
             wordToVec, totalLearnability, active) VALUES
             ('%s', '%s', '%f', 0, '%d');"""%(command, time, wordToVec, active)
+        self.execute_update_sql_command(sql, "Failed to add this new command...")
 
-        err_msg = "Failed to add this new command..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+    def add_to_robot_table(self, robotType, parentID=0):
+        """
 
-    def Add_To_Robot_Table(self, robotType, parentID=0):
-
+        :param robotType:
+        :param parentID:
+        :return:
+        """
         robotID = 0
         birthDate = datetime.datetime.now()
         birthDate = birthDate.strftime("%Y-%m-%d %H:%M:%S")
@@ -190,39 +246,62 @@ class DATABASE:
 
         return robotID
 
-    def Add_Command_To_Display_Table(self, robotID, cmdTxt, color, startTime):
+    def add_command_to_display_table(self, robotID, cmdTxt, color, startTime):
+        """
 
+        :param robotID:
+        :param cmdTxt:
+        :param color:
+        :param startTime:
+        :return:
+        """
         startTime = startTime.strftime("%Y-%m-%d %H:%M:%S")
 
         sql = """INSERT INTO display(robotID, cmdTxt, color, startTime) VALUES
         ('%d','%s','%s', '%s');"""%(robotID, cmdTxt, color, startTime)
 
         err_msg = "Failed to insert a robot into the display table..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, err_msg)
 
         sql = "UPDATE robots SET numEvals=numEvals+1 WHERE robotID='%d';"%(robotID)
-        err_msg = "Failed to update number of evaluations for a robot..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, "Failed to update number of "
+                                             "evaluations for a robot...")
 
-    def Flush_Old_Unprocessed_Helps(self):
+    def flush_old_unprocessed_helps(self):
+        """
 
+        :return:
+        """
         sql = "UPDATE helps SET processed=1 WHERE processed=0;"
-        self.Execute_Update_Sql_Command(sql)
+        self.execute_update_sql_command(sql)
 
-    def Flush_Old_Unprocessed_Chats(self):
+    def flush_old_unprocessed_chats(self):
+        """
 
+        :return:
+        """
         sql = "UPDATE chats SET processed=1 WHERE processed=0;"
-        self.Execute_Update_Sql_Command(sql)
+        self.execute_update_sql_command(sql)
 
-    def Update_User_Parent(self, user, parent):
+    def update_user_parent(self, user, parent):
+        """
 
+        :param user:
+        :param parent:
+        :return:
+        """
         sql = """UPDATE users set parentName='%s' WHERE userName='%s' 
         and parentName is NULL;"""%(parent, user)
-        err_msg = "Failed to update the user's parent..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, "Failed to update the user's parent...")
 
-    def Update_Robot_Feedback(self, color, reward, arrivalTime):
+    def update_robot_feedback(self, color, reward, arrivalTime):
+        """
 
+        :param color:
+        :param reward:
+        :param arrivalTime:
+        :return:
+        """
         if reward == 'y':
             sql = """ UPDATE robots set sumYes=sumYes+1 WHERE 
             robotID = (SELECT robotID FROM display WHERE color='%s'
@@ -248,9 +327,7 @@ class DATABASE:
              ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
 
         else: return
-
-        err_msg = "Failed to update the robot's fittness..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, "Failed to update the robot's fitness...")
 
     # def Update_Total_Fitness(self, color, reward, arrivalTime):
     #     if reward == 'y':
@@ -288,13 +365,18 @@ class DATABASE:
     #     err_msg = "Failed to update the robot's fittness..."
     #     self.Execute_Update_Sql_Command(sql, err_msg)
 
-    def Update_Users_Score(self):
+    def update_users_score(self):
+        """
 
-        sql= """SELECT * from users;"""
+        :return:
+        """
+
+        sql = """SELECT * from users;"""
         err_msg = "Failed to fetch all usernames..."
-        records = self.Execute_Select_Sql_Command(sql, err_msg)
+        records = self.execute_select_sql_command(sql, err_msg)
 
-        if records is None: return
+        if records is None:
+            return
 
         for row in records:
             user = row['userName']
@@ -304,67 +386,71 @@ class DATABASE:
              userName = '%s') WHERE userName = '%s' ;""" %(user, user, user)
             
             err_msg = "Failed to update user's score..."
-            self.Execute_Update_Sql_Command(sql, err_msg)
+            self.execute_update_sql_command(sql, err_msg)
 
-    def Update_Commands_Score(self):
+    def update_commands_score(self):
+        """
 
+        :return:
+        """
         sql = """ SELECT cmdTxt, min(startTime) as firstTime, max(startTime) as lastTime
             from display group by cmdTxt;"""
         err_msg = "Faild to fetch command names..."
-        records = self.Execute_Select_Sql_Command(sql, err_msg)
+        records = self.execute_select_sql_command(sql, err_msg)
 
-        if records is None: return
+        if records is None:
+            return
 
         for row in records:
             # print row
             command = row['cmdTxt']
             start_time, last_time = row['firstTime'], row['lastTime']
             first_sum, second_sum = 0, 0
-            mid_time = start_time + (last_time - start_time)/2
+            mid_time = start_time + (last_time-start_time)/2
             # print mid_time
 
             sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as firstSum FROM 
                     display WHERE startTime <= '%s' and cmdTxt='%s';"""%(mid_time, command)
-            err_msg = "Faild to fetch command names"
-            result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
-
-            # print result
+            err_msg = "Failed to fetch command names"
+            result = self.execute_select_one_sql_command(sql, err_msg)
 
             if result['cmdTxt'] is not None:
                 first_sum = result['firstSum']
 
             sql = """SELECT cmdTxt, (sum(numYes)-sum(numNo)) as secondSum FROM
              display WHERE startTime > '%s' and cmdTxt='%s';"""%(mid_time, command)
-
-            result = self.Execute_SelectOne_Sql_Command(sql)
-            # print result
+            result = self.execute_select_one_sql_command(sql)
 
             if result['cmdTxt'] is not None:
                 second_sum = result['secondSum']
 
-            # print command ,first_sum-second_sum
-
             sql = """UPDATE unique_commands SET totalLearnability ='%f' WHERE 
                 cmdTxt ='%s';"""%(second_sum - first_sum, command)
-
             err_msg = "Failed to update command's learnability"
-            self.Execute_Update_Sql_Command(sql, err_msg)
-    
-    #update the robot with dead flag as 1--kill it--
-    def Kill_Robot(self, robotID):
+            self.execute_update_sql_command(sql, err_msg)
 
+    def kill_robot(self, robotID):
+        """
+        update the robot with dead flag as 1--kill it--
+        :param robotID:
+        :return:
+        """
         deathDate = datetime.datetime.now()
         deathDate = deathDate.strftime("%Y-%m-%d %H:%M:%S")
 
-        sql = """UPDATE robots set dead=1, deathDate='%s' WHERE robotID=%d;"""%(deathDate, robotID)
+        sql = """UPDATE robots set dead=1, deathDate='%s' WHERE 
+        robotID=%d;"""%(deathDate, robotID)
         err_msg = "Failed to kill the robot..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, err_msg)
 
-    def Get_New_Word_Vector(self):
+    def get_new_word_vector(self):
+        """
 
+        :return:
+        """
         sql="""SELECT wordToVec FROM unique_commands;"""
         err_msg = "unable to fetch user names"
-        results = self.Execute_Select_Sql_Command(sql, err_msg)
+        results = self.execute_select_sql_command(sql, err_msg)
 
         newIndex = 0
         if results is not None:
@@ -376,66 +462,92 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
-    def Minimum_Evaluation(self, currentCommand):
-        sql = """select count(*) as _count, d.robotID from TPR_Sept.display as d join TPR_Sept.robots as r 
-        on d.robotID=r.robotID where cmdTxt='%s' and dead=0 group by d.robotID order by _count ASC;""" %(currentCommand)
-        result = self.Execute_SelectOne_Sql_Command(sql, "Not able to fetch.")
+    def minimum_evaluation(self, currentCommand):
+        """
+
+        :param currentCommand:
+        :return:
+        """
+        sql = """select count(*) as _count, d.robotID from TPR_Sept.display as d
+         join TPR_Sept.robots as r on d.robotID=r.robotID where cmdTxt='%s' and 
+         dead=0 group by d.robotID order by _count ASC;""" %(currentCommand)
+        result = self.execute_select_one_sql_command(sql, "Not able to fetch.")
 
         if result is not None:
             return result['robotID']
         else:
             return -1
 
-    def Fetch_User_Feedback(self, username):
-        sql ="""select count(*) as num, reward as feedback_type from reward_log
+    def fetch_user_feedback(self, username):
+        """
+
+        :param username:
+        :return:
+        """
+        sql = """select count(*) as num, reward as feedback_type from reward_log
          where userName='%s' group by reward;"""%(username)
-        return self.Execute_Select_Sql_Command(sql, 'Failed fetching feedback info for a user.')
+        return self.execute_select_sql_command(sql,
+                                               'Failed fetching feedback info for a user.')
 
-    def Fetch_Robot_Information(self):
+    def fetch_robot_information(self):
+        """
 
-        sql="""SELECT d.robotID, d.cmdTxt, d.color, r.type, r.birthDate, r.parentID from display as d
+        :return:
+        """
+        sql = """SELECT d.robotID, d.cmdTxt, d.color, r.type, r.birthDate, r.parentID from display as d
          join robots as r ON d.robotID=r.robotID order by d.startTime desc limit 1;"""
-        result = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
 
-        if result is None: return None
+        if result is None:
+            return None
 
         robotID, cmdTxt, robotType = result['robotID'], result['cmdTxt'], result['type']
 
-        sql="""SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where
+        sql = """SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where
          robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
-        result1 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result1 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
 
         if result1 is not None:
             result.update(result1)
 
-        sql="""SELECT count(*) as numOfKind, type as robotType from robots where
+        sql = """SELECT count(*) as numOfKind, type as robotType from robots where
          type='%s' and dead=0;""" %(robotType)
-        result2 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result2 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
 
         if result2 is not None:
             result.update(result2)
 
-        sql="""SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay
+        sql = """SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay
          from display where robotID='%d' """ %(robotID)
-        result3 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result3 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
 
         if result3 is not None:
             result.update(result3)
 
-        sql="""SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from 
+        sql = """SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from 
         display where robotID='%d';""" %(robotID)
-        result4 = self.Execute_SelectOne_Sql_Command(sql, 'Failed fetching info for a robot')
+        result4 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
 
         if result4 is not None:
             result.update(result4)
 
         return result
 
-    def Fetch_For_Abuse_Bot(self):
-        sql = "select userName, cmdTxt from command_log where timeArrival>=NOW() - interval 24 hour;"
-        return self.Execute_Select_Sql_Command(sql, 'Unable fetching from the command log.')
+    def fetch_for_abuse_bot(self):
+        """
 
-    def Fetch_From_Disply_Table(self, condition='all'):
+        :return:
+        """
+        sql = """select userName, cmdTxt from command_log where 
+        timeArrival>=NOW() - interval 24 hour;"""
+        return self.execute_select_sql_command(sql, 'Unable fetching from the command log.')
+
+    def fetch_from_display_table(self, condition='all'):
+        """
+
+        :param condition:
+        :return:
+        """
         if condition == 'all':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, d.startTime
@@ -450,24 +562,33 @@ class DATABASE:
             WHERE d.numNo <> 0 or d.numYes <> 0;"""
 
         err_msg = "Failed to retrieve record of a dispaly..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    def Fetch_User_Score(self, user):
-        sql = "SELECT * FROM users WHERE userName='%s';"%(user)
+    def fetch_user_score(self, user):
+        """
+
+        :param user:
+        :return:
+        """
+        sql = "SELECT * FROM users WHERE userName='%s';"%user
         err_msg = "Failed to retrieve a user's score"
-        return self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        return self.execute_select_one_sql_command(sql, err_msg)
 
-    def Fetch_Top_Users(self, topn):
+    def fetch_top_users(self, topn):
+        """
 
+        :param topn:
+        :return:
+        """
         if topn == 'all':
             sql = """SELECT userName, score FROM users ORDER BY score DESC;"""
         else:
             sql = """SELECT userName, score FROM users ORDER BY score DESC LIMIT %d;""" %(topn)
 
         err_msg = "Failed to retrieve scores of top users..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    def Fetch_Top_Daily_Users(self, topn):
+    def fetch_top_daily_users(self, topn):
 
         current_time = datetime.datetime.now()
         current_time = current_time.strftime("%Y-%m-%d 00:00:00")
@@ -477,12 +598,15 @@ class DATABASE:
         ORDER BY score DESC LIMIT %d;"""%(current_time, current_time, topn)
 
         err_msg = "Failed to retrieve scores of top users..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    #return a list of all commands along with their scores and ranks
-    # that were typed (interval) seconds before the current time
-    def Fetch_Recent_Typed_Command(self, interval=10):
-
+    def fetch_recent_typed_command(self, interval=10):
+        """
+        return a list of all commands along with their scores and ranks
+        that were typed (interval) seconds before the current time
+        :param interval:
+        :return:
+        """
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
 
@@ -499,10 +623,14 @@ class DATABASE:
         BETWEEN '%s' and '%s';"""%(prev_time, current_time)
 
         err_msg = "Failed to retrieve the most recent typed command..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    def Fetch_Recent_Active_Users(self, interval=10):
+    def fetch_recent_active_users(self, interval=10):
+        """
 
+        :param interval:
+        :return:
+        """
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
 
@@ -520,72 +648,94 @@ class DATABASE:
         BETWEEN '%s' and '%s';"""%(prev_time, current_time)
 
         err_msg = "Failed to retrieve the most recent active users..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    #find all the robots with the dead flag as zero --alive--
-    def Fetch_Alive_Robots(self, robotType="all"):
 
-        if robotType== "all":
+    def fetch_alive_robots(self, robotType="all"):
+        """
+        find all the robots with the dead flag as zero --alive--
+        :param robotType:
+        :return:
+        """
+        if robotType == "all":
             sql = "SELECT * FROM robots WHERE dead=0;"
         else:
             sql = "SELECT * FROM robots WHERE dead=0 and type='%s';" %(robotType)
 
         err_msg = "Failed to retrieve alive robots..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    def Fetch_An_Unprocessed_Chat(self):
-        #find the oldest piece of unprocessed chat
+    def fetch_unprocessed_chat(self):
+        """
+        find the oldest piece of unprocessed chat
+        update the processed flag as 1 for that piece of chat
+        :return:
+        """
         sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
-        result = self.Execute_SelectOne_Sql_Command(sql)
+        result = self.execute_select_one_sql_command(sql)
 
         if result is not None:
             chatID = result['chatID']
-            #update the processed flag as 1 for that piece of chat
             sql = "UPDATE chats SET processed=1 WHERE chatID='%d';" %(chatID)
-            self.Execute_Update_Sql_Command(sql)
+            self.execute_update_sql_command(sql)
 
         return result
 
-    def Fetch_Oldest_Help(self):
+    def fetch_oldest_help(self):
+        """
 
+        :return:
+        """
         sql = "SELECT * FROM helps WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         err_msg = "Failed to fetch the oldest unprocessed help request..."
-        result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        result = self.execute_select_one_sql_command(sql, err_msg)
 
         if result is not None:
             helpID = result['helpID']
             sql = "UPDATE helps SET processed=1 WHERE helpID='%d';" %(helpID)
-            self.Execute_Update_Sql_Command(sql, err_msg)
+            self.execute_update_sql_command(sql, err_msg)
 
         return result
         
-    def First_Time_Contributer(self, username):
+    def first_time_contributer(self, username):
+        """
 
+        :param username:
+        :return:
+        """
         sql = """SELECT userName FROM reward_log where userName='%s' union 
         SELECT userName FROM command_log where userName='%s';""" %(username, username)
 
         err_msg = "Failed to fetch information about this user..."
-        result = self.Execute_Select_Sql_Command(sql, err_msg)
+        result = self.execute_select_sql_command(sql, err_msg)
 
         if result == (): 
             return True
         
         return False
 
-    def Tobe_Animated_In_Command_Window( self ):
+    def tobe_animated_in_command_window(self):
+        """
 
+        :return:
+        """
         sql = """SELECT userName, cmdTxt, timeArrival FROM command_log
         WHERE animationFlag=0;"""
 
         err_msg = "unable fetching the most recent type command"
-        result = self.Execute_Select_Sql_Command(sql, err_msg)
+        result = self.execute_select_sql_command(sql, err_msg)
 
         sql = """ UPDATE command_log SET animationFlag=1 WHERE animationFlag=0;"""
-        self.Execute_Update_Sql_Command(sql)
+        self.execute_update_sql_command(sql)
 
         return result
 
-    def Fetch_For_Command_Window(self, interval=10):
+    def fetch_for_command_window(self, interval=10):
+        """
+
+        :param interval:
+        :return:
+        """
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
 
@@ -594,13 +744,16 @@ class DATABASE:
 
         sql = """SELECT userName, cmdTxt, timeArrival FROM command_log
         WHERE timeArrival BETWEEN '%s' and '%s';""" %(prev_time, current_time)
-
         err_msg = "unable fetching the most recent type command"
 
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        return self.execute_select_sql_command(sql, err_msg)
 
-    def Fetch_Topn_Unique_Commands(self, topn):
+    def fetch_topn_unique_commands(self, topn):
+        """
 
+        :param topn:
+        :return:
+        """
         if topn == 'all':
             sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
             ORDER BY score;"""
@@ -608,45 +761,55 @@ class DATABASE:
             sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
             ORDER BY score DESC LIMIT %d;""" %topn
 
-        err_msg = "Failed to retrieve the topn unique commands..."
-        return self.Execute_Select_Sql_Command(sql, err_msg)
+        err_msg = "Failed to retrieve the top n unique commands..."
+        return self.execute_select_sql_command(sql, err_msg)
 
-    def Find_Most_Voted_Command(self):
-        #find the most popular command where processed=0
+    def find_most_voted_command(self):
+        """
+        find the most popular command where processed=0
+        change those commands as processed=1
+        :return:
+        """
         sql = """SELECT count(cmdLogID) as cmdCount, cmdTxt FROM command_log WHERE 
         processed =0 GROUP BY cmdTxt ORDER BY COUNT(cmdLogID) DESC LIMIT 1;"""
-
         err_msg = "Failed to fetch the most popular command..."
-        result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        result = self.execute_select_one_sql_command(sql, err_msg)
 
-        #change those commands as processed=1
-        sql = """ UPDATE command_log SET processed=1 WHERE processed =0;"""
-        self.Execute_Update_Sql_Command(sql)
+        sql = """ UPDATE command_log SET processed=1 WHERE processed=0;"""
+        self.execute_update_sql_command(sql)
 
         return result
 
-    def Set_Current_Command(self, currentCommand):
+    def set_current_command(self, currentCommand):
+        """
 
+        :param currentCommand:
+        :return:
+        """
         sql = """SELECT * from unique_commands where active=1;"""
         err_msg = "Failed to fetch the previous command..."
-        result = self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        result = self.execute_select_one_sql_command(sql, err_msg)
 
         prevCommand = ""
         if result is not None:
             prevCommand = result['cmdTxt']
 
-        if prevCommand == currentCommand : return 
+        if prevCommand == currentCommand:
+            return
 
-        sql= """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';""" %currentCommand
+        sql = """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';""" %currentCommand
         err_msg = "Failed to set the current command..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, err_msg)
 
         sql= """UPDATE unique_commands set active=0 WHERE cmdTxt='%s';""" %prevCommand
         err_msg = "Failed to usnset the previous command..."
-        self.Execute_Update_Sql_Command(sql, err_msg)
+        self.execute_update_sql_command(sql, err_msg)
 
-    def Get_Current_Command(self):
+    def get_current_command(self):
+        """
 
+        :return:
+        """
         sql = """SELECT * FROM unique_commands WHERE active=1;"""
         err_msg = "Failed to get the current command..."
-        return self.Execute_SelectOne_Sql_Command(sql, err_msg)
+        return self.execute_select_one_sql_command(sql, err_msg)

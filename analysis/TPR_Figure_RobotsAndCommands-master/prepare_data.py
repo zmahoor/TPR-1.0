@@ -71,8 +71,8 @@ for i in range( len(commands)+2 ):
 			FROM display as d join robots as r on d.robotID=r.robotID
 			where r.type='%s' and cmdTxt='%s';"""%(robot, command)
 
-		results = db.Execute_SelectOne_Sql_Command(sql, 
-				 err_msg="Failed executing the select.")
+		results = db.execute_select_one_sql_command(sql,
+                                                    err_msg="Failed executing the select.")
 
 		print robot, results
 		if results == None or (results['sumYes']==0 and results['sumNo']==0): 

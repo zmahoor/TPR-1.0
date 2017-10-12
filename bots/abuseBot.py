@@ -6,7 +6,7 @@ import datetime
 
 db = DATABASE()
 
-users = db.Fetch_For_Abuse_Bot()
+users = db.fetch_for_abuse_bot()
 
 if users is None:
     print 'No users to print...or something went wrong!' 

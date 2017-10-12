@@ -8,7 +8,7 @@ mydatabase = database.DATABASE()
 def main():
     while True:
         sleep(10.0)
-        mydatabase.Update_Users_Score()
-        mydatabase.Update_Commands_Score()
+        mydatabase.update_users_score()
+        mydatabase.update_commands_score()
 
 main()

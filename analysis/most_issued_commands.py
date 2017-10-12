@@ -10,7 +10,7 @@ mydatabase = DATABASE()
 
 sql = """select cmdTxt, count(*) as cmdCount from TwitchPlays.command_log  group 
 by cmdTxt order by cmdCount DESC LIMIT 20;"""
-records = mydatabase.Execute_Select_Sql_Command(sql , "failed all the information.")
+records = mydatabase.execute_select_sql_command(sql, "failed all the information.")
 
 fig, ax = plt.subplots(1,1) 
 y_pos   = np.arange(len(records), 0, -1)

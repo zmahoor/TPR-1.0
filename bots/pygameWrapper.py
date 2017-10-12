@@ -4,22 +4,21 @@ class PYGAMEWRAPPER:
                 
     def __init__(self, width=800, height=240, title="test", fontSize=17):
 
-        #initialize pygame modules
+        # initialize pygame modules
         pygame.init()
 
-        #set size
+        # set size
         size = width,height
         
         self.size = width, height
 
-        #set screen
+        # set screen
         self.screen = pygame.display.set_mode(size)
 
         pygame.display.set_caption(title)
-
         self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf", fontSize)
 
-        #define font to be used
+        # define font to be used
 
     def Draw_Text(self, textString, x=10, y=10, color='BLACK', bold=False,
                   underline=False, changeFont=False, fontSize=17):
@@ -29,11 +28,15 @@ class PYGAMEWRAPPER:
 
         self.myfont = pygame.font.Font("RobotoCondensed-Regular.ttf", fontSize)
 
-        if bold: self.myfont.set_bold(True)
-        else : self.myfont.set_bold(False)
+        if bold:
+            self.myfont.set_bold(True)
+        else:
+            self.myfont.set_bold(False)
 
-        if underline: self.myfont.set_underline(True)
-        else: self.myfont.set_underline(False)
+        if underline:
+            self.myfont.set_underline(True)
+        else:
+            self.myfont.set_underline(False)
 
         #set area for text to be drawn on
         label = self.myfont.render(textString, 1, col)
@@ -100,10 +103,10 @@ class PYGAMEWRAPPER:
 
         # get color
         if color in colors:
-                return colors.get(color)
+            return colors.get(color)
         # return BLACK if name is not found
         else:
-                return colors.get('BLACK')
+            return colors.get('BLACK')
         
 
     def Quit(self):

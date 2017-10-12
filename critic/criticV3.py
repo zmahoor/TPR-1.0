@@ -125,7 +125,7 @@ def Load_Training_Data(mydatabase):
     sql = """SELECT d.robotID, numYes, numNo, d.cmdTxt, startTime, cmdTxt from display as d JOIN
      robots as r ON d.robotID=r.robotID WHERE d.cmdTxt in """ + '(' + ",".join(["'"+c+"'" for c in _COMMAND]) + ')' + \
           " and r.type='%s' and (numYes+numNo)>0;"%_MORPHOLOGY
-    robots = mydatabase.Execute_Select_Sql_Command(sql, "Failed to retrieve record of a dispaly...")
+    robots = mydatabase.execute_select_sql_command(sql, "Failed to retrieve record of a dispaly...")
     print('Number of samples: ', len(robots), " Morphology: ", _MORPHOLOGY, "Command: ", _COMMAND)
 
     sensor_input, output = [], []

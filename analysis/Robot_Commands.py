@@ -17,7 +17,7 @@ names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot', 'quadr
 sql = """SELECT d.displayID, d.cmdTxt, ro.type, count(distinct reward) as reward_count, count(distinct userName) as user_count
 FROM TwitchPlays.display as d join TwitchPlays.reward_log as r on d.displayID=r.displayID 
 join TwitchPlays.robots  as ro on ro.robotID=d.robotID where r.reward='y' or r.reward='n' group by displayID;"""
-records = db.Execute_Select_Sql_Command(sql, ' ')
+records = db.execute_select_sql_command(sql, ' ')
 
 robot_disagreements, command_disagreements, robot_command_disagreements = Counter(), Counter(), Counter()
 robot_agreements, command_agreements, robot_command_agreements = Counter(), Counter(), Counter()

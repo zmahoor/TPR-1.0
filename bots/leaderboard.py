@@ -25,7 +25,7 @@ updateTimer = TIMER(UPDATE_PERIOD)
 # This function takes users who are recently active and
 # picks a random one to be displayed at the bottom of the table
 def get_NewUser():
-    recent_users = DB.Fetch_Recent_Active_Users(interval=10)
+    recent_users = DB.fetch_recent_active_users(interval=10)
     if recent_users is None: return None
 
     if len(recent_users)>0:
@@ -47,7 +47,7 @@ def Parse_Users(li):
 
 
 # newList = Parse_Users(DB.Fetch_Top_Users(10))  
-newList = Parse_Users(DB.Fetch_Top_Daily_Users(10))
+newList = Parse_Users(DB.fetch_top_daily_users(10))
 newUser = get_NewUser()
 print 'user', newUser
 
@@ -56,7 +56,7 @@ while True:
         if event.type == pygame.QUIT:
             WINDOW.Quit()
     WINDOW.Wipe()
-    table.Update(newList, newUser)
+    table.update(newList, newUser)
     
     WINDOW.Draw_Text('Username', x=WIDTH*0.15, y=15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
     WINDOW.Draw_Text('Rank', x=4, y=15+.5*HEIGHT/12.0, fontSize=FONT_SIZE)
@@ -68,7 +68,7 @@ while True:
 
     if updateTimer.Time_Elapsed():
         # newList = Parse_Users(DB.Fetch_Top_Users(10))
-        newList = Parse_Users(DB.Fetch_Top_Daily_Users(10))
+        newList = Parse_Users(DB.fetch_top_daily_users(10))
         newUser = get_NewUser()
         updateTimer.Reset()
         print 'user', newUser

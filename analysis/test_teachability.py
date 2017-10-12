@@ -34,7 +34,7 @@ for robot in validRobots:
         startTime between '2017-07-18 10:00:00' and 
         '2017-07-18 10:00:00'+interval %d day;"""%(robot, day)
 
-        record = mydatabase.Execute_SelectOne_Sql_Command(sql , "failed.")
+        record = mydatabase.execute_select_one_sql_command(sql, "failed.")
         if day == 1:
             dayOne[robot] = record['pro']
         if record['pro'] != None:
