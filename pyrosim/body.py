@@ -19,7 +19,7 @@ class BODY:
         self.Reset()
         self.color = np.random.random(3)
 
-    def Compute_Fitness(self,whatToMaximize):
+    def Compute_Fitness(self, whatToMaximize):
         if whatToMaximize == c.maximizeLight:
             return -self.Sum_Light()
 
@@ -66,10 +66,8 @@ class BODY:
         self.Add_Eyes()
 
     def Add_Eyes(self):
-        jointsCreated  = {}
-        objectsCreated = {}
-        jointsCreated[0] = self.numJoints
-        objectsCreated[0]= self.numObjects
+        jointsCreated  = {0: self.numJoints}
+        objectsCreated = {0: self.numObjects}
 
         midpoint = [self.root.x, self.root.y-c.headRadius, self.root.z]
 
@@ -132,14 +130,12 @@ class BODY:
 # --------------- Private methods -------------------------
 
     def Add_Joints(self):
-        jointsCreated = {}
-        jointsCreated[0] = 0
+        jointsCreated = {0: 0}
         self.root.Add_Joints(None,None,jointsCreated)
         self.numJoints = jointsCreated[0]
 
     def Add_Objects(self):
-        objectsCreated = {}
-        objectsCreated[0] = 0
+        objectsCreated = {0: 0}
         self.root.Add_Objects(None,objectsCreated)
         self.numObjects = objectsCreated[0]
 
@@ -149,8 +145,7 @@ class BODY:
         self.numSensors = len(self.sensorsCreated)
 
     def Assign_IDs(self):
-        ID = {}
-        ID[0] = 0
+        ID = {0: 0}
         self.root.Assign_IDs(ID)
 
     def Create_Mirror_Image(self):
@@ -164,16 +159,16 @@ class BODY:
         self.root.Find_Lowest_Point(lowestPoint, lowestDepth)
         # the lowest part is the head
         if lowestDepth[0] == 0:
-            self.root.Move( 0 , 0, -lowestPoint[0] + c.headRadius )
+            self.root.Move(0, 0, -lowestPoint[0] + c.headRadius)
         else:
-            self.root.Move( 0 , 0, -lowestPoint[0] + c.radius )
+            self.root.Move(0, 0, -lowestPoint[0] + c.radius)
 
     def Sum_Light(self):
         return self.root.Sum_Light()
 
     def Add_Head(self):
         self.root.object.current = self.root
-        self.root.object.child   = self.root.children[0]
-        self.root.object.parent  = None
+        self.root.object.child = self.root.children[0]
+        self.root.object.parent = None
         self.root.children[0].joint.r = self.root.children[1]
         self.root.children[1].joint.r = self.root.children[0]

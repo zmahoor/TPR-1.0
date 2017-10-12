@@ -39,7 +39,8 @@ MAX_POS_SAMPLES = 150
 _MORPHOLOGY = 'quadruped'
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
-names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot', 'quadruped':'quadruped', 'starfishbot':'starfishbot',
+names = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot', 'quadruped': 'quadruped',
+         'starfishbot':'starfishbot',
          'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot'}
 
 # fix random seed for reproducibility

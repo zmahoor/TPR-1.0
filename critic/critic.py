@@ -44,10 +44,10 @@ class CRITIC:
 
         sensor_input = Input(shape=(sequence_len, num_features), name='sensor_input')
 
-        lstm1    = LSTM(12, return_sequences=True)(sensor_input)
+        lstm1 = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
 
-        lstm2    = LSTM(12, return_sequences=False)(dropout1)
+        lstm2 = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
         
         word_input = Input(shape=(1,), name='word_input')
@@ -100,16 +100,15 @@ class CRITIC:
             print np.max(np.max(sensors, axis=1), axis=0)
 
             print np.min(wordToVec), np.max(wordToVec)
-
             print wordToVec.shape, sensors.shape, obedience.shape
 
             start_time = time.time()
 
             try:
                 self.model.fit({'sensor_input': sensors, 'word_input': wordToVec},
-                    {'output': obedience},
-                    epochs=self.params['epochs'], batch_size=self.params['batch_size'],
-                    validation_split=self.params['validation_split'], callbacks=[self.checkpointer])
+                                {'output': obedience},
+                                epochs=self.params['epochs'], batch_size=self.params['batch_size'],
+                                validation_split=self.params['validation_split'], callbacks=[self.checkpointer])
 
             except KeyboardInterrupt:
                 print 'Training duration (s) : ', time.time() - start_time
@@ -146,7 +145,7 @@ def Generate_Data(batch_size, mydatabase):
 
     print('Number of possible samples: ', len(records))
 
-    if records == () or records == None: 
+    if records == () or records is None:
         print 'No data was found for critic.' 
         exit()
 
@@ -158,14 +157,13 @@ def Generate_Data(batch_size, mydatabase):
     while True:
 
         for record in records:
-
             sensors = Load_Sensors_From_File(record)
-            if sensors == None: 
+            if sensors is None:
                 # print('Not able to load the sensor file.') 
                 continue
 
             features = Extract_Features( sensors )
-            if features == None: 
+            if features is None:
                 continue
 
             tfeatures  = features[0]
@@ -189,8 +187,8 @@ def Generate_Data(batch_size, mydatabase):
                 
                 print numSamples, len(sensor_input), len(word_input), len(output)
 
-                yield ({'sensor_input': np.array(sensor_input),\
-                       'word_input': np.array(word_input)},\
+                yield ({'sensor_input': np.array(sensor_input),
+                       'word_input': np.array(word_input)},
                        {'output': np.array(output)})
 
                 sensor_input = []
@@ -215,7 +213,7 @@ def Load_Training_Data(mydatabase):
     for record in records:
 
         sensors = Load_Sensors_From_File(record)
-        if sensors == None: 
+        if sensors is None:
             # print('Not able to load the sensor file.') 
             continue
 
@@ -273,7 +271,7 @@ def Propriceptive_Feature_Extraction(values):
 
     values = np.array(values).T
     temp   = np.diff(values, axis=0)
-    temp   = np.absolute(values)
+    temp   = np.absolute(temp)
     temp   = np.average(temp, axis=1)
     temp   = np.hstack((temp, np.array(temp[-1])))
 

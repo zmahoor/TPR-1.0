@@ -64,7 +64,7 @@ def Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest):
     for i in range(0, numBest):
         best = parents.Find_Best()
         if parents.p[best].fitness > 0:
-            print 'Killing the best: ' + str(best) + ' and replaching it with a random individual.'
+            print 'Killing the best: ' + str(best) + ' and replacing it with a random individual.'
             parents.p[best].Store_To_Diversity_Pool()
             parents.Kill_And_Replace( best )
 
@@ -79,23 +79,20 @@ def main(args):
     robotType = args.robot
     Fill_Diversity_Pool(robotType, tPeriod, popSize, numBest)
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Diversity pool using intenal novelty.')
-
     parser.add_argument('--robot', '-r', type=str, default='4',
-     help='Morphology types: {1,2,3,4,spherebot\
-        ,crabbot, quadruped, shinbot, snakebot}, default=1')
+                        help='Morphology types: {1,2,3,4,spherebot,crabbot,quadruped,shinbot,snakebot}, default=1')
 
     parser.add_argument('--pop_size', '-p', type=int, default=20, help=
-        'Size of populaiton, default=30.')
+                        'Size of populaiton, default=30.')
     
     parser.add_argument('--evolution_period', '-t', type=int, default=60, help=
-        'Experiment time in minutes, default=60.')
+                        'Experiment time in minutes, default=60.')
 
     parser.add_argument('--num_top_best', '-b', type=int, default=60, help=
-    'Top n robots will be stored., default=5.')
-
+                        'Top n robots will be stored., default=5.')
     args = parser.parse_args()
-
     main(args)
 

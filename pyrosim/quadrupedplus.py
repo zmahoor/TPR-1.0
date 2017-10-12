@@ -15,10 +15,10 @@ class ROBOT:
                            self.sensorsCreated)
 
     def Initialize_Body(self):
-        self.num_joints     = 0
-        self.num_objects    = 0
-        self.head_ID        = 0
-        self.num_sensors    = 0
+        self.num_joints = 0
+        self.num_objects = 0
+        self.head_ID = 0
+        self.num_sensors = 0
         self.num_motor_neurons = 8
         self.sensorsCreated = {}
         self.Add_Sensors()
@@ -28,18 +28,15 @@ class ROBOT:
         self.brain.Mutate()
         
     def Send_To_Simulator(self, sim, color, biasValues):
-        jointsCreated  = {}
-        objectsCreated = {}
-
         self.Send_Objects(sim, color)
         self.Send_Joints(sim)
 
-        jointsCreated[0] = self.num_joints
-        objectsCreated[0]= self.num_objects
+        jointsCreated = {0: self.num_joints}
+        objectsCreated = {0: self.num_objects}
 
-        self.eyes = EYES(self.head_ID, [0, -c.L, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
+        self.eyes = EYES(self.head_ID, [0, -c.L, 3*c.R+c.L], 0.015, [1, 0, 0], [0, -1, 0], 0.015)
         self.eyes.Create_Eyes(jointsCreated, objectsCreated)
-        self.num_joints  = jointsCreated[0]
+        self.num_joints = jointsCreated[0]
         self.num_objects = objectsCreated[0]
         self.eyes.Send_Eyes_To_Simulator(sim)
         self.Send_Sensors(sim)
@@ -114,40 +111,39 @@ class ROBOT:
                           r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-
     def Send_Joints(self, sim):
         self.num_joints = 0
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=1,
-                       n1=0, n2=0, n3=1, x=-c.L/2, y=c.L/2, z=c.L + c.R)
+                       n1=0, n2=0, n3=1, x=-c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
-        sim.Send_Joint(jointID=self.num_joints, firstObjectID=0 , secondObjectID=2,
-                        n1=0, n2=0 , n3=1, x=-c.L/2, y=-c.L/2, z=c.L + c.R)
+        sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=2,
+                       n1=0, n2=0, n3=1, x=-c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
-        sim.Send_Joint(jointID=self.num_joints, firstObjectID=0 , secondObjectID=3,
-                        n1=0, n2=0 , n3=1, x=c.L/2, y=c.L/2, z=c.L + c.R)
+        sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=3,
+                       n1=0, n2=0, n3=1, x=c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
-        sim.Send_Joint(jointID=self.num_joints, firstObjectID = 0 , secondObjectID=4,
-                        n1=0, n2=0, n3=1, x=c.L/2, y=-c.L/2, z=c.L + c.R)
+        sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=4,
+                       n1=0, n2=0, n3=1, x=c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         ############
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=1, secondObjectID=5,
-                        n1=0, n2=1, n3=0, x=-3*c.L/2, y=c.L/2, z=c.L + c.R)
+                       n1=0, n2=1, n3=0, x=-3*c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=2, secondObjectID=6,
-                        n1=0, n2=1 , n3 =0, x=-3*c.L/2, y=-c.L/2, z=c.L + c.R)
+                       n1=0, n2=1, n3 =0, x=-3*c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=3, secondObjectID=7,
-                        n1=1, n2=-1, n3=0, x=3*c.L/2, y=c.L/2, z=c.L + c.R)
+                       n1=1, n2=-1, n3=0, x=3*c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=4, secondObjectID=8,
-                       n1=1, n2=-1, n3 =0, x=3*c.L/2, y=-c.L/2, z=c.L + c.R)
+                       n1=1, n2=-1, n3=0, x=3*c.L/2, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
     def Add_Sensors(self):

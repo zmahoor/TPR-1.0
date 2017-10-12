@@ -15,10 +15,10 @@ class ROBOT:
                            self.sensorsCreated)
 
     def Initialize_Body(self):
-        self.num_joints     = 0
-        self.num_objects    = 0
-        self.head_ID        = 0
-        self.num_sensors    = 0
+        self.num_joints = 0
+        self.num_objects = 0
+        self.head_ID = 0
+        self.num_sensors = 0
         self.num_motor_neurons = 1
         self.sensorsCreated = {}
         self.Add_Sensors()
@@ -28,16 +28,13 @@ class ROBOT:
         self.brain.Mutate()
 
     def Send_To_Simulator(self, sim, color, biasValues):
-        jointsCreated  = {}
-        objectsCreated = {}
-
         self.Send_Objects(sim, color)
         self.Send_Joints(sim)
 
-        jointsCreated[0] = self.num_joints
-        objectsCreated[0]= self.num_objects
+        jointsCreated = {0: self.num_joints}
+        objectsCreated = {0: self.num_objects}
 
-        self.eyes = EYES(self.head_ID, [0, -c.L/4, 2*c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
+        self.eyes = EYES(self.head_ID, [0, -c.L/4, 2*c.L], 0.015, [1, 0, 0], [0, -1, 0], 0.015)
         self.eyes.Create_Eyes(jointsCreated, objectsCreated)
 
         self.num_joints = jointsCreated[0]
@@ -68,7 +65,7 @@ class ROBOT:
         self.num_objects += 1
 
     def Send_Joints(self, sim):
-        self.num_joints=0
+        self.num_joints = 0
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=1,
                        n1=0, n2=1, n3=0, x=0, y=0, z=c.L, lo=-c.PI/2, hi=c.PI/2)
         self.num_joints += 1
@@ -78,21 +75,17 @@ class ROBOT:
         self.num_joints += 1
 
     def Get_Raw_Sensors(self, sim):
-        self.raw_sensors = {}
-
-        self.raw_sensors['T0'] = copy.deepcopy(sim.Get_Sensor_Data(0, 0))
-        self.raw_sensors['P1'] = copy.deepcopy(sim.Get_Sensor_Data(1, 0))
-        self.raw_sensors['R0'] = copy.deepcopy(sim.Get_Sensor_Data(2, 0))
-
-        self.raw_sensors['P'+str(self.head_ID)+'_X'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 0))
-        self.raw_sensors['P'+str(self.head_ID)+'_Y'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 1))
-        self.raw_sensors['P'+str(self.head_ID)+'_Z'] = copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 2))
+        self.raw_sensors = {'T0': copy.deepcopy(sim.Get_Sensor_Data(0, 0)),
+                            'P1': copy.deepcopy(sim.Get_Sensor_Data(1, 0)),
+                            'R0': copy.deepcopy(sim.Get_Sensor_Data(2, 0)),
+                            'P' + str(self.head_ID) + '_X': copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 0)),
+                            'P' + str(self.head_ID) + '_Y': copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 1)),
+                            'P' + str(self.head_ID) + '_Z': copy.deepcopy(sim.Get_Sensor_Data(self.num_sensors-1, 2))}
 
     def Get_Head_Trajectory(self, sim):
         self.values = []
         for ind in range(0, 3):
             self.values.append(copy.deepcopy(sim.Get_Sensor_Data(4, ind)))
-
         return self.values
     
     def Add_Sensors(self):
