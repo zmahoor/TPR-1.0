@@ -8,10 +8,11 @@ import os
 import glob
 import argparse
 import time
-
+from collections import Counter
 from individual import INDIVIDUAL
 from timer import TIMER
 import constants as c
+import subprocess
 
 sys.path.append('../bots')
 
@@ -31,6 +32,30 @@ db = None
 injectionTimer = None
 removeInjected = False
 
+def adjust_windows():
+	script = '''tell application "System Events"
+    set position of first window of application process "simulator" to {1, 1}
+	end tell
+
+	set the_title to "TPR"
+	tell application "System Events"
+		repeat with p in (every process whose background only is false)
+			repeat with w in every window of p
+				if (name of w) contains the_title then
+					tell p
+						set frontmost to true
+						perform action "AXRaise" of w
+					end tell
+				end if
+			end repeat
+		end repeat
+	end tell'''
+
+	proc = subprocess.Popen(['osascript', '-'],
+	                        stdin=subprocess.PIPE,
+	                        stdout=subprocess.PIPE)
+	stdout_output = proc.communicate(script)[0]
+	print stdout_output
 
 def Store_Sensors_To_File(individual, currentTime):
     # get directory
@@ -49,7 +74,7 @@ def Store_Sensors_To_File(individual, currentTime):
 
 def Store_Controller_To_File(individual, robotType):
     # get directory
-    path = ".." + MAIN_PATH + "/controllers/"+ robotType
+    path = "../" + MAIN_PATH + "/controllers/"+ robotType
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -59,7 +84,7 @@ def Store_Controller_To_File(individual, robotType):
 
 
 def Load_Controller_From_File(robotID, robotType):
-    brainPath = "../" + MAIN_PATH + "controllers/" + robotType + "/robot_" + str(robotID) + ".dat"
+    brainPath = "../" + MAIN_PATH + "/controllers/" + robotType + "/robot_" + str(robotID) + ".dat"
     if not os.path.isfile(brainPath): 
         return None
     return Read_File(brainPath)
@@ -119,12 +144,19 @@ def Remove_File(filePath):
 
 
 def Select_Individual(pop):
-    print 'Select an individual to display...'
-    robotID = db.Minimum_Evaluation(currentCommand['cmdTxt'])
-    if robotID > 0 :
-        return next((item for item in pop if item['robotID'] == robotID), None)
+    counter1 = Counter([i['robotID'] for i in pop])
+    counter2 = db.count_evaluations_for_command(currentCommand['cmdTxt'])
+    # print counter1, counter2
+
+    if counter2 is not None:
+        temp = (counter1 + counter2).most_common()[-1]
+        robotID = temp[0]
     else:
-        return pop[np.random.randint(len(pop))]
+        temp = counter1.most_common()[-1]
+        robotID = temp[0]
+
+    print 'Select an individual to display...', robotID
+    return next((item for item in pop if item['robotID'] == robotID), None)
 
 
 def Compete_While_Waiting_For(pop, ignoreID):
@@ -162,13 +194,13 @@ def Compete_Based_On_Dominance(lh_individual, rh_individual):
     print "Loser is: ", loser['robotID']
     print "Killing the loser..."
 
-    db.Kill_Robot(loser['robotID'])
+    db.kill_robot(loser['robotID'])
 
     winnerIndividual = Load_Controller_From_File(winner['robotID'], winner['type'])
 
     if winnerIndividual is None:
         print 'Not able loading it from the file...Killing robot ', winner['robotID']
-        db.Kill_Robot(winner['robotID'])
+        db.kill_robot(winner['robotID'])
         print 'Replacing with a random one from the same type.'
         mutatedOne = INDIVIDUAL(0, winner['type'])
 
@@ -202,7 +234,7 @@ def Dominance(lh_individual, rh_individual):
 
 
 def Add_New_Robot(newIndividual, parentID=0):
-    robotID = db.Add_To_Robot_Table(newIndividual.robotType, parentID)
+    robotID = db.add_to_robot_table(newIndividual.robotType, parentID)
     print 'New robot added... type: ', newIndividual.robotType, ' and ID:',robotID, 'parentID: ', parentID
     newIndividual.Set_ID(robotID)
     Store_Controller_To_File(newIndividual, newIndividual.robotType)
@@ -232,7 +264,7 @@ def Steady_State():
 
     while True:
         print "Generation: ", generation
-        aliveIndividuals = db.Fetch_Alive_Robots("all")
+        aliveIndividuals = db.fetch_alive_robots("all")
         print "Num of alive individuals: ", len(aliveIndividuals)
 
         if len(aliveIndividuals) <= 2:
@@ -254,9 +286,9 @@ def Steady_State():
                 toBe_Injected = INDIVIDUAL(0, injectionType)
 
             robotID = Add_New_Robot(toBe_Injected)
-            db.Kill_Robot(min_Evaluated_Robot['robotID'])
+            db.kill_robot(min_Evaluated_Robot['robotID'])
 
-            aliveIndividuals = db.Fetch_Alive_Robots("all")
+            aliveIndividuals = db.fetch_alive_robots("all")
 
             toBe_Displayed = next((item for item in aliveIndividuals if item['robotID'] == robotID), None)
             if toBe_Displayed is None: continue
@@ -275,17 +307,17 @@ def Steady_State():
         
         if randomIndividual is None:
             print "Could not load robot ", robotID, " with type: ", robotType
-            db.Kill_Robot(robotID)
+            db.kill_robot(robotID)
             continue
 
-        tempCurrentCommand = db.Get_Current_Command()
+        tempCurrentCommand = db.get_current_command()
         if tempCurrentCommand is not None:
             currentCommand = tempCurrentCommand
 
         wordVector = c.NUM_BIAS_NEURONS*[1.0] + [currentCommand['wordToVec']]
         currentTime = datetime.datetime.now()
 
-        db.Add_Command_To_Display_Table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
+        db.add_command_to_display_table(robotID, currentCommand['cmdTxt'], currentColor[0], currentTime)
 
         print "Displaying robot: ", toBe_Displayed
         print "Displaying color: ", currentColor
@@ -295,7 +327,10 @@ def Steady_State():
         
         randomIndividual.Set_Color(currentColor)
         randomIndividual.Start_Evaluate(False, False, wordVector)
-        
+
+        time.sleep(0.01)
+        adjust_windows()
+
         Compete_While_Waiting_For(aliveIndividuals, robotID)
         randomIndividual.Wait_For_Me()
         Store_Sensors_To_File(randomIndividual, currentTime)
