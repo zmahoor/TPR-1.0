@@ -5,6 +5,7 @@ import datetime
 from settings import *
 import sys
 import numpy as np
+from collections import Counter
 
 
 class DATABASE:
@@ -462,21 +463,22 @@ class DATABASE:
             newIndex = 2*np.random.random()-1
         return newIndex
 
-    def minimum_evaluation(self, currentCommand):
+    def count_evaluations_for_command(self, currentCommand):
         """
 
         :param currentCommand:
         :return:
         """
-        sql = """select count(*) as _count, d.robotID from TPR_Sept.display as d
-         join TPR_Sept.robots as r on d.robotID=r.robotID where cmdTxt='%s' and 
-         dead=0 group by d.robotID order by _count ASC;""" %(currentCommand)
-        result = self.execute_select_one_sql_command(sql, "Not able to fetch.")
 
-        if result is not None:
-            return result['robotID']
-        else:
-            return -1
+        sql = """select d.robotID from TPR_Sept.display as d
+         join TPR_Sept.robots as r on d.robotID=r.robotID where cmdTxt='%s' and 
+         dead=0;""" %(currentCommand)
+        # print sql
+        result = self.execute_select_sql_command(sql, "Not able to fetch.")
+        # print result
+        if result is () or result is None:
+            return None
+        return Counter([i['robotID'] for i in result])
 
     def fetch_user_feedback(self, username):
         """

@@ -6,8 +6,8 @@ from twitch import Twitch
 t = Twitch()
 db = DATABASE()
 
-username = IDENT # Your twitch username. ALL LOWER CASE
-key = PASS # Key acquired from twitch.tv account page
+username = IDENT  # Your twitch username. ALL LOWER CASE
+key = PASS        # Key acquired from twitch.tv account page
 channel = CHANNEL
 port = PORT
 host = HOST
