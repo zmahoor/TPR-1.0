@@ -35,9 +35,9 @@ prop = sorted(prop.iteritems(), key=lambda (k,v): (v,k))
 
 print prop
 
-agreements    = [value for key, value in prop]
+agreements = [value for key, value in prop]
 disagreements = [1-value for key, value in prop] 
-labels        = [key for key, value in prop]
+labels = [key for key, value in prop]
 
 p1 = plt.bar(range(len(agreements)), agreements, color='b')
 p2 = plt.bar(range(len(agreements)), disagreements, color='r', bottom=agreements)
@@ -59,7 +59,7 @@ print sql
 robots_total = db.execute_select_sql_command(sql, ' ')
 
 sql = "SELECT count(*) as count, cmdTxt FROM TwitchPlays.display where cmdTxt in "
-sql += '('+ ",".join(["'"+k+"'" for k in commands]) + ')'
+sql += '(' + ",".join(["'"+k+"'" for k in commands]) + ')'
 sql += " and (numYes>=1 and numNo>=1) group by cmdTxt;"
 print sql
 robots_disagrees = db.execute_select_sql_command(sql, ' ')
@@ -75,9 +75,9 @@ for tot in robots_total:
 prop = sorted(prop.iteritems(), key=lambda (k,v): (v,k)) 
 print prop
 
-agreements    = [value for key, value in prop]
+agreements = [value for key, value in prop]
 disagreements = [1-value for key, value in prop] 
-labels        = [key for key, value in prop]
+labels = [key for key, value in prop]
 
 p1 = plt.bar(range(len(agreements)), agreements, color='b')
 p2 = plt.bar(range(len(agreements)), disagreements, color='r', bottom=agreements)
@@ -99,13 +99,13 @@ TwitchPlays.display as d join TwitchPlays.robots as r
 on d.robotID=r.robotID group by d.robotID having (sumYes+sumNo)>=2;"""
 robots = db.execute_select_sql_command(sql, ' ')
 
-opinion={}
+opinion = {}
 for robot in validRobots: opinion[robot]=[0, 0]
 agreements, disagreements, labels = [], [], []
 
 for robot in robots:
     opinion[robot['type']][0] += 1
-    if robot['sumYes']>=1 and robot['sumNo']>=1: opinion[robot['type']][1] += 1
+    if robot['sumYes'] >= 1 and robot['sumNo'] >= 1: opinion[robot['type']][1] += 1
 
 for key in opinion.keys():
     vals = opinion[key]
@@ -115,9 +115,9 @@ opinion = sorted(opinion.iteritems(), key=lambda (k,v): (v,k))
 
 print opinion
 
-agreements    = [value for key, value in opinion]
+agreements = [value for key, value in opinion]
 disagreements = [1-value for key, value in opinion] 
-labels        = [names[key] for key, value in opinion]
+labels = [names[key] for key, value in opinion]
 
 p1 = plt.bar(range(len(agreements)), agreements, color='b')
 p2 = plt.bar(range(len(agreements)), disagreements, color='r', bottom=agreements)
@@ -151,9 +151,9 @@ opinion = sorted(opinion.iteritems(), key=lambda (k,v): (v,k))
 
 print opinion
 
-agreements    = [value for key, value in opinion]
+agreements = [value for key, value in opinion]
 disagreements = [1-value for key, value in opinion] 
-labels        = [key for key, value in opinion]
+labels = [key for key, value in opinion]
 
 p1 = plt.bar(range(len(agreements)), agreements, color='b')
 p2 = plt.bar(range(len(agreements)), disagreements, color='r', bottom=agreements)

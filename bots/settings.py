@@ -8,8 +8,8 @@ CHANNEL = 'zmahoor'
 
 #mysql info
 MYSQL_HOST = '132.198.138.119'
-# MYSQL_DB   = 'TwitchPlays'
-MYSQL_DB = 'TPR_Sept'
+MYSQL_DB   = 'TwitchPlays'
+# MYSQL_DB = 'TPR_Sept'
 MYSQL_USER = 'root'
 MYSQL_PASS = 'twitchplaysrobotics2138'
 

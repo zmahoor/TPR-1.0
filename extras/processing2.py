@@ -31,7 +31,7 @@ for evaluation in evaluations:
 
     displayID = evaluation['displayID']
     startTime = evaluation['startTime']
-    color     = evaluation['color']
+    color = evaluation['color']
 
     # print startTime, color,
 
