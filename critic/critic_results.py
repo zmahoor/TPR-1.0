@@ -1,38 +1,36 @@
 import sys
+import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy import misc
 from scipy.stats.stats import ttest_ind
 
 filename1 = 'critic_results_regular'
 filename2 = 'critic_results_permuted'
 
 
-def stars(p):
-   if p < 0.0001:
-       return "****"
-   elif p < 0.001:
-       return "***"
-   elif p < 0.01:
-       return "**"
-   elif p < 0.05:
-       return "*"
-   else:
-       return "-"
+def stars(p, m=16):
+    p *= misc.comb(m, 2)  # with Bonferroni adjustment for multiple comparisons
+    if p < 0.001:
+        return "***"
+    elif p < 0.01:
+        return "**"
+    elif p < 0.05:
+        return "*"
+    else:
+        return "n.s."
 
 
-regular = pd.read_csv("/Users/zahra/TPR-1.0/critic/"+filename1+".csv", index_col=0).transpose()
-permuted = pd.read_csv("/Users/zahra/TPR-1.0/critic/"+filename2+".csv", index_col=0).transpose()
+regular = pd.read_csv("/Users/twitchplaysrobotics/TPR-1.0/critic/"+filename1+".csv", index_col=0).transpose()
+permuted = pd.read_csv("/Users/twitchplaysrobotics/TPR-1.0/critic/"+filename2+".csv", index_col=0).transpose()
 
 regular_mean, regular_std = regular.mean(), regular.std()
+regular_std = 2.575*(regular_std/(30**0.5))  # 99% CI bounds
 permuted_mean, permuted_std = permuted.mean(), permuted.std()
+permuted_std = 2.575*(permuted_std/(30**0.5))
+regular_permuted_p_value = ttest_ind(regular, permuted, equal_var=False)
 
-print permuted
-print permuted_mean
-print permuted_std
-
-regular_permuted_p_value = ttest_ind(regular, permuted)
-
-fig, ax = plt.subplots(figsize=(8,6))
+fig, ax = plt.subplots(figsize=(8, 6))
 
 x = []
 for _ in range(len(regular.columns)):
@@ -52,9 +50,32 @@ for key in regular:
 
     ax.annotate("", xy=(x[i], y_max), xycoords='data', xytext=(x[i+1], y_max), textcoords='data',
                 arrowprops=dict(arrowstyle="-", connectionstyle="bar,fraction=0.3"))
-    ax.text(x[i]+0.02, y_max+.01, stars(ttest_ind(regular[key], permuted[key])[1]*2), horizontalalignment='center',
-            verticalalignment='center')
+
+    # print key, ttest_ind(regular[key], permuted[key], equal_var=False)
+
+    ax.text(x[i]+0.02, y_max+.02, stars(ttest_ind(regular[key], permuted[key], equal_var=False)[1]),
+            horizontalalignment='center', verticalalignment='center')
     i += 2
+
+
+i = 0
+best_one = 'tablebot'
+for key in regular:
+
+   if key == best_one: continue
+
+   print key, ttest_ind(regular[key], regular[best_one], equal_var=False)[1], \
+       stars(ttest_ind(regular[key], regular[best_one], equal_var=False)[1])
+
+   # y_min = min(regular_mean[key] - regular_std[key], regular_mean['starfishbot'] - regular_std['starfishbot'])
+   #
+   # ax.annotate("", xy=(x[i+1], y_min), xycoords='data', xytext=(x[11], y_min), textcoords='data',
+   #             arrowprops=dict(arrowstyle="-", connectionstyle="bar,fraction=0.3"))
+   #
+   # ax.text(x[i+1] + 0.02, y_min + .02, stars(ttest_ind(regular[key], regular['starfishbot'], equal_var=False)[1]),
+   #         horizontalalignment='center', verticalalignment='center')
+
+   i += 2
 
 ax.set_ylabel("Mean Absolute Error")
 ax.set_xticks(x)
@@ -63,5 +84,5 @@ ax.set_title("Mean Error of Predictive Model Across 30 Trials for each Species")
 ax.legend((points[0], points[1]), ("Experiment", "Permuted Control"), loc=0,  numpoints=1, fontsize=14)
 plt.xlim((x[0] - .1, x[len(x) - 1] + .1))
 plt.ylim((.05, .7))
-plt.savefig(filename1+'.eps', format='eps', dpi=900)
-# plt.show()
+plt.savefig(filename1+'.jpg', format='jpg', dpi=900)
+plt.show()

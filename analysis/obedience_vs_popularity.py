@@ -1,15 +1,21 @@
+''''
+Author: Zahra Mahoor
+Plot obedience vs popularity for every robots of different species.
+obedience = (Yes - No)/(Yes + No)
+Popularity = (Like - Dislike)/(Like + Dislike)
+'''
+
 import sys
 import numpy as np
 sys.path.append('../bots')
-
 from database import DATABASE
 import matplotlib.pyplot as plt
 
 names = {'1':'stickbot', '2': 'twigbot', '3':'branchbot', '4': 'treebot',
-    'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot', 
-    'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot', 
-    'snakeplusbot':'snakebot+', 'humanoid': 'humanoid', 'crabplusbot':'crabbot+',
-     'quadrupedplus':'quadruped+'}
+        'quadruped':'quadruped', 'starfishbot':'starfishbot', 'spherebot':'spherebot',
+        'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot',
+        'snakeplusbot':'snakebot+', 'humanoid': 'humanoid', 'crabplusbot':'crabbot+',
+         'quadrupedplus':'quadruped+'}
 
 db = DATABASE()
 
@@ -46,7 +52,6 @@ db = DATABASE()
 #     on r.robotID=d.robotID group by r.type;"""
 #
 # records = db.Execute_Select_Sql_Command(sql, "Faild to fetch")
-#
 # if records == None: exit()
 #
 # for row in records:
@@ -119,7 +124,8 @@ for key, val in names.items():
     result = db.execute_select_sql_command(sql, "Failed to fetch")
 
     x = [(r['sumYes']-r['sumNo'])/float(r['sumYes']+r['sumNo']) if (r['sumYes']+r['sumNo']) > 0 else 0 for r in result]
-    y = [(r['sumLike']-r['sumDislike'])/float(r['sumLike']+r['sumDislike']) if (r['sumLike']+r['sumDislike']) > 0 else 0 for r in result]
+    y = [(r['sumLike']-r['sumDislike'])/float(r['sumLike']+r['sumDislike']) if (r['sumLike']+r['sumDislike']) > 0
+         else 0 for r in result]
 
     fig, ax = plt.subplots(1, 1)
     ax.plot(x, y, 'o', color='green', alpha=0.5, markersize=10)
@@ -128,4 +134,5 @@ for key, val in names.items():
     plt.ylabel('Popularity', fontsize=14)
     plt.xlim((-1.5, +1.5))
     plt.ylim((-1.5, +1.5))
-    plt.show()
+    plt.savefig('../graghs/'+key+'_obedience_vs_popularity.jpg', format='jpg', dpi=900)
+    # plt.show()
