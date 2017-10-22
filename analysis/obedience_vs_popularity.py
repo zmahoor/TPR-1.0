@@ -7,6 +7,8 @@ Popularity = (Like - Dislike)/(Like + Dislike)
 
 import sys
 import numpy as np
+import seaborn as sns
+sns.set(color_codes=True)
 sys.path.append('../bots')
 from database import DATABASE
 import matplotlib.pyplot as plt
@@ -123,16 +125,12 @@ for key, val in names.items():
     sql = """select * from robots where type='%s'"""%key
     result = db.execute_select_sql_command(sql, "Failed to fetch")
 
-    x = [(r['sumYes']-r['sumNo'])/float(r['sumYes']+r['sumNo']) if (r['sumYes']+r['sumNo']) > 0 else 0 for r in result]
-    y = [(r['sumLike']-r['sumDislike'])/float(r['sumLike']+r['sumDislike']) if (r['sumLike']+r['sumDislike']) > 0
-         else 0 for r in result]
-
-    fig, ax = plt.subplots(1, 1)
-    ax.plot(x, y, 'o', color='green', alpha=0.5, markersize=10)
-    plt.title('Popularity vs. Obedience of %s'%val, fontsize=14)
-    plt.xlabel('Obedience', fontsize=14)
-    plt.ylabel('Popularity', fontsize=14)
-    plt.xlim((-1.5, +1.5))
-    plt.ylim((-1.5, +1.5))
-    plt.savefig('../graghs/'+key+'_obedience_vs_popularity.jpg', format='jpg', dpi=900)
-    # plt.show()
+    x = np.array([(r['sumYes']-r['sumNo'])/float(r['sumYes']+r['sumNo']) if (r['sumYes']+r['sumNo']) > 0
+                  else 0 for r in result])
+    y = np.array([(r['sumLike']-r['sumDislike'])/float(r['sumLike']+r['sumDislike']) if
+                  (r['sumLike']+r['sumDislike']) > 0 else 0 for r in result])
+    sns.plt.figure()
+    ax = sns.regplot(x=x, y=y, color="g")
+    ax.set(xlabel="Obedience", ylabel="Popularity")
+    ax.set_title('Popularity vs. Obedience of %s'%val)
+    sns.plt.savefig(key+'_obedience_vs_popularity.png', dpi=900)
