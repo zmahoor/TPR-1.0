@@ -95,7 +95,7 @@ for t in ax.xaxis.get_major_ticks():
 for t in ax.yaxis.get_major_ticks():
     t.tick1On = False
     t.tick2On = False
-plt.savefig('disagreements_species_vs_commands.jpg', format='jpg', dpi=900)
+plt.savefig('disagreements_species_vs_commands.jpg', format='jpg', dpi=400)
 # plt.show()
 ########################################################################################################################
 #plot disagreements/agreements vs species
@@ -114,7 +114,7 @@ plt.ylabel('Percentage', fontsize=14)
 plt.title('Species vs. Agreements/Disagreements')
 plt.xticks(np.arange(0.5, len(agr_list)+0.5, 1.0), labels)
 plt.legend((p1[0], p2[0]), ('Agreements', 'Disagreements'))
-plt.savefig('disagreements_species.jpg', format='jpg', dpi=900)
+plt.savefig('disagreements_species.jpg', format='jpg', dpi=400)
 # plt.show()
 
 ########################################################################################################################
@@ -133,7 +133,7 @@ plt.ylabel('Percentage', fontsize=14)
 plt.title('Commands vs. Agreements/Disagreements')
 plt.xticks(np.arange(0.5, len(agr_list)+0.5, 1.0), labels)
 plt.legend((p1[0], p2[0]), ('Agreements', 'Disagreements'))
-plt.savefig('disagreements_commands.jpg', format='jpg', dpi=900)
+plt.savefig('disagreements_commands.jpg', format='jpg', dpi=400)
 # plt.show()
 
 ########################################################################################################################
