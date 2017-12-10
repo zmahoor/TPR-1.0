@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../pyrosim')
 from pyrosim import PYROSIM
 import numpy as np
 import constants as c

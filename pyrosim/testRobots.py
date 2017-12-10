@@ -1,21 +1,8 @@
 import numpy as np
-from pyrosim import PYROSIM
-import random
-
-from snakebot import ROBOT as SNB
-from quadruped import ROBOT as QB
-from shinbot import ROBOT as SHB
-from treebot import ROBOT as TB
-from starfishbot import ROBOT as SFB
-from crabbot import ROBOT as CB
-from spherebot import ROBOT as SPB
-from snakeplusbot import ROBOT as SNPB
-from humanoid import ROBOT as HB
-from frogbot import ROBOT as FB
-from quadrupedplus import ROBOT as QPB
-from crabplusbot import ROBOT as CPB
 
 import constants as c
+from pyrosim import PYROSIM
+from quadrupedplus import ROBOT as QPB
 
 color = np.random.random(3)
 
