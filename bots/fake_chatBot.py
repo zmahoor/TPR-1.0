@@ -1,3 +1,6 @@
+"""
+a bot mimics chat bot and records predefined commands, rewards, and help requests under random usernames.
+"""
 from settings import *
 from time import *
 from database import DATABASE
@@ -19,12 +22,13 @@ def rewardSignals():
                 [p+"l" for p in validPrefix()]+[p+"d" for p in validPrefix()]
     return validRS
 
+
 REWARDS = rewardSignals()
 CMDS = ['!walk very fast then jump', '!walk back then forward', '!crawl', '!jump',
         '!walk', '!run away', '!break free', '!stay still', '!move', '!help',
         '!walk forward', 'walk fast forward' , '!dance dance', '!dance', '!move forward', '!walkkk']
 
-HELPS = ['?' , '?rewards', '?commands', '?myscore', '?scores', '?robots', '?votes', '?project']
+HELPS = ['?', '?rewards', '?commands', '?myscore', '?scores', '?robots', '?votes', '?project']
 EXTRA = ['helloO %$##', 'WHat is this?', 'DROP TABLE', 'SQL DELETE Rows']
 
 DATA = REWARDS + CMDS + HELPS + EXTRA
@@ -34,14 +38,14 @@ USERS = ['zmahoor', 'jfelag', 'doctorjoshuvm', 'tpr_bot1', 'ccappelle',
         'krystalleger', 'sijmen']
 
 
-#The main loop
+# The main loop
 while True:
     dindex = np.random.randint(len(DATA))
     uindex = np.random.randint(len(USERS))
     message = {'message': DATA[dindex], 'username': USERS[uindex]}   
     sleep(1.0)
     try:
-        #Get info from message.
+        # Get info from message.
         msg = str(message['message'].lower().replace("'", ''))
         username = str(message['username'].lower())
 
@@ -53,4 +57,4 @@ while True:
     except Exception as e:
         print str(e)
         print("something went wrong. Unable inserting this message.")
-        #end if not in filtered users
+        # end if not in filtered users

@@ -1,6 +1,9 @@
-#Code used and modified with permission from author from http://pastebin.com/MDC0RZDp.
-#Original author: Frederik Witte http://www.wituz.com/
-#Code acquired on 9/02/2015
+"""
+twitch class
+"""
+# Code used and modified with permission from author from http://pastebin.com/MDC0RZDp.
+# Original author: Frederik Witte http://www.wituz.com/
+# Code acquired on 9/02/2015
 
 import socket
 import sys
@@ -22,6 +25,15 @@ class Twitch:
         self.sock = None
 
     def connect(self, user, key, channel, host, port):
+        """
+        connect to a twitch channel
+        :param user: string
+        :param key: string
+        :param channel: string
+        :param host: string
+        :param port: int
+        :return:
+        """
         self.user = user
         self.oauth = key
 
@@ -50,6 +62,10 @@ class Twitch:
         self.join_room()
 
     def join_room(self):
+        """
+        joins a channel
+        :return: none
+        """
         readbuffer = ""
         loading = True
 
@@ -71,14 +87,28 @@ class Twitch:
         self.send_message("Joined chat...")
 
     def loading_complete(self, line):
-        if("End of /NAMES list" in line): return False
-        else: return True
+        """
+        return true if the loading is done
+        :param line: string
+        :return: bool
+        """
+        if("End of /NAMES list" in line):
+            return False
+        else:
+            return True
     
     def login_status(self, line):
-        if ("Login authentication failed" in line): return True
-        else: return False
+        if ("Login authentication failed" in line):
+            return True
+        else:
+            return False
 
     def send_message(self, message):
+        """
+        sends a message to the connected twitch channel
+        :param message: string
+        :return: none
+        """
         messageTemp = "PRIVMSG #" + self.channel + " :" + message.rstrip()
         # print messageTemp
         try:
@@ -90,10 +120,9 @@ class Twitch:
             sent = None
         return sent
 
-
     def pong(self):
         """
-        To send a pong message every 5 minutes.
+        create a thread to send a pong message to the twitch server every 5 minutes.
         """
         try:
             self.sock.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
@@ -112,9 +141,9 @@ class Twitch:
 
     def is_ping_message(self, data):
         """
-        If the incoming message is ping, then send a pong.
+        if the incoming message is ping, then send a pong back to the twitch server.
         :param data:
-        :return:
+        :return: bool
         """
         if "PING :tmi.twitch.tv\r" in data:
             print('recieved ping...', ' sending pong...')
@@ -124,6 +153,11 @@ class Twitch:
             return False
 
     def recieve_messages(self, amount=512):
+        """
+        receives a message of a given size from a twitch channel
+        :param amount: int
+        :return: list[string]
+        """
         # data = None
         data = self.sock.recv(amount)
 
@@ -142,7 +176,6 @@ class Twitch:
 
         if self.check_has_message(data):
             return [self.parse_message(line) for line in filter(None, data.split('\r\n'))] 
-
 
     def check_has_message(self, data):
         return re.match(r'^:[a-zA-Z0-9_]+\![a-zA-Z0-9_]+@[a-zA-Z0-9_]+(\.tmi\.twitch\.tv) PRIVMSG #[a-zA-Z0-9_]+ :.+$',

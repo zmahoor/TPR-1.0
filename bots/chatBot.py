@@ -1,3 +1,6 @@
+"""
+this bot listens to a twitch channel and records any incoming messages to a database.
+"""
 from settings import *
 from time import *
 from database import DATABASE

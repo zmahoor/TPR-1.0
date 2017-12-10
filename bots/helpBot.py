@@ -1,7 +1,6 @@
-'''
-This bot picks an unprocessed help message from database and sends a response.
-
-'''
+"""
+This bot picks an unprocessed help message from the database and sends a response to the user in the chat session
+"""
 
 import string
 import pymysql

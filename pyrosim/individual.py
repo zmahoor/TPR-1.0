@@ -1,24 +1,25 @@
-import numpy as np
-from pyrosim import PYROSIM
-import random
-import math
-import pickle
-import constants as c
-import os
 import datetime
+import os
+import pickle
+import random
 
+import numpy as np
+
+import constants as c
+from crabbot import ROBOT as CB
+from crabplusbot import ROBOT as CPB
+from extras.frogbot import ROBOT as FB
+from humanoid import ROBOT as HB
+from pyrosim import PYROSIM
+from quadruped import ROBOT as QB
+from quadrupedplus import ROBOT as QPB
+from shinbot import ROBOT as SHB
 from snakebot import ROBOT as SNB
 from snakeplusbot import ROBOT as SNPB
-from quadruped import ROBOT as QB
-from shinbot import ROBOT as SHB
-from treebot import ROBOT as TB
-from starfishbot import ROBOT as SFB
-from crabbot import ROBOT as CB
 from spherebot import ROBOT as SPB
-from humanoid import ROBOT as HB
-from frogbot import ROBOT as FB
-from quadrupedplus import ROBOT as QPB
-from crabplusbot import ROBOT as CPB
+from starfishbot import ROBOT as SFB
+from treebot import ROBOT as TB
+
 
 class INDIVIDUAL:
 

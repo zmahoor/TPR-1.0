@@ -1,3 +1,6 @@
+"""
+this bot reads all rows from the chat table and place them into their right tables.
+"""
 from settings import *
 import database
 import re
