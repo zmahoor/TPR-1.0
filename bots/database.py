@@ -15,12 +15,12 @@ class DATABASE:
 
     def connect(self):
         """
-
+        connect to the mysql db
         :return:
         """
         try:
             self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
-                password=MYSQL_PASS, db=MYSQL_DB, connect_timeout=60)
+                                                password=MYSQL_PASS, db=MYSQL_DB, connect_timeout=60)
             self.cursor = self.connection.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("SELECT VERSION()")
             data = self.cursor.fetchone()
@@ -32,7 +32,7 @@ class DATABASE:
 
     def close(self):
         """
-
+        close the connection to mysql db
         :return:
         """
         try:
@@ -43,10 +43,10 @@ class DATABASE:
 
     def execute_update_sql_command(self, sql_command, err_msg=""):
         """
-
-        :param sql_command:
-        :param err_msg:
-        :return:
+        execute an update sql command and display an error
+        :param sql_command: string
+        :param err_msg: string
+        :return: results
         """
         try:
             self.cursor.execute(sql_command)
@@ -66,10 +66,10 @@ class DATABASE:
 
     def execute_select_sql_command(self, sql_command, err_msg=""):
         """
-
-        :param sql_command:
-        :param err_msg:
-        :return:
+        execute a select sql command
+        :param sql_command: string
+        :param err_msg: string
+        :return: list of dictionaries
         """
         results = None
         try:
@@ -88,6 +88,12 @@ class DATABASE:
         return results
 
     def execute_select_one_sql_command(self, sql_command, err_msg=""):
+        """
+           execute a select sql command
+           :param sql_command: string
+           :param err_msg: string
+           :return: dictionary
+        """
         results = None
         try:
             self.cursor.execute(sql_command)
@@ -109,45 +115,42 @@ class DATABASE:
     def add_to_chat_table(self, username, current_time, msg):
         """
         Insert username, message and current time to the chat table.
-        :param username:
-        :param current_time:
-        :param msg:
-        :return:
+        :param username: string
+        :param current_time: datetime
+        :param msg: string
+        :return: none
         """
-        sql = """INSERT INTO chats(timeArrival, username, txt) VALUES
-        ('%s', '%s', '%s');"""%(current_time, username, msg)
+        sql = """INSERT INTO chats(timeArrival, username, txt) VALUES ('%s', '%s', '%s');"""%(current_time, username, msg)
         self.execute_update_sql_command(sql, "Failed to insert the chat message...")
     
     def add_to_help_table(self, user, txt, time):
         """
-
-        :param user:
-        :param txt:
-        :param time:
-        :return:
+        insert user, txt and time to the help table.
+        :param user: string
+        :param txt: string
+        :param time: datetime
+        :return: none
         """
-        sql = """INSERT INTO helps(txt, userName, timeArrival) 
-        VALUES('%s','%s','%s');"""%(txt, user, time)
+        sql = """INSERT INTO helps(txt, userName, timeArrival) VALUES('%s','%s','%s');"""%(txt, user, time)
         self.execute_update_sql_command(sql, "Failed to insert help request..")
 
     def add_to_user_table(self, username, time):
         """
-
-        :param username:
-        :param time:
-        :return:
+        insert user, and time to the user table.
+        :param username: string
+        :param time: string
+        :return: none
         """
-        sql = """INSERT IGNORE INTO users(userName, timeAdded)
-         VALUES('%s', '%s');"""%(username, time)
+        sql = """INSERT IGNORE INTO users(userName, timeAdded) VALUES('%s', '%s');""" %(username, time)
         self.execute_update_sql_command(sql, "Failed to insert a new user...")
         
     def add_reward_to_display_table(self, color, reward, arrivalTime):
         """
-
-        :param color:
-        :param reward:
-        :param arrivalTime:
-        :return:
+        insert reward, color and time to the display table
+        :param color: string
+        :param reward: string
+        :param arrivalTime: datetime
+        :return: none
         """
         # if the startTime is beyond 2 minutes, discard this reward
         if reward == 'y':
@@ -176,11 +179,11 @@ class DATABASE:
 
     def add_to_Reward_log_table(self, username, color, reward, arrivalTime):
         """
-
-        :param username:
-        :param color:
-        :param reward:
-        :param arrivalTime:
+        insert username, color, reward and time to the reward_log table.
+        :param username: string
+        :param color: string
+        :param reward: string
+        :param arrivalTime: datetime
         :return:
         """
         sql = """SELECT displayID from display WHERE color='%s' and '%s' BETWEEN startTime
@@ -198,11 +201,11 @@ class DATABASE:
 
     def add_to_command_log_table(self, username, command, time):
         """
-
-        :param username:
-        :param command:
-        :param time:
-        :return:
+        insert username, command, and time to the command_log table
+        :param username: string
+        :param command: string
+        :param time: datetime
+        :return: none
         """
 
         sql = """INSERT INTO command_log(userName, cmdTxt, timeArrival) VALUES
@@ -211,12 +214,12 @@ class DATABASE:
 
     def add_to_unique_commands_table(self, command, time, wordToVec, active=0):
         """
-
-        :param command:
-        :param time:
-        :param wordToVec:
-        :param active:
-        :return:
+        insert command, time, vector, active flag(0 or 1) to the unique command table.
+        :param command: string
+        :param time: datetime
+        :param wordToVec: float
+        :param active: int
+        :return: none
         """
         sql = """INSERT IGNORE INTO unique_commands(cmdTxt, timeAdded, 
             wordToVec, totalLearnability, active) VALUES
@@ -225,17 +228,16 @@ class DATABASE:
 
     def add_to_robot_table(self, robotType, parentID=0):
         """
-
-        :param robotType:
-        :param parentID:
-        :return:
+        insert the robot type with parent id into th robot table.
+        :param robotType: string
+        :param parentID: int
+        :return: none
         """
         robotID = 0
         birthDate = datetime.datetime.now()
         birthDate = birthDate.strftime("%Y-%m-%d %H:%M:%S")
 
-        sql = """INSERT INTO robots(type, birthDate, parentID) 
-        VALUES('%s', '%s', '%d');"""%(robotType, birthDate, parentID)
+        sql = """INSERT INTO robots(type, birthDate, parentID) VALUES('%s', '%s', '%d');"""%(robotType, birthDate, parentID)
 
         try:
             self.cursor.execute(sql)
@@ -249,12 +251,12 @@ class DATABASE:
 
     def add_command_to_display_table(self, robotID, cmdTxt, color, startTime):
         """
-
-        :param robotID:
-        :param cmdTxt:
-        :param color:
-        :param startTime:
-        :return:
+        insert robotID, command, color and time into the display table.
+        :param robotID: int
+        :param cmdTxt: string
+        :param color: string
+        :param startTime: date
+        :return: none
         """
         startTime = startTime.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -270,26 +272,26 @@ class DATABASE:
 
     def flush_old_unprocessed_helps(self):
         """
-
-        :return:
+        update all the rows of the help table with processed=1
+        :return: none
         """
         sql = "UPDATE helps SET processed=1 WHERE processed=0;"
         self.execute_update_sql_command(sql)
 
     def flush_old_unprocessed_chats(self):
         """
-
-        :return:
+        update all the rows of the chats table with processed=1
+        :return: none
         """
         sql = "UPDATE chats SET processed=1 WHERE processed=0;"
         self.execute_update_sql_command(sql)
 
     def update_user_parent(self, user, parent):
         """
-
-        :param user:
-        :param parent:
-        :return:
+        update the parent of user
+        :param user: string
+        :param parent: string
+        :return: none
         """
         sql = """UPDATE users set parentName='%s' WHERE userName='%s' 
         and parentName is NULL;"""%(parent, user)
@@ -297,11 +299,11 @@ class DATABASE:
 
     def update_robot_feedback(self, color, reward, arrivalTime):
         """
-
-        :param color:
-        :param reward:
-        :param arrivalTime:
-        :return:
+        update
+        :param color: string
+        :param reward: string
+        :param arrivalTime: datetime
+        :return: none
         """
         if reward == 'y':
             sql = """ UPDATE robots set sumYes=sumYes+1 WHERE 
@@ -368,8 +370,8 @@ class DATABASE:
 
     def update_users_score(self):
         """
-
-        :return:
+        update all the users' scores
+        :return: none
         """
 
         sql = """SELECT * from users;"""
@@ -391,8 +393,8 @@ class DATABASE:
 
     def update_commands_score(self):
         """
-
-        :return:
+        update all the commands' scores according to (Y_2 - N_2) - (Y_1 - N_1)
+        :return: none
         """
         sql = """ SELECT cmdTxt, min(startTime) as firstTime, max(startTime) as lastTime
             from display group by cmdTxt;"""
@@ -432,9 +434,9 @@ class DATABASE:
 
     def kill_robot(self, robotID):
         """
-        update the robot with dead flag as 1--kill it--
-        :param robotID:
-        :return:
+        change the given robot's dead flag to 1 (kill it)
+        :param robotID: int
+        :return: none
         """
         deathDate = datetime.datetime.now()
         deathDate = deathDate.strftime("%Y-%m-%d %H:%M:%S")
@@ -446,8 +448,8 @@ class DATABASE:
 
     def get_new_word_vector(self):
         """
-
-        :return:
+        find a unique number for a new command within the range (-1, +1)
+        :return: int
         """
         sql="""SELECT wordToVec FROM unique_commands;"""
         err_msg = "unable to fetch user names"
@@ -465,11 +467,10 @@ class DATABASE:
 
     def count_evaluations_for_command(self, currentCommand):
         """
-
-        :param currentCommand:
-        :return:
+        find the number of evaluations for all alive robots under currentCommand
+        :param currentCommand: string
+        :return: counter
         """
-
         sql = """select d.robotID from TPR_Sept.display as d
          join TPR_Sept.robots as r on d.robotID=r.robotID where cmdTxt='%s' and 
          dead=0;""" %(currentCommand)
@@ -478,13 +479,13 @@ class DATABASE:
         # print result
         if result is () or result is None:
             return None
-        return Counter([i['robotID'] for i in result])
+        return Counter([r['robotID'] for r in result])
 
     def fetch_user_feedback(self, username):
         """
-
-        :param username:
-        :return:
+        find the number of rewards entered by username grouped by type
+        :param username: string
+        :return: List[Dict]
         """
         sql = """select count(*) as num, reward as feedback_type from reward_log
          where userName='%s' group by reward;"""%(username)
@@ -493,8 +494,8 @@ class DATABASE:
 
     def fetch_robot_information(self):
         """
-
-        :return:
+        find the information to display for the most recent evaluation
+        :return: Dict
         """
         sql = """SELECT d.robotID, d.cmdTxt, d.color, r.type, r.birthDate, r.parentID from display as d
          join robots as r ON d.robotID=r.robotID order by d.startTime desc limit 1;"""
@@ -505,13 +506,15 @@ class DATABASE:
 
         robotID, cmdTxt, robotType = result['robotID'], result['cmdTxt'], result['type']
 
+        # find num of yes's and num of no's from the display table for a given robotID and command
         sql = """SELECT sum(numYes) as numYes, sum(numNo) as numNo from display where
-         robotID='%d' and cmdTxt ='%s';"""%(robotID, cmdTxt)
+         robotID='%d' and cmdTxt ='%s';""" %(robotID, cmdTxt)
         result1 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
 
         if result1 is not None:
             result.update(result1)
 
+        # find the number of alive robots of given type from the robot table
         sql = """SELECT count(*) as numOfKind, type as robotType from robots where
          type='%s' and dead=0;""" %(robotType)
         result2 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
@@ -519,6 +522,7 @@ class DATABASE:
         if result2 is not None:
             result.update(result2)
 
+        # find the first time and the last time from the display table given robotID
         sql = """SELECT min(startTime) as firstDisplay, max(startTime) as lastDisplay
          from display where robotID='%d' """ %(robotID)
         result3 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
@@ -526,6 +530,7 @@ class DATABASE:
         if result3 is not None:
             result.update(result3)
 
+        # find num of like's and num of dislike's from the display table for a given robotID
         sql = """SELECT sum(numDislike) as numDislike, sum(numLike) as numLike from 
         display where robotID='%d';""" %(robotID)
         result4 = self.execute_select_one_sql_command(sql, 'Failed fetching info for a robot')
@@ -537,8 +542,8 @@ class DATABASE:
 
     def fetch_for_abuse_bot(self):
         """
-
-        :return:
+        find all usernames and typed commands from the command_log table within the 24 hours
+        :return: list[dict]
         """
         sql = """select userName, cmdTxt from command_log where 
         timeArrival>=NOW() - interval 24 hour;"""
@@ -546,9 +551,9 @@ class DATABASE:
 
     def fetch_from_display_table(self, condition='all'):
         """
-
-        :param condition:
-        :return:
+        find robotID, robot type, command, command vector, num yes's, num no's, num of likes, num of dislikes, num of likes
+        :param condition: string
+        :return: list[dict]
         """
         if condition == 'all':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
@@ -556,6 +561,7 @@ class DATABASE:
             from display as d JOIN robots as r ON d.robotID=r.robotID 
             JOIN unique_commands as u on d.cmdTxt=u.cmdTxt;"""
 
+        # all the rows of the display table with yes's>0 and no's>0
         elif condition == 'all_yes_or_no':
             sql = """SELECT d.robotID, r.type, d.cmdTxt, u.wordToVec, 
             d.numYes, d.numNo, d.numLike, d.numDislike, startTime
@@ -568,9 +574,9 @@ class DATABASE:
 
     def fetch_user_score(self, user):
         """
-
-        :param user:
-        :return:
+        find a user's score
+        :param user: string
+        :return: dict
         """
         sql = "SELECT * FROM users WHERE userName='%s';"%user
         err_msg = "Failed to retrieve a user's score"
@@ -578,9 +584,9 @@ class DATABASE:
 
     def fetch_top_users(self, topn):
         """
-
-        :param topn:
-        :return:
+        find the top n users from the users table
+        :param topn: int
+        :return: list[dict]
         """
         if topn == 'all':
             sql = """SELECT userName, score FROM users ORDER BY score DESC;"""
@@ -591,7 +597,11 @@ class DATABASE:
         return self.execute_select_sql_command(sql, err_msg)
 
     def fetch_top_daily_users(self, topn):
-
+        """
+            find the top n users from the users table (highest scores during the last day)
+            :param topn: int
+            :return: list[dict]
+        """
         current_time = datetime.datetime.now()
         current_time = current_time.strftime("%Y-%m-%d 00:00:00")
 
@@ -606,8 +616,8 @@ class DATABASE:
         """
         return a list of all commands along with their scores and ranks
         that were typed (interval) seconds before the current time
-        :param interval:
-        :return:
+        :param interval: int
+        :return: list[dict]
         """
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
@@ -629,9 +639,9 @@ class DATABASE:
 
     def fetch_recent_active_users(self, interval=10):
         """
-
-        :param interval:
-        :return:
+        return a list of all active users with the past n seconds along with their scores and ranks
+        :param interval: int
+        :return: list[dict]
         """
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
@@ -655,7 +665,7 @@ class DATABASE:
 
     def fetch_alive_robots(self, robotType="all"):
         """
-        find all the robots with the dead flag as zero --alive--
+        find all the robots with the dead flag as zero (zero: alive, one:dead)
         :param robotType:
         :return:
         """
@@ -671,7 +681,7 @@ class DATABASE:
         """
         find the oldest piece of unprocessed chat
         update the processed flag as 1 for that piece of chat
-        :return:
+        :return: dict
         """
         sql = "SELECT * FROM chats WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         result = self.execute_select_one_sql_command(sql)
@@ -685,8 +695,8 @@ class DATABASE:
 
     def fetch_oldest_help(self):
         """
-
-        :return:
+        find the last unprocessed help form the help table
+        :return: dict
         """
         sql = "SELECT * FROM helps WHERE processed=0 ORDER BY timeArrival ASC LIMIT 1;"
         err_msg = "Failed to fetch the oldest unprocessed help request..."
@@ -701,13 +711,13 @@ class DATABASE:
         
     def first_time_contributer(self, username):
         """
-
-        :param username:
-        :return:
+        return true if this user has ever typed a reward or command;
+        otherwise false
+        :param username: string
+        :return: Bool
         """
         sql = """SELECT userName FROM reward_log where userName='%s' union 
         SELECT userName FROM command_log where userName='%s';""" %(username, username)
-
         err_msg = "Failed to fetch information about this user..."
         result = self.execute_select_sql_command(sql, err_msg)
 
@@ -718,12 +728,10 @@ class DATABASE:
 
     def tobe_animated_in_command_window(self):
         """
-
-        :return:
+        return username, command, time from the command_log table where animation flag is zero
+        :return: list[dict]
         """
-        sql = """SELECT userName, cmdTxt, timeArrival FROM command_log
-        WHERE animationFlag=0;"""
-
+        sql = """SELECT userName, cmdTxt, timeArrival FROM command_log WHERE animationFlag=0;"""
         err_msg = "unable fetching the most recent type command"
         result = self.execute_select_sql_command(sql, err_msg)
 
@@ -734,9 +742,9 @@ class DATABASE:
 
     def fetch_for_command_window(self, interval=10):
         """
-
-        :param interval:
-        :return:
+        find username, command, time from the command_log table within the past "interval" seconds.
+        :param interval: int
+        :return: list[dict]
         """
         current_time = datetime.datetime.now()
         prev_time = current_time - datetime.timedelta(seconds=interval)
@@ -752,9 +760,9 @@ class DATABASE:
 
     def fetch_topn_unique_commands(self, topn):
         """
-
-        :param topn:
-        :return:
+        find the top n commands and their learnability score from the unique_command table
+        :param topn: int
+        :return: list[dict]
         """
         if topn == 'all':
             sql = """SELECT cmdTxt as cmd, totalLearnability as score FROM unique_commands 
@@ -768,9 +776,8 @@ class DATABASE:
 
     def find_most_voted_command(self):
         """
-        find the most popular command where processed=0
-        change those commands as processed=1
-        :return:
+        find the most popular command with processed=0 and change those commands to processed=1
+        :return: none
         """
         sql = """SELECT count(cmdLogID) as cmdCount, cmdTxt FROM command_log WHERE 
         processed =0 GROUP BY cmdTxt ORDER BY COUNT(cmdLogID) DESC LIMIT 1;"""
@@ -784,10 +791,12 @@ class DATABASE:
 
     def set_current_command(self, currentCommand):
         """
-
-        :param currentCommand:
-        :return:
+        find the current active command and deactivate it
+        then set currentCommand as the active command
+        :param currentCommand: string
+        :return: none
         """
+        # find the current active command
         sql = """SELECT * from unique_commands where active=1;"""
         err_msg = "Failed to fetch the previous command..."
         result = self.execute_select_one_sql_command(sql, err_msg)
@@ -799,18 +808,20 @@ class DATABASE:
         if prevCommand == currentCommand:
             return
 
+        # set the current command as active
         sql = """ UPDATE unique_commands set active=1 WHERE cmdTxt='%s';""" %currentCommand
         err_msg = "Failed to set the current command..."
         self.execute_update_sql_command(sql, err_msg)
 
+        # deactivate the previous active command
         sql= """UPDATE unique_commands set active=0 WHERE cmdTxt='%s';""" %prevCommand
         err_msg = "Failed to usnset the previous command..."
         self.execute_update_sql_command(sql, err_msg)
 
     def get_current_command(self):
         """
-
-        :return:
+        find the command with active=1
+        :return: dict
         """
         sql = """SELECT * FROM unique_commands WHERE active=1;"""
         err_msg = "Failed to get the current command..."

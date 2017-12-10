@@ -30,9 +30,9 @@ from database import DATABASE
 from settings import *
 
 SENSOR_DROP_RATE = 18
-num_features     = 4
-sequence_len     = c.evaluationTime/SENSOR_DROP_RATE
-synthetic_data   = False
+num_features = 4
+sequence_len = c.evaluationTime/SENSOR_DROP_RATE
+synthetic_data = False
 
 _COMMAND = {'move', 'stop'}
 MAX_POS_SAMPLES = 150
@@ -40,8 +40,8 @@ _MORPHOLOGY = 'quadruped'
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
 names = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot', 'quadruped': 'quadruped',
-         'starfishbot':'starfishbot',
-         'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot'}
+         'starfishbot':'starfishbot', 'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot',
+         'crabbot': 'crabbot'}
 
 # fix random seed for reproducibility
 np.random.seed(1234)
@@ -54,12 +54,15 @@ class CRITIC:
         self.params = params
 
     def setup_model(self):
+        """
+            setup a model with desired configuration, loss function, and optimizer
+            :return: model
+        """
         sensor_input = Input(shape=(sequence_len, num_features), name='sensor_input')
         lstm1 = LSTM(12, return_sequences=True)(sensor_input)
         dropout1 = Dropout(0.2)(lstm1)
         lstm2 = LSTM(12, return_sequences=False)(dropout1)
         dropout2 = Dropout(0.2)(lstm2)
-        # output1 = Dense(12, activation='tanh')(dropout2)
         output = Dense(1, activation='relu', name='output')(dropout2)
         model = Model(inputs=[sensor_input], outputs=[output])
         model.compile(optimizer='rmsprop', loss={'output': 'mse'}, loss_weights={'output': 1.}, metrics=['mae'])
@@ -67,13 +70,22 @@ class CRITIC:
         return model
 
     def train_model(self, sensors, obedience):
+        """
+            :param sensors: numpy.array(sequence of inputs)
+            :param obedience: float
+            :return: two numpy.arrays
+        """
         cv_scores, pcv_scores, rcv_scores = [], [], []
+
+        # split the input data to k sections for training
         kfold = KFold(n_splits=self.params['n_split'], shuffle=True, random_state=seed)
 
+        # for each training and testing datasets
         for train, test in kfold.split(sensors, obedience):
             start_time = time.time()
             model = self.setup_model()
 
+            # evaluate the model with testing data before training
             scores = model.evaluate(sensors[test], obedience[test], verbose=0)
             rcv_scores.append(scores[1])
             print "Random control Test: %s: %.4f"%(model.metrics_names[1], scores[1]),
@@ -107,6 +119,11 @@ class CRITIC:
 
 
 def custom_loss(y_true, y_pred):
+    """
+        :param y_true: target output
+        :param y_pred: predicted oputput
+        :return: tensors
+    """
     pos_y_true = tf.gather( y_true, tf.where( tf.equal( y_true, +1)))
     pos_y_pred = tf.gather( y_pred, tf.where( tf.equal( y_true, +1)))
     pos_count  = tf.reduce_sum(tf.cast(tf.equal(y_true, +1), tf.float32))
@@ -122,6 +139,13 @@ def custom_loss(y_true, y_pred):
 
 
 def Load_Training_Data(mydatabase):
+    """
+        find all the evaluations for _MORPHOLOGY and commands with at least one reinforcement
+        load the sensors for those evaluations
+        extract features from the sequence of sensors
+        :param mydatabase: OBJECT
+        :return: numpy.array for input of the model and numpy.array for the output of the model
+    """
     sql = """SELECT d.robotID, numYes, numNo, d.cmdTxt, startTime, cmdTxt from display as d JOIN
      robots as r ON d.robotID=r.robotID WHERE d.cmdTxt in """ + '(' + ",".join(["'"+c+"'" for c in _COMMAND]) + ')' + \
           " and r.type='%s' and (numYes+numNo)>0;"%_MORPHOLOGY
@@ -150,15 +174,18 @@ def Load_Training_Data(mydatabase):
         sensor_input.append(tfeatures)
         output.append(obedience)
 
+    # count negative and positive samples
     neg_count = output.count(-1)
     pos_count = output.count(+1)
     diff = abs(neg_count - pos_count)
 
+    # resample positive samples if number of negative samples are larger than the positive ones
     if neg_count > pos_count:
         extra_indices = np.random.choice([idx for idx in range(len(output)) if output[idx] == +1], diff)
         sensor_input.extend([sensor_input[idx] for idx in extra_indices])
         output.extend([+1 for _ in range(diff)])
 
+    # resample negative samples if number of positive samples are more than the negative ones
     elif neg_count < pos_count:
         extra_indices = np.random.choice([idx for idx in range(len(output)) if output[idx] == -1], diff)
         sensor_input.extend([sensor_input[idx] for idx in extra_indices])
@@ -168,10 +195,15 @@ def Load_Training_Data(mydatabase):
 
 
 def Load_Sensors_From_File(record):
+    """
+        return sensors for a robot's evaluation
+        :param record: Dict
+        :return: LIST[Dict]
+    """
     robotID = record['robotID']
     startTime = record['startTime']
     
-    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month)+ "/" + str(startTime.day)+\
+    path = main_path + "/sensors/"+ str(startTime.year) + "/" + str(startTime.month) + "/" + str(startTime.day) + \
            "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
 
     if not os.path.isfile(path): 
@@ -194,6 +226,11 @@ def Read_File(filePath):
 
 
 def Propriceptive_Feature_Extraction(values):
+    """
+        Combine the proprioceptive features into one feature
+        :param values: List[list[float]]
+        :return: 2D numpy array
+    """
     temp = np.array(values).T
     temp = np.diff(temp, axis=0)
     temp = np.absolute(temp)
@@ -254,10 +291,18 @@ def Extract_Features(sample):
 
 
 def main(args):
+    """
+        create the prediction models for each robot morphology
+        :param args:
+        :return:
+    """
+
     global _MORPHOLOGY
     batch_size = args.batch_size
     n_split = args.n_split
     epoch = args.epoch
+
+    # connect to database
     mydatabase = DATABASE()
 
     params = {'epochs':epoch, 'batch_size':batch_size, 'n_split':n_split}
@@ -273,25 +318,33 @@ def main(args):
 
     c = CRITIC(params)
 
+    # for each morphology train and store the results
     for key, val in names.items():
 
         _MORPHOLOGY = key
-        c.setup_model()
+
+        # load training data from file and database for key
         data = Load_Training_Data(mydatabase)
         sensors, obedience = data
 
         print sensors.shape, obedience.shape
+
+        # normalize the input and output features to [0,1]
         _min = np.min(np.min(sensors, axis=1), axis=0)
         _max = np.max(np.max(sensors, axis=1), axis=0)
         sensors = (sensors - _min) / (_max - _min)
         obedience = (obedience-np.min(obedience))/(np.max(obedience)-np.min(obedience))
+
+        # create 10 bins for the output(obedience)
         counts, bins = np.histogram(obedience, bins=10)
 
+        # check if we have enough positive data
         if counts[-1] < MAX_POS_SAMPLES:
             print "Not enough data."
             continue
         print "Data Histogram: ", bins, counts
 
+        # train with input=sensors and output=obedience
         pcv_scores, cv_scores = c.train_model(sensors, obedience)
         writer_permuted.writerow([val] + map(str, pcv_scores))
         writer_regular.writerow([val] + map(str, cv_scores))
