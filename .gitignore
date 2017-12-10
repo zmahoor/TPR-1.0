@@ -1,3 +1,4 @@
+bots/settings.py
 pyrosim/tmp/*
 *.o
 **/.DS_Store
