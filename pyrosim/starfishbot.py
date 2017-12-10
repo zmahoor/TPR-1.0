@@ -1,20 +1,17 @@
-
+# import sys
+# sys.path.append('../pyrosim')
 from pyrosim import PYROSIM
-import numpy as np
-from numpy import linalg as LA
 import constants as c
 import copy
-import random
-import math
-from eyes import EYES
-from brain import BRAIN
+# from eyes import EYES
+# from brain import BRAIN
 
 class ROBOT:
 
     def __init__(self):
         self.Initialize_Body()
-        self.brain = BRAIN(self.num_sensors, self.num_motor_neurons,
-                           self.sensorsCreated)
+        # self.brain = BRAIN(self.num_sensors, self.num_motor_neurons,
+        #                    self.sensorsCreated)
 
     def Initialize_Body(self):
         self.num_joints = 0
@@ -28,20 +25,20 @@ class ROBOT:
         
     def Send_To_Simulator(self, sim, color, biasValues):
         self.Send_Objects(sim, color)
-        self.Send_Joints(sim)
+        # self.Send_Joints(sim)
+        #
+        # jointsCreated = {0: self.num_joints}
+        # objectsCreated = {0: self.num_objects}
+        #
+        # self.eyes = EYES(self.head_ID, [0, 0, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
+        # self.eyes.Create_Eyes(jointsCreated, objectsCreated)
+        #
+        # self.num_joints = jointsCreated[0]
+        # self.num_objects = objectsCreated[0]
 
-        jointsCreated = {0: self.num_joints}
-        objectsCreated = {0: self.num_objects}
-
-        self.eyes = EYES(self.head_ID, [0, 0, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
-        self.eyes.Create_Eyes(jointsCreated, objectsCreated)
-
-        self.num_joints = jointsCreated[0]
-        self.num_objects = objectsCreated[0]
-
-        self.eyes.Send_Eyes_To_Simulator(sim)
-        self.Send_Sensors(sim)
-        self.brain.Send_To_Simulator(sim,biasValues)
+        # self.eyes.Send_Eyes_To_Simulator(sim)
+        # self.Send_Sensors(sim)
+        # self.brain.Send_To_Simulator(sim, biasValues)
 
     def Evaluate(self, sim, whatToMaximize):
         self.Get_Raw_Sensors(sim)
@@ -70,34 +67,29 @@ class ROBOT:
                           length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        #
         sim.Send_Cylinder(objectID=self.num_objects, x=-c.L, y=0, z=c.L+c.R, r1=-1, r2=0, r3=0,
                           length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        ## vertical segments
+        # vertical segments
         sim.Send_Cylinder(objectID=self.num_objects, x=0, y=c.L/2+c.L, z=(c.L/2+c.R), r1=0,
                           r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        #
         sim.Send_Cylinder(objectID=self.num_objects, x=(c.L+c.L/2), y=0, z=(c.L/2+c.R), r1=0,
                           r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        #
         sim.Send_Cylinder(objectID=self.num_objects, x=0, y=-(c.L/2+c.L), z=(c.L/2+c.R), r1=0,
                           r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        #
         sim.Send_Cylinder(objectID=self.num_objects, x=-(c.L+c.L/2), y=0, z=(c.L/2 + c.R), r1=0,
                           r2=0, r3=1, length=c.L, radius=c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
     def Send_Joints(self, sim):
         self.num_joints = 0
-        #
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=1,
                        n1=-1, n2=0, n3=0, x=0, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
@@ -106,7 +98,6 @@ class ROBOT:
                        n1=-1, n2=0, n3=0, x=0, y=c.L+c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
-        #
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=2,
                        n1=0, n2=1, n3=0, x=c.L/2, y=0, z=c.L+c.R)
         self.num_joints += 1
@@ -115,7 +106,6 @@ class ROBOT:
                        n1=0, n2=1, n3 =0, x=(c.L+c.L/2), y=0, z=c.L+c.R)
         self.num_joints += 1
         
-        #
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=3,
                        n1=1, n2=0, n3=0, x=0, y=-c.L/2, z=c.L+c.R)
         self.num_joints += 1
@@ -124,7 +114,6 @@ class ROBOT:
                        n1=1, n2=0, n3=0, x=0, y=-(c.L+c.L/2), z=c.L+c.R)
         self.num_joints += 1
         
-        # # purple
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=4,
                        n1=0, n2=-1 , n3=0, x=-c.L/2, y=0, z=c.L+c.R)
 

@@ -1,14 +1,13 @@
 import math
 import sys
 import numpy as np
-
-import constants
+import os
 
 from subprocess import Popen, PIPE
 
 class PYROSIM:
 
-    def __init__(self,playBlind=False,playPaused=False,evalTime=constants.evaluationTime):
+    def __init__(self,playBlind=False,playPaused=False,evalTime=200):
 
         self.numJoints = 0
 
@@ -26,7 +25,8 @@ class PYROSIM:
 
         self.evaluationTime = evalTime
 
-        commandsToSend = ['./simulator']
+        commandsToSend = [os.path.dirname(os.path.abspath(__file__))+'/simulator']
+        print commandsToSend
 
         if ( playBlind == True ):
 
@@ -391,6 +391,6 @@ class PYROSIM:
                     index = index + 1
 
     def Send(self,stringToSend):
-        # print stringToSend
+        print stringToSend
 
         self.simulator.stdin.write( stringToSend )
