@@ -350,7 +350,7 @@ class PYROSIM:
 
         dataFromSimulator = self.simulator.communicate()
 
-        # print dataFromSimulator
+        print dataFromSimulator
 
         self.Collect_Sensor_Data(dataFromSimulator)
 

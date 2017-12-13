@@ -1,15 +1,16 @@
 #include "iostream"
 #include <ode/ode.h>
+#include <string>
+#include <limits.h>
+#include <unistd.h>
 #include <drawstuff/drawstuff.h>
-#include "texturepath.h"
+
 #include "environment.h"
 
 #ifdef _MSC_VER
 #pragma warning(disable:4244 4305)  // for VC++, no precision loss complaints
 #endif
 
-#include <drawstuff/drawstuff.h>
-#include "texturepath.h"
 #ifdef dDOUBLE
 #define dsDrawLine dsDrawLineD
 #define dsDrawBox dsDrawBoxD
@@ -178,7 +179,7 @@ static void simLoop (int pause)
 	environment->Draw();
 }
 
-void Initialize_ODE(void) {
+void Initialize_ODE(const char* texturePath) {
 
 	// setup pointers to drawstuff callback functions
   	fn.version = DS_VERSION;
@@ -186,7 +187,7 @@ void Initialize_ODE(void) {
   	fn.step = &simLoop;
   	fn.command = &command;
   	fn.stop = 0;
-  	fn.path_to_textures = DRAWSTUFF_TEXTURE_PATH;
+  	fn.path_to_textures = texturePath;
 
  	dInitODE2(0);
   	world = dWorldCreate();
@@ -227,13 +228,17 @@ void Run_Blind(void) {
 int main (int argc, char **argv)
 {
 
-	runBlind = false; 
+    std::string filePath(argv[0]);
+    filePath = filePath.substr(0, filePath.find_last_of("/"));
+    filePath += "/ode-0.12/drawstuff/textures";
+
+	runBlind = false;
 
 	if ( (argc > 1) && (strcmp(argv[1],"-blind")==0) )
 
 		runBlind = true;
 
-        Initialize_ODE();
+        Initialize_ODE(filePath.c_str());
 
         Initialize_Environment();
 

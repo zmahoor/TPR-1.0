@@ -25,20 +25,20 @@ class ROBOT:
         
     def Send_To_Simulator(self, sim, color, biasValues):
         self.Send_Objects(sim, color)
-        # self.Send_Joints(sim)
-        #
-        # jointsCreated = {0: self.num_joints}
-        # objectsCreated = {0: self.num_objects}
-        #
-        # self.eyes = EYES(self.head_ID, [0, 0, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
-        # self.eyes.Create_Eyes(jointsCreated, objectsCreated)
-        #
-        # self.num_joints = jointsCreated[0]
-        # self.num_objects = objectsCreated[0]
+        self.Send_Joints(sim)
 
-        # self.eyes.Send_Eyes_To_Simulator(sim)
-        # self.Send_Sensors(sim)
-        # self.brain.Send_To_Simulator(sim, biasValues)
+        jointsCreated = {0: self.num_joints}
+        objectsCreated = {0: self.num_objects}
+
+        self.eyes = EYES(self.head_ID, [0, 0, 3*c.R+c.L], 0.015, [1,0,0], [0,-1,0], 0.015)
+        self.eyes.Create_Eyes(jointsCreated, objectsCreated)
+
+        self.num_joints = jointsCreated[0]
+        self.num_objects = objectsCreated[0]
+
+        self.eyes.Send_Eyes_To_Simulator(sim)
+        self.Send_Sensors(sim)
+        self.brain.Send_To_Simulator(sim, biasValues)
 
     def Evaluate(self, sim, whatToMaximize):
         self.Get_Raw_Sensors(sim)
