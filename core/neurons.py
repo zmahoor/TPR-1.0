@@ -1,4 +1,3 @@
-import constants as c
 from neuron import NEURON
 import random
 import constants as c

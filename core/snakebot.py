@@ -55,18 +55,15 @@ class ROBOT:
 
     def Send_Objects(self, sim, color):
         self.num_objects = 0
-        #  Box
         sim.Send_Box(objectID=self.num_objects, x=0, y=-2*c.L, z=c.R,length=c.L,
                      width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
         self.head_ID = self.num_objects
         self.num_objects += 1
 
-        #  Box
         sim.Send_Box(objectID=self.num_objects, x=0, y=2*c.L, z=c.R,length=c.L,
                      width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1
 
-        #  Box
         sim.Send_Box(objectID=self.num_objects, x=0, y=0, z=c.R, length=c.L,
                      width=2*c.L, height=2*c.R, r=color[0], g=color[1], b=color[2])
         self.num_objects += 1

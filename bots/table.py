@@ -4,13 +4,13 @@ from pygameWrapper import PYGAMEWRAPPER
 class TABLE:
 
     def __init__(self, window, width, height):
-        #define screen to draw on
+        # define screen to draw on
         self.SCREEN = window.screen
 
-        #get screen dimensions
+        # get screen dimensions
         self.WIDTH = width
         self.HEIGHT = height
-        #set window
+        # set window
         self.WINDOW = window
         
         self.USERS = 5
@@ -45,7 +45,7 @@ class TABLE:
             else:
                 col = 'TAN'
             window.Draw_Rect(0, top_rect, self.WIDTH, height_rect, color=col)
-            window.Draw_Text(str(i+1), x = 4, y = top_rect + (.3*height_rect),fontSize=FONT_SIZE)
+            window.Draw_Text(str(i+1), x=4, y=top_rect + (.3*height_rect),fontSize=FONT_SIZE)
             
             # name is the command name or username, depending on input
             name = new[i][0]

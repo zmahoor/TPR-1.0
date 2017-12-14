@@ -45,7 +45,7 @@ window = PYGAMEWRAPPER(width=REWARD_WINDOW_W, height=REWARD_WINDOW_H,
 def Store_Sensors_To_File(individual, currentTime):
 
     # get directory
-    path = "../sensors/"+ str(currentTime.year) + "/" + str(currentTime.month) +\
+    path = "../sensors/"+ str(currentTime.year) + "/" + str(currentTime.month) + \
            "/" + str(currentTime.day)
     # print path
     if not os.path.exists(path):
@@ -312,8 +312,8 @@ def Compete_Based_On_Obedience(record1, record2):
     print "min values for normalization: ", _min
     print "max values for normalization: ", _max
 
-    features1 = ct.Extract_Features( sensorValues1 )
-    features2 = ct.Extract_Features( sensorValues2 )
+    features1 = ct.Extract_Features(sensorValues1)
+    features2 = ct.Extract_Features(sensorValues2)
 
     if features1 is None or features2 is None:
         print 'Features are not calculated properly' 
@@ -334,10 +334,8 @@ def Compete_Based_On_Obedience(record1, record2):
 
     try:
         pred_obedience = critic.predict(sample)
-
     except KeyboardInterrupt:
         sys.exit()
-
     except:
         print 'Unable predicting obedience...'
         return None

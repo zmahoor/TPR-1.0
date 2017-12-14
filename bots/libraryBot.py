@@ -1,5 +1,5 @@
 """
-this bot reads all rows from the chat table and place them into their right tables.
+this script reads all the rows from the chat table and places them into their right tables.
 """
 from settings import *
 import database

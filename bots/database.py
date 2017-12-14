@@ -332,41 +332,41 @@ class DATABASE:
         else: return
         self.execute_update_sql_command(sql, "Failed to update the robot's fitness...")
 
-    # def Update_Total_Fitness(self, color, reward, arrivalTime):
-    #     if reward == 'y':
-    #         sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE
-    #         robotID = (SELECT robotID FROM display WHERE color='%s'
-    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-    #
-    #     elif reward == 'n':
-    #         sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
-    #         robotID = (SELECT robotID FROM display WHERE color='%s'
-    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-    #
-    #     else: return
-    #
-    #     err_msg = "Failed to update the robot's fittness..."
-    #     self.Execute_Update_Sql_Command(sql, err_msg)
-    #
-    # def Update_Total_Likeability(self, color, reward, arrivalTime):
-    #     if reward == 'l':
-    #         sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE
-    #         robotID = (SELECT robotID FROM display WHERE color='%s'
-    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-    #
-    #     elif reward == 'd':
-    #         sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
-    #         robotID = (SELECT robotID FROM display WHERE color='%s'
-    #         and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
-    #          ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
-    #
-    #     else: return
-    #
-    #     err_msg = "Failed to update the robot's fittness..."
-    #     self.Execute_Update_Sql_Command(sql, err_msg)
+    def Update_Total_Fitness(self, color, reward, arrivalTime):
+        if reward == 'y':
+            sql = """ UPDATE robots set totalFitness=totalFitness+1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        elif reward == 'n':
+            sql = """ UPDATE robots set totalFitness=totalFitness-1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        else: return
+
+        err_msg = "Failed to update the robot's fittness..."
+        self.Execute_Update_Sql_Command(sql, err_msg)
+
+    def Update_Total_Likeability(self, color, reward, arrivalTime):
+        if reward == 'l':
+            sql = """ UPDATE robots set totalLikeability=totalLikeability+1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        elif reward == 'd':
+            sql = """ UPDATE robots set totalLikeability=totalLikeability-1 WHERE
+            robotID = (SELECT robotID FROM display WHERE color='%s'
+            and '%s' BETWEEN startTime and startTime + INTERVAL 2 MINUTE
+             ORDER BY startTime DESC LIMIT 1);"""%(color, arrivalTime)
+
+        else: return
+
+        err_msg = "Failed to update the robot's fittness..."
+        self.Execute_Update_Sql_Command(sql, err_msg)
 
     def update_users_score(self):
         """

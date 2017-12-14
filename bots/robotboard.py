@@ -1,10 +1,10 @@
+"""
+this script displays a window that shows some information about the current displaying robot.
+"""
 from pygameWrapper import PYGAMEWRAPPER
-import time
-import random
 from database import DATABASE
 import pygame
 from timer import TIMER
-import numpy as np
 import datetime
 
 DB = DATABASE()
@@ -68,10 +68,10 @@ def draw_robot_window(robotInfo):
         blinkTimer.Reset()
 
     if not blinkTimer.Time_Elapsed():
-        WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,
+        WINDOW.Draw_Text(cmdTxt, x=WINDOW.text_x+WINDOW.text_width,
                          y=110, color='YELLOW', bold=True, underline=False, fontSize=35)
     else:
-        WINDOW.Draw_Text(cmdTxt ,x=WINDOW.text_x+WINDOW.text_width,
+        WINDOW.Draw_Text(cmdTxt, x=WINDOW.text_x+WINDOW.text_width,
                          y=110, color='WHITE', bold=True, underline=False, fontSize=30)
 
     WINDOW.Draw_Text("Need help? Type ?robots", x=675, y=90, color='WHITE', fontSize=23)

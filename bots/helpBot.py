@@ -1,5 +1,5 @@
 """
-This bot picks an unprocessed help message from the database and sends a response to the user in the chat session
+This script picks an unprocessed help message from the database and sends a response to the user in the chat session
 """
 
 import string
@@ -13,8 +13,8 @@ import datetime
 t = Twitch()
 db = DATABASE()
 
-username = IDENT #Your twitch username. ALL LOWER CASE
-key = PASS #Key acquired from twitch.tv account page
+username = IDENT  # Your twitch username. ALL LOWER CASE
+key = PASS        # Key acquired from twitch.tv account page
 channel = CHANNEL
 port = PORT
 host = HOST
@@ -39,7 +39,7 @@ bot = """Every 30 seconds one robot, out a population of 50, is simulated.\
  It "hears" the current command and senses its environment.\
   There are 10 species of bots: have you seen them all?"""
 
-# Reinforcements help message
+# Reinforcement help message
 rewards = """Robots collect [y]es's, [n]o's, [l]ikes and [d]islikes.\
  Robots that are disobedient (y<n) and unpopular (l<d) are periodically killed,\
   and are replaced with randomly-modified copies of more obedient (y>n)\

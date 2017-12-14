@@ -1,10 +1,7 @@
 from pygameWrapper import PYGAMEWRAPPER
-import time
-import random
 from database import DATABASE
 import pygame
 from timer import TIMER
-import numpy as np
 import datetime
 
 DB = DATABASE()

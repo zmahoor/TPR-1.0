@@ -1,5 +1,6 @@
 """
-a bot mimics chat bot and records predefined commands, rewards, and help requests under random usernames.
+this bot mimics chatbot and records predefined commands, rewards, and help to the chat table
+.
 """
 from settings import *
 from time import *
@@ -26,7 +27,7 @@ def rewardSignals():
 REWARDS = rewardSignals()
 CMDS = ['!walk very fast then jump', '!walk back then forward', '!crawl', '!jump',
         '!walk', '!run away', '!break free', '!stay still', '!move', '!help',
-        '!walk forward', 'walk fast forward' , '!dance dance', '!dance', '!move forward', '!walkkk']
+        '!walk forward', 'walk fast forward', '!dance dance', '!dance', '!move forward', '!walkkk']
 
 HELPS = ['?', '?rewards', '?commands', '?myscore', '?scores', '?robots', '?votes', '?project']
 EXTRA = ['helloO %$##', 'WHat is this?', 'DROP TABLE', 'SQL DELETE Rows']

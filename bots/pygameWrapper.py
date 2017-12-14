@@ -1,3 +1,6 @@
+"""
+author: Jack Felag
+"""
 import pygame
 
 class PYGAMEWRAPPER:
@@ -8,7 +11,7 @@ class PYGAMEWRAPPER:
         pygame.init()
 
         # set size
-        size = width,height
+        size = width, height
         
         self.size = width, height
 
@@ -38,16 +41,16 @@ class PYGAMEWRAPPER:
         else:
             self.myfont.set_underline(False)
 
-        #set area for text to be drawn on
+        # set area for text to be drawn on
         label = self.myfont.render(textString, 1, col)
 
-        #get where the text is
+        # get where the text is
         self.textrect = label.get_rect()
         self.textrect.left = self.screen.get_rect().left + x
         self.textrect.top = self.screen.get_rect().top + y
         self.text_width = self.textrect[2]
         self.text_x = self.textrect[0]
-        #draw text
+        # draw text
         self.screen.blit(label, self.textrect)
 
     def Refresh(self):
@@ -55,18 +58,18 @@ class PYGAMEWRAPPER:
         pygame.display.flip()
 
     def Wipe(self, backgroundColor=(255, 255, 255)):
-        #set background
+        # set background
         # backgroundColor = 255, 255, 255
         self.screen.fill(backgroundColor)
 
     def Fill_Background(self, color):
         self.screen.fill(color)
     
-    def Draw_Line(self, x1, y1, x2, y2, color = 'BLACK', thickness = 1):
+    def Draw_Line(self, x1, y1, x2, y2, color='BLACK', thickness=1):
         # get color
         col = self.Get_Color(color)
         # draw line
-        line = pygame.draw.line(self.screen, col, (x1,y1), (x2,y2), thickness)
+        line = pygame.draw.line(self.screen, col, (x1, y1), (x2, y2), thickness)
 
     def Draw_Rect(self, x1, y1, w, h, color = 'RED'):
         # get color
@@ -113,6 +116,3 @@ class PYGAMEWRAPPER:
         # quits out of pygame and window
         pygame.quit()
         exit()
-                
-
-                

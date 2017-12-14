@@ -1,7 +1,8 @@
+"""
+This script displays a window of top 5 users by score.
+"""
 from table import TABLE
 from pygameWrapper import PYGAMEWRAPPER
-import time
-import random
 from database import DATABASE
 import pygame
 from timer import TIMER

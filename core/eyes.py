@@ -5,7 +5,7 @@ from raySensor import RAY_SENSOR
 
 class EYES: 
 
-    def __init__(self, head_ID, midpoint, distance, axis1=[1,0,0], axis2=[0,0,-1], 
+    def __init__(self, head_ID, midpoint, distance, axis1=[1, 0, 0], axis2=[0, 0, -1],
                  eye_radius=0.02):
 
         self.midpoint = midpoint
@@ -39,10 +39,10 @@ class EYES:
         self.lefEye = [_axis1[i] * -self.distance + self.midpoint[i] for i in range(len(_axis1))]
         self.rightEye = [_axis1[i] * self.distance + self.midpoint[i] for i in range(len(_axis1))]
 
-        self.leftPupil = [_axis2[i]* self.eye_radius/1.5 + _axis1[i]* -self.distance +
+        self.leftPupil = [_axis2[i] * self.eye_radius/1.5 + _axis1[i] * -self.distance +
                           self.midpoint[i] for i in range(0, len(_axis1))]
 
-        self.rightPupil = [_axis2[i]* self.eye_radius/1.5 + _axis1[i]* self.distance +
+        self.rightPupil = [_axis2[i]* self.eye_radius/1.5 + _axis1[i] * self.distance +
                            self.midpoint[i] for i in range(0, len(_axis1))]
 
     def Add_Sensors(self,sensorsCreated):

@@ -1,4 +1,3 @@
-import constants
 import numpy as np
 import copy
 
@@ -6,7 +5,6 @@ class LIGHT_SENSOR:
 
     def __init__(self, sensorID=0, objectIndex=0):
         self.ID = sensorID
-
         self.objectIndex=objectIndex
 
     def Get_Data_From_Simulator(self, simulator):

@@ -1,5 +1,5 @@
 """
-this bot listens to a twitch channel and records any incoming messages to a database.
+this script listens to a twitch channel and records any incoming message to the chat table.
 """
 from settings import *
 from time import *

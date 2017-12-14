@@ -1,14 +1,13 @@
+"""
+this script displays a window prompting users to vote for the next command.
+"""
 import numpy as np
-import random
-import time
 from pygameWrapper import PYGAMEWRAPPER
 from timer import TIMER
 from settings import *
 import database
 import datetime
-from time import sleep
 import pygame
-from copy import deepcopy
 
 COMMAND_DURATION = 3 * 60
 DB_FETCH_DURATION = 5
@@ -51,7 +50,8 @@ def draw_command_window(timeRemaining):
 
     window.Draw_Text('Top voted commands are:', x=10, y=40, fontSize=FONT_SIZE)
 
-    if timeRemaining < 0: timeRemaining = 0
+    if timeRemaining < 0:
+        timeRemaining = 0
     minute, second = divmod(timeRemaining, 60)
     hour, minute = divmod(minute, 60)
     timeRemaining = "%02dm:%02ds" %(minute, second)
@@ -89,11 +89,9 @@ def draw_command_window(timeRemaining):
 
         window.Draw_Text(cmdTxt, x=25, y=Y_COOR[i], fontSize=FONT_SIZE)
 
-    window.Draw_Text("Voting ends in "+timeRemaining,
-                     x=10, y=220, fontSize=FONT_SIZE)
+    window.Draw_Text("Voting ends in "+timeRemaining, x=10, y=220, fontSize=FONT_SIZE)
     window.Draw_Text("Need help? Type", x=675, y=220, fontSize=FONT_SIZE)
-    window.Draw_Text("?votes", x=window.text_x+window.text_width+WSPACE, y=220,
-                     color='BROWN', fontSize=FONT_SIZE)
+    window.Draw_Text("?votes", x=window.text_x+window.text_width+WSPACE, y=220, color='BROWN', fontSize=FONT_SIZE)
     window.Refresh()
 
 

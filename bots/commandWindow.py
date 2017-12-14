@@ -1,27 +1,25 @@
-import numpy as np
-import random
-import time
+"""
+this script displays a window prompting users to vote for the next command.
+"""
 from pygameWrapper import PYGAMEWRAPPER
 from timer import TIMER
 from settings import *
 import database
 import datetime
-from time import sleep
 import pygame
-from copy import deepcopy
 
 COMMAND_DURATION = 3 * 60
 DB_FETCH_DURATION = 5
 COMMAND_WINDOW_W = 900
 COMMAND_WINDOW_H = 275
 Y_COOR = [65, 115, 165]
-NAME_X = [ 800, 800, 800]
+NAME_X = [800, 800, 800]
 WSPACE = 5
 FONT_SIZE = 23
 TITLE = "Top Voted Commands"
 COLORS = ['RED', 'BLUE', 'DARKGREEN']
 
-window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H, title= TITLE, fontSize=23)
+window = PYGAMEWRAPPER(width=COMMAND_WINDOW_W, height=COMMAND_WINDOW_H, title=TITLE, fontSize=23)
 animated_list = []
 currentCommand = DEFAULT_COMMAND
 
@@ -81,7 +79,8 @@ def draw_command_window(timeRemaining):
         window.Draw_Text(str(votes), x=X_VAL+2, y=Y_COOR[i]-1, color='WHITE', fontSize=FONT_SIZE)
         window.Draw_Text("votes", x=X_VAL+2+3*votes+15, y=Y_COOR[i]-1, fontSize=FONT_SIZE)
 
-        if len(cmdTxt) > 50: cmdTxt = cmdTxt[0:50]
+        if len(cmdTxt) > 50:
+            cmdTxt = cmdTxt[0:50]
         window.Draw_Text(cmdTxt, x=25, y=Y_COOR[i], fontSize=FONT_SIZE)
 
     window.Draw_Text("Command with the most votes will be sent to the robot in " + timeRemaining,
@@ -126,8 +125,10 @@ def main():
             temp = mydatabase.find_most_voted_command()
             print "Most voted command: ", temp
 
-            if temp is not None: currentCommand = temp['cmdTxt']
-            else: currentCommand = DEFAULT_COMMAND
+            if temp is not None:
+                currentCommand = temp['cmdTxt']
+            else:
+                currentCommand = DEFAULT_COMMAND
             mydatabase.set_current_command(currentCommand)
             commandTimer.Reset()
 
@@ -135,7 +136,7 @@ def main():
             if smallTimer.Time_Elapsed():
                 tobe_animated = mydatabase.tobe_animated_in_command_window()
                 if tobe_animated is not None:
-                    process( tobe_animated)
+                    process(tobe_animated)
                 smallTimer.Reset()
             draw_command_window(commandTimer.Time_Remaining())
 
