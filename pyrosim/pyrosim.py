@@ -26,7 +26,7 @@ class PYROSIM:
         self.evaluationTime = evalTime
 
         commandsToSend = [os.path.dirname(os.path.abspath(__file__))+'/simulator']
-        print commandsToSend
+        # print commandsToSend
 
         if ( playBlind == True ):
 
@@ -350,7 +350,7 @@ class PYROSIM:
 
         dataFromSimulator = self.simulator.communicate()
 
-        print dataFromSimulator
+        # print dataFromSimulator
 
         self.Collect_Sensor_Data(dataFromSimulator)
 
@@ -391,6 +391,6 @@ class PYROSIM:
                     index = index + 1
 
     def Send(self,stringToSend):
-        print stringToSend
+        # print stringToSend
 
         self.simulator.stdin.write( stringToSend )

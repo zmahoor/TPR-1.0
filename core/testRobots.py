@@ -18,9 +18,9 @@ from treebot import ROBOT as TB
 
 color = np.random.random(3)
 
-sim = PYROSIM(playPaused=True, playBlind=False, evalTime=200)
+sim = PYROSIM(playPaused=False, playBlind=False, evalTime=200)
 
-# robot = QPB()
+robot = QPB()
 # robot = CPB()
 # robot  = FB()
 # robot = HB()
@@ -28,9 +28,9 @@ sim = PYROSIM(playPaused=True, playBlind=False, evalTime=200)
 # robot = CB()
 # robot = QB()
 # robot = SHB()
-# robot = TB(2)
+robot = TB(4)
 # robot = SPB()
-robot = SFB()
+# robot = SFB()
 # robot = SNB()
 
 robot.Send_To_Simulator(sim, color, (c.NUM_BIAS_NEURONS+c.NUM_COMMAND_NEURONS)*[1.0])
