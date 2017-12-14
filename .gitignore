@@ -5,8 +5,6 @@ pyrosim/tmp/*
 *.d
 *.pyc
 pyrosim/simulator
-controllers/*
-sensors/*
 db/*
 secondary_population/*
 diversity_pool/*
