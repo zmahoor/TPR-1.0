@@ -23,7 +23,7 @@ seed = 1234
 np.random.seed(seed)
 
 sys.path.append('../bots')
-sys.path.append('../pyrosim')
+sys.path.append('../core')
 
 import constants as c
 from database import DATABASE
@@ -31,11 +31,11 @@ from settings import *
 
 SENSOR_DROP_RATE = 18
 num_features = 4
-sequence_len = c.evaluationTime/SENSOR_DROP_RATE
+sequence_len = 100     # c.evaluationTime/SENSOR_DROP_RATE
 synthetic_data = False
 
 _COMMAND = {'move', 'stop'}
-MAX_POS_SAMPLES = 150
+MAX_POS_SAMPLES = 100
 _MORPHOLOGY = 'quadruped'
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 
@@ -154,25 +154,38 @@ def Load_Training_Data(mydatabase):
 
     sensor_input, output = [], []
 
-    pos_count = 0
+    pos_count, neg_count = 0, 0
     for robot in robots:
         sensors = Load_Sensors_From_File(robot)
-        if sensors is None: continue
+        if sensors is None:
+            continue
 
         tfeatures = Extract_Features(sensors)
-        if tfeatures is None or tfeatures.shape != (sequence_len, num_features): continue
+        if tfeatures is None or tfeatures.shape != (sequence_len, num_features):
+            continue
         
         obedience = float(robot['numYes']-robot['numNo'])/float(robot['numYes']+robot['numNo'])
-        if robot['cmdTxt'] == 'stop': obedience *= -1
+        if robot['cmdTxt'] == 'stop':
+            obedience *= -1
         # print tfeatures.shape, obedience
+
+        if -1 < obedience < +1:
+            continue
 
         if obedience == +1:
             pos_count += 1
             if pos_count > MAX_POS_SAMPLES:
                 continue
 
+        if obedience == -1:
+            neg_count += 1
+
         sensor_input.append(tfeatures)
         output.append(obedience)
+
+    print pos_count, neg_count, len(sensor_input), len(output)
+    counts, bins = np.histogram(np.array(output), bins=10)
+    print bins, counts
 
     # count negative and positive samples
     neg_count = output.count(-1)
@@ -307,10 +320,10 @@ def main(args):
 
     params = {'epochs':epoch, 'batch_size':batch_size, 'n_split':n_split}
 
-    outfile_regular = open("critic_results_regular_150.csv", "w")
+    outfile_regular = open("critic_results_regular_100.csv", "w")
     writer_regular = csv.writer(outfile_regular, delimiter=",")
 
-    outfile_permuted = open("critic_results_permuted_150.csv", "w")
+    outfile_permuted = open("critic_results_permuted_100.csv", "w")
     writer_permuted = csv.writer(outfile_permuted, delimiter=",")
 
     writer_permuted.writerow(['trials'] + map(str, range(n_split)))
@@ -321,13 +334,14 @@ def main(args):
     # for each morphology train and store the results
     for key, val in names.items():
 
+        print
+
         _MORPHOLOGY = key
 
         # load training data from file and database for key
         data = Load_Training_Data(mydatabase)
         sensors, obedience = data
-
-        print sensors.shape, obedience.shape
+        print key, sensors.shape, obedience.shape
 
         # normalize the input and output features to [0,1]
         _min = np.min(np.min(sensors, axis=1), axis=0)
@@ -357,7 +371,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Critic Model.')
     parser.add_argument('--batch_size', '-b', type=int, default=512, help='batchSize, default=512.')
     parser.add_argument('--epoch', '-e', type=int, default=100, help='Number of learning epochs, default=1000.')
-    parser.add_argument('--n_split', '-n', type=int, default=10, help='Validation split, default=10.')
+    parser.add_argument('--n_split', '-n', type=int, default=30, help='Validation split, default=30.')
     # parser.add_argument('--shuffle', '-s', action='store_true', help='Shuffle obedience.')
     args = parser.parse_args()
     main(args)

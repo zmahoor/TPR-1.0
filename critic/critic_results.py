@@ -5,8 +5,8 @@ import pandas as pd
 from scipy import misc
 from scipy.stats.stats import ttest_ind
 
-filename1 = 'critic_results_regular'
-filename2 = 'critic_results_permuted'
+filename1 = 'critic_results_regular_100'
+filename2 = 'critic_results_permuted_100'
 
 
 def stars(p, m=16):
@@ -59,7 +59,7 @@ for key in regular:
 
 
 i = 0
-best_one = 'tablebot'
+best_one = 'starfishbot'
 for key in regular:
 
    if key == best_one: continue
@@ -74,12 +74,12 @@ for key in regular:
    #
    # ax.text(x[i+1] + 0.02, y_min + .02, stars(ttest_ind(regular[key], regular['starfishbot'], equal_var=False)[1]),
    #         horizontalalignment='center', verticalalignment='center')
-
-   i += 2
+   #
+   # i += 2
 
 ax.set_ylabel("Mean Absolute Error")
-ax.set_xticks(x)
-ax.set_xticklabels(x_ticks)
+ax.set_xticks(x,)
+ax.set_xticklabels(x_ticks, rotation=0)
 ax.set_title("Mean Error of Predictive Model Across 30 Trials for each Species")
 ax.legend((points[0], points[1]), ("Experiment", "Permuted Control"), loc=0,  numpoints=1, fontsize=14)
 plt.xlim((x[0] - .1, x[len(x) - 1] + .1))
