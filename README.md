@@ -1,3 +1,5 @@
+(Work in progress) readme 
+
 # Twitch Plays Robotics
 The source code and data for Twitch Plays Robotics (TPR), a crowdsourcing project to teach robots natural language. This project is funded by the National Science Foundation and is run by a research team at the University of Vermont. 
 
@@ -5,8 +7,17 @@ The source code and data for Twitch Plays Robotics (TPR), a crowdsourcing projec
 We used a slightly modified version of Pyrosim, a Python wrapper above Open Dynamics Engine (ODE)
 https://github.com/jbongard/pyrosim for our experiment.
 
-## Core 
+To install Pyrosim, open a terminal window, and navigate into the pyrosim directory. For example:
 
+```
+$ cd ~/Desktop/TPR-1.0/pyrosim
+```
+Then run:
+```
+$ make
+```
+## Core 
+steadyStateV4.py
 ## Bots
 ##### chatBot.py
 ##### libraryBot.py
@@ -14,13 +25,14 @@ https://github.com/jbongard/pyrosim for our experiment.
 ##### database.py
 
 ## Twitch Chat Server
-https://github.com/zmahoor/minimal-TPR
+https://github.com/zmahoor/TPR-minimal helps you to start using twitch server for broadcasting and receiving/sending messages from/to a twitch channel.
 
 ## Sensors
 Each robot was displayed under a given command and a color on the broadcasting computer for 30 seconds. This 30 second period is called a robot evaluation. Sensor data for a robot evaluated at a specific time is stored in a file named,
-    "robot_id_Year-month-day-hour-minute-second.dat". In the file name, id represents the robot's id, and "Year-month-day-hour-minute-second" shows the start time of the evaluation.
+"robot_id_Year-month-day-hour-minute-second.dat". In the file name, id represents the robot's id, and "Year-month-day-hour-minute-second" shows the start time of the evaluation.
 
 ## Controllers
+The controller of each robot displayed during the experiment is stored in this directory. This directory contains 10 subdirectories (one subdirectory per robot type). The name of a subdirectory maps to a robot type as follows: 1:twigbot, 2:stickbot, 3:branchbot, 4:treebot, shinbot:tablebot, starfishbot:starfishbot, crabbot:crabbot, quadruped:quadruped, snakebot:snakebot, spherebot:spherebot.
 
 ## Critic
 
