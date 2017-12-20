@@ -1,25 +1,32 @@
 # Twitch Plays Robotics
 The source code and data for Twitch Plays Robotics (TPR), a crowdsourcing project to teach robots natural language. This project is funded by the National Science Foundation and is run by a research team at the University of Vermont. 
 
-## More Information
-
-https://tpr-uvm.github.io/
-
-https://www.twitch.tv/twitchplaysrobotics
-
 ## Pyrosim
+We used a slightly modified version of Pyrosim, a Python wrapper above Open Dynamics Engine (ODE)
+https://github.com/jbongard/pyrosim for our experiment.
 
 ## Core 
 
+## Bots
+##### chatBot.py
+##### libraryBot.py
+##### helpBot.py
+##### database.py
+
+## Twitch Chat Server
+https://github.com/zmahoor/minimal-TPR
+
 ## Sensors
- 
+Each robot was displayed under a given command and a color on the broadcasting computer for 30 seconds. This 30 second period is called a robot evaluation. Sensor data for a robot evaluated at a specific time is stored in a file named,
+    "robot_id_Year-month-day-hour-minute-second.dat". In the file name, id represents the robot's id, and "Year-month-day-hour-minute-second" shows the start time of the evaluation.
+
 ## Controllers
 
 ## Critic
 
 ## Database
 ###### Data stored in tables
-
+We used MySQL to store and retrieve information of users, incoming messages, displaying robots in our experiments. The following sections explain the general schemas for the tables in our database.
 ### chats 
 ##### stores raw chat info
 
@@ -41,7 +48,7 @@ https://www.twitch.tv/twitchplaysrobotics
 
 ### display
 ##### stores info about displayed robots
-1. displayID:		Display order
+1. displayID:		Display order (unique number identifying each evaluation)
 2. robotID:		What robot (robot table.1)
 3. cmdTxt:		The command input
 4. color:		What color the robot was displayed as
@@ -53,7 +60,7 @@ https://www.twitch.tv/twitchplaysrobotics
 
 ### helps
 ##### stores help messages
-1. helpID:		Help message number
+1. helpID:		Help message number (unique number)
 2. txt:			What the message was
 3. userName:		Who asked for help
 4. timeArrival:		When the message was stored
@@ -62,16 +69,17 @@ https://www.twitch.tv/twitchplaysrobotics
 
 ### reward_log
 ##### stores reward messages
-1. rewardLogID:		Reward number
+1. rewardLogID:		Reward number (unique number)
 2. userName:		Who typed the reward message
 3. reward:			What it was (Y/N/L/D)
 4. color:			What robot it was given to
 5. timeArrival:		When it was received 
 6. processed:		Flag **put something here**
+7. displayID: the evaluation id that this reward was given for
 
 ### robots
 ##### stores robot info
-1. robotID:			What number robot it is
+1. robotID:			What number robot it is (unique number for each robot)
 2. type:			The morphology
 3. numEvals:		How many times it was evaluated
 4. dead:			Is the robot dead (0 for no, 1 for yes)
@@ -80,6 +88,10 @@ https://www.twitch.tv/twitchplaysrobotics
 7. birthDate:		When the robot was created
 8. parentID:		Robot it was mutated from (0 for randomly generated)
 9. deathDate:		When the robot died
+10. sumYes: total yes's this robot has received
+11. sumNo: total no's this robot has received
+12. sumLike: total likes this robot has received
+13. sumDislike: total dislikes this robot has received
 
 ### unique_commands
 ##### stores commands and their progress
@@ -91,10 +103,15 @@ https://www.twitch.tv/twitchplaysrobotics
 
 ### users
 ##### stores users and their scores
-1. ID:				Order of when users typed a message
+1. ID:				a unique number assigned to each user
 2. userName:		The twitch username
 3. timeAdded:		When they first typed a message
 4. parentName: 		Who referred them
 5. score:			The user's score (sum of all messages starting with a !)
 6. ban:				Banned from the channel (0 for no, 1 for yes)
 
+
+## More Information
+https://tpr-uvm.github.io/
+
+https://www.twitch.tv/twitchplaysrobotics
