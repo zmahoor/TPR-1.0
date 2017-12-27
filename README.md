@@ -53,8 +53,12 @@ This script displays a window of top 5 users by score.
 https://github.com/zmahoor/TPR-minimal helps you to start using twitch server for broadcasting and receiving/sending messages from/to a twitch channel.
 
 ## Sensors
-Each robot was displayed under a given command and a color on the broadcasting computer for 30 seconds. This 30 second period is called a robot evaluation. Sensor data for a robot evaluated at a specific time is stored in a file named,
+Each robot was displayed under a given command and a color on the broadcasting computer for 30 seconds. This 30 second period is called a robot evaluation. Sensor data for a robot evaluated at a specific time is stored in a file named
 "robot_id_Year-month-day-hour-minute-second.dat". In the file name, id represents the robot's id, and "Year-month-day-hour-minute-second" shows the start time of the evaluation.
+
+Every sensor data file contains a pickled python dictionary of multiple elements (keys, values). Each element of this dictionary holds values of different sensors of a robot over its evaluation period. The key of the dictionary is a string which encodes a sensor type, and the value is a numpy array of length 1800 of the corresponding sensor values. The followings explain the keys to this dictionary.
+
+A key starting with 'T' encodes a touch sensor,  a key starting with 'P' and ending with either 'X',  'Y', or 'Z' to a position sensor, a key starting with 'R' to a Ray (distance) sensor, and finally, a key starting with 'P' and ending with an integer to a proprioceptive (joint) sensor.
 
 ## Controllers
 The controller of each robot displayed during the experiment is stored in this directory. This directory contains 10 subdirectories (one subdirectory per robot type). The name of a subdirectory maps to a robot type as follows: 1: twigbot, 2: stickbot, 3: branchbot, 4: treebot, shinbot: tablebot, starfishbot: starfishbot, crabbot: crabbot, quadruped: quadruped, snakebot: snakebot, spherebot: spherebot.
@@ -150,6 +154,8 @@ We used MySQL to store and retrieve information of users, incoming messages, dis
 
 
 ## More Information
+https://arxiv.org/abs/1712.05881
+
 https://tpr-uvm.github.io/
 
 https://www.twitch.tv/twitchplaysrobotics
