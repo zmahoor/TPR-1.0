@@ -17,11 +17,36 @@ Then run:
 $ make
 ```
 ## Core 
-steadyStateV4.py
+##### steadyStateV4.py
+1) This script dispays a window prompting users to type in reinforcement for a robot that is being displayed.
+2) It also maintains the primary population of robots and evoloves the robots in the population 
+
+##### fillDiversityPool.py
+This script generates a secondary population of robots that feeds into the primary one.
+To do so, it uses a hill climbing approach and novelty search to create diverse behaviours.
+
 ## Bots
 ##### chatBot.py
+This script listens to a twitch channel and records any incoming message to the chat table.
+
 ##### libraryBot.py
+This script reads all the unprocessed messages from the chat table and places them into their right tables.
+
 ##### helpBot.py
+This script picks an unprocessed help message from the help table and sends a response to the user in the chat session.
+
+##### scoreBot.py
+This script wakes up every 10 seconds and updates score of all the users and commands.
+
+##### commandWindow.py
+This script displays a window prompting users to vote for the next command.
+
+##### commandboard.py
+This script displays a window of top 5 commands by score, or learnability.
+
+##### leaderboard.py
+This script displays a window of top 5 users by score.
+
 ##### database.py
 
 ## Twitch Chat Server
@@ -32,13 +57,14 @@ Each robot was displayed under a given command and a color on the broadcasting c
 "robot_id_Year-month-day-hour-minute-second.dat". In the file name, id represents the robot's id, and "Year-month-day-hour-minute-second" shows the start time of the evaluation.
 
 ## Controllers
-The controller of each robot displayed during the experiment is stored in this directory. This directory contains 10 subdirectories (one subdirectory per robot type). The name of a subdirectory maps to a robot type as follows: 1:twigbot, 2:stickbot, 3:branchbot, 4:treebot, shinbot:tablebot, starfishbot:starfishbot, crabbot:crabbot, quadruped:quadruped, snakebot:snakebot, spherebot:spherebot.
+The controller of each robot displayed during the experiment is stored in this directory. This directory contains 10 subdirectories (one subdirectory per robot type). The name of a subdirectory maps to a robot type as follows: 1: twigbot, 2: stickbot, 3: branchbot, 4: treebot, shinbot: tablebot, starfishbot: starfishbot, crabbot: crabbot, quadruped: quadruped, snakebot: snakebot, spherebot: spherebot.
 
 ## Critic
 
 ## Database
-###### Data stored in tables
 We used MySQL to store and retrieve information of users, incoming messages, displaying robots in our experiments. The following sections explain the general schemas for the tables in our database.
+
+###### Data stored in tables
 ### chats 
 ##### stores raw chat info
 
