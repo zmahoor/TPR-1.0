@@ -1,27 +1,28 @@
-from datetime import datetime
-from copy import deepcopy
 import numpy as np
-import time
-import matplotlib.pyplot as plt
 import sys
 import pickle
 import os
-import argparse
-import csv
+import seaborn as sns
+sns.set(color_codes=True)
+import matplotlib.pyplot as plt
 
 sys.path.append('../bots')
 sys.path.append('../pyrosim')
 
-import constants as c
 from database import DATABASE
 from settings import *
 
+# X_LABEL = 'Average Change in Head Location'
+# X_LABEL = 'Average Change in Joint Position'
+X_LABEL = 'Absolute Change in Head Location'
+
+DROP_RATE = 18
+POS_SAMPLES = 100
 main_path = "/Users/twitchplaysrobotics/TPR-backup"
 commands = {'move', 'stop'}
 
-names = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot', 'quadruped': 'quadruped',
-         'starfishbot':'starfishbot', 'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot',
-         'crabbot': 'crabbot'}
+names = {'3': 'branchbot', '4': 'treebot', 'quadruped': 'quadruped', 'starfishbot':'starfishbot',
+         'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot', 'crabbot': 'crabbot'}
 
 
 def Load_Sensors_From_File(record):
@@ -50,8 +51,10 @@ def Read_File(filePath):
 
 
 def Propriceptive_Feature_Extraction(values):
-    temp = np.array(values).T
-    temp = temp[1::10]
+    temp = []
+    for row in values:
+        temp.append(row[1::DROP_RATE])
+    temp = np.array(temp).T
     temp = np.diff(temp, axis=0)
     temp = np.absolute(temp)
     temp = np.average(temp, axis=1)
@@ -72,9 +75,28 @@ def Get_Head_Location(sample):
             posZ = sample[key]
 
     features = np.array([posX, posY, posZ]).T
-    # return np.linalg.norm(features[1786, :]-features[0, :])
-    return np.abs(features[1786, 1]-features[0, 1])
+    # return np.linalg.norm(features[900, :]-features[0, :])
+    return np.linalg.norm(features[1786, :]-features[0, :])
+    # return np.abs(features[1786, 1]-features[0, 1])
 
+
+def Get_Average_Change_Head_Location(sample):
+    posX, posY, posZ = None, None, None
+    for key in sample.keys():
+        if key.startswith('P') and key.endswith('_X'):
+            posX = sample[key][1::DROP_RATE]
+            posX = np.average(np.absolute(np.diff(posX)))
+
+        elif key.startswith('P') and key.endswith('_Y'):
+            posY = sample[key][1::DROP_RATE]
+            posY = np.average(np.absolute(np.diff(posY)))
+
+        elif key.startswith('P') and key.endswith('_Z'):
+            posZ = sample[key][1::DROP_RATE]
+            posZ = np.average(np.absolute(np.diff(posZ)))
+
+    # print posX, posY, posZ
+    return posX, posY, posZ
 
 
 def Get_Propriceptive_Change(sample):
@@ -97,30 +119,67 @@ def Load_Data(mydatabase, morphology):
     robots = mydatabase.execute_select_sql_command(sql, "Failed to retrieve record of a dispaly...")
     print('Number of samples: ', len(robots), " Morphology: ", morphology, "Command: ", commands)
 
-    Y, output = [], []
+    Y, X = [], []
     for robot in robots:
         sensors = Load_Sensors_From_File(robot)
-        # head = Get_Head_Location(sensors)
-        head = Get_Propriceptive_Change(sensors)
-        Y.append(head)
+
         obedience = float(robot['numYes']-robot['numNo'])/float(robot['numYes']+robot['numNo'])
-        if robot['cmdTxt'] == 'stop':
-            obedience *= -1*obedience
-        output.append(obedience)
-        # print head, obedience
-    return Y, output
+
+        if robot['cmdTxt'] == 'stop': obedience *= -1
+        if -1 < obedience < +1: continue
+        if obedience == +1 and X.count(+1) >= POS_SAMPLES: continue
+
+        # Y.append(Get_Head_Location(sensors))
+        Y.append(Get_Propriceptive_Change(sensors))
+        # Y.append(np.linalg.norm([Get_Average_Change_Head_Location(sensors)]))
+
+        X.append(obedience)
+
+    return Y, X
+
+
+def Balance_Data(Y, X):
+    """
+        Balance data by oversampling the under represented data points
+        :param sensor_input: LIST
+        :param output: List
+        :return: Two Lists
+    """
+    # count negative and positive samples
+    neg_count, pos_count = X.count(-1), X.count(+1)
+    diff = abs(neg_count - pos_count)
+
+    # re-sample positive samples if number of negative samples are larger than the positive ones
+    if neg_count > pos_count:
+        extra_indices = np.random.choice([idx for idx in range(len(X)) if X[idx] == +1], diff)
+        Y.extend([Y[idx] for idx in extra_indices])
+        X.extend([+1 for _ in range(diff)])
+
+    # re-sample negative samples if number of positive samples are more than the negative ones
+    elif neg_count < pos_count:
+        extra_indices = np.random.choice([idx for idx in range(len(X)) if X[idx] == -1], diff)
+        Y.extend([Y[idx] for idx in extra_indices])
+        X.extend([-1 for _ in range(diff)])
+
+    counts, bins = np.histogram(np.array(X), bins=10)
+    print bins, counts
+    return Y, X
+
 
 mydatabase = DATABASE()
-fig, axes = plt.subplots(figsize=(20, 10), ncols=5, nrows=2)
+fig, axes = plt.subplots(figsize=(20, 10), ncols=4, nrows=2)
 ax = axes.flatten()
+ax[0].set_ylabel("Normalized Reinforcement Signals")
+ax[6].set_xlabel(X_LABEL)
+
 i = 0
 for key, val in names.items():
-    Y, output = Load_Data(mydatabase, key)
-    ax[i].scatter(Y, output, alpha=0.8)
-    # ax[i].hist(Y, 20, color='g', alpha=0.8)
+    Y, X = Load_Data(mydatabase, key)
+    Balance_Data(Y, X)
+    # sns.regplot(x=np.array(Y), y=np.array(X), color="g", ax=ax[i])
+    ax[i].hist(Y, 20, color='g', alpha=0.8)
     ax[i].set_title(val)
     i = i+1
-
     # plt.title('Histogram of Final Head Position)
 
 plt.show()

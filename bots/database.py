@@ -20,7 +20,7 @@ class DATABASE:
         """
         try:
             self.connection = pymysql.connect(host=MYSQL_HOST, user=MYSQL_USER,
-                                                password=MYSQL_PASS, db=MYSQL_DB, connect_timeout=60)
+                                              password=MYSQL_PASS, db=MYSQL_DB, connect_timeout=60)
             self.cursor = self.connection.cursor(pymysql.cursors.DictCursor)
             self.cursor.execute("SELECT VERSION()")
             data = self.cursor.fetchone()

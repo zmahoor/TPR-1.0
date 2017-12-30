@@ -5,12 +5,13 @@ import pandas as pd
 from scipy import misc
 from scipy.stats.stats import ttest_ind
 
-filename1 = 'critic_results_regular_100'
-filename2 = 'critic_results_permuted_100'
+filename1 = 'critic_results_regular_1f'
+filename2 = 'critic_results_permuted_1f'
 
 
 def stars(p, m=16):
-    p *= misc.comb(m, 2)  # with Bonferroni adjustment for multiple comparisons
+    p *= 22
+    # p *= misc.comb(m, 2)  # with Bonferroni adjustment for multiple comparisons
     if p < 0.001:
         return "***"
     elif p < 0.01:
@@ -59,23 +60,14 @@ for key in regular:
 
 
 i = 0
-best_one = 'starfishbot'
+best_one = 'tablebot'
 for key in regular:
 
-   if key == best_one: continue
+   if key == best_one:
+       continue
 
-   print key, ttest_ind(regular[key], regular[best_one], equal_var=False)[1], \
+   print key, ttest_ind(regular[key], regular[best_one], equal_var=False)[1]*misc.comb(16, 2), \
        stars(ttest_ind(regular[key], regular[best_one], equal_var=False)[1])
-
-   # y_min = min(regular_mean[key] - regular_std[key], regular_mean['starfishbot'] - regular_std['starfishbot'])
-   #
-   # ax.annotate("", xy=(x[i+1], y_min), xycoords='data', xytext=(x[11], y_min), textcoords='data',
-   #             arrowprops=dict(arrowstyle="-", connectionstyle="bar,fraction=0.3"))
-   #
-   # ax.text(x[i+1] + 0.02, y_min + .02, stars(ttest_ind(regular[key], regular['starfishbot'], equal_var=False)[1]),
-   #         horizontalalignment='center', verticalalignment='center')
-   #
-   # i += 2
 
 ax.set_ylabel("Mean Absolute Error")
 ax.set_xticks(x,)

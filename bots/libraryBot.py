@@ -3,7 +3,6 @@ this script reads all the rows from the chat table and places them into their ri
 """
 from settings import *
 import database
-import re
 import datetime
 
 
