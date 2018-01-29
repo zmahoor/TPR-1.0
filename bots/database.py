@@ -112,6 +112,113 @@ class DATABASE:
 
         return results
 
+    def create_tables(self):
+        """
+        this function creates all the tables needed for TPR-V.2.
+        did not test it from pymysql
+        :return: None
+        """
+
+        sql = """CREATE TABLE IF NOT EXISTS chats(
+            chatID int(20) unsigned NOT NULL AUTO_INCREMENT,
+            timeArrival datetime NOT NULL COMMENT 'time of arrival',
+            username varchar(45) NOT NULL,
+            txt varchar(100) NOT NULL COMMENT 'body of chat',
+            processed tinyint(4) DEFAULT '0' COMMENT '0: not processed 1: processed',
+            PRIMARY KEY(chatID)
+            ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS command_log (
+          cmdLogID int(20) NOT NULL AUTO_INCREMENT,
+          userName varchar(45) DEFAULT NULL,
+          cmdTxt varchar(100) DEFAULT NULL,
+          timeArrival datetime DEFAULT NULL,
+          processed tinyint(4) DEFAULT '0',
+          animationFlag tinyint(4) DEFAULT '0',
+          PRIMARY KEY (cmdLogID),
+          KEY commandID_idx (cmdTxt)
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS display (
+          displayID int(11) NOT NULL AUTO_INCREMENT,
+          robotID int(11) DEFAULT NULL,
+          cmdTxt varchar(100) DEFAULT NULL,
+          color char(1) DEFAULT NULL,
+          startTime datetime DEFAULT NULL,
+          numYes int(11) DEFAULT '0',
+          numNo int(11) DEFAULT '0',
+          numLike int(11) DEFAULT '0',
+          numDislike int(11) DEFAULT '0',
+          PRIMARY KEY (displayID)
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS helps (
+          helpID int(11) NOT NULL AUTO_INCREMENT,
+          txt varchar(45) DEFAULT NULL,
+          userName varchar(45) DEFAULT NULL,
+          timeArrival datetime DEFAULT NULL,
+          processed tinyint(4) DEFAULT '0',
+          PRIMARY KEY (helpID)
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS reward_log (
+          rewardLogID int(11) NOT NULL AUTO_INCREMENT,
+          userName varchar(45) DEFAULT NULL,
+          reward varchar(10) DEFAULT NULL,
+          color varchar(10) DEFAULT NULL,
+          timeArrival datetime DEFAULT NULL,
+          processed tinyint(4) DEFAULT '0',
+          displayID int(11) DEFAULT NULL,
+          PRIMARY KEY (rewardLogID)
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS robots (
+          robotID int(20) NOT NULL AUTO_INCREMENT,
+          type varchar(45) DEFAULT NULL,
+          numEvals int(11) DEFAULT '0',
+          dead tinyint(4) DEFAULT '0' COMMENT 'dead: true\nalive: false',
+          totalFitness double DEFAULT '0',
+          totalLikeability double DEFAULT '0',
+          birthDate datetime DEFAULT NULL,
+          parentID int(20) DEFAULT '0',
+          deathDate datetime DEFAULT NULL,
+          sumYes int(11) DEFAULT '0',
+          sumNo int(11) DEFAULT '0',
+          sumLike int(11) DEFAULT '0',
+          sumDislike int(11) DEFAULT '0',
+          PRIMARY KEY (robotID)
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS unique_commands (
+          cmdTxt varchar(100) NOT NULL,
+          timeAdded datetime DEFAULT NULL,
+          wordToVec double DEFAULT NULL,
+          totalLearnability double DEFAULT NULL,
+          active tinyint(4) DEFAULT '0',
+          PRIMARY KEY (cmdTxt),
+          UNIQUE KEY cmdTxt_UNIQUE (cmdTxt)
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
+        sql = """CREATE TABLE IF NOT EXISTS users (
+          ID int(20) NOT NULL AUTO_INCREMENT,
+          userName varchar(45) NOT NULL,
+          timeAdded datetime DEFAULT NULL,
+          parentName varchar(45) DEFAULT NULL COMMENT 'the person invited this user',
+          score double DEFAULT '0',
+          ban tinyint(4) DEFAULT '0' COMMENT 'banned or not\n1 means this user is banned from the chat',
+          PRIMARY KEY (ID,userName),
+          UNIQUE KEY ID_UNIQUE (ID),
+          UNIQUE KEY userName_UNIQUE (userName)
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;"""
+        self.execute_update_sql_command(sql, "")
+
     def add_to_chat_table(self, username, current_time, msg):
         """
         Insert username, message and current time to the chat table.

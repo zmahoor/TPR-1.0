@@ -9,30 +9,25 @@ from copy import deepcopy
 import numpy as np
 import time
 import sys
-import pickle
-import os 
 import argparse
 from scipy.stats.stats import ttest_ind
 from keras import backend as K
 import tensorflow as tf
 import csv
 
+from training_data import Training_Data
+
 seed = 1234
+# seed = 5678
 np.random.seed(seed)
 
-sys.path.append('../bots')
-sys.path.append('../core')
-
-import constants as c
-from database import DATABASE
-from settings import *
-
 SENSOR_DROP_RATE = 18
-num_features = 1
+num_features = 4
 sequence_len = 100
 MAX_POS_SAMPLES = 100
+MAX_NEG_SAMPLES = 75
+BALANCE_DATA = True
 
-main_path = "/Users/twitchplaysrobotics/TPR-backup"
 names = {'1': 'stickbot', '2': 'twigbot', '3': 'branchbot', '4': 'treebot', 'quadruped': 'quadruped',
          'starfishbot':'starfishbot', 'spherebot':'spherebot', 'shinbot': 'tablebot', 'snakebot':'snakebot',
          'crabbot': 'crabbot'}
@@ -122,179 +117,6 @@ def custom_loss(y_true, y_pred):
     return (first_sum + second_sum) / 2.0
 
 
-def Load_Training_Data(mydatabase, morphology, commands):
-    """
-        find all the evaluations for _MORPHOLOGY and commands with at least one reinforcement
-        load the sensors for those evaluations
-        extract features from the sequence of sensors
-        :param mydatabase: OBJECT
-        :return: numpy.array for input of the model and numpy.array for the output of the model
-    """
-    sql = """SELECT d.robotID, numYes, numNo, d.cmdTxt, startTime, cmdTxt from display as d JOIN
-     robots as r ON d.robotID=r.robotID WHERE d.cmdTxt in """ + '(' + ",".join(["'"+c+"'" for c in commands]) + ')' + \
-          " and r.type='%s' and (numYes+numNo)>0;" % morphology
-    robots = mydatabase.execute_select_sql_command(sql, "Failed to retrieve record of a dispaly...")
-    print('Number of samples: ', len(robots), " Morphology: ", morphology, "Command: ", commands)
-
-    sensor_input, output = [], []
-    for robot in robots:
-        sensors = Load_Sensors_From_File(robot)
-        if sensors is None: continue
-
-        tfeatures = Extract_Features(sensors)
-        if tfeatures is None or tfeatures.shape != (sequence_len, num_features): continue
-        
-        obedience = float(robot['numYes']-robot['numNo'])/float(robot['numYes']+robot['numNo'])
-
-        if robot['cmdTxt'] == 'stop': obedience *= -1
-        if -1 < obedience < +1: continue
-        if obedience == +1 and output.count(+1) > MAX_POS_SAMPLES: continue
-
-        sensor_input.append(tfeatures)
-        output.append(obedience)
-
-    return sensor_input, output
-
-
-def Balance_Data(sensor_input, output):
-    """
-    Balance data by oversampling the under represented data points
-    :param sensor_input: LIST
-    :param output: List
-    :return: Two numpy arrays
-    """
-
-    # count negative and positive samples
-    neg_count = output.count(-1)
-    pos_count = output.count(+1)
-    diff = abs(neg_count - pos_count)
-
-    print pos_count, neg_count, len(sensor_input), len(output)
-    counts, bins = np.histogram(np.array(output), bins=10)
-    print bins, counts
-
-    # re-sample positive samples if number of negative samples are larger than the positive ones
-    if neg_count > pos_count:
-        extra_indices = np.random.choice([idx for idx in range(len(output)) if output[idx] == +1], diff)
-        sensor_input.extend([sensor_input[idx] for idx in extra_indices])
-        output.extend([+1 for _ in range(diff)])
-
-    # re-sample negative samples if number of positive samples are more than the negative ones
-    elif neg_count < pos_count:
-        extra_indices = np.random.choice([idx for idx in range(len(output)) if output[idx] == -1], diff)
-        sensor_input.extend([sensor_input[idx] for idx in extra_indices])
-        output.extend([-1 for _ in range(diff)])
-
-    return np.array(sensor_input), np.array(output)
-
-
-def Load_Sensors_From_File(record):
-    """
-    return sensors for a robot's evaluation
-    :param record: Dict
-    :return: LIST[Dict]
-    """
-    robotID = record['robotID']
-    startTime = record['startTime']
-    
-    path = main_path + "/sensors/" + str(startTime.year) + "/" + str(startTime.month) + "/" + str(startTime.day) + \
-           "/robot_" + str(robotID) + '_' + startTime.strftime("%Y-%m-%d-%H-%M-%S") + ".dat"
-
-    if not os.path.isfile(path): 
-        print "Failed loading ", path
-        return None
-    sensors = Read_File(path)
-    return sensors
-
-
-def Read_File(filePath):
-    sensors = None
-    try:
-        with open(filePath, 'r') as f:
-            sensors = pickle.load(f)
-        # print "Loading ", filePath,
-    except:
-        print "Failed loading ", filePath 
-    
-    return sensors
-
-
-def Propriceptive_Feature_Extraction(values):
-    """
-        Combine the proprioceptive features into one feature
-        :param values: List[list[float]]
-        :return: 2D numpy array
-    """
-    temp = []
-    for row in values:
-        temp.append(row[1::SENSOR_DROP_RATE])
-
-    temp = np.array(temp).T
-    temp = np.diff(temp, axis=0)
-    temp = np.absolute(temp)
-    temp = np.average(temp, axis=1)
-    temp = np.hstack((temp, np.array(temp[-1])))
-    return temp
-    # return temp[1::SENSOR_DROP_RATE]
-
-
-def Ray_Feature_Extraction(values):
-    return values[1::SENSOR_DROP_RATE]
-
-
-def Position_Feature_Extraction(values):
-    return values[1::SENSOR_DROP_RATE]
-
-
-def Touch_Feature_Extraction(values):
-    values = np.array(values).T
-    temp = np.average(values, axis=1)
-    return temp[1::SENSOR_DROP_RATE]
-
-
-def Extract_Features(sample):
-    """
-
-    :param sample:
-    :return:
-    """
-    touch, prop = [], []
-    ray, posX, posY, posZ, features = None, None, None, None, None
-    # print sample.keys()
-
-    for key in sample.keys():
-        if key.startswith('P') and key.endswith('_X'):
-            posX = Position_Feature_Extraction(sample[key])
-        
-        elif key.startswith('P') and key.endswith('_Y'):
-            posY = Position_Feature_Extraction(sample[key])
-
-        elif key.startswith('P') and key.endswith('_Z'):
-            posZ = Position_Feature_Extraction(sample[key])
-
-        elif key.startswith('T'):
-            touch.append(sample[key])
-
-        elif key.startswith('R0'):
-            ray = Ray_Feature_Extraction(sample[key])
-
-        # propriceptive sensor
-        elif key.startswith('P'):
-            prop.append(sample[key])
-
-    if len(prop) != 0: prop = Propriceptive_Feature_Extraction(prop)
-    else: return None
-
-    if len(touch) != 0: touch = Touch_Feature_Extraction(touch)
-    else: return None
-
-    # features = np.array([posX, posY, posZ]).T
-    # features = np.array([posX, posY, posZ, prop]).T
-    features = np.array([prop]).T
-
-    return features
-
-
 def main(args):
     """
         create the prediction models for each robot morphology
@@ -302,51 +124,48 @@ def main(args):
         :return:
     """
 
-    batch_size = args.batch_size
-    n_split = args.n_split
-    epoch = args.epoch
+    batch_size, n_split, epoch = args.batch_size, args.n_split, args.epoch
+
+    exp_name = '_'.join([str(n_split)+"fold", str(MAX_POS_SAMPLES)+"pos", str(MAX_NEG_SAMPLES)+"neg", "balance"+str(BALANCE_DATA)])
 
     commands = {'move', 'stop'}
-
-    # connect to database
-    mydatabase = DATABASE()
-
     params = {'epochs': epoch, 'batch_size': batch_size, 'n_split': n_split}
 
-    outfile_regular = open("critic_results_regular_1f.csv", "w")
-    writer_regular = csv.writer(outfile_regular, delimiter=",")
+    outfile_regular = open("critic_results_regular_"+exp_name+".csv", "w")
+    outfile_permuted = open("critic_results_permuted_"+exp_name+".csv", "w")
 
-    outfile_permuted = open("critic_results_permuted_1f.csv", "w")
+    writer_regular = csv.writer(outfile_regular, delimiter=",")
     writer_permuted = csv.writer(outfile_permuted, delimiter=",")
 
     writer_permuted.writerow(['trials'] + map(str, range(n_split)))
     writer_regular.writerow(['trials'] + map(str, range(n_split)))
 
     c = CRITIC(params)
+    td = Training_Data(commands, seed, SENSOR_DROP_RATE, MAX_POS_SAMPLES, MAX_NEG_SAMPLES)
 
     # for each morphology train and store the results
     for morphology, val in names.items():
 
         # load training data from file and database for key
-        sensors, obedience = Load_Training_Data(mydatabase, morphology, commands)
-        sensors, obedience = Balance_Data(sensors, obedience)
-        print morphology, sensors.shape, obedience.shape
+        sensors, obedience = td.Load_Training_Data(morphology)
+        sensors, obedience = td.Balance_Data(sensors, obedience, BALANCE_DATA)
+        sensors, obedience = td.Normalize_Data(sensors, obedience)
 
-        # normalize the input and output features to [0,1]
-        _min = np.min(np.min(sensors, axis=1), axis=0)
-        _max = np.max(np.max(sensors, axis=1), axis=0)
-        sensors = (sensors - _min) / (_max - _min)
-        obedience = (obedience-np.min(obedience))/(np.max(obedience)-np.min(obedience))
-
-        # check if we have enough positive data points (+1)
-        if obedience.count(+1) < MAX_POS_SAMPLES or obedience.count(0) < MAX_POS_SAMPLES:
-            print "Not enough data."
+        hist = np.histogram(np.array(obedience), bins=10)
+        if hist[0][0] < MAX_NEG_SAMPLES or hist[0][9] < MAX_POS_SAMPLES:
+            print "not enough data\n"
             continue
+
+        print morphology, "Training size: ", sensors.shape, obedience.shape
+
+        print
+        continue
 
         # train with input=sensors and output=obedience
         pcv_scores, cv_scores = c.train_model(sensors, obedience)
         writer_permuted.writerow([val] + map(str, pcv_scores))
         writer_regular.writerow([val] + map(str, cv_scores))
+        print
 
     outfile_regular.close()
     outfile_permuted.close()
@@ -356,6 +175,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Critic Model.')
     parser.add_argument('--batch_size', '-b', type=int, default=512, help='batchSize, default=512.')
     parser.add_argument('--epoch', '-e', type=int, default=100, help='Number of learning epochs, default=1000.')
-    parser.add_argument('--n_split', '-n', type=int, default=30, help='Validation split, default=30.')
+    parser.add_argument('--n_split', '-n', type=int, default=10, help='Validation split, default=30.')
     args = parser.parse_args()
     main(args)

@@ -121,7 +121,7 @@ class ROBOT:
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=3,
-                       n1=0, n2=1, n=0, x=c.L/2, y=c.L/2, z=c.L+c.R)
+                       n1=0, n2=1, n3=0, x=c.L/2, y=c.L/2, z=c.L+c.R)
         self.num_joints += 1
 
         sim.Send_Joint(jointID=self.num_joints, firstObjectID=0, secondObjectID=4,
